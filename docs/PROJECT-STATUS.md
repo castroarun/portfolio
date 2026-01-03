@@ -3,7 +3,7 @@
 > **Project:** Castronix Portfolio Website
 > **Purpose:** Showcase projects, workflow, and engineering practices
 
-**Last Updated:** 2025-12-28
+**Last Updated:** 2026-01-03
 
 ---
 
@@ -28,6 +28,8 @@
 | V6 | [v6-combined.html](mockups/v6-combined.html) | Carousel showcase, spotlight effect, mobile menu |
 | V7 | [v7-principles.html](mockups/v7-principles.html) | Principles showcase experiments (5 approaches) |
 | V8 | [v8-brittany.html](mockups/v8-brittany.html) | **LATEST** - Brittany Chiang style, alternating projects, vertical email |
+| Resume (PDF) | [resume-pdf-email.html](mockups/resume-pdf-email.html) | Print-optimized 2-column resume |
+| Resume (Digital) | [resume-digital.html](mockups/resume-digital.html) | **NEW** - Interactive digital resume with GitHub stats, skills viz, code showcase, AI chat |
 
 ### V8 Features (Latest - Brittany + V6/V7 Combined)
 **Layout (Brittany Chiang style):**
@@ -82,6 +84,45 @@ Five creative approaches to present engineering principles:
 - Gradient orbs and grid background
 - Easter egg interaction
 - Linear-style thin borders and accents
+
+### Digital Resume Features (NEW)
+A "truly digital" resume that differentiates from traditional PDF resumes:
+
+**1. GitHub Heatmap + Live Stats**
+- Interactive contribution calendar (52 weeks)
+- Animated stat cards (commits, repos, PRs, stars)
+- Language distribution visualization
+- Hover effects on heatmap cells
+
+**2. Interactive Skills Visualization**
+- Chart.js radar chart for competency overview
+- Filterable skill progress bars (All/Architecture/Development/Data)
+- Animated progress bars on scroll
+- Categories: Architecture, Core Banking, Python, React, Java, Data Analytics
+
+**3. Code Showcase**
+- Three language tabs (TypeScript, Python, SQL)
+- Prism.js syntax highlighting (Tomorrow theme)
+- Copy-to-clipboard functionality
+- Real code examples from actual projects:
+  - TypeScript: `useOfflineSync` hook from NoteApp
+  - Python: Data pipeline from Bank of America work
+  - SQL: Reconciliation report from Emirates NBD
+
+**4. AI Chat Assistant**
+- Pre-built knowledge base about experience & projects
+- Suggested questions as clickable chips
+- Real-time typing indicator
+- Responses cover: Core banking, React projects, Certifications, NoteApp details
+
+**Design System:**
+- Dark theme (#0A0A0F) matching V8 portfolio
+- Cyan accent (#22D3EE) for consistency
+- Grid background + gradient orbs
+- Numbered sections (01., 02., etc.)
+- JetBrains Mono for code, Inter for UI
+
+See [DIGITAL-RESUME-DESIGN.md](Design/DIGITAL-RESUME-DESIGN.md) for full architecture.
 
 ---
 

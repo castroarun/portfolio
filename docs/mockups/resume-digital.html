@@ -1,0 +1,1873 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arun Castromin Lawrance - Digital Resume</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Chart.js for Skills Radar -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Prism.js for Code Highlighting -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+
+  <style>
+    /* ============ CSS Variables ============ */
+    :root {
+      --bg-base: #0A0A0F;
+      --bg-elevated: #111118;
+      --bg-card: #16161D;
+      --bg-hover: #1E1E26;
+      --text-primary: #F4F4F5;
+      --text-secondary: #A1A1AA;
+      --text-muted: #71717A;
+      --accent: #22D3EE;
+      --accent-dim: rgba(34, 211, 238, 0.1);
+      --accent-glow: rgba(34, 211, 238, 0.3);
+      --border-subtle: rgba(255, 255, 255, 0.06);
+      --border-medium: rgba(255, 255, 255, 0.1);
+      --success: #22C55E;
+      --error: #EF4444;
+      --warning: #F59E0B;
+      --gradient-1: linear-gradient(135deg, var(--accent) 0%, #06B6D4 100%);
+    }
+
+    /* ============ Reset & Base ============ */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-base);
+      color: var(--text-primary);
+      line-height: 1.6;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    a:hover {
+      opacity: 0.8;
+    }
+
+    /* ============ Background Effects ============ */
+    .bg-grid {
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .bg-orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(100px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .bg-orb-1 {
+      width: 600px;
+      height: 600px;
+      background: rgba(34, 211, 238, 0.08);
+      top: -200px;
+      right: -200px;
+    }
+
+    .bg-orb-2 {
+      width: 400px;
+      height: 400px;
+      background: rgba(6, 182, 212, 0.05);
+      bottom: -100px;
+      left: -100px;
+    }
+
+    /* ============ Layout ============ */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ============ Header ============ */
+    .header {
+      text-align: center;
+      padding: 4rem 0 3rem;
+      border-bottom: 1px solid var(--border-subtle);
+      margin-bottom: 3rem;
+    }
+
+    .header-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: var(--accent-dim);
+      border: 1px solid var(--accent);
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 1.5rem;
+    }
+
+    .header-badge svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .name {
+      font-size: 3rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .title {
+      font-size: 1.25rem;
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .contact-item svg {
+      width: 16px;
+      height: 16px;
+      color: var(--accent);
+    }
+
+    /* ============ Navigation Tabs ============ */
+    .nav-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-tab {
+      padding: 0.75rem 1.5rem;
+      background: transparent;
+      border: 1px solid var(--border-medium);
+      border-radius: 8px;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .nav-tab:hover {
+      background: var(--bg-card);
+      color: var(--text-primary);
+    }
+
+    .nav-tab.active {
+      background: var(--accent-dim);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* ============ Section Styling ============ */
+    .section {
+      margin-bottom: 4rem;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .section-number {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--accent);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border-subtle);
+    }
+
+    /* ============ GitHub Stats Section ============ */
+    .github-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .github-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+    }
+
+    .github-profile {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .github-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--accent-dim);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .github-avatar svg {
+      width: 24px;
+      height: 24px;
+      color: var(--accent);
+    }
+
+    .github-username {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .github-handle {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    .github-link {
+      padding: 0.5rem 1rem;
+      background: var(--bg-hover);
+      border: 1px solid var(--border-medium);
+      border-radius: 8px;
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s;
+    }
+
+    .github-link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* Stats Cards */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .stat-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 1.25rem;
+      text-align: center;
+      transition: all 0.2s;
+    }
+
+    .stat-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .stat-value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 0.25rem;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Contribution Heatmap */
+    .heatmap-container {
+      background: var(--bg-elevated);
+      border-radius: 12px;
+      padding: 1.5rem;
+      overflow-x: auto;
+    }
+
+    .heatmap-title {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .heatmap {
+      display: flex;
+      gap: 3px;
+    }
+
+    .heatmap-week {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .heatmap-day {
+      width: 12px;
+      height: 12px;
+      border-radius: 2px;
+      background: var(--bg-hover);
+      transition: all 0.2s;
+    }
+
+    .heatmap-day:hover {
+      transform: scale(1.3);
+    }
+
+    .heatmap-day.level-1 { background: rgba(34, 211, 238, 0.2); }
+    .heatmap-day.level-2 { background: rgba(34, 211, 238, 0.4); }
+    .heatmap-day.level-3 { background: rgba(34, 211, 238, 0.6); }
+    .heatmap-day.level-4 { background: var(--accent); }
+
+    .heatmap-legend {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .heatmap-legend-item {
+      width: 12px;
+      height: 12px;
+      border-radius: 2px;
+    }
+
+    /* Languages */
+    .languages-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .language-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .language-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .language-name {
+      font-size: 0.875rem;
+      color: var(--text-primary);
+      flex: 1;
+    }
+
+    .language-percent {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* ============ Skills Visualization ============ */
+    .skills-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    @media (max-width: 768px) {
+      .skills-container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .radar-container {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 2rem;
+    }
+
+    .radar-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    #skillsRadar {
+      max-height: 300px;
+    }
+
+    .skills-bars {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 2rem;
+    }
+
+    .skill-filters {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .skill-filter {
+      padding: 0.5rem 1rem;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: 6px;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .skill-filter:hover,
+    .skill-filter.active {
+      background: var(--accent-dim);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .skill-item {
+      margin-bottom: 1.25rem;
+    }
+
+    .skill-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+    }
+
+    .skill-name {
+      font-size: 0.9rem;
+      color: var(--text-primary);
+    }
+
+    .skill-level {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .skill-bar {
+      height: 6px;
+      background: var(--bg-elevated);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .skill-progress {
+      height: 100%;
+      background: var(--gradient-1);
+      border-radius: 3px;
+      transition: width 1s ease-out;
+    }
+
+    /* ============ Code Showcase ============ */
+    .code-showcase {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .code-tabs {
+      display: flex;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .code-tab {
+      padding: 1rem 1.5rem;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      border-bottom: 2px solid transparent;
+    }
+
+    .code-tab:hover {
+      color: var(--text-primary);
+      background: var(--bg-hover);
+    }
+
+    .code-tab.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
+    .code-content {
+      position: relative;
+    }
+
+    .code-panel {
+      display: none;
+    }
+
+    .code-panel.active {
+      display: block;
+    }
+
+    .code-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.5rem;
+      background: var(--bg-elevated);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .code-file {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .code-file svg {
+      width: 16px;
+      height: 16px;
+      color: var(--accent);
+    }
+
+    .code-copy {
+      padding: 0.5rem 0.75rem;
+      background: var(--bg-hover);
+      border: 1px solid var(--border-medium);
+      border-radius: 6px;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s;
+    }
+
+    .code-copy:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .code-copy svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .code-block {
+      padding: 1.5rem;
+      overflow-x: auto;
+      font-size: 0.875rem;
+      line-height: 1.7;
+    }
+
+    .code-block pre {
+      margin: 0;
+      background: transparent !important;
+    }
+
+    .code-block code {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .code-meta {
+      display: flex;
+      gap: 1.5rem;
+      padding: 1rem 1.5rem;
+      background: var(--bg-elevated);
+      border-top: 1px solid var(--border-subtle);
+      font-size: 0.8rem;
+    }
+
+    .code-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-muted);
+    }
+
+    .code-meta-item svg {
+      width: 14px;
+      height: 14px;
+      color: var(--accent);
+    }
+
+    /* ============ AI Chat Assistant ============ */
+    .chat-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .chat-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.5rem;
+      background: var(--accent-dim);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .chat-title {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .chat-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .chat-avatar svg {
+      width: 20px;
+      height: 20px;
+      color: var(--bg-base);
+    }
+
+    .chat-name {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .chat-status {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      color: var(--success);
+    }
+
+    .chat-status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--success);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .chat-badge {
+      padding: 0.25rem 0.75rem;
+      background: var(--bg-base);
+      border-radius: 100px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .chat-messages {
+      height: 400px;
+      overflow-y: auto;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .chat-message {
+      display: flex;
+      gap: 0.75rem;
+      max-width: 85%;
+    }
+
+    .chat-message.user {
+      flex-direction: row-reverse;
+      margin-left: auto;
+    }
+
+    .message-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--bg-hover);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .message-avatar svg {
+      width: 16px;
+      height: 16px;
+      color: var(--text-muted);
+    }
+
+    .chat-message.ai .message-avatar {
+      background: var(--accent-dim);
+    }
+
+    .chat-message.ai .message-avatar svg {
+      color: var(--accent);
+    }
+
+    .message-bubble {
+      padding: 1rem 1.25rem;
+      background: var(--bg-elevated);
+      border-radius: 12px;
+      border-bottom-left-radius: 4px;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: var(--text-secondary);
+    }
+
+    .chat-message.user .message-bubble {
+      background: var(--accent-dim);
+      border: 1px solid rgba(34, 211, 238, 0.3);
+      border-bottom-left-radius: 12px;
+      border-bottom-right-radius: 4px;
+      color: var(--text-primary);
+    }
+
+    .message-bubble strong {
+      color: var(--text-primary);
+    }
+
+    .suggested-questions {
+      padding: 1rem 1.5rem;
+      background: var(--bg-elevated);
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .suggested-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .suggested-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .suggested-chip {
+      padding: 0.5rem 1rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border-medium);
+      border-radius: 100px;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .suggested-chip:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .chat-input-container {
+      display: flex;
+      gap: 0.75rem;
+      padding: 1rem 1.5rem;
+      background: var(--bg-elevated);
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .chat-input {
+      flex: 1;
+      padding: 0.875rem 1rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border-medium);
+      border-radius: 8px;
+      color: var(--text-primary);
+      font-size: 0.9rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .chat-input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .chat-input:focus {
+      border-color: var(--accent);
+    }
+
+    .chat-send {
+      padding: 0.875rem 1.25rem;
+      background: var(--accent);
+      border: none;
+      border-radius: 8px;
+      color: var(--bg-base);
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s;
+    }
+
+    .chat-send:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+
+    .chat-send svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    /* ============ Footer ============ */
+    .footer {
+      text-align: center;
+      padding: 3rem 0;
+      border-top: 1px solid var(--border-subtle);
+      margin-top: 4rem;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-link {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    .footer-link:hover {
+      color: var(--accent);
+    }
+
+    .footer-link svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .footer-text {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .footer-digital {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: var(--accent-dim);
+      border-radius: 100px;
+      font-size: 0.75rem;
+      color: var(--accent);
+      margin-top: 1rem;
+    }
+
+    /* ============ Animations ============ */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-fade-up {
+      animation: fadeUp 0.6s ease-out forwards;
+    }
+
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+    .delay-4 { animation-delay: 0.4s; }
+
+    /* ============ Responsive ============ */
+    @media (max-width: 640px) {
+      .container {
+        padding: 1rem;
+      }
+
+      .name {
+        font-size: 2rem;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .chat-messages {
+        height: 300px;
+      }
+
+      .chat-message {
+        max-width: 95%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Background Effects -->
+  <div class="bg-grid"></div>
+  <div class="bg-orb bg-orb-1"></div>
+  <div class="bg-orb bg-orb-2"></div>
+
+  <div class="container">
+    <!-- Header -->
+    <header class="header animate-fade-up">
+      <div class="header-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M12 6v6l4 2"/>
+        </svg>
+        Interactive Digital Resume
+      </div>
+      <h1 class="name">Arun Castromin Lawrance</h1>
+      <p class="title">Solutions Architect | Enterprise Architect | Technology Consulting</p>
+      <div class="contact-row">
+        <a href="mailto:arun.castromin@gmail.com" class="contact-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
+          arun.castromin@gmail.com
+        </a>
+        <a href="https://linkedin.com/in/aruncastromin" class="contact-item" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/>
+            <rect x="2" y="9" width="4" height="12"/>
+            <circle cx="4" cy="4" r="2"/>
+          </svg>
+          LinkedIn
+        </a>
+        <a href="https://github.com/castronix" class="contact-item" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+          </svg>
+          GitHub
+        </a>
+        <span class="contact-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+          Singapore
+        </span>
+      </div>
+    </header>
+
+    <!-- ============ SECTION 1: GitHub Stats ============ -->
+    <section class="section animate-fade-up delay-1">
+      <div class="section-header">
+        <span class="section-number">01.</span>
+        <h2 class="section-title">GitHub Activity</h2>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="github-section">
+        <div class="github-header">
+          <div class="github-profile">
+            <div class="github-avatar">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+              </svg>
+            </div>
+            <div>
+              <div class="github-username">castronix</div>
+              <div class="github-handle">@castronix</div>
+            </div>
+          </div>
+          <a href="https://github.com/castronix" class="github-link" target="_blank">
+            View Profile
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+              <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
+              <polyline points="15 3 21 3 21 9"/>
+              <line x1="10" y1="14" x2="21" y2="3"/>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-value" id="commits-count">523</div>
+            <div class="stat-label">Commits (2024)</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="repos-count">12</div>
+            <div class="stat-label">Repositories</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="prs-count">47</div>
+            <div class="stat-label">Pull Requests</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="stars-count">8</div>
+            <div class="stat-label">Stars Earned</div>
+          </div>
+        </div>
+
+        <!-- Contribution Heatmap -->
+        <div class="heatmap-container">
+          <div class="heatmap-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+              <line x1="16" y1="2" x2="16" y2="6"/>
+              <line x1="8" y1="2" x2="8" y2="6"/>
+              <line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+            Contribution Activity (Last 52 weeks)
+          </div>
+          <div class="heatmap" id="contribution-heatmap">
+            <!-- Generated by JavaScript -->
+          </div>
+          <div class="heatmap-legend">
+            Less
+            <div class="heatmap-legend-item" style="background: var(--bg-hover)"></div>
+            <div class="heatmap-legend-item level-1" style="background: rgba(34, 211, 238, 0.2)"></div>
+            <div class="heatmap-legend-item level-2" style="background: rgba(34, 211, 238, 0.4)"></div>
+            <div class="heatmap-legend-item level-3" style="background: rgba(34, 211, 238, 0.6)"></div>
+            <div class="heatmap-legend-item level-4" style="background: var(--accent)"></div>
+            More
+          </div>
+        </div>
+
+        <!-- Languages -->
+        <div class="languages-grid">
+          <div class="language-item">
+            <div class="language-dot" style="background: #3178C6"></div>
+            <span class="language-name">TypeScript</span>
+            <span class="language-percent">42%</span>
+          </div>
+          <div class="language-item">
+            <div class="language-dot" style="background: #F7DF1E"></div>
+            <span class="language-name">JavaScript</span>
+            <span class="language-percent">28%</span>
+          </div>
+          <div class="language-item">
+            <div class="language-dot" style="background: #3776AB"></div>
+            <span class="language-name">Python</span>
+            <span class="language-percent">18%</span>
+          </div>
+          <div class="language-item">
+            <div class="language-dot" style="background: #E34F26"></div>
+            <span class="language-name">HTML/CSS</span>
+            <span class="language-percent">12%</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SECTION 2: Skills Visualization ============ -->
+    <section class="section animate-fade-up delay-2">
+      <div class="section-header">
+        <span class="section-number">02.</span>
+        <h2 class="section-title">Skills & Expertise</h2>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="skills-container">
+        <!-- Radar Chart -->
+        <div class="radar-container">
+          <h3 class="radar-title">Competency Overview</h3>
+          <canvas id="skillsRadar"></canvas>
+        </div>
+
+        <!-- Skill Bars -->
+        <div class="skills-bars">
+          <div class="skill-filters">
+            <button class="skill-filter active" data-filter="all">All</button>
+            <button class="skill-filter" data-filter="architecture">Architecture</button>
+            <button class="skill-filter" data-filter="development">Development</button>
+            <button class="skill-filter" data-filter="data">Data & Analytics</button>
+          </div>
+
+          <div class="skills-list">
+            <div class="skill-item" data-category="architecture">
+              <div class="skill-header">
+                <span class="skill-name">Solution Architecture</span>
+                <span class="skill-level">Expert | 17+ years</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 95%"></div>
+              </div>
+            </div>
+
+            <div class="skill-item" data-category="architecture">
+              <div class="skill-header">
+                <span class="skill-name">Core Banking (Finacle)</span>
+                <span class="skill-level">Expert</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 90%"></div>
+              </div>
+            </div>
+
+            <div class="skill-item" data-category="development">
+              <div class="skill-header">
+                <span class="skill-name">Python</span>
+                <span class="skill-level">Advanced</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 80%"></div>
+              </div>
+            </div>
+
+            <div class="skill-item" data-category="development">
+              <div class="skill-header">
+                <span class="skill-name">React / TypeScript</span>
+                <span class="skill-level">Intermediate</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 65%"></div>
+              </div>
+            </div>
+
+            <div class="skill-item" data-category="development">
+              <div class="skill-header">
+                <span class="skill-name">Java / PL-SQL</span>
+                <span class="skill-level">Expert</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 88%"></div>
+              </div>
+            </div>
+
+            <div class="skill-item" data-category="data">
+              <div class="skill-header">
+                <span class="skill-name">Data Analytics (Tableau, Splunk)</span>
+                <span class="skill-level">Advanced</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 75%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SECTION 3: Code Showcase ============ -->
+    <section class="section animate-fade-up delay-3">
+      <div class="section-header">
+        <span class="section-number">03.</span>
+        <h2 class="section-title">Code Showcase</h2>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="code-showcase">
+        <div class="code-tabs">
+          <button class="code-tab active" data-tab="typescript">TypeScript</button>
+          <button class="code-tab" data-tab="python">Python</button>
+          <button class="code-tab" data-tab="sql">SQL</button>
+        </div>
+
+        <div class="code-content">
+          <!-- TypeScript Panel -->
+          <div class="code-panel active" id="typescript-panel">
+            <div class="code-header">
+              <div class="code-file">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                  <polyline points="14 2 14 8 20 8"/>
+                </svg>
+                useOfflineSync.ts
+              </div>
+              <button class="code-copy" onclick="copyCode('typescript')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                  <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
+                </svg>
+                Copy
+              </button>
+            </div>
+            <div class="code-block">
+<pre><code class="language-typescript">// Custom Hook for Offline-First Sync (NoteApp)
+export function useOfflineSync<T extends { id: string }>() {
+  const [syncStatus, setSyncStatus] = useState<'synced' | 'pending' | 'error'>('synced');
+  const [pendingChanges, setPendingChanges] = useState<T[]>([]);
+
+  useEffect(() => {
+    const handleOnline = async () => {
+      if (pendingChanges.length === 0) return;
+
+      setSyncStatus('pending');
+      try {
+        for (const change of pendingChanges) {
+          await syncToCloud(change);
+        }
+        setPendingChanges([]);
+        setSyncStatus('synced');
+      } catch (error) {
+        setSyncStatus('error');
+        console.error('Sync failed:', error);
+      }
+    };
+
+    window.addEventListener('online', handleOnline);
+    return () => window.removeEventListener('online', handleOnline);
+  }, [pendingChanges]);
+
+  const saveLocally = useCallback((item: T) => {
+    setPendingChanges(prev => [...prev, item]);
+    // Persist to IndexedDB for offline access
+    localDB.put('pending_sync', item);
+  }, []);
+
+  return { syncStatus, pendingChanges, saveLocally };
+}</code></pre>
+            </div>
+            <div class="code-meta">
+              <div class="code-meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/>
+                </svg>
+                NoteApp
+              </div>
+              <div class="code-meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                </svg>
+                Pattern: Custom Hook
+              </div>
+              <div class="code-meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                </svg>
+                Offline-First Architecture
+              </div>
+            </div>
+          </div>
+
+          <!-- Python Panel -->
+          <div class="code-panel" id="python-panel">
+            <div class="code-header">
+              <div class="code-file">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                  <polyline points="14 2 14 8 20 8"/>
+                </svg>
+                data_pipeline.py
+              </div>
+              <button class="code-copy" onclick="copyCode('python')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                  <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
+                </svg>
+                Copy
+              </button>
+            </div>
+            <div class="code-block">
+<pre><code class="language-python"># Efficient Data Pipeline for Banking Analytics
+from dataclasses import dataclass
+from typing import Iterator, Callable
+import pandas as pd
+
+@dataclass
+class TransformStep:
+    name: str
+    transform: Callable[[pd.DataFrame], pd.DataFrame]
+    validate: Callable[[pd.DataFrame], bool] = lambda df: True
+
+class DataPipeline:
+    """Composable data pipeline with validation at each step."""
+
+    def __init__(self, steps: list[TransformStep]):
+        self.steps = steps
+        self.metrics: dict[str, float] = {}
+
+    def execute(self, df: pd.DataFrame) -> pd.DataFrame:
+        for step in self.steps:
+            df = step.transform(df)
+
+            if not step.validate(df):
+                raise ValueError(f"Validation failed: {step.name}")
+
+            self.metrics[step.name] = len(df)
+
+        return df
+
+# Usage: 80% reduction in daily job execution times
+pipeline = DataPipeline([
+    TransformStep("clean", clean_nulls, validate_no_nulls),
+    TransformStep("enrich", add_derived_columns),
+    TransformStep("aggregate", group_by_region),
+])</code></pre>
+            </div>
+            <div class="code-meta">
+              <div class="code-meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/>
+                </svg>
+                Bank of America
+              </div>
+              <div class="code-meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                </svg>
+                Pattern: Pipeline Composition
+              </div>
+            </div>
+          </div>
+
+          <!-- SQL Panel -->
+          <div class="code-panel" id="sql-panel">
+            <div class="code-header">
+              <div class="code-file">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                  <polyline points="14 2 14 8 20 8"/>
+                </svg>
+                reconciliation_report.sql
+              </div>
+              <button class="code-copy" onclick="copyCode('sql')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                  <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
+                </svg>
+                Copy
+              </button>
+            </div>
+            <div class="code-block">
+<pre><code class="language-sql">-- Daily Reconciliation Report (Finacle Core Banking)
+-- Optimized for 60-minute recovery persistence requirement
+
+WITH daily_transactions AS (
+    SELECT
+        t.account_id,
+        t.transaction_date,
+        SUM(CASE WHEN t.type = 'CR' THEN t.amount ELSE 0 END) as credits,
+        SUM(CASE WHEN t.type = 'DR' THEN t.amount ELSE 0 END) as debits,
+        COUNT(*) as txn_count
+    FROM transactions t
+    WHERE t.transaction_date = TRUNC(SYSDATE - 1)
+      AND t.status = 'COMPLETED'
+    GROUP BY t.account_id, t.transaction_date
+),
+account_balances AS (
+    SELECT
+        a.account_id,
+        a.current_balance,
+        a.available_balance,
+        NVL(dt.credits, 0) - NVL(dt.debits, 0) as net_movement
+    FROM accounts a
+    LEFT JOIN daily_transactions dt ON a.account_id = dt.account_id
+)
+SELECT
+    ab.*,
+    CASE
+        WHEN ab.current_balance != ab.available_balance + ab.net_movement
+        THEN 'MISMATCH'
+        ELSE 'OK'
+    END as reconciliation_status
+FROM account_balances ab
+WHERE ab.net_movement != 0
+ORDER BY ABS(ab.net_movement) DESC;</code></pre>
+            </div>
+            <div class="code-meta">
+              <div class="code-meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/>
+                </svg>
+                Emirates NBD
+              </div>
+              <div class="code-meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                </svg>
+                Pattern: CTE-based Reporting
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SECTION 4: AI Chat Assistant ============ -->
+    <section class="section animate-fade-up delay-4">
+      <div class="section-header">
+        <span class="section-number">04.</span>
+        <h2 class="section-title">Ask Me Anything</h2>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="chat-section">
+        <div class="chat-header">
+          <div class="chat-title">
+            <div class="chat-avatar">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+              </svg>
+            </div>
+            <div>
+              <div class="chat-name">Resume Assistant</div>
+              <div class="chat-status">
+                <div class="chat-status-dot"></div>
+                Online
+              </div>
+            </div>
+          </div>
+          <span class="chat-badge">AI Powered</span>
+        </div>
+
+        <div class="chat-messages" id="chat-messages">
+          <div class="chat-message ai">
+            <div class="message-avatar">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+              </svg>
+            </div>
+            <div class="message-bubble">
+              Hi! I'm an AI assistant trained on Arun's experience and projects. Ask me anything about his <strong>17+ years in enterprise technology</strong>, <strong>core banking implementations</strong>, or <strong>side projects</strong> like NoteApp, REPPIT, and PRIMMO.
+            </div>
+          </div>
+        </div>
+
+        <div class="suggested-questions">
+          <div class="suggested-label">Suggested questions:</div>
+          <div class="suggested-chips">
+            <button class="suggested-chip" onclick="askQuestion('What is Arun\'s experience with core banking?')">Core banking experience?</button>
+            <button class="suggested-chip" onclick="askQuestion('What projects has Arun built with React?')">React projects?</button>
+            <button class="suggested-chip" onclick="askQuestion('What certifications does Arun have?')">Certifications?</button>
+            <button class="suggested-chip" onclick="askQuestion('Tell me about the NoteApp project')">About NoteApp?</button>
+          </div>
+        </div>
+
+        <div class="chat-input-container">
+          <input
+            type="text"
+            class="chat-input"
+            id="chat-input"
+            placeholder="Ask about experience, skills, projects..."
+            onkeypress="handleKeyPress(event)"
+          >
+          <button class="chat-send" onclick="sendMessage()">
+            Send
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="22" y1="2" x2="11" y2="13"/>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-links">
+        <a href="resume-pdf-email.html" class="footer-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="16" y1="13" x2="8" y2="13"/>
+            <line x1="16" y1="17" x2="8" y2="17"/>
+            <polyline points="10 9 9 9 8 9"/>
+          </svg>
+          Download PDF Resume
+        </a>
+        <a href="v8-brittany.html" class="footer-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+            <polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+          View Full Portfolio
+        </a>
+      </div>
+      <p class="footer-text">Built with purpose. Last updated January 2026.</p>
+      <div class="footer-digital">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M12 6v6l4 2"/>
+        </svg>
+        Truly Digital Resume
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // ============ Generate Contribution Heatmap ============
+    function generateHeatmap() {
+      const container = document.getElementById('contribution-heatmap');
+      const weeks = 52;
+      const daysPerWeek = 7;
+
+      for (let w = 0; w < weeks; w++) {
+        const weekDiv = document.createElement('div');
+        weekDiv.className = 'heatmap-week';
+
+        for (let d = 0; d < daysPerWeek; d++) {
+          const dayDiv = document.createElement('div');
+          dayDiv.className = 'heatmap-day';
+
+          // Generate realistic contribution pattern
+          const random = Math.random();
+          if (random > 0.7) {
+            const level = Math.ceil(Math.random() * 4);
+            dayDiv.classList.add(`level-${level}`);
+          }
+
+          weekDiv.appendChild(dayDiv);
+        }
+
+        container.appendChild(weekDiv);
+      }
+    }
+
+    // ============ Initialize Skills Radar Chart ============
+    function initRadarChart() {
+      const ctx = document.getElementById('skillsRadar').getContext('2d');
+
+      new Chart(ctx, {
+        type: 'radar',
+        data: {
+          labels: ['Architecture', 'Backend', 'Frontend', 'Data', 'Methodology', 'Leadership'],
+          datasets: [{
+            label: 'Skill Level',
+            data: [95, 85, 65, 75, 90, 88],
+            fill: true,
+            backgroundColor: 'rgba(34, 211, 238, 0.2)',
+            borderColor: 'rgba(34, 211, 238, 1)',
+            pointBackgroundColor: 'rgba(34, 211, 238, 1)',
+            pointBorderColor: '#fff',
+            pointHoverBackgroundColor: '#fff',
+            pointHoverBorderColor: 'rgba(34, 211, 238, 1)'
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true,
+          scales: {
+            r: {
+              angleLines: {
+                color: 'rgba(255, 255, 255, 0.1)'
+              },
+              grid: {
+                color: 'rgba(255, 255, 255, 0.1)'
+              },
+              pointLabels: {
+                color: '#A1A1AA',
+                font: {
+                  size: 11
+                }
+              },
+              ticks: {
+                display: false
+              },
+              suggestedMin: 0,
+              suggestedMax: 100
+            }
+          },
+          plugins: {
+            legend: {
+              display: false
+            }
+          }
+        }
+      });
+    }
+
+    // ============ Skill Filter Functionality ============
+    function initSkillFilters() {
+      const filters = document.querySelectorAll('.skill-filter');
+      const skills = document.querySelectorAll('.skill-item');
+
+      filters.forEach(filter => {
+        filter.addEventListener('click', () => {
+          // Update active filter
+          filters.forEach(f => f.classList.remove('active'));
+          filter.classList.add('active');
+
+          const category = filter.dataset.filter;
+
+          // Filter skills
+          skills.forEach(skill => {
+            if (category === 'all' || skill.dataset.category === category) {
+              skill.style.display = 'block';
+            } else {
+              skill.style.display = 'none';
+            }
+          });
+        });
+      });
+    }
+
+    // ============ Code Tabs Functionality ============
+    function initCodeTabs() {
+      const tabs = document.querySelectorAll('.code-tab');
+      const panels = document.querySelectorAll('.code-panel');
+
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          const targetTab = tab.dataset.tab;
+
+          // Update active tab
+          tabs.forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
+
+          // Show corresponding panel
+          panels.forEach(panel => {
+            if (panel.id === `${targetTab}-panel`) {
+              panel.classList.add('active');
+            } else {
+              panel.classList.remove('active');
+            }
+          });
+
+          // Re-highlight code
+          Prism.highlightAll();
+        });
+      });
+    }
+
+    // ============ Copy Code Functionality ============
+    function copyCode(language) {
+      const panel = document.getElementById(`${language}-panel`);
+      const code = panel.querySelector('code').textContent;
+
+      navigator.clipboard.writeText(code).then(() => {
+        const btn = panel.querySelector('.code-copy');
+        const originalText = btn.innerHTML;
+        btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><polyline points="20 6 9 17 4 12"/></svg> Copied!';
+
+        setTimeout(() => {
+          btn.innerHTML = originalText;
+        }, 2000);
+      });
+    }
+
+    // ============ AI Chat Functionality ============
+    const chatResponses = {
+      'core banking': `Arun has <strong>17+ years of experience</strong> in core banking, primarily with <strong>Finacle implementations</strong>. He has led projects for major banks including:
+
+<strong>Emirates NBD</strong> (UAE) - Full core banking transformation
+<strong>Standard Bank</strong> (South Africa & Nigeria) - QA Lead with 100% on-time delivery
+<strong>Bank of America</strong> (Singapore, Jakarta) - NFR implementation for APAC
+
+His expertise spans solution architecture, payments systems, and regulatory reporting.`,
+
+      'react': `Arun has built several React-based projects:
+
+<strong>NoteApp</strong> - React Native note-taking app with offline sync, voice-to-text, and 200+ test cases
+
+<strong>REPPIT</strong> - React Native fitness tracker with workout timer and progressive overload tracking
+
+<strong>PRIMMO</strong> - Next.js AI-powered personal trainer using voice AI for curated guidance
+
+All projects follow his 9-step development workflow and are AI-assisted in development.`,
+
+      'certifications': `Arun holds several professional certifications:
+
+<strong>TOGAF Enterprise Architecture</strong> - Architecture framework
+<strong>Certified Scrum Product Owner (CSPO)</strong> - Agile methodology
+<strong>ISO 31000 Risk Management</strong> - Risk governance
+<strong>IBM Data Science Professional</strong> - Data analytics
+<strong>Databricks Lakehouse Fundamentals</strong> - Big data
+<strong>MicroStrategy Certified Architect</strong> - BI/Analytics`,
+
+      'noteapp': `<strong>NoteApp</strong> is a privacy-first note-taking application built with:
+
+<strong>Tech Stack:</strong> React Native, TypeScript, Supabase
+
+<strong>Key Features:</strong>
+- Offline-first architecture with cloud sync
+- Voice-to-text input
+- 200+ automated test cases
+- E2E encryption for privacy
+
+It demonstrates Arun's expertise in mobile development, offline-first patterns, and comprehensive testing.`,
+
+      'default': `I can help you learn more about Arun's experience! Try asking about:
+
+- <strong>Core banking experience</strong> (Finacle, payments, NFR)
+- <strong>Technical projects</strong> (NoteApp, REPPIT, PRIMMO)
+- <strong>Certifications</strong> (TOGAF, CSPO, IBM Data Science)
+- <strong>Skills</strong> (Python, React, Solution Architecture)
+
+What would you like to know?`
+    };
+
+    function getResponse(question) {
+      const q = question.toLowerCase();
+
+      if (q.includes('core banking') || q.includes('finacle') || q.includes('bank')) {
+        return chatResponses['core banking'];
+      } else if (q.includes('react') || q.includes('frontend') || q.includes('javascript')) {
+        return chatResponses['react'];
+      } else if (q.includes('certif') || q.includes('togaf') || q.includes('scrum')) {
+        return chatResponses['certifications'];
+      } else if (q.includes('noteapp') || q.includes('note app')) {
+        return chatResponses['noteapp'];
+      } else {
+        return chatResponses['default'];
+      }
+    }
+
+    function addMessage(content, isUser = false) {
+      const messages = document.getElementById('chat-messages');
+      const messageDiv = document.createElement('div');
+      messageDiv.className = `chat-message ${isUser ? 'user' : 'ai'}`;
+
+      const icon = isUser ?
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>' :
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>';
+
+      messageDiv.innerHTML = `
+        <div class="message-avatar">${icon}</div>
+        <div class="message-bubble">${content}</div>
+      `;
+
+      messages.appendChild(messageDiv);
+      messages.scrollTop = messages.scrollHeight;
+    }
+
+    function sendMessage() {
+      const input = document.getElementById('chat-input');
+      const question = input.value.trim();
+
+      if (!question) return;
+
+      addMessage(question, true);
+      input.value = '';
+
+      // Simulate typing delay
+      setTimeout(() => {
+        const response = getResponse(question);
+        addMessage(response);
+      }, 500);
+    }
+
+    function askQuestion(question) {
+      document.getElementById('chat-input').value = question;
+      sendMessage();
+    }
+
+    function handleKeyPress(event) {
+      if (event.key === 'Enter') {
+        sendMessage();
+      }
+    }
+
+    // ============ Animate Stats on Scroll ============
+    function animateStats() {
+      const stats = document.querySelectorAll('.stat-value');
+
+      stats.forEach(stat => {
+        const target = parseInt(stat.textContent);
+        let current = 0;
+        const increment = Math.ceil(target / 30);
+
+        const timer = setInterval(() => {
+          current += increment;
+          if (current >= target) {
+            stat.textContent = target;
+            clearInterval(timer);
+          } else {
+            stat.textContent = current;
+          }
+        }, 30);
+      });
+    }
+
+    // ============ Initialize Everything ============
+    document.addEventListener('DOMContentLoaded', () => {
+      generateHeatmap();
+      initRadarChart();
+      initSkillFilters();
+      initCodeTabs();
+      Prism.highlightAll();
+
+      // Animate stats when in view
+      setTimeout(animateStats, 500);
+    });
+  </script>
+</body>
+</html>
