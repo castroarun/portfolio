@@ -407,6 +407,19 @@
       border-radius: 2px;
     }
 
+    .github-contrib-chart {
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 8px;
+      padding: 0.5rem;
+      overflow: hidden;
+    }
+
+    .github-contrib-chart img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
     /* Languages */
     .languages-grid {
       display: grid;
@@ -1330,6 +1343,65 @@
       color: var(--accent);
     }
 
+    /* Loading indicator */
+    .chat-loading {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.5rem 0;
+    }
+
+    .chat-loading .message-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      background: var(--accent-dim);
+    }
+
+    .chat-loading .message-avatar svg {
+      width: 16px;
+      height: 16px;
+      color: var(--accent);
+    }
+
+    .typing-indicator {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 0.75rem 1rem;
+      background: var(--bg-elevated);
+      border-radius: 12px;
+      border-bottom-left-radius: 4px;
+    }
+
+    .typing-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--text-muted);
+      border-radius: 50%;
+      animation: typingBounce 1.4s infinite ease-in-out;
+    }
+
+    .typing-dot:nth-child(1) { animation-delay: 0ms; }
+    .typing-dot:nth-child(2) { animation-delay: 200ms; }
+    .typing-dot:nth-child(3) { animation-delay: 400ms; }
+
+    @keyframes typingBounce {
+      0%, 60%, 100% {
+        transform: translateY(0);
+        opacity: 0.4;
+      }
+      30% {
+        transform: translateY(-6px);
+        opacity: 1;
+        background: var(--accent);
+      }
+    }
+
     .chat-input-container {
       display: flex;
       gap: 0.75rem;
@@ -1879,6 +1951,503 @@
         max-width: 95%;
       }
     }
+
+    /* ============ Intro Section - Collapsible ============ */
+    .intro-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 2rem;
+    }
+
+    .intro-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.5rem 2rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .intro-header:hover {
+      background: var(--bg-hover);
+    }
+
+    .intro-title-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .intro-avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--gradient-1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--bg-base);
+    }
+
+    .intro-title-text h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.2rem;
+    }
+
+    .intro-title-text p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .intro-toggle {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-medium);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+    }
+
+    .intro-toggle svg {
+      width: 16px;
+      height: 16px;
+      color: var(--text-muted);
+      transition: transform 0.3s;
+    }
+
+    .intro-section.expanded .intro-toggle svg {
+      transform: rotate(180deg);
+    }
+
+    .intro-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease-out;
+    }
+
+    .intro-section.expanded .intro-content {
+      max-height: 1000px;
+    }
+
+    .intro-body {
+      padding: 0 2rem 2rem;
+    }
+
+    /* Typing Animation */
+    .typing-container {
+      background: var(--bg-elevated);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      border-left: 3px solid var(--accent);
+    }
+
+    .typing-text {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--text-secondary);
+    }
+
+    .typing-text strong {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .typing-cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1.2em;
+      background: var(--accent);
+      margin-left: 2px;
+      animation: blink 1s infinite;
+      vertical-align: text-bottom;
+    }
+
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+
+    /* Key Stats Grid */
+    .intro-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .intro-stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .intro-stat {
+      text-align: center;
+      padding: 1rem;
+      background: var(--bg-elevated);
+      border-radius: 10px;
+      border: 1px solid var(--border-subtle);
+      transition: all 0.2s;
+    }
+
+    .intro-stat:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .intro-stat-value {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 0.25rem;
+    }
+
+    .intro-stat-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Key Strengths Grid */
+    .strengths-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    @media (max-width: 640px) {
+      .strengths-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .strength-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 1rem;
+      background: var(--bg-elevated);
+      border-radius: 10px;
+      border: 1px solid var(--border-subtle);
+      transition: all 0.2s;
+    }
+
+    .strength-card:hover {
+      border-color: var(--accent);
+    }
+
+    .strength-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: var(--accent-dim);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .strength-icon svg {
+      width: 18px;
+      height: 18px;
+      color: var(--accent);
+    }
+
+    .strength-text h4 {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.2rem;
+    }
+
+    .strength-text p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* ============ Professional Experience Timeline ============ */
+    .experience-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    /* Tabs Navigation */
+    .exp-tabs {
+      display: flex;
+      overflow-x: auto;
+      border-bottom: 1px solid var(--border-subtle);
+      background: var(--bg-elevated);
+      padding: 0 1rem;
+    }
+
+    .exp-tab {
+      padding: 1rem 1.25rem;
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid transparent;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+
+    .exp-tab:hover {
+      color: var(--text-primary);
+      background: rgba(255,255,255,0.03);
+    }
+
+    .exp-tab.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
+    .exp-tab-period {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      display: block;
+      margin-top: 0.2rem;
+    }
+
+    /* Experience Panels */
+    .exp-panels {
+      padding: 2rem;
+    }
+
+    .exp-panel {
+      display: none;
+    }
+
+    .exp-panel.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .exp-panel-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .exp-company-info h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.25rem;
+    }
+
+    .exp-company-info .role {
+      font-size: 1rem;
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .exp-company-info .employer {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .exp-period-badge {
+      padding: 0.5rem 1rem;
+      background: var(--accent-dim);
+      border: 1px solid rgba(34, 211, 238, 0.3);
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .exp-context {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      font-style: italic;
+      padding: 1rem;
+      background: var(--bg-elevated);
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+      border-left: 3px solid var(--accent);
+    }
+
+    .exp-bullets {
+      list-style: none;
+    }
+
+    .exp-bullets li {
+      position: relative;
+      padding-left: 1.5rem;
+      margin-bottom: 0.75rem;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .exp-bullets li::before {
+      content: '>';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .exp-bullets li strong {
+      color: var(--text-primary);
+    }
+
+    .exp-roles-held {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 1px dashed var(--border-subtle);
+    }
+
+    .exp-roles-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+    }
+
+    .exp-roles-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .exp-role-chip {
+      padding: 0.35rem 0.75rem;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-medium);
+      border-radius: 100px;
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+    }
+
+    /* Vertical Timeline View */
+    .timeline-view {
+      position: relative;
+      padding-left: 2rem;
+    }
+
+    .timeline-view::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--border-subtle);
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-bottom: 2rem;
+      padding-left: 1.5rem;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -2rem;
+      top: 0.5rem;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--bg-card);
+      border: 2px solid var(--accent);
+    }
+
+    .timeline-item.current::before {
+      background: var(--accent);
+      box-shadow: 0 0 0 4px var(--accent-dim);
+    }
+
+    .timeline-date {
+      font-size: 0.8rem;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .timeline-company {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.25rem;
+    }
+
+    .timeline-role {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin-bottom: 0.5rem;
+    }
+
+    .timeline-summary {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* View Toggle */
+    .view-toggle {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .view-btn {
+      padding: 0.5rem 1rem;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-medium);
+      border-radius: 6px;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+
+    .view-btn:hover {
+      border-color: var(--accent);
+      color: var(--text-primary);
+    }
+
+    .view-btn.active {
+      background: var(--accent-dim);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .view-btn svg {
+      width: 14px;
+      height: 14px;
+    }
   </style>
 </head>
 <body>
@@ -1931,133 +2500,350 @@
       </div>
     </header>
 
-    <!-- ============ SECTION 1: GitHub Stats ============ -->
+    <!-- ============ SECTION 1: About Me (Collapsible) ============ -->
     <section class="section animate-fade-up delay-1">
       <div class="section-header">
         <span class="section-number">01.</span>
-        <h2 class="section-title">GitHub Activity</h2>
+        <h2 class="section-title">About Me</h2>
         <div class="section-line"></div>
       </div>
 
-      <div class="github-section">
-        <div class="github-header">
-          <div class="github-profile">
-            <div class="github-avatar">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-              </svg>
-            </div>
-            <div>
-              <div class="github-username">castroarun</div>
-              <div class="github-handle">@castroarun</div>
+      <div class="intro-section expanded" id="intro-section">
+        <div class="intro-header" onclick="toggleIntro()">
+          <div class="intro-title-row">
+            <div class="intro-avatar">AC</div>
+            <div class="intro-title-text">
+              <h3>Hi, I'm Arun Castromin</h3>
+              <p>Click to expand my story</p>
             </div>
           </div>
-          <a href="https://github.com/castroarun" class="github-link" target="_blank">
-            View Profile
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
-              <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
-              <polyline points="15 3 21 3 21 9"/>
-              <line x1="10" y1="14" x2="21" y2="3"/>
+          <div class="intro-toggle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9"/>
             </svg>
-          </a>
-        </div>
-
-        <!-- Stats Cards -->
-        <div class="stats-grid">
-          <div class="stat-card">
-            <div class="stat-value" id="commits-count">285</div>
-            <div class="stat-label">Commits (2025)</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-value" id="repos-count">8</div>
-            <div class="stat-label">Repositories</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-value" id="prs-count">23</div>
-            <div class="stat-label">Pull Requests</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-value" id="stars-count">4</div>
-            <div class="stat-label">Stars Earned</div>
           </div>
         </div>
 
-        <!-- Contribution Heatmap -->
-        <div class="heatmap-container">
-          <div class="heatmap-title">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
-              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-              <line x1="16" y1="2" x2="16" y2="6"/>
-              <line x1="8" y1="2" x2="8" y2="6"/>
-              <line x1="3" y1="10" x2="21" y2="10"/>
-            </svg>
-            Contribution Activity (Last 52 weeks)
-          </div>
-          <div class="heatmap" id="contribution-heatmap">
-            <!-- Generated by JavaScript -->
-          </div>
-          <div class="heatmap-legend">
-            Less
-            <div class="heatmap-legend-item" style="background: var(--bg-hover)"></div>
-            <div class="heatmap-legend-item level-1" style="background: rgba(34, 211, 238, 0.2)"></div>
-            <div class="heatmap-legend-item level-2" style="background: rgba(34, 211, 238, 0.4)"></div>
-            <div class="heatmap-legend-item level-3" style="background: rgba(34, 211, 238, 0.6)"></div>
-            <div class="heatmap-legend-item level-4" style="background: var(--accent)"></div>
-            More
-          </div>
-        </div>
+        <div class="intro-content">
+          <div class="intro-body">
+            <!-- Typing Animation Summary -->
+            <div class="typing-container">
+              <p class="typing-text" id="typing-text">
+                <strong>Sr. Solution Architect</strong> with <strong>17+ years</strong> delivering technology-enabled solutions in
+                <strong>core banking, payments, and digital transformation</strong>. I've implemented Finacle core banking
+                across <strong>India, Middle East, Africa, and APAC</strong> for Tier-1 banks including
+                <strong>Bank of America, Emirates NBD, and Standard Bank</strong>. Currently driving NFR and RTP
+                implementations for global commercial banking at BoA Singapore.<span class="typing-cursor"></span>
+              </p>
+            </div>
 
-        <!-- Languages -->
-        <div class="languages-grid">
-          <div class="language-item">
-            <div class="language-dot" style="background: #3178C6"></div>
-            <span class="language-name">TypeScript</span>
-            <span class="language-percent">42%</span>
-          </div>
-          <div class="language-item">
-            <div class="language-dot" style="background: #F7DF1E"></div>
-            <span class="language-name">JavaScript</span>
-            <span class="language-percent">28%</span>
-          </div>
-          <div class="language-item">
-            <div class="language-dot" style="background: #3776AB"></div>
-            <span class="language-name">Python</span>
-            <span class="language-percent">18%</span>
-          </div>
-          <div class="language-item">
-            <div class="language-dot" style="background: #E34F26"></div>
-            <span class="language-name">HTML/CSS</span>
-            <span class="language-percent">12%</span>
-          </div>
-        </div>
+            <!-- Key Stats -->
+            <div class="intro-stats">
+              <div class="intro-stat">
+                <div class="intro-stat-value">17+</div>
+                <div class="intro-stat-label">Years Experience</div>
+              </div>
+              <div class="intro-stat">
+                <div class="intro-stat-value">5</div>
+                <div class="intro-stat-label">Regions Served</div>
+              </div>
+              <div class="intro-stat">
+                <div class="intro-stat-value">15K+</div>
+                <div class="intro-stat-label">Man-days Led</div>
+              </div>
+              <div class="intro-stat">
+                <div class="intro-stat-value">100%</div>
+                <div class="intro-stat-label">On-time Delivery</div>
+              </div>
+            </div>
 
-        <!-- GitHub Repositories (Dynamically Loaded) -->
-        <div class="github-repos-section">
-          <div class="github-repos-header">
-            <h3 class="github-repos-title">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
-              </svg>
-              Public Repositories
-            </h3>
-          </div>
-          <div class="github-repos-grid" id="github-repos-grid">
-            <!-- Loaded dynamically from GitHub API -->
-            <div class="github-repos-loading">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M21 12a9 9 0 1 1-6.219-8.56"/>
-              </svg>
-              Loading repositories...
+            <!-- Key Strengths Grid -->
+            <div class="strengths-grid">
+              <div class="strength-card">
+                <div class="strength-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                    <circle cx="9" cy="7" r="4"/>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                  </svg>
+                </div>
+                <div class="strength-text">
+                  <h4>Demonstrated Leadership</h4>
+                  <p>Mentored teams of up to 18 for Tier-1 clients with 15000+ man-days of deliverables</p>
+                </div>
+              </div>
+              <div class="strength-card">
+                <div class="strength-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                    <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                  </svg>
+                </div>
+                <div class="strength-text">
+                  <h4>Business Analyst Acumen</h4>
+                  <p>Conceptualized & established multiple business processes and regulatory frameworks</p>
+                </div>
+              </div>
+              <div class="strength-card">
+                <div class="strength-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+                    <polyline points="2 17 12 22 22 17"/>
+                    <polyline points="2 12 12 17 22 12"/>
+                  </svg>
+                </div>
+                <div class="strength-text">
+                  <h4>Technology Architect</h4>
+                  <p>Designed scalable, reusable & performance-savvy complex banking modules</p>
+                </div>
+              </div>
+              <div class="strength-card">
+                <div class="strength-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2v4"/>
+                    <path d="m16.24 7.76 2.83-2.83"/>
+                    <path d="M21 12h-4"/>
+                    <path d="m16.24 16.24 2.83 2.83"/>
+                    <path d="M12 18v4"/>
+                    <path d="m4.93 19.07 2.83-2.83"/>
+                    <path d="M4 12H0"/>
+                    <path d="m4.93 4.93 2.83 2.83"/>
+                  </svg>
+                </div>
+                <div class="strength-text">
+                  <h4>Innovation Mindset</h4>
+                  <p>Out-of-the-box thinking with AI-assisted development workflows</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ============ SECTION 2: Skills Visualization ============ -->
+    <!-- ============ SECTION 2: Professional Experience ============ -->
     <section class="section animate-fade-up delay-2">
       <div class="section-header">
         <span class="section-number">02.</span>
+        <h2 class="section-title">Professional Experience</h2>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="experience-section">
+        <!-- View Toggle -->
+        <div style="padding: 1rem 1.5rem 0; display: flex; justify-content: flex-end;">
+          <div class="view-toggle">
+            <button class="view-btn active" onclick="switchExpView('tabs')" id="view-tabs">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                <path d="M3 9h18"/>
+              </svg>
+              Tabs
+            </button>
+            <button class="view-btn" onclick="switchExpView('timeline')" id="view-timeline">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2v20"/>
+                <path d="M2 12h4"/>
+                <path d="M18 12h4"/>
+                <path d="M2 6h4"/>
+                <path d="M18 6h4"/>
+                <path d="M2 18h4"/>
+                <path d="M18 18h4"/>
+              </svg>
+              Timeline
+            </button>
+          </div>
+        </div>
+
+        <!-- Tabbed View -->
+        <div id="exp-tabs-view">
+          <div class="exp-tabs">
+            <button class="exp-tab active" onclick="switchExpTab('boa')" data-tab="boa">
+              Bank of America
+              <span class="exp-tab-period">2020 - Present</span>
+            </button>
+            <button class="exp-tab" onclick="switchExpTab('chola')" data-tab="chola">
+              Cholamandalam
+              <span class="exp-tab-period">2019</span>
+            </button>
+            <button class="exp-tab" onclick="switchExpTab('standard')" data-tab="standard">
+              Standard Bank
+              <span class="exp-tab-period">2012 - 2016</span>
+            </button>
+            <button class="exp-tab" onclick="switchExpTab('enbd')" data-tab="enbd">
+              Emirates NBD
+              <span class="exp-tab-period">2008 - 2012</span>
+            </button>
+            <button class="exp-tab" onclick="switchExpTab('early')" data-tab="early">
+              Early Career
+              <span class="exp-tab-period">2004 - 2008</span>
+            </button>
+          </div>
+
+          <div class="exp-panels">
+            <!-- Bank of America Panel -->
+            <div class="exp-panel active" id="panel-boa">
+              <div class="exp-panel-header">
+                <div class="exp-company-info">
+                  <h3>Bank of America (Jakarta, Singapore, India)</h3>
+                  <p class="role">Sr. Technology Architect</p>
+                  <p class="employer">Infosys Ltd.</p>
+                </div>
+                <span class="exp-period-badge">2020 - Present</span>
+              </div>
+              <p class="exp-context">Global Commercial Bank - APAC Region. Driving Real-Time Payments (RTP) and NFR delivery across multiple countries.</p>
+              <ul class="exp-bullets">
+                <li>Integral member and architect of Application Engineering and Support agile team driving <strong>Real-Time Payments (RTP)</strong> implementations and NFR delivery for APAC regions</li>
+                <li>Led the Business mapping stream for <strong>Regulatory Reporting translation</strong>, achieving 100% mappings and timely Business enablement</li>
+                <li>Strategized Business processes for <strong>Client Onboarding</strong>, enabling new businesses and integrating Regulatory norms within Bank-in-a-box technology</li>
+                <li>Designed and achieved a <strong>5x Business-volumes-ready</strong> reporting system certified by the Client</li>
+                <li>Led Design changes resulting in <strong>60% reduction</strong> in daily job execution times</li>
+                <li>Designed <strong>Splunk dashboards</strong> for visualization and remediation of system events with quickest TAT</li>
+                <li>Mentored cross-functional teams in decision making, business thinking, and problem solving</li>
+              </ul>
+            </div>
+
+            <!-- Cholamandalam Panel -->
+            <div class="exp-panel" id="panel-chola">
+              <div class="exp-panel-header">
+                <div class="exp-company-info">
+                  <h3>Cholamandalam Investment and Finance Company</h3>
+                  <p class="role">Project Manager</p>
+                  <p class="employer">Latitude Fintech</p>
+                </div>
+                <span class="exp-period-badge">Feb - Apr 2019</span>
+              </div>
+              <ul class="exp-bullets">
+                <li>Implemented Latitude Fintech's premiere <strong>tech-savvy LOS product</strong> at Cholamandalam Finance Ltd</li>
+                <li>Ensured successful <strong>all-India go-live</strong> transformations</li>
+                <li>Achieved <strong>two-thirds reduction</strong> in Client onboarding processes (end-to-end time, verifications & sanctioning)</li>
+              </ul>
+            </div>
+
+            <!-- Standard Bank Panel -->
+            <div class="exp-panel" id="panel-standard">
+              <div class="exp-panel-header">
+                <div class="exp-company-info">
+                  <h3>Standard Bank (South Africa & Nigeria)</h3>
+                  <p class="role">Technology Architect & Project Manager</p>
+                  <p class="employer">EdgeVerve Systems Ltd.</p>
+                </div>
+                <span class="exp-period-badge">2012 - 2016</span>
+              </div>
+              <p class="exp-context">Africa's largest banking institution with operations across 18 countries. Finacle Core Banking implementation.</p>
+              <ul class="exp-bullets">
+                <li>Managed Business discussions, Requirement gathering & Design Phases with Client</li>
+                <li>Trained and mentored fresh talent through Design, Build & Delivery phases</li>
+                <li>Achieved <strong>1000+ man-days of 100% on-time deliverables</strong></li>
+                <li>Managed teams of <strong>3-18 members</strong> with less than 2.5% Defect Injection Rate</li>
+                <li>Led the Project into successful <strong>CMMI Maturity Level 4</strong> assessment - first in Africa & Middle East Region</li>
+                <li>Acknowledged as <strong>Client's most preferred Project Manager</strong></li>
+                <li>Earned internal prestigious <strong>Team Award</strong> for management and code quality</li>
+              </ul>
+              <div class="exp-roles-held">
+                <p class="exp-roles-label">Roles Held</p>
+                <div class="exp-roles-chips">
+                  <span class="exp-role-chip">Project Manager</span>
+                  <span class="exp-role-chip">Business Analyst</span>
+                  <span class="exp-role-chip">QA Lead</span>
+                  <span class="exp-role-chip">Technology Architect</span>
+                  <span class="exp-role-chip">Senior Developer</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Emirates NBD Panel -->
+            <div class="exp-panel" id="panel-enbd">
+              <div class="exp-panel-header">
+                <div class="exp-company-info">
+                  <h3>Emirates NBD (Dubai)</h3>
+                  <p class="role">Team Lead & Project Manager</p>
+                  <p class="employer">Infosys Ltd.</p>
+                </div>
+                <span class="exp-period-badge">2008 - 2012</span>
+              </div>
+              <p class="exp-context">One of the largest banking groups in the Middle East. Core banking transformation following Emirates Bank + National Bank of Dubai merger.</p>
+              <ul class="exp-bullets">
+                <li>Achieved <strong>3000+ man-days of 100% on-time deliverables</strong></li>
+                <li>Served as preferred techno-functional Project Manager managing teams of <strong>up to 18 members</strong></li>
+                <li>Designed & implemented reusable modules - <strong>cash denomination, teller reports, EOD batch jobs</strong></li>
+                <li>Earned individual award for <strong>cash denomination module design</strong></li>
+                <li>Led Release Management eliminating <strong>100% non-infra deployment issues</strong> through automation</li>
+              </ul>
+              <div class="exp-roles-held">
+                <p class="exp-roles-label">Roles Held</p>
+                <div class="exp-roles-chips">
+                  <span class="exp-role-chip">Senior Developer</span>
+                  <span class="exp-role-chip">Team Lead</span>
+                  <span class="exp-role-chip">Project Manager</span>
+                  <span class="exp-role-chip">Technology Architect</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Early Career Panel -->
+            <div class="exp-panel" id="panel-early">
+              <div class="exp-panel-header">
+                <div class="exp-company-info">
+                  <h3>Earlier Career at Infosys Ltd.</h3>
+                  <p class="role">Software Developer</p>
+                  <p class="employer">Infosys Ltd., Chennai</p>
+                </div>
+                <span class="exp-period-badge">2004 - 2008</span>
+              </div>
+              <ul class="exp-bullets">
+                <li><strong>Bank Sohar (2007):</strong> Reports Customization & Development - Oman</li>
+                <li><strong>State Bank of India Overseas (2006-2007):</strong> Core module Customization, Reports, Test & Support</li>
+                <li><strong>Bank of Alexandria (2004-2005):</strong> Core module Customization, Test & Support - Egypt</li>
+                <li><strong>Bank of India (2004):</strong> Core module Customization</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Timeline View (hidden by default) -->
+        <div id="exp-timeline-view" style="display: none; padding: 2rem;">
+          <div class="timeline-view">
+            <div class="timeline-item current">
+              <div class="timeline-date">2020 - Present</div>
+              <div class="timeline-company">Bank of America (Jakarta, Singapore)</div>
+              <div class="timeline-role">Sr. Technology Architect @ Infosys Ltd.</div>
+              <div class="timeline-summary">Driving RTP implementations and NFR delivery for APAC. 5x business-volumes-ready reporting, 60% reduction in job execution times.</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-date">Feb - Apr 2019</div>
+              <div class="timeline-company">Cholamandalam Finance</div>
+              <div class="timeline-role">Project Manager @ Latitude Fintech</div>
+              <div class="timeline-summary">All-India LOS go-live. Two-thirds reduction in client onboarding time.</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-date">2012 - 2016</div>
+              <div class="timeline-company">Standard Bank (South Africa & Nigeria)</div>
+              <div class="timeline-role">Technology Architect & PM @ EdgeVerve</div>
+              <div class="timeline-summary">1000+ man-days, 100% on-time delivery. CMMI Level 4. Client's most preferred PM.</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-date">2008 - 2012</div>
+              <div class="timeline-company">Emirates NBD (Dubai)</div>
+              <div class="timeline-role">Team Lead & PM @ Infosys Ltd.</div>
+              <div class="timeline-summary">3000+ man-days, 100% on-time. Award-winning module designs. Release automation.</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-date">2004 - 2008</div>
+              <div class="timeline-company">Multiple Banks</div>
+              <div class="timeline-role">Software Developer @ Infosys Ltd.</div>
+              <div class="timeline-summary">Bank Sohar, SBI Overseas, Bank of Alexandria, Bank of India - Core banking implementations.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SECTION 3: Skills Visualization ============ -->
+    <section class="section animate-fade-up delay-3">
+      <div class="section-header">
+        <span class="section-number">03.</span>
         <h2 class="section-title">Skills & Expertise</h2>
         <div class="section-line"></div>
       </div>
@@ -2163,10 +2949,142 @@
       </div>
     </section>
 
-    <!-- ============ SECTION 3: Projects Showcase ============ -->
-    <section class="section animate-fade-up delay-3">
+    <!-- ============ SECTION 4: GitHub Stats ============ -->
+    <section class="section animate-fade-up delay-4">
       <div class="section-header">
-        <span class="section-number">03.</span>
+        <span class="section-number">04.</span>
+        <h2 class="section-title">GitHub Activity</h2>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="github-section">
+        <div class="github-header">
+          <div class="github-profile">
+            <div class="github-avatar">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+              </svg>
+            </div>
+            <div>
+              <div class="github-username">castroarun</div>
+              <div class="github-handle">@castroarun</div>
+            </div>
+          </div>
+          <a href="https://github.com/castroarun" class="github-link" target="_blank">
+            View Profile
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+              <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
+              <polyline points="15 3 21 3 21 9"/>
+              <line x1="10" y1="14" x2="21" y2="3"/>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-value" id="commits-count">--</div>
+            <div class="stat-label">Commits (2025)</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="repos-count">--</div>
+            <div class="stat-label">Repositories</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="prs-count">--</div>
+            <div class="stat-label">Pull Requests</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="stars-count">--</div>
+            <div class="stat-label">Stars Earned</div>
+          </div>
+        </div>
+
+        <!-- Contribution Heatmap - Using GitHub Contributions Calendar -->
+        <div class="heatmap-container">
+          <div class="heatmap-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+              <line x1="16" y1="2" x2="16" y2="6"/>
+              <line x1="8" y1="2" x2="8" y2="6"/>
+              <line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+            Contribution Activity (Last 12 months)
+          </div>
+          <!-- Using ghchart for accurate contribution data -->
+          <div class="github-contrib-chart">
+            <img
+              src="https://ghchart.rshah.org/22d3ee/castroarun"
+              alt="GitHub Contribution Chart"
+              style="width: 100%; border-radius: 8px; filter: hue-rotate(180deg) saturate(1.2);"
+              onerror="this.style.display='none'; document.getElementById('contribution-heatmap').style.display='flex';"
+            />
+            <div class="heatmap" id="contribution-heatmap" style="display: none;">
+              <!-- Fallback: Generated by JavaScript -->
+            </div>
+          </div>
+          <div class="heatmap-legend">
+            Less
+            <div class="heatmap-legend-item" style="background: var(--bg-hover)"></div>
+            <div class="heatmap-legend-item level-1" style="background: rgba(34, 211, 238, 0.2)"></div>
+            <div class="heatmap-legend-item level-2" style="background: rgba(34, 211, 238, 0.4)"></div>
+            <div class="heatmap-legend-item level-3" style="background: rgba(34, 211, 238, 0.6)"></div>
+            <div class="heatmap-legend-item level-4" style="background: var(--accent)"></div>
+            More
+          </div>
+        </div>
+
+        <!-- Languages -->
+        <div class="languages-grid">
+          <div class="language-item">
+            <div class="language-dot" style="background: #3178C6"></div>
+            <span class="language-name">TypeScript</span>
+            <span class="language-percent">42%</span>
+          </div>
+          <div class="language-item">
+            <div class="language-dot" style="background: #F7DF1E"></div>
+            <span class="language-name">JavaScript</span>
+            <span class="language-percent">28%</span>
+          </div>
+          <div class="language-item">
+            <div class="language-dot" style="background: #3776AB"></div>
+            <span class="language-name">Python</span>
+            <span class="language-percent">18%</span>
+          </div>
+          <div class="language-item">
+            <div class="language-dot" style="background: #E34F26"></div>
+            <span class="language-name">HTML/CSS</span>
+            <span class="language-percent">12%</span>
+          </div>
+        </div>
+
+        <!-- GitHub Repositories (Dynamically Loaded) -->
+        <div class="github-repos-section">
+          <div class="github-repos-header">
+            <h3 class="github-repos-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+              </svg>
+              Public Repositories
+            </h3>
+          </div>
+          <div class="github-repos-grid" id="github-repos-grid">
+            <!-- Loaded dynamically from GitHub API -->
+            <div class="github-repos-loading">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 12a9 9 0 1 1-6.219-8.56"/>
+              </svg>
+              Loading repositories...
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SECTION 5: Projects Showcase ============ -->
+    <section class="section animate-fade-up delay-5">
+      <div class="section-header">
+        <span class="section-number">05.</span>
         <h2 class="section-title">What I'm Building</h2>
         <div class="section-line"></div>
       </div>
@@ -2607,10 +3525,10 @@
       </div>
     </section>
 
-    <!-- ============ SECTION 4: Certifications ============ -->
-    <section class="section animate-fade-up delay-4">
+    <!-- ============ SECTION 6: Certifications ============ -->
+    <section class="section animate-fade-up delay-5">
       <div class="section-header">
-        <span class="section-number">04.</span>
+        <span class="section-number">06.</span>
         <h2 class="section-title">Certifications & Credentials</h2>
         <div class="section-line"></div>
       </div>
@@ -2705,10 +3623,10 @@
       </div>
     </section>
 
-    <!-- ============ SECTION 5: AI Chat Assistant ============ -->
-    <section class="section animate-fade-up delay-5">
+    <!-- ============ SECTION 7: AI Chat Assistant ============ -->
+    <section class="section animate-fade-up delay-6">
       <div class="section-header">
-        <span class="section-number">05.</span>
+        <span class="section-number">07.</span>
         <h2 class="section-title">Ask Me Anything</h2>
         <div class="section-line"></div>
       </div>
@@ -2926,6 +3844,48 @@
   </div>
 
   <script>
+    // ============ Intro Section Toggle ============
+    function toggleIntro() {
+      const section = document.getElementById('intro-section');
+      section.classList.toggle('expanded');
+      const titleText = section.querySelector('.intro-title-text p');
+      if (section.classList.contains('expanded')) {
+        titleText.textContent = 'Click to collapse';
+      } else {
+        titleText.textContent = 'Click to expand my story';
+      }
+    }
+
+    // ============ Experience Tabs ============
+    function switchExpTab(tabId) {
+      // Remove active from all tabs
+      document.querySelectorAll('.exp-tab').forEach(tab => tab.classList.remove('active'));
+      document.querySelectorAll('.exp-panel').forEach(panel => panel.classList.remove('active'));
+
+      // Add active to clicked tab
+      document.querySelector(`[data-tab="${tabId}"]`).classList.add('active');
+      document.getElementById(`panel-${tabId}`).classList.add('active');
+    }
+
+    function switchExpView(view) {
+      const tabsView = document.getElementById('exp-tabs-view');
+      const timelineView = document.getElementById('exp-timeline-view');
+      const tabsBtn = document.getElementById('view-tabs');
+      const timelineBtn = document.getElementById('view-timeline');
+
+      if (view === 'tabs') {
+        tabsView.style.display = 'block';
+        timelineView.style.display = 'none';
+        tabsBtn.classList.add('active');
+        timelineBtn.classList.remove('active');
+      } else {
+        tabsView.style.display = 'none';
+        timelineView.style.display = 'block';
+        tabsBtn.classList.remove('active');
+        timelineBtn.classList.add('active');
+      }
+    }
+
     // ============ GitHub API Configuration ============
     const GITHUB_USERNAME = 'castroarun';
     const GITHUB_API_BASE = 'https://api.github.com';
@@ -3705,6 +4665,41 @@ This creativity informs his approach to problem-solving - thinking outside the b
       messages.scrollTop = messages.scrollHeight;
     }
 
+    function showLoadingIndicator() {
+      const messages = document.getElementById('chat-messages');
+      const loadingDiv = document.createElement('div');
+      loadingDiv.className = 'chat-loading';
+      loadingDiv.id = 'chat-loading-indicator';
+      loadingDiv.innerHTML = `
+        <div class="message-avatar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+          </svg>
+        </div>
+        <div class="typing-indicator">
+          <div class="typing-dot"></div>
+          <div class="typing-dot"></div>
+          <div class="typing-dot"></div>
+        </div>
+      `;
+      messages.appendChild(loadingDiv);
+      messages.scrollTop = messages.scrollHeight;
+    }
+
+    function hideLoadingIndicator() {
+      const loading = document.getElementById('chat-loading-indicator');
+      if (loading) loading.remove();
+    }
+
+    function getRandomDelay() {
+      // Random delay between 800ms and 2200ms to simulate backend processing
+      // Shorter responses feel faster, longer ones take more time
+      const baseDelay = 600;
+      const variableDelay = Math.random() * 1400; // 0-1400ms
+      const extraJitter = Math.random() * 200; // Small jitter for realism
+      return Math.floor(baseDelay + variableDelay + extraJitter);
+    }
+
     function sendMessage() {
       const input = document.getElementById('chat-input');
       const question = input.value.trim();
@@ -3714,11 +4709,16 @@ This creativity informs his approach to problem-solving - thinking outside the b
       addMessage(question, true);
       input.value = '';
 
-      // Simulate typing delay
+      // Show loading indicator
+      showLoadingIndicator();
+
+      // Simulate backend processing with variable delay
+      const delay = getRandomDelay();
       setTimeout(() => {
+        hideLoadingIndicator();
         const response = getResponse(question);
         addMessage(response);
-      }, 500);
+      }, delay);
     }
 
     function askQuestion(question) {
