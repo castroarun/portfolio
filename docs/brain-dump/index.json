@@ -1,0 +1,41 @@
+{
+  "profile": {
+    "name": "Arun Castromin Lawrance",
+    "title": "Sr. Technology Architect",
+    "yearsExperience": 17,
+    "currentRole": {
+      "company": "Infosys Ltd.",
+      "client": "Bank of America",
+      "location": "Singapore",
+      "focus": ["RTP Implementations", "NFR Delivery", "APAC Region"]
+    }
+  },
+  "categories": {
+    "career-stories": {
+      "description": "Detailed project narratives and memorable career moments",
+      "files": ["bank-of-america-rtp.md"]
+    },
+    "achievements": {
+      "description": "Awards, recognition, metrics, and wins",
+      "files": ["denomination-module-award.md", "cmmi-level4-standard-bank.md"]
+    },
+    "challenges-solutions": {
+      "description": "Situational awareness - problems faced and how they were solved",
+      "files": ["ipdl-operations-automation.md"]
+    },
+    "personal-interests": {
+      "description": "Hobbies, passions, and personal philosophy",
+      "files": ["creative-arts-filmmaking.md", "strength-training.md"]
+    },
+    "technical-expertise": {
+      "description": "Deep technical knowledge and architectural insights",
+      "files": ["finacle-core-banking.md"]
+    }
+  },
+  "tags": [
+    "finacle", "rtp", "nfr", "core-banking", "payments", "cmmi",
+    "java", "python", "automation", "leadership", "filmmaking",
+    "strength-training", "apac", "middle-east", "africa"
+  ],
+  "lastUpdated": "2026-01-03"
+}
