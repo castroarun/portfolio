@@ -959,6 +959,313 @@
         width: 150px;
       }
     }
+
+    /* ============ 3A: COMBINED - Vertical Line + Moderate Cards (Default Expanded) ============ */
+    .timeline-combined {
+      position: relative;
+      padding-left: 3rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .timeline-combined::before {
+      content: '';
+      position: absolute;
+      left: 0.75rem;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom,
+        var(--track-career) 0%,
+        var(--track-career) 40%,
+        var(--track-personal) 60%,
+        var(--track-spiritual) 100%
+      );
+    }
+
+    .combined-event {
+      position: relative;
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.6s ease-out;
+    }
+
+    .combined-dot {
+      position: absolute;
+      left: -2.5rem;
+      top: 1.25rem;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 3px solid var(--bg-elevated);
+      z-index: 1;
+    }
+
+    .combined-dot.career { background: var(--track-career); }
+    .combined-dot.personal { background: var(--track-personal); }
+    .combined-dot.spiritual { background: var(--track-spiritual); }
+
+    .combined-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: all 0.2s;
+    }
+
+    .combined-card:hover {
+      border-color: var(--border-medium);
+    }
+
+    .combined-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.25rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .combined-header:hover {
+      background: var(--bg-hover);
+    }
+
+    .combined-year {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.875rem;
+      font-weight: 600;
+      min-width: 50px;
+    }
+
+    .combined-year.career { color: var(--track-career); }
+    .combined-year.personal { color: var(--track-personal); }
+    .combined-year.spiritual { color: var(--track-spiritual); }
+
+    .combined-title {
+      flex: 1;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .combined-role {
+      font-size: 0.75rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      color: var(--text-muted);
+      background: var(--bg-hover);
+    }
+
+    .combined-toggle {
+      color: var(--text-muted);
+      transition: transform 0.3s;
+    }
+
+    .combined-event.expanded .combined-toggle {
+      transform: rotate(180deg);
+    }
+
+    .combined-content {
+      max-height: 300px;
+      overflow: hidden;
+      transition: max-height 0.4s ease-out;
+    }
+
+    .combined-event.collapsed .combined-content {
+      max-height: 0;
+    }
+
+    .combined-inner {
+      padding: 0 1.25rem 1.25rem;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .combined-desc {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-top: 1rem;
+    }
+
+    .combined-highlight {
+      background: var(--accent-dim);
+      border-left: 3px solid var(--accent);
+      padding: 0.75rem 1rem;
+      border-radius: 0 8px 8px 0;
+      margin-top: 1rem;
+    }
+
+    .combined-highlight-text {
+      font-size: 0.85rem;
+      color: var(--accent);
+      font-style: italic;
+    }
+
+    .combined-tags {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .combined-tag {
+      font-size: 0.7rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 100px;
+      font-weight: 500;
+    }
+
+    .combined-tag.career { background: var(--track-career-dim); color: var(--track-career); }
+    .combined-tag.personal { background: var(--track-personal-dim); color: var(--track-personal); }
+    .combined-tag.spiritual { background: var(--track-spiritual-dim); color: var(--track-spiritual); }
+
+    /* ============ 3B: RIVER/ZIGZAG - Fits on Page ============ */
+    .timeline-river {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .river-row {
+      display: flex;
+      align-items: center;
+      position: relative;
+      padding: 1rem 0;
+    }
+
+    .river-row.reverse {
+      flex-direction: row-reverse;
+    }
+
+    .river-row::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--border-medium);
+      transform: translateY(-50%);
+    }
+
+    .river-connector {
+      position: absolute;
+      width: 3px;
+      height: 100%;
+      background: var(--border-medium);
+    }
+
+    .river-row:not(:last-child) .river-connector {
+      bottom: -50%;
+    }
+
+    .river-row:nth-child(odd) .river-connector {
+      right: 0;
+    }
+
+    .river-row:nth-child(even) .river-connector {
+      left: 0;
+    }
+
+    .river-events {
+      display: flex;
+      gap: 0;
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    .river-row.reverse .river-events {
+      flex-direction: row-reverse;
+    }
+
+    .river-event {
+      flex: 0 0 auto;
+      width: calc(25% - 1rem);
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .river-dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      margin: 0 auto 0.75rem;
+      border: 3px solid var(--bg-elevated);
+      position: relative;
+      z-index: 2;
+    }
+
+    .river-dot.career { background: var(--track-career); box-shadow: 0 0 0 3px var(--track-career-dim); }
+    .river-dot.personal { background: var(--track-personal); box-shadow: 0 0 0 3px var(--track-personal-dim); }
+    .river-dot.spiritual { background: var(--track-spiritual); box-shadow: 0 0 0 3px var(--track-spiritual-dim); }
+
+    .river-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 0.75rem;
+      transition: all 0.2s;
+    }
+
+    .river-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--border-medium);
+    }
+
+    .river-year {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .river-year.career { color: var(--track-career); }
+    .river-year.personal { color: var(--track-personal); }
+    .river-year.spiritual { color: var(--track-spiritual); }
+
+    .river-title {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.3;
+    }
+
+    .river-role {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+    }
+
+    @media (max-width: 768px) {
+      .river-event {
+        width: calc(50% - 0.5rem);
+      }
+
+      .river-row {
+        flex-wrap: wrap;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .timeline-combined {
+        padding-left: 2rem;
+      }
+
+      .combined-dot {
+        left: -1.75rem;
+        width: 12px;
+        height: 12px;
+      }
+
+      .river-event {
+        width: 100%;
+        margin-bottom: 1rem;
+      }
+
+      .river-row::before {
+        display: none;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1106,6 +1413,53 @@
         </div>
 
         <div class="timeline-rich" id="timeline-rich">
+          <!-- Events will be populated by JavaScript -->
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: RECOMMENDED STYLES -->
+    <section class="showcase-section">
+      <div class="section-header">
+        <span class="section-number">03.</span>
+        <h2 class="section-title">Recommended Styles</h2>
+        <div class="section-line"></div>
+      </div>
+      <p class="section-desc">Custom combinations based on your preferences.</p>
+
+      <!-- 3A: Combined - Vertical + Moderate (Default Expanded) -->
+      <div class="variation-container">
+        <div class="variation-header">
+          <h3 class="variation-title">3A. Vertical Line + Expandable Cards (Default Expanded)</h3>
+          <span class="variation-badge">Recommended</span>
+        </div>
+
+        <div class="category-filters">
+          <button class="filter-btn active" onclick="filterEvents(this, 'all', 'combined')">All</button>
+          <button class="filter-btn career" onclick="filterEvents(this, 'career', 'combined')">
+            <span class="filter-dot" style="background: var(--track-career)"></span> Career
+          </button>
+          <button class="filter-btn personal" onclick="filterEvents(this, 'personal', 'combined')">
+            <span class="filter-dot" style="background: var(--track-personal)"></span> Personal
+          </button>
+          <button class="filter-btn spiritual" onclick="filterEvents(this, 'spiritual', 'combined')">
+            <span class="filter-dot" style="background: var(--track-spiritual)"></span> Spiritual
+          </button>
+        </div>
+
+        <div class="timeline-combined" id="timeline-combined">
+          <!-- Events will be populated by JavaScript -->
+        </div>
+      </div>
+
+      <!-- 3B: River/Zigzag - Fits on Page -->
+      <div class="variation-container">
+        <div class="variation-header">
+          <h3 class="variation-title">3B. River Flow (Left→Right→Down→Left, No Scroll)</h3>
+          <span class="variation-badge">Fits on Page</span>
+        </div>
+
+        <div class="timeline-river" id="timeline-river">
           <!-- Events will be populated by JavaScript -->
         </div>
       </div>
@@ -1282,6 +1636,76 @@
       element.classList.toggle('expanded');
     }
 
+    // Toggle combined event expansion
+    function toggleCombined(element) {
+      element.classList.toggle('collapsed');
+    }
+
+    // Render Combined Timeline (Vertical Line + Moderate Cards, Default Expanded)
+    function renderCombined() {
+      const container = document.getElementById('timeline-combined');
+      container.innerHTML = sortedData.map((event, index) => `
+        <div class="combined-event expanded" data-category="${event.category}" onclick="toggleCombined(this)">
+          <div class="combined-dot ${event.category}"></div>
+          <div class="combined-card">
+            <div class="combined-header">
+              <span class="combined-year ${event.category}">${event.year}</span>
+              <span class="combined-title">${event.title}</span>
+              ${event.role ? `<span class="combined-role">${event.role}</span>` : ''}
+              <svg class="combined-toggle" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"/>
+              </svg>
+            </div>
+            <div class="combined-content">
+              <div class="combined-inner">
+                <p class="combined-desc">${event.desc}</p>
+                ${event.highlight ? `
+                  <div class="combined-highlight">
+                    <p class="combined-highlight-text">"${event.highlight}"</p>
+                  </div>
+                ` : ''}
+                ${event.tags ? `
+                  <div class="combined-tags">
+                    ${event.tags.map(tag => `<span class="combined-tag ${event.category}">${tag}</span>`).join('')}
+                  </div>
+                ` : ''}
+              </div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Render River/Zigzag Timeline (Fits on Page)
+    function renderRiver() {
+      const container = document.getElementById('timeline-river');
+      const eventsPerRow = 4;
+      const rows = [];
+
+      // Split events into rows
+      for (let i = 0; i < sortedData.length; i += eventsPerRow) {
+        rows.push(sortedData.slice(i, i + eventsPerRow));
+      }
+
+      container.innerHTML = rows.map((row, rowIndex) => `
+        <div class="river-row ${rowIndex % 2 === 1 ? 'reverse' : ''}">
+          <div class="river-events">
+            ${row.map(event => `
+              <div class="river-event" data-category="${event.category}">
+                <div class="river-dot ${event.category}"></div>
+                <div class="river-card">
+                  <div class="river-year ${event.category}">${event.year}</div>
+                  <div class="river-title">${event.title}</div>
+                  ${event.role ? `<div class="river-role">${event.role}</div>` : ''}
+                </div>
+              </div>
+            `).join('')}
+          </div>
+          ${rowIndex < rows.length - 1 ? '<div class="river-connector"></div>' : ''}
+        </div>
+      `).join('');
+    }
+
     // Filter events by category
     function filterEvents(button, category, timeline) {
       // Update button states
@@ -1314,6 +1738,8 @@
     renderMinimal();
     renderModerate();
     renderRich();
+    renderCombined();
+    renderRiver();
   </script>
 </body>
 </html>
