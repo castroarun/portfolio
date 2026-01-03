@@ -1,0 +1,1319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Life Timeline - Design Showcase | Arun Castromin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ============ CSS Variables (Design System) ============ */
+    :root {
+      --bg-base: #0A0A0F;
+      --bg-elevated: #111118;
+      --bg-card: #16161D;
+      --bg-hover: #1E1E26;
+      --text-primary: #F4F4F5;
+      --text-secondary: #A1A1AA;
+      --text-muted: #71717A;
+      --accent: #22D3EE;
+      --accent-dim: rgba(34, 211, 238, 0.1);
+      --accent-glow: rgba(34, 211, 238, 0.3);
+      --border-subtle: rgba(255, 255, 255, 0.06);
+      --border-medium: rgba(255, 255, 255, 0.1);
+
+      /* Category Track Colors */
+      --track-career: #3B82F6;
+      --track-career-dim: rgba(59, 130, 246, 0.1);
+      --track-career-glow: rgba(59, 130, 246, 0.3);
+      --track-personal: #EC4899;
+      --track-personal-dim: rgba(236, 72, 153, 0.1);
+      --track-personal-glow: rgba(236, 72, 153, 0.3);
+      --track-spiritual: #F59E0B;
+      --track-spiritual-dim: rgba(245, 158, 11, 0.1);
+      --track-spiritual-glow: rgba(245, 158, 11, 0.3);
+    }
+
+    /* ============ Base Styles ============ */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-base);
+      color: var(--text-primary);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    /* ============ Page Header ============ */
+    .page-header {
+      text-align: center;
+      padding: 3rem 0 4rem;
+      border-bottom: 1px solid var(--border-subtle);
+      margin-bottom: 4rem;
+    }
+
+    .page-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .page-subtitle {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* ============ Category Legend ============ */
+    .category-legend {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+    }
+
+    .legend-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .legend-dot.career { background: var(--track-career); }
+    .legend-dot.personal { background: var(--track-personal); }
+    .legend-dot.spiritual { background: var(--track-spiritual); }
+
+    /* ============ Section Styles ============ */
+    .showcase-section {
+      margin-bottom: 6rem;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .section-number {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.875rem;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border-subtle);
+    }
+
+    .section-desc {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+      padding-left: 2.5rem;
+    }
+
+    /* ============ Variation Container ============ */
+    .variation-container {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .variation-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .variation-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .variation-badge {
+      font-size: 0.75rem;
+      padding: 0.25rem 0.75rem;
+      background: var(--accent-dim);
+      color: var(--accent);
+      border-radius: 100px;
+      font-weight: 600;
+    }
+
+    /* ============ Category Filters ============ */
+    .category-filters {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      padding: 0.5rem 1rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border-medium);
+      border-radius: 100px;
+      color: var(--text-secondary);
+      font-size: 0.8rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .filter-btn:hover {
+      background: var(--bg-hover);
+      color: var(--text-primary);
+    }
+
+    .filter-btn.active {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .filter-btn.career.active {
+      border-color: var(--track-career);
+      color: var(--track-career);
+      background: var(--track-career-dim);
+    }
+
+    .filter-btn.personal.active {
+      border-color: var(--track-personal);
+      color: var(--track-personal);
+      background: var(--track-personal-dim);
+    }
+
+    .filter-btn.spiritual.active {
+      border-color: var(--track-spiritual);
+      color: var(--track-spiritual);
+      background: var(--track-spiritual-dim);
+    }
+
+    .filter-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    /* ============ 1A: HORIZONTAL SCROLL TIMELINE ============ */
+    .timeline-horizontal {
+      overflow-x: auto;
+      padding: 2rem 0;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .timeline-horizontal::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    .timeline-horizontal::-webkit-scrollbar-track {
+      background: var(--bg-card);
+      border-radius: 3px;
+    }
+
+    .timeline-horizontal::-webkit-scrollbar-thumb {
+      background: var(--accent-dim);
+      border-radius: 3px;
+    }
+
+    .timeline-horizontal::-webkit-scrollbar-thumb:hover {
+      background: var(--accent);
+    }
+
+    .timeline-track-h {
+      display: flex;
+      gap: 0;
+      min-width: max-content;
+      padding: 0 1rem;
+      position: relative;
+    }
+
+    .timeline-track-h::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--border-medium);
+      transform: translateY(-50%);
+      z-index: 0;
+    }
+
+    .timeline-event-h {
+      flex-shrink: 0;
+      width: 180px;
+      scroll-snap-align: center;
+      position: relative;
+      z-index: 1;
+      padding: 0 0.5rem;
+    }
+
+    .event-dot-h {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      margin: 0 auto 1rem;
+      position: relative;
+      border: 3px solid var(--bg-elevated);
+      transition: all 0.3s;
+    }
+
+    .event-dot-h.career { background: var(--track-career); box-shadow: 0 0 0 3px var(--track-career-dim); }
+    .event-dot-h.personal { background: var(--track-personal); box-shadow: 0 0 0 3px var(--track-personal-dim); }
+    .event-dot-h.spiritual { background: var(--track-spiritual); box-shadow: 0 0 0 3px var(--track-spiritual-dim); }
+
+    .event-card-h {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 1rem;
+      text-align: center;
+      transition: all 0.3s;
+    }
+
+    .event-card-h:hover {
+      transform: translateY(-4px);
+      border-color: var(--border-medium);
+    }
+
+    .event-year-h {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .event-year-h.career { color: var(--track-career); }
+    .event-year-h.personal { color: var(--track-personal); }
+    .event-year-h.spiritual { color: var(--track-spiritual); }
+
+    .event-title-h {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.25rem;
+    }
+
+    .event-subtitle-h {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    /* ============ 1B: VERTICAL STACK TIMELINE ============ */
+    .timeline-vertical {
+      position: relative;
+      padding-left: 3rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .timeline-vertical::before {
+      content: '';
+      position: absolute;
+      left: 0.75rem;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--track-career), var(--track-personal), var(--track-spiritual));
+    }
+
+    .timeline-event-v {
+      position: relative;
+      padding-bottom: 2rem;
+      animation: fadeUp 0.6s ease-out;
+    }
+
+    .event-dot-v {
+      position: absolute;
+      left: -2.5rem;
+      top: 0.25rem;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 3px solid var(--bg-elevated);
+    }
+
+    .event-dot-v.career { background: var(--track-career); }
+    .event-dot-v.personal { background: var(--track-personal); }
+    .event-dot-v.spiritual { background: var(--track-spiritual); }
+
+    .event-content-v {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 1.25rem;
+      transition: all 0.2s;
+    }
+
+    .event-content-v:hover {
+      border-color: var(--border-medium);
+      transform: translateX(4px);
+    }
+
+    .event-header-v {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .event-year-v {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+
+    .event-year-v.career { color: var(--track-career); }
+    .event-year-v.personal { color: var(--track-personal); }
+    .event-year-v.spiritual { color: var(--track-spiritual); }
+
+    .event-title-v {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .event-desc-v {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    .event-role-v {
+      display: inline-block;
+      font-size: 0.75rem;
+      padding: 0.25rem 0.5rem;
+      background: var(--bg-hover);
+      border-radius: 4px;
+      color: var(--text-muted);
+      margin-top: 0.75rem;
+    }
+
+    /* ============ 1C: SPIRAL/CREATIVE TIMELINE ============ */
+    .timeline-spiral-container {
+      display: flex;
+      justify-content: center;
+      padding: 2rem;
+      min-height: 600px;
+    }
+
+    .timeline-spiral {
+      position: relative;
+      width: 100%;
+      max-width: 900px;
+    }
+
+    .spiral-path {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      opacity: 0.3;
+    }
+
+    .spiral-events {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .spiral-event {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 1rem;
+      text-align: center;
+      transition: all 0.3s;
+      position: relative;
+    }
+
+    .spiral-event::before {
+      content: '';
+      position: absolute;
+      top: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 3px solid var(--bg-card);
+    }
+
+    .spiral-event.career::before { background: var(--track-career); }
+    .spiral-event.personal::before { background: var(--track-personal); }
+    .spiral-event.spiritual::before { background: var(--track-spiritual); }
+
+    .spiral-event:hover {
+      transform: scale(1.05);
+      border-color: var(--accent);
+    }
+
+    .spiral-year {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .spiral-year.career { color: var(--track-career); }
+    .spiral-year.personal { color: var(--track-personal); }
+    .spiral-year.spiritual { color: var(--track-spiritual); }
+
+    .spiral-title {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    /* ============ 1D: HYBRID TIMELINE ============ */
+    .timeline-hybrid {
+      position: relative;
+    }
+
+    .hybrid-desktop {
+      display: flex;
+      overflow-x: auto;
+      gap: 0;
+      padding: 3rem 1rem;
+      scroll-snap-type: x mandatory;
+    }
+
+    .hybrid-event {
+      flex-shrink: 0;
+      width: 200px;
+      scroll-snap-align: center;
+      position: relative;
+      text-align: center;
+    }
+
+    .hybrid-line {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--border-medium);
+    }
+
+    .hybrid-dot {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      margin: -10px auto 1.5rem;
+      position: relative;
+      z-index: 1;
+      border: 4px solid var(--bg-elevated);
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .hybrid-dot.career { background: var(--track-career); }
+    .hybrid-dot.personal { background: var(--track-personal); }
+    .hybrid-dot.spiritual { background: var(--track-spiritual); }
+
+    .hybrid-dot:hover {
+      transform: scale(1.3);
+    }
+
+    .hybrid-year {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .hybrid-year.career { color: var(--track-career); }
+    .hybrid-year.personal { color: var(--track-personal); }
+    .hybrid-year.spiritual { color: var(--track-spiritual); }
+
+    .hybrid-title {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-top: 0.5rem;
+    }
+
+    .hybrid-detail {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 250px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-medium);
+      border-radius: 12px;
+      padding: 1rem;
+      margin-top: 1rem;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s;
+      z-index: 10;
+    }
+
+    .hybrid-event:hover .hybrid-detail {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* ============ 2A: MINIMAL DETAIL LEVEL ============ */
+    .timeline-minimal {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      position: relative;
+      padding-left: 2rem;
+    }
+
+    .timeline-minimal::before {
+      content: '';
+      position: absolute;
+      left: 0.4rem;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--border-subtle);
+    }
+
+    .minimal-event {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 0.75rem 0;
+      position: relative;
+    }
+
+    .minimal-dot {
+      position: absolute;
+      left: -1.65rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .minimal-dot.career { background: var(--track-career); }
+    .minimal-dot.personal { background: var(--track-personal); }
+    .minimal-dot.spiritual { background: var(--track-spiritual); }
+
+    .minimal-year {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.875rem;
+      font-weight: 600;
+      min-width: 50px;
+    }
+
+    .minimal-year.career { color: var(--track-career); }
+    .minimal-year.personal { color: var(--track-personal); }
+    .minimal-year.spiritual { color: var(--track-spiritual); }
+
+    .minimal-line {
+      width: 20px;
+      height: 1px;
+      background: var(--border-medium);
+    }
+
+    .minimal-title {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+
+    /* ============ 2B: MODERATE DETAIL LEVEL ============ */
+    .timeline-moderate {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .moderate-event {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: all 0.2s;
+    }
+
+    .moderate-event:hover {
+      border-color: var(--border-medium);
+    }
+
+    .moderate-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.25rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .moderate-header:hover {
+      background: var(--bg-hover);
+    }
+
+    .moderate-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .moderate-dot.career { background: var(--track-career); }
+    .moderate-dot.personal { background: var(--track-personal); }
+    .moderate-dot.spiritual { background: var(--track-spiritual); }
+
+    .moderate-year {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+
+    .moderate-year.career { color: var(--track-career); }
+    .moderate-year.personal { color: var(--track-personal); }
+    .moderate-year.spiritual { color: var(--track-spiritual); }
+
+    .moderate-title {
+      flex: 1;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .moderate-toggle {
+      color: var(--text-muted);
+      transition: transform 0.3s;
+    }
+
+    .moderate-event.expanded .moderate-toggle {
+      transform: rotate(180deg);
+    }
+
+    .moderate-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease-out;
+    }
+
+    .moderate-event.expanded .moderate-content {
+      max-height: 200px;
+    }
+
+    .moderate-inner {
+      padding: 0 1.25rem 1.25rem;
+      padding-left: 3.25rem;
+    }
+
+    .moderate-desc {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .moderate-tags {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .moderate-tag {
+      font-size: 0.7rem;
+      padding: 0.2rem 0.5rem;
+      background: var(--bg-hover);
+      border-radius: 4px;
+      color: var(--text-muted);
+    }
+
+    /* ============ 2C: RICH CARDS DETAIL LEVEL ============ */
+    .timeline-rich {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .rich-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: all 0.3s;
+    }
+
+    .rich-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--border-medium);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .rich-header {
+      padding: 1.5rem;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .rich-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .rich-icon.career { background: var(--track-career-dim); }
+    .rich-icon.personal { background: var(--track-personal-dim); }
+    .rich-icon.spiritual { background: var(--track-spiritual-dim); }
+
+    .rich-meta {
+      flex: 1;
+    }
+
+    .rich-year {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .rich-year.career { color: var(--track-career); }
+    .rich-year.personal { color: var(--track-personal); }
+    .rich-year.spiritual { color: var(--track-spiritual); }
+
+    .rich-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .rich-body {
+      padding: 1.5rem;
+    }
+
+    .rich-desc {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+
+    .rich-highlight {
+      background: var(--bg-hover);
+      border-left: 3px solid var(--accent);
+      padding: 0.75rem 1rem;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 1rem;
+    }
+
+    .rich-highlight-text {
+      font-size: 0.85rem;
+      color: var(--text-primary);
+      font-style: italic;
+    }
+
+    .rich-tags {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .rich-tag {
+      font-size: 0.75rem;
+      padding: 0.3rem 0.75rem;
+      border-radius: 100px;
+      font-weight: 500;
+    }
+
+    .rich-tag.career {
+      background: var(--track-career-dim);
+      color: var(--track-career);
+    }
+
+    .rich-tag.personal {
+      background: var(--track-personal-dim);
+      color: var(--track-personal);
+    }
+
+    .rich-tag.spiritual {
+      background: var(--track-spiritual-dim);
+      color: var(--track-spiritual);
+    }
+
+    /* ============ Animations ============ */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-fade-up {
+      animation: fadeUp 0.6s ease-out;
+    }
+
+    /* ============ Mobile Responsiveness ============ */
+    @media (max-width: 768px) {
+      .container {
+        padding: 1rem;
+      }
+
+      .page-title {
+        font-size: 1.75rem;
+      }
+
+      .category-legend {
+        gap: 1rem;
+      }
+
+      .variation-container {
+        padding: 1.25rem;
+      }
+
+      .spiral-events {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .timeline-rich {
+        grid-template-columns: 1fr;
+      }
+
+      .hybrid-desktop {
+        padding: 2rem 0.5rem;
+      }
+
+      .hybrid-event {
+        width: 150px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .page-header {
+        padding: 2rem 0 3rem;
+      }
+
+      .section-header {
+        flex-wrap: wrap;
+      }
+
+      .section-line {
+        display: none;
+      }
+
+      .spiral-events {
+        grid-template-columns: 1fr;
+      }
+
+      .timeline-horizontal {
+        padding: 1rem 0;
+      }
+
+      .timeline-event-h {
+        width: 150px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Page Header -->
+    <header class="page-header animate-fade-up">
+      <h1 class="page-title">Life Timeline - Design Showcase</h1>
+      <p class="page-subtitle">
+        A comprehensive journey through career, personal milestones, and spiritual growth.
+        Compare different layout styles and detail levels to choose your preferred design.
+      </p>
+      <div class="category-legend">
+        <div class="legend-item">
+          <div class="legend-dot career"></div>
+          <span>Career</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot personal"></div>
+          <span>Personal</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot spiritual"></div>
+          <span>Spiritual</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- SECTION 1: LAYOUT STYLES -->
+    <section class="showcase-section">
+      <div class="section-header">
+        <span class="section-number">01.</span>
+        <h2 class="section-title">Layout Styles</h2>
+        <div class="section-line"></div>
+      </div>
+      <p class="section-desc">Four different approaches to visualizing the timeline. All are mobile-compatible.</p>
+
+      <!-- 1A: Horizontal Scroll -->
+      <div class="variation-container">
+        <div class="variation-header">
+          <h3 class="variation-title">1A. Horizontal Scroll Timeline</h3>
+          <span class="variation-badge">Swipe Enabled</span>
+        </div>
+
+        <div class="category-filters">
+          <button class="filter-btn active" onclick="filterEvents(this, 'all', 'horizontal')">All</button>
+          <button class="filter-btn career" onclick="filterEvents(this, 'career', 'horizontal')">
+            <span class="filter-dot" style="background: var(--track-career)"></span> Career
+          </button>
+          <button class="filter-btn personal" onclick="filterEvents(this, 'personal', 'horizontal')">
+            <span class="filter-dot" style="background: var(--track-personal)"></span> Personal
+          </button>
+          <button class="filter-btn spiritual" onclick="filterEvents(this, 'spiritual', 'horizontal')">
+            <span class="filter-dot" style="background: var(--track-spiritual)"></span> Spiritual
+          </button>
+        </div>
+
+        <div class="timeline-horizontal" id="timeline-horizontal">
+          <div class="timeline-track-h">
+            <!-- Events will be populated by JavaScript -->
+          </div>
+        </div>
+      </div>
+
+      <!-- 1B: Vertical Stack -->
+      <div class="variation-container">
+        <div class="variation-header">
+          <h3 class="variation-title">1B. Vertical Stack Timeline</h3>
+          <span class="variation-badge">Classic Layout</span>
+        </div>
+
+        <div class="timeline-vertical" id="timeline-vertical">
+          <!-- Events will be populated by JavaScript -->
+        </div>
+      </div>
+
+      <!-- 1C: Spiral/Creative -->
+      <div class="variation-container">
+        <div class="variation-header">
+          <h3 class="variation-title">1C. Grid/Mosaic Timeline</h3>
+          <span class="variation-badge">Creative Layout</span>
+        </div>
+
+        <div class="timeline-spiral-container">
+          <div class="timeline-spiral">
+            <div class="spiral-events" id="timeline-spiral">
+              <!-- Events will be populated by JavaScript -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 1D: Hybrid -->
+      <div class="variation-container">
+        <div class="variation-header">
+          <h3 class="variation-title">1D. Hybrid Timeline (Hover for Details)</h3>
+          <span class="variation-badge">Desktop Optimized</span>
+        </div>
+
+        <div class="timeline-hybrid">
+          <div class="hybrid-desktop" id="timeline-hybrid">
+            <!-- Events will be populated by JavaScript -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: DETAIL LEVELS -->
+    <section class="showcase-section">
+      <div class="section-header">
+        <span class="section-number">02.</span>
+        <h2 class="section-title">Detail Levels</h2>
+        <div class="section-line"></div>
+      </div>
+      <p class="section-desc">Choose how much information to display for each milestone.</p>
+
+      <!-- 2A: Minimal -->
+      <div class="variation-container">
+        <div class="variation-header">
+          <h3 class="variation-title">2A. Minimal - Year + Title Only</h3>
+          <span class="variation-badge">Clean & Simple</span>
+        </div>
+
+        <div class="timeline-minimal" id="timeline-minimal">
+          <!-- Events will be populated by JavaScript -->
+        </div>
+      </div>
+
+      <!-- 2B: Moderate -->
+      <div class="variation-container">
+        <div class="variation-header">
+          <h3 class="variation-title">2B. Moderate - Expandable Descriptions</h3>
+          <span class="variation-badge">Click to Expand</span>
+        </div>
+
+        <div class="timeline-moderate" id="timeline-moderate">
+          <!-- Events will be populated by JavaScript -->
+        </div>
+      </div>
+
+      <!-- 2C: Rich Cards -->
+      <div class="variation-container">
+        <div class="variation-header">
+          <h3 class="variation-title">2C. Rich Cards - Full Portfolio Style</h3>
+          <span class="variation-badge">Maximum Detail</span>
+        </div>
+
+        <div class="timeline-rich" id="timeline-rich">
+          <!-- Events will be populated by JavaScript -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="text-align: center; padding: 3rem 0; border-top: 1px solid var(--border-subtle); margin-top: 2rem;">
+      <p style="color: var(--text-muted); font-size: 0.875rem;">
+        Life Timeline Showcase | Choose your preferred style to implement in the final portfolio
+      </p>
+      <a href="resume-digital.html" style="color: var(--accent); text-decoration: none; font-size: 0.875rem; margin-top: 1rem; display: inline-block;">
+        ← Back to Digital Resume
+      </a>
+    </footer>
+  </div>
+
+  <script>
+    // Timeline Data
+    const timelineData = [
+      // Career Track
+      { year: 2004, title: "Graduated & Joined Infosys", category: "career", role: "Developer", desc: "B.E. Electronics & Communication from Sathyabama College. Started career at Infosys, embarking on a journey in enterprise technology.", icon: "🎓", tags: ["Education", "Infosys", "India"] },
+      { year: 2006, title: "First Banking Project", category: "career", role: "Developer", desc: "First exposure to core banking systems. Beginning of specialization in financial technology.", icon: "🏦", tags: ["Banking", "Finacle"] },
+      { year: 2006, title: "Faith Journey Begins", category: "spiritual", desc: "Personal spiritual awakening and beginning of walk with Christ. Foundation of values that guide life and work.", icon: "✝️", tags: ["Faith", "Christ"] },
+      { year: 2008, title: "Emirates NBD - Dubai", category: "career", role: "Senior Developer", desc: "Moved to Dubai for Emirates NBD implementation. First international assignment in the Middle East.", icon: "🌍", tags: ["Dubai", "Emirates NBD", "Middle East"] },
+      { year: 2010, title: "MVP Award - Denomination Module", category: "career", role: "Technical Architect", desc: "Self-taught Java in 2 months from a book. Built reusable denomination module deployed to 3-4 banks. Most Valuable Player - Finacle Unit.", icon: "🏆", highlight: "95% code reuse across implementations", tags: ["Java", "TreeMap", "MVP Award"] },
+      { year: 2010, title: "Best Short Film Award", category: "personal", desc: "Won inter-departmental filmmaking competition at Infosys. Creative expression through script writing and direction.", icon: "🎬", tags: ["Filmmaking", "Creative Arts"] },
+      { year: 2012, title: "Standard Bank - South Africa", category: "career", role: "Team Lead", desc: "Led team for Standard Bank implementation across South Africa and Nigeria. Started QA leadership responsibilities.", icon: "🌍", tags: ["Africa", "Standard Bank", "Team Lead"] },
+      { year: 2012, title: "Wedding Photography Phase", category: "personal", desc: "Explored creative passion through wedding photography. Capturing meaningful moments.", icon: "📷", tags: ["Photography", "Creative"] },
+      { year: 2014, title: "Marriage", category: "personal", desc: "Life partner found. Beginning of family journey.", icon: "💍", tags: ["Family", "Marriage"] },
+      { year: 2014, title: "CMMI Level 4 Achievement", category: "career", role: "QA Lead", desc: "First project in Africa & Middle East region to achieve CMMI Level 4. Less than 2.5% Defect Injection Rate. 100% on-time delivery.", icon: "🏅", highlight: "First in Africa & Middle East Region", tags: ["CMMI", "Quality", "First in Region"] },
+      { year: 2016, title: "EdgeVerve Chennai", category: "career", role: "Technology Architect", desc: "Transition to EdgeVerve Systems. Focus on product architecture and technology leadership.", icon: "💼", tags: ["EdgeVerve", "Chennai", "Architecture"] },
+      { year: 2018, title: "Return to Infosys", category: "career", role: "Sr. Technology Architect", desc: "Returned to Infosys mainline. Senior architecture role with expanded responsibilities.", icon: "🔄", tags: ["Infosys", "Architecture"] },
+      { year: 2020, title: "Bank of America - Singapore", category: "career", role: "Solution Architect", desc: "Moved to Singapore for Bank of America engagement. Leading RTP implementations and NFR delivery for APAC region.", icon: "🇸🇬", highlight: "60% reduction in job execution times", tags: ["Singapore", "BoA", "RTP", "APAC"] },
+      { year: 2022, title: "Thiya Born", category: "personal", desc: "Daughter Thiya joins the family. A new chapter of fatherhood and joy.", icon: "👶", tags: ["Family", "Daughter", "Blessing"] },
+      { year: 2024, title: "Strength Training Journey", category: "personal", desc: "Started morning strength training routine. Now coaching 3-4 people. In best shape at 40+.", icon: "💪", highlight: "Discipline transfers to all life areas", tags: ["Fitness", "Coaching", "Discipline"] },
+      { year: 2024, title: "AI-Assisted Development", category: "career", role: "Side Projects", desc: "Embracing AI-assisted workflows. Building NoteApp, REPPIT, PRIMMO with modern tech stack.", icon: "🤖", tags: ["AI", "React Native", "Side Projects"] }
+    ];
+
+    // Sort by year
+    const sortedData = [...timelineData].sort((a, b) => a.year - b.year);
+
+    // Render Horizontal Timeline
+    function renderHorizontal() {
+      const container = document.querySelector('#timeline-horizontal .timeline-track-h');
+      container.innerHTML = sortedData.map(event => `
+        <div class="timeline-event-h" data-category="${event.category}">
+          <div class="event-dot-h ${event.category}"></div>
+          <div class="event-card-h">
+            <div class="event-year-h ${event.category}">${event.year}</div>
+            <div class="event-title-h">${event.title}</div>
+            ${event.role ? `<div class="event-subtitle-h">${event.role}</div>` : ''}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Render Vertical Timeline
+    function renderVertical() {
+      const container = document.getElementById('timeline-vertical');
+      container.innerHTML = sortedData.map(event => `
+        <div class="timeline-event-v" data-category="${event.category}">
+          <div class="event-dot-v ${event.category}"></div>
+          <div class="event-content-v">
+            <div class="event-header-v">
+              <span class="event-year-v ${event.category}">${event.year}</span>
+              <span class="event-title-v">${event.title}</span>
+            </div>
+            <p class="event-desc-v">${event.desc}</p>
+            ${event.role ? `<span class="event-role-v">${event.role}</span>` : ''}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Render Spiral/Grid Timeline
+    function renderSpiral() {
+      const container = document.getElementById('timeline-spiral');
+      container.innerHTML = sortedData.map(event => `
+        <div class="spiral-event ${event.category}">
+          <div class="spiral-year ${event.category}">${event.year}</div>
+          <div class="spiral-title">${event.title}</div>
+        </div>
+      `).join('');
+    }
+
+    // Render Hybrid Timeline
+    function renderHybrid() {
+      const container = document.getElementById('timeline-hybrid');
+      container.innerHTML = sortedData.map(event => `
+        <div class="hybrid-event">
+          <div class="hybrid-line"></div>
+          <div class="hybrid-dot ${event.category}"></div>
+          <div class="hybrid-year ${event.category}">${event.year}</div>
+          <div class="hybrid-title">${event.title}</div>
+          <div class="hybrid-detail">
+            <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5;">${event.desc}</p>
+            ${event.role ? `<p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.5rem;">${event.role}</p>` : ''}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Render Minimal Timeline
+    function renderMinimal() {
+      const container = document.getElementById('timeline-minimal');
+      container.innerHTML = sortedData.map(event => `
+        <div class="minimal-event" data-category="${event.category}">
+          <div class="minimal-dot ${event.category}"></div>
+          <span class="minimal-year ${event.category}">${event.year}</span>
+          <span class="minimal-line"></span>
+          <span class="minimal-title">${event.title}</span>
+        </div>
+      `).join('');
+    }
+
+    // Render Moderate Timeline
+    function renderModerate() {
+      const container = document.getElementById('timeline-moderate');
+      container.innerHTML = sortedData.map((event, index) => `
+        <div class="moderate-event" data-category="${event.category}" onclick="toggleModerate(this)">
+          <div class="moderate-header">
+            <div class="moderate-dot ${event.category}"></div>
+            <span class="moderate-year ${event.category}">${event.year}</span>
+            <span class="moderate-title">${event.title}</span>
+            <svg class="moderate-toggle" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </div>
+          <div class="moderate-content">
+            <div class="moderate-inner">
+              <p class="moderate-desc">${event.desc}</p>
+              ${event.tags ? `
+                <div class="moderate-tags">
+                  ${event.tags.map(tag => `<span class="moderate-tag">${tag}</span>`).join('')}
+                </div>
+              ` : ''}
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Render Rich Cards Timeline
+    function renderRich() {
+      const container = document.getElementById('timeline-rich');
+      container.innerHTML = sortedData.map(event => `
+        <div class="rich-card" data-category="${event.category}">
+          <div class="rich-header">
+            <div class="rich-icon ${event.category}">${event.icon || '📌'}</div>
+            <div class="rich-meta">
+              <div class="rich-year ${event.category}">${event.year}</div>
+              <div class="rich-title">${event.title}</div>
+            </div>
+          </div>
+          <div class="rich-body">
+            <p class="rich-desc">${event.desc}</p>
+            ${event.highlight ? `
+              <div class="rich-highlight">
+                <p class="rich-highlight-text">"${event.highlight}"</p>
+              </div>
+            ` : ''}
+            ${event.tags ? `
+              <div class="rich-tags">
+                ${event.tags.map(tag => `<span class="rich-tag ${event.category}">${tag}</span>`).join('')}
+              </div>
+            ` : ''}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Toggle moderate event expansion
+    function toggleModerate(element) {
+      element.classList.toggle('expanded');
+    }
+
+    // Filter events by category
+    function filterEvents(button, category, timeline) {
+      // Update button states
+      const container = button.closest('.category-filters');
+      container.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.classList.contains('career')) btn.classList.remove('career');
+        if (btn.classList.contains('personal')) btn.classList.remove('personal');
+        if (btn.classList.contains('spiritual')) btn.classList.remove('spiritual');
+      });
+      button.classList.add('active');
+      if (category !== 'all') button.classList.add(category);
+
+      // Filter events
+      const events = document.querySelectorAll(`#timeline-${timeline} [data-category]`);
+      events.forEach(event => {
+        if (category === 'all' || event.dataset.category === category) {
+          event.style.display = '';
+        } else {
+          event.style.display = 'none';
+        }
+      });
+    }
+
+    // Initialize all timelines
+    renderHorizontal();
+    renderVertical();
+    renderSpiral();
+    renderHybrid();
+    renderMinimal();
+    renderModerate();
+    renderRich();
+  </script>
+</body>
+</html>
