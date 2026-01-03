@@ -1726,6 +1726,15 @@ ORDER BY ABS(ab.net_movement) DESC;</code></pre>
 
     // ============ AI Chat Functionality ============
     const chatResponses = {
+      // ===== EXPERIENCE & BACKGROUND =====
+      'experience': `Arun has <strong>17+ years of experience</strong> in enterprise technology consulting:
+
+<strong>Current:</strong> Sr. Technology Architect at Infosys, Singapore (2019-Present)
+<strong>Previous:</strong> Technology Architect at EdgeVerve, Chennai (2015-2016)
+<strong>Earlier:</strong> Progressive roles at Infosys India (2004-2015)
+
+Specialization: Core Banking, Solution Architecture, NFR Management, Digital Transformation`,
+
       'core banking': `Arun has <strong>17+ years of experience</strong> in core banking, primarily with <strong>Finacle implementations</strong>. He has led projects for major banks including:
 
 <strong>Emirates NBD</strong> (UAE) - Full core banking transformation
@@ -1734,6 +1743,37 @@ ORDER BY ABS(ab.net_movement) DESC;</code></pre>
 
 His expertise spans solution architecture, payments systems, and regulatory reporting.`,
 
+      'current role': `<strong>Current Role:</strong> Sr. Technology Architect at Infosys Ltd., Singapore
+
+<strong>Client:</strong> Bank of America (Singapore, Jakarta, Indonesia, India)
+<strong>Since:</strong> 2019
+
+<strong>Key Responsibilities:</strong>
+- Lead NFR implementation for APAC region
+- Drive digital transformation for Global Commercial Bank
+- Architect microservices-based solutions with 60-minute recovery
+- Manage cross-functional squads across APAC and EMEA`,
+
+      'location': `Arun is based in <strong>Singapore</strong>.
+
+He has worked across multiple regions:
+- <strong>APAC:</strong> Singapore, Jakarta, India
+- <strong>Middle East:</strong> UAE (Emirates NBD), Oman (Bank Sohar)
+- <strong>Africa:</strong> South Africa, Nigeria (Standard Bank)
+- <strong>North Africa:</strong> Egypt (Bank of Alexandria)`,
+
+      'team': `Arun has extensive <strong>leadership experience</strong>:
+
+<strong>Team sizes managed:</strong> 3 to 18 members
+<strong>Total man-days led:</strong> 5000+ across multiple projects
+
+<strong>Leadership highlights:</strong>
+- Client's most preferred Project Manager at Standard Bank
+- Led cross-functional squads across APAC and EMEA at Bank of America
+- Drove IPDL engagement managing distributed teams
+- 100% on-time deliverables across all projects`,
+
+      // ===== PROJECTS =====
       'react': `Arun has built several React-based projects:
 
 <strong>NoteApp</strong> - React Native note-taking app with offline sync, voice-to-text, and 200+ test cases
@@ -1743,15 +1783,6 @@ His expertise spans solution architecture, payments systems, and regulatory repo
 <strong>PRIMMO</strong> - Next.js AI-powered personal trainer using voice AI for curated guidance
 
 All projects follow his 9-step development workflow and are AI-assisted in development.`,
-
-      'certifications': `Arun holds several professional certifications:
-
-<strong>TOGAF Enterprise Architecture</strong> - Architecture framework
-<strong>Certified Scrum Product Owner (CSPO)</strong> - Agile methodology
-<strong>ISO 31000 Risk Management</strong> - Risk governance
-<strong>IBM Data Science Professional</strong> - Data analytics
-<strong>Databricks Lakehouse Fundamentals</strong> - Big data
-<strong>MicroStrategy Certified Architect</strong> - BI/Analytics`,
 
       'noteapp': `<strong>NoteApp</strong> is a privacy-first note-taking application built with:
 
@@ -1765,12 +1796,132 @@ All projects follow his 9-step development workflow and are AI-assisted in devel
 
 It demonstrates Arun's expertise in mobile development, offline-first patterns, and comprehensive testing.`,
 
+      'reppit': `<strong>REPPIT</strong> is a fitness strength tracking application:
+
+<strong>Tech Stack:</strong> React Native, TypeScript
+
+<strong>Key Features:</strong>
+- Workout timer with rest intervals
+- Progressive overload tracking
+- Exercise history and analytics
+- Clean, intuitive UI
+
+It showcases Arun's skills in mobile app development, state management, and real-time UI updates.`,
+
+      'primmo': `<strong>PRIMMO</strong> is an AI-powered personal trainer:
+
+<strong>Tech Stack:</strong> Next.js, Supabase, Voice AI
+
+<strong>Key Features:</strong>
+- Uses REPPIT workout insights for personalized guidance
+- Voice-based AI interaction
+- Curated training recommendations
+- Integration with fitness data
+
+It demonstrates Arun's expertise in AI integration, voice interfaces, and full-stack development.`,
+
+      // ===== SKILLS =====
+      'python': `Arun has <strong>advanced Python</strong> skills:
+
+<strong>Experience:</strong> Data pipelines, automation, analytics
+<strong>Achievement:</strong> 80% reduction in daily job execution times at Bank of America
+
+<strong>Related skills:</strong> Data Science (IBM certified), Databricks Lakehouse, analytics platforms`,
+
+      'java': `Arun has <strong>expert-level Java</strong> experience:
+
+<strong>Years:</strong> 15+ years working with Java in enterprise environments
+<strong>Context:</strong> Core banking systems, Finacle implementations
+<strong>Related:</strong> PL/SQL, Unix scripting, enterprise integrations
+
+Used extensively in banking middleware and backend systems.`,
+
+      'sql': `Arun has <strong>expert-level SQL/PL-SQL</strong> skills:
+
+<strong>Experience:</strong> 17+ years in banking data systems
+<strong>Domains:</strong> Core banking, reconciliation, regulatory reporting
+<strong>Databases:</strong> Oracle (Finacle), enterprise data warehouses
+
+Created complex reconciliation reports and optimized batch processing jobs.`,
+
+      // ===== CERTIFICATIONS & EDUCATION =====
+      'certifications': `Arun holds several professional certifications:
+
+<strong>TOGAF Enterprise Architecture</strong> - Architecture framework
+<strong>Certified Scrum Product Owner (CSPO)</strong> - Agile methodology
+<strong>ISO 31000 Risk Management</strong> - Risk governance
+<strong>IBM Data Science Professional</strong> - Data analytics
+<strong>Databricks Lakehouse Fundamentals</strong> - Big data
+<strong>MicroStrategy Certified Architect</strong> - BI/Analytics`,
+
+      'education': `<strong>Education:</strong>
+
+<strong>Degree:</strong> B.E. in Electronics & Communication
+<strong>Institution:</strong> Sathyabama College, Madras University
+<strong>Year:</strong> 2004
+
+<strong>Continuous Learning:</strong>
+- TOGAF, CSPO, ISO 31000 certifications
+- IBM Data Science, Databricks courses
+- AI-assisted development workflows`,
+
+      // ===== ACHIEVEMENTS =====
+      'achievement': `<strong>Key Achievements:</strong>
+
+<strong>Performance:</strong>
+- 80% reduction in daily job execution times
+- 100% elimination of non-infra deployment issues
+- 60-minute recovery persistence for banking systems
+
+<strong>Delivery:</strong>
+- 100% on-time deliverables across 5000+ man-days
+- Less than 2.5% Defect Injection Rate (CMMI Level 4)
+- Client's most preferred Project Manager
+
+<strong>Recognition:</strong>
+- Led digital transformation for Global Commercial Bank
+- Trusted with APAC-wide NFR implementation`,
+
+      // ===== LOGISTICS =====
+      'availability': `For availability and notice period details, please contact Arun directly:
+
+<strong>Email:</strong> arun.castromin@gmail.com
+<strong>LinkedIn:</strong> linkedin.com/in/aruncastromin
+<strong>Phone:</strong> +65 91806569
+
+He's happy to discuss timing for the right opportunity.`,
+
+      'salary': `Salary expectations depend on the specific role, responsibilities, and total compensation package.
+
+For a detailed discussion, please reach out directly:
+<strong>Email:</strong> arun.castromin@gmail.com
+<strong>LinkedIn:</strong> linkedin.com/in/aruncastromin`,
+
+      'remote': `Arun has experience with <strong>distributed teams</strong> across APAC and EMEA.
+
+<strong>Work style:</strong> Flexible - has worked in:
+- On-site client engagements
+- Hybrid arrangements
+- Managing remote cross-functional teams
+
+Open to discussing work arrangements based on role requirements.`,
+
+      'contact': `<strong>Contact Information:</strong>
+
+<strong>Email:</strong> arun.castromin@gmail.com
+<strong>Phone:</strong> +65 91806569
+<strong>LinkedIn:</strong> linkedin.com/in/aruncastromin
+<strong>GitHub:</strong> github.com/castronix
+<strong>Location:</strong> Singapore`,
+
+      // ===== DEFAULT =====
       'default': `I can help you learn more about Arun's experience! Try asking about:
 
-- <strong>Core banking experience</strong> (Finacle, payments, NFR)
-- <strong>Technical projects</strong> (NoteApp, REPPIT, PRIMMO)
-- <strong>Certifications</strong> (TOGAF, CSPO, IBM Data Science)
-- <strong>Skills</strong> (Python, React, Solution Architecture)
+<strong>Background:</strong> Years of experience, current role, location, team size
+<strong>Banking:</strong> Core banking, Finacle, payments, NFR
+<strong>Projects:</strong> NoteApp, REPPIT, PRIMMO
+<strong>Skills:</strong> Python, Java, React, SQL
+<strong>Credentials:</strong> Certifications, education, achievements
 
 What would you like to know?`
     };
@@ -1778,15 +1929,58 @@ What would you like to know?`
     function getResponse(question) {
       const q = question.toLowerCase();
 
-      if (q.includes('core banking') || q.includes('finacle') || q.includes('bank')) {
+      // Experience & Background
+      if (q.includes('years') || q.includes('experience') || q.includes('background') || q.includes('career')) {
+        return chatResponses['experience'];
+      } else if (q.includes('current role') || q.includes('current job') || q.includes('currently') || q.includes('doing now')) {
+        return chatResponses['current role'];
+      } else if (q.includes('location') || q.includes('based') || q.includes('where') || q.includes('country') || q.includes('singapore')) {
+        return chatResponses['location'];
+      } else if (q.includes('team') || q.includes('manage') || q.includes('lead') || q.includes('people') || q.includes('size')) {
+        return chatResponses['team'];
+      }
+      // Banking
+      else if (q.includes('core banking') || q.includes('finacle') || q.includes('bank')) {
         return chatResponses['core banking'];
-      } else if (q.includes('react') || q.includes('frontend') || q.includes('javascript')) {
-        return chatResponses['react'];
-      } else if (q.includes('certif') || q.includes('togaf') || q.includes('scrum')) {
-        return chatResponses['certifications'];
-      } else if (q.includes('noteapp') || q.includes('note app')) {
+      }
+      // Projects
+      else if (q.includes('reppit') || q.includes('fitness') || q.includes('workout')) {
+        return chatResponses['reppit'];
+      } else if (q.includes('primmo') || q.includes('ai trainer') || q.includes('personal trainer')) {
+        return chatResponses['primmo'];
+      } else if (q.includes('noteapp') || q.includes('note app') || q.includes('notes')) {
         return chatResponses['noteapp'];
-      } else {
+      } else if (q.includes('react') || q.includes('frontend') || q.includes('javascript') || q.includes('project')) {
+        return chatResponses['react'];
+      }
+      // Skills
+      else if (q.includes('python') || q.includes('data science') || q.includes('pipeline')) {
+        return chatResponses['python'];
+      } else if (q.includes('java') && !q.includes('javascript')) {
+        return chatResponses['java'];
+      } else if (q.includes('sql') || q.includes('database') || q.includes('oracle') || q.includes('pl/sql')) {
+        return chatResponses['sql'];
+      }
+      // Credentials
+      else if (q.includes('certif') || q.includes('togaf') || q.includes('scrum') || q.includes('cspo')) {
+        return chatResponses['certifications'];
+      } else if (q.includes('education') || q.includes('degree') || q.includes('university') || q.includes('college') || q.includes('study')) {
+        return chatResponses['education'];
+      } else if (q.includes('achieve') || q.includes('accomplish') || q.includes('proud') || q.includes('success') || q.includes('impact')) {
+        return chatResponses['achievement'];
+      }
+      // Logistics
+      else if (q.includes('availab') || q.includes('notice') || q.includes('start') || q.includes('when can')) {
+        return chatResponses['availability'];
+      } else if (q.includes('salary') || q.includes('compensation') || q.includes('pay') || q.includes('expect')) {
+        return chatResponses['salary'];
+      } else if (q.includes('remote') || q.includes('hybrid') || q.includes('onsite') || q.includes('work from') || q.includes('wfh')) {
+        return chatResponses['remote'];
+      } else if (q.includes('contact') || q.includes('email') || q.includes('phone') || q.includes('reach') || q.includes('linkedin')) {
+        return chatResponses['contact'];
+      }
+      // Default
+      else {
         return chatResponses['default'];
       }
     }

@@ -50,6 +50,10 @@
 
     /* ============ Print Styles ============ */
     @media print {
+      @page {
+        margin: 1.5cm 1cm;
+      }
+
       html {
         font-size: 8.5px;
       }
@@ -61,6 +65,7 @@
       .resume {
         box-shadow: none;
         max-width: 100%;
+        padding: 0;
       }
 
       .no-print {
@@ -69,6 +74,14 @@
 
       .page-break {
         page-break-before: always;
+      }
+
+      .experience-item {
+        page-break-inside: avoid;
+      }
+
+      .section {
+        page-break-inside: avoid;
       }
     }
 
@@ -493,7 +506,7 @@
     <section class="section">
       <h2 class="section-title">Key Strengths</h2>
       <div class="traits-grid">
-        <div class="trait-item"><strong>Demonstrated Leadership</strong> - Led teams of up to 18 for top Tier clients with 5000+ man-days of successful deliverables</div>
+        <div class="trait-item"><strong>Demonstrated Leadership</strong> - Mentored and led teams of up to 18 for top Tier clients with 15000+ man-days of successful deliverables</div>
         <div class="trait-item"><strong>Business Analyst Acumen</strong> - Conceptualized & established multiple Business Processes</div>
         <div class="trait-item"><strong>Technology Architect</strong> - Designed & Implemented Scalable, Reusable & Performance-Savvy Business Complex modules</div>
         <div class="trait-item"><strong>Innovation Mindset</strong> - Out-of-the-box thinking with inclination to add creativity to work regimen</div>
