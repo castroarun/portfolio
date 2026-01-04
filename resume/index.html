@@ -106,6 +106,121 @@
       left: -100px;
     }
 
+    /* ============ Neon Wave Sweep (First Load) ============ */
+    .neon-wave {
+      position: fixed;
+      top: -100%;
+      left: -100%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        135deg,
+        transparent 0%,
+        transparent 45%,
+        rgba(34, 211, 238, 0.15) 48%,
+        rgba(34, 211, 238, 0.3) 50%,
+        rgba(34, 211, 238, 0.15) 52%,
+        transparent 55%,
+        transparent 100%
+      );
+      pointer-events: none;
+      z-index: 9999;
+      animation: neonSweep 1.5s ease-out forwards;
+    }
+
+    @keyframes neonSweep {
+      0% {
+        transform: translate(0, 0);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(100%, 100%);
+        opacity: 0;
+      }
+    }
+
+    /* ============ Top Navigation ============ */
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(10, 10, 15, 0.8);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .nav-portfolio {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-portfolio:hover {
+      color: var(--accent);
+    }
+
+    .nav-portfolio svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .nav-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1.25rem;
+      background: var(--accent-dim);
+      border: 1px solid var(--accent);
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .nav-badge svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    /* Lifeline Clock Animation */
+    .clock-lifeline {
+      animation: clockPulse 2s ease-in-out infinite;
+    }
+
+    .clock-lifeline .clock-hand {
+      transform-origin: 12px 12px;
+      animation: clockRotate 4s linear infinite;
+    }
+
+    @keyframes clockPulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+
+    @keyframes clockRotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .nav-spacer {
+      width: 100px;
+    }
+
     /* ============ Layout ============ */
     .container {
       max-width: 1200px;
@@ -118,30 +233,39 @@
     /* ============ Header ============ */
     .header {
       text-align: center;
-      padding: 4rem 0 3rem;
+      padding: 6rem 0 3rem;
       border-bottom: 1px solid var(--border-subtle);
       margin-bottom: 3rem;
     }
 
     .header-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.5rem 1rem;
-      background: var(--accent-dim);
-      border: 1px solid var(--accent);
-      border-radius: 100px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: var(--accent);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 1.5rem;
+      display: none; /* Hidden - moved to top nav */
     }
 
-    .header-badge svg {
-      width: 14px;
-      height: 14px;
+    /* Header Hero Group - Hover Glow Effect */
+    .header-hero {
+      display: inline-block;
+      padding: 1.5rem 2rem;
+      border-radius: 16px;
+      transition: all 0.4s ease;
+      cursor: default;
+    }
+
+    .header-hero:hover {
+      background: rgba(34, 211, 238, 0.05);
+      box-shadow:
+        0 0 30px rgba(34, 211, 238, 0.15),
+        0 0 60px rgba(34, 211, 238, 0.08),
+        inset 0 0 30px rgba(34, 211, 238, 0.03);
+    }
+
+    .header-hero:hover .name {
+      text-shadow: 0 0 40px rgba(34, 211, 238, 0.5);
+    }
+
+    .header-hero:hover .title {
+      color: var(--accent);
+      text-shadow: 0 0 20px rgba(34, 211, 238, 0.3);
     }
 
     .name {
@@ -153,12 +277,14 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      transition: text-shadow 0.4s ease;
     }
 
     .title {
       font-size: 1.25rem;
       color: var(--text-secondary);
-      margin-bottom: 1.5rem;
+      margin-bottom: 0;
+      transition: all 0.4s ease;
     }
 
     .contact-row {
@@ -1315,6 +1441,177 @@
       display: block;
     }
 
+    /* Timeline Header */
+    .timeline-header {
+      text-align: center;
+      padding: 2rem 1rem 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .timeline-header-content {
+      display: inline-block;
+    }
+
+    .timeline-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .timeline-title {
+      font-family: var(--font-display);
+      font-size: 1.75rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
+      margin: 0;
+    }
+
+    .timeline-pulse {
+      width: 8px;
+      height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: timelinePulse 2s ease-in-out infinite;
+      box-shadow: 0 0 10px var(--accent-dim);
+    }
+
+    @keyframes timelinePulse {
+      0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+        box-shadow: 0 0 10px var(--accent-dim);
+      }
+      50% {
+        transform: scale(1.5);
+        opacity: 0.7;
+        box-shadow: 0 0 20px var(--accent);
+      }
+    }
+
+    .timeline-tagline {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin: 0 0 1rem 0;
+      font-style: italic;
+      letter-spacing: 0.1em;
+    }
+
+    .timeline-status-summary {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .timeline-status-chip {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+    }
+
+    .timeline-status-chip .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .timeline-status-chip.building .status-dot {
+      background: #F59E0B;
+      box-shadow: 0 0 8px rgba(245, 158, 11, 0.5);
+      animation: statusPulse 2s ease-in-out infinite;
+    }
+
+    .timeline-status-chip.live .status-dot {
+      background: #22C55E;
+      box-shadow: 0 0 8px rgba(34, 197, 94, 0.5);
+    }
+
+    .timeline-status-chip.planning .status-dot {
+      background: #8B5CF6;
+      box-shadow: 0 0 8px rgba(139, 92, 246, 0.5);
+    }
+
+    @keyframes statusPulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    /* Timeline Filter States */
+    .timeline-status-chip {
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .timeline-status-chip:hover:not(.disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .timeline-status-chip:not(.active) {
+      opacity: 0.4;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .timeline-status-chip:not(.active) .status-dot {
+      animation: none;
+    }
+
+    .timeline-status-chip.disabled {
+      opacity: 0.25;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    .timeline-status-chip.disabled .status-dot {
+      background: var(--text-muted) !important;
+      box-shadow: none !important;
+      animation: none !important;
+    }
+
+    /* Track Row visibility and animation */
+    .track-row {
+      transition: opacity 0.4s ease, max-height 0.5s ease, margin 0.4s ease, padding 0.4s ease;
+      overflow: hidden;
+    }
+
+    .track-row.hidden-row {
+      opacity: 0;
+      max-height: 0 !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      pointer-events: none;
+    }
+
+    .track-row.hidden-row::before,
+    .track-row.hidden-row::after {
+      opacity: 0;
+    }
+
+    /* Track Node filter animation */
+    .track-node {
+      transition: opacity 0.4s ease, transform 0.4s ease, max-width 0.4s ease, padding 0.4s ease, margin 0.4s ease;
+    }
+
+    .track-node.filtered-out {
+      opacity: 0;
+      transform: scale(0.8);
+      max-width: 0;
+      padding: 0;
+      margin: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
     /* The track container - horizontal flow */
     .track-row {
       display: flex;
@@ -1703,6 +2000,17 @@
       color: var(--text-primary);
     }
 
+    .legend-item.disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    .legend-item.disabled .legend-dot {
+      background: var(--text-muted) !important;
+      box-shadow: none !important;
+    }
+
     .legend-dot {
       width: 10px;
       height: 10px;
@@ -1739,6 +2047,19 @@
     .track-node.hidden,
     .simple-card.hidden {
       display: none;
+    }
+
+    /* Simple card filter animation */
+    .simple-card {
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    .simple-card.filtered-out {
+      opacity: 0;
+      transform: scale(0.9);
+      pointer-events: none;
+      position: absolute;
+      visibility: hidden;
     }
 
     .track-tagline {
@@ -2864,6 +3185,22 @@
       border-radius: 16px;
       overflow: hidden;
       margin-bottom: 2rem;
+      animation: breathingGlow 4s ease-in-out infinite;
+    }
+
+    @keyframes breathingGlow {
+      0%, 100% {
+        box-shadow:
+          0 0 20px rgba(34, 211, 238, 0.05),
+          0 0 40px rgba(34, 211, 238, 0.02);
+        border-color: var(--border-subtle);
+      }
+      50% {
+        box-shadow:
+          0 0 30px rgba(34, 211, 238, 0.12),
+          0 0 60px rgba(34, 211, 238, 0.06);
+        border-color: rgba(34, 211, 238, 0.3);
+      }
     }
 
     .intro-header {
@@ -3394,6 +3731,27 @@
   </style>
 </head>
 <body>
+  <!-- Neon Wave Sweep (First Load) -->
+  <div class="neon-wave"></div>
+
+  <!-- Top Navigation -->
+  <nav class="top-nav">
+    <a href="v8-brittany.html" class="nav-portfolio">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M15 18l-6-6 6-6"/>
+      </svg>
+      Portfolio
+    </a>
+    <div class="nav-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="clock-lifeline">
+        <circle cx="12" cy="12" r="10"/>
+        <path d="M12 6v6l4 2" class="clock-hand"/>
+      </svg>
+      Interactive Digital Resume
+    </div>
+    <div class="nav-spacer"></div>
+  </nav>
+
   <!-- Background Effects -->
   <div class="bg-grid"></div>
   <div class="bg-orb bg-orb-1"></div>
@@ -3402,21 +3760,10 @@
   <div class="container">
     <!-- Header -->
     <header class="header animate-fade-up">
-      <a href="/portfolio/" class="back-link" style="display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem; transition: color 0.2s;">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M19 12H5M12 19l-7-7 7-7"/>
-        </svg>
-        Back to Portfolio
-      </a>
-      <div class="header-badge">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="12" cy="12" r="10"/>
-          <path d="M12 6v6l4 2"/>
-        </svg>
-        Interactive Digital Resume
+      <div class="header-hero">
+        <h1 class="name">Arun Castromin Lawrance</h1>
+        <p class="title">Solutions Architect | Enterprise Architect | Technology Consulting</p>
       </div>
-      <h1 class="name">Arun Castromin Lawrance</h1>
-      <p class="title">Solutions Architect | Enterprise Architect | Technology Consulting</p>
       <div class="contact-row">
         <a href="mailto:arun.castromin@gmail.com" class="contact-item">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -3449,11 +3796,11 @@
       </div>
     </header>
 
-    <!-- ============ SECTION 1: About Me (Collapsible) ============ -->
+    <!-- ============ SECTION 1: The Backstory (Collapsible) ============ -->
     <section class="section animate-fade-up delay-1" id="section-about">
       <div class="section-header">
         <span class="section-number">01.</span>
-        <h2 class="section-title">About Me</h2>
+        <h2 class="section-title">The Backstory</h2>
         <div class="section-line"></div>
       </div>
 
@@ -3462,8 +3809,8 @@
           <div class="intro-title-row">
             <div class="intro-avatar">AC</div>
             <div class="intro-title-text">
-              <h3>Hi, I'm Arun Castromin</h3>
-              <p>Click to expand my story</p>
+              <h3 id="intro-greeting">Hi, click to read my story</h3>
+              <p id="intro-hint">or collapse to skip ahead</p>
             </div>
           </div>
           <div class="intro-toggle">
@@ -4799,6 +5146,31 @@
 
       <!-- Track Timeline View (Default) -->
       <div class="track-timeline active" id="track-timeline">
+        <!-- Timeline Header -->
+        <div class="timeline-header">
+          <div class="timeline-header-content">
+            <div class="timeline-title-row">
+              <div class="timeline-pulse"></div>
+              <h2 class="timeline-title">The Build Journey</h2>
+              <div class="timeline-pulse"></div>
+            </div>
+            <p class="timeline-tagline">Ideas → Code → Reality</p>
+            <div class="timeline-status-summary">
+              <div class="timeline-status-chip building active" data-filter="building" onclick="filterTimelineByStatus('building', this)">
+                <span class="status-dot"></span>
+                <span class="chip-label">3 Building</span>
+              </div>
+              <div class="timeline-status-chip live active" data-filter="live" onclick="filterTimelineByStatus('live', this)">
+                <span class="status-dot"></span>
+                <span class="chip-label">4 Live</span>
+              </div>
+              <div class="timeline-status-chip planning active" data-filter="planning" onclick="filterTimelineByStatus('planning', this)">
+                <span class="status-dot"></span>
+                <span class="chip-label">1 Planning</span>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="track-flip-instruction">Click any card to flip</div>
         <div class="track-row">
           <!-- PRIMMO Node -->
@@ -5176,7 +5548,7 @@
             </div>
           </div>
           <!-- Backtest Pro Node -->
-          <div class="track-node building">
+          <div class="track-node building" data-status="building">
             <div class="track-card" onclick="this.classList.toggle('flipped')">
               <div class="track-card-inner">
                 <div class="track-card-front">
@@ -5819,7 +6191,7 @@
       }
     }
 
-    // ============ Project Status Filter ============
+    // ============ Project Status Filter (with Fluid Rearrangement) ============
     function filterProjects(status) {
       // Update legend active state
       document.querySelectorAll('.legend-item').forEach(item => {
@@ -5829,33 +6201,188 @@
         }
       });
 
-      // Filter simple cards
+      // Filter simple cards with animation
       document.querySelectorAll('.simple-card').forEach(card => {
         if (status === 'all' || card.dataset.status === status) {
-          card.classList.remove('hidden');
+          card.classList.remove('filtered-out');
         } else {
-          card.classList.add('hidden');
+          card.classList.add('filtered-out');
         }
       });
 
-      // Filter track nodes
-      document.querySelectorAll('.track-node').forEach(node => {
-        if (status === 'all' || node.dataset.status === status) {
-          node.classList.remove('hidden');
+      // Filter track nodes with fluid animation
+      const trackRows = document.querySelectorAll('.track-row');
+      trackRows.forEach(row => {
+        const nodes = row.querySelectorAll('.track-node');
+        let visibleCount = 0;
+
+        nodes.forEach(node => {
+          const nodeStatus = node.dataset.status;
+          if (status === 'all' || nodeStatus === status) {
+            node.classList.remove('filtered-out');
+            visibleCount++;
+          } else {
+            node.classList.add('filtered-out');
+          }
+        });
+
+        // Hide entire row if no visible nodes (with animation)
+        if (visibleCount === 0) {
+          row.classList.add('hidden-row');
         } else {
-          node.classList.add('hidden');
+          row.classList.remove('hidden-row');
         }
       });
 
       // Filter flip cards
       document.querySelectorAll('.projects-grid .flip-card-container').forEach(card => {
         if (status === 'all' || card.dataset.status === status) {
+          card.classList.remove('filtered-out');
           card.style.display = '';
         } else {
-          card.style.display = 'none';
+          card.classList.add('filtered-out');
+          // Delay hiding to allow animation
+          setTimeout(() => {
+            if (card.classList.contains('filtered-out')) {
+              card.style.display = 'none';
+            }
+          }, 400);
+        }
+      });
+
+      // Sync timeline header chips with main filter
+      syncTimelineChipsWithFilter(status);
+    }
+
+    // Sync timeline header chips when main legend is used
+    function syncTimelineChipsWithFilter(status) {
+      document.querySelectorAll('.timeline-status-chip').forEach(chip => {
+        const chipFilter = chip.dataset.filter;
+        if (status === 'all') {
+          chip.classList.add('active');
+          activeTimelineFilters.add(chipFilter);
+        } else if (chipFilter === status) {
+          chip.classList.add('active');
+          activeTimelineFilters = new Set([status]);
+        } else {
+          chip.classList.remove('active');
         }
       });
     }
+
+    // ============ Timeline Status Filter (Fluid Rearrangement) ============
+    // Track active filters (all active by default)
+    let activeTimelineFilters = new Set(['building', 'live', 'planning']);
+
+    function filterTimelineByStatus(status, chipElement) {
+      // Toggle the filter
+      if (activeTimelineFilters.has(status)) {
+        // Don't allow deselecting if it's the last active filter
+        if (activeTimelineFilters.size <= 1) return;
+        activeTimelineFilters.delete(status);
+        chipElement.classList.remove('active');
+      } else {
+        activeTimelineFilters.add(status);
+        chipElement.classList.add('active');
+      }
+
+      // Apply filters to track nodes with fluid animation
+      const trackRows = document.querySelectorAll('.track-row');
+
+      trackRows.forEach(row => {
+        const nodes = row.querySelectorAll('.track-node');
+        let visibleCount = 0;
+
+        nodes.forEach(node => {
+          const nodeStatus = node.dataset.status;
+          if (activeTimelineFilters.has(nodeStatus)) {
+            node.classList.remove('filtered-out');
+            visibleCount++;
+          } else {
+            node.classList.add('filtered-out');
+          }
+        });
+
+        // Hide entire row if no visible nodes
+        if (visibleCount === 0) {
+          row.classList.add('hidden-row');
+        } else {
+          row.classList.remove('hidden-row');
+        }
+      });
+
+      // Update chip labels with filtered counts
+      updateTimelineChipCounts();
+    }
+
+    function updateTimelineChipCounts() {
+      const statusCounts = { building: 0, live: 0, planning: 0 };
+
+      document.querySelectorAll('.track-node').forEach(node => {
+        const status = node.dataset.status;
+        if (status && statusCounts.hasOwnProperty(status)) {
+          statusCounts[status]++;
+        }
+      });
+
+      // Update chip labels and disable those with 0 count
+      document.querySelectorAll('.timeline-status-chip').forEach(chip => {
+        const filter = chip.dataset.filter;
+        const count = statusCounts[filter] || 0;
+        const label = chip.querySelector('.chip-label');
+
+        if (label) {
+          const statusText = filter.charAt(0).toUpperCase() + filter.slice(1);
+          label.textContent = `${count} ${statusText}`;
+        }
+
+        // Disable chips with 0 count
+        if (count === 0) {
+          chip.classList.add('disabled');
+          chip.classList.remove('active');
+          activeTimelineFilters.delete(filter);
+        } else {
+          chip.classList.remove('disabled');
+        }
+      });
+    }
+
+    // Initialize timeline chip counts on page load
+    document.addEventListener('DOMContentLoaded', updateTimelineChipCounts);
+
+    // Initialize main legend (disable items with 0 count)
+    function initializeLegendCounts() {
+      const statusCounts = { all: 0, live: 0, building: 0, planning: 0, ideating: 0 };
+
+      // Count all project statuses from track nodes
+      document.querySelectorAll('.track-node').forEach(node => {
+        const status = node.dataset.status;
+        if (status && statusCounts.hasOwnProperty(status)) {
+          statusCounts[status]++;
+          statusCounts.all++;
+        }
+      });
+
+      // Update legend items
+      document.querySelectorAll('.legend-item').forEach(item => {
+        const filter = item.dataset.filter;
+        const count = statusCounts[filter] || 0;
+        const countSpan = item.querySelector('.legend-count');
+
+        if (countSpan) {
+          countSpan.textContent = `(${count})`;
+        }
+
+        // Disable items with 0 count (except 'all')
+        if (count === 0 && filter !== 'all') {
+          item.classList.add('disabled');
+        } else {
+          item.classList.remove('disabled');
+        }
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', initializeLegendCounts);
 
     // ============ GitHub API Configuration ============
     const GITHUB_USERNAME = 'castroarun';
