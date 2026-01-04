@@ -960,7 +960,7 @@
       }
     }
 
-    /* ============ 3A: COMBINED - Vertical Line + Moderate Cards (Default Expanded) ============ */
+    /* ============ 3A: COMBINED - Vertical Line + Hover Cards ============ */
     .timeline-combined {
       position: relative;
       padding-left: 3rem;
@@ -985,48 +985,60 @@
 
     .combined-event {
       position: relative;
-      margin-bottom: 1.5rem;
+      margin-bottom: 0.5rem;
       animation: fadeUp 0.6s ease-out;
     }
 
     .combined-dot {
       position: absolute;
       left: -2.5rem;
-      top: 1.25rem;
+      top: 0.85rem;
       width: 14px;
       height: 14px;
       border-radius: 50%;
       border: 3px solid var(--bg-elevated);
       z-index: 1;
+      transition: all 0.3s ease;
     }
 
     .combined-dot.career { background: var(--track-career); }
     .combined-dot.personal { background: var(--track-personal); }
     .combined-dot.spiritual { background: var(--track-spiritual); }
 
+    /* Glowing dots on hover */
+    .combined-event:hover .combined-dot.career {
+      box-shadow: 0 0 12px 4px var(--track-career-glow), 0 0 24px 8px var(--track-career-dim);
+      transform: scale(1.2);
+    }
+    .combined-event:hover .combined-dot.personal {
+      box-shadow: 0 0 12px 4px var(--track-personal-glow), 0 0 24px 8px var(--track-personal-dim);
+      transform: scale(1.2);
+    }
+    .combined-event:hover .combined-dot.spiritual {
+      box-shadow: 0 0 12px 4px var(--track-spiritual-glow), 0 0 24px 8px var(--track-spiritual-dim);
+      transform: scale(1.2);
+    }
+
     .combined-card {
       background: var(--bg-card);
       border: 1px solid var(--border-subtle);
       border-radius: 12px;
       overflow: hidden;
-      transition: all 0.2s;
+      transition: all 0.3s ease;
     }
 
-    .combined-card:hover {
+    .combined-event:hover .combined-card {
       border-color: var(--border-medium);
+      background: var(--bg-hover);
     }
 
     .combined-header {
       display: flex;
       align-items: center;
       gap: 1rem;
-      padding: 1rem 1.25rem;
-      cursor: pointer;
+      padding: 0.75rem 1.25rem;
+      cursor: default;
       transition: background 0.2s;
-    }
-
-    .combined-header:hover {
-      background: var(--bg-hover);
     }
 
     .combined-year {
@@ -1055,23 +1067,17 @@
       background: var(--bg-hover);
     }
 
-    .combined-toggle {
-      color: var(--text-muted);
-      transition: transform 0.3s;
-    }
-
-    .combined-event.expanded .combined-toggle {
-      transform: rotate(180deg);
-    }
-
+    /* Content hidden by default, shown on hover */
     .combined-content {
-      max-height: 300px;
+      max-height: 0;
       overflow: hidden;
-      transition: max-height 0.4s ease-out;
+      transition: max-height 0.4s ease-out, opacity 0.3s ease;
+      opacity: 0;
     }
 
-    .combined-event.collapsed .combined-content {
-      max-height: 0;
+    .combined-event:hover .combined-content {
+      max-height: 300px;
+      opacity: 1;
     }
 
     .combined-inner {
@@ -1266,6 +1272,890 @@
         display: none;
       }
     }
+
+    /* ============ 3C: S-SHAPED SERPENTINE TIMELINE ============ */
+    .timeline-serpentine {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      padding: 1rem 0;
+    }
+
+    .serpentine-row {
+      display: flex;
+      align-items: stretch;
+      position: relative;
+    }
+
+    /* Odd rows: left to right */
+    .serpentine-row:nth-child(odd) {
+      flex-direction: row;
+    }
+
+    /* Even rows: right to left */
+    .serpentine-row:nth-child(even) {
+      flex-direction: row-reverse;
+    }
+
+    /* Horizontal line through the row */
+    .serpentine-row::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 2%;
+      right: 2%;
+      height: 3px;
+      background: linear-gradient(90deg,
+        var(--track-career) 0%,
+        var(--track-personal) 50%,
+        var(--track-spiritual) 100%
+      );
+      transform: translateY(-50%);
+      border-radius: 2px;
+    }
+
+    .serpentine-row:nth-child(even)::before {
+      background: linear-gradient(270deg,
+        var(--track-career) 0%,
+        var(--track-personal) 50%,
+        var(--track-spiritual) 100%
+      );
+    }
+
+    /* S-curve connector between rows */
+    .serpentine-connector {
+      position: relative;
+      height: 60px;
+      width: 100%;
+    }
+
+    .serpentine-connector::before {
+      content: '';
+      position: absolute;
+      width: 3px;
+      height: 100%;
+      background: linear-gradient(to bottom, var(--track-personal), var(--track-career));
+      border-radius: 2px;
+    }
+
+    .serpentine-connector.right::before {
+      right: 2%;
+    }
+
+    .serpentine-connector.left::before {
+      left: 2%;
+    }
+
+    .serpentine-events {
+      display: flex;
+      gap: 0;
+      width: 100%;
+      justify-content: space-around;
+      position: relative;
+      z-index: 1;
+    }
+
+    .serpentine-event {
+      flex: 0 1 auto;
+      width: 20%;
+      min-width: 140px;
+      max-width: 200px;
+      text-align: center;
+      position: relative;
+    }
+
+    .serpentine-dot {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      margin: 0 auto 0.75rem;
+      border: 4px solid var(--bg-elevated);
+      position: relative;
+      z-index: 2;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .serpentine-dot.career { background: var(--track-career); }
+    .serpentine-dot.personal { background: var(--track-personal); }
+    .serpentine-dot.spiritual { background: var(--track-spiritual); }
+
+    /* Glowing effect on hover */
+    .serpentine-event:hover .serpentine-dot.career {
+      box-shadow: 0 0 15px 5px var(--track-career-glow), 0 0 30px 10px var(--track-career-dim);
+      transform: scale(1.3);
+    }
+    .serpentine-event:hover .serpentine-dot.personal {
+      box-shadow: 0 0 15px 5px var(--track-personal-glow), 0 0 30px 10px var(--track-personal-dim);
+      transform: scale(1.3);
+    }
+    .serpentine-event:hover .serpentine-dot.spiritual {
+      box-shadow: 0 0 15px 5px var(--track-spiritual-glow), 0 0 30px 10px var(--track-spiritual-dim);
+      transform: scale(1.3);
+    }
+
+    .serpentine-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 0.75rem;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .serpentine-event:hover .serpentine-card {
+      transform: translateY(-4px);
+      border-color: var(--border-medium);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    }
+
+    .serpentine-year {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+
+    .serpentine-year.career { color: var(--track-career); }
+    .serpentine-year.personal { color: var(--track-personal); }
+    .serpentine-year.spiritual { color: var(--track-spiritual); }
+
+    .serpentine-title {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.3;
+      margin-bottom: 0.25rem;
+    }
+
+    .serpentine-role {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
+
+    /* Tooltip on hover */
+    .serpentine-tooltip {
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%) translateY(-10px);
+      width: 220px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-medium);
+      border-radius: 10px;
+      padding: 1rem;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 100;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .serpentine-tooltip::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 8px solid transparent;
+      border-top-color: var(--bg-elevated);
+    }
+
+    .serpentine-event:hover .serpentine-tooltip {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(-15px);
+    }
+
+    .serpentine-tooltip-desc {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    .serpentine-tooltip-highlight {
+      margin-top: 0.75rem;
+      padding: 0.5rem;
+      background: var(--accent-dim);
+      border-left: 2px solid var(--accent);
+      border-radius: 0 6px 6px 0;
+      font-size: 0.75rem;
+      color: var(--accent);
+      font-style: italic;
+    }
+
+    @media (max-width: 768px) {
+      .serpentine-event {
+        width: 45%;
+        min-width: 120px;
+      }
+
+      .serpentine-row {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+      }
+
+      .serpentine-row::before {
+        display: none;
+      }
+
+      .serpentine-connector {
+        height: 30px;
+      }
+
+      .serpentine-tooltip {
+        width: 180px;
+        padding: 0.75rem;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .serpentine-event {
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .serpentine-tooltip {
+        position: relative;
+        bottom: auto;
+        left: auto;
+        transform: none;
+        width: 100%;
+        margin-top: 0.5rem;
+        opacity: 0;
+        max-height: 0;
+        overflow: hidden;
+        padding: 0;
+      }
+
+      .serpentine-event:hover .serpentine-tooltip {
+        opacity: 1;
+        max-height: 200px;
+        padding: 0.75rem;
+        transform: none;
+      }
+
+      .serpentine-tooltip::after {
+        display: none;
+      }
+    }
+
+    /* ============ 3D: CAREER SPINE WITH BRANCHING TRACKS ============ */
+    .timeline-spine {
+      position: relative;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem 0;
+    }
+
+    /* Main career spine - center line */
+    .timeline-spine::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: linear-gradient(to bottom,
+        var(--track-career) 0%,
+        var(--track-career) 100%
+      );
+      transform: translateX(-50%);
+      border-radius: 2px;
+    }
+
+    .spine-event {
+      position: relative;
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 0.75rem;
+      animation: fadeUp 0.5s ease-out;
+    }
+
+    /* Career events - centered on the spine */
+    .spine-event.career {
+      justify-content: center;
+    }
+
+    .spine-event.career .spine-card {
+      width: 45%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Personal events - branch to the left */
+    .spine-event.personal {
+      justify-content: flex-start;
+      padding-right: 52%;
+    }
+
+    /* Spiritual events - branch to the right */
+    .spine-event.spiritual {
+      justify-content: flex-end;
+      padding-left: 52%;
+    }
+
+    /* Dot on the spine */
+    .spine-dot {
+      position: absolute;
+      left: 50%;
+      top: 0.5rem;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      transform: translateX(-50%);
+      border: 4px solid var(--bg-elevated);
+      z-index: 2;
+      transition: all 0.3s ease;
+    }
+
+    .spine-dot.career {
+      background: var(--track-career);
+      width: 20px;
+      height: 20px;
+    }
+    .spine-dot.personal { background: var(--track-personal); }
+    .spine-dot.spiritual { background: var(--track-spiritual); }
+
+    /* Glowing on card hover */
+    .spine-event:has(.spine-card:hover) .spine-dot.career {
+      box-shadow: 0 0 15px 5px var(--track-career-glow), 0 0 30px 10px var(--track-career-dim);
+      transform: translateX(-50%) scale(1.2);
+    }
+    .spine-event:has(.spine-card:hover) .spine-dot.personal {
+      box-shadow: 0 0 12px 4px var(--track-personal-glow), 0 0 24px 8px var(--track-personal-dim);
+      transform: translateX(-50%) scale(1.2);
+    }
+    .spine-event:has(.spine-card:hover) .spine-dot.spiritual {
+      box-shadow: 0 0 12px 4px var(--track-spiritual-glow), 0 0 24px 8px var(--track-spiritual-dim);
+      transform: translateX(-50%) scale(1.2);
+    }
+
+    /* Branch connector lines */
+    .spine-branch {
+      position: absolute;
+      top: 0.85rem;
+      height: 2px;
+      z-index: 1;
+    }
+
+    .spine-event.personal .spine-branch {
+      right: 50%;
+      left: 0;
+      background: linear-gradient(to left, var(--track-career), var(--track-personal));
+      margin-right: 8px;
+    }
+
+    .spine-event.spiritual .spine-branch {
+      left: 50%;
+      right: 0;
+      background: linear-gradient(to right, var(--track-career), var(--track-spiritual));
+      margin-left: 8px;
+    }
+
+    .spine-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 3;
+    }
+
+    .spine-card:hover {
+      border-color: var(--border-medium);
+      background: var(--bg-hover);
+    }
+
+    .spine-event.career .spine-card {
+      border-left: 3px solid var(--track-career);
+    }
+
+    .spine-event.personal .spine-card {
+      border-left: 3px solid var(--track-personal);
+    }
+
+    .spine-event.spiritual .spine-card {
+      border-left: 3px solid var(--track-spiritual);
+    }
+
+    .spine-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.6rem 1rem;
+    }
+
+    .spine-year {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    .spine-year.career { color: var(--track-career); }
+    .spine-year.personal { color: var(--track-personal); }
+    .spine-year.spiritual { color: var(--track-spiritual); }
+
+    .spine-title {
+      flex: 1;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .spine-role {
+      font-size: 0.7rem;
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      color: var(--text-muted);
+      background: var(--bg-hover);
+    }
+
+    /* Content hidden by default, shown on card hover */
+    .spine-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease-out, opacity 0.3s ease;
+      opacity: 0;
+    }
+
+    .spine-card:hover .spine-content {
+      max-height: 250px;
+      opacity: 1;
+    }
+
+    .spine-inner {
+      padding: 0 1rem 0.75rem;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .spine-desc {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-top: 0.75rem;
+    }
+
+    .spine-highlight {
+      background: var(--accent-dim);
+      border-left: 2px solid var(--accent);
+      padding: 0.5rem 0.75rem;
+      border-radius: 0 6px 6px 0;
+      margin-top: 0.75rem;
+    }
+
+    .spine-highlight-text {
+      font-size: 0.75rem;
+      color: var(--accent);
+      font-style: italic;
+    }
+
+    /* Year markers on spine */
+    .spine-year-marker {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--bg-elevated);
+      padding: 0.25rem 0.75rem;
+      border-radius: 100px;
+      border: 2px solid var(--track-career);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--track-career);
+      z-index: 5;
+      margin-bottom: 1rem;
+    }
+
+    .spine-year-group {
+      position: relative;
+      margin-bottom: 0.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .timeline-spine::before {
+        left: 2rem;
+      }
+
+      .spine-dot {
+        left: 2rem;
+      }
+
+      .spine-event.career,
+      .spine-event.personal,
+      .spine-event.spiritual {
+        padding-left: 4rem;
+        padding-right: 0;
+        justify-content: flex-start;
+      }
+
+      .spine-event.career .spine-card,
+      .spine-event.personal .spine-card,
+      .spine-event.spiritual .spine-card {
+        width: 100%;
+        margin: 0;
+      }
+
+      .spine-branch {
+        display: none;
+      }
+
+      .spine-year-marker {
+        left: 2rem;
+      }
+    }
+
+    /* ============ 3E: PARALLEL TRACKS - Life Left, Career Right with Year Alignment ============ */
+    .timeline-parallel {
+      position: relative;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 2rem 0;
+    }
+
+    /* Track labels at top */
+    .parallel-labels {
+      display: grid;
+      grid-template-columns: 1fr 60px 1fr;
+      gap: 0;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .parallel-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 0.5rem 1rem;
+      border-radius: 100px;
+    }
+
+    .parallel-label.life {
+      background: linear-gradient(90deg, var(--track-personal-dim), var(--track-spiritual-dim));
+      color: var(--text-secondary);
+      justify-self: end;
+      margin-right: 1rem;
+    }
+
+    .parallel-label.career {
+      background: var(--track-career-dim);
+      color: var(--track-career);
+      justify-self: start;
+      margin-left: 1rem;
+    }
+
+    /* Year row - aligns events horizontally */
+    .parallel-row {
+      display: grid;
+      grid-template-columns: 1fr 60px 1fr;
+      gap: 0;
+      align-items: start;
+      margin-bottom: 0.5rem;
+      min-height: 50px;
+    }
+
+    /* Left side - Personal/Spiritual */
+    .parallel-left {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      justify-content: flex-start;
+      align-items: flex-end;
+      padding-right: 0.5rem;
+    }
+
+    /* Center spine with year marker */
+    .parallel-spine {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      height: 100%;
+      min-height: 50px;
+    }
+
+    .parallel-spine::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: -0.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 4px;
+      background: var(--track-career);
+      border-radius: 2px;
+    }
+
+    .parallel-year-marker {
+      position: relative;
+      z-index: 2;
+      background: var(--bg-primary);
+      padding: 0.4rem 0;
+      font-family: 'JetBrains Mono', monospace;
+      text-align: center;
+      white-space: nowrap;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.15rem;
+    }
+
+    .parallel-year-text {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.2;
+    }
+
+    .parallel-age-text {
+      font-size: 0.6rem;
+      font-weight: 400;
+      color: var(--text-muted);
+      line-height: 1;
+      opacity: 0.6;
+      font-style: italic;
+    }
+
+    /* Right side - Career */
+    .parallel-right {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      padding-left: 0.5rem;
+    }
+
+    .parallel-event {
+      position: relative;
+      animation: fadeUp 0.5s ease-out;
+      width: 100%;
+    }
+
+    .parallel-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .parallel-card:hover {
+      border-color: var(--border-medium);
+      background: var(--bg-hover);
+    }
+
+    /* Left cards - border on right */
+    .parallel-left .parallel-card.personal {
+      border-right: 3px solid var(--track-personal);
+    }
+
+    .parallel-left .parallel-card.spiritual {
+      border-right: 3px solid var(--track-spiritual);
+    }
+
+    /* Right cards - Career with border on left */
+    .parallel-right .parallel-card {
+      border-left: 3px solid var(--track-career);
+    }
+
+    .parallel-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 0.75rem;
+    }
+
+    .parallel-title {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    /* Dot between title and role */
+    .parallel-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 3px solid var(--bg-elevated);
+      flex-shrink: 0;
+      transition: all 0.3s ease;
+    }
+
+    .parallel-dot.career { background: var(--track-career); }
+    .parallel-dot.personal { background: var(--track-personal); }
+    .parallel-dot.spiritual { background: var(--track-spiritual); }
+
+    /* Career milestone type colors for visual variety */
+    .parallel-dot.career.type-milestone { background: #06B6D4; } /* Cyan - Awards/Achievements */
+    .parallel-dot.career.type-move { background: #A855F7; }      /* Purple - Location moves */
+    .parallel-dot.career.type-promotion { background: #10B981; } /* Green - Promotions */
+    .parallel-dot.career.type-start { background: #F59E0B; }     /* Gold - New beginnings */
+
+    /* Career card border colors based on type */
+    .parallel-right .parallel-card.type-milestone { border-left-color: #06B6D4; }
+    .parallel-right .parallel-card.type-move { border-left-color: #A855F7; }
+    .parallel-right .parallel-card.type-promotion { border-left-color: #10B981; }
+    .parallel-right .parallel-card.type-start { border-left-color: #F59E0B; }
+
+    /* Type badge for career events */
+    .parallel-type-badge {
+      font-size: 0.55rem;
+      padding: 0.1rem 0.35rem;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 600;
+      margin-left: 0.25rem;
+    }
+
+    .parallel-type-badge.type-milestone {
+      background: rgba(6, 182, 212, 0.15);
+      color: #06B6D4;
+    }
+
+    .parallel-type-badge.type-move {
+      background: rgba(168, 85, 247, 0.15);
+      color: #A855F7;
+    }
+
+    .parallel-type-badge.type-promotion {
+      background: rgba(16, 185, 129, 0.15);
+      color: #10B981;
+    }
+
+    .parallel-type-badge.type-start {
+      background: rgba(245, 158, 11, 0.15);
+      color: #F59E0B;
+    }
+
+    /* Glowing on card hover */
+    .parallel-card:hover .parallel-dot.career {
+      box-shadow: 0 0 12px 4px var(--track-career-glow);
+      transform: scale(1.2);
+    }
+
+    .parallel-card:hover .parallel-dot.personal {
+      box-shadow: 0 0 12px 4px var(--track-personal-glow);
+      transform: scale(1.2);
+    }
+
+    .parallel-card:hover .parallel-dot.spiritual {
+      box-shadow: 0 0 12px 4px var(--track-spiritual-glow);
+      transform: scale(1.2);
+    }
+
+    /* Glow effects for career types */
+    .parallel-card:hover .parallel-dot.career.type-milestone {
+      box-shadow: 0 0 12px 4px rgba(6, 182, 212, 0.4);
+    }
+
+    .parallel-card:hover .parallel-dot.career.type-move {
+      box-shadow: 0 0 12px 4px rgba(168, 85, 247, 0.4);
+    }
+
+    .parallel-card:hover .parallel-dot.career.type-promotion {
+      box-shadow: 0 0 12px 4px rgba(16, 185, 129, 0.4);
+    }
+
+    .parallel-card:hover .parallel-dot.career.type-start {
+      box-shadow: 0 0 12px 4px rgba(245, 158, 11, 0.4);
+    }
+
+    .parallel-role {
+      font-size: 0.7rem;
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      color: var(--text-muted);
+      background: var(--bg-hover);
+      margin-left: auto;
+    }
+
+    /* Content hidden by default, shown on card hover */
+    .parallel-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease-out, opacity 0.3s ease;
+      opacity: 0;
+    }
+
+    .parallel-card:hover .parallel-content {
+      max-height: 200px;
+      opacity: 1;
+    }
+
+    .parallel-inner {
+      padding: 0 0.75rem 0.75rem;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .parallel-desc {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      margin-top: 0.5rem;
+    }
+
+    .parallel-highlight {
+      background: var(--accent-dim);
+      border-left: 2px solid var(--accent);
+      padding: 0.4rem 0.6rem;
+      border-radius: 0 6px 6px 0;
+      margin-top: 0.5rem;
+    }
+
+    .parallel-highlight-text {
+      font-size: 0.7rem;
+      color: var(--accent);
+      font-style: italic;
+    }
+
+    /* Empty placeholder for alignment */
+    .parallel-empty {
+      min-height: 1px;
+    }
+
+    @media (max-width: 768px) {
+      .parallel-labels {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+      }
+
+      .parallel-label {
+        justify-self: center;
+        margin: 0;
+      }
+
+      .parallel-row {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+      }
+
+      .parallel-spine {
+        display: none;
+      }
+
+      .parallel-left,
+      .parallel-right {
+        padding: 0;
+        align-items: stretch;
+      }
+
+      .parallel-left .parallel-card.personal,
+      .parallel-left .parallel-card.spiritual {
+        border-right: none;
+        border-left: 3px solid;
+      }
+
+      .parallel-left .parallel-card.personal {
+        border-left-color: var(--track-personal);
+      }
+
+      .parallel-left .parallel-card.spiritual {
+        border-left-color: var(--track-spiritual);
+      }
+    }
   </style>
 </head>
 <body>
@@ -1427,10 +2317,10 @@
       </div>
       <p class="section-desc">Custom combinations based on your preferences.</p>
 
-      <!-- 3A: Combined - Vertical + Moderate (Default Expanded) -->
+      <!-- 3A: Combined - Vertical + Hover Cards -->
       <div class="variation-container">
         <div class="variation-header">
-          <h3 class="variation-title">3A. Vertical Line + Expandable Cards (Default Expanded)</h3>
+          <h3 class="variation-title">3A. Vertical Line + Hover Cards (Glowing Dots)</h3>
           <span class="variation-badge">Recommended</span>
         </div>
 
@@ -1463,6 +2353,68 @@
           <!-- Events will be populated by JavaScript -->
         </div>
       </div>
+
+      <!-- 3C: S-Shaped Serpentine Timeline -->
+      <div class="variation-container">
+        <div class="variation-header">
+          <h3 class="variation-title">3C. S-Shaped Serpentine (Hover for Details)</h3>
+          <span class="variation-badge">Visual Flow</span>
+        </div>
+
+        <div class="category-filters">
+          <button class="filter-btn active" onclick="filterEvents(this, 'all', 'serpentine')">All</button>
+          <button class="filter-btn career" onclick="filterEvents(this, 'career', 'serpentine')">
+            <span class="filter-dot" style="background: var(--track-career)"></span> Career
+          </button>
+          <button class="filter-btn personal" onclick="filterEvents(this, 'personal', 'serpentine')">
+            <span class="filter-dot" style="background: var(--track-personal)"></span> Personal
+          </button>
+          <button class="filter-btn spiritual" onclick="filterEvents(this, 'spiritual', 'serpentine')">
+            <span class="filter-dot" style="background: var(--track-spiritual)"></span> Spiritual
+          </button>
+        </div>
+
+        <div class="timeline-serpentine" id="timeline-serpentine">
+          <!-- Events will be populated by JavaScript -->
+        </div>
+      </div>
+
+      <!-- 3D: Career Spine with Branching Tracks -->
+      <div class="variation-container">
+        <div class="variation-header">
+          <h3 class="variation-title">3D. Career Spine (Personal Left, Spiritual Right)</h3>
+          <span class="variation-badge">Branching</span>
+        </div>
+
+        <div class="category-filters">
+          <button class="filter-btn active" onclick="filterEvents(this, 'all', 'spine')">All</button>
+          <button class="filter-btn career" onclick="filterEvents(this, 'career', 'spine')">
+            <span class="filter-dot" style="background: var(--track-career)"></span> Career
+          </button>
+          <button class="filter-btn personal" onclick="filterEvents(this, 'personal', 'spine')">
+            <span class="filter-dot" style="background: var(--track-personal)"></span> Personal
+          </button>
+          <button class="filter-btn spiritual" onclick="filterEvents(this, 'spiritual', 'spine')">
+            <span class="filter-dot" style="background: var(--track-spiritual)"></span> Spiritual
+          </button>
+        </div>
+
+        <div class="timeline-spine" id="timeline-spine">
+          <!-- Events will be populated by JavaScript -->
+        </div>
+      </div>
+
+      <!-- 3E: Parallel Tracks - Life Events | Career -->
+      <div class="variation-container">
+        <div class="variation-header">
+          <h3 class="variation-title">3E. Parallel Tracks (Life Events | Career)</h3>
+          <span class="variation-badge">Year Aligned</span>
+        </div>
+
+        <div class="timeline-parallel" id="timeline-parallel">
+          <!-- Events will be populated by JavaScript -->
+        </div>
+      </div>
     </section>
 
     <!-- Footer -->
@@ -1478,24 +2430,28 @@
 
   <script>
     // Timeline Data
+    // Career types: start (gold) = new beginnings, move (purple) = location changes,
+    //               milestone (cyan) = awards/achievements, promotion (green) = role advancements
+    const BIRTH_YEAR = 1982; // For age calculation (graduated 2004 at ~22)
+
     const timelineData = [
-      // Career Track
-      { year: 2004, title: "Graduated & Joined Infosys", category: "career", role: "Developer", desc: "B.E. Electronics & Communication from Sathyabama College. Started career at Infosys, embarking on a journey in enterprise technology.", icon: "🎓", tags: ["Education", "Infosys", "India"] },
-      { year: 2006, title: "First Banking Project", category: "career", role: "Developer", desc: "First exposure to core banking systems. Beginning of specialization in financial technology.", icon: "🏦", tags: ["Banking", "Finacle"] },
+      // Career Track (with type for visual variety)
+      { year: 2004, title: "Graduated & Joined Infosys", category: "career", type: "start", role: "Developer", desc: "B.E. Electronics & Communication from Sathyabama College. Started career at Infosys, embarking on a journey in enterprise technology.", icon: "🎓", tags: ["Education", "Infosys", "India"] },
+      { year: 2006, title: "First Banking Project", category: "career", type: "start", role: "Developer", desc: "First exposure to core banking systems. Beginning of specialization in financial technology.", icon: "🏦", tags: ["Banking", "Finacle"] },
       { year: 2006, title: "Faith Journey Begins", category: "spiritual", desc: "Personal spiritual awakening and beginning of walk with Christ. Foundation of values that guide life and work.", icon: "✝️", tags: ["Faith", "Christ"] },
-      { year: 2008, title: "Emirates NBD - Dubai", category: "career", role: "Senior Developer", desc: "Moved to Dubai for Emirates NBD implementation. First international assignment in the Middle East.", icon: "🌍", tags: ["Dubai", "Emirates NBD", "Middle East"] },
-      { year: 2010, title: "MVP Award - Denomination Module", category: "career", role: "Technical Architect", desc: "Self-taught Java in 2 months from a book. Built reusable denomination module deployed to 3-4 banks. Most Valuable Player - Finacle Unit.", icon: "🏆", highlight: "95% code reuse across implementations", tags: ["Java", "TreeMap", "MVP Award"] },
+      { year: 2008, title: "Emirates NBD - Dubai", category: "career", type: "move", role: "Senior Developer", desc: "Moved to Dubai for Emirates NBD implementation. First international assignment in the Middle East.", icon: "🌍", tags: ["Dubai", "Emirates NBD", "Middle East"] },
+      { year: 2010, title: "MVP Award - Denomination Module", category: "career", type: "milestone", role: "Technical Architect", desc: "Self-taught Java in 2 months from a book. Built reusable denomination module deployed to 3-4 banks. Most Valuable Player - Finacle Unit.", icon: "🏆", highlight: "95% code reuse across implementations", tags: ["Java", "TreeMap", "MVP Award"] },
       { year: 2010, title: "Best Short Film Award", category: "personal", desc: "Won inter-departmental filmmaking competition at Infosys. Creative expression through script writing and direction.", icon: "🎬", tags: ["Filmmaking", "Creative Arts"] },
-      { year: 2012, title: "Standard Bank - South Africa", category: "career", role: "Team Lead", desc: "Led team for Standard Bank implementation across South Africa and Nigeria. Started QA leadership responsibilities.", icon: "🌍", tags: ["Africa", "Standard Bank", "Team Lead"] },
+      { year: 2012, title: "Standard Bank - South Africa", category: "career", type: "move", role: "Team Lead", desc: "Led team for Standard Bank implementation across South Africa and Nigeria. Started QA leadership responsibilities.", icon: "🌍", tags: ["Africa", "Standard Bank", "Team Lead"] },
       { year: 2012, title: "Wedding Photography Phase", category: "personal", desc: "Explored creative passion through wedding photography. Capturing meaningful moments.", icon: "📷", tags: ["Photography", "Creative"] },
       { year: 2014, title: "Marriage", category: "personal", desc: "Life partner found. Beginning of family journey.", icon: "💍", tags: ["Family", "Marriage"] },
-      { year: 2014, title: "CMMI Level 4 Achievement", category: "career", role: "QA Lead", desc: "First project in Africa & Middle East region to achieve CMMI Level 4. Less than 2.5% Defect Injection Rate. 100% on-time delivery.", icon: "🏅", highlight: "First in Africa & Middle East Region", tags: ["CMMI", "Quality", "First in Region"] },
-      { year: 2016, title: "EdgeVerve Chennai", category: "career", role: "Technology Architect", desc: "Transition to EdgeVerve Systems. Focus on product architecture and technology leadership.", icon: "💼", tags: ["EdgeVerve", "Chennai", "Architecture"] },
-      { year: 2018, title: "Return to Infosys", category: "career", role: "Sr. Technology Architect", desc: "Returned to Infosys mainline. Senior architecture role with expanded responsibilities.", icon: "🔄", tags: ["Infosys", "Architecture"] },
-      { year: 2020, title: "Bank of America - Singapore", category: "career", role: "Solution Architect", desc: "Moved to Singapore for Bank of America engagement. Leading RTP implementations and NFR delivery for APAC region.", icon: "🇸🇬", highlight: "60% reduction in job execution times", tags: ["Singapore", "BoA", "RTP", "APAC"] },
-      { year: 2022, title: "Thiya Born", category: "personal", desc: "Daughter Thiya joins the family. A new chapter of fatherhood and joy.", icon: "👶", tags: ["Family", "Daughter", "Blessing"] },
+      { year: 2014, title: "CMMI Level 4 Achievement", category: "career", type: "milestone", role: "QA Lead", desc: "First project in Africa & Middle East region to achieve CMMI Level 4. Less than 2.5% Defect Injection Rate. 100% on-time delivery.", icon: "🏅", highlight: "First in Africa & Middle East Region", tags: ["CMMI", "Quality", "First in Region"] },
+      { year: 2016, title: "EdgeVerve Chennai", category: "career", type: "move", role: "Technology Architect", desc: "Transition to EdgeVerve Systems. Focus on product architecture and technology leadership.", icon: "💼", tags: ["EdgeVerve", "Chennai", "Architecture"] },
+      { year: 2018, title: "Return to Infosys", category: "career", type: "start", role: "Sr. Technology Architect", desc: "Returned to Infosys mainline. Senior architecture role with expanded responsibilities.", icon: "🔄", tags: ["Infosys", "Architecture"] },
+      { year: 2020, title: "Bank of America - Singapore", category: "career", type: "move", role: "Solution Architect", desc: "Moved to Singapore for Bank of America engagement. Leading RTP implementations and NFR delivery for APAC region.", icon: "🇸🇬", highlight: "60% reduction in job execution times", tags: ["Singapore", "BoA", "RTP", "APAC"] },
+      { year: 2022, title: "Princess Arrived", category: "personal", desc: "Little princess Thiya joins the family. A new chapter of fatherhood, joy, and endless love.", icon: "👶", tags: ["Family", "Daughter", "Blessing"] },
       { year: 2024, title: "Strength Training Journey", category: "personal", desc: "Started morning strength training routine. Now coaching 3-4 people. In best shape at 40+.", icon: "💪", highlight: "Discipline transfers to all life areas", tags: ["Fitness", "Coaching", "Discipline"] },
-      { year: 2024, title: "AI-Assisted Development", category: "career", role: "Side Projects", desc: "Embracing AI-assisted workflows. Building NoteApp, REPPIT, PRIMMO with modern tech stack.", icon: "🤖", tags: ["AI", "React Native", "Side Projects"] }
+      { year: 2024, title: "AI-Assisted Development", category: "career", type: "start", role: "Side Projects", desc: "Embracing AI-assisted workflows. Building NoteApp, REPPIT, PRIMMO with modern tech stack.", icon: "🤖", tags: ["AI", "React Native", "Side Projects"] }
     ];
 
     // Sort by year
@@ -1641,20 +2597,17 @@
       element.classList.toggle('collapsed');
     }
 
-    // Render Combined Timeline (Vertical Line + Moderate Cards, Default Expanded)
+    // Render Combined Timeline (Vertical Line + Hover Cards with Glowing Dots)
     function renderCombined() {
       const container = document.getElementById('timeline-combined');
       container.innerHTML = sortedData.map((event, index) => `
-        <div class="combined-event expanded" data-category="${event.category}" onclick="toggleCombined(this)">
+        <div class="combined-event" data-category="${event.category}">
           <div class="combined-dot ${event.category}"></div>
           <div class="combined-card">
             <div class="combined-header">
               <span class="combined-year ${event.category}">${event.year}</span>
               <span class="combined-title">${event.title}</span>
               ${event.role ? `<span class="combined-role">${event.role}</span>` : ''}
-              <svg class="combined-toggle" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="6 9 12 15 18 9"/>
-              </svg>
             </div>
             <div class="combined-content">
               <div class="combined-inner">
@@ -1730,6 +2683,183 @@
       });
     }
 
+    // Render S-Shaped Serpentine Timeline
+    function renderSerpentine() {
+      const container = document.getElementById('timeline-serpentine');
+      const eventsPerRow = 4;
+      const rows = [];
+
+      // Split events into rows
+      for (let i = 0; i < sortedData.length; i += eventsPerRow) {
+        rows.push(sortedData.slice(i, i + eventsPerRow));
+      }
+
+      let html = '';
+      rows.forEach((row, rowIndex) => {
+        // Add connector before row (except first row)
+        if (rowIndex > 0) {
+          const connectorSide = rowIndex % 2 === 1 ? 'right' : 'left';
+          html += `<div class="serpentine-connector ${connectorSide}"></div>`;
+        }
+
+        // Add row
+        html += `
+          <div class="serpentine-row">
+            <div class="serpentine-events">
+              ${row.map(event => `
+                <div class="serpentine-event" data-category="${event.category}">
+                  <div class="serpentine-tooltip">
+                    <p class="serpentine-tooltip-desc">${event.desc}</p>
+                    ${event.highlight ? `<div class="serpentine-tooltip-highlight">"${event.highlight}"</div>` : ''}
+                  </div>
+                  <div class="serpentine-dot ${event.category}"></div>
+                  <div class="serpentine-card">
+                    <div class="serpentine-year ${event.category}">${event.year}</div>
+                    <div class="serpentine-title">${event.title}</div>
+                    ${event.role ? `<div class="serpentine-role">${event.role}</div>` : ''}
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+    }
+
+    // Render Career Spine with Branching Tracks
+    function renderSpine() {
+      const container = document.getElementById('timeline-spine');
+
+      // Sort by year, keeping career as primary
+      const spineData = [...sortedData];
+
+      container.innerHTML = spineData.map((event, index) => `
+        <div class="spine-event ${event.category}" data-category="${event.category}">
+          <div class="spine-dot ${event.category}"></div>
+          ${event.category !== 'career' ? `<div class="spine-branch"></div>` : ''}
+          <div class="spine-card">
+            <div class="spine-header">
+              <span class="spine-year ${event.category}">${event.year}</span>
+              <span class="spine-title">${event.title}</span>
+              ${event.role ? `<span class="spine-role">${event.role}</span>` : ''}
+            </div>
+            <div class="spine-content">
+              <div class="spine-inner">
+                <p class="spine-desc">${event.desc}</p>
+                ${event.highlight ? `
+                  <div class="spine-highlight">
+                    <p class="spine-highlight-text">"${event.highlight}"</p>
+                  </div>
+                ` : ''}
+              </div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Render Parallel Tracks Timeline (Life Left | Career Right, Year Aligned)
+    function renderParallel() {
+      const container = document.getElementById('timeline-parallel');
+
+      // Get all unique years and sort them
+      const allYears = [...new Set(sortedData.map(e => e.year))].sort((a, b) => a - b);
+
+      // Group events by year
+      const eventsByYear = {};
+      sortedData.forEach(event => {
+        if (!eventsByYear[event.year]) {
+          eventsByYear[event.year] = { life: [], career: [] };
+        }
+        if (event.category === 'career') {
+          eventsByYear[event.year].career.push(event);
+        } else {
+          eventsByYear[event.year].life.push(event);
+        }
+      });
+
+      // Render a card for left side (personal/spiritual)
+      const renderLeftCard = (event) => `
+        <div class="parallel-event" data-category="${event.category}">
+          <div class="parallel-card ${event.category}">
+            <div class="parallel-header">
+              <span class="parallel-title">${event.title}</span>
+              <div class="parallel-dot ${event.category}"></div>
+            </div>
+            <div class="parallel-content">
+              <div class="parallel-inner">
+                <p class="parallel-desc">${event.desc}</p>
+                ${event.highlight ? `
+                  <div class="parallel-highlight">
+                    <p class="parallel-highlight-text">"${event.highlight}"</p>
+                  </div>
+                ` : ''}
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      // Render a card for right side (career) with dot between title and role
+      const renderRightCard = (event) => `
+        <div class="parallel-event" data-category="${event.category}">
+          <div class="parallel-card ${event.type ? 'type-' + event.type : ''}">
+            <div class="parallel-header">
+              <span class="parallel-title">${event.title}</span>
+              <div class="parallel-dot career ${event.type ? 'type-' + event.type : ''}"></div>
+              ${event.role ? `<span class="parallel-role">${event.role}</span>` : ''}
+            </div>
+            <div class="parallel-content">
+              <div class="parallel-inner">
+                <p class="parallel-desc">${event.desc}</p>
+                ${event.highlight ? `
+                  <div class="parallel-highlight">
+                    <p class="parallel-highlight-text">"${event.highlight}"</p>
+                  </div>
+                ` : ''}
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      // Build rows for each year
+      const rows = allYears.map(year => {
+        const yearData = eventsByYear[year];
+        const lifeCards = yearData.life.map(renderLeftCard).join('');
+        const careerCards = yearData.career.map(renderRightCard).join('');
+        const age = year - BIRTH_YEAR;
+
+        return `
+          <div class="parallel-row">
+            <div class="parallel-left">
+              ${lifeCards || '<div class="parallel-empty"></div>'}
+            </div>
+            <div class="parallel-spine">
+              <div class="parallel-year-marker">
+                <span class="parallel-year-text">${year}</span>
+                <span class="parallel-age-text">@ ${age}</span>
+              </div>
+            </div>
+            <div class="parallel-right">
+              ${careerCards || '<div class="parallel-empty"></div>'}
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      container.innerHTML = `
+        <div class="parallel-labels">
+          <div class="parallel-label life">Life Events</div>
+          <div></div>
+          <div class="parallel-label career">Career</div>
+        </div>
+        ${rows}
+      `;
+    }
+
     // Initialize all timelines
     renderHorizontal();
     renderVertical();
@@ -1740,6 +2870,9 @@
     renderRich();
     renderCombined();
     renderRiver();
+    renderSerpentine();
+    renderSpine();
+    renderParallel();
   </script>
 </body>
 </html>

@@ -1,0 +1,4891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arun Castromin Lawrance - Digital Resume</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Chart.js for Skills Radar -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Prism.js for Code Highlighting -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+
+  <style>
+    /* ============ CSS Variables ============ */
+    :root {
+      --bg-base: #0A0A0F;
+      --bg-elevated: #111118;
+      --bg-card: #16161D;
+      --bg-hover: #1E1E26;
+      --text-primary: #F4F4F5;
+      --text-secondary: #A1A1AA;
+      --text-muted: #71717A;
+      --accent: #22D3EE;
+      --accent-dim: rgba(34, 211, 238, 0.1);
+      --accent-glow: rgba(34, 211, 238, 0.3);
+      --border-subtle: rgba(255, 255, 255, 0.06);
+      --border-medium: rgba(255, 255, 255, 0.1);
+      --success: #22C55E;
+      --error: #EF4444;
+      --warning: #F59E0B;
+      --gradient-1: linear-gradient(135deg, var(--accent) 0%, #06B6D4 100%);
+    }
+
+    /* ============ Reset & Base ============ */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-base);
+      color: var(--text-primary);
+      line-height: 1.6;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    a:hover {
+      opacity: 0.8;
+    }
+
+    /* ============ Background Effects ============ */
+    .bg-grid {
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .bg-orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(100px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .bg-orb-1 {
+      width: 600px;
+      height: 600px;
+      background: rgba(34, 211, 238, 0.08);
+      top: -200px;
+      right: -200px;
+    }
+
+    .bg-orb-2 {
+      width: 400px;
+      height: 400px;
+      background: rgba(6, 182, 212, 0.05);
+      bottom: -100px;
+      left: -100px;
+    }
+
+    /* ============ Layout ============ */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ============ Header ============ */
+    .header {
+      text-align: center;
+      padding: 4rem 0 3rem;
+      border-bottom: 1px solid var(--border-subtle);
+      margin-bottom: 3rem;
+    }
+
+    .header-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: var(--accent-dim);
+      border: 1px solid var(--accent);
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 1.5rem;
+    }
+
+    .header-badge svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .name {
+      font-size: 3rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .title {
+      font-size: 1.25rem;
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .contact-item svg {
+      width: 16px;
+      height: 16px;
+      color: var(--accent);
+    }
+
+    /* ============ Navigation Tabs ============ */
+    .nav-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-tab {
+      padding: 0.75rem 1.5rem;
+      background: transparent;
+      border: 1px solid var(--border-medium);
+      border-radius: 8px;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .nav-tab:hover {
+      background: var(--bg-card);
+      color: var(--text-primary);
+    }
+
+    .nav-tab.active {
+      background: var(--accent-dim);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* ============ Section Styling ============ */
+    .section {
+      margin-bottom: 4rem;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .section-number {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--accent);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border-subtle);
+    }
+
+    /* ============ GitHub Stats Section ============ */
+    .github-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .github-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+    }
+
+    .github-profile {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .github-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--accent-dim);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .github-avatar svg {
+      width: 24px;
+      height: 24px;
+      color: var(--accent);
+    }
+
+    .github-username {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .github-handle {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    .github-link {
+      padding: 0.5rem 1rem;
+      background: var(--bg-hover);
+      border: 1px solid var(--border-medium);
+      border-radius: 8px;
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s;
+    }
+
+    .github-link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* Stats Cards */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .stat-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 1.25rem;
+      text-align: center;
+      transition: all 0.2s;
+    }
+
+    .stat-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .stat-value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 0.25rem;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Contribution Heatmap */
+    .heatmap-container {
+      background: var(--bg-elevated);
+      border-radius: 12px;
+      padding: 1.5rem;
+      overflow-x: auto;
+    }
+
+    .heatmap-title {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .heatmap-total {
+      margin-left: auto;
+      font-size: 0.75rem;
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .heatmap {
+      display: flex;
+      gap: 3px;
+    }
+
+    .heatmap-week {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .heatmap-day {
+      width: 12px;
+      height: 12px;
+      border-radius: 2px;
+      background: var(--bg-hover);
+      transition: all 0.2s;
+    }
+
+    .heatmap-day:hover {
+      transform: scale(1.3);
+    }
+
+    .heatmap-day.level-1 { background: rgba(34, 211, 238, 0.2); }
+    .heatmap-day.level-2 { background: rgba(34, 211, 238, 0.4); }
+    .heatmap-day.level-3 { background: rgba(34, 211, 238, 0.6); }
+    .heatmap-day.level-4 { background: var(--accent); }
+
+    .heatmap-legend {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .heatmap-legend-item {
+      width: 12px;
+      height: 12px;
+      border-radius: 2px;
+    }
+
+    /* Languages */
+    .languages-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .language-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .language-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .language-name {
+      font-size: 0.875rem;
+      color: var(--text-primary);
+      flex: 1;
+    }
+
+    .language-percent {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* ============ GitHub Repositories Grid ============ */
+    .github-repos-section {
+      margin-top: 2rem;
+    }
+
+    .github-repos-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+
+    .github-repos-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .github-repos-title svg {
+      width: 18px;
+      height: 18px;
+      color: var(--accent);
+    }
+
+    .github-repos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+
+    .github-repo-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 1.25rem;
+      text-decoration: none;
+      transition: all 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .github-repo-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      opacity: 1;
+    }
+
+    .repo-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .repo-icon {
+      width: 16px;
+      height: 16px;
+      color: var(--text-muted);
+      flex-shrink: 0;
+    }
+
+    .repo-name {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--accent);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .repo-description {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      flex: 1;
+      margin-bottom: 0.75rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .repo-meta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .repo-language,
+    .repo-stars,
+    .repo-forks {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .repo-language .language-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .repo-stars svg,
+    .repo-forks svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .github-repos-loading {
+      text-align: center;
+      padding: 2rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .github-repos-loading svg {
+      width: 24px;
+      height: 24px;
+      animation: spin 1s linear infinite;
+      margin-bottom: 0.5rem;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* ============ Skills Visualization ============ */
+    .skills-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    @media (max-width: 768px) {
+      .skills-container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .radar-container {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 2rem;
+    }
+
+    .radar-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    #skillsRadar {
+      max-height: 300px;
+    }
+
+    .skills-bars {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 2rem;
+    }
+
+    .skill-filters {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .skill-filter {
+      padding: 0.5rem 1rem;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: 6px;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .skill-filter:hover,
+    .skill-filter.active {
+      background: var(--accent-dim);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .skill-item {
+      margin-bottom: 1.25rem;
+    }
+
+    .skill-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+    }
+
+    .skill-name {
+      font-size: 0.9rem;
+      color: var(--text-primary);
+    }
+
+    .skill-level {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .skill-bar {
+      height: 6px;
+      background: var(--bg-elevated);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .skill-progress {
+      height: 100%;
+      background: var(--gradient-1);
+      border-radius: 3px;
+      transition: width 1s ease-out;
+    }
+
+    /* ============ Projects Flip Cards Grid ============ */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .flip-card {
+      height: 380px;
+      perspective: 1000px;
+      cursor: pointer;
+    }
+
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-style: preserve-3d;
+    }
+
+    .flip-card.flipped .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .flip-card-front,
+    .flip-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      padding: 1.5rem;
+      overflow: hidden;
+    }
+
+    .flip-card-front {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .flip-card:hover .flip-card-front {
+      border-color: var(--accent);
+    }
+
+    .flip-card-back {
+      transform: rotateY(180deg);
+      border-color: var(--accent);
+      background: linear-gradient(135deg, var(--bg-card) 0%, rgba(34, 211, 238, 0.05) 100%);
+    }
+
+    .flip-hint {
+      position: absolute;
+      bottom: 1rem;
+      right: 1rem;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .flip-card:hover .flip-hint {
+      opacity: 1;
+    }
+
+    .flip-hint svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    /* Front card styles */
+    .card-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .card-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: var(--accent-dim);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .card-icon svg {
+      width: 24px;
+      height: 24px;
+      color: var(--accent);
+    }
+
+    .card-title-wrapper {
+      flex: 1;
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin: 0 0 0.25rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .card-badge {
+      padding: 0.2rem 0.6rem;
+      border-radius: 100px;
+      font-size: 0.65rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .card-badge.built {
+      background: rgba(34, 197, 94, 0.15);
+      color: var(--success);
+    }
+
+    .card-badge.building {
+      background: rgba(234, 179, 8, 0.15);
+      color: var(--warning);
+    }
+
+    .card-tagline {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin: 0;
+    }
+
+    .card-description {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+      flex: 1;
+    }
+
+    .card-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .tech-chip {
+      padding: 0.25rem 0.6rem;
+      background: rgba(34, 211, 238, 0.1);
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-family: var(--font-mono);
+      color: var(--accent);
+    }
+
+    .card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .card-link:hover {
+      color: var(--accent);
+    }
+
+    /* Back card styles - 9-Step Workflow */
+    .back-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .back-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .back-title svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .workflow-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .workflow-step {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.5rem;
+      border-radius: 8px;
+      transition: background 0.2s ease;
+    }
+
+    .workflow-step:hover {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .step-number {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 600;
+      font-family: var(--font-mono);
+      flex-shrink: 0;
+    }
+
+    .step-number.completed {
+      background: var(--success);
+      color: #000;
+    }
+
+    .step-number.in-progress {
+      background: var(--warning);
+      color: #000;
+    }
+
+    .step-number.pending {
+      background: var(--border-subtle);
+      color: var(--text-muted);
+    }
+
+    .step-name {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      flex: 1;
+    }
+
+    .step-name.completed {
+      color: var(--text-primary);
+    }
+
+    .step-check {
+      width: 16px;
+      height: 16px;
+      color: var(--success);
+    }
+
+    .back-footer {
+      margin-top: auto;
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--border-subtle);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    /* Deliverable Screenshot on Back */
+    .deliverable-container {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .deliverable-screenshot {
+      width: 100%;
+      height: 160px;
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 1rem;
+      position: relative;
+      background: linear-gradient(135deg, rgba(34, 211, 238, 0.1) 0%, rgba(34, 211, 238, 0.05) 100%);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .deliverable-screenshot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      transition: transform 0.3s ease;
+    }
+
+    .flip-card.flipped .deliverable-screenshot img {
+      transform: scale(1.02);
+    }
+
+    .deliverable-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      gap: 0.5rem;
+    }
+
+    .deliverable-placeholder svg {
+      width: 32px;
+      height: 32px;
+      opacity: 0.5;
+    }
+
+    .deliverable-placeholder span {
+      font-size: 0.75rem;
+    }
+
+    /* Workflow Progress Bar (Condensed) */
+    .workflow-progress {
+      margin-top: auto;
+    }
+
+    .workflow-progress-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+    }
+
+    .workflow-progress-label {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .workflow-progress-label svg {
+      width: 14px;
+      height: 14px;
+      color: var(--accent);
+    }
+
+    .workflow-progress-count {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+    }
+
+    .progress-bar-track {
+      height: 6px;
+      background: var(--border-subtle);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      border-radius: 3px;
+      transition: width 0.5s ease;
+    }
+
+    .progress-bar-fill.complete {
+      background: var(--success);
+    }
+
+    .progress-bar-fill.building {
+      background: linear-gradient(90deg, var(--success) 0%, var(--warning) 100%);
+    }
+
+    .workflow-stages {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 0.5rem;
+    }
+
+    .stage-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--border-subtle);
+    }
+
+    .stage-dot.completed {
+      background: var(--success);
+    }
+
+    .stage-dot.in-progress {
+      background: var(--warning);
+    }
+
+    .deliverable-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.75rem;
+      color: var(--accent);
+      text-decoration: none;
+      margin-top: 0.75rem;
+      transition: opacity 0.2s ease;
+    }
+
+    .deliverable-link:hover {
+      opacity: 0.8;
+    }
+
+    .deliverable-link svg {
+      width: 12px;
+      height: 12px;
+    }
+
+    @media (max-width: 768px) {
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .flip-card {
+        height: 400px;
+      }
+    }
+
+    /* ============ Certifications Section ============ */
+    .certifications-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+
+    .certification-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 1.25rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      transition: all 0.2s;
+    }
+
+    .certification-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .certification-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: var(--accent-dim);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .certification-icon svg {
+      width: 20px;
+      height: 20px;
+      color: var(--accent);
+    }
+
+    .certification-content {
+      flex: 1;
+    }
+
+    .certification-name {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.25rem;
+    }
+
+    .certification-issuer {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* ============ AI Chat Assistant ============ */
+    .chat-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .chat-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.5rem;
+      background: var(--accent-dim);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .chat-title {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .chat-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .chat-avatar svg {
+      width: 20px;
+      height: 20px;
+      color: var(--bg-base);
+    }
+
+    .chat-name {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .chat-status {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      color: var(--success);
+    }
+
+    .chat-status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--success);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .chat-badge {
+      padding: 0.25rem 0.75rem;
+      background: var(--bg-base);
+      border-radius: 100px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .chat-messages {
+      height: 400px;
+      overflow-y: auto;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .chat-message {
+      display: flex;
+      gap: 0.75rem;
+      max-width: 85%;
+    }
+
+    .chat-message.user {
+      flex-direction: row-reverse;
+      margin-left: auto;
+    }
+
+    .message-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--bg-hover);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .message-avatar svg {
+      width: 16px;
+      height: 16px;
+      color: var(--text-muted);
+    }
+
+    .chat-message.ai .message-avatar {
+      background: var(--accent-dim);
+    }
+
+    .chat-message.ai .message-avatar svg {
+      color: var(--accent);
+    }
+
+    .message-bubble {
+      padding: 1rem 1.25rem;
+      background: var(--bg-elevated);
+      border-radius: 12px;
+      border-bottom-left-radius: 4px;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: var(--text-secondary);
+    }
+
+    .chat-message.user .message-bubble {
+      background: var(--accent-dim);
+      border: 1px solid rgba(34, 211, 238, 0.3);
+      border-bottom-left-radius: 12px;
+      border-bottom-right-radius: 4px;
+      color: var(--text-primary);
+    }
+
+    .message-bubble strong {
+      color: var(--text-primary);
+    }
+
+    .suggested-questions {
+      padding: 1rem 1.5rem;
+      background: var(--bg-elevated);
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .suggested-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .suggested-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .suggested-chip {
+      padding: 0.5rem 1rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border-medium);
+      border-radius: 100px;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .suggested-chip:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* Loading indicator */
+    .chat-loading {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.5rem 0;
+    }
+
+    .chat-loading .message-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      background: var(--accent-dim);
+    }
+
+    .chat-loading .message-avatar svg {
+      width: 16px;
+      height: 16px;
+      color: var(--accent);
+    }
+
+    .typing-indicator {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 0.75rem 1rem;
+      background: var(--bg-elevated);
+      border-radius: 12px;
+      border-bottom-left-radius: 4px;
+    }
+
+    .typing-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--text-muted);
+      border-radius: 50%;
+      animation: typingBounce 1.4s infinite ease-in-out;
+    }
+
+    .typing-dot:nth-child(1) { animation-delay: 0ms; }
+    .typing-dot:nth-child(2) { animation-delay: 200ms; }
+    .typing-dot:nth-child(3) { animation-delay: 400ms; }
+
+    @keyframes typingBounce {
+      0%, 60%, 100% {
+        transform: translateY(0);
+        opacity: 0.4;
+      }
+      30% {
+        transform: translateY(-6px);
+        opacity: 1;
+        background: var(--accent);
+      }
+    }
+
+    .chat-input-container {
+      display: flex;
+      gap: 0.75rem;
+      padding: 1rem 1.5rem;
+      background: var(--bg-elevated);
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .chat-input {
+      flex: 1;
+      padding: 0.875rem 1rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border-medium);
+      border-radius: 8px;
+      color: var(--text-primary);
+      font-size: 0.9rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .chat-input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .chat-input:focus {
+      border-color: var(--accent);
+    }
+
+    .chat-send {
+      padding: 0.875rem 1.25rem;
+      background: var(--accent);
+      border: none;
+      border-radius: 8px;
+      color: var(--bg-base);
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s;
+    }
+
+    .chat-send:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+
+    .chat-send svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    /* ============ Contact Popout ============ */
+    .contact-fab {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(34, 211, 238, 0.4);
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+
+    .contact-fab:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 30px rgba(34, 211, 238, 0.5);
+    }
+
+    .contact-fab svg {
+      width: 24px;
+      height: 24px;
+      color: var(--bg-base);
+    }
+
+    .contact-fab-label {
+      position: absolute;
+      right: 70px;
+      background: var(--bg-card);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      color: var(--text-primary);
+      white-space: nowrap;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      opacity: 0;
+      transform: translateX(10px);
+      transition: all 0.3s ease;
+      pointer-events: none;
+    }
+
+    .contact-fab:hover .contact-fab-label {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .contact-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(4px);
+      z-index: 1001;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .contact-modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .contact-modal {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 400px;
+      max-width: calc(100vw - 2rem);
+      max-height: calc(100vh - 4rem);
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      overflow: hidden;
+      z-index: 1002;
+      transform: translateY(20px) scale(0.95);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .contact-modal.active {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .contact-modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 1.5rem;
+      background: var(--accent-dim);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .contact-modal-title {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .contact-modal-title svg {
+      width: 24px;
+      height: 24px;
+      color: var(--accent);
+    }
+
+    .contact-modal-title h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .contact-modal-close {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: transparent;
+      border: 1px solid var(--border-medium);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      color: var(--text-muted);
+    }
+
+    .contact-modal-close:hover {
+      background: var(--error);
+      border-color: var(--error);
+      color: white;
+    }
+
+    .contact-modal-close svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .contact-modal-body {
+      padding: 1.5rem;
+      max-height: 60vh;
+      overflow-y: auto;
+    }
+
+    .contact-form-group {
+      margin-bottom: 1.25rem;
+    }
+
+    .contact-form-label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      margin-bottom: 0.5rem;
+    }
+
+    .contact-form-input {
+      width: 100%;
+      padding: 0.875rem 1rem;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-medium);
+      border-radius: 8px;
+      color: var(--text-primary);
+      font-size: 0.9rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .contact-form-input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .contact-form-input:focus {
+      border-color: var(--accent);
+    }
+
+    .contact-form-textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .email-input-wrapper {
+      position: relative;
+    }
+
+    .email-domain-suggestions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .domain-chip {
+      padding: 0.35rem 0.75rem;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-medium);
+      border-radius: 100px;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .domain-chip:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-dim);
+    }
+
+    .quick-messages {
+      margin-bottom: 1.25rem;
+    }
+
+    .quick-messages-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .quick-message-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .quick-message-chip {
+      padding: 0.5rem 0.75rem;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-medium);
+      border-radius: 8px;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .quick-message-chip:hover {
+      border-color: var(--accent);
+      color: var(--text-primary);
+    }
+
+    .contact-form-actions {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .contact-btn {
+      flex: 1;
+      padding: 0.875rem 1rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: all 0.2s;
+    }
+
+    .contact-btn-primary {
+      background: var(--accent);
+      border: none;
+      color: var(--bg-base);
+    }
+
+    .contact-btn-primary:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+
+    .contact-btn-secondary {
+      background: transparent;
+      border: 1px solid var(--border-medium);
+      color: var(--text-secondary);
+    }
+
+    .contact-btn-secondary:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .contact-btn svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .contact-direct {
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .contact-direct-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .contact-direct-options {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .contact-direct-btn {
+      flex: 1;
+      padding: 0.75rem;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-medium);
+      border-radius: 8px;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+
+    .contact-direct-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .contact-direct-btn svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .contact-success {
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+
+    .contact-success-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: rgba(34, 197, 94, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+    }
+
+    .contact-success-icon svg {
+      width: 32px;
+      height: 32px;
+      color: var(--success);
+    }
+
+    .contact-success h4 {
+      font-size: 1.1rem;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .contact-success p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 480px) {
+      .contact-fab {
+        bottom: 1rem;
+        right: 1rem;
+        width: 50px;
+        height: 50px;
+      }
+
+      .contact-fab-label {
+        display: none;
+      }
+
+      .contact-modal {
+        bottom: 0;
+        right: 0;
+        left: 0;
+        width: 100%;
+        max-width: 100%;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+
+      .contact-form-actions {
+        flex-direction: column;
+      }
+
+      .contact-direct-options {
+        flex-direction: column;
+      }
+    }
+
+    /* ============ Footer ============ */
+    .footer {
+      text-align: center;
+      padding: 3rem 0;
+      border-top: 1px solid var(--border-subtle);
+      margin-top: 4rem;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-link {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    .footer-link:hover {
+      color: var(--accent);
+    }
+
+    .footer-link svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .footer-text {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .footer-digital {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: var(--accent-dim);
+      border-radius: 100px;
+      font-size: 0.75rem;
+      color: var(--accent);
+      margin-top: 1rem;
+    }
+
+    /* ============ Animations ============ */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-fade-up {
+      animation: fadeUp 0.6s ease-out forwards;
+    }
+
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+    .delay-4 { animation-delay: 0.4s; }
+    .delay-5 { animation-delay: 0.5s; }
+
+    /* ============ Responsive ============ */
+    @media (max-width: 640px) {
+      .container {
+        padding: 1rem;
+      }
+
+      .name {
+        font-size: 2rem;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .chat-messages {
+        height: 300px;
+      }
+
+      .chat-message {
+        max-width: 95%;
+      }
+    }
+
+    /* ============ Intro Section - Collapsible ============ */
+    .intro-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 2rem;
+    }
+
+    .intro-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.5rem 2rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .intro-header:hover {
+      background: var(--bg-hover);
+    }
+
+    .intro-title-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .intro-avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--gradient-1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--bg-base);
+    }
+
+    .intro-title-text h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.2rem;
+    }
+
+    .intro-title-text p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .intro-toggle {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-medium);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+    }
+
+    .intro-toggle svg {
+      width: 16px;
+      height: 16px;
+      color: var(--text-muted);
+      transition: transform 0.3s;
+    }
+
+    .intro-section.expanded .intro-toggle svg {
+      transform: rotate(180deg);
+    }
+
+    .intro-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease-out;
+    }
+
+    .intro-section.expanded .intro-content {
+      max-height: 1000px;
+    }
+
+    .intro-body {
+      padding: 0 2rem 2rem;
+    }
+
+    /* Typing Animation */
+    .typing-container {
+      background: var(--bg-elevated);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      border-left: 3px solid var(--accent);
+    }
+
+    .typing-text {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--text-secondary);
+    }
+
+    .typing-text strong {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .typing-cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1.2em;
+      background: var(--accent);
+      margin-left: 2px;
+      animation: blink 1s infinite;
+      vertical-align: text-bottom;
+    }
+
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+
+    /* Key Stats Grid */
+    .intro-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .intro-stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .intro-stat {
+      text-align: center;
+      padding: 1rem;
+      background: var(--bg-elevated);
+      border-radius: 10px;
+      border: 1px solid var(--border-subtle);
+      transition: all 0.2s;
+    }
+
+    .intro-stat:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .intro-stat-value {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 0.25rem;
+    }
+
+    .intro-stat-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Key Strengths Grid */
+    .strengths-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    @media (max-width: 640px) {
+      .strengths-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .strength-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 1rem;
+      background: var(--bg-elevated);
+      border-radius: 10px;
+      border: 1px solid var(--border-subtle);
+      transition: all 0.2s;
+    }
+
+    .strength-card:hover {
+      border-color: var(--accent);
+    }
+
+    .strength-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: var(--accent-dim);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .strength-icon svg {
+      width: 18px;
+      height: 18px;
+      color: var(--accent);
+    }
+
+    .strength-text h4 {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.2rem;
+    }
+
+    .strength-text p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* ============ Professional Experience Timeline ============ */
+    .experience-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    /* Tabs Navigation */
+    .exp-tabs {
+      display: flex;
+      overflow-x: auto;
+      border-bottom: 1px solid var(--border-subtle);
+      background: var(--bg-elevated);
+      padding: 0 1rem;
+    }
+
+    .exp-tab {
+      padding: 1rem 1.25rem;
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid transparent;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+
+    .exp-tab:hover {
+      color: var(--text-primary);
+      background: rgba(255,255,255,0.03);
+    }
+
+    .exp-tab.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
+    .exp-tab-period {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      display: block;
+      margin-top: 0.2rem;
+    }
+
+    /* Experience Panels */
+    .exp-panels {
+      padding: 2rem;
+    }
+
+    .exp-panel {
+      display: none;
+    }
+
+    .exp-panel.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .exp-panel-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .exp-company-info h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.25rem;
+    }
+
+    .exp-company-info .role {
+      font-size: 1rem;
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .exp-company-info .employer {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .exp-period-badge {
+      padding: 0.5rem 1rem;
+      background: var(--accent-dim);
+      border: 1px solid rgba(34, 211, 238, 0.3);
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .exp-context {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      font-style: italic;
+      padding: 1rem;
+      background: var(--bg-elevated);
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+      border-left: 3px solid var(--accent);
+    }
+
+    .exp-bullets {
+      list-style: none;
+    }
+
+    .exp-bullets li {
+      position: relative;
+      padding-left: 1.5rem;
+      margin-bottom: 0.75rem;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .exp-bullets li::before {
+      content: '>';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .exp-bullets li strong {
+      color: var(--text-primary);
+    }
+
+    .exp-roles-held {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 1px dashed var(--border-subtle);
+    }
+
+    .exp-roles-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+    }
+
+    .exp-roles-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .exp-role-chip {
+      padding: 0.35rem 0.75rem;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-medium);
+      border-radius: 100px;
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+    }
+
+    /* Vertical Timeline View */
+    .timeline-view {
+      position: relative;
+      padding-left: 2rem;
+    }
+
+    .timeline-view::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--border-subtle);
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-bottom: 2rem;
+      padding-left: 1.5rem;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -2rem;
+      top: 0.5rem;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--bg-card);
+      border: 2px solid var(--accent);
+    }
+
+    .timeline-item.current::before {
+      background: var(--accent);
+      box-shadow: 0 0 0 4px var(--accent-dim);
+    }
+
+    .timeline-date {
+      font-size: 0.8rem;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .timeline-company {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.25rem;
+    }
+
+    .timeline-role {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin-bottom: 0.5rem;
+    }
+
+    .timeline-summary {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* View Toggle */
+    .view-toggle {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .view-btn {
+      padding: 0.5rem 1rem;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-medium);
+      border-radius: 6px;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+
+    .view-btn:hover {
+      border-color: var(--accent);
+      color: var(--text-primary);
+    }
+
+    .view-btn.active {
+      background: var(--accent-dim);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .view-btn svg {
+      width: 14px;
+      height: 14px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Background Effects -->
+  <div class="bg-grid"></div>
+  <div class="bg-orb bg-orb-1"></div>
+  <div class="bg-orb bg-orb-2"></div>
+
+  <div class="container">
+    <!-- Header -->
+    <header class="header animate-fade-up">
+      <div class="header-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M12 6v6l4 2"/>
+        </svg>
+        Interactive Digital Resume
+      </div>
+      <h1 class="name">Arun Castromin Lawrance</h1>
+      <p class="title">Solutions Architect | Enterprise Architect | Technology Consulting</p>
+      <div class="contact-row">
+        <a href="mailto:arun.castromin@gmail.com" class="contact-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
+          arun.castromin@gmail.com
+        </a>
+        <a href="https://linkedin.com/in/aruncastromin" class="contact-item" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/>
+            <rect x="2" y="9" width="4" height="12"/>
+            <circle cx="4" cy="4" r="2"/>
+          </svg>
+          LinkedIn
+        </a>
+        <a href="https://github.com/castroarun" class="contact-item" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+          </svg>
+          GitHub
+        </a>
+        <span class="contact-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+          Singapore
+        </span>
+      </div>
+    </header>
+
+    <!-- ============ SECTION 1: About Me (Collapsible) ============ -->
+    <section class="section animate-fade-up delay-1">
+      <div class="section-header">
+        <span class="section-number">01.</span>
+        <h2 class="section-title">About Me</h2>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="intro-section expanded" id="intro-section">
+        <div class="intro-header" onclick="toggleIntro()">
+          <div class="intro-title-row">
+            <div class="intro-avatar">AC</div>
+            <div class="intro-title-text">
+              <h3>Hi, I'm Arun Castromin</h3>
+              <p>Click to expand my story</p>
+            </div>
+          </div>
+          <div class="intro-toggle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </div>
+        </div>
+
+        <div class="intro-content">
+          <div class="intro-body">
+            <!-- Typing Animation Summary -->
+            <div class="typing-container">
+              <p class="typing-text" id="typing-text">
+                <strong>Sr. Solution Architect</strong> with <strong>17+ years</strong> delivering technology-enabled solutions in
+                <strong>core banking, payments, and digital transformation</strong>. I've implemented Finacle core banking
+                across <strong>India, Middle East, Africa, and APAC</strong> for Tier-1 banks including
+                <strong>Bank of America, Emirates NBD, and Standard Bank</strong>. Currently driving NFR and RTP
+                implementations for global commercial banking at BoA Singapore.<span class="typing-cursor"></span>
+              </p>
+            </div>
+
+            <!-- Key Stats -->
+            <div class="intro-stats">
+              <div class="intro-stat">
+                <div class="intro-stat-value">17+</div>
+                <div class="intro-stat-label">Years Experience</div>
+              </div>
+              <div class="intro-stat">
+                <div class="intro-stat-value">5</div>
+                <div class="intro-stat-label">Regions Served</div>
+              </div>
+              <div class="intro-stat">
+                <div class="intro-stat-value">15K+</div>
+                <div class="intro-stat-label">Man-days Led</div>
+              </div>
+              <div class="intro-stat">
+                <div class="intro-stat-value">100%</div>
+                <div class="intro-stat-label">On-time Delivery</div>
+              </div>
+            </div>
+
+            <!-- Key Strengths Grid -->
+            <div class="strengths-grid">
+              <div class="strength-card">
+                <div class="strength-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                    <circle cx="9" cy="7" r="4"/>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                  </svg>
+                </div>
+                <div class="strength-text">
+                  <h4>Demonstrated Leadership</h4>
+                  <p>Mentored teams of up to 18 for Tier-1 clients with 15000+ man-days of deliverables</p>
+                </div>
+              </div>
+              <div class="strength-card">
+                <div class="strength-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                    <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                  </svg>
+                </div>
+                <div class="strength-text">
+                  <h4>Business Analyst Acumen</h4>
+                  <p>Conceptualized & established multiple business processes and regulatory frameworks</p>
+                </div>
+              </div>
+              <div class="strength-card">
+                <div class="strength-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+                    <polyline points="2 17 12 22 22 17"/>
+                    <polyline points="2 12 12 17 22 12"/>
+                  </svg>
+                </div>
+                <div class="strength-text">
+                  <h4>Technology Architect</h4>
+                  <p>Designed scalable, reusable & performance-savvy complex banking modules</p>
+                </div>
+              </div>
+              <div class="strength-card">
+                <div class="strength-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2v4"/>
+                    <path d="m16.24 7.76 2.83-2.83"/>
+                    <path d="M21 12h-4"/>
+                    <path d="m16.24 16.24 2.83 2.83"/>
+                    <path d="M12 18v4"/>
+                    <path d="m4.93 19.07 2.83-2.83"/>
+                    <path d="M4 12H0"/>
+                    <path d="m4.93 4.93 2.83 2.83"/>
+                  </svg>
+                </div>
+                <div class="strength-text">
+                  <h4>Innovation Mindset</h4>
+                  <p>Out-of-the-box thinking with AI-assisted development workflows</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SECTION 2: Professional Experience ============ -->
+    <section class="section animate-fade-up delay-2">
+      <div class="section-header">
+        <span class="section-number">02.</span>
+        <h2 class="section-title">Professional Experience</h2>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="experience-section">
+        <!-- View Toggle -->
+        <div style="padding: 1rem 1.5rem 0; display: flex; justify-content: flex-end;">
+          <div class="view-toggle">
+            <button class="view-btn active" onclick="switchExpView('tabs')" id="view-tabs">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                <path d="M3 9h18"/>
+              </svg>
+              Tabs
+            </button>
+            <button class="view-btn" onclick="switchExpView('timeline')" id="view-timeline">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2v20"/>
+                <path d="M2 12h4"/>
+                <path d="M18 12h4"/>
+                <path d="M2 6h4"/>
+                <path d="M18 6h4"/>
+                <path d="M2 18h4"/>
+                <path d="M18 18h4"/>
+              </svg>
+              Timeline
+            </button>
+          </div>
+        </div>
+
+        <!-- Tabbed View -->
+        <div id="exp-tabs-view">
+          <div class="exp-tabs">
+            <button class="exp-tab active" onclick="switchExpTab('boa')" data-tab="boa">
+              Bank of America
+              <span class="exp-tab-period">2020 - Present • Infosys</span>
+            </button>
+            <button class="exp-tab" onclick="switchExpTab('chola')" data-tab="chola">
+              Cholamandalam
+              <span class="exp-tab-period">2019 • Latitude Fintech</span>
+            </button>
+            <button class="exp-tab" onclick="switchExpTab('standard')" data-tab="standard">
+              Standard Bank
+              <span class="exp-tab-period">2012 - 2016 • EdgeVerve</span>
+            </button>
+            <button class="exp-tab" onclick="switchExpTab('enbd')" data-tab="enbd">
+              Emirates NBD
+              <span class="exp-tab-period">2008 - 2012 • Infosys</span>
+            </button>
+            <button class="exp-tab" onclick="switchExpTab('early')" data-tab="early">
+              Early Career
+              <span class="exp-tab-period">2004 - 2008 • Infosys</span>
+            </button>
+          </div>
+
+          <div class="exp-panels">
+            <!-- Bank of America Panel -->
+            <div class="exp-panel active" id="panel-boa">
+              <div class="exp-panel-header">
+                <div class="exp-company-info">
+                  <h3>Bank of America (Jakarta, Singapore, India)</h3>
+                  <p class="role">Sr. Technology Architect</p>
+                  <p class="employer">Infosys Ltd.</p>
+                </div>
+                <span class="exp-period-badge">2020 - Present</span>
+              </div>
+              <p class="exp-context">Global Commercial Bank - APAC Region. Driving Real-Time Payments (RTP) and NFR delivery across multiple countries.</p>
+              <ul class="exp-bullets">
+                <li>Integral member and architect of Application Engineering and Support agile team driving <strong>Real-Time Payments (RTP)</strong> implementations and NFR delivery for APAC regions</li>
+                <li>Led the Business mapping stream for <strong>Regulatory Reporting translation</strong>, achieving 100% mappings and timely Business enablement</li>
+                <li>Strategized Business processes for <strong>Client Onboarding</strong>, enabling new businesses and integrating Regulatory norms within Bank-in-a-box technology</li>
+                <li>Designed and achieved a <strong>5x Business-volumes-ready</strong> reporting system certified by the Client</li>
+                <li>Led Design changes resulting in <strong>60% reduction</strong> in daily job execution times</li>
+                <li>Designed <strong>Splunk dashboards</strong> for visualization and remediation of system events with quickest TAT</li>
+                <li>Mentored cross-functional teams in decision making, business thinking, and problem solving</li>
+              </ul>
+            </div>
+
+            <!-- Cholamandalam Panel -->
+            <div class="exp-panel" id="panel-chola">
+              <div class="exp-panel-header">
+                <div class="exp-company-info">
+                  <h3>Cholamandalam Investment and Finance Company</h3>
+                  <p class="role">Project Manager</p>
+                  <p class="employer">Latitude Fintech</p>
+                </div>
+                <span class="exp-period-badge">Feb - Apr 2019</span>
+              </div>
+              <ul class="exp-bullets">
+                <li>Implemented Latitude Fintech's premiere <strong>tech-savvy LOS product</strong> at Cholamandalam Finance Ltd</li>
+                <li>Ensured successful <strong>all-India go-live</strong> transformations</li>
+                <li>Achieved <strong>two-thirds reduction</strong> in Client onboarding processes (end-to-end time, verifications & sanctioning)</li>
+              </ul>
+            </div>
+
+            <!-- Standard Bank Panel -->
+            <div class="exp-panel" id="panel-standard">
+              <div class="exp-panel-header">
+                <div class="exp-company-info">
+                  <h3>Standard Bank (South Africa & Nigeria)</h3>
+                  <p class="role">Technology Architect & Project Manager</p>
+                  <p class="employer">EdgeVerve Systems Ltd.</p>
+                </div>
+                <span class="exp-period-badge">2012 - 2016</span>
+              </div>
+              <p class="exp-context">Africa's largest banking institution with operations across 18 countries. Finacle Core Banking implementation.</p>
+              <ul class="exp-bullets">
+                <li>Managed Business discussions, Requirement gathering & Design Phases with Client</li>
+                <li>Trained and mentored fresh talent through Design, Build & Delivery phases</li>
+                <li>Achieved <strong>1000+ man-days of 100% on-time deliverables</strong></li>
+                <li>Managed teams of <strong>3-18 members</strong> with less than 2.5% Defect Injection Rate</li>
+                <li>Led the Project into successful <strong>CMMI Maturity Level 4</strong> assessment - first in Africa & Middle East Region</li>
+                <li>Acknowledged as <strong>Client's most preferred Project Manager</strong></li>
+                <li>Earned internal prestigious <strong>Team Award</strong> for management and code quality</li>
+              </ul>
+              <div class="exp-roles-held">
+                <p class="exp-roles-label">Roles Held</p>
+                <div class="exp-roles-chips">
+                  <span class="exp-role-chip">Project Manager</span>
+                  <span class="exp-role-chip">Business Analyst</span>
+                  <span class="exp-role-chip">QA Lead</span>
+                  <span class="exp-role-chip">Technology Architect</span>
+                  <span class="exp-role-chip">Senior Developer</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Emirates NBD Panel -->
+            <div class="exp-panel" id="panel-enbd">
+              <div class="exp-panel-header">
+                <div class="exp-company-info">
+                  <h3>Emirates NBD (Dubai)</h3>
+                  <p class="role">Team Lead & Project Manager</p>
+                  <p class="employer">Infosys Ltd.</p>
+                </div>
+                <span class="exp-period-badge">2008 - 2012</span>
+              </div>
+              <p class="exp-context">One of the largest banking groups in the Middle East. Core banking transformation following Emirates Bank + National Bank of Dubai merger.</p>
+              <ul class="exp-bullets">
+                <li>Achieved <strong>3000+ man-days of 100% on-time deliverables</strong></li>
+                <li>Served as preferred techno-functional Project Manager managing teams of <strong>up to 18 members</strong></li>
+                <li>Designed & implemented reusable modules - <strong>cash denomination, teller reports, EOD batch jobs</strong></li>
+                <li>Earned individual award for <strong>cash denomination module design</strong></li>
+                <li>Led Release Management eliminating <strong>100% non-infra deployment issues</strong> through automation</li>
+              </ul>
+              <div class="exp-roles-held">
+                <p class="exp-roles-label">Roles Held</p>
+                <div class="exp-roles-chips">
+                  <span class="exp-role-chip">Senior Developer</span>
+                  <span class="exp-role-chip">Team Lead</span>
+                  <span class="exp-role-chip">Project Manager</span>
+                  <span class="exp-role-chip">Technology Architect</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Early Career Panel -->
+            <div class="exp-panel" id="panel-early">
+              <div class="exp-panel-header">
+                <div class="exp-company-info">
+                  <h3>Earlier Career at Infosys Ltd.</h3>
+                  <p class="role">Software Developer</p>
+                  <p class="employer">Infosys Ltd., Chennai</p>
+                </div>
+                <span class="exp-period-badge">2004 - 2008</span>
+              </div>
+              <ul class="exp-bullets">
+                <li><strong>Bank Sohar (2007):</strong> Reports Customization & Development - Oman</li>
+                <li><strong>State Bank of India Overseas (2006-2007):</strong> Core module Customization, Reports, Test & Support</li>
+                <li><strong>Bank of Alexandria (2004-2005):</strong> Core module Customization, Test & Support - Egypt</li>
+                <li><strong>Bank of India (2004):</strong> Core module Customization</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Timeline View (hidden by default) -->
+        <div id="exp-timeline-view" style="display: none; padding: 2rem;">
+          <div class="timeline-view">
+            <div class="timeline-item current">
+              <div class="timeline-date">2020 - Present</div>
+              <div class="timeline-company">Bank of America (Jakarta, Singapore)</div>
+              <div class="timeline-role">Sr. Technology Architect @ Infosys Ltd.</div>
+              <div class="timeline-summary">Driving RTP implementations and NFR delivery for APAC. 5x business-volumes-ready reporting, 60% reduction in job execution times.</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-date">Feb - Apr 2019</div>
+              <div class="timeline-company">Cholamandalam Finance</div>
+              <div class="timeline-role">Project Manager @ Latitude Fintech</div>
+              <div class="timeline-summary">All-India LOS go-live. Two-thirds reduction in client onboarding time.</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-date">2012 - 2016</div>
+              <div class="timeline-company">Standard Bank (South Africa & Nigeria)</div>
+              <div class="timeline-role">Technology Architect & PM @ EdgeVerve</div>
+              <div class="timeline-summary">1000+ man-days, 100% on-time delivery. CMMI Level 4. Client's most preferred PM.</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-date">2008 - 2012</div>
+              <div class="timeline-company">Emirates NBD (Dubai)</div>
+              <div class="timeline-role">Team Lead & PM @ Infosys Ltd.</div>
+              <div class="timeline-summary">3000+ man-days, 100% on-time. Award-winning module designs. Release automation.</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-date">2004 - 2008</div>
+              <div class="timeline-company">Multiple Banks</div>
+              <div class="timeline-role">Software Developer @ Infosys Ltd.</div>
+              <div class="timeline-summary">Bank Sohar, SBI Overseas, Bank of Alexandria, Bank of India - Core banking implementations.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SECTION 3: Skills Visualization ============ -->
+    <section class="section animate-fade-up delay-3">
+      <div class="section-header">
+        <span class="section-number">03.</span>
+        <h2 class="section-title">Skills & Expertise</h2>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="skills-container">
+        <!-- Radar Chart -->
+        <div class="radar-container">
+          <h3 class="radar-title">Competency Overview</h3>
+          <canvas id="skillsRadar"></canvas>
+        </div>
+
+        <!-- Skill Bars -->
+        <div class="skills-bars">
+          <div class="skill-filters">
+            <button class="skill-filter active" data-filter="all">All</button>
+            <button class="skill-filter" data-filter="architecture">Architecture</button>
+            <button class="skill-filter" data-filter="development">Development</button>
+            <button class="skill-filter" data-filter="data">Data & Analytics</button>
+          </div>
+
+          <div class="skills-list">
+            <div class="skill-item" data-category="architecture">
+              <div class="skill-header">
+                <span class="skill-name">Solution Architecture</span>
+                <span class="skill-level">Expert | 17+ years</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 95%"></div>
+              </div>
+            </div>
+
+            <div class="skill-item" data-category="architecture">
+              <div class="skill-header">
+                <span class="skill-name">Core Banking (Finacle)</span>
+                <span class="skill-level">Expert</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 90%"></div>
+              </div>
+            </div>
+
+            <div class="skill-item" data-category="data">
+              <div class="skill-header">
+                <span class="skill-name">Data Science</span>
+                <span class="skill-level">IBM Certified</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 78%"></div>
+              </div>
+            </div>
+
+            <div class="skill-item" data-category="development">
+              <div class="skill-header">
+                <span class="skill-name">Python</span>
+                <span class="skill-level">Advanced</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 80%"></div>
+              </div>
+            </div>
+
+            <div class="skill-item" data-category="development">
+              <div class="skill-header">
+                <span class="skill-name">Java</span>
+                <span class="skill-level">Expert</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 88%"></div>
+              </div>
+            </div>
+
+            <div class="skill-item" data-category="development">
+              <div class="skill-header">
+                <span class="skill-name">PL/SQL</span>
+                <span class="skill-level">Expert</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 90%"></div>
+              </div>
+            </div>
+
+            <div class="skill-item" data-category="data">
+              <div class="skill-header">
+                <span class="skill-name">Data Analytics (Tableau, Splunk)</span>
+                <span class="skill-level">Advanced</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 75%"></div>
+              </div>
+            </div>
+
+            <div class="skill-item" data-category="data">
+              <div class="skill-header">
+                <span class="skill-name">Agentic AI Implementation</span>
+                <span class="skill-level">Active Practitioner</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 70%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SECTION 4: GitHub Stats ============ -->
+    <section class="section animate-fade-up delay-4">
+      <div class="section-header">
+        <span class="section-number">04.</span>
+        <h2 class="section-title">GitHub Activity</h2>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="github-section">
+        <div class="github-header">
+          <div class="github-profile">
+            <div class="github-avatar">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+              </svg>
+            </div>
+            <div>
+              <div class="github-username">castroarun</div>
+              <div class="github-handle">@castroarun</div>
+            </div>
+          </div>
+          <a href="https://github.com/castroarun" class="github-link" target="_blank">
+            View Profile
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+              <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
+              <polyline points="15 3 21 3 21 9"/>
+              <line x1="10" y1="14" x2="21" y2="3"/>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-value" id="commits-count" data-target="0">0</div>
+            <div class="stat-label">Contributions (2025-26)</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="repos-count" data-target="0">0</div>
+            <div class="stat-label">Repositories</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="prs-count" data-target="0">0</div>
+            <div class="stat-label">Pull Requests</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="stars-count" data-target="0">0</div>
+            <div class="stat-label">Stars Earned</div>
+          </div>
+        </div>
+
+        <!-- Contribution Heatmap -->
+        <div class="heatmap-container">
+          <div class="heatmap-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+              <line x1="16" y1="2" x2="16" y2="6"/>
+              <line x1="8" y1="2" x2="8" y2="6"/>
+              <line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+            <span>Contribution Activity (Last 52 weeks)</span>
+            <span class="heatmap-total" id="heatmap-total"></span>
+          </div>
+          <div class="heatmap" id="contribution-heatmap">
+            <!-- Generated by JavaScript with live GitHub data -->
+          </div>
+          <div class="heatmap-legend">
+            Less
+            <div class="heatmap-legend-item" style="background: var(--bg-hover)"></div>
+            <div class="heatmap-legend-item level-1" style="background: rgba(34, 211, 238, 0.2)"></div>
+            <div class="heatmap-legend-item level-2" style="background: rgba(34, 211, 238, 0.4)"></div>
+            <div class="heatmap-legend-item level-3" style="background: rgba(34, 211, 238, 0.6)"></div>
+            <div class="heatmap-legend-item level-4" style="background: var(--accent)"></div>
+            More
+          </div>
+        </div>
+
+        <!-- Languages -->
+        <div class="languages-grid">
+          <div class="language-item">
+            <div class="language-dot" style="background: #3178C6"></div>
+            <span class="language-name">TypeScript</span>
+            <span class="language-percent">42%</span>
+          </div>
+          <div class="language-item">
+            <div class="language-dot" style="background: #F7DF1E"></div>
+            <span class="language-name">JavaScript</span>
+            <span class="language-percent">28%</span>
+          </div>
+          <div class="language-item">
+            <div class="language-dot" style="background: #3776AB"></div>
+            <span class="language-name">Python</span>
+            <span class="language-percent">18%</span>
+          </div>
+          <div class="language-item">
+            <div class="language-dot" style="background: #E34F26"></div>
+            <span class="language-name">HTML/CSS</span>
+            <span class="language-percent">12%</span>
+          </div>
+        </div>
+
+        <!-- GitHub Repositories (Dynamically Loaded) -->
+        <div class="github-repos-section">
+          <div class="github-repos-header">
+            <h3 class="github-repos-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+              </svg>
+              Public Repositories
+            </h3>
+          </div>
+          <div class="github-repos-grid" id="github-repos-grid">
+            <!-- Loaded dynamically from GitHub API -->
+            <div class="github-repos-loading">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 12a9 9 0 1 1-6.219-8.56"/>
+              </svg>
+              Loading repositories...
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SECTION 5: Projects Showcase ============ -->
+    <section class="section animate-fade-up delay-5">
+      <div class="section-header">
+        <span class="section-number">05.</span>
+        <h2 class="section-title">What I'm Building</h2>
+        <div class="section-line"></div>
+      </div>
+      <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1.5rem;">Click any card to see the 9-step development workflow</p>
+
+      <!-- Flip Cards Grid -->
+      <div class="projects-grid">
+        <!-- PRIMMO Card -->
+        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <div class="card-header">
+                <div class="card-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+                    <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                    <line x1="12" x2="12" y1="19" y2="22"/>
+                  </svg>
+                </div>
+                <div class="card-title-wrapper">
+                  <h3 class="card-title">PRIMMO <span class="card-badge building">Building</span></h3>
+                  <p class="card-tagline">AI-powered personal strength coach</p>
+                </div>
+              </div>
+              <p class="card-description">Communicates via <strong>WhatsApp and Voice calls</strong>. Uses workout data from REPPIT for personalized training.</p>
+              <div class="card-tech">
+                <span class="tech-chip">Next.js</span>
+                <span class="tech-chip">Voice AI</span>
+                <span class="tech-chip">Supabase</span>
+              </div>
+              <div class="flip-hint">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+                Click to flip
+              </div>
+            </div>
+            <div class="flip-card-back">
+              <div class="deliverable-container">
+                <div class="deliverable-screenshot">
+                  <!-- Replace with actual screenshot: <img src="screenshots/primmo.png" alt="PRIMMO Screenshot"> -->
+                  <div class="deliverable-placeholder">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+                      <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                      <line x1="12" x2="12" y1="19" y2="22"/>
+                    </svg>
+                    <span>PRIMMO Preview</span>
+                  </div>
+                </div>
+                <div class="back-header" style="border-bottom: none; padding-bottom: 0; margin-bottom: 0.5rem;">
+                  <h4 class="back-title" style="font-size: 0.9rem;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg>
+                    PRIMMO
+                  </h4>
+                  <span class="card-badge building" style="font-size: 0.6rem;">Building</span>
+                </div>
+                <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 1rem;">AI-powered personal strength coach with WhatsApp & Voice AI integration.</p>
+                <div class="workflow-progress">
+                  <div class="workflow-progress-header">
+                    <span class="workflow-progress-label">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                      9-Step Workflow
+                    </span>
+                    <span class="workflow-progress-count">3/9 Complete</span>
+                  </div>
+                  <div class="progress-bar-track">
+                    <div class="progress-bar-fill building" style="width: 38.8%;"></div>
+                  </div>
+                  <div class="workflow-stages">
+                    <span class="stage-dot completed" title="DEV-CLOCK"></span>
+                    <span class="stage-dot completed" title="PRD"></span>
+                    <span class="stage-dot completed" title="Test Cases"></span>
+                    <span class="stage-dot in-progress" title="Build"></span>
+                    <span class="stage-dot" title="Testing"></span>
+                    <span class="stage-dot" title="Debug"></span>
+                    <span class="stage-dot" title="Walkthrough"></span>
+                    <span class="stage-dot" title="Ship"></span>
+                    <span class="stage-dot" title="Retro"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- REPPIT Card -->
+        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <div class="card-header">
+                <div class="card-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="5" r="3"/><path d="M12 22V8M5 12H2a10 10 0 0 0 20 0h-3"/>
+                  </svg>
+                </div>
+                <div class="card-title-wrapper">
+                  <h3 class="card-title">REPPIT <span class="card-badge built">Built</span></h3>
+                  <p class="card-tagline">Fitness strength tracking app</p>
+                </div>
+              </div>
+              <p class="card-description">Track workouts with <strong>real-time timer</strong>, progressive overload tracking, and exercise history analytics.</p>
+              <div class="card-tech">
+                <span class="tech-chip">React Native</span>
+                <span class="tech-chip">TypeScript</span>
+                <span class="tech-chip">Expo</span>
+              </div>
+              <div class="flip-hint">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+                Click to flip
+              </div>
+            </div>
+            <div class="flip-card-back">
+              <div class="deliverable-container">
+                <div class="deliverable-screenshot">
+                  <!-- Replace with actual screenshot: <img src="screenshots/reppit.png" alt="REPPIT Screenshot"> -->
+                  <div class="deliverable-placeholder">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="5" r="3"/><path d="M12 22V8M5 12H2a10 10 0 0 0 20 0h-3"/>
+                    </svg>
+                    <span>REPPIT Preview</span>
+                  </div>
+                </div>
+                <div class="back-header" style="border-bottom: none; padding-bottom: 0; margin-bottom: 0.5rem;">
+                  <h4 class="back-title" style="font-size: 0.9rem;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><circle cx="12" cy="5" r="3"/><path d="M12 22V8M5 12H2a10 10 0 0 0 20 0h-3"/></svg>
+                    REPPIT
+                  </h4>
+                  <span class="card-badge built" style="font-size: 0.6rem;">Built</span>
+                </div>
+                <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 1rem;">Fitness strength tracking with real-time timer and progressive overload analytics.</p>
+                <div class="workflow-progress">
+                  <div class="workflow-progress-header">
+                    <span class="workflow-progress-label">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                      9-Step Workflow
+                    </span>
+                    <span class="workflow-progress-count">9/9 Complete</span>
+                  </div>
+                  <div class="progress-bar-track">
+                    <div class="progress-bar-fill complete" style="width: 100%;"></div>
+                  </div>
+                  <div class="workflow-stages">
+                    <span class="stage-dot completed" title="DEV-CLOCK"></span>
+                    <span class="stage-dot completed" title="PRD"></span>
+                    <span class="stage-dot completed" title="Test Cases"></span>
+                    <span class="stage-dot completed" title="Build"></span>
+                    <span class="stage-dot completed" title="Testing"></span>
+                    <span class="stage-dot completed" title="Debug"></span>
+                    <span class="stage-dot completed" title="Walkthrough"></span>
+                    <span class="stage-dot completed" title="Ship"></span>
+                    <span class="stage-dot completed" title="Retro"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- NoteApp Card -->
+        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <div class="card-header">
+                <div class="card-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
+                    <polyline points="14 2 14 8 20 8"/>
+                  </svg>
+                </div>
+                <div class="card-title-wrapper">
+                  <h3 class="card-title">NoteApp <span class="card-badge built">Built</span></h3>
+                  <p class="card-tagline">Privacy-first note-taking app</p>
+                </div>
+              </div>
+              <p class="card-description"><strong>Offline-first</strong> with cloud sync, voice-to-text input, and 200+ automated test cases.</p>
+              <div class="card-tech">
+                <span class="tech-chip">React Native</span>
+                <span class="tech-chip">TypeScript</span>
+                <span class="tech-chip">Supabase</span>
+              </div>
+              <div class="flip-hint">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+                Click to flip
+              </div>
+            </div>
+            <div class="flip-card-back">
+              <div class="deliverable-container">
+                <div class="deliverable-screenshot">
+                  <!-- Replace with actual screenshot: <img src="screenshots/noteapp.png" alt="NoteApp Screenshot"> -->
+                  <div class="deliverable-placeholder">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="32" height="32">
+                      <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
+                      <polyline points="14 2 14 8 20 8"/>
+                      <line x1="16" y1="13" x2="8" y2="13"/>
+                      <line x1="16" y1="17" x2="8" y2="17"/>
+                    </svg>
+                    <span>NoteApp Preview</span>
+                  </div>
+                </div>
+                <div class="back-header" style="border-bottom: none; padding-bottom: 0; margin-bottom: 0.5rem;">
+                  <h4 class="back-title" style="font-size: 0.9rem;">NoteApp</h4>
+                  <span class="card-badge built" style="font-size: 0.6rem;">Built</span>
+                </div>
+                <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 1rem;">Offline-first note-taking with cloud sync, voice input, and 200+ test cases.</p>
+                <div class="workflow-progress">
+                  <div class="workflow-progress-header">
+                    <span class="workflow-progress-label">9-Step Workflow</span>
+                    <span class="workflow-progress-count">9/9 Complete</span>
+                  </div>
+                  <div class="progress-bar-track">
+                    <div class="progress-bar-fill complete" style="width: 100%;"></div>
+                  </div>
+                  <div class="workflow-stages">
+                    <span class="stage-dot completed"></span>
+                    <span class="stage-dot completed"></span>
+                    <span class="stage-dot completed"></span>
+                    <span class="stage-dot completed"></span>
+                    <span class="stage-dot completed"></span>
+                    <span class="stage-dot completed"></span>
+                    <span class="stage-dot completed"></span>
+                    <span class="stage-dot completed"></span>
+                    <span class="stage-dot completed"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Spotify Songs Card -->
+        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <div class="card-header">
+                <div class="card-icon" style="background: rgba(30, 215, 96, 0.15);">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#1DB954" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M8 15s1.5-2 4-2 4 2 4 2"/>
+                    <path d="M7 11s2-2 5-2 5 2 5 2"/>
+                    <path d="M6 7s2.5-2 6-2 6 2 6 2"/>
+                  </svg>
+                </div>
+                <div class="card-title-wrapper">
+                  <h3 class="card-title">Spotify Songs <span class="card-badge building">Building</span></h3>
+                  <p class="card-tagline">Music data analysis & launch</p>
+                </div>
+              </div>
+              <p class="card-description">Analyzing <strong>listening patterns</strong> and preparing for original music release on Spotify.</p>
+              <div class="card-tech">
+                <span class="tech-chip">Python</span>
+                <span class="tech-chip">Data Analytics</span>
+                <span class="tech-chip">Spotify API</span>
+              </div>
+              <div class="flip-hint">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+                Click to flip
+              </div>
+            </div>
+            <div class="flip-card-back">
+              <div class="deliverable-container">
+                <div class="deliverable-screenshot">
+                  <!-- Replace with actual screenshot: <img src="screenshots/spotify.png" alt="Spotify Songs Screenshot"> -->
+                  <div class="deliverable-placeholder">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#1DB954" stroke-width="2" width="32" height="32">
+                      <circle cx="12" cy="12" r="10"/>
+                      <path d="M8 15s1.5-2 4-2 4 2 4 2"/>
+                      <path d="M7 11s2-2 5-2 5 2 5 2"/>
+                    </svg>
+                    <span>Spotify Songs Preview</span>
+                  </div>
+                </div>
+                <div class="back-header" style="border-bottom: none; padding-bottom: 0; margin-bottom: 0.5rem;">
+                  <h4 class="back-title" style="font-size: 0.9rem;">Spotify Songs</h4>
+                  <span class="card-badge building" style="font-size: 0.6rem;">Building</span>
+                </div>
+                <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 1rem;">Music data analysis & preparing for original music release on Spotify.</p>
+                <div class="workflow-progress">
+                  <div class="workflow-progress-header">
+                    <span class="workflow-progress-label">9-Step Workflow</span>
+                    <span class="workflow-progress-count">1/9 Complete</span>
+                  </div>
+                  <div class="progress-bar-track">
+                    <div class="progress-bar-fill building" style="width: 16.6%;"></div>
+                  </div>
+                  <div class="workflow-stages">
+                    <span class="stage-dot completed"></span>
+                    <span class="stage-dot in-progress"></span>
+                    <span class="stage-dot"></span>
+                    <span class="stage-dot"></span>
+                    <span class="stage-dot"></span>
+                    <span class="stage-dot"></span>
+                    <span class="stage-dot"></span>
+                    <span class="stage-dot"></span>
+                    <span class="stage-dot"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Space Race ML Card -->
+        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <div class="card-header">
+                <div class="card-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/>
+                    <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/>
+                  </svg>
+                </div>
+                <div class="card-title-wrapper">
+                  <h3 class="card-title">Space Race ML <span class="card-badge built">Built</span></h3>
+                  <p class="card-tagline">Falcon 9 landing prediction</p>
+                </div>
+              </div>
+              <p class="card-description">Machine learning project predicting <strong>successful rocket landings</strong>. IBM Data Science certified.</p>
+              <div class="card-tech">
+                <span class="tech-chip">Python</span>
+                <span class="tech-chip">Jupyter</span>
+                <span class="tech-chip">ML</span>
+              </div>
+              <div class="flip-hint">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+                Click to flip
+              </div>
+            </div>
+            <div class="flip-card-back">
+              <div class="deliverable-container">
+                <div class="deliverable-screenshot">
+                  <!-- Replace with actual screenshot: <img src="screenshots/spacerace.png" alt="Space Race ML Screenshot"> -->
+                  <div class="deliverable-placeholder">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="32" height="32">
+                      <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/>
+                      <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/>
+                    </svg>
+                    <span>Space Race ML Preview</span>
+                  </div>
+                </div>
+                <div class="back-header" style="border-bottom: none; padding-bottom: 0; margin-bottom: 0.5rem;">
+                  <h4 class="back-title" style="font-size: 0.9rem;">Space Race ML</h4>
+                  <span class="card-badge built" style="font-size: 0.6rem;">Built</span>
+                </div>
+                <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 1rem;">Falcon 9 landing prediction with ML. IBM Data Science certified capstone project.</p>
+                <div class="workflow-progress">
+                  <div class="workflow-progress-header">
+                    <span class="workflow-progress-label">9-Step Workflow</span>
+                    <span class="workflow-progress-count">9/9 Complete</span>
+                  </div>
+                  <div class="progress-bar-track">
+                    <div class="progress-bar-fill complete" style="width: 100%;"></div>
+                  </div>
+                  <div class="workflow-stages">
+                    <span class="stage-dot completed"></span>
+                    <span class="stage-dot completed"></span>
+                    <span class="stage-dot completed"></span>
+                    <span class="stage-dot completed"></span>
+                    <span class="stage-dot completed"></span>
+                    <span class="stage-dot completed"></span>
+                    <span class="stage-dot completed"></span>
+                    <span class="stage-dot completed"></span>
+                    <span class="stage-dot completed"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- This Portfolio Card -->
+        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <div class="card-header">
+                <div class="card-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 6v6l4 2"/>
+                  </svg>
+                </div>
+                <div class="card-title-wrapper">
+                  <h3 class="card-title">This Portfolio <span class="card-badge building">Building</span></h3>
+                  <p class="card-tagline">Interactive digital resume</p>
+                </div>
+              </div>
+              <p class="card-description"><strong>AI chat assistant</strong>, skills radar, flip cards with 9-step workflow showcase.</p>
+              <div class="card-tech">
+                <span class="tech-chip">HTML/CSS</span>
+                <span class="tech-chip">JavaScript</span>
+                <span class="tech-chip">Chart.js</span>
+              </div>
+              <div class="flip-hint">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+                Click to flip
+              </div>
+            </div>
+            <div class="flip-card-back">
+              <div class="deliverable-container">
+                <div class="deliverable-screenshot">
+                  <!-- Replace with actual screenshot: <img src="screenshots/portfolio.png" alt="Portfolio Screenshot"> -->
+                  <div class="deliverable-placeholder">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="32" height="32">
+                      <circle cx="12" cy="12" r="10"/>
+                      <path d="M12 6v6l4 2"/>
+                    </svg>
+                    <span>You're Looking at It!</span>
+                  </div>
+                </div>
+                <div class="back-header" style="border-bottom: none; padding-bottom: 0; margin-bottom: 0.5rem;">
+                  <h4 class="back-title" style="font-size: 0.9rem;">This Portfolio</h4>
+                  <span class="card-badge building" style="font-size: 0.6rem;">Building</span>
+                </div>
+                <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 1rem;">Interactive digital resume with AI chat, skills radar, and flip cards.</p>
+                <div class="workflow-progress">
+                  <div class="workflow-progress-header">
+                    <span class="workflow-progress-label">9-Step Workflow</span>
+                    <span class="workflow-progress-count">3/9 Complete</span>
+                  </div>
+                  <div class="progress-bar-track">
+                    <div class="progress-bar-fill building" style="width: 38.8%;"></div>
+                  </div>
+                  <div class="workflow-stages">
+                    <span class="stage-dot completed"></span>
+                    <span class="stage-dot completed"></span>
+                    <span class="stage-dot completed"></span>
+                    <span class="stage-dot in-progress"></span>
+                    <span class="stage-dot"></span>
+                    <span class="stage-dot"></span>
+                    <span class="stage-dot"></span>
+                    <span class="stage-dot"></span>
+                    <span class="stage-dot"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SECTION 6: Certifications ============ -->
+    <section class="section animate-fade-up delay-5">
+      <div class="section-header">
+        <span class="section-number">06.</span>
+        <h2 class="section-title">Certifications & Credentials</h2>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="certifications-grid">
+        <!-- TOGAF -->
+        <div class="certification-card">
+          <div class="certification-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+              <polyline points="2 17 12 22 22 17"/>
+              <polyline points="2 12 12 17 22 12"/>
+            </svg>
+          </div>
+          <div class="certification-content">
+            <div class="certification-name">TOGAF 9 Certified</div>
+            <div class="certification-issuer">The Open Group · Enterprise Architecture</div>
+          </div>
+        </div>
+
+        <!-- CSPO -->
+        <div class="certification-card">
+          <div class="certification-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 20V10"/>
+              <path d="M18 20V4"/>
+              <path d="M6 20v-4"/>
+            </svg>
+          </div>
+          <div class="certification-content">
+            <div class="certification-name">Certified Scrum Product Owner (CSPO)</div>
+            <div class="certification-issuer">Scrum Alliance · Agile Methodology</div>
+          </div>
+        </div>
+
+        <!-- IBM Data Science -->
+        <div class="certification-card">
+          <div class="certification-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+              <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+              <line x1="12" y1="22.08" x2="12" y2="12"/>
+            </svg>
+          </div>
+          <div class="certification-content">
+            <div class="certification-name">IBM Data Science Professional</div>
+            <div class="certification-issuer">IBM · Python, ML, Data Analytics</div>
+          </div>
+        </div>
+
+        <!-- ISO 31000 -->
+        <div class="certification-card">
+          <div class="certification-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
+          <div class="certification-content">
+            <div class="certification-name">ISO 31000 Risk Manager</div>
+            <div class="certification-issuer">PECB · Risk Management Framework</div>
+          </div>
+        </div>
+
+        <!-- AWS SAA (Pursuing) -->
+        <div class="certification-card" style="opacity: 0.7; border-style: dashed;">
+          <div class="certification-icon" style="background: rgba(255, 255, 255, 0.05);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/>
+            </svg>
+          </div>
+          <div class="certification-content">
+            <div class="certification-name">AWS Solutions Architect <span style="font-size: 0.7rem; color: var(--warning);">· Pursuing</span></div>
+            <div class="certification-issuer">Amazon Web Services · Cloud Architecture</div>
+          </div>
+        </div>
+
+        <!-- PMP (Future) -->
+        <div class="certification-card" style="opacity: 0.7; border-style: dashed;">
+          <div class="certification-icon" style="background: rgba(255, 255, 255, 0.05);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+              <line x1="16" y1="2" x2="16" y2="6"/>
+              <line x1="8" y1="2" x2="8" y2="6"/>
+              <line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+          </div>
+          <div class="certification-content">
+            <div class="certification-name">PMP <span style="font-size: 0.7rem; color: var(--text-muted);">· Planned 2026</span></div>
+            <div class="certification-issuer">Project Management Institute · PM Professional</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SECTION 7: AI Chat Assistant ============ -->
+    <section class="section animate-fade-up delay-6">
+      <div class="section-header">
+        <span class="section-number">07.</span>
+        <h2 class="section-title">Ask Me Anything</h2>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="chat-section">
+        <div class="chat-header">
+          <div class="chat-title">
+            <div class="chat-avatar">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+              </svg>
+            </div>
+            <div>
+              <div class="chat-name">Resume Assistant</div>
+              <div class="chat-status">
+                <div class="chat-status-dot"></div>
+                Online
+              </div>
+            </div>
+          </div>
+          <span class="chat-badge">AI Powered</span>
+        </div>
+
+        <div class="chat-messages" id="chat-messages">
+          <div class="chat-message ai">
+            <div class="message-avatar">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+              </svg>
+            </div>
+            <div class="message-bubble">
+              Hi! I'm an AI assistant trained on Arun's experience and projects. Ask me anything about his <strong>17+ years in enterprise technology</strong>, <strong>core banking implementations</strong>, or <strong>side projects</strong> like NoteApp, REPPIT, and PRIMMO.
+            </div>
+          </div>
+        </div>
+
+        <div class="suggested-questions">
+          <div class="suggested-label">Suggested questions:</div>
+          <div class="suggested-chips">
+            <button class="suggested-chip" onclick="askQuestion('Tell me about Java expertise')">Java story?</button>
+            <button class="suggested-chip" onclick="askQuestion('What is RTP and current role?')">RTP & current role?</button>
+            <button class="suggested-chip" onclick="askQuestion('Tell me about achievements and CMMI')">Achievements?</button>
+            <button class="suggested-chip" onclick="askQuestion('What are your hobbies and interests?')">Personal interests?</button>
+          </div>
+        </div>
+
+        <div class="chat-input-container">
+          <input
+            type="text"
+            class="chat-input"
+            id="chat-input"
+            placeholder="Ask about experience, skills, projects..."
+            onkeypress="handleKeyPress(event)"
+          >
+          <button class="chat-send" onclick="sendMessage()">
+            Send
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="22" y1="2" x2="11" y2="13"/>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-links">
+        <a href="resume-pdf-email.html" class="footer-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="16" y1="13" x2="8" y2="13"/>
+            <line x1="16" y1="17" x2="8" y2="17"/>
+            <polyline points="10 9 9 9 8 9"/>
+          </svg>
+          Download PDF Resume
+        </a>
+        <a href="v8-brittany.html" class="footer-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+            <polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+          View Full Portfolio
+        </a>
+      </div>
+      <p class="footer-text">Built with purpose. Last updated January 2026.</p>
+      <div class="footer-digital">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M12 6v6l4 2"/>
+        </svg>
+        Truly Digital Resume
+      </div>
+    </footer>
+  </div>
+
+  <!-- Contact Floating Button & Modal -->
+  <button class="contact-fab" onclick="openContactModal()" id="contact-fab">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+    </svg>
+    <span class="contact-fab-label">Leave me a message</span>
+  </button>
+
+  <div class="contact-modal-overlay" id="contact-overlay" onclick="closeContactModal()"></div>
+
+  <div class="contact-modal" id="contact-modal">
+    <div class="contact-modal-header">
+      <div class="contact-modal-title">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+        </svg>
+        <h3>Leave me a message</h3>
+      </div>
+      <button class="contact-modal-close" onclick="closeContactModal()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="contact-modal-body" id="contact-form-container">
+      <div class="contact-form-group">
+        <label class="contact-form-label">Your Name</label>
+        <input type="text" class="contact-form-input" id="contact-name" placeholder="John Doe">
+      </div>
+
+      <div class="contact-form-group">
+        <label class="contact-form-label">Your Email</label>
+        <div class="email-input-wrapper">
+          <input type="text" class="contact-form-input" id="contact-email" placeholder="john.doe">
+          <div class="email-domain-suggestions">
+            <span class="domain-chip" onclick="appendDomain('@gmail.com')">@gmail.com</span>
+            <span class="domain-chip" onclick="appendDomain('@outlook.com')">@outlook.com</span>
+            <span class="domain-chip" onclick="appendDomain('@yahoo.com')">@yahoo.com</span>
+            <span class="domain-chip" onclick="appendDomain('@company.com')">@company.com</span>
+            <span class="domain-chip" onclick="appendDomain('@co.in')">@co.in</span>
+            <span class="domain-chip" onclick="appendDomain('@sg')">@sg</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="quick-messages">
+        <div class="quick-messages-label">Quick messages:</div>
+        <div class="quick-message-chips">
+          <span class="quick-message-chip" onclick="setQuickMessage('Please get back to me regarding a position.')">Get back to me</span>
+          <span class="quick-message-chip" onclick="setQuickMessage('Please send your resume to my email.')">Send resume</span>
+          <span class="quick-message-chip" onclick="setQuickMessage('Would love to discuss a potential opportunity.')">Discuss opportunity</span>
+          <span class="quick-message-chip" onclick="setQuickMessage('Interested in your profile for our team.')">Interested in profile</span>
+        </div>
+      </div>
+
+      <div class="contact-form-group">
+        <label class="contact-form-label">Message</label>
+        <textarea class="contact-form-input contact-form-textarea" id="contact-message" placeholder="Hi Arun, I'm reaching out to..."></textarea>
+      </div>
+
+      <div class="contact-form-actions">
+        <button class="contact-btn contact-btn-primary" onclick="copyEmailToClipboard()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+          </svg>
+          Copy Email Address
+        </button>
+      </div>
+
+      <div class="contact-direct">
+        <div class="contact-direct-label">Or reach out directly:</div>
+        <div class="contact-direct-options">
+          <a href="mailto:arun.castromin@gmail.com" class="contact-direct-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+            Email
+          </a>
+          <a href="https://linkedin.com/in/aruncastromin" target="_blank" class="contact-direct-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/>
+              <rect x="2" y="9" width="4" height="12"/>
+              <circle cx="4" cy="4" r="2"/>
+            </svg>
+            LinkedIn
+          </a>
+          <a href="https://wa.me/6591806569" target="_blank" class="contact-direct-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+            </svg>
+            WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Success State -->
+    <div class="contact-success" id="contact-success" style="display: none;">
+      <div class="contact-success-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="20 6 9 17 4 12"/>
+        </svg>
+      </div>
+      <h4>Email client opened!</h4>
+      <p>Your message has been prepared in your default email app.</p>
+    </div>
+  </div>
+
+  <script>
+    // ============ Intro Section Toggle ============
+    function toggleIntro() {
+      const section = document.getElementById('intro-section');
+      section.classList.toggle('expanded');
+      const titleText = section.querySelector('.intro-title-text p');
+      if (section.classList.contains('expanded')) {
+        titleText.textContent = 'Click to collapse';
+      } else {
+        titleText.textContent = 'Click to expand my story';
+      }
+    }
+
+    // ============ Experience Tabs ============
+    function switchExpTab(tabId) {
+      // Remove active from all tabs
+      document.querySelectorAll('.exp-tab').forEach(tab => tab.classList.remove('active'));
+      document.querySelectorAll('.exp-panel').forEach(panel => panel.classList.remove('active'));
+
+      // Add active to clicked tab
+      document.querySelector(`[data-tab="${tabId}"]`).classList.add('active');
+      document.getElementById(`panel-${tabId}`).classList.add('active');
+    }
+
+    function switchExpView(view) {
+      const tabsView = document.getElementById('exp-tabs-view');
+      const timelineView = document.getElementById('exp-timeline-view');
+      const tabsBtn = document.getElementById('view-tabs');
+      const timelineBtn = document.getElementById('view-timeline');
+
+      if (view === 'tabs') {
+        tabsView.style.display = 'block';
+        timelineView.style.display = 'none';
+        tabsBtn.classList.add('active');
+        timelineBtn.classList.remove('active');
+      } else {
+        tabsView.style.display = 'none';
+        timelineView.style.display = 'block';
+        tabsBtn.classList.remove('active');
+        timelineBtn.classList.add('active');
+      }
+    }
+
+    // ============ GitHub API Configuration ============
+    const GITHUB_USERNAME = 'castroarun';
+    const GITHUB_API_BASE = 'https://api.github.com';
+
+    // Cache for GitHub data
+    let githubCache = {
+      user: null,
+      repos: null,
+      contributions: null,
+      lastFetch: null
+    };
+
+    // ============ Fetch GitHub User Data ============
+    async function fetchGitHubUser() {
+      try {
+        const response = await fetch(`${GITHUB_API_BASE}/users/${GITHUB_USERNAME}`);
+        if (!response.ok) throw new Error('Failed to fetch user');
+        return await response.json();
+      } catch (error) {
+        console.warn('GitHub user fetch failed:', error);
+        return null;
+      }
+    }
+
+    // ============ Fetch GitHub Repositories ============
+    async function fetchGitHubRepos() {
+      try {
+        const response = await fetch(`${GITHUB_API_BASE}/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=100`);
+        if (!response.ok) throw new Error('Failed to fetch repos');
+        return await response.json();
+      } catch (error) {
+        console.warn('GitHub repos fetch failed:', error);
+        return null;
+      }
+    }
+
+    // ============ Fetch GitHub Events (for contributions) ============
+    async function fetchGitHubEvents() {
+      try {
+        const response = await fetch(`${GITHUB_API_BASE}/users/${GITHUB_USERNAME}/events?per_page=100`);
+        if (!response.ok) throw new Error('Failed to fetch events');
+        return await response.json();
+      } catch (error) {
+        console.warn('GitHub events fetch failed:', error);
+        return null;
+      }
+    }
+
+    // ============ Calculate Language Statistics ============
+    function calculateLanguageStats(repos) {
+      const languages = {};
+      repos.forEach(repo => {
+        if (repo.language) {
+          languages[repo.language] = (languages[repo.language] || 0) + 1;
+        }
+      });
+      return Object.entries(languages)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 5);
+    }
+
+    // ============ Calculate Total Stars ============
+    function calculateTotalStars(repos) {
+      return repos.reduce((total, repo) => total + (repo.stargazers_count || 0), 0);
+    }
+
+    // ============ Update Stats Display ============
+    function updateGitHubStats(user, repos) {
+      // Update repos count
+      if (user) {
+        const repoCount = user.public_repos || (repos ? repos.length : 0);
+        updateStatValue('repos-count', repoCount);
+      }
+
+      // Update stars count
+      if (repos && repos.length > 0) {
+        const stars = calculateTotalStars(repos);
+        updateStatValue('stars-count', stars);
+
+        // Estimate PRs from repos with activity
+        const prs = repos.filter(r => new Date(r.pushed_at) > new Date(Date.now() - 180*24*60*60*1000)).length * 3;
+        updateStatValue('prs-count', prs);
+      }
+    }
+
+    // ============ Fetch GitHub Contributions (using contributions API) ============
+    async function fetchGitHubContributions() {
+      try {
+        // Fetch both 2025 and 2026 data
+        const [res2025, res2026] = await Promise.all([
+          fetch(`https://github-contributions-api.jogruber.de/v4/${GITHUB_USERNAME}?y=2025`),
+          fetch(`https://github-contributions-api.jogruber.de/v4/${GITHUB_USERNAME}?y=2026`)
+        ]);
+
+        const data2025 = res2025.ok ? await res2025.json() : null;
+        const data2026 = res2026.ok ? await res2026.json() : null;
+
+        // Merge contributions
+        const allContributions = [];
+        if (data2025?.contributions) allContributions.push(...data2025.contributions);
+        if (data2026?.contributions) allContributions.push(...data2026.contributions);
+
+        return { contributions: allContributions, total: (data2025?.total?.lastYear || 0) + (data2026?.total?.lastYear || 0) };
+      } catch (error) {
+        console.warn('GitHub contributions fetch failed:', error);
+        return null;
+      }
+    }
+
+    // ============ Generate Contribution Heatmap with Live Data ============
+    async function generateHeatmapWithLiveData() {
+      const container = document.getElementById('contribution-heatmap');
+      if (!container) return;
+
+      container.innerHTML = '<div style="color: var(--text-muted); font-size: 0.8rem;">Loading contributions...</div>';
+
+      let contributionsData = null;
+      try {
+        contributionsData = await fetchGitHubContributions();
+      } catch (e) {
+        console.warn('Failed to fetch contributions:', e);
+      }
+
+      container.innerHTML = ''; // Clear loading
+
+      const weeks = 52;
+      const daysPerWeek = 7;
+      const today = new Date();
+      let totalContributions = 0;
+
+      // Create contribution map from API data
+      const contributionMap = {};
+      if (contributionsData && contributionsData.contributions && Array.isArray(contributionsData.contributions)) {
+        contributionsData.contributions.forEach(day => {
+          if (day && day.date) {
+            contributionMap[day.date] = day.count || 0;
+            totalContributions += day.count || 0;
+          }
+        });
+      }
+
+      // Update total display
+      const totalEl = document.getElementById('heatmap-total');
+      if (totalEl) {
+        totalEl.textContent = totalContributions > 0 ? `${totalContributions} contributions in the last year` : '';
+      }
+
+      // Update commits count with actual data
+      if (totalContributions > 0) {
+        updateStatValue('commits-count', totalContributions);
+      }
+
+      for (let w = 0; w < weeks; w++) {
+        const weekDiv = document.createElement('div');
+        weekDiv.className = 'heatmap-week';
+
+        for (let d = 0; d < daysPerWeek; d++) {
+          const dayDiv = document.createElement('div');
+          dayDiv.className = 'heatmap-day';
+
+          // Calculate date for this cell
+          const daysAgo = (weeks - w - 1) * 7 + (6 - d);
+          const cellDate = new Date(today);
+          cellDate.setDate(today.getDate() - daysAgo);
+          const dateKey = cellDate.toISOString().split('T')[0];
+
+          // Set contribution level based on real data
+          const contributions = contributionMap[dateKey] || 0;
+          if (contributions > 0) {
+            // Use GitHub's level calculation (0, 1-3, 4-6, 7-9, 10+)
+            let level;
+            if (contributions >= 10) level = 4;
+            else if (contributions >= 7) level = 3;
+            else if (contributions >= 4) level = 2;
+            else level = 1;
+            dayDiv.classList.add(`level-${level}`);
+          }
+
+          dayDiv.title = `${dateKey}: ${contributions} contribution${contributions !== 1 ? 's' : ''}`;
+          weekDiv.appendChild(dayDiv);
+        }
+
+        container.appendChild(weekDiv);
+      }
+    }
+
+    // ============ Generate Contribution Heatmap from Events (Fallback) ============
+    function generateHeatmapFromEvents(events) {
+      const container = document.getElementById('contribution-heatmap');
+      container.innerHTML = ''; // Clear existing
+
+      const weeks = 52;
+      const daysPerWeek = 7;
+      const today = new Date();
+
+      // Create contribution map from events
+      const contributionMap = {};
+      if (events && events.length > 0) {
+        events.forEach(event => {
+          const date = new Date(event.created_at);
+          const dateKey = date.toISOString().split('T')[0];
+          contributionMap[dateKey] = (contributionMap[dateKey] || 0) + 1;
+        });
+      }
+
+      for (let w = 0; w < weeks; w++) {
+        const weekDiv = document.createElement('div');
+        weekDiv.className = 'heatmap-week';
+
+        for (let d = 0; d < daysPerWeek; d++) {
+          const dayDiv = document.createElement('div');
+          dayDiv.className = 'heatmap-day';
+
+          // Calculate date for this cell
+          const daysAgo = (weeks - w - 1) * 7 + (6 - d);
+          const cellDate = new Date(today);
+          cellDate.setDate(today.getDate() - daysAgo);
+          const dateKey = cellDate.toISOString().split('T')[0];
+
+          // Set contribution level based on events
+          const contributions = contributionMap[dateKey] || 0;
+          if (contributions > 0) {
+            const level = Math.min(4, Math.ceil(contributions / 2));
+            dayDiv.classList.add(`level-${level}`);
+          }
+
+          dayDiv.title = `${dateKey}: ${contributions} contributions`;
+          weekDiv.appendChild(dayDiv);
+        }
+
+        container.appendChild(weekDiv);
+      }
+    }
+
+    // ============ Generate Contribution Heatmap (Static Fallback) ============
+    function generateHeatmap() {
+      const container = document.getElementById('contribution-heatmap');
+      const weeks = 52;
+      const daysPerWeek = 7;
+
+      for (let w = 0; w < weeks; w++) {
+        const weekDiv = document.createElement('div');
+        weekDiv.className = 'heatmap-week';
+
+        for (let d = 0; d < daysPerWeek; d++) {
+          const dayDiv = document.createElement('div');
+          dayDiv.className = 'heatmap-day';
+
+          // Generate pattern based on position (not random)
+          const dayOfYear = w * 7 + d;
+          const isActive = (dayOfYear % 3 === 0) || (dayOfYear % 7 === 0);
+          if (isActive) {
+            const level = 1 + (dayOfYear % 4);
+            dayDiv.classList.add(`level-${level}`);
+          }
+
+          weekDiv.appendChild(dayDiv);
+        }
+
+        container.appendChild(weekDiv);
+      }
+    }
+
+    // ============ Render GitHub Repositories Section ============
+    function renderGitHubRepos(repos) {
+      const container = document.getElementById('github-repos-grid');
+      if (!container || !repos) return;
+
+      // Filter and sort repos (exclude forks, sort by stars then recent)
+      const filteredRepos = repos
+        .filter(repo => !repo.fork && repo.name !== GITHUB_USERNAME)
+        .sort((a, b) => b.stargazers_count - a.stargazers_count || new Date(b.pushed_at) - new Date(a.pushed_at))
+        .slice(0, 6);
+
+      container.innerHTML = filteredRepos.map(repo => `
+        <a href="${repo.html_url}" target="_blank" class="github-repo-card">
+          <div class="repo-header">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="repo-icon">
+              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+            </svg>
+            <span class="repo-name">${repo.name}</span>
+          </div>
+          <p class="repo-description">${repo.description || 'No description'}</p>
+          <div class="repo-meta">
+            ${repo.language ? `<span class="repo-language"><span class="language-dot" style="background: ${getLanguageColor(repo.language)}"></span>${repo.language}</span>` : ''}
+            ${repo.stargazers_count > 0 ? `<span class="repo-stars"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>${repo.stargazers_count}</span>` : ''}
+            ${repo.forks_count > 0 ? `<span class="repo-forks"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><circle cx="18" cy="6" r="3"/><path d="M18 9v1a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V9"/><path d="M12 12v3"/></svg>${repo.forks_count}</span>` : ''}
+          </div>
+        </a>
+      `).join('');
+    }
+
+    // ============ Language Color Mapping ============
+    function getLanguageColor(language) {
+      const colors = {
+        'JavaScript': '#f1e05a',
+        'TypeScript': '#2b7489',
+        'Python': '#3572A5',
+        'Java': '#b07219',
+        'HTML': '#e34c26',
+        'CSS': '#563d7c',
+        'Shell': '#89e051',
+        'Jupyter Notebook': '#DA5B0B',
+        'Swift': '#ffac45',
+        'Kotlin': '#A97BFF',
+        'Go': '#00ADD8',
+        'Rust': '#dea584',
+        'Ruby': '#701516',
+        'PHP': '#4F5D95',
+        'C++': '#f34b7d',
+        'C': '#555555',
+        'C#': '#178600'
+      };
+      return colors[language] || '#8b949e';
+    }
+
+    // ============ Initialize GitHub Data ============
+    async function initGitHubData() {
+      try {
+        // Fetch all data in parallel
+        const [user, repos, events] = await Promise.all([
+          fetchGitHubUser(),
+          fetchGitHubRepos(),
+          fetchGitHubEvents()
+        ]);
+
+        // Cache the data
+        githubCache = { user, repos, events, lastFetch: new Date() };
+
+        // Update UI with fetched data
+        if (user || repos) {
+          updateGitHubStats(user, repos);
+        }
+
+        // Generate heatmap with live data (async, runs independently)
+        generateHeatmapWithLiveData();
+
+        if (repos) {
+          renderGitHubRepos(repos);
+        }
+
+      } catch (error) {
+        console.warn('GitHub API initialization failed, using live data fallback:', error);
+        generateHeatmapWithLiveData(); // Still try live data
+      }
+    }
+
+    // ============ Initialize Skills Radar Chart ============
+    function initRadarChart() {
+      const ctx = document.getElementById('skillsRadar').getContext('2d');
+
+      new Chart(ctx, {
+        type: 'radar',
+        data: {
+          labels: ['Architecture', 'Backend', 'Frontend', 'Data', 'Methodology', 'Leadership'],
+          datasets: [{
+            label: 'Skill Level',
+            data: [95, 85, 65, 75, 90, 88],
+            fill: true,
+            backgroundColor: 'rgba(34, 211, 238, 0.2)',
+            borderColor: 'rgba(34, 211, 238, 1)',
+            pointBackgroundColor: 'rgba(34, 211, 238, 1)',
+            pointBorderColor: '#fff',
+            pointHoverBackgroundColor: '#fff',
+            pointHoverBorderColor: 'rgba(34, 211, 238, 1)'
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true,
+          scales: {
+            r: {
+              angleLines: {
+                color: 'rgba(255, 255, 255, 0.1)'
+              },
+              grid: {
+                color: 'rgba(255, 255, 255, 0.1)'
+              },
+              pointLabels: {
+                color: '#A1A1AA',
+                font: {
+                  size: 11
+                }
+              },
+              ticks: {
+                display: false
+              },
+              suggestedMin: 0,
+              suggestedMax: 100
+            }
+          },
+          plugins: {
+            legend: {
+              display: false
+            }
+          }
+        }
+      });
+    }
+
+    // ============ Skill Filter Functionality ============
+    function initSkillFilters() {
+      const filters = document.querySelectorAll('.skill-filter');
+      const skills = document.querySelectorAll('.skill-item');
+
+      filters.forEach(filter => {
+        filter.addEventListener('click', () => {
+          // Update active filter
+          filters.forEach(f => f.classList.remove('active'));
+          filter.classList.add('active');
+
+          const category = filter.dataset.filter;
+
+          // Filter skills
+          skills.forEach(skill => {
+            if (category === 'all' || skill.dataset.category === category) {
+              skill.style.display = 'block';
+            } else {
+              skill.style.display = 'none';
+            }
+          });
+        });
+      });
+    }
+
+    // ============ Project Tabs Functionality ============
+    function initProjectTabs() {
+      const tabs = document.querySelectorAll('.project-tab');
+      const panels = document.querySelectorAll('.project-panel');
+
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          const targetProject = tab.dataset.project;
+
+          // Update active tab
+          tabs.forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
+
+          // Show corresponding panel
+          panels.forEach(panel => {
+            if (panel.id === `${targetProject}-panel`) {
+              panel.classList.add('active');
+            } else {
+              panel.classList.remove('active');
+            }
+          });
+        });
+      });
+    }
+
+    // ============ Copy Code Functionality ============
+    function copyCode(language) {
+      const panel = document.getElementById(`${language}-panel`);
+      const code = panel.querySelector('code').textContent;
+
+      navigator.clipboard.writeText(code).then(() => {
+        const btn = panel.querySelector('.code-copy');
+        const originalText = btn.innerHTML;
+        btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><polyline points="20 6 9 17 4 12"/></svg> Copied!';
+
+        setTimeout(() => {
+          btn.innerHTML = originalText;
+        }, 2000);
+      });
+    }
+
+    // ============ AI Chat Functionality ============
+    const chatResponses = {
+      // ===== EXPERIENCE & BACKGROUND =====
+      'experience': `Arun has <strong>17+ years of experience</strong> in enterprise technology consulting:
+
+<strong>Current:</strong> Sr. Technology Architect at Infosys, Singapore (2019-Present)
+<strong>Previous:</strong> Technology Architect at EdgeVerve, Chennai (2015-2016)
+<strong>Earlier:</strong> Progressive roles at Infosys India (2004-2015)
+
+Specialization: Core Banking, Solution Architecture, NFR Management, Digital Transformation`,
+
+      'core banking': `Arun has <strong>15+ years of Finacle core banking expertise</strong> - Infosys's flagship solution deployed in 100+ countries.
+
+<strong>Modules:</strong> CASA (Current/Savings Accounts), Payments, Clearing & Settlements
+
+<strong>Key Insight:</strong> <em>"Modern Finacle offers microservices-based architecture, scalable to any processing speed with message queues and streaming platforms for legacy integration."</em>
+
+<strong>Banks Implemented:</strong>
+• Emirates NBD (UAE) - Full transformation
+• Standard Bank (South Africa, Nigeria) - CMMI Level 4
+• Bank of America (APAC) - RTP & NFR
+• Bank Sohar, Bank of Alexandria, Bank of India
+
+<strong>What makes implementations succeed:</strong> Team structure, quality individuals, and proper Infosys backing.`,
+
+      'current role': `<strong>Current Role:</strong> Sr. Technology Architect at Infosys Ltd., Singapore
+
+<strong>Client:</strong> Bank of America - Global Commercial Bank
+<strong>Team:</strong> Application Engineering & Support Agile Team
+
+<strong>What is RTP?</strong> <em>"All payments must be instantly received, acknowledged, validated, processed and settled. To the customer, this end loop must be instant."</em>
+
+<strong>Evolution:</strong> Team Lead (Customization) → Solution Architect
+• Gap Analysis & Requirement Framing
+• Capability Mapping & Design Architecture
+• NFR Automation (curation, tracking, traceability)
+• 60% reduction in job execution times
+• 5x Volume-Ready Reporting (certified by client)
+
+<strong>APAC Challenge:</strong> Each region (Chinese, Japanese, Singaporean, Indonesian banks) has different regulations and clearing houses - must unlearn and approach fresh for each.`,
+
+      'location': `Arun is based in <strong>Singapore</strong>.
+
+He has worked across multiple regions:
+- <strong>APAC:</strong> Singapore, Jakarta, India
+- <strong>Middle East:</strong> UAE (Emirates NBD), Oman (Bank Sohar)
+- <strong>Africa:</strong> South Africa, Nigeria (Standard Bank)
+- <strong>North Africa:</strong> Egypt (Bank of Alexandria)`,
+
+      'team': `Arun has extensive <strong>leadership experience</strong>:
+
+<strong>Team sizes managed:</strong> 3 to 18 members
+<strong>Total man-days led:</strong> 15,000+ across multiple projects
+
+<strong>Leadership highlights:</strong>
+• Client's most preferred Project Manager at Standard Bank
+• Led cross-functional squads across APAC and EMEA at Bank of America
+• First to achieve CMMI Level 4 in Africa & Middle East region
+• 100% on-time deliverables across all projects
+
+<strong>Philosophy on team resistance:</strong> <em>"Team would naturally think quality processes are add-on overheads. It takes the finish line to instill the meaning of the milestone to them."</em>
+
+Led through example - took on QA Lead role additionally when needed.`,
+
+      // ===== PROJECTS =====
+      'react': `Arun has built several React-based projects:
+
+<strong>NoteApp</strong> - React Native note-taking app with offline sync, voice-to-text, and 200+ test cases
+
+<strong>REPPIT</strong> - React Native fitness tracker with workout timer and progressive overload tracking
+
+<strong>PRIMMO</strong> - Next.js AI-powered personal trainer using voice AI for curated guidance
+
+All projects follow his 9-step development workflow and are AI-assisted in development.`,
+
+      'noteapp': `<strong>NoteApp</strong> is a privacy-first note-taking application built with:
+
+<strong>Tech Stack:</strong> React Native, TypeScript, Supabase
+
+<strong>Key Features:</strong>
+- Offline-first architecture with cloud sync
+- Voice-to-text input
+- 200+ automated test cases
+- E2E encryption for privacy
+
+It demonstrates Arun's expertise in mobile development, offline-first patterns, and comprehensive testing.`,
+
+      'reppit': `<strong>REPPIT</strong> is a fitness strength tracking app - built by someone who actually trains:
+
+<strong>Why Built:</strong> Arun has been strength training for 1.5 years and coaches 3-4 people. He wanted to share practitioner-level knowledge through technology.
+
+<strong>Tech Stack:</strong> React Native, TypeScript
+
+<strong>Key Features:</strong>
+• Workout timer with rest intervals
+• Progressive overload tracking
+• Exercise history and analytics
+• Handcrafted training inputs from a practitioner's perspective
+
+<strong>Philosophy:</strong> <em>"Strength training teaches that small consistent efforts compound over time - whether building muscle or building software."</em>
+
+<strong>Personal:</strong> Arun is in the best shape of his life at 40+ - morning workouts before work set the tone for the day.`,
+
+      'primmo': `<strong>PRIMMO</strong> is an AI-powered personal trainer:
+
+<strong>Tech Stack:</strong> Next.js, Supabase, Voice AI
+
+<strong>Key Features:</strong>
+- Uses REPPIT workout insights for personalized guidance
+- Voice-based AI interaction
+- Curated training recommendations
+- Integration with fitness data
+
+It demonstrates Arun's expertise in AI integration, voice interfaces, and full-stack development.`,
+
+      // ===== SKILLS =====
+      'python': `Arun has <strong>advanced Python</strong> skills:
+
+<strong>Experience:</strong> Data pipelines, automation, analytics
+<strong>Achievement:</strong> 80% reduction in daily job execution times at Bank of America
+
+<strong>Related skills:</strong> Data Science (IBM certified), Databricks Lakehouse, analytics platforms`,
+
+      'java': `Arun has <strong>expert-level Java</strong> experience, with a remarkable origin story:
+
+<strong>The Denomination Module Story:</strong>
+• <strong>Challenge:</strong> Build a multi-screen, multi-currency cash denomination utility
+• <strong>Twist:</strong> Had ZERO Java knowledge when starting
+• <strong>Constraint:</strong> No internet access (pre-StackOverflow era)
+• <strong>Learning:</strong> Self-taught from "Java: The Complete Reference" book
+• <strong>Timeline:</strong> 2 months to production-ready code
+• <strong>Solution:</strong> TreeMap for efficient sorting, pre-compiled classes for speed
+
+<strong>Result:</strong>
+• 95% code reuse across 3-4 Middle East bank implementations
+• <strong>Most Valuable Player of the Quarter</strong> - Finacle Unit, Infosys
+• Significantly contributed to unit revenue through rapid reuse
+
+This established his Java competency that grew into architecture expertise.`,
+
+      'sql': `Arun has <strong>expert-level SQL/PL-SQL</strong> skills:
+
+<strong>Experience:</strong> 17+ years in banking data systems
+<strong>Domains:</strong> Core banking, reconciliation, regulatory reporting
+<strong>Databases:</strong> Oracle (Finacle), enterprise data warehouses
+
+Created complex reconciliation reports and optimized batch processing jobs.`,
+
+      // ===== CERTIFICATIONS & EDUCATION =====
+      'certifications': `Arun holds several professional certifications:
+
+<strong>TOGAF Enterprise Architecture</strong> - Architecture framework
+<strong>Certified Scrum Product Owner (CSPO)</strong> - Agile methodology
+<strong>ISO 31000 Risk Management</strong> - Risk governance
+<strong>IBM Data Science Professional</strong> - Data analytics
+<strong>Databricks Lakehouse Fundamentals</strong> - Big data
+<strong>MicroStrategy Certified Architect</strong> - BI/Analytics`,
+
+      'education': `<strong>Education:</strong>
+
+<strong>Degree:</strong> B.E. in Electronics & Communication
+<strong>Institution:</strong> Sathyabama College, Madras University
+<strong>Year:</strong> 2004
+
+<strong>Continuous Learning:</strong>
+- TOGAF, CSPO, ISO 31000 certifications
+- IBM Data Science, Databricks courses
+- AI-assisted development workflows`,
+
+      // ===== ACHIEVEMENTS =====
+      'achievement': `<strong>Key Achievements:</strong>
+
+<strong>🏆 CMMI Level 4 - First in Africa & Middle East Region:</strong>
+• Standard Bank project (2012-2016)
+• <2.5% Defect Injection Rate
+• 100% on-time delivery over 1000+ man-days
+• <em>"Quality processes feel like overhead until they pay off"</em>
+
+<strong>🏆 Most Valuable Player - Finacle Unit:</strong>
+• Self-taught Java, built Denomination Module in 2 months
+• 95% code reuse across 3-4 bank implementations
+
+<strong>Performance Metrics:</strong>
+• 60% reduction in daily job execution times (Bank of America)
+• 5x Volume-Ready Reporting (client certified)
+• Client's most preferred Project Manager
+
+<strong>Creative:</strong> Best Short Film Award (inter-departmental competition)`,
+
+      // ===== LOGISTICS =====
+      'availability': `For availability and notice period details, please contact Arun directly:
+
+<strong>Email:</strong> arun.castromin@gmail.com
+<strong>LinkedIn:</strong> linkedin.com/in/aruncastromin
+<strong>Phone:</strong> +65 91806569
+
+He's happy to discuss timing for the right opportunity.`,
+
+      'salary': `Salary expectations depend on the specific role, responsibilities, and total compensation package.
+
+For a detailed discussion, please reach out directly:
+<strong>Email:</strong> arun.castromin@gmail.com
+<strong>LinkedIn:</strong> linkedin.com/in/aruncastromin`,
+
+      'remote': `Arun has experience with <strong>distributed teams</strong> across APAC and EMEA.
+
+<strong>Work style:</strong> Flexible - has worked in:
+- On-site client engagements
+- Hybrid arrangements
+- Managing remote cross-functional teams
+
+Open to discussing work arrangements based on role requirements.`,
+
+      'contact': `<strong>Contact Information:</strong>
+
+<strong>Email:</strong> arun.castromin@gmail.com
+<strong>Phone:</strong> +65 91806569
+<strong>LinkedIn:</strong> linkedin.com/in/aruncastromin
+<strong>GitHub:</strong> github.com/castroarun
+<strong>Location:</strong> Singapore`,
+
+      // ===== SUGGESTIONS (first-time helper) =====
+      'suggestions': `I can help you learn more about Arun's experience! Try asking about:
+
+<strong>Background:</strong> Years of experience, current role, location, team size
+<strong>Banking:</strong> Core banking, Finacle, payments, NFR
+<strong>Projects:</strong> NoteApp, REPPIT, PRIMMO
+<strong>Skills:</strong> Python, Java, React, SQL
+<strong>Credentials:</strong> Certifications, education, achievements
+
+What would you like to know?`,
+
+      // ===== AGE & PERSONAL INFO =====
+      'age': `<strong>About Arun:</strong>
+
+<strong>Age:</strong> 42 years old (DOB: 26 April 1983)
+<strong>Location:</strong> Singapore
+<strong>Career Start:</strong> 2004 (after B.E. graduation)
+<strong>Experience:</strong> 17+ years in enterprise technology
+
+Arun graduated with a B.E. in Electronics & Communication from Sathyabama College in 2004 and has been building his career in core banking and solution architecture ever since.`,
+
+      // ===== PERSONAL INTERESTS =====
+      'fitness': `<strong>Strength Training - Discipline, Clarity & Coaching</strong>
+
+Arun trains every morning before work - 1.5 years of consistent practice.
+
+<strong>Why it works:</strong>
+• Endorphin release - natural stress buster
+• Dopamine boost - improved mood throughout the day
+• Mental clarity - sharper thinking for work challenges
+• <em>"Consistency and discipline that transfers to all life areas"</em>
+
+<strong>Coaching:</strong> Trains 3-4 people with attention to minute details
+<strong>Personal milestone:</strong> "I'm in the best shape of my life" at 40+
+
+<strong>Connection to work:</strong> Consistency over intensity, progressive improvement, tracking progress - same principles apply to software delivery.`,
+
+      'filmmaking': `<strong>Creative Arts & Filmmaking</strong>
+
+Arun has a creative side that complements his technical expertise:
+
+<strong>🏆 Best Short Film Award:</strong>
+• Won inter-departmental competition at Infosys
+• Entry qualified for finals
+• 2x participation in Infosys creative competitions
+
+<strong>Skills:</strong> Script writing, storyboarding, direction
+<strong>Drive:</strong> <em>"Not for fame or stardom, but for the process of creation itself"</em>
+
+This creativity informs his approach to problem-solving - thinking outside the box and adding creativity to work regimen.`,
+
+      'automation': `<strong>IPDL Operations Automation - A Challenge Story</strong>
+
+<strong>The Situation:</strong>
+• Daily batch operations required monitoring & exception handling
+• No one wanted to own it - "not my job" syndrome
+• Mundane, thankless, but critical work
+
+<strong>Arun's Solution:</strong>
+• Built Python scheduler for intelligent job monitoring
+• Created Windows shell script for automated exception handling
+• Implemented email notifications with formatted reports
+
+<strong>Approach:</strong> <em>"Not my job? But it needs to be done. Let me own it and automate it."</em>
+
+<strong>Result:</strong> Transformed mundane operations into automated, reliable process - freeing team to focus on higher-value work.`,
+
+      // ===== UNKNOWN (no match found) =====
+      'unknown': `I don't have specific information about that topic in my knowledge base.
+
+<strong>Try asking about:</strong> Core banking, projects (NoteApp, REPPIT, PRIMMO), certifications, or skills.
+
+<strong>Or leave Arun a message directly:</strong>
+<button onclick="openContactModal()" style="margin-top: 0.75rem; padding: 0.5rem 1rem; background: var(--accent); color: var(--bg-base); border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 0.85rem;">💬 Leave a Message</button>`
+    };
+
+    function getResponse(question) {
+      const q = question.toLowerCase();
+
+      // Age & Personal Info
+      if (q.includes('age') || q.includes('old') || q.includes('born') || q.includes('birthday') || q.includes('dob') || q.includes('date of birth')) {
+        return chatResponses['age'];
+      }
+      // Experience & Background
+      else if (q.includes('years') || q.includes('experience') || q.includes('background') || q.includes('career')) {
+        return chatResponses['experience'];
+      } else if (q.includes('current role') || q.includes('current job') || q.includes('currently') || q.includes('doing now')) {
+        return chatResponses['current role'];
+      } else if (q.includes('location') || q.includes('based') || q.includes('where') || q.includes('country') || q.includes('singapore')) {
+        return chatResponses['location'];
+      } else if (q.includes('team') || q.includes('manage') || q.includes('lead') || q.includes('people') || q.includes('size')) {
+        return chatResponses['team'];
+      }
+      // Banking & Current Role
+      else if (q.includes('rtp') || q.includes('real-time') || q.includes('nfr') || q.includes('current role') || q.includes('bank of america') || q.includes('boa')) {
+        return chatResponses['current role'];
+      } else if (q.includes('core banking') || q.includes('finacle') || q.includes('casa') || q.includes('payments')) {
+        return chatResponses['core banking'];
+      } else if (q.includes('cmmi') || q.includes('quality') || q.includes('standard bank') || q.includes('defect')) {
+        return chatResponses['achievement'];
+      }
+      // Projects
+      else if (q.includes('reppit')) {
+        return chatResponses['reppit'];
+      } else if (q.includes('primmo') || q.includes('ai trainer') || q.includes('personal trainer')) {
+        return chatResponses['primmo'];
+      } else if (q.includes('noteapp') || q.includes('note app') || q.includes('notes')) {
+        return chatResponses['noteapp'];
+      } else if (q.includes('react') || q.includes('frontend') || q.includes('javascript') || q.includes('project')) {
+        return chatResponses['react'];
+      }
+      // Personal Interests
+      else if (q.includes('strength') || q.includes('fitness') || q.includes('workout') || q.includes('gym') || q.includes('training') || q.includes('exercise')) {
+        return chatResponses['fitness'];
+      } else if (q.includes('film') || q.includes('movie') || q.includes('creative') || q.includes('short film') || q.includes('hobby') || q.includes('hobbies') || q.includes('interests')) {
+        return chatResponses['filmmaking'];
+      } else if (q.includes('automat') || q.includes('ipdl') || q.includes('challenge') || q.includes('problem') || q.includes('difficult')) {
+        return chatResponses['automation'];
+      }
+      // Skills
+      else if (q.includes('python') || q.includes('data science') || q.includes('pipeline')) {
+        return chatResponses['python'];
+      } else if (q.includes('java') && !q.includes('javascript')) {
+        return chatResponses['java'];
+      } else if (q.includes('sql') || q.includes('database') || q.includes('oracle') || q.includes('pl/sql')) {
+        return chatResponses['sql'];
+      }
+      // Credentials
+      else if (q.includes('certif') || q.includes('togaf') || q.includes('scrum') || q.includes('cspo')) {
+        return chatResponses['certifications'];
+      } else if (q.includes('education') || q.includes('degree') || q.includes('university') || q.includes('college') || q.includes('study')) {
+        return chatResponses['education'];
+      } else if (q.includes('achieve') || q.includes('accomplish') || q.includes('proud') || q.includes('success') || q.includes('impact')) {
+        return chatResponses['achievement'];
+      }
+      // Logistics
+      else if (q.includes('availab') || q.includes('notice') || q.includes('start') || q.includes('when can')) {
+        return chatResponses['availability'];
+      } else if (q.includes('salary') || q.includes('compensation') || q.includes('pay') || q.includes('expect')) {
+        return chatResponses['salary'];
+      } else if (q.includes('remote') || q.includes('hybrid') || q.includes('onsite') || q.includes('work from') || q.includes('wfh')) {
+        return chatResponses['remote'];
+      } else if (q.includes('contact') || q.includes('email') || q.includes('phone') || q.includes('reach') || q.includes('linkedin')) {
+        return chatResponses['contact'];
+      } else if (q.includes('hello') || q.includes('hi') || q.includes('hey') || q.includes('help')) {
+        return chatResponses['suggestions'];
+      }
+      // Unknown - no match found
+      else {
+        return chatResponses['unknown'];
+      }
+    }
+
+    function addMessage(content, isUser = false) {
+      const messages = document.getElementById('chat-messages');
+      const messageDiv = document.createElement('div');
+      messageDiv.className = `chat-message ${isUser ? 'user' : 'ai'}`;
+
+      const icon = isUser ?
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>' :
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>';
+
+      messageDiv.innerHTML = `
+        <div class="message-avatar">${icon}</div>
+        <div class="message-bubble">${content}</div>
+      `;
+
+      messages.appendChild(messageDiv);
+      messages.scrollTop = messages.scrollHeight;
+    }
+
+    function showLoadingIndicator() {
+      const messages = document.getElementById('chat-messages');
+      const loadingDiv = document.createElement('div');
+      loadingDiv.className = 'chat-loading';
+      loadingDiv.id = 'chat-loading-indicator';
+      loadingDiv.innerHTML = `
+        <div class="message-avatar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+          </svg>
+        </div>
+        <div class="typing-indicator">
+          <div class="typing-dot"></div>
+          <div class="typing-dot"></div>
+          <div class="typing-dot"></div>
+        </div>
+      `;
+      messages.appendChild(loadingDiv);
+      messages.scrollTop = messages.scrollHeight;
+    }
+
+    function hideLoadingIndicator() {
+      const loading = document.getElementById('chat-loading-indicator');
+      if (loading) loading.remove();
+    }
+
+    function getRandomDelay() {
+      // Random delay between 800ms and 2200ms to simulate backend processing
+      // Shorter responses feel faster, longer ones take more time
+      const baseDelay = 600;
+      const variableDelay = Math.random() * 1400; // 0-1400ms
+      const extraJitter = Math.random() * 200; // Small jitter for realism
+      return Math.floor(baseDelay + variableDelay + extraJitter);
+    }
+
+    function sendMessage() {
+      const input = document.getElementById('chat-input');
+      const question = input.value.trim();
+
+      if (!question) return;
+
+      addMessage(question, true);
+      input.value = '';
+
+      // Show loading indicator
+      showLoadingIndicator();
+
+      // Simulate backend processing with variable delay
+      const delay = getRandomDelay();
+      setTimeout(() => {
+        hideLoadingIndicator();
+        const response = getResponse(question);
+        addMessage(response);
+      }, delay);
+    }
+
+    function askQuestion(question) {
+      document.getElementById('chat-input').value = question;
+      sendMessage();
+    }
+
+    function handleKeyPress(event) {
+      if (event.key === 'Enter') {
+        sendMessage();
+      }
+    }
+
+    // ============ Animate Stats on Scroll ============
+    function animateStats() {
+      const stats = document.querySelectorAll('.stat-value[data-target]');
+
+      stats.forEach(stat => {
+        const target = parseInt(stat.dataset.target) || parseInt(stat.textContent) || 0;
+        if (isNaN(target) || target === 0) return; // Skip if no valid target
+
+        let current = 0;
+        const increment = Math.max(1, Math.ceil(target / 30));
+
+        const timer = setInterval(() => {
+          current += increment;
+          if (current >= target) {
+            stat.textContent = target;
+            clearInterval(timer);
+          } else {
+            stat.textContent = current;
+          }
+        }, 30);
+      });
+    }
+
+    // ============ Update Stat Value ============
+    function updateStatValue(id, value) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.textContent = value;
+        el.dataset.target = value;
+      }
+    }
+
+    // ============ Contact Modal Functions ============
+    function openContactModal() {
+      document.getElementById('contact-overlay').classList.add('active');
+      document.getElementById('contact-modal').classList.add('active');
+      document.getElementById('contact-fab').style.display = 'none';
+      // Reset form to show form, hide success
+      document.getElementById('contact-form-container').style.display = 'block';
+      document.getElementById('contact-success').style.display = 'none';
+    }
+
+    function closeContactModal() {
+      document.getElementById('contact-overlay').classList.remove('active');
+      document.getElementById('contact-modal').classList.remove('active');
+      document.getElementById('contact-fab').style.display = 'flex';
+    }
+
+    function appendDomain(domain) {
+      const emailInput = document.getElementById('contact-email');
+      const currentValue = emailInput.value;
+      // Remove any existing domain
+      const atIndex = currentValue.indexOf('@');
+      const username = atIndex > -1 ? currentValue.substring(0, atIndex) : currentValue;
+      emailInput.value = username + domain;
+      emailInput.focus();
+    }
+
+    function setQuickMessage(message) {
+      document.getElementById('contact-message').value = message;
+    }
+
+    function copyEmailToClipboard() {
+      navigator.clipboard.writeText('arun.castromin@gmail.com').then(() => {
+        const btn = event.target.closest('.contact-btn');
+        const originalHTML = btn.innerHTML;
+        btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg> Copied!';
+        btn.style.borderColor = 'var(--success)';
+        btn.style.color = 'var(--success)';
+
+        setTimeout(() => {
+          btn.innerHTML = originalHTML;
+          btn.style.borderColor = '';
+          btn.style.color = '';
+        }, 2000);
+      });
+    }
+
+    // Close modal on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeContactModal();
+      }
+    });
+
+    // ============ Initialize Everything ============
+    document.addEventListener('DOMContentLoaded', () => {
+      // Load all GitHub data (user, repos, contributions)
+      initGitHubData();
+      initRadarChart();
+      initSkillFilters();
+
+      // Animate stats after data loads
+      setTimeout(animateStats, 1500);
+    });
+  </script>
+</body>
+</html>
