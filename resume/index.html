@@ -224,8 +224,27 @@
       100% { transform: rotate(360deg); }
     }
 
-    .nav-spacer {
-      width: 100px;
+    .nav-chat-hint {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      font-weight: 500;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+
+    .nav-chat-hint:hover {
+      color: var(--accent);
+      background: var(--accent-dim);
+    }
+
+    .nav-chat-hint svg {
+      width: 16px;
+      height: 16px;
     }
 
     /* ============ Layout ============ */
@@ -3897,7 +3916,12 @@
       </svg>
       Interactive Digital Resume
     </div>
-    <div class="nav-spacer"></div>
+    <a href="#chat-section" class="nav-chat-hint">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+      </svg>
+      Chat with AI
+    </a>
   </nav>
 
   <!-- Background Effects -->
@@ -5769,7 +5793,7 @@
     </section>
 
     <!-- ============ SECTION 7: AI Chat Assistant ============ -->
-    <section class="section animate-fade-up delay-6">
+    <section id="chat-section" class="section animate-fade-up delay-6">
       <div class="section-header">
         <span class="section-number">07.</span>
         <h2 class="section-title">Ask Me Anything</h2>
