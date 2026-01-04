@@ -155,11 +155,10 @@ Based on research from:
 
 ## Next Actions
 
-- [ ] Review V1 vs V2 mockups and choose direction
-- [ ] Add actual project screenshots/GIFs
-- [ ] Convert to Next.js project
-- [ ] Deploy to Vercel
-- [ ] Connect custom domain (castronix.dev)
+- [ ] Add screenshots for remaining projects (Spotify Songs, Space Race ML, Backtest Pro)
+- [ ] Finalize resume/index.html as production version
+- [ ] Set up custom domain (castronix.dev) on GitHub Pages
+- [ ] Add favicon and meta tags for SEO/social sharing
 
 ---
 

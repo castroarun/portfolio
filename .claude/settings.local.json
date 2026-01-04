@@ -16,7 +16,15 @@
       "Bash(git config:*)",
       "Bash(dir:*)",
       "Bash(copy /Y \"docs\\\\mockups\\\\resume-digital.html\" \"resume\\\\index.html\")",
-      "Bash(node scripts/sync-projects.js:*)"
+      "Bash(node scripts/sync-projects.js:*)",
+      "Bash(node:*)",
+      "Bash(git -C \"C:\\\\Users\\\\Castro\\\\Documents\\\\Projects\\\\castronix-portfolio\" status)",
+      "Bash(findstr:*)",
+      "Bash(magick:*)",
+      "Bash(python:*)",
+      "Bash(pip install:*)",
+      "Bash(cat:*)",
+      "Bash(npx serve -l 3000)"
     ]
   }
 }

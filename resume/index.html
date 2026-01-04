@@ -3836,6 +3836,7 @@
       justify-content: center;
       gap: 0.75rem;
       margin-bottom: 0.25rem;
+      position: relative;
     }
 
     .exp-timeline-title {
@@ -4037,9 +4038,11 @@
     /* Timeline View Toggle */
     .timeline-mode-toggle {
       display: flex;
-      justify-content: center;
       gap: 0.5rem;
-      margin-bottom: 1.5rem;
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
     }
 
     .timeline-mode-btn {
@@ -4346,7 +4349,18 @@
 
     /* Mobile responsive */
     @media (max-width: 768px) {
-      .timeline-mode-toggle { flex-wrap: wrap; justify-content: center; }
+      .timeline-mode-toggle {
+        position: static;
+        transform: none;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-bottom: 0.5rem;
+        width: 100%;
+      }
+      .exp-timeline-title-row {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
       .life-legend { justify-content: center; }
 
       /* Stack tracks vertically on mobile */
@@ -4823,24 +4837,23 @@
 
         <!-- Timeline View (default) -->
         <div id="exp-timeline-view" style="padding: 0.5rem 2rem 2rem 2rem;">
-          <!-- Timeline Header -->
+          <!-- Timeline Header with Inline Toggle -->
           <div class="exp-timeline-header">
             <div class="exp-timeline-title-row">
+              <!-- Toggle buttons on the left -->
+              <div class="timeline-mode-toggle">
+                <button class="timeline-mode-btn active" onclick="toggleTimelineMode('career')" id="btn-career-timeline">
+                  <span class="mode-icon">💼</span> Career Only
+                </button>
+                <button class="timeline-mode-btn" onclick="toggleTimelineMode('combined')" id="btn-combined-timeline">
+                  <span class="mode-icon">🌟</span> Life + Career
+                </button>
+              </div>
               <div class="exp-timeline-pulse"></div>
               <h3 class="exp-timeline-title">Career Journey</h3>
               <div class="exp-timeline-pulse"></div>
             </div>
             <p class="exp-timeline-tagline">17+ years of enterprise solutioning</p>
-          </div>
-
-          <!-- Timeline Mode Toggle -->
-          <div class="timeline-mode-toggle">
-            <button class="timeline-mode-btn active" onclick="toggleTimelineMode('career')" id="btn-career-timeline">
-              <span class="mode-icon">💼</span> Career Only
-            </button>
-            <button class="timeline-mode-btn" onclick="toggleTimelineMode('combined')" id="btn-combined-timeline">
-              <span class="mode-icon">🌟</span> Life + Career
-            </button>
           </div>
 
           <div class="timeline-view" id="career-timeline">
@@ -4882,11 +4895,23 @@
               <div class="personal-track">
                 <div class="life-event">
                   <div class="life-event-header">
+                    <span class="life-event-year">2025</span>
+                    <span class="life-event-badge">Personal</span>
+                  </div>
+                  <div class="life-event-title">AI-Assisted Learning Journey</div>
+                  <div class="life-event-summary">New co-pilot unlocked. Building apps with Claude, learning at 10x speed.</div>
+                  <div class="life-event-gallery">
+                    <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=100&h=100&fit=crop" alt="AI" class="life-event-gallery-img">
+                    <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=100&h=100&fit=crop" alt="Tech" class="life-event-gallery-img">
+                  </div>
+                </div>
+                <div class="life-event">
+                  <div class="life-event-header">
                     <span class="life-event-year">2024</span>
                     <span class="life-event-badge">Personal</span>
                   </div>
                   <div class="life-event-title">Professional Fitness Journey</div>
-                  <div class="life-event-summary">Morning strength training. Coaching 3-4 people. Best shape at 40+.</div>
+                  <div class="life-event-summary">From sedentary to shredded. Now coaching others to escape the dad-bod zone.</div>
                   <div class="life-event-gallery">
                     <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=100&h=100&fit=crop" alt="Strength training" class="life-event-gallery-img">
                     <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=100&h=100&fit=crop" alt="Fitness" class="life-event-gallery-img">
@@ -4898,7 +4923,7 @@
                     <span class="life-event-badge">Personal</span>
                   </div>
                   <div class="life-event-title">Princess Thiya Arrived</div>
-                  <div class="life-event-summary">Little princess joins the family. A new chapter of fatherhood.</div>
+                  <div class="life-event-summary">New project manager arrived - zero experience, maximum authority.</div>
                   <div class="life-event-gallery">
                     <img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?w=100&h=100&fit=crop" alt="Family" class="life-event-gallery-img">
                     <img src="https://images.unsplash.com/photo-1476703993599-0035a21b17a9?w=100&h=100&fit=crop" alt="Baby" class="life-event-gallery-img">
@@ -4960,11 +4985,23 @@
               <div class="personal-track">
                 <div class="life-event">
                   <div class="life-event-header">
+                    <span class="life-event-year">2015</span>
+                    <span class="life-event-badge">Personal</span>
+                  </div>
+                  <div class="life-event-title">Best Short Film Award</div>
+                  <div class="life-event-summary">Creative DNA confirmed. Script to screen - won against 20+ shortlisted teams.</div>
+                  <div class="life-event-gallery">
+                    <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?w=100&h=100&fit=crop" alt="Film" class="life-event-gallery-img">
+                    <img src="https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=100&h=100&fit=crop" alt="Cinema" class="life-event-gallery-img">
+                  </div>
+                </div>
+                <div class="life-event">
+                  <div class="life-event-header">
                     <span class="life-event-year">2014</span>
                     <span class="life-event-badge">Personal</span>
                   </div>
                   <div class="life-event-title">Marriage</div>
-                  <div class="life-event-summary">Life partner found. Beginning of family journey.</div>
+                  <div class="life-event-summary">Plot twist: Found the co-star of my life story. The sequel's been amazing.</div>
                   <div class="life-event-gallery">
                     <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=100&h=100&fit=crop" alt="Wedding" class="life-event-gallery-img">
                     <img src="https://images.unsplash.com/photo-1529634806980-85c3dd6d34ac?w=100&h=100&fit=crop" alt="Couple" class="life-event-gallery-img">
@@ -4975,8 +5012,8 @@
                     <span class="life-event-year">2012</span>
                     <span class="life-event-badge">Personal</span>
                   </div>
-                  <div class="life-event-title">Wedding Photography Phase</div>
-                  <div class="life-event-summary">Exploring creative side through professional photography.</div>
+                  <div class="life-event-title">Creative Arts Focus</div>
+                  <div class="life-event-summary">Traded code for cameras. Capturing 'I dos' between deployments.</div>
                   <div class="life-event-gallery">
                     <img src="https://images.unsplash.com/photo-1502982720700-bfff97f2ecac?w=100&h=100&fit=crop" alt="Photography" class="life-event-gallery-img">
                     <img src="https://images.unsplash.com/photo-1452802447250-470a88ac82bc?w=100&h=100&fit=crop" alt="Camera" class="life-event-gallery-img">
@@ -5003,19 +5040,15 @@
                   </div>
                 </div>
               </div>
-              <!-- Personal Track (Right) -->
+              <!-- Personal Track (Right) - spacer for this period -->
               <div class="personal-track">
-                <div class="life-event">
+                <div class="life-event" style="opacity: 0.3;">
                   <div class="life-event-header">
-                    <span class="life-event-year">2010</span>
+                    <span class="life-event-year">2008-2012</span>
                     <span class="life-event-badge">Personal</span>
                   </div>
-                  <div class="life-event-title">Best Short Film Award</div>
-                  <div class="life-event-summary">Won inter-departmental filmmaking competition at Infosys.</div>
-                  <div class="life-event-gallery">
-                    <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?w=100&h=100&fit=crop" alt="Film" class="life-event-gallery-img">
-                    <img src="https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=100&h=100&fit=crop" alt="Cinema" class="life-event-gallery-img">
-                  </div>
+                  <div class="life-event-title">Career Focus Period</div>
+                  <div class="life-event-summary">Deep dive into international banking projects.</div>
                 </div>
               </div>
             </div>
@@ -5046,7 +5079,7 @@
                     <span class="life-event-badge">Faith</span>
                   </div>
                   <div class="life-event-title">Walking with Christ</div>
-                  <div class="life-event-summary">Beginning of faith journey. The foundation of values.</div>
+                  <div class="life-event-summary">Found the source of truth. The commit that changed everything.</div>
                   <div class="life-event-gallery">
                     <img src="https://images.unsplash.com/photo-1507692049790-de58290a4334?w=100&h=100&fit=crop" alt="Faith" class="life-event-gallery-img">
                     <img src="https://images.unsplash.com/photo-1504052434569-70ad5836ab65?w=100&h=100&fit=crop" alt="Journey" class="life-event-gallery-img">
