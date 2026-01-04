@@ -224,21 +224,19 @@
       100% { transform: rotate(360deg); }
     }
 
-    /* Nav Badge Breathing */
+    /* Nav Badge Breathing - Subtle */
     .nav-badge {
-      animation: badgeBreathing 3s ease-in-out infinite;
+      animation: badgeBreathing 5s ease-in-out infinite;
     }
 
     @keyframes badgeBreathing {
       0%, 100% {
-        box-shadow: 0 0 5px rgba(34, 211, 238, 0.1), 0 0 10px rgba(34, 211, 238, 0.05);
-        border-color: rgba(34, 211, 238, 0.3);
-        transform: translateX(-50%) scale(1);
+        box-shadow: 0 0 6px rgba(34, 211, 238, 0.1);
+        border-color: rgba(34, 211, 238, 0.4);
       }
       50% {
-        box-shadow: 0 0 20px rgba(34, 211, 238, 0.5), 0 0 40px rgba(34, 211, 238, 0.3), 0 0 60px rgba(34, 211, 238, 0.15);
-        border-color: rgba(34, 211, 238, 1);
-        transform: translateX(-50%) scale(1.02);
+        box-shadow: 0 0 12px rgba(34, 211, 238, 0.2);
+        border-color: rgba(34, 211, 238, 0.6);
       }
     }
 
@@ -3327,59 +3325,16 @@
     /* ============ Intro Section - Collapsible ============ */
     .intro-section {
       background: var(--bg-card);
-      border: 1px solid transparent;
+      border: 1px solid var(--border-subtle);
       border-radius: 16px;
-      overflow: visible;
+      overflow: hidden;
       margin-bottom: 2rem;
-      position: relative;
-      z-index: 1;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
     }
 
-    /* Circular glow behind the section */
-    .intro-section::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 130%;
-      height: 200%;
-      transform: translate(-50%, -50%);
-      border-radius: 50%;
-      background: radial-gradient(ellipse at center, rgba(34, 211, 238, 0.25) 0%, rgba(34, 211, 238, 0.1) 40%, transparent 70%);
-      animation: circularBreathing 4s ease-in-out infinite;
-      pointer-events: none;
-      z-index: -1;
-    }
-
-    /* Border glow effect */
-    .intro-section::after {
-      content: '';
-      position: absolute;
-      inset: -2px;
-      border-radius: 18px;
-      background: linear-gradient(135deg, rgba(34, 211, 238, 0.3), transparent 50%, rgba(34, 211, 238, 0.3));
-      animation: borderGlow 4s ease-in-out infinite;
-      z-index: -1;
-    }
-
-    @keyframes circularBreathing {
-      0%, 100% {
-        opacity: 0.2;
-        transform: translate(-50%, -50%) scale(0.85);
-      }
-      50% {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1.15);
-      }
-    }
-
-    @keyframes borderGlow {
-      0%, 100% {
-        opacity: 0.3;
-      }
-      50% {
-        opacity: 0.8;
-      }
+    .intro-section:hover {
+      border-color: rgba(34, 211, 238, 0.3);
+      box-shadow: 0 0 20px rgba(34, 211, 238, 0.1);
     }
 
     .intro-header {
