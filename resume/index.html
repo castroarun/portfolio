@@ -1202,11 +1202,13 @@
       height: 100%;
       object-fit: cover;
       object-position: top;
-      transition: transform 0.3s ease;
+      cursor: zoom-in;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .flip-card.flipped .deliverable-screenshot img {
-      transform: scale(1.02);
+    .deliverable-screenshot img:hover {
+      transform: scale(1.08);
+      box-shadow: 0 8px 25px rgba(34, 211, 238, 0.3);
     }
 
     .deliverable-placeholder {
@@ -1880,6 +1882,68 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      cursor: zoom-in;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .track-back-screenshot img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 25px rgba(34, 211, 238, 0.3);
+    }
+
+    /* Image Lightbox Modal */
+    .image-lightbox {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 10000;
+      justify-content: center;
+      align-items: center;
+      cursor: zoom-out;
+      backdrop-filter: blur(10px);
+    }
+
+    .image-lightbox.active {
+      display: flex;
+    }
+
+    .image-lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+      object-fit: contain;
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      animation: lightboxZoomIn 0.3s ease;
+    }
+
+    @keyframes lightboxZoomIn {
+      from {
+        transform: scale(0.8);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 40px;
+      color: white;
+      cursor: pointer;
+      opacity: 0.8;
+      transition: opacity 0.2s;
+    }
+
+    .lightbox-close:hover {
+      opacity: 1;
     }
 
     .track-back-placeholder {
@@ -2613,8 +2677,9 @@
     }
 
     .chat-reg-submit:hover {
-      background: var(--accent-bright);
+      background: var(--accent-hover);
       transform: translateY(-1px);
+      box-shadow: 0 4px 15px rgba(34, 211, 238, 0.4);
     }
 
     .chat-reg-submit:disabled {
@@ -3129,6 +3194,16 @@
     .contact-btn-secondary:hover {
       border-color: var(--accent);
       color: var(--accent);
+    }
+
+    .contact-btn-small {
+      padding: 0.6rem 1rem;
+      font-size: 0.75rem;
+    }
+
+    .contact-btn-small svg {
+      width: 14px;
+      height: 14px;
     }
 
     .contact-btn svg {
@@ -3956,6 +4031,209 @@
       transform: rotate(10deg) translateY(-10px) scale(1.05);
     }
 
+    /* Timeline View Toggle */
+    .timeline-mode-toggle {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .timeline-mode-btn {
+      padding: 0.5rem 1rem;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: 6px;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .timeline-mode-btn:hover {
+      border-color: var(--accent);
+      color: var(--text-primary);
+    }
+
+    .timeline-mode-btn.active {
+      background: var(--accent-dim);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .timeline-mode-btn .mode-icon {
+      font-size: 0.9rem;
+    }
+
+    /* Combined Life + Career Timeline - Interleaved Vertical */
+    .combined-timeline {
+      display: none;
+      position: relative;
+      padding-left: 3rem;
+      margin-left: 0;
+    }
+
+    .combined-timeline.active {
+      display: block;
+    }
+
+    .timeline-view.hidden {
+      display: none;
+    }
+
+    /* Timeline line for combined view */
+    .combined-timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--border-subtle);
+    }
+
+    /* Legend for combined view */
+    .combined-legend {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+      padding-left: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .legend-dot.career { background: var(--accent); }
+    .legend-dot.personal { background: #F472B6; }
+    .legend-dot.spiritual { background: #FBBF24; }
+
+    /* Combined timeline item - similar to timeline-item with category colors */
+    .combined-item {
+      position: relative;
+      padding-bottom: 2rem;
+      padding-left: 1rem;
+    }
+
+    .combined-item::before {
+      content: '';
+      position: absolute;
+      left: -2.5rem;
+      top: 0.25rem;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--bg-card);
+      border: 2px solid var(--accent);
+      transition: all 0.3s ease;
+    }
+
+    .combined-item.personal::before { border-color: #F472B6; }
+    .combined-item.spiritual::before { border-color: #FBBF24; }
+    .combined-item.current::before { background: var(--accent); box-shadow: 0 0 0 4px var(--accent-dim); }
+
+    .combined-item:hover::before { background: var(--accent); box-shadow: 0 0 12px var(--accent); }
+    .combined-item.personal:hover::before { background: #F472B6; box-shadow: 0 0 12px #F472B6; }
+    .combined-item.spiritual:hover::before { background: #FBBF24; box-shadow: 0 0 12px #FBBF24; }
+
+    .combined-date-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .combined-date {
+      font-size: 0.8rem;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .combined-item.personal .combined-date { color: #F472B6; }
+    .combined-item.spiritual .combined-date { color: #FBBF24; }
+
+    .combined-badge {
+      font-size: 0.55rem;
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 600;
+    }
+
+    .combined-badge.personal { background: rgba(244, 114, 182, 0.15); color: #F472B6; }
+    .combined-badge.spiritual { background: rgba(251, 191, 36, 0.15); color: #FBBF24; }
+
+    .combined-item-role {
+      font-size: 0.65rem;
+      color: var(--text-primary);
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-medium);
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+    }
+
+    .combined-item:hover .combined-item-role { color: var(--accent); border-color: var(--accent); background: var(--accent-dim); }
+    .combined-item.personal:hover .combined-item-role { color: #F472B6; border-color: #F472B6; background: rgba(244, 114, 182, 0.1); }
+
+    .combined-item-title { font-size: 1.05rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.15rem; }
+    .combined-item-subtitle { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.4rem; font-style: italic; }
+    .combined-item-summary { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; }
+
+    .combined-gallery {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      gap: 0.5rem;
+      opacity: 0.08;
+      filter: grayscale(100%);
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 10;
+    }
+
+    .combined-item:hover .combined-gallery { opacity: 1; filter: grayscale(0%); }
+
+    .combined-gallery-img {
+      width: 55px;
+      height: 55px;
+      object-fit: cover;
+      border: 3px solid rgba(255, 255, 255, 0.9);
+      border-radius: 8px;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .combined-gallery-img:nth-child(1) { transform: rotate(-3deg); }
+    .combined-gallery-img:nth-child(2) { transform: rotate(2deg) translateY(-3px); }
+
+    .combined-item:hover .combined-gallery-img { width: 95px; height: 95px; }
+    .combined-item:hover .combined-gallery-img:nth-child(1) { transform: rotate(-12deg) scale(1.05); }
+    .combined-item:hover .combined-gallery-img:nth-child(2) { transform: rotate(10deg) translateY(-10px) scale(1.05); }
+
+    @media (max-width: 768px) {
+      .timeline-mode-toggle { flex-wrap: wrap; justify-content: center; }
+      .combined-legend { justify-content: center; }
+      .combined-gallery { position: relative; right: auto; top: auto; transform: none; margin-top: 0.75rem; opacity: 0.5; }
+      .combined-item:hover .combined-gallery { opacity: 1; }
+      .combined-gallery-img, .combined-item:hover .combined-gallery-img { width: 50px; height: 50px; }
+    }
+
     /* View Toggle */
     .view-toggle {
       display: flex;
@@ -4420,7 +4698,18 @@
             </div>
             <p class="exp-timeline-tagline">17+ years of enterprise solutioning</p>
           </div>
-          <div class="timeline-view">
+
+          <!-- Timeline Mode Toggle -->
+          <div class="timeline-mode-toggle">
+            <button class="timeline-mode-btn active" onclick="toggleTimelineMode('career')" id="btn-career-timeline">
+              <span class="mode-icon">💼</span> Career Only
+            </button>
+            <button class="timeline-mode-btn" onclick="toggleTimelineMode('combined')" id="btn-combined-timeline">
+              <span class="mode-icon">🌟</span> Life + Career
+            </button>
+          </div>
+
+          <div class="timeline-view" id="career-timeline">
             <div class="timeline-item current">
               <div class="timeline-date-role">
                 <span class="timeline-date">2020 - Present</span>
@@ -4487,6 +4776,203 @@
               </div>
             </div>
           </div>
+
+          <!-- Combined Life + Career Timeline (Interleaved Vertical) -->
+          <div class="combined-timeline" id="combined-timeline">
+            <!-- Legend -->
+            <div class="combined-legend">
+              <div class="legend-item">
+                <div class="legend-dot career"></div>
+                <span>Career</span>
+              </div>
+              <div class="legend-item">
+                <div class="legend-dot personal"></div>
+                <span>Personal</span>
+              </div>
+              <div class="legend-item">
+                <div class="legend-dot spiritual"></div>
+                <span>Faith</span>
+              </div>
+            </div>
+
+            <!-- 2004 - Career: Graduated & Joined Infosys -->
+            <div class="combined-item current">
+              <div class="combined-date-row">
+                <span class="combined-date">2004</span>
+                <span class="combined-item-role">Developer</span>
+              </div>
+              <div class="combined-item-title">Graduated & Joined Infosys</div>
+              <div class="combined-item-subtitle">B.E. Electronics & Communication, Sathyabama</div>
+              <div class="combined-item-summary">Started career at Infosys, embarking on a journey in enterprise technology.</div>
+              <div class="combined-gallery">
+                <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=120&h=120&fit=crop" alt="Coding" class="combined-gallery-img">
+              </div>
+            </div>
+
+            <!-- 2004 - Spiritual: Walking with Christ -->
+            <div class="combined-item spiritual">
+              <div class="combined-date-row">
+                <span class="combined-date">2004</span>
+                <span class="combined-badge spiritual">Faith</span>
+              </div>
+              <div class="combined-item-title">Walking with Christ</div>
+              <div class="combined-item-summary">Beginning of faith journey. The foundation of values that guide every decision in life and work.</div>
+            </div>
+
+            <!-- 2006 - Career: First Banking Project -->
+            <div class="combined-item">
+              <div class="combined-date-row">
+                <span class="combined-date">2006</span>
+                <span class="combined-item-role">Developer</span>
+              </div>
+              <div class="combined-item-title">First Banking Project</div>
+              <div class="combined-item-subtitle">Finacle Core Banking</div>
+              <div class="combined-item-summary">First exposure to Finacle core banking. Beginning of specialization in financial technology.</div>
+            </div>
+
+            <!-- 2008 - Career: Emirates NBD -->
+            <div class="combined-item">
+              <div class="combined-date-row">
+                <span class="combined-date">2008 - 2012</span>
+                <span class="combined-item-role">Team Lead</span>
+              </div>
+              <div class="combined-item-title">Emirates NBD</div>
+              <div class="combined-item-subtitle">Dubai, UAE | Infosys Ltd.</div>
+              <div class="combined-item-summary">First international assignment. 6000+ man-days, 100% on-time delivery. Award-winning module designs.</div>
+              <div class="combined-gallery">
+                <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=120&h=120&fit=crop" alt="Dubai skyline" class="combined-gallery-img">
+                <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=120&h=120&fit=crop" alt="Tech work" class="combined-gallery-img">
+              </div>
+            </div>
+
+            <!-- 2010 - Career: MVP Award -->
+            <div class="combined-item">
+              <div class="combined-date-row">
+                <span class="combined-date">2010</span>
+                <span class="combined-item-role">Tech Architect</span>
+              </div>
+              <div class="combined-item-title">MVP Award - Denomination Module</div>
+              <div class="combined-item-subtitle">Emirates NBD</div>
+              <div class="combined-item-summary">Self-taught Java in 2 months using only a book. Built a reusable module deployed to 3-4 banks with 95% code reuse.</div>
+            </div>
+
+            <!-- 2010 - Personal: Filmmaking -->
+            <div class="combined-item personal">
+              <div class="combined-date-row">
+                <span class="combined-date">2010</span>
+                <span class="combined-badge personal">Personal</span>
+              </div>
+              <div class="combined-item-title">Best Short Film Award</div>
+              <div class="combined-item-summary">Creative expression through filmmaking. Won Best Short Film at Infosys competition.</div>
+            </div>
+
+            <!-- 2012 - Career: Standard Bank -->
+            <div class="combined-item">
+              <div class="combined-date-row">
+                <span class="combined-date">2012 - 2016</span>
+                <span class="combined-item-role">Team Lead & QA Lead</span>
+              </div>
+              <div class="combined-item-title">Standard Bank</div>
+              <div class="combined-item-subtitle">South Africa & Nigeria | EdgeVerve Systems</div>
+              <div class="combined-item-summary">Led team for Standard Bank implementation. 3000+ man-days. First CMMI Level 4 project in Africa & Middle East region.</div>
+              <div class="combined-gallery">
+                <img src="https://images.unsplash.com/photo-1540946485063-a40da27545f8?w=120&h=120&fit=crop" alt="Africa" class="combined-gallery-img">
+              </div>
+            </div>
+
+            <!-- 2012 - Personal: Wedding Photography -->
+            <div class="combined-item personal">
+              <div class="combined-date-row">
+                <span class="combined-date">2012</span>
+                <span class="combined-badge personal">Personal</span>
+              </div>
+              <div class="combined-item-title">Wedding Photography Phase</div>
+              <div class="combined-item-summary">Exploring creative side through professional wedding photography alongside tech career.</div>
+            </div>
+
+            <!-- 2013 - Personal: Marriage -->
+            <div class="combined-item personal">
+              <div class="combined-date-row">
+                <span class="combined-date">2013</span>
+                <span class="combined-badge personal">Personal</span>
+              </div>
+              <div class="combined-item-title">Marriage</div>
+              <div class="combined-item-summary">Life partner found. Beginning of family journey. A new chapter of togetherness.</div>
+            </div>
+
+            <!-- 2014 - Career: CMMI Level 4 -->
+            <div class="combined-item">
+              <div class="combined-date-row">
+                <span class="combined-date">2014</span>
+                <span class="combined-item-role">QA Lead</span>
+              </div>
+              <div class="combined-item-title">CMMI Level 4 Achievement</div>
+              <div class="combined-item-subtitle">First in Africa & Middle East Region</div>
+              <div class="combined-item-summary">Processes established, followed, and controlled with statistical metrics. &lt;2.5% Defect Injection Rate, 100% on-time delivery.</div>
+            </div>
+
+            <!-- 2016 - Career: EdgeVerve Chennai -->
+            <div class="combined-item">
+              <div class="combined-date-row">
+                <span class="combined-date">2016 - 2019</span>
+                <span class="combined-item-role">Tech Architect</span>
+              </div>
+              <div class="combined-item-title">EdgeVerve Chennai</div>
+              <div class="combined-item-subtitle">Infosys Subsidiary</div>
+              <div class="combined-item-summary">Transition to EdgeVerve Systems. Focus on product architecture and technology leadership.</div>
+            </div>
+
+            <!-- 2020 - Career: Bank of America -->
+            <div class="combined-item current">
+              <div class="combined-date-row">
+                <span class="combined-date">2020 - Present</span>
+                <span class="combined-item-role">Solution Architect</span>
+              </div>
+              <div class="combined-item-title">Bank of America - APAC</div>
+              <div class="combined-item-subtitle">Singapore | Infosys Ltd.</div>
+              <div class="combined-item-summary">Leading RTP and NFR delivery for APAC region. 60% reduction in job execution times. 5x volume-ready reporting certified by client.</div>
+              <div class="combined-gallery">
+                <img src="https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=120&h=120&fit=crop" alt="Singapore" class="combined-gallery-img">
+                <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=120&h=120&fit=crop" alt="Corporate" class="combined-gallery-img">
+              </div>
+            </div>
+
+            <!-- 2021 - Personal: Thiya Born -->
+            <div class="combined-item personal">
+              <div class="combined-date-row">
+                <span class="combined-date">2021</span>
+                <span class="combined-badge personal">Personal</span>
+              </div>
+              <div class="combined-item-title">Princess Thiya Arrived</div>
+              <div class="combined-item-summary">Little princess Thiya joins the family. A new chapter of fatherhood, joy, and endless love.</div>
+              <div class="combined-gallery">
+                <img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?w=60&h=60&fit=crop" alt="Baby" class="combined-gallery-img">
+              </div>
+            </div>
+
+            <!-- 2024 - Personal: Strength Training -->
+            <div class="combined-item personal">
+              <div class="combined-date-row">
+                <span class="combined-date">2024</span>
+                <span class="combined-badge personal">Personal</span>
+              </div>
+              <div class="combined-item-title">Professional Fitness Journey</div>
+              <div class="combined-item-summary">Morning strength training routine. Now coaching 3-4 people. In best shape at 40+. "Discipline transfers to all life areas."</div>
+            </div>
+
+            <!-- 2024 - Career: AI Development -->
+            <div class="combined-item">
+              <div class="combined-date-row">
+                <span class="combined-date">2024</span>
+                <span class="combined-item-role">Side Projects</span>
+              </div>
+              <div class="combined-item-title">AI-Assisted Development</div>
+              <div class="combined-item-summary">Embracing AI-assisted workflows. Building NoteApp, REPPIT, PRIMMO with modern tech stack.</div>
+            </div>
+
+          </div>
+          <!-- End Combined Timeline -->
+
         </div>
       </div>
     </section>
@@ -5342,15 +5828,7 @@
             <div class="flip-card-back">
               <div class="deliverable-container">
                 <div class="deliverable-screenshot">
-                  <div class="deliverable-placeholder">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2" width="32" height="32">
-                      <path d="M3 3v18h18"/>
-                      <path d="M18 17V9"/>
-                      <path d="M13 17V5"/>
-                      <path d="M8 17v-3"/>
-                    </svg>
-                    <span>Portfolio Optimizer Preview</span>
-                  </div>
+                  <img src="../assets/projects/portfolio-optimizer.png" alt="Portfolio Optimizer Screenshot" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
                 </div>
                 <div class="back-header" style="border-bottom: none; padding-bottom: 0; margin-bottom: 0.5rem;">
                   <h4 class="back-title" style="font-size: 0.9rem;">Portfolio Optimizer</h4>
@@ -5485,8 +5963,7 @@
                 </div>
                 <div class="track-card-back">
                   <div class="track-back-screenshot">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg>
-                    <span>Preview</span>
+                    <img src="../assets/projects/primmo.png" alt="PRIMMO" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">
                   </div>
                   <div class="track-back-title">PRIMMO</div>
                   <p class="track-back-desc">AI-powered strength coach communicating via WhatsApp and Voice.</p>
@@ -5539,8 +6016,7 @@
                 </div>
                 <div class="track-card-back">
                   <div class="track-back-screenshot">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="3"/><path d="M12 22V8M5 12H2a10 10 0 0 0 20 0h-3"/></svg>
-                    <span>Preview</span>
+                    <img src="../assets/projects/reppit.png" alt="REPPIT" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">
                   </div>
                   <div class="track-back-title">REPPIT</div>
                   <p class="track-back-desc">Fitness app with real-time timer and progressive overload tracking.</p>
@@ -5594,11 +6070,7 @@
                 </div>
                 <div class="track-card-back">
                   <div class="track-back-screenshot">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
-                      <polyline points="14 2 14 8 20 8"/>
-                    </svg>
-                    <span>Preview</span>
+                    <img src="../assets/projects/noteapp.png" alt="NoteApp" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">
                   </div>
                   <div class="track-back-title">NoteApp</div>
                   <p class="track-back-desc">Privacy-first note-taking with offline support and cloud sync.</p>
@@ -5822,7 +6294,7 @@
                   <div class="track-tech"><span class="track-tech-chip">Next.js</span><span class="track-tech-chip">Supabase</span><span class="track-tech-chip">Chart.js</span></div>
                 </div>
                 <div class="track-card-back">
-                  <div class="track-back-screenshot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M18 17V9"/></svg><span>Preview</span></div>
+                  <div class="track-back-screenshot"><img src="../assets/projects/portfolio-optimizer.png" alt="Portfolio Optimizer" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;"></div>
                   <div class="track-back-title">Portfolio Optimizer</div>
                   <p class="track-back-desc">Seamless visualization of fundamentals to democratize investment strategies.</p>
                   <div class="track-workflow"><div class="track-workflow-header"><span>9-Step Workflow</span><span>1/9</span></div><div class="track-workflow-dots"><span class="track-workflow-dot completed"></span><span class="track-workflow-dot in-progress"></span><span class="track-workflow-dot"></span><span class="track-workflow-dot"></span><span class="track-workflow-dot"></span><span class="track-workflow-dot"></span><span class="track-workflow-dot"></span><span class="track-workflow-dot"></span><span class="track-workflow-dot"></span></div></div>
@@ -5982,8 +6454,8 @@
               <div class="chat-reg-col">
                 <div class="chat-reg-group">
                   <label class="chat-reg-label">I am a...</label>
-              <div class="chat-role-options" id="chat-role-options">
-                <button class="chat-role-btn" data-role="Recruiter / Hiring Manager">
+                  <div class="chat-role-options" id="chat-role-options">
+                    <button class="chat-role-btn" data-role="Recruiter / Hiring Manager">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
                     <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
                     <circle cx="12" cy="7" r="4"/>
@@ -6032,8 +6504,10 @@
                   </svg>
                   Just Curious
                 </button>
+                  </div>
+                  <div class="chat-reg-error" id="role-error"></div>
+                </div>
               </div>
-              <div class="chat-reg-error" id="role-error"></div>
             </div>
 
             <button class="chat-reg-submit" id="chat-start-btn" onclick="startChat()">
@@ -6186,12 +6660,19 @@
       </div>
 
       <div class="contact-form-actions">
-        <button class="contact-btn contact-btn-primary" onclick="copyEmailToClipboard()">
+        <button class="contact-btn contact-btn-primary" onclick="sendContactMessage()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="22" y1="2" x2="11" y2="13"/>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+          </svg>
+          Send Message
+        </button>
+        <button class="contact-btn contact-btn-secondary contact-btn-small" onclick="copyEmailToClipboard()">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
             <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
           </svg>
-          Copy Email Address
+          Copy Arun's Email
         </button>
       </div>
 
@@ -6230,15 +6711,35 @@
           <polyline points="20 6 9 17 4 12"/>
         </svg>
       </div>
-      <h4>Email client opened!</h4>
-      <p>Your message has been prepared in your default email app.</p>
+      <h4>Message Sent!</h4>
+      <p>Thanks for reaching out. I'll get back to you soon.</p>
     </div>
   </div>
 
   <script>
+    // ============ Timeline Mode Toggle ============
+    function toggleTimelineMode(mode) {
+      const careerTimeline = document.getElementById('career-timeline');
+      const combinedTimeline = document.getElementById('combined-timeline');
+      const btnCareer = document.getElementById('btn-career-timeline');
+      const btnCombined = document.getElementById('btn-combined-timeline');
+
+      if (mode === 'career') {
+        careerTimeline.classList.remove('hidden');
+        combinedTimeline.classList.remove('active');
+        btnCareer.classList.add('active');
+        btnCombined.classList.remove('active');
+      } else {
+        careerTimeline.classList.add('hidden');
+        combinedTimeline.classList.add('active');
+        btnCareer.classList.remove('active');
+        btnCombined.classList.add('active');
+      }
+    }
+
     // ============ Supabase Configuration ============
-    const SUPABASE_URL = 'https://your-project.supabase.co';
-    const SUPABASE_ANON_KEY = 'your-anon-key';
+    const SUPABASE_URL = 'https://zljszmxfbeeoiznbuesr.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpsanN6bXhmYmVlb2l6bmJ1ZXNyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc1MTcyMjIsImV4cCI6MjA4MzA5MzIyMn0._RTf-B3ux4eaG9XRyvNE2OcrPxJAH3Q7ZsUDgF3hHPU';
 
     // Chat user state
     let chatUser = {
@@ -7543,6 +8044,14 @@ This creativity informs his approach to problem-solving - thinking outside the b
       // Reset form to show form, hide success
       document.getElementById('contact-form-container').style.display = 'block';
       document.getElementById('contact-success').style.display = 'none';
+
+      // Auto-populate from chat user data if available
+      if (chatUser.name) {
+        document.getElementById('contact-name').value = chatUser.name;
+      }
+      if (chatUser.email) {
+        document.getElementById('contact-email').value = chatUser.email;
+      }
     }
 
     function closeContactModal() {
@@ -7563,6 +8072,68 @@ This creativity informs his approach to problem-solving - thinking outside the b
 
     function setQuickMessage(message) {
       document.getElementById('contact-message').value = message;
+    }
+
+    async function sendContactMessage() {
+      const name = document.getElementById('contact-name').value.trim();
+      const email = document.getElementById('contact-email').value.trim();
+      const message = document.getElementById('contact-message').value.trim();
+
+      // Basic validation
+      if (!name || !email || !message) {
+        alert('Please fill in all fields');
+        return;
+      }
+
+      // Email validation
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        alert('Please enter a valid email address');
+        return;
+      }
+
+      const btn = event.target.closest('.contact-btn');
+      const originalHTML = btn.innerHTML;
+      btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" class="spin"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> Sending...';
+      btn.disabled = true;
+
+      try {
+        // Send to Supabase
+        if (SUPABASE_URL !== 'https://your-project.supabase.co') {
+          const res = await fetch(`${SUPABASE_URL}/rest/v1/contact_messages`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'apikey': SUPABASE_ANON_KEY,
+              'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+            },
+            body: JSON.stringify({
+              sender_name: name,
+              sender_email: email,
+              message: message,
+              source: chatUser.name ? 'ai_chat' : 'contact_form',
+              created_at: new Date().toISOString()
+            })
+          });
+
+          if (!res.ok) {
+            throw new Error('Failed to send message');
+          }
+        } else {
+          // Fallback: log to console if Supabase not configured
+          console.log('Contact message (Supabase not configured):', { name, email, message });
+        }
+
+        // Show success
+        document.getElementById('contact-form-container').style.display = 'none';
+        document.getElementById('contact-success').style.display = 'block';
+
+      } catch (error) {
+        console.error('Error sending message:', error);
+        alert('Failed to send message. Please try the direct contact options below.');
+        btn.innerHTML = originalHTML;
+        btn.disabled = false;
+      }
     }
 
     function copyEmailToClipboard() {
@@ -7712,6 +8283,45 @@ This creativity informs his approach to problem-solving - thinking outside the b
         } else {
           goToTopBtn.classList.remove('visible');
         }
+      });
+    });
+  </script>
+
+  <!-- Image Lightbox Modal -->
+  <div class="image-lightbox" id="image-lightbox" onclick="closeLightbox()">
+    <span class="lightbox-close">&times;</span>
+    <img id="lightbox-image" src="" alt="Enlarged view">
+  </div>
+
+  <script>
+    // ============ Image Lightbox Functionality ============
+    function openLightbox(imgSrc) {
+      const lightbox = document.getElementById('image-lightbox');
+      const lightboxImg = document.getElementById('lightbox-image');
+      lightboxImg.src = imgSrc;
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      const lightbox = document.getElementById('image-lightbox');
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    // Close lightbox with Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeLightbox();
+    });
+
+    // Attach click handlers to all project images
+    document.addEventListener('DOMContentLoaded', () => {
+      const projectImages = document.querySelectorAll('.track-back-screenshot img, .deliverable-screenshot img');
+      projectImages.forEach(img => {
+        img.addEventListener('click', (e) => {
+          e.stopPropagation(); // Prevent card flip
+          openLightbox(img.src);
+        });
       });
     });
   </script>
