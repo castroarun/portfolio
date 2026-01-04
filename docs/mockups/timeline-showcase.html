@@ -2190,64 +2190,9 @@
         <h2 class="section-title">Layout Styles</h2>
         <div class="section-line"></div>
       </div>
-      <p class="section-desc">Four different approaches to visualizing the timeline. All are mobile-compatible.</p>
+      <p class="section-desc">Hover-based timeline with smooth reveal animations.</p>
 
-      <!-- 1A: Horizontal Scroll -->
-      <div class="variation-container">
-        <div class="variation-header">
-          <h3 class="variation-title">1A. Horizontal Scroll Timeline</h3>
-          <span class="variation-badge">Swipe Enabled</span>
-        </div>
-
-        <div class="category-filters">
-          <button class="filter-btn active" onclick="filterEvents(this, 'all', 'horizontal')">All</button>
-          <button class="filter-btn career" onclick="filterEvents(this, 'career', 'horizontal')">
-            <span class="filter-dot" style="background: var(--track-career)"></span> Career
-          </button>
-          <button class="filter-btn personal" onclick="filterEvents(this, 'personal', 'horizontal')">
-            <span class="filter-dot" style="background: var(--track-personal)"></span> Personal
-          </button>
-          <button class="filter-btn spiritual" onclick="filterEvents(this, 'spiritual', 'horizontal')">
-            <span class="filter-dot" style="background: var(--track-spiritual)"></span> Spiritual
-          </button>
-        </div>
-
-        <div class="timeline-horizontal" id="timeline-horizontal">
-          <div class="timeline-track-h">
-            <!-- Events will be populated by JavaScript -->
-          </div>
-        </div>
-      </div>
-
-      <!-- 1B: Vertical Stack -->
-      <div class="variation-container">
-        <div class="variation-header">
-          <h3 class="variation-title">1B. Vertical Stack Timeline</h3>
-          <span class="variation-badge">Classic Layout</span>
-        </div>
-
-        <div class="timeline-vertical" id="timeline-vertical">
-          <!-- Events will be populated by JavaScript -->
-        </div>
-      </div>
-
-      <!-- 1C: Spiral/Creative -->
-      <div class="variation-container">
-        <div class="variation-header">
-          <h3 class="variation-title">1C. Grid/Mosaic Timeline</h3>
-          <span class="variation-badge">Creative Layout</span>
-        </div>
-
-        <div class="timeline-spiral-container">
-          <div class="timeline-spiral">
-            <div class="spiral-events" id="timeline-spiral">
-              <!-- Events will be populated by JavaScript -->
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 1D: Hybrid -->
+      <!-- Hybrid Timeline -->
       <div class="variation-container">
         <div class="variation-header">
           <h3 class="variation-title">1D. Hybrid Timeline (Hover for Details)</h3>
@@ -2262,124 +2207,16 @@
       </div>
     </section>
 
-    <!-- SECTION 2: DETAIL LEVELS -->
+    <!-- SECTION 2: RECOMMENDED STYLES -->
     <section class="showcase-section">
       <div class="section-header">
         <span class="section-number">02.</span>
-        <h2 class="section-title">Detail Levels</h2>
-        <div class="section-line"></div>
-      </div>
-      <p class="section-desc">Choose how much information to display for each milestone.</p>
-
-      <!-- 2A: Minimal -->
-      <div class="variation-container">
-        <div class="variation-header">
-          <h3 class="variation-title">2A. Minimal - Year + Title Only</h3>
-          <span class="variation-badge">Clean & Simple</span>
-        </div>
-
-        <div class="timeline-minimal" id="timeline-minimal">
-          <!-- Events will be populated by JavaScript -->
-        </div>
-      </div>
-
-      <!-- 2B: Moderate -->
-      <div class="variation-container">
-        <div class="variation-header">
-          <h3 class="variation-title">2B. Moderate - Expandable Descriptions</h3>
-          <span class="variation-badge">Click to Expand</span>
-        </div>
-
-        <div class="timeline-moderate" id="timeline-moderate">
-          <!-- Events will be populated by JavaScript -->
-        </div>
-      </div>
-
-      <!-- 2C: Rich Cards -->
-      <div class="variation-container">
-        <div class="variation-header">
-          <h3 class="variation-title">2C. Rich Cards - Full Portfolio Style</h3>
-          <span class="variation-badge">Maximum Detail</span>
-        </div>
-
-        <div class="timeline-rich" id="timeline-rich">
-          <!-- Events will be populated by JavaScript -->
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION 3: RECOMMENDED STYLES -->
-    <section class="showcase-section">
-      <div class="section-header">
-        <span class="section-number">03.</span>
         <h2 class="section-title">Recommended Styles</h2>
         <div class="section-line"></div>
       </div>
-      <p class="section-desc">Custom combinations based on your preferences.</p>
+      <p class="section-desc">Career-focused layouts with life events integration.</p>
 
-      <!-- 3A: Combined - Vertical + Hover Cards -->
-      <div class="variation-container">
-        <div class="variation-header">
-          <h3 class="variation-title">3A. Vertical Line + Hover Cards (Glowing Dots)</h3>
-          <span class="variation-badge">Recommended</span>
-        </div>
-
-        <div class="category-filters">
-          <button class="filter-btn active" onclick="filterEvents(this, 'all', 'combined')">All</button>
-          <button class="filter-btn career" onclick="filterEvents(this, 'career', 'combined')">
-            <span class="filter-dot" style="background: var(--track-career)"></span> Career
-          </button>
-          <button class="filter-btn personal" onclick="filterEvents(this, 'personal', 'combined')">
-            <span class="filter-dot" style="background: var(--track-personal)"></span> Personal
-          </button>
-          <button class="filter-btn spiritual" onclick="filterEvents(this, 'spiritual', 'combined')">
-            <span class="filter-dot" style="background: var(--track-spiritual)"></span> Spiritual
-          </button>
-        </div>
-
-        <div class="timeline-combined" id="timeline-combined">
-          <!-- Events will be populated by JavaScript -->
-        </div>
-      </div>
-
-      <!-- 3B: River/Zigzag - Fits on Page -->
-      <div class="variation-container">
-        <div class="variation-header">
-          <h3 class="variation-title">3B. River Flow (Left→Right→Down→Left, No Scroll)</h3>
-          <span class="variation-badge">Fits on Page</span>
-        </div>
-
-        <div class="timeline-river" id="timeline-river">
-          <!-- Events will be populated by JavaScript -->
-        </div>
-      </div>
-
-      <!-- 3C: S-Shaped Serpentine Timeline -->
-      <div class="variation-container">
-        <div class="variation-header">
-          <h3 class="variation-title">3C. S-Shaped Serpentine (Hover for Details)</h3>
-          <span class="variation-badge">Visual Flow</span>
-        </div>
-
-        <div class="category-filters">
-          <button class="filter-btn active" onclick="filterEvents(this, 'all', 'serpentine')">All</button>
-          <button class="filter-btn career" onclick="filterEvents(this, 'career', 'serpentine')">
-            <span class="filter-dot" style="background: var(--track-career)"></span> Career
-          </button>
-          <button class="filter-btn personal" onclick="filterEvents(this, 'personal', 'serpentine')">
-            <span class="filter-dot" style="background: var(--track-personal)"></span> Personal
-          </button>
-          <button class="filter-btn spiritual" onclick="filterEvents(this, 'spiritual', 'serpentine')">
-            <span class="filter-dot" style="background: var(--track-spiritual)"></span> Spiritual
-          </button>
-        </div>
-
-        <div class="timeline-serpentine" id="timeline-serpentine">
-          <!-- Events will be populated by JavaScript -->
-        </div>
-      </div>
-
-      <!-- 3D: Career Spine with Branching Tracks -->
+      <!-- Career Spine with Branching Tracks -->
       <div class="variation-container">
         <div class="variation-header">
           <h3 class="variation-title">3D. Career Spine (Personal Left, Spiritual Right)</h3>
@@ -2457,50 +2294,6 @@
     // Sort by year
     const sortedData = [...timelineData].sort((a, b) => a.year - b.year);
 
-    // Render Horizontal Timeline
-    function renderHorizontal() {
-      const container = document.querySelector('#timeline-horizontal .timeline-track-h');
-      container.innerHTML = sortedData.map(event => `
-        <div class="timeline-event-h" data-category="${event.category}">
-          <div class="event-dot-h ${event.category}"></div>
-          <div class="event-card-h">
-            <div class="event-year-h ${event.category}">${event.year}</div>
-            <div class="event-title-h">${event.title}</div>
-            ${event.role ? `<div class="event-subtitle-h">${event.role}</div>` : ''}
-          </div>
-        </div>
-      `).join('');
-    }
-
-    // Render Vertical Timeline
-    function renderVertical() {
-      const container = document.getElementById('timeline-vertical');
-      container.innerHTML = sortedData.map(event => `
-        <div class="timeline-event-v" data-category="${event.category}">
-          <div class="event-dot-v ${event.category}"></div>
-          <div class="event-content-v">
-            <div class="event-header-v">
-              <span class="event-year-v ${event.category}">${event.year}</span>
-              <span class="event-title-v">${event.title}</span>
-            </div>
-            <p class="event-desc-v">${event.desc}</p>
-            ${event.role ? `<span class="event-role-v">${event.role}</span>` : ''}
-          </div>
-        </div>
-      `).join('');
-    }
-
-    // Render Spiral/Grid Timeline
-    function renderSpiral() {
-      const container = document.getElementById('timeline-spiral');
-      container.innerHTML = sortedData.map(event => `
-        <div class="spiral-event ${event.category}">
-          <div class="spiral-year ${event.category}">${event.year}</div>
-          <div class="spiral-title">${event.title}</div>
-        </div>
-      `).join('');
-    }
-
     // Render Hybrid Timeline
     function renderHybrid() {
       const container = document.getElementById('timeline-hybrid');
@@ -2514,147 +2307,6 @@
             <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5;">${event.desc}</p>
             ${event.role ? `<p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.5rem;">${event.role}</p>` : ''}
           </div>
-        </div>
-      `).join('');
-    }
-
-    // Render Minimal Timeline
-    function renderMinimal() {
-      const container = document.getElementById('timeline-minimal');
-      container.innerHTML = sortedData.map(event => `
-        <div class="minimal-event" data-category="${event.category}">
-          <div class="minimal-dot ${event.category}"></div>
-          <span class="minimal-year ${event.category}">${event.year}</span>
-          <span class="minimal-line"></span>
-          <span class="minimal-title">${event.title}</span>
-        </div>
-      `).join('');
-    }
-
-    // Render Moderate Timeline
-    function renderModerate() {
-      const container = document.getElementById('timeline-moderate');
-      container.innerHTML = sortedData.map((event, index) => `
-        <div class="moderate-event" data-category="${event.category}" onclick="toggleModerate(this)">
-          <div class="moderate-header">
-            <div class="moderate-dot ${event.category}"></div>
-            <span class="moderate-year ${event.category}">${event.year}</span>
-            <span class="moderate-title">${event.title}</span>
-            <svg class="moderate-toggle" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <polyline points="6 9 12 15 18 9"/>
-            </svg>
-          </div>
-          <div class="moderate-content">
-            <div class="moderate-inner">
-              <p class="moderate-desc">${event.desc}</p>
-              ${event.tags ? `
-                <div class="moderate-tags">
-                  ${event.tags.map(tag => `<span class="moderate-tag">${tag}</span>`).join('')}
-                </div>
-              ` : ''}
-            </div>
-          </div>
-        </div>
-      `).join('');
-    }
-
-    // Render Rich Cards Timeline
-    function renderRich() {
-      const container = document.getElementById('timeline-rich');
-      container.innerHTML = sortedData.map(event => `
-        <div class="rich-card" data-category="${event.category}">
-          <div class="rich-header">
-            <div class="rich-icon ${event.category}">${event.icon || '📌'}</div>
-            <div class="rich-meta">
-              <div class="rich-year ${event.category}">${event.year}</div>
-              <div class="rich-title">${event.title}</div>
-            </div>
-          </div>
-          <div class="rich-body">
-            <p class="rich-desc">${event.desc}</p>
-            ${event.highlight ? `
-              <div class="rich-highlight">
-                <p class="rich-highlight-text">"${event.highlight}"</p>
-              </div>
-            ` : ''}
-            ${event.tags ? `
-              <div class="rich-tags">
-                ${event.tags.map(tag => `<span class="rich-tag ${event.category}">${tag}</span>`).join('')}
-              </div>
-            ` : ''}
-          </div>
-        </div>
-      `).join('');
-    }
-
-    // Toggle moderate event expansion
-    function toggleModerate(element) {
-      element.classList.toggle('expanded');
-    }
-
-    // Toggle combined event expansion
-    function toggleCombined(element) {
-      element.classList.toggle('collapsed');
-    }
-
-    // Render Combined Timeline (Vertical Line + Hover Cards with Glowing Dots)
-    function renderCombined() {
-      const container = document.getElementById('timeline-combined');
-      container.innerHTML = sortedData.map((event, index) => `
-        <div class="combined-event" data-category="${event.category}">
-          <div class="combined-dot ${event.category}"></div>
-          <div class="combined-card">
-            <div class="combined-header">
-              <span class="combined-year ${event.category}">${event.year}</span>
-              <span class="combined-title">${event.title}</span>
-              ${event.role ? `<span class="combined-role">${event.role}</span>` : ''}
-            </div>
-            <div class="combined-content">
-              <div class="combined-inner">
-                <p class="combined-desc">${event.desc}</p>
-                ${event.highlight ? `
-                  <div class="combined-highlight">
-                    <p class="combined-highlight-text">"${event.highlight}"</p>
-                  </div>
-                ` : ''}
-                ${event.tags ? `
-                  <div class="combined-tags">
-                    ${event.tags.map(tag => `<span class="combined-tag ${event.category}">${tag}</span>`).join('')}
-                  </div>
-                ` : ''}
-              </div>
-            </div>
-          </div>
-        </div>
-      `).join('');
-    }
-
-    // Render River/Zigzag Timeline (Fits on Page)
-    function renderRiver() {
-      const container = document.getElementById('timeline-river');
-      const eventsPerRow = 4;
-      const rows = [];
-
-      // Split events into rows
-      for (let i = 0; i < sortedData.length; i += eventsPerRow) {
-        rows.push(sortedData.slice(i, i + eventsPerRow));
-      }
-
-      container.innerHTML = rows.map((row, rowIndex) => `
-        <div class="river-row ${rowIndex % 2 === 1 ? 'reverse' : ''}">
-          <div class="river-events">
-            ${row.map(event => `
-              <div class="river-event" data-category="${event.category}">
-                <div class="river-dot ${event.category}"></div>
-                <div class="river-card">
-                  <div class="river-year ${event.category}">${event.year}</div>
-                  <div class="river-title">${event.title}</div>
-                  ${event.role ? `<div class="river-role">${event.role}</div>` : ''}
-                </div>
-              </div>
-            `).join('')}
-          </div>
-          ${rowIndex < rows.length - 1 ? '<div class="river-connector"></div>' : ''}
         </div>
       `).join('');
     }
@@ -2860,17 +2512,8 @@
       `;
     }
 
-    // Initialize all timelines
-    renderHorizontal();
-    renderVertical();
-    renderSpiral();
+    // Initialize timelines
     renderHybrid();
-    renderMinimal();
-    renderModerate();
-    renderRich();
-    renderCombined();
-    renderRiver();
-    renderSerpentine();
     renderSpine();
     renderParallel();
   </script>
