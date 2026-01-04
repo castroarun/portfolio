@@ -1600,17 +1600,20 @@
     .track-row.hidden-row::before,
     .track-row.hidden-row::after {
       opacity: 0;
+      transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    /* Track Node filter animation */
+    /* Track Node filter animation - smooth cubic-bezier */
     .track-node {
-      transition: opacity 0.4s ease, transform 0.4s ease, max-width 0.4s ease, padding 0.4s ease, margin 0.4s ease;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-origin: center center;
     }
 
     .track-node.filtered-out {
       opacity: 0;
-      transform: scale(0.8);
+      transform: scale(0.85) translateY(10px);
       max-width: 0;
+      min-width: 0;
       padding: 0;
       margin: 0;
       overflow: hidden;
@@ -1625,6 +1628,12 @@
       position: relative;
       padding: 2rem 0;
       gap: 0;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .track-row::before,
+    .track-row::after {
+      transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     /* Parallel track lines */
@@ -1970,6 +1979,44 @@
       color: #a855f7;
     }
 
+    /* Section Title with Pulse */
+    .section-title-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .section-pulse {
+      width: 8px;
+      height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: sectionPulse 2s ease-in-out infinite;
+      box-shadow: 0 0 10px var(--accent-dim);
+    }
+
+    @keyframes sectionPulse {
+      0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+        box-shadow: 0 0 10px var(--accent-dim);
+      }
+      50% {
+        transform: scale(1.4);
+        opacity: 0.7;
+        box-shadow: 0 0 20px var(--accent);
+      }
+    }
+
+    .section-tagline {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-style: italic;
+      letter-spacing: 0.1em;
+      margin-top: 0.25rem;
+      margin-bottom: 1rem;
+    }
+
     /* Project Status Legend */
     .project-legend {
       display: flex;
@@ -1979,6 +2026,7 @@
       padding: 0;
       background: transparent;
       border: none;
+      justify-content: center;
     }
 
     .legend-item {
@@ -4403,35 +4451,34 @@
     <section class="section animate-fade-up delay-5">
       <div class="section-header">
         <span class="section-number">05.</span>
-        <h2 class="section-title">What I'm Building</h2>
-        <div class="section-line"></div>
+        <div class="section-title-row">
+          <div class="section-pulse"></div>
+          <h2 class="section-title">The Build Journey</h2>
+          <div class="section-pulse"></div>
+        </div>
+        <p class="section-tagline">Ideas → Code → Reality</p>
       </div>
 
       <!-- Project Status Legend -->
       <div class="project-legend" id="project-legend">
         <div class="legend-item active" data-filter="all" onclick="filterProjects('all')">
           <span>All</span>
-          <span class="legend-count">(7)</span>
+          <span class="legend-count">(8)</span>
+        </div>
+        <div class="legend-item" data-filter="building" onclick="filterProjects('building')">
+          <span class="legend-dot building"></span>
+          <span>Building</span>
+          <span class="legend-count">(3)</span>
         </div>
         <div class="legend-item" data-filter="live" onclick="filterProjects('live')">
           <span class="legend-dot live"></span>
           <span>Live</span>
           <span class="legend-count">(4)</span>
         </div>
-        <div class="legend-item" data-filter="building" onclick="filterProjects('building')">
-          <span class="legend-dot building"></span>
-          <span>Building</span>
-          <span class="legend-count">(2)</span>
-        </div>
         <div class="legend-item" data-filter="planning" onclick="filterProjects('planning')">
           <span class="legend-dot planning"></span>
           <span>Planning</span>
           <span class="legend-count">(1)</span>
-        </div>
-        <div class="legend-item" data-filter="ideating" onclick="filterProjects('ideating')">
-          <span class="legend-dot ideating"></span>
-          <span>Ideating</span>
-          <span class="legend-count">(0)</span>
         </div>
       </div>
 
