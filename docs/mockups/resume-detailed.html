@@ -51,11 +51,19 @@
     /* ============ Print Styles ============ */
     @media print {
       @page {
-        margin: 1.5cm 1cm;
+        margin: 1.5cm 1cm 1.2cm 1.5cm;
+      }
+
+      @page :first {
+        margin-top: 1cm;
       }
 
       html {
-        font-size: 8.5px;
+        font-size: 12px;
+      }
+
+      .name {
+        font-size: 2rem; /* Keep name same size */
       }
 
       body {
@@ -68,20 +76,53 @@
         padding: 0;
       }
 
+      .header {
+        margin-bottom: 1rem;
+        padding-bottom: 0.8rem;
+      }
+
+      .section {
+        margin-bottom: 1rem;
+      }
+
+      .section-title {
+        margin-bottom: 0.6rem;
+        padding-bottom: 0.3rem;
+      }
+
+      .experience-item {
+        margin-bottom: 1rem;
+        padding-bottom: 0.8rem;
+        page-break-inside: avoid;
+      }
+
+      .traits-grid {
+        gap: 0.5rem;
+      }
+
+      .skills-grid {
+        gap: 0.6rem;
+      }
+
+      .cert-grid {
+        gap: 0.4rem;
+      }
+
+      .projects-grid {
+        gap: 0.6rem;
+      }
+
+      .project-card {
+        padding: 0.6rem;
+      }
+
       .no-print {
         display: none !important;
       }
 
       .page-break {
         page-break-before: always;
-      }
-
-      .experience-item {
-        page-break-inside: avoid;
-      }
-
-      .section {
-        page-break-inside: avoid;
+        padding-top: 0.5cm;
       }
     }
 
@@ -552,7 +593,7 @@
     </section>
 
     <!-- Experience -->
-    <section class="section">
+    <section class="section page-break">
       <h2 class="section-title">Professional Experience</h2>
 
       <!-- Bank of America Jakarta -->
