@@ -1546,6 +1546,72 @@
       50% { opacity: 0.5; }
     }
 
+    /* Timeline Filter States */
+    .timeline-status-chip {
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .timeline-status-chip:hover:not(.disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .timeline-status-chip:not(.active) {
+      opacity: 0.4;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .timeline-status-chip:not(.active) .status-dot {
+      animation: none;
+    }
+
+    .timeline-status-chip.disabled {
+      opacity: 0.25;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    .timeline-status-chip.disabled .status-dot {
+      background: var(--text-muted) !important;
+      box-shadow: none !important;
+      animation: none !important;
+    }
+
+    /* Track Row visibility and animation */
+    .track-row {
+      transition: opacity 0.4s ease, max-height 0.5s ease, margin 0.4s ease, padding 0.4s ease;
+      overflow: hidden;
+    }
+
+    .track-row.hidden-row {
+      opacity: 0;
+      max-height: 0 !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      pointer-events: none;
+    }
+
+    .track-row.hidden-row::before,
+    .track-row.hidden-row::after {
+      opacity: 0;
+    }
+
+    /* Track Node filter animation */
+    .track-node {
+      transition: opacity 0.4s ease, transform 0.4s ease, max-width 0.4s ease, padding 0.4s ease, margin 0.4s ease;
+    }
+
+    .track-node.filtered-out {
+      opacity: 0;
+      transform: scale(0.8);
+      max-width: 0;
+      padding: 0;
+      margin: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
     /* The track container - horizontal flow */
     .track-row {
       display: flex;
@@ -5066,17 +5132,17 @@
             </div>
             <p class="timeline-tagline">Ideas → Code → Reality</p>
             <div class="timeline-status-summary">
-              <div class="timeline-status-chip building">
+              <div class="timeline-status-chip building active" data-filter="building" onclick="filterTimelineByStatus('building', this)">
                 <span class="status-dot"></span>
-                <span>4 Building</span>
+                <span class="chip-label">3 Building</span>
               </div>
-              <div class="timeline-status-chip live">
+              <div class="timeline-status-chip live active" data-filter="live" onclick="filterTimelineByStatus('live', this)">
                 <span class="status-dot"></span>
-                <span>1 Live</span>
+                <span class="chip-label">4 Live</span>
               </div>
-              <div class="timeline-status-chip planning">
+              <div class="timeline-status-chip planning active" data-filter="planning" onclick="filterTimelineByStatus('planning', this)">
                 <span class="status-dot"></span>
-                <span>1 Planning</span>
+                <span class="chip-label">1 Planning</span>
               </div>
             </div>
           </div>
@@ -5458,7 +5524,7 @@
             </div>
           </div>
           <!-- Backtest Pro Node -->
-          <div class="track-node building">
+          <div class="track-node building" data-status="building">
             <div class="track-card" onclick="this.classList.toggle('flipped')">
               <div class="track-card-inner">
                 <div class="track-card-front">
@@ -6138,6 +6204,86 @@
         }
       });
     }
+
+    // ============ Timeline Status Filter (Fluid Rearrangement) ============
+    // Track active filters (all active by default)
+    let activeTimelineFilters = new Set(['building', 'live', 'planning']);
+
+    function filterTimelineByStatus(status, chipElement) {
+      // Toggle the filter
+      if (activeTimelineFilters.has(status)) {
+        // Don't allow deselecting if it's the last active filter
+        if (activeTimelineFilters.size <= 1) return;
+        activeTimelineFilters.delete(status);
+        chipElement.classList.remove('active');
+      } else {
+        activeTimelineFilters.add(status);
+        chipElement.classList.add('active');
+      }
+
+      // Apply filters to track nodes with fluid animation
+      const trackRows = document.querySelectorAll('.track-row');
+
+      trackRows.forEach(row => {
+        const nodes = row.querySelectorAll('.track-node');
+        let visibleCount = 0;
+
+        nodes.forEach(node => {
+          const nodeStatus = node.dataset.status;
+          if (activeTimelineFilters.has(nodeStatus)) {
+            node.classList.remove('filtered-out');
+            visibleCount++;
+          } else {
+            node.classList.add('filtered-out');
+          }
+        });
+
+        // Hide entire row if no visible nodes
+        if (visibleCount === 0) {
+          row.classList.add('hidden-row');
+        } else {
+          row.classList.remove('hidden-row');
+        }
+      });
+
+      // Update chip labels with filtered counts
+      updateTimelineChipCounts();
+    }
+
+    function updateTimelineChipCounts() {
+      const statusCounts = { building: 0, live: 0, planning: 0 };
+
+      document.querySelectorAll('.track-node').forEach(node => {
+        const status = node.dataset.status;
+        if (status && statusCounts.hasOwnProperty(status)) {
+          statusCounts[status]++;
+        }
+      });
+
+      // Update chip labels and disable those with 0 count
+      document.querySelectorAll('.timeline-status-chip').forEach(chip => {
+        const filter = chip.dataset.filter;
+        const count = statusCounts[filter] || 0;
+        const label = chip.querySelector('.chip-label');
+
+        if (label) {
+          const statusText = filter.charAt(0).toUpperCase() + filter.slice(1);
+          label.textContent = `${count} ${statusText}`;
+        }
+
+        // Disable chips with 0 count
+        if (count === 0) {
+          chip.classList.add('disabled');
+          chip.classList.remove('active');
+          activeTimelineFilters.delete(filter);
+        } else {
+          chip.classList.remove('disabled');
+        }
+      });
+    }
+
+    // Initialize timeline chip counts on page load
+    document.addEventListener('DOMContentLoaded', updateTimelineChipCounts);
 
     // ============ GitHub API Configuration ============
     const GITHUB_USERNAME = 'castroarun';
