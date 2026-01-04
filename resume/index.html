@@ -1541,6 +1541,11 @@
       box-shadow: 0 0 8px rgba(139, 92, 246, 0.5);
     }
 
+    .timeline-status-chip.all.active {
+      background: var(--accent-dim);
+      border-color: var(--accent);
+    }
+
     @keyframes statusPulse {
       0%, 100% { opacity: 1; }
       50% { opacity: 0.5; }
@@ -5156,17 +5161,20 @@
             </div>
             <p class="timeline-tagline">Ideas → Code → Reality</p>
             <div class="timeline-status-summary">
-              <div class="timeline-status-chip building active" data-filter="building" onclick="filterTimelineByStatus('building', this)">
-                <span class="status-dot"></span>
-                <span class="chip-label">3 Building</span>
+              <div class="timeline-status-chip all active" data-filter="all" onclick="filterTimelineByStatus('all', this)">
+                <span class="chip-label">All (8)</span>
               </div>
-              <div class="timeline-status-chip live active" data-filter="live" onclick="filterTimelineByStatus('live', this)">
+              <div class="timeline-status-chip building" data-filter="building" onclick="filterTimelineByStatus('building', this)">
                 <span class="status-dot"></span>
-                <span class="chip-label">4 Live</span>
+                <span class="chip-label">Building (3)</span>
               </div>
-              <div class="timeline-status-chip planning active" data-filter="planning" onclick="filterTimelineByStatus('planning', this)">
+              <div class="timeline-status-chip live" data-filter="live" onclick="filterTimelineByStatus('live', this)">
                 <span class="status-dot"></span>
-                <span class="chip-label">1 Planning</span>
+                <span class="chip-label">Live (4)</span>
+              </div>
+              <div class="timeline-status-chip planning" data-filter="planning" onclick="filterTimelineByStatus('planning', this)">
+                <span class="status-dot"></span>
+                <span class="chip-label">Planning (1)</span>
               </div>
             </div>
           </div>
@@ -6250,43 +6258,30 @@
         }
       });
 
-      // Sync timeline header chips with main filter
-      syncTimelineChipsWithFilter(status);
-    }
-
-    // Sync timeline header chips when main legend is used
-    function syncTimelineChipsWithFilter(status) {
+      // Sync timeline header chips with main filter (single select)
       document.querySelectorAll('.timeline-status-chip').forEach(chip => {
-        const chipFilter = chip.dataset.filter;
-        if (status === 'all') {
+        chip.classList.remove('active');
+        if (chip.dataset.filter === status) {
           chip.classList.add('active');
-          activeTimelineFilters.add(chipFilter);
-        } else if (chipFilter === status) {
-          chip.classList.add('active');
-          activeTimelineFilters = new Set([status]);
-        } else {
-          chip.classList.remove('active');
         }
       });
+      currentTimelineFilter = status;
     }
 
-    // ============ Timeline Status Filter (Fluid Rearrangement) ============
-    // Track active filters (all active by default)
-    let activeTimelineFilters = new Set(['building', 'live', 'planning']);
+    // ============ Timeline Status Filter (Single Select) ============
+    let currentTimelineFilter = 'all';
 
     function filterTimelineByStatus(status, chipElement) {
-      // Toggle the filter
-      if (activeTimelineFilters.has(status)) {
-        // Don't allow deselecting if it's the last active filter
-        if (activeTimelineFilters.size <= 1) return;
-        activeTimelineFilters.delete(status);
-        chipElement.classList.remove('active');
-      } else {
-        activeTimelineFilters.add(status);
-        chipElement.classList.add('active');
-      }
+      // Single select - only one filter active at a time
+      currentTimelineFilter = status;
 
-      // Apply filters to track nodes with fluid animation
+      // Update chip active states
+      document.querySelectorAll('.timeline-status-chip').forEach(chip => {
+        chip.classList.remove('active');
+      });
+      chipElement.classList.add('active');
+
+      // Apply filter to track nodes with fluid animation
       const trackRows = document.querySelectorAll('.track-row');
 
       trackRows.forEach(row => {
@@ -6295,7 +6290,7 @@
 
         nodes.forEach(node => {
           const nodeStatus = node.dataset.status;
-          if (activeTimelineFilters.has(nodeStatus)) {
+          if (status === 'all' || nodeStatus === status) {
             node.classList.remove('filtered-out');
             visibleCount++;
           } else {
@@ -6311,21 +6306,22 @@
         }
       });
 
-      // Update chip labels with filtered counts
-      updateTimelineChipCounts();
+      // Sync with main legend filter
+      filterProjects(status);
     }
 
     function updateTimelineChipCounts() {
-      const statusCounts = { building: 0, live: 0, planning: 0 };
+      const statusCounts = { all: 0, building: 0, live: 0, planning: 0 };
 
       document.querySelectorAll('.track-node').forEach(node => {
         const status = node.dataset.status;
         if (status && statusCounts.hasOwnProperty(status)) {
           statusCounts[status]++;
+          statusCounts.all++;
         }
       });
 
-      // Update chip labels and disable those with 0 count
+      // Update chip labels with "Status (count)" format and disable those with 0 count
       document.querySelectorAll('.timeline-status-chip').forEach(chip => {
         const filter = chip.dataset.filter;
         const count = statusCounts[filter] || 0;
@@ -6333,14 +6329,12 @@
 
         if (label) {
           const statusText = filter.charAt(0).toUpperCase() + filter.slice(1);
-          label.textContent = `${count} ${statusText}`;
+          label.textContent = `${statusText} (${count})`;
         }
 
-        // Disable chips with 0 count
-        if (count === 0) {
+        // Disable chips with 0 count (except 'all')
+        if (count === 0 && filter !== 'all') {
           chip.classList.add('disabled');
-          chip.classList.remove('active');
-          activeTimelineFilters.delete(filter);
         } else {
           chip.classList.remove('disabled');
         }
