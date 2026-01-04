@@ -1441,6 +1441,111 @@
       display: block;
     }
 
+    /* Timeline Header */
+    .timeline-header {
+      text-align: center;
+      padding: 2rem 1rem 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .timeline-header-content {
+      display: inline-block;
+    }
+
+    .timeline-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .timeline-title {
+      font-family: var(--font-display);
+      font-size: 1.75rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
+      margin: 0;
+    }
+
+    .timeline-pulse {
+      width: 8px;
+      height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: timelinePulse 2s ease-in-out infinite;
+      box-shadow: 0 0 10px var(--accent-dim);
+    }
+
+    @keyframes timelinePulse {
+      0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+        box-shadow: 0 0 10px var(--accent-dim);
+      }
+      50% {
+        transform: scale(1.5);
+        opacity: 0.7;
+        box-shadow: 0 0 20px var(--accent);
+      }
+    }
+
+    .timeline-tagline {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin: 0 0 1rem 0;
+      font-style: italic;
+      letter-spacing: 0.1em;
+    }
+
+    .timeline-status-summary {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .timeline-status-chip {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+    }
+
+    .timeline-status-chip .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .timeline-status-chip.building .status-dot {
+      background: #F59E0B;
+      box-shadow: 0 0 8px rgba(245, 158, 11, 0.5);
+      animation: statusPulse 2s ease-in-out infinite;
+    }
+
+    .timeline-status-chip.live .status-dot {
+      background: #22C55E;
+      box-shadow: 0 0 8px rgba(34, 197, 94, 0.5);
+    }
+
+    .timeline-status-chip.planning .status-dot {
+      background: #8B5CF6;
+      box-shadow: 0 0 8px rgba(139, 92, 246, 0.5);
+    }
+
+    @keyframes statusPulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
     /* The track container - horizontal flow */
     .track-row {
       display: flex;
@@ -4951,6 +5056,31 @@
 
       <!-- Track Timeline View (Default) -->
       <div class="track-timeline active" id="track-timeline">
+        <!-- Timeline Header -->
+        <div class="timeline-header">
+          <div class="timeline-header-content">
+            <div class="timeline-title-row">
+              <div class="timeline-pulse"></div>
+              <h2 class="timeline-title">The Build Journey</h2>
+              <div class="timeline-pulse"></div>
+            </div>
+            <p class="timeline-tagline">Ideas → Code → Reality</p>
+            <div class="timeline-status-summary">
+              <div class="timeline-status-chip building">
+                <span class="status-dot"></span>
+                <span>4 Building</span>
+              </div>
+              <div class="timeline-status-chip live">
+                <span class="status-dot"></span>
+                <span>1 Live</span>
+              </div>
+              <div class="timeline-status-chip planning">
+                <span class="status-dot"></span>
+                <span>1 Planning</span>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="track-flip-instruction">Click any card to flip</div>
         <div class="track-row">
           <!-- PRIMMO Node -->
