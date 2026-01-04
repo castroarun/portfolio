@@ -3878,6 +3878,56 @@
       line-height: 1.5;
     }
 
+    /* Timeline Gallery Effect */
+    .timeline-item {
+      position: relative;
+    }
+
+    .timeline-gallery {
+      position: absolute;
+      right: -20px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      gap: 0.5rem;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.4s ease;
+      z-index: 10;
+    }
+
+    .timeline-item:hover .timeline-gallery {
+      opacity: 1;
+      visibility: visible;
+      right: 0;
+    }
+
+    .timeline-gallery-img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border: 3px solid rgba(255, 255, 255, 0.9);
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease;
+    }
+
+    .timeline-gallery-img:nth-child(1) {
+      transform: rotate(-5deg);
+    }
+
+    .timeline-gallery-img:nth-child(2) {
+      transform: rotate(3deg) translateY(-5px);
+    }
+
+    .timeline-item:hover .timeline-gallery-img:nth-child(1) {
+      transform: rotate(-8deg) scale(1.1);
+    }
+
+    .timeline-item:hover .timeline-gallery-img:nth-child(2) {
+      transform: rotate(5deg) translateY(-8px) scale(1.1);
+    }
+
     /* View Toggle */
     .view-toggle {
       display: flex;
@@ -3915,6 +3965,44 @@
       width: 14px;
       height: 14px;
     }
+
+    /* Go to Top Button */
+    .go-to-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 44px;
+      height: 44px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-medium);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 100;
+    }
+
+    .go-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .go-to-top:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      box-shadow: 0 0 15px rgba(34, 211, 238, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .go-to-top svg {
+      width: 20px;
+      height: 20px;
+    }
   </style>
 </head>
 <body>
@@ -3941,8 +4029,8 @@
         <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
       </svg>
       <span class="nav-chat-text">
-        <span class="main">Chat with AI</span>
-        <span class="sub">Know about me</span>
+        <span class="main">Resume Assistant</span>
+        <span class="sub">Ask me anything</span>
       </span>
     </a>
   </nav>
@@ -4313,6 +4401,10 @@
               <div class="timeline-company">Bank of America (Jakarta, Singapore)</div>
               <div class="timeline-employer">Infosys Ltd.</div>
               <div class="timeline-summary">Driving RTP implementations and NFR delivery for APAC. 5x business-volumes-ready reporting, 60% reduction in job execution times.</div>
+              <div class="timeline-gallery">
+                <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=120&h=120&fit=crop" alt="Jakarta office" class="timeline-gallery-img">
+                <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=120&h=120&fit=crop" alt="Team collaboration" class="timeline-gallery-img">
+              </div>
             </div>
             <div class="timeline-item">
               <div class="timeline-date-role">
@@ -4322,6 +4414,10 @@
               <div class="timeline-company">Cholamandalam Finance</div>
               <div class="timeline-employer">Latitude Fintech</div>
               <div class="timeline-summary">All-India LOS go-live. Two-thirds reduction in client onboarding time.</div>
+              <div class="timeline-gallery">
+                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=120&h=120&fit=crop" alt="Team meeting" class="timeline-gallery-img">
+                <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=120&h=120&fit=crop" alt="Office work" class="timeline-gallery-img">
+              </div>
             </div>
             <div class="timeline-item">
               <div class="timeline-date-role">
@@ -4331,6 +4427,10 @@
               <div class="timeline-company">Standard Bank (South Africa & Nigeria)</div>
               <div class="timeline-employer">EdgeVerve Systems</div>
               <div class="timeline-summary">3000+ man-days, 100% on-time delivery. CMMI Level 4. Client's most preferred PM.</div>
+              <div class="timeline-gallery">
+                <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=120&h=120&fit=crop" alt="Africa project" class="timeline-gallery-img">
+                <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=120&h=120&fit=crop" alt="Team leadership" class="timeline-gallery-img">
+              </div>
             </div>
             <div class="timeline-item">
               <div class="timeline-date-role">
@@ -4340,6 +4440,10 @@
               <div class="timeline-company">Emirates NBD (Dubai)</div>
               <div class="timeline-employer">Infosys Ltd.</div>
               <div class="timeline-summary">6000+ man-days, 100% on-time. Award-winning module designs. Release automation.</div>
+              <div class="timeline-gallery">
+                <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=120&h=120&fit=crop" alt="Dubai skyline" class="timeline-gallery-img">
+                <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=120&h=120&fit=crop" alt="Tech work" class="timeline-gallery-img">
+              </div>
             </div>
             <div class="timeline-item">
               <div class="timeline-date-role">
@@ -4349,6 +4453,10 @@
               <div class="timeline-company">Multiple Banks</div>
               <div class="timeline-employer">Infosys Ltd.</div>
               <div class="timeline-summary">Bank Sohar, SBI Overseas, Bank of Alexandria, Bank of India - Core banking implementations.</div>
+              <div class="timeline-gallery">
+                <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=120&h=120&fit=crop" alt="Coding" class="timeline-gallery-img">
+                <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=120&h=120&fit=crop" alt="Early career" class="timeline-gallery-img">
+              </div>
             </div>
           </div>
         </div>
@@ -7584,7 +7692,24 @@ This creativity informs his approach to problem-solving - thinking outside the b
 
       // Animate stats after data loads
       setTimeout(animateStats, 1500);
+
+      // Go to top button
+      const goToTopBtn = document.getElementById('go-to-top');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 500) {
+          goToTopBtn.classList.add('visible');
+        } else {
+          goToTopBtn.classList.remove('visible');
+        }
+      });
     });
   </script>
+
+  <!-- Go to Top Button -->
+  <button id="go-to-top" class="go-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" aria-label="Go to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M18 15l-6-6-6 6"/>
+    </svg>
+  </button>
 </body>
 </html>
