@@ -14,7 +14,9 @@
       "Bash(git log:*)",
       "Bash(copy:*)",
       "Bash(git config:*)",
-      "Bash(dir:*)"
+      "Bash(dir:*)",
+      "Bash(copy /Y \"docs\\\\mockups\\\\resume-digital.html\" \"resume\\\\index.html\")",
+      "Bash(node scripts/sync-projects.js:*)"
     ]
   }
 }

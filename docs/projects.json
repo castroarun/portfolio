@@ -1,0 +1,200 @@
+{
+  "meta": {
+    "description": "Single source of truth for all portfolio projects",
+    "lastUpdated": "2026-01-04",
+    "usage": "Run 'node scripts/sync-projects.js' to update portfolio pages"
+  },
+  "projects": [
+    {
+      "id": "reppit",
+      "name": "REPPIT",
+      "tagline": "Strength Training Companion",
+      "description": "Track workouts with real-time timer, progressive overload tracking, and exercise history analytics.",
+      "longDescription": "A mobile strength training app that tracks your workouts, rest periods, and progress. Features timer modes, workout history, and detailed analytics for serious lifters.",
+      "status": "live",
+      "progress": 100,
+      "technologies": [
+        "Flutter",
+        "Dart",
+        "SQLite",
+        "Riverpod"
+      ],
+      "localPath": "strength_profile_tracker",
+      "githubRepo": "castroarun/reppit",
+      "category": "mobile-app",
+      "featured": true,
+      "showInResume": true,
+      "showInPortfolio": true
+    },
+    {
+      "id": "noteapp",
+      "name": "NoteApp",
+      "tagline": "Privacy-First Notes",
+      "description": "Offline-first with cloud sync, voice-to-text input, and 200+ automated test cases.",
+      "longDescription": "A notes app with real-time sync across devices. Features markdown support, folder organization, and AI-powered search to find any note instantly. Built for speed and simplicity.",
+      "status": "live",
+      "progress": 100,
+      "technologies": [
+        "Next.js",
+        "TypeScript",
+        "Supabase",
+        "Tailwind"
+      ],
+      "localPath": "noteApp",
+      "githubRepo": "castroarun/noteapp",
+      "category": "web-app",
+      "featured": true,
+      "showInResume": true,
+      "showInPortfolio": true
+    },
+    {
+      "id": "primmo",
+      "name": "PRIMMO",
+      "tagline": "AI Strength Coach",
+      "description": "Communicates via WhatsApp and Voice calls. Uses workout data from REPPIT for personalized training guidance.",
+      "longDescription": "An agentic AI strength coach that communicates via WhatsApp and voice calls. Leverages workout data from REPPIT to provide personalized training guidance, form corrections, and motivation.",
+      "status": "building",
+      "progress": 39,
+      "technologies": [
+        "Next.js",
+        "TypeScript",
+        "Supabase",
+        "WhatsApp API",
+        "Voice AI"
+      ],
+      "localPath": "PRIMMO",
+      "githubRepo": "castroarun/primmo",
+      "category": "ai-agent",
+      "featured": true,
+      "showInResume": true,
+      "showInPortfolio": true
+    },
+    {
+      "id": "spotify-songs",
+      "name": "Spotify Songs",
+      "tagline": "AI-Assisted Music",
+      "description": "AI-assisted original music production for Spotify release. Themes: A Letter to Myself, Island of Sun & Rain, Morning Rush.",
+      "longDescription": "Original music production using AI-assisted composition and production tools. Creating authentic songs with themes of self-reflection, tropical vibes, and daily life energy.",
+      "status": "building",
+      "progress": 17,
+      "technologies": [
+        "AI/ML",
+        "Music Production",
+        "Suno",
+        "Udio"
+      ],
+      "localPath": null,
+      "githubRepo": null,
+      "category": "creative",
+      "featured": false,
+      "showInResume": true,
+      "showInPortfolio": false
+    },
+    {
+      "id": "space-race-ml",
+      "name": "Space Race ML",
+      "tagline": "Rocket Landing Predictor",
+      "description": "Machine learning project predicting successful rocket landings. IBM Data Science certified.",
+      "longDescription": "Applied machine learning to predict successful SpaceX rocket landings. Part of IBM Data Science Professional Certificate capstone project.",
+      "status": "live",
+      "progress": 100,
+      "technologies": [
+        "Python",
+        "Machine Learning",
+        "Pandas",
+        "Scikit-learn"
+      ],
+      "localPath": null,
+      "githubRepo": "castroarun/space-race-ml",
+      "category": "data-science",
+      "featured": false,
+      "showInResume": true,
+      "showInPortfolio": false
+    },
+    {
+      "id": "portfolio",
+      "name": "This Portfolio",
+      "tagline": "Interactive Digital Resume",
+      "description": "AI chat assistant, skills radar, flip cards with 9-step workflow showcase.",
+      "longDescription": "A modern portfolio featuring an AI chat assistant, interactive skills radar, project flip cards, and a showcase of the 9-step development workflow.",
+      "status": "building",
+      "progress": 39,
+      "technologies": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "Chart.js"
+      ],
+      "localPath": "castronix-portfolio",
+      "githubRepo": "castroarun/portfolio",
+      "category": "web-app",
+      "featured": false,
+      "showInResume": true,
+      "showInPortfolio": false
+    },
+    {
+      "id": "portfolio-optimizer",
+      "name": "Portfolio Optimizer",
+      "tagline": "Investment Dashboard",
+      "description": "Integrable dashboard with fundamentals view for easy decision making and portfolio performance tracking.",
+      "longDescription": "An investment portfolio dashboard that aggregates fundamental data, tracks performance, and provides AI-powered insights for better investment decisions.",
+      "status": "planning",
+      "progress": 11,
+      "technologies": [
+        "React",
+        "TypeScript",
+        "Finance APIs",
+        "Charts"
+      ],
+      "localPath": "quantflow",
+      "githubRepo": null,
+      "category": "fintech",
+      "featured": false,
+      "showInResume": true,
+      "showInPortfolio": false
+    },
+    {
+      "id": "backtest-pro",
+      "name": "Backtest Pro",
+      "tagline": "Options Strategy Backtester",
+      "description": "Covered calls strategy backtesting to smooth portfolio returns. Extensive backtesting & automation.",
+      "longDescription": "A backtesting platform for covered call options strategies. Analyzes historical data to optimize premium collection while managing downside risk.",
+      "status": "building",
+      "progress": 11,
+      "technologies": [
+        "Python",
+        "Pandas",
+        "Trading APIs",
+        "Automation"
+      ],
+      "localPath": "Covered_Calls",
+      "githubRepo": null,
+      "category": "fintech",
+      "featured": false,
+      "showInResume": true,
+      "showInPortfolio": false
+    }
+  ],
+  "statusConfig": {
+    "live": {
+      "label": "Live",
+      "color": "#22C55E",
+      "glowColor": "rgba(34, 197, 94, 0.5)"
+    },
+    "building": {
+      "label": "Building",
+      "color": "#F59E0B",
+      "glowColor": "rgba(245, 158, 11, 0.5)"
+    },
+    "planning": {
+      "label": "Planning",
+      "color": "#3B82F6",
+      "glowColor": "rgba(59, 130, 246, 0.5)"
+    },
+    "ideating": {
+      "label": "Ideating",
+      "color": "#A855F7",
+      "glowColor": "rgba(168, 85, 247, 0.5)"
+    }
+  }
+}

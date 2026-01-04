@@ -2335,51 +2335,6 @@
       });
     }
 
-    // Render S-Shaped Serpentine Timeline
-    function renderSerpentine() {
-      const container = document.getElementById('timeline-serpentine');
-      const eventsPerRow = 4;
-      const rows = [];
-
-      // Split events into rows
-      for (let i = 0; i < sortedData.length; i += eventsPerRow) {
-        rows.push(sortedData.slice(i, i + eventsPerRow));
-      }
-
-      let html = '';
-      rows.forEach((row, rowIndex) => {
-        // Add connector before row (except first row)
-        if (rowIndex > 0) {
-          const connectorSide = rowIndex % 2 === 1 ? 'right' : 'left';
-          html += `<div class="serpentine-connector ${connectorSide}"></div>`;
-        }
-
-        // Add row
-        html += `
-          <div class="serpentine-row">
-            <div class="serpentine-events">
-              ${row.map(event => `
-                <div class="serpentine-event" data-category="${event.category}">
-                  <div class="serpentine-tooltip">
-                    <p class="serpentine-tooltip-desc">${event.desc}</p>
-                    ${event.highlight ? `<div class="serpentine-tooltip-highlight">"${event.highlight}"</div>` : ''}
-                  </div>
-                  <div class="serpentine-dot ${event.category}"></div>
-                  <div class="serpentine-card">
-                    <div class="serpentine-year ${event.category}">${event.year}</div>
-                    <div class="serpentine-title">${event.title}</div>
-                    ${event.role ? `<div class="serpentine-role">${event.role}</div>` : ''}
-                  </div>
-                </div>
-              `).join('')}
-            </div>
-          </div>
-        `;
-      });
-
-      container.innerHTML = html;
-    }
-
     // Render Career Spine with Branching Tracks
     function renderSpine() {
       const container = document.getElementById('timeline-spine');
