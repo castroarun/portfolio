@@ -199,23 +199,23 @@
 
     /* Lifeline Clock Animation */
     .clock-lifeline {
-      animation: clockPulse 1.5s ease-in-out infinite;
+      animation: clockPulse 3s ease-in-out infinite;
       filter: drop-shadow(0 0 4px var(--accent));
     }
 
     .clock-lifeline .clock-hand {
       transform-origin: 12px 12px;
-      animation: clockRotate 3s linear infinite;
+      animation: clockRotate 6s linear infinite;
     }
 
     @keyframes clockPulse {
       0%, 100% {
-        opacity: 1;
-        filter: drop-shadow(0 0 4px var(--accent));
+        opacity: 0.5;
+        filter: drop-shadow(0 0 2px var(--accent));
       }
       50% {
-        opacity: 0.7;
-        filter: drop-shadow(0 0 8px var(--accent));
+        opacity: 1;
+        filter: drop-shadow(0 0 10px var(--accent));
       }
     }
 
@@ -224,13 +224,27 @@
       100% { transform: rotate(360deg); }
     }
 
+    /* Nav Badge Breathing */
+    .nav-badge {
+      animation: badgeBreathing 3.5s ease-in-out infinite;
+    }
+
+    @keyframes badgeBreathing {
+      0%, 100% {
+        box-shadow: 0 0 10px rgba(34, 211, 238, 0.1);
+        border-color: rgba(34, 211, 238, 0.4);
+      }
+      50% {
+        box-shadow: 0 0 25px rgba(34, 211, 238, 0.3);
+        border-color: rgba(34, 211, 238, 0.8);
+      }
+    }
+
     .nav-chat-hint {
       display: inline-flex;
       align-items: center;
-      gap: 0.4rem;
+      gap: 0.5rem;
       color: var(--text-muted);
-      font-size: 0.8rem;
-      font-weight: 500;
       padding: 0.4rem 0.8rem;
       border-radius: 6px;
       transition: all 0.3s ease;
@@ -243,8 +257,26 @@
     }
 
     .nav-chat-hint svg {
-      width: 16px;
-      height: 16px;
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+
+    .nav-chat-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+    }
+
+    .nav-chat-text .main {
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    .nav-chat-text .sub {
+      font-size: 0.6rem;
+      color: var(--accent);
+      opacity: 0.8;
     }
 
     /* ============ Layout ============ */
@@ -3295,25 +3327,34 @@
       background: var(--bg-card);
       border: 1px solid var(--border-subtle);
       border-radius: 16px;
-      overflow: hidden;
+      overflow: visible;
       margin-bottom: 2rem;
-      animation: breathingGlow 2.5s ease-in-out infinite;
+      position: relative;
     }
 
-    @keyframes breathingGlow {
+    .intro-section::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 120%;
+      height: 150%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background: radial-gradient(ellipse at center, rgba(34, 211, 238, 0.15) 0%, transparent 70%);
+      animation: circularBreathing 4s ease-in-out infinite;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    @keyframes circularBreathing {
       0%, 100% {
-        box-shadow:
-          0 0 15px rgba(34, 211, 238, 0.08),
-          0 0 30px rgba(34, 211, 238, 0.04),
-          inset 0 0 20px rgba(34, 211, 238, 0.02);
-        border-color: rgba(34, 211, 238, 0.15);
+        opacity: 0.3;
+        transform: translate(-50%, -50%) scale(0.9);
       }
       50% {
-        box-shadow:
-          0 0 35px rgba(34, 211, 238, 0.2),
-          0 0 70px rgba(34, 211, 238, 0.1),
-          inset 0 0 40px rgba(34, 211, 238, 0.05);
-        border-color: rgba(34, 211, 238, 0.5);
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.1);
       }
     }
 
@@ -3920,7 +3961,10 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
       </svg>
-      Chat with AI
+      <span class="nav-chat-text">
+        <span class="main">Chat with AI</span>
+        <span class="sub">Know about me</span>
+      </span>
     </a>
   </nav>
 
