@@ -3885,47 +3885,52 @@
 
     .timeline-gallery {
       position: absolute;
-      right: -20px;
+      right: 0;
       top: 50%;
       transform: translateY(-50%);
       display: flex;
       gap: 0.5rem;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.4s ease;
+      opacity: 0.08;
+      filter: grayscale(100%);
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
       z-index: 10;
     }
 
     .timeline-item:hover .timeline-gallery {
       opacity: 1;
-      visibility: visible;
-      right: 0;
+      filter: grayscale(0%);
     }
 
     .timeline-gallery-img {
-      width: 60px;
-      height: 60px;
+      width: 55px;
+      height: 55px;
       object-fit: cover;
       border: 3px solid rgba(255, 255, 255, 0.9);
       border-radius: 8px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-      transition: transform 0.3s ease;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .timeline-gallery-img:nth-child(1) {
-      transform: rotate(-5deg);
+      transform: rotate(-3deg);
     }
 
     .timeline-gallery-img:nth-child(2) {
-      transform: rotate(3deg) translateY(-5px);
+      transform: rotate(2deg) translateY(-3px);
+    }
+
+    .timeline-item:hover .timeline-gallery-img {
+      width: 75px;
+      height: 75px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
     }
 
     .timeline-item:hover .timeline-gallery-img:nth-child(1) {
-      transform: rotate(-8deg) scale(1.1);
+      transform: rotate(-12deg) scale(1.05);
     }
 
     .timeline-item:hover .timeline-gallery-img:nth-child(2) {
-      transform: rotate(5deg) translateY(-8px) scale(1.1);
+      transform: rotate(10deg) translateY(-10px) scale(1.05);
     }
 
     /* View Toggle */
@@ -4213,14 +4218,14 @@
         <!-- View Toggle -->
         <div style="padding: 1rem 1.5rem 0; display: flex; justify-content: flex-end;">
           <div class="view-toggle">
-            <button class="view-btn active" onclick="switchExpView('tabs')" id="view-tabs">
+            <button class="view-btn" onclick="switchExpView('tabs')" id="view-tabs">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <rect x="3" y="3" width="18" height="18" rx="2"/>
                 <path d="M3 9h18"/>
               </svg>
               Tabs
             </button>
-            <button class="view-btn" onclick="switchExpView('timeline')" id="view-timeline">
+            <button class="view-btn active" onclick="switchExpView('timeline')" id="view-timeline">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M12 2v20"/>
                 <path d="M2 12h4"/>
@@ -4235,8 +4240,8 @@
           </div>
         </div>
 
-        <!-- Tabbed View -->
-        <div id="exp-tabs-view">
+        <!-- Tabbed View (hidden by default) -->
+        <div id="exp-tabs-view" style="display: none;">
           <div class="exp-tabs">
             <button class="exp-tab active" onclick="switchExpTab('boa')" data-tab="boa">
               Bank of America
@@ -4381,8 +4386,8 @@
           </div>
         </div>
 
-        <!-- Timeline View (hidden by default) -->
-        <div id="exp-timeline-view" style="display: none; padding: 0.5rem 2rem 2rem 2rem;">
+        <!-- Timeline View (default) -->
+        <div id="exp-timeline-view" style="padding: 0.5rem 2rem 2rem 2rem;">
           <!-- Timeline Header -->
           <div class="exp-timeline-header">
             <div class="exp-timeline-title-row">
