@@ -2,7 +2,8 @@
   "meta": {
     "description": "Single source of truth for all portfolio projects",
     "lastUpdated": "2026-01-04",
-    "usage": "Run 'node scripts/sync-projects.js' to update portfolio pages"
+    "usage": "Run 'node scripts/sync-projects.js' to update portfolio pages",
+    "lastSync": "2026-01-04T09:16:18.971Z"
   },
   "projects": [
     {
