@@ -233,13 +233,13 @@
       0%, 100% {
         box-shadow: 0 0 8px rgba(34, 211, 238, 0.15), inset 0 0 15px rgba(34, 211, 238, 0.03);
         border-color: rgba(34, 211, 238, 0.45);
-        transform: scale(1);
+        transform: translateX(-50%) scale(1);
         opacity: 0.92;
       }
       50% {
         box-shadow: 0 0 20px rgba(34, 211, 238, 0.35), inset 0 0 25px rgba(34, 211, 238, 0.08);
         border-color: rgba(34, 211, 238, 0.85);
-        transform: scale(1.02);
+        transform: translateX(-50%) scale(1.02);
         opacity: 1;
       }
     }
@@ -4136,7 +4136,7 @@
       to { opacity: 1; transform: translateX(0); }
     }
 
-    /* Personal vertical line - continuous */
+    /* Personal vertical line - dotted */
     .personal-track::before {
       content: '';
       position: absolute;
@@ -4144,7 +4144,13 @@
       top: 0;
       bottom: 0;
       width: 2px;
-      background: linear-gradient(180deg, #F472B6 0%, rgba(244, 114, 182, 0.3) 100%);
+      background: repeating-linear-gradient(
+        to bottom,
+        #F472B6 0px,
+        #F472B6 8px,
+        transparent 8px,
+        transparent 16px
+      );
     }
 
     /* Adjust career item width in parallel mode */
@@ -4237,31 +4243,55 @@
       margin-bottom: 0.5rem;
     }
 
-    /* Photo gallery for life events */
+    /* Photo gallery for life events - matching career timeline style */
     .life-event-gallery {
       display: flex;
-      gap: 0.4rem;
+      gap: 0.5rem;
       margin-top: 0.5rem;
+      opacity: 0.15;
+      filter: grayscale(100%);
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .life-event:hover .life-event-gallery {
+      opacity: 1;
+      filter: grayscale(0%);
     }
 
     .life-event-gallery-img {
       width: 50px;
       height: 50px;
       object-fit: cover;
+      border: 2px solid rgba(255, 255, 255, 0.85);
       border-radius: 6px;
-      opacity: 0.85;
-      transition: all 0.3s ease;
-      border: 1px solid var(--border-subtle);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    .life-event-gallery-img:hover {
-      opacity: 1;
-      transform: scale(1.08);
-      box-shadow: 0 4px 12px rgba(244, 114, 182, 0.3);
+    .life-event-gallery-img:nth-child(1) {
+      transform: rotate(-3deg);
     }
 
-    .life-event.spiritual .life-event-gallery-img:hover {
-      box-shadow: 0 4px 12px rgba(251, 191, 36, 0.3);
+    .life-event-gallery-img:nth-child(2) {
+      transform: rotate(2deg) translateY(-2px);
+    }
+
+    .life-event:hover .life-event-gallery-img {
+      width: 70px;
+      height: 70px;
+      box-shadow: 0 6px 20px rgba(244, 114, 182, 0.4);
+    }
+
+    .life-event:hover .life-event-gallery-img:nth-child(1) {
+      transform: rotate(-8deg) scale(1.02);
+    }
+
+    .life-event:hover .life-event-gallery-img:nth-child(2) {
+      transform: rotate(6deg) translateY(-5px) scale(1.02);
+    }
+
+    .life-event.spiritual:hover .life-event-gallery-img {
+      box-shadow: 0 6px 20px rgba(251, 191, 36, 0.4);
     }
 
     /* Legend for life events */
