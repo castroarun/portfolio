@@ -5198,34 +5198,6 @@
 
       <!-- Track Timeline View (Default) -->
       <div class="track-timeline active" id="track-timeline">
-        <!-- Timeline Header -->
-        <div class="timeline-header">
-          <div class="timeline-header-content">
-            <div class="timeline-title-row">
-              <div class="timeline-pulse"></div>
-              <h2 class="timeline-title">The Build Journey</h2>
-              <div class="timeline-pulse"></div>
-            </div>
-            <p class="timeline-tagline">Ideas → Code → Reality</p>
-            <div class="timeline-status-summary">
-              <div class="timeline-status-chip all active" data-filter="all" onclick="filterTimelineByStatus('all', this)">
-                <span class="chip-label">All (8)</span>
-              </div>
-              <div class="timeline-status-chip building" data-filter="building" onclick="filterTimelineByStatus('building', this)">
-                <span class="status-dot"></span>
-                <span class="chip-label">Building (3)</span>
-              </div>
-              <div class="timeline-status-chip live" data-filter="live" onclick="filterTimelineByStatus('live', this)">
-                <span class="status-dot"></span>
-                <span class="chip-label">Live (4)</span>
-              </div>
-              <div class="timeline-status-chip planning" data-filter="planning" onclick="filterTimelineByStatus('planning', this)">
-                <span class="status-dot"></span>
-                <span class="chip-label">Planning (1)</span>
-              </div>
-            </div>
-          </div>
-        </div>
         <div class="track-flip-instruction">Click any card to flip</div>
         <div class="track-row">
           <!-- PRIMMO Node -->
@@ -6305,91 +6277,7 @@
         }
       });
 
-      // Sync timeline header chips with main filter (single select)
-      document.querySelectorAll('.timeline-status-chip').forEach(chip => {
-        chip.classList.remove('active');
-        if (chip.dataset.filter === status) {
-          chip.classList.add('active');
-        }
-      });
-      currentTimelineFilter = status;
     }
-
-    // ============ Timeline Status Filter (Single Select) ============
-    let currentTimelineFilter = 'all';
-
-    function filterTimelineByStatus(status, chipElement) {
-      // Single select - only one filter active at a time
-      currentTimelineFilter = status;
-
-      // Update chip active states
-      document.querySelectorAll('.timeline-status-chip').forEach(chip => {
-        chip.classList.remove('active');
-      });
-      chipElement.classList.add('active');
-
-      // Apply filter to track nodes with fluid animation
-      const trackRows = document.querySelectorAll('.track-row');
-
-      trackRows.forEach(row => {
-        const nodes = row.querySelectorAll('.track-node');
-        let visibleCount = 0;
-
-        nodes.forEach(node => {
-          const nodeStatus = node.dataset.status;
-          if (status === 'all' || nodeStatus === status) {
-            node.classList.remove('filtered-out');
-            visibleCount++;
-          } else {
-            node.classList.add('filtered-out');
-          }
-        });
-
-        // Hide entire row if no visible nodes
-        if (visibleCount === 0) {
-          row.classList.add('hidden-row');
-        } else {
-          row.classList.remove('hidden-row');
-        }
-      });
-
-      // Sync with main legend filter
-      filterProjects(status);
-    }
-
-    function updateTimelineChipCounts() {
-      const statusCounts = { all: 0, building: 0, live: 0, planning: 0 };
-
-      document.querySelectorAll('.track-node').forEach(node => {
-        const status = node.dataset.status;
-        if (status && statusCounts.hasOwnProperty(status)) {
-          statusCounts[status]++;
-          statusCounts.all++;
-        }
-      });
-
-      // Update chip labels with "Status (count)" format and disable those with 0 count
-      document.querySelectorAll('.timeline-status-chip').forEach(chip => {
-        const filter = chip.dataset.filter;
-        const count = statusCounts[filter] || 0;
-        const label = chip.querySelector('.chip-label');
-
-        if (label) {
-          const statusText = filter.charAt(0).toUpperCase() + filter.slice(1);
-          label.textContent = `${statusText} (${count})`;
-        }
-
-        // Disable chips with 0 count (except 'all')
-        if (count === 0 && filter !== 'all') {
-          chip.classList.add('disabled');
-        } else {
-          chip.classList.remove('disabled');
-        }
-      });
-    }
-
-    // Initialize timeline chip counts on page load
-    document.addEventListener('DOMContentLoaded', updateTimelineChipCounts);
 
     // Initialize main legend (disable items with 0 count)
     function initializeLegendCounts() {
