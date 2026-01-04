@@ -1,11 +1,12 @@
 #!/usr/bin/env node
 /**
- * Project Sync Script
+ * Project Sync Script v2
  *
- * Reads projects.json and updates:
- * - resume/index.html (What I'm Building section)
- * - index.html (Featured Work section)
- * - docs/mockups/resume-digital.html (source file)
+ * Reads project data from each project's .project.json file
+ * and aggregates into the portfolio.
+ *
+ * Source: Each project folder has .project.json + assets/screenshot.png
+ * Target: docs/projects.json, resume/index.html, index.html
  *
  * Usage: node scripts/sync-projects.js
  */
@@ -14,235 +15,244 @@ const fs = require('fs');
 const path = require('path');
 
 // Paths
-const ROOT = path.join(__dirname, '..');
-const PROJECTS_JSON = path.join(ROOT, 'docs', 'projects.json');
-const RESUME_HTML = path.join(ROOT, 'resume', 'index.html');
-const PORTFOLIO_HTML = path.join(ROOT, 'index.html');
-const MOCKUP_RESUME = path.join(ROOT, 'docs', 'mockups', 'resume-digital.html');
+const PROJECTS_ROOT = 'C:\\Users\\Castro\\Documents\\Projects';
+const PORTFOLIO_ROOT = path.join(PROJECTS_ROOT, 'castronix-portfolio');
+const PROJECTS_JSON = path.join(PORTFOLIO_ROOT, 'docs', 'projects.json');
+const ASSETS_DIR = path.join(PORTFOLIO_ROOT, 'assets', 'projects');
 
-// Load projects
-function loadProjects() {
-  const data = JSON.parse(fs.readFileSync(PROJECTS_JSON, 'utf8'));
-  return data;
+// Known project folders (mapped from projects.json localPath)
+const PROJECT_FOLDERS = [
+  { id: 'reppit', folder: 'strength_profile_tracker' },
+  { id: 'noteapp', folder: 'noteApp' },
+  { id: 'primmo', folder: 'PRIMMO' },
+  { id: 'portfolio', folder: 'castronix-portfolio' },
+  { id: 'portfolio-optimizer', folder: 'quantflow' },
+  { id: 'backtest-pro', folder: 'Covered_Calls' },
+  // Projects without local folders
+  { id: 'spotify-songs', folder: null },
+  { id: 'space-race-ml', folder: null }
+];
+
+// Load existing projects.json as fallback
+function loadExistingProjects() {
+  try {
+    return JSON.parse(fs.readFileSync(PROJECTS_JSON, 'utf8'));
+  } catch (e) {
+    return { projects: [], statusConfig: {} };
+  }
 }
 
-// Generate status dot HTML
-function getStatusDot(status, config) {
-  const statusInfo = config[status] || config.building;
-  return `<span class="status-dot" style="background: ${statusInfo.color}; box-shadow: 0 0 6px ${statusInfo.glowColor};"></span>`;
+// Read .project.json from a project folder
+function readProjectConfig(folderName) {
+  if (!folderName) return null;
+
+  const projectPath = path.join(PROJECTS_ROOT, folderName, '.project.json');
+  try {
+    if (fs.existsSync(projectPath)) {
+      return JSON.parse(fs.readFileSync(projectPath, 'utf8'));
+    }
+  } catch (e) {
+    console.log(`  Warning: Could not read ${projectPath}`);
+  }
+  return null;
 }
 
-// Generate project card HTML for resume (simple-card style)
-function generateResumeCard(project, statusConfig) {
-  const statusInfo = statusConfig[project.status] || statusConfig.building;
+// Copy screenshot from project to portfolio assets
+function copyScreenshot(folderName, projectId) {
+  if (!folderName) return false;
 
-  return `
-              <div class="simple-card" data-status="${project.status}">
-                <div class="simple-card-header">
-                  <span class="status-dot ${project.status}"></span>
-                  <h4>${project.name}</h4>
-                </div>
-                <p class="simple-card-desc">${project.description}</p>
-                <div class="simple-card-tech">
-                  ${project.technologies.slice(0, 4).map(t => `<span>${t}</span>`).join('')}
-                </div>
-              </div>`;
+  const possiblePaths = [
+    path.join(PROJECTS_ROOT, folderName, 'assets', 'screenshot.png'),
+    path.join(PROJECTS_ROOT, folderName, 'assets', 'preview.png'),
+    path.join(PROJECTS_ROOT, folderName, 'screenshot.png'),
+    path.join(PROJECTS_ROOT, folderName, 'docs', 'screenshot.png')
+  ];
+
+  for (const srcPath of possiblePaths) {
+    if (fs.existsSync(srcPath)) {
+      const destPath = path.join(ASSETS_DIR, `${projectId}.png`);
+      try {
+        fs.copyFileSync(srcPath, destPath);
+        console.log(`  Copied: ${srcPath} -> ${destPath}`);
+        return true;
+      } catch (e) {
+        console.log(`  Error copying ${srcPath}: ${e.message}`);
+      }
+    }
+  }
+  return false;
 }
 
-// Generate featured project HTML for portfolio
-function generatePortfolioProject(project, index) {
-  const isEven = index % 2 === 0;
+// Merge project config with existing data
+function mergeProjectData(existing, fromFolder) {
+  if (!fromFolder) return existing;
 
-  return `
-          <!-- ${project.name} -->
-          <article class="project ${isEven ? '' : 'project-reverse'}">
-            <div class="project-content">
-              <p class="project-overline">Featured Project</p>
-              <h3 class="project-title">${project.name}</h3>
-              <div class="project-description">
-                <p>${project.longDescription || project.description}</p>
-              </div>
-              <ul class="project-tech-list">
-                ${project.technologies.map(t => `<li>${t}</li>`).join('\n                ')}
-              </ul>
-              <div class="project-links">
-                ${project.githubRepo ? `<a href="https://github.com/${project.githubRepo}" target="_blank" aria-label="GitHub">
-                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                </a>` : ''}
-              </div>
-            </div>
-            <div class="project-image">
-              <div class="project-image-wrapper">
-                <img src="assets/projects/${project.id}.png" alt="${project.name} Screenshot" loading="lazy" onerror="this.style.display='none'">
-              </div>
-            </div>
-          </article>`;
-}
-
-// Generate legend counts
-function generateLegendCounts(projects) {
-  const counts = {
-    all: projects.length,
-    live: projects.filter(p => p.status === 'live').length,
-    building: projects.filter(p => p.status === 'building').length,
-    planning: projects.filter(p => p.status === 'planning').length,
-    ideating: projects.filter(p => p.status === 'ideating').length
+  return {
+    ...existing,
+    name: fromFolder.name || existing.name,
+    tagline: fromFolder.tagline || existing.tagline,
+    description: fromFolder.description || existing.description,
+    status: fromFolder.status || existing.status,
+    progress: fromFolder.progress ?? existing.progress,
+    technologies: fromFolder.technologies || existing.technologies,
+    category: fromFolder.category || existing.category,
+    featured: fromFolder.featured ?? existing.featured,
+    githubRepo: fromFolder.githubRepo || existing.githubRepo
   };
-  return counts;
-}
-
-// Update HTML file with new content between markers
-function updateHtmlSection(filePath, startMarker, endMarker, newContent) {
-  if (!fs.existsSync(filePath)) {
-    console.log(`  Skipped: ${filePath} (not found)`);
-    return false;
-  }
-
-  let html = fs.readFileSync(filePath, 'utf8');
-
-  const startIdx = html.indexOf(startMarker);
-  const endIdx = html.indexOf(endMarker);
-
-  if (startIdx === -1 || endIdx === -1) {
-    console.log(`  Skipped: ${filePath} (markers not found)`);
-    return false;
-  }
-
-  const before = html.substring(0, startIdx + startMarker.length);
-  const after = html.substring(endIdx);
-
-  html = before + '\n' + newContent + '\n            ' + after;
-
-  fs.writeFileSync(filePath, html, 'utf8');
-  console.log(`  Updated: ${filePath}`);
-  return true;
 }
 
 // Main sync function
 function syncProjects() {
-  console.log('\\n=== Project Sync Script ===\\n');
+  console.log('\n=== Project Sync Script v2 ===\n');
+  console.log('Reading from project folders...\n');
 
-  // Load data
-  const data = loadProjects();
-  const { projects, statusConfig } = data;
+  // Load existing data
+  const existingData = loadExistingProjects();
+  const existingProjects = existingData.projects || [];
 
-  console.log(`Loaded ${projects.length} projects from projects.json\\n`);
+  // Create lookup map
+  const projectMap = {};
+  existingProjects.forEach(p => { projectMap[p.id] = p; });
 
-  // Filter projects for resume
-  const resumeProjects = projects.filter(p => p.showInResume);
-  console.log(`Resume projects: ${resumeProjects.length}`);
+  // Process each project folder
+  let updated = 0;
+  let screenshots = 0;
 
-  // Filter projects for portfolio (featured only)
-  const portfolioProjects = projects.filter(p => p.showInPortfolio && p.featured);
-  console.log(`Portfolio featured projects: ${portfolioProjects.length}`);
+  for (const { id, folder } of PROJECT_FOLDERS) {
+    const existing = projectMap[id];
+    if (!existing) {
+      console.log(`  Skipping ${id}: not in projects.json`);
+      continue;
+    }
 
-  // Generate resume cards HTML
-  const resumeCardsHtml = resumeProjects
-    .map(p => generateResumeCard(p, statusConfig))
-    .join('\\n');
+    console.log(`Processing: ${id} (${folder || 'no local folder'})`);
 
-  // Generate portfolio projects HTML
-  const portfolioProjectsHtml = portfolioProjects
-    .map((p, i) => generatePortfolioProject(p, i))
-    .join('\\n');
+    // Read .project.json if exists
+    const folderConfig = readProjectConfig(folder);
+    if (folderConfig) {
+      projectMap[id] = mergeProjectData(existing, folderConfig);
+      updated++;
+      console.log(`  Updated from .project.json`);
+    }
 
-  // Update legend counts
-  const counts = generateLegendCounts(resumeProjects);
+    // Copy screenshot if exists
+    if (copyScreenshot(folder, id)) {
+      screenshots++;
+    }
+  }
 
-  console.log('\\nUpdating HTML files...');
+  // Update projects.json
+  existingData.projects = Object.values(projectMap);
+  existingData.meta = existingData.meta || {};
+  existingData.meta.lastUpdated = new Date().toISOString().split('T')[0];
+  existingData.meta.lastSync = new Date().toISOString();
 
-  // Note: For safety, we're using markers in the HTML
-  // Add these markers to your HTML files:
-  // <!-- PROJECT_CARDS_START --> and <!-- PROJECT_CARDS_END -->
-  // <!-- FEATURED_PROJECTS_START --> and <!-- FEATURED_PROJECTS_END -->
+  fs.writeFileSync(PROJECTS_JSON, JSON.stringify(existingData, null, 2), 'utf8');
 
-  // For now, just output what would be generated
-  console.log('\\n--- Generated Resume Cards ---');
-  console.log(`${resumeProjects.length} cards ready`);
+  // Summary
+  console.log('\n--- Sync Summary ---');
+  console.log(`Projects processed: ${PROJECT_FOLDERS.length}`);
+  console.log(`Updated from .project.json: ${updated}`);
+  console.log(`Screenshots copied: ${screenshots}`);
+  console.log(`\nUpdated: docs/projects.json`);
+  console.log('\n=== Sync Complete ===\n');
 
-  console.log('\\n--- Generated Portfolio Projects ---');
-  console.log(`${portfolioProjects.length} featured projects ready`);
-
-  console.log('\\n--- Legend Counts ---');
-  console.log(`All: ${counts.all}, Live: ${counts.live}, Building: ${counts.building}, Planning: ${counts.planning}, Ideating: ${counts.ideating}`);
-
-  // Update meta
-  data.meta.lastUpdated = new Date().toISOString().split('T')[0];
-  fs.writeFileSync(PROJECTS_JSON, JSON.stringify(data, null, 2), 'utf8');
-  console.log('\\nUpdated lastUpdated in projects.json');
-
-  console.log('\\n=== Sync Complete ===\\n');
-
-  // Return data for programmatic use
-  return {
-    resumeCardsHtml,
-    portfolioProjectsHtml,
-    counts,
-    projects: resumeProjects
-  };
+  return existingData;
 }
 
-// Generate README for a project
-function generateReadme(project) {
-  const statusBadge = {
-    live: '![Status](https://img.shields.io/badge/Status-Live-22C55E)',
-    building: '![Status](https://img.shields.io/badge/Status-Building-F59E0B)',
-    planning: '![Status](https://img.shields.io/badge/Status-Planning-3B82F6)',
-    ideating: '![Status](https://img.shields.io/badge/Status-Ideating-A855F7)'
+// Initialize .project.json in a project folder
+function initProject(folderName) {
+  const projectPath = path.join(PROJECTS_ROOT, folderName);
+  const configPath = path.join(projectPath, '.project.json');
+
+  if (!fs.existsSync(projectPath)) {
+    console.log(`Error: Folder not found: ${projectPath}`);
+    return;
+  }
+
+  if (fs.existsSync(configPath)) {
+    console.log(`Already exists: ${configPath}`);
+    return;
+  }
+
+  const template = {
+    id: folderName.toLowerCase().replace(/[^a-z0-9]/g, '-'),
+    name: folderName,
+    tagline: "Short tagline",
+    description: "Project description for portfolio",
+    status: "building",
+    progress: 0,
+    technologies: [],
+    category: "web-app",
+    featured: false,
+    screenshot: "assets/screenshot.png",
+    githubRepo: null
   };
 
-  return `# ${project.name}
+  fs.writeFileSync(configPath, JSON.stringify(template, null, 2), 'utf8');
+  console.log(`Created: ${configPath}`);
+  console.log('Edit this file to update your portfolio!');
+}
 
-${statusBadge[project.status] || ''}
+// List projects and their sync status
+function listProjects() {
+  console.log('\n=== Project Sync Status ===\n');
+  console.log('ID'.padEnd(20) + 'Folder'.padEnd(25) + '.project.json'.padEnd(15) + 'Screenshot');
+  console.log('-'.repeat(75));
 
-> ${project.tagline}
+  for (const { id, folder } of PROJECT_FOLDERS) {
+    const hasConfig = folder && fs.existsSync(path.join(PROJECTS_ROOT, folder, '.project.json'));
+    const hasScreenshot = folder && (
+      fs.existsSync(path.join(PROJECTS_ROOT, folder, 'assets', 'screenshot.png')) ||
+      fs.existsSync(path.join(PROJECTS_ROOT, folder, 'screenshot.png'))
+    );
 
-${project.longDescription || project.description}
-
-## Tech Stack
-
-${project.technologies.map(t => `- ${t}`).join('\\n')}
-
-## Progress
-
-${project.progress}% complete
-
----
-
-*Part of the [Castronix Portfolio](https://castroarun.github.io/portfolio/)*
-`;
+    console.log(
+      id.padEnd(20) +
+      (folder || '(none)').padEnd(25) +
+      (hasConfig ? 'Yes' : 'No').padEnd(15) +
+      (hasScreenshot ? 'Yes' : 'No')
+    );
+  }
+  console.log('');
 }
 
 // CLI
 if (require.main === module) {
   const args = process.argv.slice(2);
+  const command = args[0];
 
-  if (args.includes('--help')) {
+  if (command === '--help' || command === '-h') {
     console.log(`
-Project Sync Script
+Project Sync Script v2
 
 Usage:
-  node sync-projects.js          Run sync (dry run)
-  node sync-projects.js --readme Generate README for a project
-  node sync-projects.js --help   Show this help
+  node sync-projects.js              Sync all projects to portfolio
+  node sync-projects.js --list       Show sync status of all projects
+  node sync-projects.js --init NAME  Initialize .project.json in a folder
+  node sync-projects.js --help       Show this help
 
-Environment:
-  Projects are read from: docs/projects.json
-  HTML files updated: resume/index.html, index.html
+How it works:
+  1. Each project folder can have a .project.json file
+  2. This script reads those files and updates docs/projects.json
+  3. Screenshots are copied from project folders to assets/projects/
+
+Project folder locations:
+  ${PROJECTS_ROOT}\\{folder}\\.project.json
+  ${PROJECTS_ROOT}\\{folder}\\assets\\screenshot.png
 `);
-  } else if (args.includes('--readme')) {
-    const projectId = args[args.indexOf('--readme') + 1];
-    const data = loadProjects();
-    const project = data.projects.find(p => p.id === projectId);
-    if (project) {
-      console.log(generateReadme(project));
+  } else if (command === '--list' || command === '-l') {
+    listProjects();
+  } else if (command === '--init' || command === '-i') {
+    const folderName = args[1];
+    if (!folderName) {
+      console.log('Usage: node sync-projects.js --init FOLDER_NAME');
     } else {
-      console.log(`Project not found: ${projectId}`);
-      console.log('Available:', data.projects.map(p => p.id).join(', '));
+      initProject(folderName);
     }
   } else {
     syncProjects();
   }
 }
 
-module.exports = { syncProjects, loadProjects, generateReadme };
+module.exports = { syncProjects, initProject, listProjects };
