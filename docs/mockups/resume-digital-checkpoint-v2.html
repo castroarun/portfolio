@@ -1917,143 +1917,6 @@
       letter-spacing: 0.05em;
     }
 
-    /* Chat Registration Form */
-    .chat-registration {
-      padding: 2rem;
-    }
-
-    .chat-reg-intro {
-      text-align: center;
-      margin-bottom: 1.5rem;
-    }
-
-    .chat-reg-intro p {
-      color: var(--text-muted);
-      font-size: 0.9rem;
-    }
-
-    .chat-reg-form {
-      display: flex;
-      flex-direction: column;
-      gap: 1.25rem;
-    }
-
-    .chat-reg-group {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    .chat-reg-label {
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: var(--text-secondary);
-    }
-
-    .chat-reg-input {
-      padding: 0.75rem 1rem;
-      background: var(--bg-elevated);
-      border: 1px solid var(--border-medium);
-      border-radius: 8px;
-      color: var(--text-primary);
-      font-size: 0.9rem;
-      font-family: inherit;
-      transition: all 0.2s;
-    }
-
-    .chat-reg-input:focus {
-      outline: none;
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px var(--accent-dim);
-    }
-
-    .chat-reg-input.error {
-      border-color: var(--error);
-      box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
-    }
-
-    .chat-reg-error {
-      font-size: 0.75rem;
-      color: var(--error);
-      min-height: 1rem;
-    }
-
-    .chat-role-options {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0.5rem;
-    }
-
-    .chat-role-btn {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.4rem;
-      padding: 0.75rem 0.5rem;
-      background: var(--bg-elevated);
-      border: 1px solid var(--border-medium);
-      border-radius: 8px;
-      color: var(--text-muted);
-      font-size: 0.7rem;
-      font-family: inherit;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .chat-role-btn:hover {
-      border-color: var(--accent);
-      color: var(--text-primary);
-    }
-
-    .chat-role-btn.selected {
-      background: var(--accent-dim);
-      border-color: var(--accent);
-      color: var(--accent);
-    }
-
-    .chat-role-btn svg {
-      opacity: 0.7;
-    }
-
-    .chat-role-btn.selected svg {
-      opacity: 1;
-    }
-
-    .chat-reg-submit {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      padding: 1rem;
-      background: var(--accent);
-      border: none;
-      border-radius: 8px;
-      color: var(--bg-base);
-      font-size: 0.9rem;
-      font-weight: 600;
-      font-family: inherit;
-      cursor: pointer;
-      transition: all 0.2s;
-      margin-top: 0.5rem;
-    }
-
-    .chat-reg-submit:hover {
-      background: var(--accent-bright);
-      transform: translateY(-1px);
-    }
-
-    .chat-reg-submit:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-      transform: none;
-    }
-
-    @media (max-width: 480px) {
-      .chat-role-options {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
     .chat-messages {
       height: 400px;
       overflow-y: auto;
@@ -4518,148 +4381,6 @@
             </div>
           </div>
         </div>
-
-        <!-- Portfolio Analyzer Card -->
-        <div class="flip-card" onclick="this.classList.toggle('flipped')">
-          <div class="flip-card-inner">
-            <div class="flip-card-front">
-              <div class="card-header">
-                <div class="card-icon" style="background: rgba(34, 197, 94, 0.15);">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2">
-                    <path d="M3 3v18h18"/>
-                    <path d="M18 17V9"/>
-                    <path d="M13 17V5"/>
-                    <path d="M8 17v-3"/>
-                  </svg>
-                </div>
-                <div class="card-title-wrapper">
-                  <h3 class="card-title">Portfolio Analyzer <span class="card-badge building">Building</span></h3>
-                  <p class="card-tagline">Democratize investment insights</p>
-                </div>
-              </div>
-              <p class="card-description">Integrable dashboard with <strong>fundamentals view</strong> for easy decision making and portfolio performance tracking.</p>
-              <div class="card-tech">
-                <span class="tech-chip">Next.js</span>
-                <span class="tech-chip">Supabase</span>
-                <span class="tech-chip">Chart.js</span>
-              </div>
-              <div class="flip-hint">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
-                Click to flip
-              </div>
-            </div>
-            <div class="flip-card-back">
-              <div class="deliverable-container">
-                <div class="deliverable-screenshot">
-                  <div class="deliverable-placeholder">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2" width="32" height="32">
-                      <path d="M3 3v18h18"/>
-                      <path d="M18 17V9"/>
-                      <path d="M13 17V5"/>
-                      <path d="M8 17v-3"/>
-                    </svg>
-                    <span>Portfolio Analyzer Preview</span>
-                  </div>
-                </div>
-                <div class="back-header" style="border-bottom: none; padding-bottom: 0; margin-bottom: 0.5rem;">
-                  <h4 class="back-title" style="font-size: 0.9rem;">Portfolio Analyzer</h4>
-                  <span class="card-badge building" style="font-size: 0.6rem;">Building</span>
-                </div>
-                <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 1rem;">Seamless visualization of fundamentals to democratize investment strategies.</p>
-                <div class="workflow-progress">
-                  <div class="workflow-progress-header">
-                    <span class="workflow-progress-label">9-Step Workflow</span>
-                    <span class="workflow-progress-count">1/9 Complete</span>
-                  </div>
-                  <div class="progress-bar-track">
-                    <div class="progress-bar-fill building" style="width: 11%;"></div>
-                  </div>
-                  <div class="workflow-stages">
-                    <span class="stage-dot completed"></span>
-                    <span class="stage-dot in-progress"></span>
-                    <span class="stage-dot"></span>
-                    <span class="stage-dot"></span>
-                    <span class="stage-dot"></span>
-                    <span class="stage-dot"></span>
-                    <span class="stage-dot"></span>
-                    <span class="stage-dot"></span>
-                    <span class="stage-dot"></span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Backtest Pro Card -->
-        <div class="flip-card" onclick="this.classList.toggle('flipped')">
-          <div class="flip-card-inner">
-            <div class="flip-card-front">
-              <div class="card-header">
-                <div class="card-icon" style="background: rgba(251, 191, 36, 0.15);">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="#FBBF24" stroke-width="2">
-                    <circle cx="12" cy="12" r="10"/>
-                    <path d="M12 6v6l4 2"/>
-                    <path d="M2 12h2"/>
-                    <path d="M20 12h2"/>
-                  </svg>
-                </div>
-                <div class="card-title-wrapper">
-                  <h3 class="card-title">Backtest Pro <span class="card-badge building">Building</span></h3>
-                  <p class="card-tagline">Covered call strategy automation</p>
-                </div>
-              </div>
-              <p class="card-description"><strong>Covered calls</strong> (sell options on held stock for premium) to smooth portfolio returns. Extensive backtesting & automation.</p>
-              <div class="card-tech">
-                <span class="tech-chip">Python</span>
-                <span class="tech-chip">Pandas</span>
-                <span class="tech-chip">Options API</span>
-              </div>
-              <div class="flip-hint">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
-                Click to flip
-              </div>
-            </div>
-            <div class="flip-card-back">
-              <div class="deliverable-container">
-                <div class="deliverable-screenshot">
-                  <div class="deliverable-placeholder">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#FBBF24" stroke-width="2" width="32" height="32">
-                      <circle cx="12" cy="12" r="10"/>
-                      <path d="M12 6v6l4 2"/>
-                    </svg>
-                    <span>Backtest Pro Preview</span>
-                  </div>
-                </div>
-                <div class="back-header" style="border-bottom: none; padding-bottom: 0; margin-bottom: 0.5rem;">
-                  <h4 class="back-title" style="font-size: 0.9rem;">Backtest Pro</h4>
-                  <span class="card-badge building" style="font-size: 0.6rem;">Building</span>
-                </div>
-                <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 1rem;">Extensive backtesting and automation for covered call strategies.</p>
-                <div class="workflow-progress">
-                  <div class="workflow-progress-header">
-                    <span class="workflow-progress-label">9-Step Workflow</span>
-                    <span class="workflow-progress-count">1/9 Complete</span>
-                  </div>
-                  <div class="progress-bar-track">
-                    <div class="progress-bar-fill building" style="width: 11%;"></div>
-                  </div>
-                  <div class="workflow-stages">
-                    <span class="stage-dot completed"></span>
-                    <span class="stage-dot in-progress"></span>
-                    <span class="stage-dot"></span>
-                    <span class="stage-dot"></span>
-                    <span class="stage-dot"></span>
-                    <span class="stage-dot"></span>
-                    <span class="stage-dot"></span>
-                    <span class="stage-dot"></span>
-                    <span class="stage-dot"></span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
 
       <!-- Track Timeline View (Default) -->
@@ -4852,16 +4573,16 @@
                     </div>
                     <div class="track-title">Spotify Songs <span class="track-badge building">Building</span></div>
                   </div>
-                  <p class="track-tagline">AI-assisted original music</p>
-                  <p class="track-description"><strong>AI-assisted original music production</strong> for Spotify release. Themes: A Letter to Myself, Island of Sun & Rain, Morning Rush.</p>
+                  <p class="track-tagline">Music data analysis & launch</p>
+                  <p class="track-description">Analyzing <strong>listening patterns</strong> and preparing for original music release on Spotify.</p>
                   <div class="track-tech">
-                    <span class="track-tech-chip">AI Production</span>
-                    <span class="track-tech-chip">Suno</span>
-                    <span class="track-tech-chip">Spotify</span>
+                    <span class="track-tech-chip">Python</span>
+                    <span class="track-tech-chip">Data Analytics</span>
+                    <span class="track-tech-chip">Spotify API</span>
                   </div>
-                  <a href="https://open.spotify.com/user/castronix" target="_blank" class="track-link-front" onclick="event.stopPropagation()">
-                    <svg viewBox="0 0 24 24" fill="#1DB954"><circle cx="12" cy="12" r="10"/><path fill="#000" d="M8 15s1.5-2 4-2 4 2 4 2M7 11s2-2 5-2 5 2 5 2M6 7s2.5-2 6-2 6 2 6 2"/></svg>
-                    Spotify
+                  <a href="https://github.com/castroarun" target="_blank" class="track-link-front" onclick="event.stopPropagation()">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    GitHub
                   </a>
                 </div>
                 <div class="track-card-back">
@@ -4874,7 +4595,7 @@
                     <span>Preview</span>
                   </div>
                   <div class="track-back-title">Spotify Songs</div>
-                  <p class="track-back-desc">AI-assisted original music production for Spotify release.</p>
+                  <p class="track-back-desc">Music data analysis and original song launch on Spotify.</p>
                   <div class="track-workflow">
                     <div class="track-workflow-header">
                       <span>9-Step Workflow</span>
@@ -5113,131 +4834,44 @@
           <span class="chat-badge">AI Powered</span>
         </div>
 
-        <!-- User Registration Form (shown first) -->
-        <div class="chat-registration" id="chat-registration">
-          <div class="chat-reg-intro">
-            <p>Before we chat, please introduce yourself so I can personalize our conversation.</p>
-          </div>
-
-          <div class="chat-reg-form">
-            <div class="chat-reg-group">
-              <label class="chat-reg-label">Your Name</label>
-              <input type="text" class="chat-reg-input" id="chat-user-name" placeholder="e.g., John Doe">
-              <div class="chat-reg-error" id="name-error"></div>
-            </div>
-
-            <div class="chat-reg-group">
-              <label class="chat-reg-label">Your Email</label>
-              <input type="email" class="chat-reg-input" id="chat-user-email" placeholder="e.g., john@company.com">
-              <div class="chat-reg-error" id="email-error"></div>
-            </div>
-
-            <div class="chat-reg-group">
-              <label class="chat-reg-label">I am a...</label>
-              <div class="chat-role-options" id="chat-role-options">
-                <button class="chat-role-btn" data-role="Recruiter">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
-                    <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
-                    <circle cx="12" cy="7" r="4"/>
-                  </svg>
-                  Recruiter
-                </button>
-                <button class="chat-role-btn" data-role="HR Professional">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
-                    <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
-                    <circle cx="9" cy="7" r="4"/>
-                    <path d="M23 21v-2a4 4 0 00-3-3.87"/>
-                    <path d="M16 3.13a4 4 0 010 7.75"/>
-                  </svg>
-                  HR Professional
-                </button>
-                <button class="chat-role-btn" data-role="Hiring Manager">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
-                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
-                    <path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/>
-                  </svg>
-                  Hiring Manager
-                </button>
-                <button class="chat-role-btn" data-role="Potential Client">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
-                    <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                    <path d="M2 17l10 5 10-5"/>
-                    <path d="M2 12l10 5 10-5"/>
-                  </svg>
-                  Potential Client
-                </button>
-                <button class="chat-role-btn" data-role="Colleague/Peer">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
-                    <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
-                    <circle cx="9" cy="7" r="4"/>
-                    <path d="M23 21v-2a4 4 0 00-3-3.87"/>
-                    <path d="M16 3.13a4 4 0 010 7.75"/>
-                  </svg>
-                  Colleague/Peer
-                </button>
-                <button class="chat-role-btn" data-role="Just Curious">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
-                    <circle cx="12" cy="12" r="10"/>
-                    <path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/>
-                    <line x1="12" y1="17" x2="12.01" y2="17"/>
-                  </svg>
-                  Just Curious
-                </button>
-              </div>
-              <div class="chat-reg-error" id="role-error"></div>
-            </div>
-
-            <button class="chat-reg-submit" id="chat-start-btn" onclick="startChat()">
-              Start Chatting
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
-                <line x1="5" y1="12" x2="19" y2="12"/>
-                <polyline points="12 5 19 12 12 19"/>
+        <div class="chat-messages" id="chat-messages">
+          <div class="chat-message ai">
+            <div class="message-avatar">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
               </svg>
-            </button>
+            </div>
+            <div class="message-bubble">
+              Hi! I'm an AI assistant trained on Arun's experience and projects. Ask me anything about his <strong>17+ years in enterprise technology</strong>, <strong>core banking implementations</strong>, or <strong>side projects</strong> like NoteApp, REPPIT, and PRIMMO.
+            </div>
           </div>
         </div>
 
-        <!-- Chat Interface (hidden until registered) -->
-        <div class="chat-interface" id="chat-interface" style="display: none;">
-          <div class="chat-messages" id="chat-messages">
-            <div class="chat-message ai">
-              <div class="message-avatar">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
-                </svg>
-              </div>
-              <div class="message-bubble">
-                Hi! I'm an AI assistant trained on Arun's experience and projects. Ask me anything about his <strong>17+ years in enterprise technology</strong>, <strong>core banking implementations</strong>, or <strong>side projects</strong> like NoteApp, REPPIT, and PRIMMO.
-              </div>
-            </div>
+        <div class="suggested-questions">
+          <div class="suggested-label">Suggested questions:</div>
+          <div class="suggested-chips">
+            <button class="suggested-chip" onclick="askQuestion('Tell me about Java expertise')">Java story?</button>
+            <button class="suggested-chip" onclick="askQuestion('What is RTP and current role?')">RTP & current role?</button>
+            <button class="suggested-chip" onclick="askQuestion('Tell me about achievements and CMMI')">Achievements?</button>
+            <button class="suggested-chip" onclick="askQuestion('What are your hobbies and interests?')">Personal interests?</button>
           </div>
+        </div>
 
-          <div class="suggested-questions">
-            <div class="suggested-label">Suggested questions:</div>
-            <div class="suggested-chips">
-              <button class="suggested-chip" onclick="askQuestion('Tell me about Java expertise')">Java story?</button>
-              <button class="suggested-chip" onclick="askQuestion('What is RTP and current role?')">RTP & current role?</button>
-              <button class="suggested-chip" onclick="askQuestion('Tell me about achievements and CMMI')">Achievements?</button>
-              <button class="suggested-chip" onclick="askQuestion('What are your hobbies and interests?')">Personal interests?</button>
-            </div>
-          </div>
-
-          <div class="chat-input-container">
-            <input
-              type="text"
-              class="chat-input"
-              id="chat-input"
-              placeholder="Ask about experience, skills, projects..."
-              onkeypress="handleKeyPress(event)"
-            >
-            <button class="chat-send" onclick="sendMessage()">
-              Send
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <line x1="22" y1="2" x2="11" y2="13"/>
-                <polygon points="22 2 15 22 11 13 2 9 22 2"/>
-              </svg>
-            </button>
-          </div>
+        <div class="chat-input-container">
+          <input
+            type="text"
+            class="chat-input"
+            id="chat-input"
+            placeholder="Ask about experience, skills, projects..."
+            onkeypress="handleKeyPress(event)"
+          >
+          <button class="chat-send" onclick="sendMessage()">
+            Send
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="22" y1="2" x2="11" y2="13"/>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+            </svg>
+          </button>
         </div>
       </div>
     </section>
@@ -5387,178 +5021,6 @@
   </div>
 
   <script>
-    // ============ Supabase Configuration ============
-    const SUPABASE_URL = 'https://your-project.supabase.co';
-    const SUPABASE_ANON_KEY = 'your-anon-key';
-
-    // Chat user state
-    let chatUser = {
-      name: '',
-      email: '',
-      role: '',
-      sessionId: null,
-      sessionStart: null
-    };
-
-    // ============ Chat Registration ============
-    let selectedRole = null;
-
-    // Initialize role button click handlers
-    document.addEventListener('DOMContentLoaded', function() {
-      const roleButtons = document.querySelectorAll('.chat-role-btn');
-      roleButtons.forEach(btn => {
-        btn.addEventListener('click', function() {
-          // Remove selected from all buttons
-          roleButtons.forEach(b => b.classList.remove('selected'));
-          // Add selected to clicked button
-          this.classList.add('selected');
-          selectedRole = this.dataset.role;
-          // Clear role error
-          document.getElementById('role-error').textContent = '';
-        });
-      });
-    });
-
-    // Validation functions
-    function validateName(name) {
-      const trimmed = name.trim();
-      // Check if empty or only whitespace
-      if (!trimmed) {
-        return { valid: false, error: 'Please enter your name' };
-      }
-      // Check for only special characters or numbers
-      if (!/[a-zA-Z]/.test(trimmed)) {
-        return { valid: false, error: 'Name must contain at least one letter' };
-      }
-      // Check minimum length
-      if (trimmed.length < 2) {
-        return { valid: false, error: 'Name must be at least 2 characters' };
-      }
-      // Check for invalid characters (allow letters, spaces, hyphens, apostrophes)
-      if (!/^[a-zA-Z\s\-']+$/.test(trimmed)) {
-        return { valid: false, error: 'Name contains invalid characters' };
-      }
-      return { valid: true, error: '' };
-    }
-
-    function validateEmail(email) {
-      const trimmed = email.trim();
-      // Check if empty
-      if (!trimmed) {
-        return { valid: false, error: 'Please enter your email' };
-      }
-      // Basic email pattern
-      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailPattern.test(trimmed)) {
-        return { valid: false, error: 'Please enter a valid email address' };
-      }
-      return { valid: true, error: '' };
-    }
-
-    function startChat() {
-      const nameInput = document.getElementById('chat-user-name');
-      const emailInput = document.getElementById('chat-user-email');
-      const nameError = document.getElementById('name-error');
-      const emailError = document.getElementById('email-error');
-      const roleError = document.getElementById('role-error');
-
-      // Reset errors
-      nameError.textContent = '';
-      emailError.textContent = '';
-      roleError.textContent = '';
-      nameInput.classList.remove('error');
-      emailInput.classList.remove('error');
-
-      let hasErrors = false;
-
-      // Validate name
-      const nameValidation = validateName(nameInput.value);
-      if (!nameValidation.valid) {
-        nameError.textContent = nameValidation.error;
-        nameInput.classList.add('error');
-        hasErrors = true;
-      }
-
-      // Validate email
-      const emailValidation = validateEmail(emailInput.value);
-      if (!emailValidation.valid) {
-        emailError.textContent = emailValidation.error;
-        emailInput.classList.add('error');
-        hasErrors = true;
-      }
-
-      // Validate role
-      if (!selectedRole) {
-        roleError.textContent = 'Please select your role';
-        hasErrors = true;
-      }
-
-      if (hasErrors) return;
-
-      // Store user info
-      chatUser.name = nameInput.value.trim();
-      chatUser.email = emailInput.value.trim();
-      chatUser.role = selectedRole;
-      chatUser.sessionId = generateSessionId();
-      chatUser.sessionStart = new Date().toISOString();
-
-      // Log session start to Supabase
-      logChatSession('session_start');
-
-      // Hide registration, show chat interface
-      document.getElementById('chat-registration').style.display = 'none';
-      document.getElementById('chat-interface').style.display = 'block';
-
-      // Update welcome message with user's name
-      const welcomeMessage = document.querySelector('#chat-messages .message-bubble');
-      if (welcomeMessage) {
-        const firstName = chatUser.name.split(' ')[0];
-        welcomeMessage.innerHTML = `Hi <strong>${firstName}</strong>! I'm an AI assistant trained on Arun's experience and projects. Ask me anything about his <strong>17+ years in enterprise technology</strong>, <strong>core banking implementations</strong>, or <strong>side projects</strong> like NoteApp, REPPIT, and PRIMMO.`;
-      }
-    }
-
-    function generateSessionId() {
-      return 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-    }
-
-    // Supabase logging functions
-    async function logChatSession(eventType, question = null, response = null) {
-      // Skip if Supabase not configured
-      if (SUPABASE_URL === 'https://your-project.supabase.co') {
-        console.log('Supabase not configured. Would log:', { eventType, chatUser, question, response });
-        return;
-      }
-
-      try {
-        const payload = {
-          session_id: chatUser.sessionId,
-          user_name: chatUser.name,
-          user_email: chatUser.email,
-          user_role: chatUser.role,
-          event_type: eventType,
-          question: question,
-          response: response,
-          timestamp: new Date().toISOString()
-        };
-
-        const res = await fetch(`${SUPABASE_URL}/rest/v1/chat_logs`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'apikey': SUPABASE_ANON_KEY,
-            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
-          },
-          body: JSON.stringify(payload)
-        });
-
-        if (!res.ok) {
-          console.error('Failed to log chat:', res.statusText);
-        }
-      } catch (error) {
-        console.error('Error logging to Supabase:', error);
-      }
-    }
-
     // ============ Intro Section Toggle ============
     function toggleIntro() {
       const section = document.getElementById('intro-section');
@@ -6542,9 +6004,6 @@ This creativity informs his approach to problem-solving - thinking outside the b
         hideLoadingIndicator();
         const response = getResponse(question);
         addMessage(response);
-
-        // Log Q&A to Supabase
-        logChatSession('message', question, response);
       }, delay);
     }
 
