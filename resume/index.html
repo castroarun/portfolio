@@ -1200,8 +1200,7 @@
     .deliverable-screenshot img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
-      object-position: top;
+      object-fit: contain;
       cursor: zoom-in;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
@@ -1854,7 +1853,7 @@
     /* Back card content */
     .track-back-screenshot {
       width: 100%;
-      height: 100px;
+      height: 140px;
       background: var(--bg-elevated);
       border-radius: 8px;
       display: flex;
@@ -1881,7 +1880,7 @@
     .track-back-screenshot img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
       cursor: zoom-in;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
@@ -4068,53 +4067,132 @@
       font-size: 0.9rem;
     }
 
-    /* Combined Life + Career Timeline - Interleaved Vertical */
-    .combined-timeline {
+    /* ============ Personal Life Zones (Expandable Gaps Between Career Items) ============ */
+
+    /* Hide personal zones by default */
+    .personal-zone {
       display: none;
       position: relative;
-      padding-left: 3rem;
-      margin-left: 0;
+      margin-left: 1.5rem;
+      padding: 0.75rem 0 0.75rem 1.5rem;
+      border-left: 2px dashed rgba(244, 114, 182, 0.3);
     }
 
-    .combined-timeline.active {
+    /* Show personal zones when life mode is active */
+    .timeline-view.show-life .personal-zone {
       display: block;
+      animation: expandZone 0.4s ease-out;
     }
 
-    .timeline-view.hidden {
-      display: none;
+    @keyframes expandZone {
+      from { opacity: 0; max-height: 0; padding: 0 0 0 1.5rem; }
+      to { opacity: 1; max-height: 500px; padding: 0.75rem 0 0.75rem 1.5rem; }
     }
 
-    /* Timeline line for combined view */
-    .combined-timeline::before {
+    /* Life event within personal zone */
+    .life-event {
+      position: relative;
+      padding: 0.6rem 0;
+      padding-left: 1.25rem;
+      transition: all 0.3s ease;
+    }
+
+    /* Dot for life event */
+    .life-event::before {
       content: '';
       position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 2px;
-      background: var(--border-subtle);
+      left: -1.6rem;
+      top: 0.85rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--bg-card);
+      border: 2px solid #F472B6;
+      transition: all 0.3s ease;
     }
 
-    /* Legend for combined view */
-    .combined-legend {
+    .life-event.spiritual::before { border-color: #FBBF24; }
+
+    .life-event:hover::before {
+      background: #F472B6;
+      box-shadow: 0 0 10px rgba(244, 114, 182, 0.5);
+    }
+
+    .life-event.spiritual:hover::before {
+      background: #FBBF24;
+      box-shadow: 0 0 10px rgba(251, 191, 36, 0.5);
+    }
+
+    /* Life event content */
+    .life-event-header {
       display: flex;
-      gap: 1.5rem;
-      margin-bottom: 1.5rem;
-      padding-left: 1rem;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .life-event-year {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: #F472B6;
+    }
+
+    .life-event.spiritual .life-event-year { color: #FBBF24; }
+
+    .life-event-badge {
+      font-size: 0.5rem;
+      padding: 0.1rem 0.35rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 600;
+      background: rgba(244, 114, 182, 0.12);
+      color: #F472B6;
+    }
+
+    .life-event.spiritual .life-event-badge {
+      background: rgba(251, 191, 36, 0.12);
+      color: #FBBF24;
+    }
+
+    .life-event-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.15rem;
+    }
+
+    .life-event-summary {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+
+    /* Legend for life events */
+    .life-legend {
+      display: none;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      padding-left: 0;
       flex-wrap: wrap;
+      justify-content: flex-start;
+    }
+
+    .timeline-view.show-life .life-legend {
+      display: flex;
     }
 
     .legend-item {
       display: flex;
       align-items: center;
-      gap: 0.4rem;
-      font-size: 0.7rem;
+      gap: 0.35rem;
+      font-size: 0.65rem;
       color: var(--text-muted);
     }
 
     .legend-dot {
-      width: 10px;
-      height: 10px;
+      width: 8px;
+      height: 8px;
       border-radius: 50%;
     }
 
@@ -4122,116 +4200,12 @@
     .legend-dot.personal { background: #F472B6; }
     .legend-dot.spiritual { background: #FBBF24; }
 
-    /* Combined timeline item - similar to timeline-item with category colors */
-    .combined-item {
-      position: relative;
-      padding-bottom: 2rem;
-      padding-left: 1rem;
-    }
-
-    .combined-item::before {
-      content: '';
-      position: absolute;
-      left: -2.5rem;
-      top: 0.25rem;
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: var(--bg-card);
-      border: 2px solid var(--accent);
-      transition: all 0.3s ease;
-    }
-
-    .combined-item.personal::before { border-color: #F472B6; }
-    .combined-item.spiritual::before { border-color: #FBBF24; }
-    .combined-item.current::before { background: var(--accent); box-shadow: 0 0 0 4px var(--accent-dim); }
-
-    .combined-item:hover::before { background: var(--accent); box-shadow: 0 0 12px var(--accent); }
-    .combined-item.personal:hover::before { background: #F472B6; box-shadow: 0 0 12px #F472B6; }
-    .combined-item.spiritual:hover::before { background: #FBBF24; box-shadow: 0 0 12px #FBBF24; }
-
-    .combined-date-row {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      margin-bottom: 0.35rem;
-    }
-
-    .combined-date {
-      font-size: 0.8rem;
-      color: var(--accent);
-      font-weight: 600;
-    }
-
-    .combined-item.personal .combined-date { color: #F472B6; }
-    .combined-item.spiritual .combined-date { color: #FBBF24; }
-
-    .combined-badge {
-      font-size: 0.55rem;
-      padding: 0.15rem 0.4rem;
-      border-radius: 4px;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      font-weight: 600;
-    }
-
-    .combined-badge.personal { background: rgba(244, 114, 182, 0.15); color: #F472B6; }
-    .combined-badge.spiritual { background: rgba(251, 191, 36, 0.15); color: #FBBF24; }
-
-    .combined-item-role {
-      font-size: 0.65rem;
-      color: var(--text-primary);
-      background: var(--bg-elevated);
-      border: 1px solid var(--border-medium);
-      padding: 0.2rem 0.5rem;
-      border-radius: 4px;
-      transition: all 0.3s ease;
-    }
-
-    .combined-item:hover .combined-item-role { color: var(--accent); border-color: var(--accent); background: var(--accent-dim); }
-    .combined-item.personal:hover .combined-item-role { color: #F472B6; border-color: #F472B6; background: rgba(244, 114, 182, 0.1); }
-
-    .combined-item-title { font-size: 1.05rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.15rem; }
-    .combined-item-subtitle { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.4rem; font-style: italic; }
-    .combined-item-summary { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; }
-
-    .combined-gallery {
-      position: absolute;
-      right: 0;
-      top: 50%;
-      transform: translateY(-50%);
-      display: flex;
-      gap: 0.5rem;
-      opacity: 0.08;
-      filter: grayscale(100%);
-      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-      z-index: 10;
-    }
-
-    .combined-item:hover .combined-gallery { opacity: 1; filter: grayscale(0%); }
-
-    .combined-gallery-img {
-      width: 55px;
-      height: 55px;
-      object-fit: cover;
-      border: 3px solid rgba(255, 255, 255, 0.9);
-      border-radius: 8px;
-      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .combined-gallery-img:nth-child(1) { transform: rotate(-3deg); }
-    .combined-gallery-img:nth-child(2) { transform: rotate(2deg) translateY(-3px); }
-
-    .combined-item:hover .combined-gallery-img { width: 95px; height: 95px; }
-    .combined-item:hover .combined-gallery-img:nth-child(1) { transform: rotate(-12deg) scale(1.05); }
-    .combined-item:hover .combined-gallery-img:nth-child(2) { transform: rotate(10deg) translateY(-10px) scale(1.05); }
-
     @media (max-width: 768px) {
       .timeline-mode-toggle { flex-wrap: wrap; justify-content: center; }
-      .combined-legend { justify-content: center; }
-      .combined-gallery { position: relative; right: auto; top: auto; transform: none; margin-top: 0.75rem; opacity: 0.5; }
-      .combined-item:hover .combined-gallery { opacity: 1; }
-      .combined-gallery-img, .combined-item:hover .combined-gallery-img { width: 50px; height: 50px; }
+      .life-legend { justify-content: center; }
+      .personal-zone { margin-left: 0.5rem; padding-left: 1rem; }
+      .life-event { padding-left: 1rem; }
+      .life-event::before { left: -1.1rem; }
     }
 
     /* View Toggle */
@@ -4710,77 +4684,8 @@
           </div>
 
           <div class="timeline-view" id="career-timeline">
-            <div class="timeline-item current">
-              <div class="timeline-date-role">
-                <span class="timeline-date">2020 - Present</span>
-                <span class="timeline-role">Sr. Technology Architect</span>
-              </div>
-              <div class="timeline-company">Bank of America (Jakarta, Singapore)</div>
-              <div class="timeline-employer">Infosys Ltd.</div>
-              <div class="timeline-summary">Driving RTP implementations and NFR delivery for APAC. 5x business-volumes-ready reporting, 60% reduction in job execution times.</div>
-              <div class="timeline-gallery">
-                <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=120&h=120&fit=crop" alt="Jakarta office" class="timeline-gallery-img">
-                <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=120&h=120&fit=crop" alt="Team collaboration" class="timeline-gallery-img">
-              </div>
-            </div>
-            <div class="timeline-item">
-              <div class="timeline-date-role">
-                <span class="timeline-date">Feb - Apr 2019</span>
-                <span class="timeline-role">Project Manager</span>
-              </div>
-              <div class="timeline-company">Cholamandalam Finance</div>
-              <div class="timeline-employer">Latitude Fintech</div>
-              <div class="timeline-summary">All-India LOS go-live. Two-thirds reduction in client onboarding time.</div>
-              <div class="timeline-gallery">
-                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=120&h=120&fit=crop" alt="Team meeting" class="timeline-gallery-img">
-                <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=120&h=120&fit=crop" alt="Office work" class="timeline-gallery-img">
-              </div>
-            </div>
-            <div class="timeline-item">
-              <div class="timeline-date-role">
-                <span class="timeline-date">2012 - 2016</span>
-                <span class="timeline-role">Technology Architect & PM</span>
-              </div>
-              <div class="timeline-company">Standard Bank (South Africa & Nigeria)</div>
-              <div class="timeline-employer">EdgeVerve Systems</div>
-              <div class="timeline-summary">3000+ man-days, 100% on-time delivery. CMMI Level 4. Client's most preferred PM.</div>
-              <div class="timeline-gallery">
-                <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=120&h=120&fit=crop" alt="Africa project" class="timeline-gallery-img">
-                <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=120&h=120&fit=crop" alt="Team leadership" class="timeline-gallery-img">
-              </div>
-            </div>
-            <div class="timeline-item">
-              <div class="timeline-date-role">
-                <span class="timeline-date">2008 - 2012</span>
-                <span class="timeline-role">Team Lead & Project Manager</span>
-              </div>
-              <div class="timeline-company">Emirates NBD (Dubai)</div>
-              <div class="timeline-employer">Infosys Ltd.</div>
-              <div class="timeline-summary">6000+ man-days, 100% on-time. Award-winning module designs. Release automation.</div>
-              <div class="timeline-gallery">
-                <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=120&h=120&fit=crop" alt="Dubai skyline" class="timeline-gallery-img">
-                <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=120&h=120&fit=crop" alt="Tech work" class="timeline-gallery-img">
-              </div>
-            </div>
-            <div class="timeline-item">
-              <div class="timeline-date-role">
-                <span class="timeline-date">2004 - 2008</span>
-                <span class="timeline-role">Software Developer</span>
-              </div>
-              <div class="timeline-company">Multiple Banks</div>
-              <div class="timeline-employer">Infosys Ltd.</div>
-              <div class="timeline-summary">Bank Sohar, SBI Overseas, Bank of Alexandria, Bank of India - Core banking implementations.</div>
-              <div class="timeline-gallery">
-                <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=120&h=120&fit=crop" alt="Coding" class="timeline-gallery-img">
-                <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=120&h=120&fit=crop" alt="Early career" class="timeline-gallery-img">
-              </div>
-            </div>
-          </div>
-
-          <!-- Combined Life + Career Timeline (Interleaved Vertical) -->
-          <div class="combined-timeline" id="combined-timeline">
-            <!-- Legend -->
-            <div class="combined-legend">
+            <!-- Legend (shown when Life mode active) -->
+            <div class="life-legend">
               <div class="legend-item">
                 <div class="legend-dot career"></div>
                 <span>Career</span>
@@ -4795,183 +4700,143 @@
               </div>
             </div>
 
-            <!-- 2004 - Career: Graduated & Joined Infosys -->
-            <div class="combined-item current">
-              <div class="combined-date-row">
-                <span class="combined-date">2004</span>
-                <span class="combined-item-role">Developer</span>
+            <!-- 2020-Present: Bank of America -->
+            <div class="timeline-item current">
+              <div class="timeline-date-role">
+                <span class="timeline-date">2020 - Present</span>
+                <span class="timeline-role">Sr. Technology Architect</span>
               </div>
-              <div class="combined-item-title">Graduated & Joined Infosys</div>
-              <div class="combined-item-subtitle">B.E. Electronics & Communication, Sathyabama</div>
-              <div class="combined-item-summary">Started career at Infosys, embarking on a journey in enterprise technology.</div>
-              <div class="combined-gallery">
-                <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=120&h=120&fit=crop" alt="Coding" class="combined-gallery-img">
+              <div class="timeline-company">Bank of America (Jakarta, Singapore)</div>
+              <div class="timeline-employer">Infosys Ltd.</div>
+              <div class="timeline-summary">Driving RTP implementations and NFR delivery for APAC. 5x business-volumes-ready reporting, 60% reduction in job execution times.</div>
+              <div class="timeline-gallery">
+                <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=120&h=120&fit=crop" alt="Jakarta office" class="timeline-gallery-img">
+                <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=120&h=120&fit=crop" alt="Team collaboration" class="timeline-gallery-img">
+              </div>
+            </div>
+            <!-- Personal Zone: 2020-2024 -->
+            <div class="personal-zone">
+              <div class="life-event">
+                <div class="life-event-header">
+                  <span class="life-event-year">2024</span>
+                  <span class="life-event-badge">Personal</span>
+                </div>
+                <div class="life-event-title">Professional Fitness Journey</div>
+                <div class="life-event-summary">Morning strength training. Coaching 3-4 people. Best shape at 40+.</div>
+              </div>
+              <div class="life-event">
+                <div class="life-event-header">
+                  <span class="life-event-year">2021</span>
+                  <span class="life-event-badge">Personal</span>
+                </div>
+                <div class="life-event-title">Princess Thiya Arrived</div>
+                <div class="life-event-summary">Little princess joins the family. A new chapter of fatherhood and joy.</div>
               </div>
             </div>
 
-            <!-- 2004 - Spiritual: Walking with Christ -->
-            <div class="combined-item spiritual">
-              <div class="combined-date-row">
-                <span class="combined-date">2004</span>
-                <span class="combined-badge spiritual">Faith</span>
+            <!-- 2019: Cholamandalam -->
+            <div class="timeline-item">
+              <div class="timeline-date-role">
+                <span class="timeline-date">Feb - Apr 2019</span>
+                <span class="timeline-role">Project Manager</span>
               </div>
-              <div class="combined-item-title">Walking with Christ</div>
-              <div class="combined-item-summary">Beginning of faith journey. The foundation of values that guide every decision in life and work.</div>
-            </div>
-
-            <!-- 2006 - Career: First Banking Project -->
-            <div class="combined-item">
-              <div class="combined-date-row">
-                <span class="combined-date">2006</span>
-                <span class="combined-item-role">Developer</span>
-              </div>
-              <div class="combined-item-title">First Banking Project</div>
-              <div class="combined-item-subtitle">Finacle Core Banking</div>
-              <div class="combined-item-summary">First exposure to Finacle core banking. Beginning of specialization in financial technology.</div>
-            </div>
-
-            <!-- 2008 - Career: Emirates NBD -->
-            <div class="combined-item">
-              <div class="combined-date-row">
-                <span class="combined-date">2008 - 2012</span>
-                <span class="combined-item-role">Team Lead</span>
-              </div>
-              <div class="combined-item-title">Emirates NBD</div>
-              <div class="combined-item-subtitle">Dubai, UAE | Infosys Ltd.</div>
-              <div class="combined-item-summary">First international assignment. 6000+ man-days, 100% on-time delivery. Award-winning module designs.</div>
-              <div class="combined-gallery">
-                <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=120&h=120&fit=crop" alt="Dubai skyline" class="combined-gallery-img">
-                <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=120&h=120&fit=crop" alt="Tech work" class="combined-gallery-img">
+              <div class="timeline-company">Cholamandalam Finance</div>
+              <div class="timeline-employer">Latitude Fintech</div>
+              <div class="timeline-summary">All-India LOS go-live. Two-thirds reduction in client onboarding time.</div>
+              <div class="timeline-gallery">
+                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=120&h=120&fit=crop" alt="Team meeting" class="timeline-gallery-img">
+                <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=120&h=120&fit=crop" alt="Office work" class="timeline-gallery-img">
               </div>
             </div>
+            <!-- No personal zone for 2019 -->
 
-            <!-- 2010 - Career: MVP Award -->
-            <div class="combined-item">
-              <div class="combined-date-row">
-                <span class="combined-date">2010</span>
-                <span class="combined-item-role">Tech Architect</span>
+            <!-- 2012-2016: Standard Bank -->
+            <div class="timeline-item">
+              <div class="timeline-date-role">
+                <span class="timeline-date">2012 - 2016</span>
+                <span class="timeline-role">Technology Architect & PM</span>
               </div>
-              <div class="combined-item-title">MVP Award - Denomination Module</div>
-              <div class="combined-item-subtitle">Emirates NBD</div>
-              <div class="combined-item-summary">Self-taught Java in 2 months using only a book. Built a reusable module deployed to 3-4 banks with 95% code reuse.</div>
+              <div class="timeline-company">Standard Bank (South Africa & Nigeria)</div>
+              <div class="timeline-employer">EdgeVerve Systems</div>
+              <div class="timeline-summary">3000+ man-days, 100% on-time delivery. CMMI Level 4. Client's most preferred PM.</div>
+              <div class="timeline-gallery">
+                <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=120&h=120&fit=crop" alt="Africa project" class="timeline-gallery-img">
+                <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=120&h=120&fit=crop" alt="Team leadership" class="timeline-gallery-img">
+              </div>
             </div>
-
-            <!-- 2010 - Personal: Filmmaking -->
-            <div class="combined-item personal">
-              <div class="combined-date-row">
-                <span class="combined-date">2010</span>
-                <span class="combined-badge personal">Personal</span>
+            <!-- Personal Zone: 2012-2016 -->
+            <div class="personal-zone">
+              <div class="life-event">
+                <div class="life-event-header">
+                  <span class="life-event-year">2014</span>
+                  <span class="life-event-badge">Personal</span>
+                </div>
+                <div class="life-event-title">Marriage</div>
+                <div class="life-event-summary">Life partner found. Beginning of family journey.</div>
               </div>
-              <div class="combined-item-title">Best Short Film Award</div>
-              <div class="combined-item-summary">Creative expression through filmmaking. Won Best Short Film at Infosys competition.</div>
-            </div>
-
-            <!-- 2012 - Career: Standard Bank -->
-            <div class="combined-item">
-              <div class="combined-date-row">
-                <span class="combined-date">2012 - 2016</span>
-                <span class="combined-item-role">Team Lead & QA Lead</span>
-              </div>
-              <div class="combined-item-title">Standard Bank</div>
-              <div class="combined-item-subtitle">South Africa & Nigeria | EdgeVerve Systems</div>
-              <div class="combined-item-summary">Led team for Standard Bank implementation. 3000+ man-days. First CMMI Level 4 project in Africa & Middle East region.</div>
-              <div class="combined-gallery">
-                <img src="https://images.unsplash.com/photo-1540946485063-a40da27545f8?w=120&h=120&fit=crop" alt="Africa" class="combined-gallery-img">
+              <div class="life-event">
+                <div class="life-event-header">
+                  <span class="life-event-year">2012</span>
+                  <span class="life-event-badge">Personal</span>
+                </div>
+                <div class="life-event-title">Wedding Photography Phase</div>
+                <div class="life-event-summary">Exploring creative side through professional photography.</div>
               </div>
             </div>
 
-            <!-- 2012 - Personal: Wedding Photography -->
-            <div class="combined-item personal">
-              <div class="combined-date-row">
-                <span class="combined-date">2012</span>
-                <span class="combined-badge personal">Personal</span>
+            <!-- 2008-2012: Emirates NBD -->
+            <div class="timeline-item">
+              <div class="timeline-date-role">
+                <span class="timeline-date">2008 - 2012</span>
+                <span class="timeline-role">Team Lead & Project Manager</span>
               </div>
-              <div class="combined-item-title">Wedding Photography Phase</div>
-              <div class="combined-item-summary">Exploring creative side through professional wedding photography alongside tech career.</div>
+              <div class="timeline-company">Emirates NBD (Dubai)</div>
+              <div class="timeline-employer">Infosys Ltd.</div>
+              <div class="timeline-summary">6000+ man-days, 100% on-time. Award-winning module designs. Release automation.</div>
+              <div class="timeline-gallery">
+                <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=120&h=120&fit=crop" alt="Dubai skyline" class="timeline-gallery-img">
+                <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=120&h=120&fit=crop" alt="Tech work" class="timeline-gallery-img">
+              </div>
             </div>
-
-            <!-- 2013 - Personal: Marriage -->
-            <div class="combined-item personal">
-              <div class="combined-date-row">
-                <span class="combined-date">2013</span>
-                <span class="combined-badge personal">Personal</span>
-              </div>
-              <div class="combined-item-title">Marriage</div>
-              <div class="combined-item-summary">Life partner found. Beginning of family journey. A new chapter of togetherness.</div>
-            </div>
-
-            <!-- 2014 - Career: CMMI Level 4 -->
-            <div class="combined-item">
-              <div class="combined-date-row">
-                <span class="combined-date">2014</span>
-                <span class="combined-item-role">QA Lead</span>
-              </div>
-              <div class="combined-item-title">CMMI Level 4 Achievement</div>
-              <div class="combined-item-subtitle">First in Africa & Middle East Region</div>
-              <div class="combined-item-summary">Processes established, followed, and controlled with statistical metrics. &lt;2.5% Defect Injection Rate, 100% on-time delivery.</div>
-            </div>
-
-            <!-- 2016 - Career: EdgeVerve Chennai -->
-            <div class="combined-item">
-              <div class="combined-date-row">
-                <span class="combined-date">2016 - 2019</span>
-                <span class="combined-item-role">Tech Architect</span>
-              </div>
-              <div class="combined-item-title">EdgeVerve Chennai</div>
-              <div class="combined-item-subtitle">Infosys Subsidiary</div>
-              <div class="combined-item-summary">Transition to EdgeVerve Systems. Focus on product architecture and technology leadership.</div>
-            </div>
-
-            <!-- 2020 - Career: Bank of America -->
-            <div class="combined-item current">
-              <div class="combined-date-row">
-                <span class="combined-date">2020 - Present</span>
-                <span class="combined-item-role">Solution Architect</span>
-              </div>
-              <div class="combined-item-title">Bank of America - APAC</div>
-              <div class="combined-item-subtitle">Singapore | Infosys Ltd.</div>
-              <div class="combined-item-summary">Leading RTP and NFR delivery for APAC region. 60% reduction in job execution times. 5x volume-ready reporting certified by client.</div>
-              <div class="combined-gallery">
-                <img src="https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=120&h=120&fit=crop" alt="Singapore" class="combined-gallery-img">
-                <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=120&h=120&fit=crop" alt="Corporate" class="combined-gallery-img">
+            <!-- Personal Zone: 2008-2012 -->
+            <div class="personal-zone">
+              <div class="life-event">
+                <div class="life-event-header">
+                  <span class="life-event-year">2010</span>
+                  <span class="life-event-badge">Personal</span>
+                </div>
+                <div class="life-event-title">Best Short Film Award</div>
+                <div class="life-event-summary">Won inter-departmental filmmaking competition at Infosys.</div>
               </div>
             </div>
 
-            <!-- 2021 - Personal: Thiya Born -->
-            <div class="combined-item personal">
-              <div class="combined-date-row">
-                <span class="combined-date">2021</span>
-                <span class="combined-badge personal">Personal</span>
+            <!-- 2004-2008: Early Career -->
+            <div class="timeline-item">
+              <div class="timeline-date-role">
+                <span class="timeline-date">2004 - 2008</span>
+                <span class="timeline-role">Software Developer</span>
               </div>
-              <div class="combined-item-title">Princess Thiya Arrived</div>
-              <div class="combined-item-summary">Little princess Thiya joins the family. A new chapter of fatherhood, joy, and endless love.</div>
-              <div class="combined-gallery">
-                <img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?w=60&h=60&fit=crop" alt="Baby" class="combined-gallery-img">
+              <div class="timeline-company">Multiple Banks</div>
+              <div class="timeline-employer">Infosys Ltd.</div>
+              <div class="timeline-summary">Bank Sohar, SBI Overseas, Bank of Alexandria, Bank of India - Core banking implementations.</div>
+              <div class="timeline-gallery">
+                <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=120&h=120&fit=crop" alt="Coding" class="timeline-gallery-img">
+                <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=120&h=120&fit=crop" alt="Early career" class="timeline-gallery-img">
               </div>
             </div>
-
-            <!-- 2024 - Personal: Strength Training -->
-            <div class="combined-item personal">
-              <div class="combined-date-row">
-                <span class="combined-date">2024</span>
-                <span class="combined-badge personal">Personal</span>
+            <!-- Personal Zone: 2004-2008 -->
+            <div class="personal-zone">
+              <div class="life-event spiritual">
+                <div class="life-event-header">
+                  <span class="life-event-year">2004</span>
+                  <span class="life-event-badge">Faith</span>
+                </div>
+                <div class="life-event-title">Walking with Christ</div>
+                <div class="life-event-summary">Beginning of faith journey. The foundation of values that guide life and work.</div>
               </div>
-              <div class="combined-item-title">Professional Fitness Journey</div>
-              <div class="combined-item-summary">Morning strength training routine. Now coaching 3-4 people. In best shape at 40+. "Discipline transfers to all life areas."</div>
             </div>
-
-            <!-- 2024 - Career: AI Development -->
-            <div class="combined-item">
-              <div class="combined-date-row">
-                <span class="combined-date">2024</span>
-                <span class="combined-item-role">Side Projects</span>
-              </div>
-              <div class="combined-item-title">AI-Assisted Development</div>
-              <div class="combined-item-summary">Embracing AI-assisted workflows. Building NoteApp, REPPIT, PRIMMO with modern tech stack.</div>
-            </div>
-
           </div>
-          <!-- End Combined Timeline -->
+
 
         </div>
       </div>
@@ -6720,18 +6585,17 @@
     // ============ Timeline Mode Toggle ============
     function toggleTimelineMode(mode) {
       const careerTimeline = document.getElementById('career-timeline');
-      const combinedTimeline = document.getElementById('combined-timeline');
       const btnCareer = document.getElementById('btn-career-timeline');
       const btnCombined = document.getElementById('btn-combined-timeline');
 
       if (mode === 'career') {
-        careerTimeline.classList.remove('hidden');
-        combinedTimeline.classList.remove('active');
+        // Career only - hide personal zones
+        careerTimeline.classList.remove('show-life');
         btnCareer.classList.add('active');
         btnCombined.classList.remove('active');
       } else {
-        careerTimeline.classList.add('hidden');
-        combinedTimeline.classList.add('active');
+        // Life + Career - show personal zones between career items
+        careerTimeline.classList.add('show-life');
         btnCareer.classList.remove('active');
         btnCombined.classList.add('active');
       }
