@@ -3641,10 +3641,64 @@
       color: var(--text-secondary);
     }
 
+    /* Experience Timeline Header */
+    .exp-timeline-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .exp-timeline-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .exp-timeline-title {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
+      margin: 0;
+    }
+
+    .exp-timeline-pulse {
+      width: 8px;
+      height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: expPulse 2s ease-in-out infinite;
+      box-shadow: 0 0 10px var(--accent-dim);
+    }
+
+    @keyframes expPulse {
+      0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+        box-shadow: 0 0 10px var(--accent-dim);
+      }
+      50% {
+        transform: scale(1.4);
+        opacity: 0.7;
+        box-shadow: 0 0 20px var(--accent);
+      }
+    }
+
+    .exp-timeline-tagline {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-style: italic;
+      letter-spacing: 0.05em;
+      margin: 0;
+    }
+
     /* Vertical Timeline View */
     .timeline-view {
       position: relative;
-      padding-left: 2rem;
+      padding-left: 2.5rem;
+      margin-left: 1rem;
     }
 
     .timeline-view::before {
@@ -3660,14 +3714,14 @@
     .timeline-item {
       position: relative;
       padding-bottom: 2rem;
-      padding-left: 1.5rem;
+      padding-left: 1rem;
     }
 
     .timeline-item::before {
       content: '';
       position: absolute;
-      left: -2rem;
-      top: 0.5rem;
+      left: -2.5rem;
+      top: 0.25rem;
       width: 12px;
       height: 12px;
       border-radius: 50%;
@@ -3695,7 +3749,7 @@
       justify-content: space-between;
       align-items: flex-start;
       gap: 1rem;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.25rem;
     }
 
     .timeline-date {
@@ -3706,7 +3760,7 @@
     }
 
     .timeline-company {
-      font-size: 1rem;
+      font-size: 1.1rem;
       font-weight: 600;
       color: var(--text-primary);
       margin-bottom: 0.25rem;
@@ -3722,6 +3776,7 @@
       white-space: nowrap;
       flex-shrink: 0;
       transition: all 0.3s ease;
+      margin-top: 0.25rem;
     }
 
     .timeline-item:hover .timeline-role {
@@ -3740,7 +3795,7 @@
 
     .timeline-summary {
       font-size: 0.85rem;
-      color: var(--text-muted);
+      color: var(--text-secondary);
       line-height: 1.5;
     }
 
@@ -4153,6 +4208,15 @@
 
         <!-- Timeline View (hidden by default) -->
         <div id="exp-timeline-view" style="display: none; padding: 2rem;">
+          <!-- Timeline Header -->
+          <div class="exp-timeline-header">
+            <div class="exp-timeline-title-row">
+              <div class="exp-timeline-pulse"></div>
+              <h3 class="exp-timeline-title">Career Journey</h3>
+              <div class="exp-timeline-pulse"></div>
+            </div>
+            <p class="exp-timeline-tagline">20+ years building enterprise solutions</p>
+          </div>
           <div class="timeline-view">
             <div class="timeline-item current">
               <div class="timeline-header">
