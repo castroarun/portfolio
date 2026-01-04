@@ -60,7 +60,7 @@ Implementing rigorous quality processes while:
 ## Impact
 - **First in Region**: No other project in Africa & Middle East BU had achieved CMMI Level 4
 - **Defect Rate**: <2.5% Defect Injection Rate
-- **On-Time Delivery**: 100% on-time deliverables over 1000+ man-days
+- **On-Time Delivery**: 100% on-time deliverables over 3000+ man-days
 - **Team Recognition**: Team Award for management, consistency, timeliness & code quality
 - **Client Preference**: Acknowledged as client's most preferred Project Manager
 
@@ -69,7 +69,7 @@ Implementing rigorous quality processes while:
 |--------|-------|
 | Defect Injection Rate | <2.5% |
 | On-Time Delivery | 100% |
-| Man-days Delivered | 1000+ |
+| Man-days Delivered | 3000+ |
 | Team Size Managed | 3-18 members |
 
 ## Lessons Learned
