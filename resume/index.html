@@ -3644,7 +3644,8 @@
     /* Experience Timeline Header */
     .exp-timeline-header {
       text-align: center;
-      margin-bottom: 2rem;
+      margin-bottom: 1rem;
+      margin-top: 0;
     }
 
     .exp-timeline-title-row {
@@ -3652,12 +3653,12 @@
       align-items: center;
       justify-content: center;
       gap: 0.75rem;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.25rem;
     }
 
     .exp-timeline-title {
       font-family: var(--font-display);
-      font-size: 1.5rem;
+      font-size: 1.4rem;
       font-weight: 600;
       color: var(--text-primary);
       letter-spacing: -0.02em;
@@ -3687,7 +3688,7 @@
     }
 
     .exp-timeline-tagline {
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       color: var(--text-muted);
       font-style: italic;
       letter-spacing: 0.05em;
@@ -3697,8 +3698,8 @@
     /* Vertical Timeline View */
     .timeline-view {
       position: relative;
-      padding-left: 2.5rem;
-      margin-left: 1rem;
+      padding-left: 3rem;
+      margin-left: 0;
     }
 
     .timeline-view::before {
@@ -3744,39 +3745,28 @@
       box-shadow: 0 0 12px var(--accent), 0 0 24px var(--accent-dim), 0 0 0 4px var(--accent-dim);
     }
 
-    .timeline-header {
+    .timeline-date-role {
       display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 1rem;
-      margin-bottom: 0.25rem;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.35rem;
     }
 
     .timeline-date {
       font-size: 0.8rem;
       color: var(--accent);
       font-weight: 600;
-      margin-bottom: 0.25rem;
-    }
-
-    .timeline-company {
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: var(--text-primary);
-      margin-bottom: 0.25rem;
     }
 
     .timeline-role {
-      font-size: 0.7rem;
+      font-size: 0.65rem;
       color: var(--text-primary);
       background: var(--bg-elevated);
       border: 1px solid var(--border-medium);
-      padding: 0.25rem 0.6rem;
+      padding: 0.2rem 0.5rem;
       border-radius: 4px;
       white-space: nowrap;
-      flex-shrink: 0;
       transition: all 0.3s ease;
-      margin-top: 0.25rem;
     }
 
     .timeline-item:hover .timeline-role {
@@ -3786,11 +3776,19 @@
       box-shadow: 0 0 8px var(--accent-dim), 0 0 16px rgba(34, 211, 238, 0.1);
     }
 
+    .timeline-company {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.15rem;
+    }
+
     .timeline-employer {
-      font-size: 0.8rem;
-      color: var(--accent);
-      margin-bottom: 0.5rem;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 0.4rem;
       font-weight: 500;
+      font-style: italic;
     }
 
     .timeline-summary {
@@ -4207,7 +4205,7 @@
         </div>
 
         <!-- Timeline View (hidden by default) -->
-        <div id="exp-timeline-view" style="display: none; padding: 2rem;">
+        <div id="exp-timeline-view" style="display: none; padding: 0.5rem 2rem 2rem 2rem;">
           <!-- Timeline Header -->
           <div class="exp-timeline-header">
             <div class="exp-timeline-title-row">
@@ -4215,61 +4213,51 @@
               <h3 class="exp-timeline-title">Career Journey</h3>
               <div class="exp-timeline-pulse"></div>
             </div>
-            <p class="exp-timeline-tagline">20+ years building enterprise solutions</p>
+            <p class="exp-timeline-tagline">17+ years building enterprise solutions</p>
           </div>
           <div class="timeline-view">
             <div class="timeline-item current">
-              <div class="timeline-header">
-                <div>
-                  <div class="timeline-date">2020 - Present</div>
-                  <div class="timeline-company">Bank of America (Jakarta, Singapore)</div>
-                </div>
-                <div class="timeline-role">Sr. Technology Architect</div>
+              <div class="timeline-date-role">
+                <span class="timeline-date">2020 - Present</span>
+                <span class="timeline-role">Sr. Technology Architect</span>
               </div>
+              <div class="timeline-company">Bank of America (Jakarta, Singapore)</div>
               <div class="timeline-employer">Infosys Ltd.</div>
               <div class="timeline-summary">Driving RTP implementations and NFR delivery for APAC. 5x business-volumes-ready reporting, 60% reduction in job execution times.</div>
             </div>
             <div class="timeline-item">
-              <div class="timeline-header">
-                <div>
-                  <div class="timeline-date">Feb - Apr 2019</div>
-                  <div class="timeline-company">Cholamandalam Finance</div>
-                </div>
-                <div class="timeline-role">Project Manager</div>
+              <div class="timeline-date-role">
+                <span class="timeline-date">Feb - Apr 2019</span>
+                <span class="timeline-role">Project Manager</span>
               </div>
+              <div class="timeline-company">Cholamandalam Finance</div>
               <div class="timeline-employer">Latitude Fintech</div>
               <div class="timeline-summary">All-India LOS go-live. Two-thirds reduction in client onboarding time.</div>
             </div>
             <div class="timeline-item">
-              <div class="timeline-header">
-                <div>
-                  <div class="timeline-date">2012 - 2016</div>
-                  <div class="timeline-company">Standard Bank (South Africa & Nigeria)</div>
-                </div>
-                <div class="timeline-role">Technology Architect & PM</div>
+              <div class="timeline-date-role">
+                <span class="timeline-date">2012 - 2016</span>
+                <span class="timeline-role">Technology Architect & PM</span>
               </div>
+              <div class="timeline-company">Standard Bank (South Africa & Nigeria)</div>
               <div class="timeline-employer">EdgeVerve Systems</div>
               <div class="timeline-summary">3000+ man-days, 100% on-time delivery. CMMI Level 4. Client's most preferred PM.</div>
             </div>
             <div class="timeline-item">
-              <div class="timeline-header">
-                <div>
-                  <div class="timeline-date">2008 - 2012</div>
-                  <div class="timeline-company">Emirates NBD (Dubai)</div>
-                </div>
-                <div class="timeline-role">Team Lead & Project Manager</div>
+              <div class="timeline-date-role">
+                <span class="timeline-date">2008 - 2012</span>
+                <span class="timeline-role">Team Lead & Project Manager</span>
               </div>
+              <div class="timeline-company">Emirates NBD (Dubai)</div>
               <div class="timeline-employer">Infosys Ltd.</div>
               <div class="timeline-summary">6000+ man-days, 100% on-time. Award-winning module designs. Release automation.</div>
             </div>
             <div class="timeline-item">
-              <div class="timeline-header">
-                <div>
-                  <div class="timeline-date">2004 - 2008</div>
-                  <div class="timeline-company">Multiple Banks</div>
-                </div>
-                <div class="timeline-role">Software Developer</div>
+              <div class="timeline-date-role">
+                <span class="timeline-date">2004 - 2008</span>
+                <span class="timeline-role">Software Developer</span>
               </div>
+              <div class="timeline-company">Multiple Banks</div>
               <div class="timeline-employer">Infosys Ltd.</div>
               <div class="timeline-summary">Bank Sohar, SBI Overseas, Bank of Alexandria, Bank of India - Core banking implementations.</div>
             </div>
