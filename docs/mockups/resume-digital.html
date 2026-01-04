@@ -844,6 +844,16 @@
       color: var(--warning);
     }
 
+    .card-badge.planning {
+      background: rgba(59, 130, 246, 0.15);
+      color: #3b82f6;
+    }
+
+    .card-badge.ideating {
+      background: rgba(168, 85, 247, 0.15);
+      color: #a855f7;
+    }
+
     .card-tagline {
       font-size: 0.85rem;
       color: var(--text-secondary);
@@ -1646,6 +1656,90 @@
     .track-badge.building {
       background: rgba(245, 158, 11, 0.15);
       color: #F59E0B;
+    }
+
+    .track-badge.planning {
+      background: rgba(59, 130, 246, 0.15);
+      color: #3b82f6;
+    }
+
+    .track-badge.ideating {
+      background: rgba(168, 85, 247, 0.15);
+      color: #a855f7;
+    }
+
+    /* Project Status Legend */
+    .project-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 0.8rem;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-medium);
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+
+    .legend-item:hover {
+      border-color: var(--accent);
+    }
+
+    .legend-item.active {
+      background: var(--accent-dim);
+      border-color: var(--accent);
+      color: var(--text-primary);
+    }
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .legend-dot.live {
+      background: #22C55E;
+      box-shadow: 0 0 6px rgba(34, 197, 94, 0.5);
+    }
+
+    .legend-dot.building {
+      background: #F59E0B;
+      box-shadow: 0 0 6px rgba(245, 158, 11, 0.5);
+    }
+
+    .legend-dot.planning {
+      background: #3b82f6;
+      box-shadow: 0 0 6px rgba(59, 130, 246, 0.5);
+    }
+
+    .legend-dot.ideating {
+      background: #a855f7;
+      box-shadow: 0 0 6px rgba(168, 85, 247, 0.5);
+    }
+
+    .legend-count {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      margin-left: 0.25rem;
+    }
+
+    /* Hide filtered projects */
+    .track-node.hidden,
+    .simple-card.hidden {
+      display: none;
     }
 
     .track-tagline {
@@ -3956,10 +4050,38 @@
         <div class="section-line"></div>
       </div>
 
+      <!-- Project Status Legend -->
+      <div class="project-legend" id="project-legend">
+        <div class="legend-item active" data-filter="all" onclick="filterProjects('all')">
+          <span>All</span>
+          <span class="legend-count">(7)</span>
+        </div>
+        <div class="legend-item" data-filter="live" onclick="filterProjects('live')">
+          <span class="legend-dot live"></span>
+          <span>Live</span>
+          <span class="legend-count">(4)</span>
+        </div>
+        <div class="legend-item" data-filter="building" onclick="filterProjects('building')">
+          <span class="legend-dot building"></span>
+          <span>Building</span>
+          <span class="legend-count">(2)</span>
+        </div>
+        <div class="legend-item" data-filter="planning" onclick="filterProjects('planning')">
+          <span class="legend-dot planning"></span>
+          <span>Planning</span>
+          <span class="legend-count">(1)</span>
+        </div>
+        <div class="legend-item" data-filter="ideating" onclick="filterProjects('ideating')">
+          <span class="legend-dot ideating"></span>
+          <span>Ideating</span>
+          <span class="legend-count">(0)</span>
+        </div>
+      </div>
+
       <!-- Simple Cards Grid -->
       <div class="simple-cards-grid" id="simple-cards-grid">
         <!-- PRIMMO Simple Card -->
-        <div class="simple-card">
+        <div class="simple-card" data-status="building">
           <div class="card-header">
             <div class="card-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -4006,7 +4128,7 @@
         </div>
 
         <!-- REPPIT Simple Card -->
-        <div class="simple-card">
+        <div class="simple-card" data-status="live">
           <div class="card-header">
             <div class="card-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -4014,7 +4136,7 @@
               </svg>
             </div>
             <div class="card-title-wrapper">
-              <h3 class="card-title">REPPIT <span class="card-badge built">Built</span></h3>
+              <h3 class="card-title">REPPIT <span class="card-badge built">Live</span></h3>
               <p class="card-tagline">Fitness strength tracking app</p>
             </div>
           </div>
@@ -4049,7 +4171,7 @@
         </div>
 
         <!-- NoteApp Simple Card -->
-        <div class="simple-card">
+        <div class="simple-card" data-status="live">
           <div class="card-header">
             <div class="card-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -4058,7 +4180,7 @@
               </svg>
             </div>
             <div class="card-title-wrapper">
-              <h3 class="card-title">NoteApp <span class="card-badge built">Built</span></h3>
+              <h3 class="card-title">NoteApp <span class="card-badge built">Live</span></h3>
               <p class="card-tagline">Privacy-first note-taking app</p>
             </div>
           </div>
@@ -4527,13 +4649,13 @@
           </div>
         </div>
 
-        <!-- Portfolio Analyzer Card -->
-        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <!-- Portfolio Optimizer Card -->
+        <div class="flip-card" data-status="planning" onclick="this.classList.toggle('flipped')">
           <div class="flip-card-inner">
             <div class="flip-card-front">
               <div class="card-header">
-                <div class="card-icon" style="background: rgba(34, 197, 94, 0.15);">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2">
+                <div class="card-icon" style="background: rgba(59, 130, 246, 0.15);">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2">
                     <path d="M3 3v18h18"/>
                     <path d="M18 17V9"/>
                     <path d="M13 17V5"/>
@@ -4541,7 +4663,7 @@
                   </svg>
                 </div>
                 <div class="card-title-wrapper">
-                  <h3 class="card-title">Portfolio Analyzer <span class="card-badge building">Building</span></h3>
+                  <h3 class="card-title">Portfolio Optimizer <span class="card-badge planning">Planning</span></h3>
                   <p class="card-tagline">Democratize investment insights</p>
                 </div>
               </div>
@@ -4566,12 +4688,12 @@
                       <path d="M13 17V5"/>
                       <path d="M8 17v-3"/>
                     </svg>
-                    <span>Portfolio Analyzer Preview</span>
+                    <span>Portfolio Optimizer Preview</span>
                   </div>
                 </div>
                 <div class="back-header" style="border-bottom: none; padding-bottom: 0; margin-bottom: 0.5rem;">
-                  <h4 class="back-title" style="font-size: 0.9rem;">Portfolio Analyzer</h4>
-                  <span class="card-badge building" style="font-size: 0.6rem;">Building</span>
+                  <h4 class="back-title" style="font-size: 0.9rem;">Portfolio Optimizer</h4>
+                  <span class="card-badge planning" style="font-size: 0.6rem;">Planning</span>
                 </div>
                 <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 1rem;">Seamless visualization of fundamentals to democratize investment strategies.</p>
                 <div class="workflow-progress">
@@ -4580,7 +4702,7 @@
                     <span class="workflow-progress-count">1/9 Complete</span>
                   </div>
                   <div class="progress-bar-track">
-                    <div class="progress-bar-fill building" style="width: 11%;"></div>
+                    <div class="progress-bar-fill planning" style="width: 11%;"></div>
                   </div>
                   <div class="workflow-stages">
                     <span class="stage-dot completed"></span>
@@ -4675,7 +4797,7 @@
         <div class="track-flip-instruction">Click any card to flip</div>
         <div class="track-row">
           <!-- PRIMMO Node -->
-          <div class="track-node building">
+          <div class="track-node building" data-status="building">
             <div class="track-card" onclick="this.classList.toggle('flipped')">
               <div class="track-card-inner">
                 <div class="track-card-front">
@@ -4731,7 +4853,7 @@
           </div>
 
           <!-- REPPIT Node -->
-          <div class="track-node">
+          <div class="track-node" data-status="live">
             <div class="track-card" onclick="this.classList.toggle('flipped')">
               <div class="track-card-inner">
                 <div class="track-card-front">
@@ -4785,7 +4907,7 @@
           </div>
 
           <!-- NoteApp Node -->
-          <div class="track-node">
+          <div class="track-node" data-status="live">
             <div class="track-card" onclick="this.classList.toggle('flipped')">
               <div class="track-card-inner">
                 <div class="track-card-front">
@@ -4846,7 +4968,7 @@
         <!-- Second Row -->
         <div class="track-row">
           <!-- Spotify Songs Node -->
-          <div class="track-node building">
+          <div class="track-node building" data-status="building">
             <div class="track-card" onclick="this.classList.toggle('flipped')">
               <div class="track-card-inner">
                 <div class="track-card-front">
@@ -4906,7 +5028,7 @@
           </div>
 
           <!-- Space Race ML Node -->
-          <div class="track-node">
+          <div class="track-node" data-status="live">
             <div class="track-card" onclick="this.classList.toggle('flipped')">
               <div class="track-card-inner">
                 <div class="track-card-front">
@@ -4964,7 +5086,7 @@
           </div>
 
           <!-- This Portfolio Node -->
-          <div class="track-node building">
+          <div class="track-node" data-status="live">
             <div class="track-card" onclick="this.classList.toggle('flipped')">
               <div class="track-card-inner">
                 <div class="track-card-front">
@@ -4975,7 +5097,7 @@
                         <path d="M12 6v6l4 2"/>
                       </svg>
                     </div>
-                    <div class="track-title">This Portfolio <span class="track-badge building">Building</span></div>
+                    <div class="track-title">This Portfolio <span class="track-badge built">Live</span></div>
                   </div>
                   <p class="track-tagline">Interactive digital resume</p>
                   <p class="track-description"><strong>AI chat assistant</strong>, skills radar, timeline view with 9-step workflow showcase.</p>
@@ -5024,16 +5146,16 @@
 
         <!-- Third Row -->
         <div class="track-row">
-          <!-- Portfolio Analyzer Node -->
-          <div class="track-node building">
+          <!-- Portfolio Optimizer Node -->
+          <div class="track-node" data-status="planning">
             <div class="track-card" onclick="this.classList.toggle('flipped')">
               <div class="track-card-inner">
                 <div class="track-card-front">
                   <div class="track-card-header">
-                    <div class="track-icon" style="color: #22C55E;">
+                    <div class="track-icon" style="color: #3b82f6;">
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
                     </div>
-                    <div class="track-title">Portfolio Analyzer <span class="track-badge building">Building</span></div>
+                    <div class="track-title">Portfolio Optimizer <span class="track-badge planning">Planning</span></div>
                   </div>
                   <p class="track-tagline">Democratize investment insights</p>
                   <p class="track-description">Integrable dashboard with <strong>fundamentals view</strong> for easy decision making.</p>
@@ -5041,7 +5163,7 @@
                 </div>
                 <div class="track-card-back">
                   <div class="track-back-screenshot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M18 17V9"/></svg><span>Preview</span></div>
-                  <div class="track-back-title">Portfolio Analyzer</div>
+                  <div class="track-back-title">Portfolio Optimizer</div>
                   <p class="track-back-desc">Seamless visualization of fundamentals to democratize investment strategies.</p>
                   <div class="track-workflow"><div class="track-workflow-header"><span>9-Step Workflow</span><span>1/9</span></div><div class="track-workflow-dots"><span class="track-workflow-dot completed"></span><span class="track-workflow-dot in-progress"></span><span class="track-workflow-dot"></span><span class="track-workflow-dot"></span><span class="track-workflow-dot"></span><span class="track-workflow-dot"></span><span class="track-workflow-dot"></span><span class="track-workflow-dot"></span><span class="track-workflow-dot"></span></div></div>
                 </div>
@@ -5689,6 +5811,44 @@
         flipGrid.classList.remove('hidden');
         flipBtn.classList.add('active');
       }
+    }
+
+    // ============ Project Status Filter ============
+    function filterProjects(status) {
+      // Update legend active state
+      document.querySelectorAll('.legend-item').forEach(item => {
+        item.classList.remove('active');
+        if (item.dataset.filter === status) {
+          item.classList.add('active');
+        }
+      });
+
+      // Filter simple cards
+      document.querySelectorAll('.simple-card').forEach(card => {
+        if (status === 'all' || card.dataset.status === status) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+
+      // Filter track nodes
+      document.querySelectorAll('.track-node').forEach(node => {
+        if (status === 'all' || node.dataset.status === status) {
+          node.classList.remove('hidden');
+        } else {
+          node.classList.add('hidden');
+        }
+      });
+
+      // Filter flip cards
+      document.querySelectorAll('.projects-grid .flip-card-container').forEach(card => {
+        if (status === 'all' || card.dataset.status === status) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
     }
 
     // ============ GitHub API Configuration ============
