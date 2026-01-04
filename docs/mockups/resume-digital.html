@@ -106,6 +106,121 @@
       left: -100px;
     }
 
+    /* ============ Neon Wave Sweep (First Load) ============ */
+    .neon-wave {
+      position: fixed;
+      top: -100%;
+      left: -100%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        135deg,
+        transparent 0%,
+        transparent 45%,
+        rgba(34, 211, 238, 0.15) 48%,
+        rgba(34, 211, 238, 0.3) 50%,
+        rgba(34, 211, 238, 0.15) 52%,
+        transparent 55%,
+        transparent 100%
+      );
+      pointer-events: none;
+      z-index: 9999;
+      animation: neonSweep 1.5s ease-out forwards;
+    }
+
+    @keyframes neonSweep {
+      0% {
+        transform: translate(0, 0);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(100%, 100%);
+        opacity: 0;
+      }
+    }
+
+    /* ============ Top Navigation ============ */
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(10, 10, 15, 0.8);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .nav-portfolio {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-portfolio:hover {
+      color: var(--accent);
+    }
+
+    .nav-portfolio svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .nav-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1.25rem;
+      background: var(--accent-dim);
+      border: 1px solid var(--accent);
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .nav-badge svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    /* Lifeline Clock Animation */
+    .clock-lifeline {
+      animation: clockPulse 2s ease-in-out infinite;
+    }
+
+    .clock-lifeline .clock-hand {
+      transform-origin: 12px 12px;
+      animation: clockRotate 4s linear infinite;
+    }
+
+    @keyframes clockPulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+
+    @keyframes clockRotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .nav-spacer {
+      width: 100px;
+    }
+
     /* ============ Layout ============ */
     .container {
       max-width: 1200px;
@@ -118,30 +233,39 @@
     /* ============ Header ============ */
     .header {
       text-align: center;
-      padding: 4rem 0 3rem;
+      padding: 6rem 0 3rem;
       border-bottom: 1px solid var(--border-subtle);
       margin-bottom: 3rem;
     }
 
     .header-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.5rem 1rem;
-      background: var(--accent-dim);
-      border: 1px solid var(--accent);
-      border-radius: 100px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: var(--accent);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 1.5rem;
+      display: none; /* Hidden - moved to top nav */
     }
 
-    .header-badge svg {
-      width: 14px;
-      height: 14px;
+    /* Header Hero Group - Hover Glow Effect */
+    .header-hero {
+      display: inline-block;
+      padding: 1.5rem 2rem;
+      border-radius: 16px;
+      transition: all 0.4s ease;
+      cursor: default;
+    }
+
+    .header-hero:hover {
+      background: rgba(34, 211, 238, 0.05);
+      box-shadow:
+        0 0 30px rgba(34, 211, 238, 0.15),
+        0 0 60px rgba(34, 211, 238, 0.08),
+        inset 0 0 30px rgba(34, 211, 238, 0.03);
+    }
+
+    .header-hero:hover .name {
+      text-shadow: 0 0 40px rgba(34, 211, 238, 0.5);
+    }
+
+    .header-hero:hover .title {
+      color: var(--accent);
+      text-shadow: 0 0 20px rgba(34, 211, 238, 0.3);
     }
 
     .name {
@@ -153,12 +277,14 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      transition: text-shadow 0.4s ease;
     }
 
     .title {
       font-size: 1.25rem;
       color: var(--text-secondary);
-      margin-bottom: 1.5rem;
+      margin-bottom: 0;
+      transition: all 0.4s ease;
     }
 
     .contact-row {
@@ -2864,6 +2990,22 @@
       border-radius: 16px;
       overflow: hidden;
       margin-bottom: 2rem;
+      animation: breathingGlow 4s ease-in-out infinite;
+    }
+
+    @keyframes breathingGlow {
+      0%, 100% {
+        box-shadow:
+          0 0 20px rgba(34, 211, 238, 0.05),
+          0 0 40px rgba(34, 211, 238, 0.02);
+        border-color: var(--border-subtle);
+      }
+      50% {
+        box-shadow:
+          0 0 30px rgba(34, 211, 238, 0.12),
+          0 0 60px rgba(34, 211, 238, 0.06);
+        border-color: rgba(34, 211, 238, 0.3);
+      }
     }
 
     .intro-header {
@@ -3394,6 +3536,27 @@
   </style>
 </head>
 <body>
+  <!-- Neon Wave Sweep (First Load) -->
+  <div class="neon-wave"></div>
+
+  <!-- Top Navigation -->
+  <nav class="top-nav">
+    <a href="v8-brittany.html" class="nav-portfolio">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M15 18l-6-6 6-6"/>
+      </svg>
+      Portfolio
+    </a>
+    <div class="nav-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="clock-lifeline">
+        <circle cx="12" cy="12" r="10"/>
+        <path d="M12 6v6l4 2" class="clock-hand"/>
+      </svg>
+      Interactive Digital Resume
+    </div>
+    <div class="nav-spacer"></div>
+  </nav>
+
   <!-- Background Effects -->
   <div class="bg-grid"></div>
   <div class="bg-orb bg-orb-1"></div>
@@ -3402,15 +3565,10 @@
   <div class="container">
     <!-- Header -->
     <header class="header animate-fade-up">
-      <div class="header-badge">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="12" cy="12" r="10"/>
-          <path d="M12 6v6l4 2"/>
-        </svg>
-        Interactive Digital Resume
+      <div class="header-hero">
+        <h1 class="name">Arun Castromin Lawrance</h1>
+        <p class="title">Solutions Architect | Enterprise Architect | Technology Consulting</p>
       </div>
-      <h1 class="name">Arun Castromin Lawrance</h1>
-      <p class="title">Solutions Architect | Enterprise Architect | Technology Consulting</p>
       <div class="contact-row">
         <a href="mailto:arun.castromin@gmail.com" class="contact-item">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -3443,11 +3601,11 @@
       </div>
     </header>
 
-    <!-- ============ SECTION 1: About Me (Collapsible) ============ -->
+    <!-- ============ SECTION 1: The Backstory (Collapsible) ============ -->
     <section class="section animate-fade-up delay-1" id="section-about">
       <div class="section-header">
         <span class="section-number">01.</span>
-        <h2 class="section-title">About Me</h2>
+        <h2 class="section-title">The Backstory</h2>
         <div class="section-line"></div>
       </div>
 
@@ -3456,8 +3614,8 @@
           <div class="intro-title-row">
             <div class="intro-avatar">AC</div>
             <div class="intro-title-text">
-              <h3>Hi, I'm Arun Castromin</h3>
-              <p>Click to expand my story</p>
+              <h3 id="intro-greeting">Hi, click to read my story</h3>
+              <p id="intro-hint">or collapse to skip ahead</p>
             </div>
           </div>
           <div class="intro-toggle">

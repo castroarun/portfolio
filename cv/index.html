@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,8 +8,26 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    /* ============ Light Theme for PDF ============ */
-    :root {
+    /* ============ CSS Variables - Dark Theme (Default) ============ */
+    :root,
+    [data-theme="dark"] {
+      --bg-base: #0A0A0F;
+      --bg-sidebar: #0E0E14;
+      --bg-elevated: #1A1A24;
+      --text-primary: #E4E4E7;
+      --text-secondary: #A1A1AA;
+      --text-muted: #71717A;
+      --accent: #22D3EE;
+      --accent-dim: rgba(34, 211, 238, 0.15);
+      --accent-hover: #06B6D4;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-medium: rgba(255, 255, 255, 0.12);
+      --toggle-bg: #1A1A24;
+      --toggle-icon: #FBBF24;
+    }
+
+    /* ============ Light Theme ============ */
+    [data-theme="light"] {
       --bg-base: #FFFFFF;
       --bg-sidebar: #FAFAFA;
       --bg-elevated: #F3F4F6;
@@ -21,6 +39,8 @@
       --accent-hover: #155E75;
       --border-subtle: rgba(0, 0, 0, 0.06);
       --border-medium: rgba(0, 0, 0, 0.1);
+      --toggle-bg: #E5E7EB;
+      --toggle-icon: #6366F1;
     }
 
     /* ============ Reset & Base ============ */
@@ -41,6 +61,7 @@
       color: var(--text-primary);
       background: var(--bg-base);
       -webkit-font-smoothing: antialiased;
+      transition: background 0.3s ease, color 0.3s ease;
     }
 
     a {
@@ -50,6 +71,21 @@
 
     /* ============ Print Styles ============ */
     @media print {
+      /* Force light theme for print */
+      :root,
+      [data-theme="dark"],
+      [data-theme="light"] {
+        --bg-base: #FFFFFF;
+        --bg-sidebar: #FAFAFA;
+        --bg-elevated: #F3F4F6;
+        --text-primary: #111827;
+        --text-secondary: #4B5563;
+        --text-muted: #9CA3AF;
+        --accent: #0E7490;
+        --border-subtle: rgba(0, 0, 0, 0.06);
+        --border-medium: rgba(0, 0, 0, 0.1);
+      }
+
       @page {
         margin: 1.5cm 1cm 1.2cm 1.5cm;
       }
@@ -494,6 +530,31 @@
       color: var(--text-secondary);
       border: 1px solid var(--border-medium);
     }
+
+    /* Theme Toggle Button */
+    .theme-toggle {
+      background: var(--toggle-bg);
+      color: var(--toggle-icon);
+      border: 1px solid var(--border-medium);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .theme-toggle:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .theme-toggle .icon-sun,
+    .theme-toggle .icon-moon {
+      display: none;
+    }
+
+    [data-theme="dark"] .theme-toggle .icon-sun {
+      display: block;
+    }
+
+    [data-theme="light"] .theme-toggle .icon-moon {
+      display: block;
+    }
   </style>
 </head>
 <body>
@@ -721,11 +782,23 @@
 
   <!-- Action Buttons -->
   <div class="action-buttons no-print">
-    <a href="resume-pdf-email.html" class="action-btn back-btn">
+    <!-- Theme Toggle -->
+    <button class="action-btn theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+      <!-- Sun icon (shown in dark mode) -->
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+      </svg>
+      <!-- Moon icon (shown in light mode) -->
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+      </svg>
+      Theme
+    </button>
+    <a href="/portfolio/resume/" class="action-btn back-btn">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path d="M9 12h12M9 12l4-4M9 12l4 4"/>
       </svg>
-      1-Page Version
+      Digital Resume
     </a>
     <button class="action-btn print-btn" onclick="window.print()">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -734,5 +807,24 @@
       Print / PDF
     </button>
   </div>
+
+  <script>
+    // Theme toggle functionality
+    function toggleTheme() {
+      const html = document.documentElement;
+      const currentTheme = html.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('cv-theme', newTheme);
+    }
+
+    // Load saved theme preference
+    (function() {
+      const savedTheme = localStorage.getItem('cv-theme');
+      if (savedTheme) {
+        document.documentElement.setAttribute('data-theme', savedTheme);
+      }
+    })();
+  </script>
 </body>
 </html>
