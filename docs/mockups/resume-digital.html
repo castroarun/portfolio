@@ -2000,6 +2000,17 @@
       color: var(--text-primary);
     }
 
+    .legend-item.disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    .legend-item.disabled .legend-dot {
+      background: var(--text-muted) !important;
+      box-shadow: none !important;
+    }
+
     .legend-dot {
       width: 10px;
       height: 10px;
@@ -2036,6 +2047,19 @@
     .track-node.hidden,
     .simple-card.hidden {
       display: none;
+    }
+
+    /* Simple card filter animation */
+    .simple-card {
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    .simple-card.filtered-out {
+      opacity: 0;
+      transform: scale(0.9);
+      pointer-events: none;
+      position: absolute;
+      visibility: hidden;
     }
 
     .track-tagline {
@@ -6167,7 +6191,7 @@
       }
     }
 
-    // ============ Project Status Filter ============
+    // ============ Project Status Filter (with Fluid Rearrangement) ============
     function filterProjects(status) {
       // Update legend active state
       document.querySelectorAll('.legend-item').forEach(item => {
@@ -6177,30 +6201,71 @@
         }
       });
 
-      // Filter simple cards
+      // Filter simple cards with animation
       document.querySelectorAll('.simple-card').forEach(card => {
         if (status === 'all' || card.dataset.status === status) {
-          card.classList.remove('hidden');
+          card.classList.remove('filtered-out');
         } else {
-          card.classList.add('hidden');
+          card.classList.add('filtered-out');
         }
       });
 
-      // Filter track nodes
-      document.querySelectorAll('.track-node').forEach(node => {
-        if (status === 'all' || node.dataset.status === status) {
-          node.classList.remove('hidden');
+      // Filter track nodes with fluid animation
+      const trackRows = document.querySelectorAll('.track-row');
+      trackRows.forEach(row => {
+        const nodes = row.querySelectorAll('.track-node');
+        let visibleCount = 0;
+
+        nodes.forEach(node => {
+          const nodeStatus = node.dataset.status;
+          if (status === 'all' || nodeStatus === status) {
+            node.classList.remove('filtered-out');
+            visibleCount++;
+          } else {
+            node.classList.add('filtered-out');
+          }
+        });
+
+        // Hide entire row if no visible nodes (with animation)
+        if (visibleCount === 0) {
+          row.classList.add('hidden-row');
         } else {
-          node.classList.add('hidden');
+          row.classList.remove('hidden-row');
         }
       });
 
       // Filter flip cards
       document.querySelectorAll('.projects-grid .flip-card-container').forEach(card => {
         if (status === 'all' || card.dataset.status === status) {
+          card.classList.remove('filtered-out');
           card.style.display = '';
         } else {
-          card.style.display = 'none';
+          card.classList.add('filtered-out');
+          // Delay hiding to allow animation
+          setTimeout(() => {
+            if (card.classList.contains('filtered-out')) {
+              card.style.display = 'none';
+            }
+          }, 400);
+        }
+      });
+
+      // Sync timeline header chips with main filter
+      syncTimelineChipsWithFilter(status);
+    }
+
+    // Sync timeline header chips when main legend is used
+    function syncTimelineChipsWithFilter(status) {
+      document.querySelectorAll('.timeline-status-chip').forEach(chip => {
+        const chipFilter = chip.dataset.filter;
+        if (status === 'all') {
+          chip.classList.add('active');
+          activeTimelineFilters.add(chipFilter);
+        } else if (chipFilter === status) {
+          chip.classList.add('active');
+          activeTimelineFilters = new Set([status]);
+        } else {
+          chip.classList.remove('active');
         }
       });
     }
@@ -6284,6 +6349,40 @@
 
     // Initialize timeline chip counts on page load
     document.addEventListener('DOMContentLoaded', updateTimelineChipCounts);
+
+    // Initialize main legend (disable items with 0 count)
+    function initializeLegendCounts() {
+      const statusCounts = { all: 0, live: 0, building: 0, planning: 0, ideating: 0 };
+
+      // Count all project statuses from track nodes
+      document.querySelectorAll('.track-node').forEach(node => {
+        const status = node.dataset.status;
+        if (status && statusCounts.hasOwnProperty(status)) {
+          statusCounts[status]++;
+          statusCounts.all++;
+        }
+      });
+
+      // Update legend items
+      document.querySelectorAll('.legend-item').forEach(item => {
+        const filter = item.dataset.filter;
+        const count = statusCounts[filter] || 0;
+        const countSpan = item.querySelector('.legend-count');
+
+        if (countSpan) {
+          countSpan.textContent = `(${count})`;
+        }
+
+        // Disable items with 0 count (except 'all')
+        if (count === 0 && filter !== 'all') {
+          item.classList.add('disabled');
+        } else {
+          item.classList.remove('disabled');
+        }
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', initializeLegendCounts);
 
     // ============ GitHub API Configuration ============
     const GITHUB_USERNAME = 'castroarun';
