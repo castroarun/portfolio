@@ -1769,6 +1769,8 @@
       perspective: 1000px;
       cursor: pointer;
       min-height: 280px;
+      height: 280px;
+      position: relative;
     }
 
     .track-card-inner {
@@ -1776,7 +1778,7 @@
       width: 100%;
       height: 100%;
       min-height: 280px;
-      transition: transform 0.6s;
+      transition: transform 0.6s, z-index 0s 0.3s;
       transform-style: preserve-3d;
     }
 
@@ -1784,10 +1786,16 @@
       transform: rotateY(180deg);
     }
 
+    /* Raise z-index when card is flipped to prevent overlap */
+    .track-card.flipped {
+      z-index: 10;
+    }
+
     .track-card-front,
     .track-card-back {
       position: absolute;
       width: 100%;
+      height: 100%;
       backface-visibility: hidden;
       -webkit-backface-visibility: hidden;
       background: var(--bg-card);
@@ -1795,6 +1803,7 @@
       border-radius: 12px;
       padding: 1.25rem;
       box-sizing: border-box;
+      overflow: hidden;
     }
 
     .track-card-front {
@@ -1806,6 +1815,7 @@
       transform: rotateY(180deg);
       display: flex;
       flex-direction: column;
+      overflow-y: auto;
     }
 
     .track-card-back .track-link {
@@ -2413,12 +2423,22 @@
         margin-top: 0;
         width: 100%;
         box-sizing: border-box;
+        height: 280px;
+      }
+
+      .track-card-inner {
+        height: 280px;
       }
 
       .track-card-front,
       .track-card-back {
         width: 100%;
         box-sizing: border-box;
+        height: 100%;
+      }
+
+      .track-card.flipped {
+        z-index: 20;
       }
     }
 
@@ -5172,16 +5192,23 @@
       }
 
       .track-card {
-        min-height: 220px;
+        min-height: 260px;
+        height: 260px;
       }
 
       .track-card-inner {
-        min-height: 220px;
+        min-height: 260px;
+        height: 260px;
       }
 
       .track-card-front,
       .track-card-back {
         padding: 1rem;
+        height: 100%;
+      }
+
+      .track-card.flipped {
+        z-index: 20;
       }
 
       .track-card-header {
@@ -5318,16 +5345,23 @@
       }
 
       .track-card {
-        min-height: 200px;
+        min-height: 240px;
+        height: 240px;
       }
 
       .track-card-inner {
-        min-height: 200px;
+        min-height: 240px;
+        height: 240px;
       }
 
       .track-card-front,
       .track-card-back {
         padding: 0.75rem;
+        height: 100%;
+      }
+
+      .track-card.flipped {
+        z-index: 20;
       }
 
       .track-icon {
