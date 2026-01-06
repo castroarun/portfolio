@@ -7778,6 +7778,18 @@
       }
     }
 
+    // ============ Life Events Toggle (for toggle switch) ============
+    function toggleLifeEvents(isChecked) {
+      const careerTimeline = document.getElementById('career-timeline');
+      if (isChecked) {
+        // Show life events
+        careerTimeline.classList.add('show-life');
+      } else {
+        // Hide life events
+        careerTimeline.classList.remove('show-life');
+      }
+    }
+
     // ============ Supabase Configuration ============
     const SUPABASE_URL = 'https://zljszmxfbeeoiznbuesr.supabase.co';
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpsanN6bXhmYmVlb2l6bmJ1ZXNyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc1MTcyMjIsImV4cCI6MjA4MzA5MzIyMn0._RTf-B3ux4eaG9XRyvNE2OcrPxJAH3Q7ZsUDgF3hHPU';
