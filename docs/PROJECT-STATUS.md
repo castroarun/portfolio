@@ -3,7 +3,7 @@
 > **Project:** Castronix Portfolio Website
 > **Purpose:** Showcase projects, workflow, and engineering practices
 
-**Last Updated:** 2026-01-03
+**Last Updated:** 2026-01-06
 
 ---
 
@@ -124,6 +124,36 @@ A "truly digital" resume that differentiates from traditional PDF resumes:
 
 See [DIGITAL-RESUME-DESIGN.md](Design/DIGITAL-RESUME-DESIGN.md) for full architecture.
 
+### Resume Content Automation System (NEW - Completed)
+A local AI-powered agent for editing resume content via natural language commands:
+
+**Command Categories:**
+- **CRUD Operations:** Add/update/delete skills, bullets, project tags, profile info
+- **Layout:** Compact mode, hide/show sections
+- **Theme:** Dark/light mode switching
+- **Review:** Full resume scoring with industry best practices
+
+**Local AI Review Agent (No External API):**
+- **ATS Optimization Rules:** 97.4% Fortune 500 use ATS - checks compliance
+- **Keyword Patterns:** 5 pillars (hard skills, soft skills, industry terms, achievement language, emerging tech)
+- **Role-Specific Keywords:** Technology Architect, Principal Architect, Engineering Manager, etc.
+- **100-Point Scoring:** ATS (30), Content Quality (35), Formatting (20), Role Relevance (15)
+
+**ContentValidator (Enforces Standards During Edits):**
+- Validates bullets: action verbs (30pts), metrics (40pts), impact (20pts), length (10pts)
+- Auto-suggests improvements for low-scoring content
+- Context-aware verb suggestions based on content
+- ATS keyword validation for skills
+
+**Example Commands:**
+```
+Add TypeScript at 85%
+Update bullet 1 in Bank of America to: Led migration achieving 50% efficiency
+Validate: responsible for managing the team
+Review my resume for Principal Architect role
+Switch to light mode
+```
+
 ---
 
 ## Design Inspiration Sources
@@ -155,6 +185,7 @@ Based on research from:
 
 ## Next Actions
 
+- [x] Resume Content Automation System with local AI agent (Completed 2026-01-06)
 - [ ] Add screenshots for remaining projects (Spotify Songs, Space Race ML, Backtest Pro)
 - [ ] Finalize resume/index.html as production version
 - [ ] Set up custom domain (castronix.dev) on GitHub Pages

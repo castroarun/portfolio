@@ -1498,6 +1498,8 @@
       display: none;
       padding: 1.5rem 0;
       position: relative;
+      overflow-x: hidden;
+      max-width: 100%;
     }
 
     .track-timeline.active {
@@ -2370,14 +2372,14 @@
     @media (max-width: 900px) {
       .track-row {
         flex-direction: column;
-        padding: 1rem 2rem;
+        padding: 1rem 1rem 1rem 3.5rem;
         gap: 2.5rem;
       }
 
       .track-row::before {
         width: 4px;
         height: calc(100% - 2rem);
-        left: 2rem;
+        left: 1.5rem;
         right: auto;
         top: 1rem;
         transform: none;
@@ -2386,7 +2388,7 @@
       .track-row::after {
         width: 2px;
         height: calc(100% - 2rem);
-        left: calc(2rem + 10px);
+        left: calc(1.5rem + 10px);
         right: auto;
         top: 1rem;
         transform: none;
@@ -2396,17 +2398,27 @@
         flex: none;
         max-width: 100%;
         min-width: auto;
-        padding-left: 2.5rem;
+        width: 100%;
+        padding-left: 1.5rem;
+        box-sizing: border-box;
       }
 
       .track-node::before {
-        left: -0.5rem;
+        left: -2.25rem;
         top: 50%;
         transform: translateY(-50%);
       }
 
       .track-card {
         margin-top: 0;
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      .track-card-front,
+      .track-card-back {
+        width: 100%;
+        box-sizing: border-box;
       }
     }
 
@@ -2763,6 +2775,98 @@
 
     .message-bubble strong {
       color: var(--text-primary);
+    }
+
+    /* Review Report Styles */
+    .review-report {
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+
+    .review-report .report-header {
+      color: var(--accent);
+      font-size: 0.95rem;
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .review-report .report-score {
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      padding: 0.75rem;
+      background: var(--bg-card);
+      border-radius: 8px;
+      border-left: 3px solid var(--accent);
+    }
+
+    .review-report .report-section {
+      margin-bottom: 0.75rem;
+      padding: 0.5rem 0;
+      white-space: pre-line;
+    }
+
+    .review-report .report-section strong {
+      color: var(--accent);
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+
+    .review-report .strengths {
+      color: var(--success);
+    }
+
+    .review-report .strengths strong {
+      color: var(--success);
+    }
+
+    .review-report .improvements {
+      color: var(--warning);
+    }
+
+    .review-report .improvements strong {
+      color: var(--warning);
+    }
+
+    /* Compact Mode Styles */
+    body.compact-mode .section {
+      margin-bottom: 1rem;
+    }
+
+    body.compact-mode .section-header {
+      padding: 0.5rem 0;
+    }
+
+    body.compact-mode .exp-panel,
+    body.compact-mode .skill-item,
+    body.compact-mode .simple-card {
+      padding: 0.75rem;
+    }
+
+    body.compact-mode .exp-bullets li {
+      margin-bottom: 0.25rem;
+      font-size: 0.85rem;
+    }
+
+    body.compact-mode .intro-section .intro-body {
+      font-size: 0.9rem;
+    }
+
+    /* Pulse animation for skill updates */
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.02); background: var(--accent-dim); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeOut {
+      from { opacity: 1; transform: scale(1); }
+      to { opacity: 0; transform: scale(0.95); }
     }
 
     .suggested-questions {
@@ -3879,21 +3983,151 @@
       margin: 0;
     }
 
+    /* Experience Controls Row */
+    .exp-controls-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .exp-controls-left {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .exp-controls-right {
+      display: flex;
+      align-items: center;
+    }
+
+    /* Life Toggle Switch */
+    .life-toggle {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .life-toggle input {
+      display: none;
+    }
+
+    .toggle-switch {
+      position: relative;
+      width: 44px;
+      height: 24px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-medium);
+      border-radius: 100px;
+      transition: all 0.3s ease;
+    }
+
+    .toggle-switch::before {
+      content: '';
+      position: absolute;
+      left: 3px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 16px;
+      height: 16px;
+      background: var(--text-muted);
+      border-radius: 50%;
+      transition: all 0.3s ease;
+    }
+
+    .life-toggle input:checked + .toggle-switch {
+      background: var(--accent-dim);
+      border-color: var(--accent);
+    }
+
+    .life-toggle input:checked + .toggle-switch::before {
+      left: calc(100% - 19px);
+      background: var(--accent);
+      box-shadow: 0 0 8px var(--accent);
+    }
+
+    .toggle-label {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      transition: color 0.3s ease;
+    }
+
+    .life-toggle input:checked ~ .toggle-label {
+      color: var(--accent);
+    }
+
+    .life-toggle:hover .toggle-switch {
+      border-color: var(--accent);
+    }
+
+    .life-toggle:hover .toggle-label {
+      color: var(--text-primary);
+    }
+
+    /* Inline View Toggle */
+    .inline-view-toggle {
+      display: flex;
+      gap: 0.25rem;
+      background: var(--bg-base);
+      border-radius: 6px;
+      padding: 0.2rem;
+    }
+
+    .inline-view-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.4rem 0.7rem;
+      background: transparent;
+      border: none;
+      border-radius: 4px;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+
+    .inline-view-btn:hover {
+      color: var(--text-primary);
+      background: var(--bg-elevated);
+    }
+
+    .inline-view-btn.active {
+      background: var(--accent-dim);
+      color: var(--accent);
+    }
+
+    .inline-view-btn svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    /* Experience View Toggle Bar */
+    .exp-view-toggle-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.5rem;
+      background: var(--bg-elevated);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
     /* Vertical Timeline View */
     .timeline-view {
       position: relative;
-      padding-left: 3rem;
+      padding-left: 2rem;
       margin-left: 0;
     }
 
+    /* Grey vertical line removed for cleaner look */
     .timeline-view::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 2px;
-      background: var(--border-subtle);
+      display: none;
     }
 
     .timeline-item {
@@ -3905,7 +4139,7 @@
     .timeline-item::before {
       content: '';
       position: absolute;
-      left: -2.5rem;
+      left: -1.75rem;
       top: 0.25rem;
       width: 12px;
       height: 12px;
@@ -4103,18 +4337,19 @@
     }
 
     .timeline-row .timeline-item::before {
-      left: -1.5rem;
+      left: -1.25rem;
     }
 
-    /* Career vertical line - continuous */
+    /* Career vertical line - continuous neon line */
     .career-track::before {
       content: '';
       position: absolute;
-      left: -0.5rem;
+      left: -0.75rem;
       top: 0;
       bottom: 0;
       width: 2px;
       background: linear-gradient(180deg, var(--accent) 0%, rgba(0, 255, 255, 0.3) 100%);
+      box-shadow: 0 0 8px var(--accent-dim);
     }
 
     /* Hide main timeline line when show-life mode is active */
@@ -4362,6 +4597,51 @@
         flex-direction: column;
         gap: 0.5rem;
       }
+
+      .exp-controls-row {
+        flex-direction: column;
+        gap: 0.75rem;
+        align-items: center;
+      }
+
+      .exp-controls-left {
+        justify-content: center;
+      }
+
+      .life-toggle {
+        order: -1;
+      }
+
+      .inline-view-btn {
+        padding: 0.35rem 0.6rem;
+        font-size: 0.7rem;
+      }
+
+      .toggle-switch {
+        width: 38px;
+        height: 20px;
+      }
+
+      .toggle-switch::before {
+        width: 14px;
+        height: 14px;
+      }
+
+      .life-toggle input:checked + .toggle-switch::before {
+        left: calc(100% - 17px);
+      }
+
+      .toggle-label {
+        font-size: 0.75rem;
+      }
+
+      .exp-view-toggle-bar {
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        padding: 0.75rem 1rem;
+        justify-content: center;
+      }
+
       .life-legend { justify-content: center; }
 
       /* Stack tracks vertically on mobile */
@@ -4476,13 +4756,14 @@
 
       .nav-badge {
         position: static;
-        transform: none;
+        transform: none !important;
         order: 3;
         width: 100%;
         justify-content: center;
         padding: 0.4rem 0.8rem;
         font-size: 0.65rem;
         margin-top: 0.5rem;
+        animation: none;
       }
 
       .nav-badge svg {
@@ -4861,6 +5142,121 @@
       .certification-name {
         font-size: 0.9rem;
       }
+
+      /* Track Timeline mobile adjustments for 480px */
+      .track-row {
+        padding: 1rem 1rem 1rem 2.5rem;
+        gap: 2rem;
+      }
+
+      .track-row::before {
+        left: 1.25rem;
+        width: 3px;
+      }
+
+      .track-row::after {
+        left: calc(1.25rem + 8px);
+        width: 2px;
+      }
+
+      .track-node {
+        padding-left: 1.5rem;
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      .track-node::before {
+        left: -1.75rem;
+        width: 14px;
+        height: 14px;
+      }
+
+      .track-card {
+        min-height: 220px;
+      }
+
+      .track-card-inner {
+        min-height: 220px;
+      }
+
+      .track-card-front,
+      .track-card-back {
+        padding: 1rem;
+      }
+
+      .track-card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+
+      .track-icon {
+        width: 36px;
+        height: 36px;
+      }
+
+      .track-icon svg {
+        width: 18px;
+        height: 18px;
+      }
+
+      .track-name {
+        font-size: 0.95rem;
+      }
+
+      .track-status-badge {
+        font-size: 0.6rem;
+        padding: 0.2rem 0.5rem;
+      }
+
+      .track-description {
+        font-size: 0.75rem;
+        line-height: 1.4;
+      }
+
+      .track-tech {
+        gap: 0.3rem;
+      }
+
+      .track-tech-tag {
+        font-size: 0.6rem;
+        padding: 0.2rem 0.4rem;
+      }
+
+      .track-links {
+        gap: 0.3rem;
+        flex-wrap: wrap;
+      }
+
+      .track-link {
+        font-size: 0.6rem;
+        padding: 0.25rem 0.5rem;
+      }
+
+      .timeline-header {
+        padding: 1rem 0.5rem;
+      }
+
+      .timeline-title {
+        font-size: 1.35rem;
+      }
+
+      .timeline-tagline {
+        font-size: 0.8rem;
+      }
+
+      .timeline-status-summary {
+        gap: 0.5rem;
+      }
+
+      .timeline-status-chip {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.65rem;
+      }
+
+      .flip-hint {
+        font-size: 0.65rem;
+      }
     }
 
     /* Handle very small screens - 360px and below */
@@ -4892,6 +5288,82 @@
 
       .stat-label {
         font-size: 0.65rem;
+      }
+
+      /* Track Timeline for very small screens */
+      .track-row {
+        padding: 0.75rem 0.5rem 0.75rem 2rem;
+        gap: 1.5rem;
+      }
+
+      .track-row::before {
+        left: 0.75rem;
+        width: 3px;
+      }
+
+      .track-row::after {
+        left: calc(0.75rem + 6px);
+        width: 1px;
+      }
+
+      .track-node {
+        padding-left: 1rem;
+      }
+
+      .track-node::before {
+        left: -1.5rem;
+        width: 12px;
+        height: 12px;
+        border-width: 2px;
+      }
+
+      .track-card {
+        min-height: 200px;
+      }
+
+      .track-card-inner {
+        min-height: 200px;
+      }
+
+      .track-card-front,
+      .track-card-back {
+        padding: 0.75rem;
+      }
+
+      .track-icon {
+        width: 32px;
+        height: 32px;
+      }
+
+      .track-icon svg {
+        width: 16px;
+        height: 16px;
+      }
+
+      .track-name {
+        font-size: 0.85rem;
+      }
+
+      .track-status-badge {
+        font-size: 0.55rem;
+        padding: 0.15rem 0.4rem;
+      }
+
+      .track-description {
+        font-size: 0.7rem;
+      }
+
+      .timeline-title {
+        font-size: 1.2rem;
+      }
+
+      .timeline-tagline {
+        font-size: 0.7rem;
+      }
+
+      .timeline-status-chip {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.6rem;
       }
     }
 
@@ -5131,29 +5603,31 @@
       </div>
 
       <div class="experience-section">
-        <!-- View Toggle -->
-        <div style="padding: 1rem 1.5rem 0; display: flex; justify-content: flex-end;">
-          <div class="view-toggle">
-            <button class="view-btn" onclick="switchExpView('tabs')" id="view-tabs">
+        <!-- Persistent View Toggle Bar -->
+        <div class="exp-view-toggle-bar">
+          <div class="inline-view-toggle">
+            <button class="inline-view-btn" onclick="switchExpView('tabs')" id="view-tabs">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <rect x="3" y="3" width="18" height="18" rx="2"/>
                 <path d="M3 9h18"/>
               </svg>
               Tabs
             </button>
-            <button class="view-btn active" onclick="switchExpView('timeline')" id="view-timeline">
+            <button class="inline-view-btn active" onclick="switchExpView('timeline')" id="view-timeline">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M12 2v20"/>
                 <path d="M2 12h4"/>
                 <path d="M18 12h4"/>
-                <path d="M2 6h4"/>
-                <path d="M18 6h4"/>
-                <path d="M2 18h4"/>
-                <path d="M18 18h4"/>
               </svg>
               Timeline
             </button>
           </div>
+          <!-- Life Toggle Switch (only visible in timeline view) -->
+          <label class="life-toggle" id="life-toggle">
+            <input type="checkbox" id="life-toggle-input" onchange="toggleLifeEvents(this.checked)">
+            <span class="toggle-switch"></span>
+            <span class="toggle-label">+ Life</span>
+          </label>
         </div>
 
         <!-- Tabbed View (hidden by default) -->
@@ -5304,18 +5778,9 @@
 
         <!-- Timeline View (default) -->
         <div id="exp-timeline-view" style="padding: 0.5rem 2rem 2rem 2rem;">
-          <!-- Timeline Header with Inline Toggle -->
+          <!-- Timeline Header -->
           <div class="exp-timeline-header">
             <div class="exp-timeline-title-row">
-              <!-- Toggle buttons on the left -->
-              <div class="timeline-mode-toggle">
-                <button class="timeline-mode-btn active" onclick="toggleTimelineMode('career')" id="btn-career-timeline">
-                  <span class="mode-icon">💼</span> Career Only
-                </button>
-                <button class="timeline-mode-btn" onclick="toggleTimelineMode('combined')" id="btn-combined-timeline">
-                  <span class="mode-icon">🌟</span> Life + Career
-                </button>
-              </div>
               <div class="exp-timeline-pulse"></div>
               <h3 class="exp-timeline-title">Career Journey</h3>
               <div class="exp-timeline-pulse"></div>
@@ -7479,17 +7944,22 @@
       const timelineView = document.getElementById('exp-timeline-view');
       const tabsBtn = document.getElementById('view-tabs');
       const timelineBtn = document.getElementById('view-timeline');
+      const lifeToggle = document.getElementById('life-toggle');
 
       if (view === 'tabs') {
         tabsView.style.display = 'block';
         timelineView.style.display = 'none';
         tabsBtn.classList.add('active');
         timelineBtn.classList.remove('active');
+        // Hide Life toggle in tabs view
+        if (lifeToggle) lifeToggle.style.display = 'none';
       } else {
         tabsView.style.display = 'none';
         timelineView.style.display = 'block';
         tabsBtn.classList.remove('active');
         timelineBtn.classList.add('active');
+        // Show Life toggle in timeline view
+        if (lifeToggle) lifeToggle.style.display = 'flex';
       }
     }
 
@@ -8826,7 +9296,1566 @@ This creativity informs his approach to problem-solving - thinking outside the b
           goToTopBtn.classList.remove('visible');
         }
       });
+
+      // Initialize Resume Content Automation System
+      ResumeAutomation.init();
     });
+
+    // ========================================================================
+    // RESUME CONTENT AUTOMATION SYSTEM
+    // AI-powered local agent for resume editing via natural language commands
+    // ========================================================================
+
+    const ResumeAutomation = {
+      // ===== RESUME STATE - Single Source of Truth =====
+      state: {
+        meta: {
+          name: 'Arun Castromin Lawrance',
+          title: 'Sr. Technology Architect',
+          email: 'arun.castromin@gmail.com',
+          linkedin: 'linkedin.com/in/aruncastromin',
+          github: 'github.com/castroarun',
+          location: 'Singapore'
+        },
+        sections: {
+          about: { visible: true, order: 1, id: 'section-about' },
+          experience: { visible: true, order: 2, id: 'exp-tabs-view' },
+          skills: { visible: true, order: 3, id: 'skills-container' },
+          github: { visible: true, order: 4, id: 'github-section' },
+          projects: { visible: true, order: 5, id: 'simple-cards-grid' },
+          certifications: { visible: true, order: 6, id: 'certifications-grid' }
+        },
+        experience: [
+          {
+            id: 'boa',
+            company: 'Bank of America',
+            location: 'Jakarta, Singapore, India',
+            role: 'Sr. Technology Architect',
+            employer: 'Infosys Ltd.',
+            period: '2020 - Present',
+            isCurrent: true,
+            context: 'Global Commercial Bank - APAC Region. Driving Real-Time Payments (RTP) and NFR delivery across multiple countries.',
+            bullets: [
+              'Integral member and architect of Application Engineering and Support agile team driving Real-Time Payments (RTP) implementations and NFR delivery for APAC regions',
+              'Led the Business mapping stream for Regulatory Reporting translation, achieving 100% mappings and timely Business enablement',
+              'Strategized Business processes for Client Onboarding, enabling new businesses and integrating Regulatory norms within Bank-in-a-box technology',
+              'Designed and achieved a 5x Business-volumes-ready reporting system certified by the Client',
+              'Led Design changes resulting in 60% reduction in daily job execution times',
+              'Designed Splunk dashboards for visualization and remediation of system events with quickest TAT',
+              'Mentored cross-functional teams in decision making, business thinking, and problem solving'
+            ]
+          },
+          {
+            id: 'chola',
+            company: 'Cholamandalam Investment and Finance Company',
+            location: 'India',
+            role: 'Project Manager',
+            employer: 'Latitude Fintech',
+            period: 'Feb - Apr 2019',
+            isCurrent: false,
+            bullets: [
+              'Implemented Latitude Fintech\'s premiere tech-savvy LOS product at Cholamandalam Finance Ltd',
+              'Ensured successful all-India go-live transformations',
+              'Achieved two-thirds reduction in Client onboarding processes (end-to-end time, verifications & sanctioning)'
+            ]
+          },
+          {
+            id: 'standard',
+            company: 'Standard Bank',
+            location: 'South Africa & Nigeria',
+            role: 'Technology Architect & Project Manager',
+            employer: 'EdgeVerve Systems Ltd.',
+            period: '2012 - 2016',
+            isCurrent: false,
+            context: 'Africa\'s largest banking institution with operations across 18 countries. Finacle Core Banking implementation.',
+            bullets: [
+              'Managed Business discussions, Requirement gathering & Design Phases with Client',
+              'Trained and mentored fresh talent through Design, Build & Delivery phases',
+              'Achieved 3000+ man-days of 100% on-time deliverables',
+              'Managed teams of 3-18 members with less than 2.5% Defect Injection Rate',
+              'Led the Project into successful CMMI Maturity Level 4 assessment - first in Africa & Middle East Region',
+              'Acknowledged as Client\'s most preferred Project Manager',
+              'Earned internal prestigious Team Award for management and code quality'
+            ],
+            rolesHeld: ['Project Manager', 'Business Analyst', 'QA Lead', 'Technology Architect', 'Senior Developer']
+          },
+          {
+            id: 'enbd',
+            company: 'Emirates NBD',
+            location: 'Dubai',
+            role: 'Team Lead & Project Manager',
+            employer: 'Infosys Ltd.',
+            period: '2008 - 2012',
+            isCurrent: false,
+            context: 'One of the largest banking groups in the Middle East. Core banking transformation following Emirates Bank + National Bank of Dubai merger.',
+            bullets: [
+              'Achieved 6000+ man-days of 100% on-time deliverables',
+              'Served as preferred techno-functional Project Manager managing teams of up to 18 members',
+              'Designed & implemented reusable modules - cash denomination, teller reports, EOD batch jobs',
+              'Earned individual award for cash denomination module design',
+              'Led Release Management eliminating 100% non-infra deployment issues through automation'
+            ],
+            rolesHeld: ['Senior Developer', 'Team Lead', 'Project Manager', 'Technology Architect']
+          },
+          {
+            id: 'early',
+            company: 'Earlier Career at Infosys Ltd.',
+            location: 'Chennai',
+            role: 'Software Developer',
+            employer: 'Infosys Ltd.',
+            period: '2004 - 2008',
+            isCurrent: false,
+            bullets: [
+              'Bank Sohar (2007): Reports Customization & Development - Oman',
+              'State Bank of India Overseas (2006-2007): Core module Customization, Reports, Test & Support',
+              'Bank of Alexandria (2004-2005): Core module Customization, Test & Support - Egypt',
+              'Bank of India (2004): Core module Customization'
+            ]
+          }
+        ],
+        skills: [
+          { name: 'Solution Architecture', category: 'architecture', level: 'Expert | 17+ years', progress: 95 },
+          { name: 'Core Banking (Finacle)', category: 'architecture', level: 'Expert', progress: 90 },
+          { name: 'Data Science', category: 'data', level: 'IBM Certified', progress: 78 },
+          { name: 'Python', category: 'development', level: 'Advanced', progress: 80 },
+          { name: 'Java', category: 'development', level: 'Expert', progress: 88 },
+          { name: 'PL/SQL', category: 'development', level: 'Expert', progress: 90 },
+          { name: 'Data Analytics (Tableau, Splunk)', category: 'data', level: 'Advanced', progress: 75 },
+          { name: 'Agentic AI Implementation', category: 'data', level: 'Active Practitioner', progress: 70 }
+        ],
+        projects: [
+          { name: 'PRIMMO', status: 'building', tagline: 'AI-powered personal strength coach', tech: ['Next.js', 'Voice AI', 'Supabase'] },
+          { name: 'REPPIT', status: 'live', tagline: 'Fitness strength tracking app', tech: ['React Native', 'TypeScript', 'Expo'] },
+          { name: 'NoteApp', status: 'live', tagline: 'Privacy-first note-taking app', tech: ['Next.js', 'Supabase', 'PWA'] },
+          { name: 'Portfolio', status: 'live', tagline: 'Interactive digital portfolio', tech: ['HTML/CSS/JS', 'Chart.js', 'GitHub API'] }
+        ],
+        settings: {
+          theme: 'dark',
+          pageLimit: null,
+          layout: 'full'
+        }
+      },
+
+      originalState: null, // For demo mode reset
+
+      // ===== INITIALIZATION =====
+      init() {
+        // Store original state for reset
+        this.originalState = JSON.parse(JSON.stringify(this.state));
+        console.log('Resume Automation System initialized');
+      },
+
+      // ===== COMMAND PARSER =====
+      CommandParser: {
+        intents: {
+          ADD: ['add', 'create', 'new', 'include', 'insert'],
+          UPDATE: ['update', 'change', 'modify', 'set', 'make', 'edit', 'rename'],
+          DELETE: ['remove', 'delete', 'drop'],
+          HIDE: ['hide'],
+          LAYOUT: ['page', 'compact', 'expand', 'restrict', 'fit', 'single'],
+          THEME: ['dark', 'light', 'theme', 'mode', 'color'],
+          REVIEW: ['review', 'score', 'check', 'analyze', 'ats', 'rate', 'evaluate', 'assess'],
+          SHOW: ['show', 'display', 'reveal', 'unhide'],
+          RESET: ['reset', 'restore', 'original', 'undo all'],
+          LIST: ['list', 'show all', 'what are'],
+          VALIDATE: ['validate', 'improve', 'rewrite', 'suggest'],
+          HELP: ['help', 'commands', 'how do i', 'what can']
+        },
+
+        sections: {
+          EXPERIENCE: ['experience', 'work', 'job', 'role', 'career', 'employment'],
+          SKILLS: ['skill', 'skills', 'expertise', 'competency', 'ability'],
+          PROJECTS: ['project', 'projects', 'portfolio', 'build'],
+          CERTIFICATIONS: ['certification', 'certifications', 'credential', 'credentials'],
+          ABOUT: ['about', 'summary', 'intro', 'backstory'],
+          NAME: ['name', 'title', 'headline'],
+          ALL: ['all', 'everything', 'entire']
+        },
+
+        parse(message) {
+          const msg = message.toLowerCase();
+          const result = {
+            intent: null,
+            section: null,
+            target: null,
+            value: null,
+            targetRole: null,
+            canExecute: true,
+            reason: null
+          };
+
+          // Detect intent
+          for (const [intent, keywords] of Object.entries(this.intents)) {
+            if (keywords.some(kw => msg.includes(kw))) {
+              result.intent = intent;
+              break;
+            }
+          }
+
+          // Detect section
+          for (const [section, keywords] of Object.entries(this.sections)) {
+            if (keywords.some(kw => msg.includes(kw))) {
+              result.section = section;
+              break;
+            }
+          }
+
+          // Extract target role for review (e.g., "for a Principal Architect role")
+          const roleMatch = msg.match(/for\s+(?:a\s+)?(.+?)\s+(?:role|position|job)/i);
+          if (roleMatch) {
+            result.targetRole = roleMatch[1].trim();
+          }
+
+          // Extract value (e.g., "Python to 95%")
+          const percentMatch = msg.match(/(\d+)%/);
+          if (percentMatch) {
+            result.value = parseInt(percentMatch[1]);
+          }
+
+          // Extract skill name
+          const skillMatch = msg.match(/(?:add|update|change|remove|delete)\s+(?:the\s+)?(.+?)\s+(?:skill|to|at|from)/i);
+          if (skillMatch) {
+            result.target = skillMatch[1].trim();
+          }
+
+          return result;
+        },
+
+        isResumeCommand(message) {
+          const msg = message.toLowerCase();
+          const allKeywords = [
+            ...Object.values(this.intents).flat(),
+            'resume', 'cv', 'skill', 'experience', 'project'
+          ];
+
+          // Check if it's a resume-related command
+          const isResumeRelated = allKeywords.some(kw => msg.includes(kw));
+          const hasActionIntent = Object.values(this.intents).some(keywords =>
+            keywords.some(kw => msg.includes(kw))
+          );
+
+          return isResumeRelated && hasActionIntent;
+        }
+      },
+
+      // ===== RECRUITER KEYWORD PATTERNS DATABASE =====
+      KeywordPatterns: {
+        pillars: {
+          hardSkills: {
+            weight: 30,
+            keywords: ['python', 'java', 'javascript', 'aws', 'azure', 'gcp', 'kubernetes', 'docker', 'sql', 'react', 'angular', 'vue', 'node.js', 'typescript', 'c++', 'c#', 'go', 'rust', 'swift', 'kotlin'],
+            found: []
+          },
+          softSkills: {
+            weight: 15,
+            keywords: ['leadership', 'communication', 'problem-solving', 'collaboration', 'teamwork', 'mentoring', 'strategic', 'analytical', 'creative', 'adaptable'],
+            found: []
+          },
+          industryTerminology: {
+            weight: 20,
+            keywords: ['agile', 'scrum', 'ci/cd', 'devops', 'microservices', 'api', 'rest', 'graphql', 'saas', 'fintech', 'core banking', 'payments', 'rtp', 'nfr', 'regulatory'],
+            found: []
+          },
+          achievementLanguage: {
+            weight: 25,
+            keywords: ['increased', 'reduced', 'improved', 'delivered', 'led', 'managed', 'architected', 'designed', 'implemented', 'optimized', 'achieved', 'transformed'],
+            found: []
+          },
+          emergingTech: {
+            weight: 10,
+            keywords: ['ai', 'ml', 'machine learning', 'generative ai', 'llm', 'gpt', 'cloud native', 'zero trust', 'blockchain', 'data science'],
+            found: []
+          }
+        },
+
+        roleKeywords: {
+          'technology architect': ['solution architecture', 'enterprise architecture', 'system design', 'scalability', 'high availability', 'disaster recovery', 'api design', 'microservices', 'cloud migration', 'technical leadership', 'togaf'],
+          'principal architect': ['enterprise strategy', 'technology roadmap', 'stakeholder management', 'cross-functional leadership', 'architecture governance', 'platform design', 'technical vision', 'c-suite', 'vendor evaluation'],
+          'engineering manager': ['team leadership', 'performance management', 'hiring', 'mentoring', 'sprint planning', 'agile transformation', 'delivery management', 'cross-team collaboration', 'okrs', 'engineering excellence'],
+          'software engineer': ['full-stack', 'backend', 'frontend', 'algorithms', 'data structures', 'code review', 'unit testing', 'integration testing', 'debugging', 'performance optimization', 'clean code', 'design patterns']
+        }
+      },
+
+      // ===== ATS OPTIMIZATION RULES =====
+      ATSRules: {
+        requiredSections: ['Experience', 'Skills', 'Contact'],
+        recommendedSections: ['Summary', 'Certifications', 'Projects', 'Education'],
+        contactRequired: ['Name', 'Email', 'Location'],
+        contactRecommended: ['LinkedIn', 'Phone', 'GitHub'],
+        avoidInContact: ['Full address', 'Photo', 'Age', 'Date of birth'],
+
+        checkCompliance(state) {
+          const results = {
+            score: 0,
+            maxScore: 30,
+            checks: []
+          };
+
+          // Check required sections (5 points each)
+          const hasSections = {
+            'Experience': state.experience && state.experience.length > 0,
+            'Skills': state.skills && state.skills.length > 0,
+            'Contact': state.meta && state.meta.email
+          };
+
+          for (const [section, exists] of Object.entries(hasSections)) {
+            results.checks.push({
+              name: `${section} section present`,
+              passed: exists,
+              points: exists ? 5 : 0
+            });
+            if (exists) results.score += 5;
+          }
+
+          // Check contact completeness (5 points)
+          const contactComplete = state.meta.name && state.meta.email && state.meta.location;
+          results.checks.push({
+            name: 'Contact info complete',
+            passed: contactComplete,
+            points: contactComplete ? 5 : 0
+          });
+          if (contactComplete) results.score += 5;
+
+          // Check for LinkedIn (5 points)
+          const hasLinkedIn = state.meta.linkedin && state.meta.linkedin.length > 0;
+          results.checks.push({
+            name: 'LinkedIn profile linked',
+            passed: hasLinkedIn,
+            points: hasLinkedIn ? 5 : 0
+          });
+          if (hasLinkedIn) results.score += 5;
+
+          // ATS format score (5 points) - assume web resume is ATS-friendly
+          results.checks.push({
+            name: 'ATS-friendly format',
+            passed: true,
+            points: 5
+          });
+          results.score += 5;
+
+          return results;
+        }
+      },
+
+      // ===== ACHIEVEMENT ANALYZER =====
+      AchievementAnalyzer: {
+        patterns: {
+          percentage: /(\d+)%/g,
+          currency: /\$[\d,]+[KMB]?/gi,
+          multiplier: /(\d+)x\b/gi,
+          volume: /(\d+)\+?\s*(users|customers|transactions|requests|man-days|members)/gi,
+          time: /(\d+)\s*(hours?|days?|weeks?|months?|years?)/gi
+        },
+
+        analyzeContent(text) {
+          const metrics = {
+            percentages: [],
+            currencies: [],
+            multipliers: [],
+            volumes: [],
+            times: [],
+            hasActionVerb: false,
+            score: 0
+          };
+
+          // Check for action verbs
+          const actionVerbs = /\b(led|designed|architected|implemented|delivered|increased|reduced|optimized|achieved|managed|developed|created|built|established|transformed|drove|mentored|strategized|earned)\b/gi;
+          metrics.hasActionVerb = actionVerbs.test(text);
+
+          // Find all metrics
+          let match;
+          while ((match = this.patterns.percentage.exec(text)) !== null) {
+            metrics.percentages.push(match[0]);
+          }
+          this.patterns.percentage.lastIndex = 0;
+
+          while ((match = this.patterns.multiplier.exec(text)) !== null) {
+            metrics.multipliers.push(match[0]);
+          }
+          this.patterns.multiplier.lastIndex = 0;
+
+          while ((match = this.patterns.volume.exec(text)) !== null) {
+            metrics.volumes.push(match[0]);
+          }
+          this.patterns.volume.lastIndex = 0;
+
+          // Calculate score
+          metrics.score = (metrics.hasActionVerb ? 30 : 0) +
+            (metrics.percentages.length > 0 ? 25 : 0) +
+            (metrics.multipliers.length > 0 ? 25 : 0) +
+            (metrics.volumes.length > 0 ? 20 : 0);
+
+          return metrics;
+        },
+
+        analyzeExperience(experience) {
+          const results = {
+            totalBullets: 0,
+            bulletsWithMetrics: 0,
+            bulletsWithActionVerbs: 0,
+            suggestions: []
+          };
+
+          for (const exp of experience) {
+            for (const bullet of exp.bullets || []) {
+              results.totalBullets++;
+              const analysis = this.analyzeContent(bullet);
+              if (analysis.hasActionVerb) results.bulletsWithActionVerbs++;
+              if (analysis.percentages.length > 0 || analysis.multipliers.length > 0 || analysis.volumes.length > 0) {
+                results.bulletsWithMetrics++;
+              }
+            }
+          }
+
+          const actionVerbPct = results.totalBullets > 0 ? Math.round((results.bulletsWithActionVerbs / results.totalBullets) * 100) : 0;
+          const metricsPct = results.totalBullets > 0 ? Math.round((results.bulletsWithMetrics / results.totalBullets) * 100) : 0;
+
+          if (actionVerbPct < 80) {
+            results.suggestions.push(`Start more bullets with action verbs (current: ${actionVerbPct}%)`);
+          }
+          if (metricsPct < 50) {
+            results.suggestions.push(`Add quantifiable metrics to more achievements (current: ${metricsPct}%)`);
+          }
+
+          return results;
+        }
+      },
+
+      // ===== CONTENT VALIDATOR & AUTO-IMPROVER =====
+      ContentValidator: {
+        actionVerbs: [
+          'led', 'designed', 'architected', 'implemented', 'delivered', 'increased',
+          'reduced', 'optimized', 'achieved', 'managed', 'developed', 'created',
+          'built', 'established', 'transformed', 'drove', 'mentored', 'strategized',
+          'spearheaded', 'pioneered', 'orchestrated', 'streamlined', 'accelerated',
+          'enhanced', 'automated', 'integrated', 'migrated', 'scaled', 'secured'
+        ],
+
+        validateBullet(text) {
+          const result = { isValid: true, score: 0, issues: [], suggestions: [], improved: null };
+          const words = text.toLowerCase().split(/\s+/);
+          const firstWord = words[0].replace(/[^a-z]/g, '');
+
+          // Check 1: Action verb (30 pts)
+          const startsWithAction = this.actionVerbs.includes(firstWord);
+          if (startsWithAction) { result.score += 30; }
+          else {
+            result.issues.push('Missing action verb at start');
+            result.suggestions.push(`Start with: "${this.suggestActionVerb(text)}..."`);
+          }
+
+          // Check 2: Metrics (40 pts)
+          const hasMetric = /\d+%|\d+x\b|\$[\d,]+|\b\d+[+]?\s*(users|customers|transactions|man-days|members|projects|systems|teams)/i.test(text);
+          if (hasMetric) { result.score += 40; }
+          else {
+            result.issues.push('No quantifiable metrics');
+            result.suggestions.push('Add: %, $, Nx, or counts (e.g., "by 30%", "12 systems")');
+          }
+
+          // Check 3: Impact (20 pts)
+          const hasImpact = /\b(resulting|leading to|achieving|saving|generating|enabling|improved|reduced|increased|delivered)\b/i.test(text);
+          if (hasImpact) { result.score += 20; }
+          else {
+            result.issues.push('No impact statement');
+            result.suggestions.push('Add outcome: "...resulting in X"');
+          }
+
+          // Check 4: Length (10 pts)
+          if (words.length >= 8 && words.length <= 25) { result.score += 10; }
+          else if (words.length < 8) { result.issues.push('Too brief - add detail'); }
+
+          result.isValid = result.score >= 50;
+          if (result.score < 70) {
+            result.improved = this.autoImprove(text, startsWithAction, hasMetric);
+          }
+          return result;
+        },
+
+        suggestActionVerb(text) {
+          const t = text.toLowerCase();
+          if (t.includes('team') || t.includes('people')) return 'Led';
+          if (t.includes('system') || t.includes('architect')) return 'Architected';
+          if (t.includes('automat')) return 'Automated';
+          if (t.includes('improve') || t.includes('optimi')) return 'Optimized';
+          if (t.includes('build') || t.includes('creat')) return 'Developed';
+          if (t.includes('reduc')) return 'Reduced';
+          if (t.includes('increas')) return 'Increased';
+          if (t.includes('migrat')) return 'Migrated';
+          return 'Delivered';
+        },
+
+        autoImprove(text, hasVerb, hasMetric) {
+          let improved = text.trim();
+          if (!hasVerb) {
+            const verb = this.suggestActionVerb(text);
+            const weak = ['was', 'had', 'did', 'worked', 'helped', 'responsible'];
+            const first = improved.split(/\s+/)[0].toLowerCase();
+            if (weak.some(w => first.startsWith(w))) {
+              improved = verb + ' ' + improved.substring(improved.indexOf(' ') + 1);
+            } else {
+              improved = verb + ' ' + improved.charAt(0).toLowerCase() + improved.slice(1);
+            }
+          }
+          if (!hasMetric && !improved.includes('[')) {
+            improved = improved.replace(/\.$/, '') + ' [add: X% or N count]';
+          }
+          return improved;
+        },
+
+        validateSkill(name) {
+          const result = { isValid: true, warnings: [], suggestedCategory: null };
+          const atsKw = ResumeAutomation.KeywordPatterns.pillars.hardSkills.keywords;
+          if (!atsKw.some(kw => name.toLowerCase().includes(kw))) {
+            result.warnings.push('Not a common ATS keyword - verify spelling');
+          }
+          const n = name.toLowerCase();
+          if (n.includes('architect')) result.suggestedCategory = 'architecture';
+          else if (n.includes('python') || n.includes('java') || n.includes('react')) result.suggestedCategory = 'development';
+          else if (n.includes('sql') || n.includes('data')) result.suggestedCategory = 'data';
+          else if (n.includes('aws') || n.includes('azure') || n.includes('kubernetes')) result.suggestedCategory = 'infrastructure';
+          return result;
+        },
+
+        formatFeedback(v) {
+          let h = '';
+          if (v.score !== undefined) {
+            const e = v.score >= 70 ? '✓' : v.score >= 50 ? '⚠' : '✗';
+            h += `<div><strong>${e} Quality: ${v.score}/100</strong></div>`;
+          }
+          if (v.issues?.length) {
+            h += '<div style="color:var(--warning);margin-top:0.3rem">';
+            v.issues.forEach(i => { h += `<br>• ${i}`; });
+            h += '</div>';
+          }
+          if (v.suggestions?.length) {
+            h += '<div style="color:var(--accent);margin-top:0.3rem">';
+            v.suggestions.forEach(s => { h += `<br>💡 ${s}`; });
+            h += '</div>';
+          }
+          if (v.improved) {
+            h += `<div style="margin-top:0.5rem;padding:0.5rem;background:var(--bg-hover);border-radius:6px"><strong>Suggested:</strong><br><em>"${v.improved}"</em></div>`;
+          }
+          return h;
+        }
+      },
+
+      // ===== RESUME SCORER =====
+      Scorer: {
+        scoreResume(state, targetRole = null) {
+          const report = {
+            overallScore: 0,
+            maxScore: 100,
+            grade: '',
+            categories: {},
+            strengths: [],
+            improvements: [],
+            missingKeywords: []
+          };
+
+          // 1. ATS Compatibility (30 points)
+          const atsResult = ResumeAutomation.ATSRules.checkCompliance(state);
+          report.categories.ats = atsResult;
+          report.overallScore += atsResult.score;
+
+          // 2. Content Quality (35 points)
+          const contentResult = this.scoreContent(state);
+          report.categories.content = contentResult;
+          report.overallScore += contentResult.score;
+
+          // 3. Formatting (20 points) - assume good since it's a web resume
+          report.categories.formatting = {
+            score: 18,
+            maxScore: 20,
+            checks: [
+              { name: 'Consistent visual hierarchy', passed: true, points: 5 },
+              { name: 'Proper section structure', passed: true, points: 5 },
+              { name: 'Balanced white space', passed: true, points: 4 },
+              { name: 'Interactive elements work', passed: true, points: 4 }
+            ]
+          };
+          report.overallScore += 18;
+
+          // 4. Role Relevance (15 points)
+          const relevanceResult = this.scoreRelevance(state, targetRole);
+          report.categories.relevance = relevanceResult;
+          report.overallScore += relevanceResult.score;
+
+          // Calculate grade
+          const pct = Math.round((report.overallScore / report.maxScore) * 100);
+          if (pct >= 90) report.grade = 'A';
+          else if (pct >= 80) report.grade = 'B+';
+          else if (pct >= 70) report.grade = 'B';
+          else if (pct >= 60) report.grade = 'C';
+          else report.grade = 'D';
+
+          // Generate strengths and improvements
+          this.generateFeedback(report, state, targetRole);
+
+          return report;
+        },
+
+        scoreContent(state) {
+          const result = {
+            score: 0,
+            maxScore: 35,
+            checks: []
+          };
+
+          // Check action verbs (7 points)
+          const achievementAnalysis = ResumeAutomation.AchievementAnalyzer.analyzeExperience(state.experience);
+          const actionVerbPct = achievementAnalysis.totalBullets > 0 ?
+            (achievementAnalysis.bulletsWithActionVerbs / achievementAnalysis.totalBullets) : 0;
+          const actionVerbPoints = Math.round(actionVerbPct * 7);
+          result.checks.push({
+            name: `Action verbs used (${Math.round(actionVerbPct * 100)}%)`,
+            passed: actionVerbPct >= 0.8,
+            points: actionVerbPoints
+          });
+          result.score += actionVerbPoints;
+
+          // Check quantifiable achievements (10 points)
+          const metricsPct = achievementAnalysis.totalBullets > 0 ?
+            (achievementAnalysis.bulletsWithMetrics / achievementAnalysis.totalBullets) : 0;
+          const metricsPoints = Math.round(metricsPct * 10);
+          result.checks.push({
+            name: `Quantifiable achievements (${achievementAnalysis.bulletsWithMetrics} found)`,
+            passed: metricsPct >= 0.5,
+            points: metricsPoints
+          });
+          result.score += metricsPoints;
+
+          // Recent experience (5 points)
+          const hasRecent = state.experience.some(exp => exp.isCurrent);
+          result.checks.push({
+            name: 'Recent experience highlighted',
+            passed: hasRecent,
+            points: hasRecent ? 5 : 0
+          });
+          if (hasRecent) result.score += 5;
+
+          // Career progression (5 points)
+          const showsProgression = state.experience.length >= 3;
+          result.checks.push({
+            name: 'Shows career progression',
+            passed: showsProgression,
+            points: showsProgression ? 5 : 0
+          });
+          if (showsProgression) result.score += 5;
+
+          // Sufficient skills (5 points)
+          const sufficientSkills = state.skills.length >= 5;
+          result.checks.push({
+            name: 'Sufficient skills listed',
+            passed: sufficientSkills,
+            points: sufficientSkills ? 5 : 3
+          });
+          result.score += sufficientSkills ? 5 : 3;
+
+          return result;
+        },
+
+        scoreRelevance(state, targetRole) {
+          const result = {
+            score: 0,
+            maxScore: 15,
+            checks: [],
+            missingKeywords: []
+          };
+
+          // Get all resume text
+          const resumeText = this.getResumeText(state).toLowerCase();
+
+          // Check role-specific keywords if target role provided
+          if (targetRole) {
+            const roleKey = targetRole.toLowerCase();
+            const roleKeywords = ResumeAutomation.KeywordPatterns.roleKeywords[roleKey] || [];
+
+            if (roleKeywords.length > 0) {
+              let foundCount = 0;
+              for (const keyword of roleKeywords) {
+                if (resumeText.includes(keyword.toLowerCase())) {
+                  foundCount++;
+                } else {
+                  result.missingKeywords.push(keyword);
+                }
+              }
+
+              const matchPct = foundCount / roleKeywords.length;
+              const rolePoints = Math.round(matchPct * 8);
+              result.checks.push({
+                name: `Role-specific keywords (${Math.round(matchPct * 100)}% match)`,
+                passed: matchPct >= 0.5,
+                points: rolePoints
+              });
+              result.score += rolePoints;
+            }
+          } else {
+            // Default score if no target role
+            result.score += 5;
+            result.checks.push({
+              name: 'Role-specific keywords',
+              passed: true,
+              points: 5,
+              note: 'Specify a target role for detailed analysis'
+            });
+          }
+
+          // Check industry terminology (4 points)
+          const industryKeywords = ResumeAutomation.KeywordPatterns.pillars.industryTerminology.keywords;
+          const industryFound = industryKeywords.filter(kw => resumeText.includes(kw)).length;
+          const industryPct = industryFound / industryKeywords.length;
+          result.checks.push({
+            name: `Industry terminology (${industryFound} found)`,
+            passed: industryPct >= 0.3,
+            points: Math.round(industryPct * 4)
+          });
+          result.score += Math.round(industryPct * 4);
+
+          // Check emerging tech (3 points)
+          const emergingKeywords = ResumeAutomation.KeywordPatterns.pillars.emergingTech.keywords;
+          const emergingFound = emergingKeywords.filter(kw => resumeText.includes(kw)).length;
+          const emergingPoints = emergingFound > 0 ? 3 : 0;
+          result.checks.push({
+            name: `Emerging tech mentioned (${emergingFound} found)`,
+            passed: emergingFound > 0,
+            points: emergingPoints
+          });
+          result.score += emergingPoints;
+
+          return result;
+        },
+
+        getResumeText(state) {
+          let text = '';
+          text += state.meta.name + ' ' + state.meta.title + ' ';
+
+          for (const exp of state.experience) {
+            text += exp.company + ' ' + exp.role + ' ' + (exp.context || '') + ' ';
+            text += (exp.bullets || []).join(' ') + ' ';
+          }
+
+          for (const skill of state.skills) {
+            text += skill.name + ' ' + skill.level + ' ';
+          }
+
+          return text;
+        },
+
+        generateFeedback(report, state, targetRole) {
+          // Strengths
+          if (report.categories.ats.score >= 25) {
+            report.strengths.push('Strong ATS compatibility');
+          }
+          if (report.categories.content.score >= 28) {
+            report.strengths.push('Excellent content quality with quantifiable achievements');
+          }
+          if (state.experience.some(e => e.isCurrent)) {
+            report.strengths.push('Current role clearly highlighted');
+          }
+          if (state.experience.length >= 4) {
+            report.strengths.push('Clear career progression demonstrated');
+          }
+
+          // Improvements
+          const contentChecks = report.categories.content.checks;
+          for (const check of contentChecks) {
+            if (!check.passed && check.points < check.maxPoints * 0.7) {
+              report.improvements.push(check.name.replace(/\(\d+.*\)/, '') + ' needs attention');
+            }
+          }
+
+          if (report.categories.relevance.missingKeywords.length > 0) {
+            report.missingKeywords = report.categories.relevance.missingKeywords.slice(0, 5);
+          }
+        }
+      },
+
+      // ===== THEME MANAGER =====
+      ThemeManager: {
+        themes: {
+          dark: {
+            '--bg-base': '#0A0A0F',
+            '--bg-elevated': '#111118',
+            '--bg-card': '#16161D',
+            '--bg-hover': '#1E1E26',
+            '--text-primary': '#F4F4F5',
+            '--text-secondary': '#A1A1AA',
+            '--text-muted': '#71717A',
+            '--accent': '#22D3EE',
+            '--border-subtle': 'rgba(255, 255, 255, 0.06)',
+            '--border-medium': 'rgba(255, 255, 255, 0.1)'
+          },
+          light: {
+            '--bg-base': '#f8f9fa',
+            '--bg-elevated': '#ffffff',
+            '--bg-card': '#ffffff',
+            '--bg-hover': '#f0f0f5',
+            '--text-primary': '#1a1a2e',
+            '--text-secondary': '#4a4a5a',
+            '--text-muted': '#6a6a7a',
+            '--accent': '#0891B2',
+            '--border-subtle': 'rgba(0, 0, 0, 0.06)',
+            '--border-medium': 'rgba(0, 0, 0, 0.1)'
+          }
+        },
+
+        apply(themeName) {
+          const theme = this.themes[themeName];
+          if (!theme) return false;
+
+          for (const [prop, value] of Object.entries(theme)) {
+            document.documentElement.style.setProperty(prop, value);
+          }
+
+          ResumeAutomation.state.settings.theme = themeName;
+          return true;
+        },
+
+        toggle() {
+          const current = ResumeAutomation.state.settings.theme;
+          const newTheme = current === 'dark' ? 'light' : 'dark';
+          return this.apply(newTheme);
+        }
+      },
+
+      // ===== LAYOUT ENGINE =====
+      LayoutEngine: {
+        applyCompact() {
+          document.body.classList.add('compact-mode');
+          ResumeAutomation.state.settings.layout = 'compact';
+        },
+
+        applyFull() {
+          document.body.classList.remove('compact-mode');
+          ResumeAutomation.state.settings.layout = 'full';
+        },
+
+        hideSection(sectionId) {
+          const section = document.getElementById(sectionId);
+          if (section) {
+            section.style.display = 'none';
+            return true;
+          }
+          return false;
+        },
+
+        showSection(sectionId) {
+          const section = document.getElementById(sectionId);
+          if (section) {
+            section.style.display = '';
+            return true;
+          }
+          return false;
+        }
+      },
+
+      // ===== CONTENT MANAGER (ENHANCED) =====
+      ContentManager: {
+        // ---- SKILL OPERATIONS ----
+        findSkillElement(skillName) {
+          const skillItems = document.querySelectorAll('.skill-item');
+          for (const item of skillItems) {
+            const nameEl = item.querySelector('.skill-name');
+            if (nameEl && nameEl.textContent.toLowerCase().includes(skillName.toLowerCase())) {
+              return { item, nameEl };
+            }
+          }
+          return null;
+        },
+
+        updateSkill(skillName, newProgress) {
+          const skill = ResumeAutomation.state.skills.find(
+            s => s.name.toLowerCase().includes(skillName.toLowerCase())
+          );
+          if (skill) {
+            skill.progress = Math.min(100, Math.max(0, newProgress));
+            const found = this.findSkillElement(skillName);
+            if (found) {
+              const progressBar = found.item.querySelector('.skill-progress');
+              if (progressBar) {
+                progressBar.style.width = `${skill.progress}%`;
+                progressBar.style.transition = 'width 0.5s ease';
+                found.item.style.animation = 'pulse 0.5s ease';
+              }
+            }
+            return true;
+          }
+          return false;
+        },
+
+        renameSkill(oldName, newName) {
+          const skill = ResumeAutomation.state.skills.find(
+            s => s.name.toLowerCase().includes(oldName.toLowerCase())
+          );
+          if (skill) {
+            skill.name = newName;
+            const found = this.findSkillElement(oldName);
+            if (found) {
+              found.nameEl.textContent = newName;
+              found.item.style.animation = 'pulse 0.5s ease';
+            }
+            return true;
+          }
+          return false;
+        },
+
+        updateSkillLevel(skillName, newLevel) {
+          const skill = ResumeAutomation.state.skills.find(
+            s => s.name.toLowerCase().includes(skillName.toLowerCase())
+          );
+          if (skill) {
+            skill.level = newLevel;
+            const found = this.findSkillElement(skillName);
+            if (found) {
+              const levelEl = found.item.querySelector('.skill-level');
+              if (levelEl) {
+                levelEl.textContent = newLevel;
+                found.item.style.animation = 'pulse 0.5s ease';
+              }
+            }
+            return true;
+          }
+          return false;
+        },
+
+        removeSkill(skillName) {
+          const index = ResumeAutomation.state.skills.findIndex(
+            s => s.name.toLowerCase().includes(skillName.toLowerCase())
+          );
+          if (index !== -1) {
+            const removedSkill = ResumeAutomation.state.skills.splice(index, 1)[0];
+            const found = this.findSkillElement(skillName);
+            if (found) {
+              found.item.style.animation = 'fadeOut 0.3s ease';
+              setTimeout(() => found.item.remove(), 300);
+            }
+            return removedSkill.name;
+          }
+          return null;
+        },
+
+        addSkill(name, category = 'development', level = 'Proficient', progress = 75) {
+          const newSkill = { name, category, level, progress };
+          ResumeAutomation.state.skills.push(newSkill);
+          const skillsList = document.querySelector('.skills-list');
+          if (skillsList) {
+            const skillHTML = `
+              <div class="skill-item" data-category="${category}" style="animation: fadeIn 0.3s ease">
+                <div class="skill-header">
+                  <span class="skill-name">${name}</span>
+                  <span class="skill-level">${level}</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" style="width: ${progress}%"></div>
+                </div>
+              </div>
+            `;
+            skillsList.insertAdjacentHTML('beforeend', skillHTML);
+          }
+          return true;
+        },
+
+        listSkills() {
+          return ResumeAutomation.state.skills.map(s => s.name);
+        },
+
+        // ---- META OPERATIONS ----
+        updateName(newName) {
+          ResumeAutomation.state.meta.name = newName;
+          const nameEl = document.querySelector('.profile-name');
+          if (nameEl) {
+            nameEl.textContent = newName;
+            nameEl.style.animation = 'pulse 0.5s ease';
+          }
+          return true;
+        },
+
+        updateTitle(newTitle) {
+          ResumeAutomation.state.meta.title = newTitle;
+          const titleEl = document.querySelector('.profile-title');
+          if (titleEl) {
+            titleEl.textContent = newTitle;
+            titleEl.style.animation = 'pulse 0.5s ease';
+          }
+          return true;
+        },
+
+        updateLocation(newLocation) {
+          ResumeAutomation.state.meta.location = newLocation;
+          const locationEls = document.querySelectorAll('.contact-item');
+          for (const el of locationEls) {
+            if (el.textContent.includes('Singapore') || el.querySelector('svg path[d*="M12 2"]')) {
+              const textNode = el.childNodes[el.childNodes.length - 1];
+              if (textNode.nodeType === Node.TEXT_NODE) {
+                textNode.textContent = ' ' + newLocation;
+              }
+              el.style.animation = 'pulse 0.5s ease';
+              break;
+            }
+          }
+          return true;
+        },
+
+        // ---- EXPERIENCE OPERATIONS ----
+        getExperienceItems() {
+          return document.querySelectorAll('.timeline-item');
+        },
+
+        findExperienceByRole(roleKeyword) {
+          const items = this.getExperienceItems();
+          for (const item of items) {
+            const title = item.querySelector('.timeline-title');
+            if (title && title.textContent.toLowerCase().includes(roleKeyword.toLowerCase())) {
+              return item;
+            }
+          }
+          return null;
+        },
+
+        updateExperienceBullet(roleKeyword, bulletIndex, newText) {
+          const item = this.findExperienceByRole(roleKeyword);
+          if (item) {
+            const bullets = item.querySelectorAll('.timeline-details li');
+            if (bullets[bulletIndex]) {
+              bullets[bulletIndex].textContent = newText;
+              bullets[bulletIndex].style.animation = 'pulse 0.5s ease';
+              return true;
+            }
+          }
+          return false;
+        },
+
+        addExperienceBullet(roleKeyword, text) {
+          const item = this.findExperienceByRole(roleKeyword);
+          if (item) {
+            const bulletList = item.querySelector('.timeline-details');
+            if (bulletList) {
+              const newLi = document.createElement('li');
+              newLi.textContent = text;
+              newLi.style.animation = 'fadeIn 0.3s ease';
+              bulletList.appendChild(newLi);
+              return true;
+            }
+          }
+          return false;
+        },
+
+        removeExperienceBullet(roleKeyword, bulletIndex) {
+          const item = this.findExperienceByRole(roleKeyword);
+          if (item) {
+            const bullets = item.querySelectorAll('.timeline-details li');
+            if (bullets[bulletIndex]) {
+              bullets[bulletIndex].style.animation = 'fadeOut 0.3s ease';
+              setTimeout(() => bullets[bulletIndex].remove(), 300);
+              return true;
+            }
+          }
+          return false;
+        },
+
+        listExperienceRoles() {
+          const items = this.getExperienceItems();
+          const roles = [];
+          items.forEach(item => {
+            const title = item.querySelector('.timeline-title');
+            if (title) roles.push(title.textContent);
+          });
+          return roles;
+        },
+
+        // ---- PROJECT OPERATIONS ----
+        findProjectCard(projectName) {
+          const projects = document.querySelectorAll('.project-card');
+          for (const proj of projects) {
+            const title = proj.querySelector('.project-title, h4');
+            if (title && title.textContent.toLowerCase().includes(projectName.toLowerCase())) {
+              return proj;
+            }
+          }
+          return null;
+        },
+
+        updateProjectDescription(projectName, newDescription) {
+          const proj = this.findProjectCard(projectName);
+          if (proj) {
+            const desc = proj.querySelector('.project-description, p');
+            if (desc) {
+              desc.textContent = newDescription;
+              desc.style.animation = 'pulse 0.5s ease';
+              return true;
+            }
+          }
+          return false;
+        },
+
+        addProjectTag(projectName, tag) {
+          const proj = this.findProjectCard(projectName);
+          if (proj) {
+            const tagsContainer = proj.querySelector('.project-tags');
+            if (tagsContainer) {
+              const tagSpan = document.createElement('span');
+              tagSpan.className = 'project-tag';
+              tagSpan.textContent = tag;
+              tagSpan.style.animation = 'fadeIn 0.3s ease';
+              tagsContainer.appendChild(tagSpan);
+              return true;
+            }
+          }
+          return false;
+        },
+
+        removeProjectTag(projectName, tagText) {
+          const proj = this.findProjectCard(projectName);
+          if (proj) {
+            const tags = proj.querySelectorAll('.project-tag');
+            for (const tag of tags) {
+              if (tag.textContent.toLowerCase() === tagText.toLowerCase()) {
+                tag.style.animation = 'fadeOut 0.3s ease';
+                setTimeout(() => tag.remove(), 300);
+                return true;
+              }
+            }
+          }
+          return false;
+        }
+      },
+
+      // ===== DEMO MODE =====
+      DemoMode: {
+        isActive: true, // Always demo mode for visitors
+
+        reset() {
+          if (ResumeAutomation.originalState) {
+            ResumeAutomation.state = JSON.parse(JSON.stringify(ResumeAutomation.originalState));
+            location.reload(); // Simplest way to reset all DOM changes
+          }
+        }
+      },
+
+      // ===== GENERATE REVIEW REPORT =====
+      generateReviewReport(targetRole = null) {
+        const report = this.Scorer.scoreResume(this.state, targetRole);
+
+        let output = `
+<div class="review-report">
+<div class="report-header">
+<strong>RESUME ANALYSIS REPORT</strong>
+</div>
+
+<div class="report-score">
+Overall Score: <strong>${report.overallScore}/${report.maxScore}</strong> (Grade: ${report.grade})
+</div>
+
+<div class="report-section">
+<strong>ATS COMPATIBILITY:</strong> ${report.categories.ats.score}/${report.categories.ats.maxScore}
+${report.categories.ats.checks.map(c => `
+  ${c.passed ? '✓' : '⚠'} ${c.name}`).join('')}
+</div>
+
+<div class="report-section">
+<strong>CONTENT QUALITY:</strong> ${report.categories.content.score}/${report.categories.content.maxScore}
+${report.categories.content.checks.map(c => `
+  ${c.passed ? '✓' : '⚠'} ${c.name}`).join('')}
+</div>
+
+<div class="report-section">
+<strong>FORMATTING:</strong> ${report.categories.formatting.score}/${report.categories.formatting.maxScore}
+${report.categories.formatting.checks.map(c => `
+  ${c.passed ? '✓' : '⚠'} ${c.name}`).join('')}
+</div>
+
+<div class="report-section">
+<strong>ROLE RELEVANCE:</strong> ${report.categories.relevance.score}/${report.categories.relevance.maxScore}
+${report.categories.relevance.checks.map(c => `
+  ${c.passed ? '✓' : '⚠'} ${c.name}${c.note ? ' (' + c.note + ')' : ''}`).join('')}
+</div>`;
+
+        if (report.missingKeywords.length > 0) {
+          output += `
+<div class="report-section">
+<strong>MISSING KEYWORDS${targetRole ? ' for ' + targetRole : ''}:</strong>
+${report.missingKeywords.map(kw => `• ${kw}`).join('\n')}
+</div>`;
+        }
+
+        if (report.strengths.length > 0) {
+          output += `
+<div class="report-section strengths">
+<strong>STRENGTHS:</strong>
+${report.strengths.map(s => `• ${s}`).join('\n')}
+</div>`;
+        }
+
+        if (report.improvements.length > 0) {
+          output += `
+<div class="report-section improvements">
+<strong>IMPROVEMENTS SUGGESTED:</strong>
+${report.improvements.map(i => `• ${i}`).join('\n')}
+</div>`;
+        }
+
+        output += '</div>';
+
+        return output;
+      },
+
+      // ===== PROCESS COMMAND (ENHANCED) =====
+      processCommand(message) {
+        const cmd = this.CommandParser.parse(message);
+        const msg = message.toLowerCase();
+        const demoNote = '<br><small style="color: var(--text-muted)">Note: Changes are session-only in demo mode.</small>';
+
+        // Handle different intents
+        switch (cmd.intent) {
+          case 'REVIEW':
+            return this.generateReviewReport(cmd.targetRole);
+
+          case 'THEME':
+            if (msg.includes('light')) {
+              this.ThemeManager.apply('light');
+              return '✓ Switched to <strong>light mode</strong>. The resume now uses a light color scheme.';
+            } else if (msg.includes('dark')) {
+              this.ThemeManager.apply('dark');
+              return '✓ Switched to <strong>dark mode</strong>. The resume now uses the original dark color scheme.';
+            } else if (msg.includes('toggle')) {
+              this.ThemeManager.toggle();
+              return `✓ Theme toggled to <strong>${this.state.settings.theme} mode</strong>.`;
+            }
+            return 'You can switch between <strong>light mode</strong> and <strong>dark mode</strong>. Try "switch to light mode" or "toggle theme".';
+
+          case 'UPDATE':
+            // Handle skill rename: "rename Python to Python 3"
+            const renameMatch = msg.match(/rename\s+(\w+(?:\s+\w+)?)\s+to\s+(.+)/i);
+            if (renameMatch) {
+              const oldName = renameMatch[1].trim();
+              const newName = renameMatch[2].trim();
+              if (this.ContentManager.renameSkill(oldName, newName)) {
+                return `✓ Renamed <strong>${oldName}</strong> to <strong>${newName}</strong>.${demoNote}`;
+              }
+              return `Could not find skill "${oldName}". Available: ${this.ContentManager.listSkills().join(', ')}`;
+            }
+
+            // Handle skill level: "change Python level to Expert"
+            const levelMatch = msg.match(/(?:change|update|set)\s+(\w+)\s+level\s+to\s+(\w+)/i);
+            if (levelMatch) {
+              const skillName = levelMatch[1].trim();
+              const newLevel = levelMatch[2].trim();
+              if (this.ContentManager.updateSkillLevel(skillName, newLevel)) {
+                return `✓ Updated <strong>${skillName}</strong> level to <strong>${newLevel}</strong>.${demoNote}`;
+              }
+              return `Could not find skill "${skillName}".`;
+            }
+
+            // Handle name change: "change my name to..." or "update name to..."
+            const nameMatch = msg.match(/(?:change|update|set)\s+(?:my\s+)?name\s+to\s+(.+)/i);
+            if (nameMatch) {
+              const newName = message.match(/(?:change|update|set)\s+(?:my\s+)?name\s+to\s+(.+)/i)[1].trim();
+              this.ContentManager.updateName(newName);
+              return `✓ Updated name to <strong>${newName}</strong>.${demoNote}`;
+            }
+
+            // Handle title change: "change my title to..."
+            const titleMatch = msg.match(/(?:change|update|set)\s+(?:my\s+)?title\s+to\s+(.+)/i);
+            if (titleMatch) {
+              const newTitle = message.match(/(?:change|update|set)\s+(?:my\s+)?title\s+to\s+(.+)/i)[1].trim();
+              this.ContentManager.updateTitle(newTitle);
+              return `✓ Updated title to <strong>${newTitle}</strong>.${demoNote}`;
+            }
+
+            // Handle location change: "change location to..."
+            const locMatch = msg.match(/(?:change|update|set)\s+(?:my\s+)?location\s+to\s+(.+)/i);
+            if (locMatch) {
+              const newLoc = message.match(/(?:change|update|set)\s+(?:my\s+)?location\s+to\s+(.+)/i)[1].trim();
+              this.ContentManager.updateLocation(newLoc);
+              return `✓ Updated location to <strong>${newLoc}</strong>.${demoNote}`;
+            }
+
+            // Handle experience bullet update with validation: "update bullet 1 in Bank of America to: ..."
+            const updateBulletMatch = msg.match(/update\s+bullet\s+(\d+)\s+(?:in|at|for)\s+(\w+(?:\s+\w+)?)(?:\s+to)?:\s*(.+)/i);
+            if (updateBulletMatch) {
+              const bulletIndex = parseInt(updateBulletMatch[1]) - 1; // Convert to 0-based
+              const role = updateBulletMatch[2].trim();
+              const newText = message.match(/update\s+bullet\s+\d+\s+(?:in|at|for)\s+\w+(?:\s+\w+)?(?:\s+to)?:\s*(.+)/i)[1].trim();
+
+              // Validate the new bullet text against resume best practices
+              const bulletValidation = this.ContentValidator.validateBullet(newText);
+
+              if (this.ContentManager.updateExperienceBullet(role, bulletIndex, newText)) {
+                let response = `✓ Updated bullet ${bulletIndex + 1} in <strong>${role}</strong>.${demoNote}`;
+                response += `<br><div style="margin-top:0.5rem">${this.ContentValidator.formatFeedback(bulletValidation)}</div>`;
+
+                // If score is low, offer improvement suggestion
+                if (bulletValidation.improved && bulletValidation.score < 70) {
+                  response += `<br><div style="margin-top:0.5rem;padding:0.5rem;background:var(--accent-dim);border-radius:6px;border-left:3px solid var(--accent)">
+                    <strong>Consider this improved version:</strong><br>
+                    <code style="font-size:0.8rem">Update bullet ${bulletIndex + 1} in ${role} to: ${bulletValidation.improved.replace(/\[add:.+?\]/g, '[X%]')}</code>
+                  </div>`;
+                }
+
+                return response;
+              }
+              return `Could not find role "${role}" or bullet ${bulletIndex + 1}. Use "list roles" to see available roles.`;
+            }
+
+            // Handle skill progress update (original functionality)
+            if (cmd.section === 'SKILLS' && cmd.target && cmd.value) {
+              if (this.ContentManager.updateSkill(cmd.target, cmd.value)) {
+                return `✓ Updated <strong>${cmd.target}</strong> skill to <strong>${cmd.value}%</strong>.${demoNote}`;
+              }
+              return `Could not find skill "${cmd.target}". Available: ${this.ContentManager.listSkills().join(', ')}`;
+            }
+
+            return `<strong>Update Commands:</strong>
+• Update skill: "Update Python to 90%"
+• Rename skill: "Rename Python to Python 3"
+• Change level: "Change Java level to Expert"
+• Change name: "Change my name to John Doe"
+• Change title: "Update my title to Principal Architect"
+• Change location: "Set location to New York, USA"`;
+
+          case 'ADD':
+            // Handle skill addition with validation
+            const addSkillMatch = msg.match(/add\s+(\w+(?:\s+\w+)?)\s+(?:skill\s+)?(?:at\s+)?(\d+)?%?/i);
+            if (addSkillMatch || cmd.section === 'SKILLS') {
+              let skillName, progress;
+              if (addSkillMatch) {
+                skillName = addSkillMatch[1].trim();
+                progress = addSkillMatch[2] ? parseInt(addSkillMatch[2]) : 75;
+              } else {
+                skillName = cmd.target || 'NewSkill';
+                progress = cmd.value || 75;
+              }
+
+              // Validate skill against ATS standards
+              const skillValidation = this.ContentValidator.validateSkill(skillName);
+              const category = skillValidation.suggestedCategory || 'development';
+
+              this.ContentManager.addSkill(skillName, category, 'Proficient', progress);
+
+              let response = `✓ Added <strong>${skillName}</strong> skill at <strong>${progress}%</strong> (${category}).${demoNote}`;
+
+              if (skillValidation.warnings.length > 0) {
+                response += `<br><div style="margin-top:0.5rem;color:var(--warning)">⚠ ${skillValidation.warnings.join(', ')}</div>`;
+              }
+
+              return response;
+            }
+
+            // Handle add bullet with validation & auto-improvement suggestions
+            const addBulletMatch = msg.match(/add\s+(?:bullet|point)\s+to\s+(\w+(?:\s+\w+)?):\s*(.+)/i);
+            if (addBulletMatch) {
+              const role = addBulletMatch[1].trim();
+              const bulletText = message.match(/add\s+(?:bullet|point)\s+to\s+\w+(?:\s+\w+)?:\s*(.+)/i)[1].trim();
+
+              // Validate bullet against resume best practices
+              const bulletValidation = this.ContentValidator.validateBullet(bulletText);
+
+              if (this.ContentManager.addExperienceBullet(role, bulletText)) {
+                let response = `✓ Added bullet to <strong>${role}</strong>.${demoNote}`;
+
+                // Show quality feedback
+                response += `<br><div style="margin-top:0.5rem">${this.ContentValidator.formatFeedback(bulletValidation)}</div>`;
+
+                return response;
+              }
+              return `Could not find role containing "${role}". Available: ${this.ContentManager.listExperienceRoles().join(', ')}`;
+            }
+
+            // Handle add project tag
+            const addTagMatch = msg.match(/add\s+tag\s+(\w+)\s+to\s+(\w+)/i);
+            if (addTagMatch) {
+              const tag = addTagMatch[1].trim();
+              const project = addTagMatch[2].trim();
+              if (this.ContentManager.addProjectTag(project, tag)) {
+                return `✓ Added tag <strong>${tag}</strong> to <strong>${project}</strong>.${demoNote}`;
+              }
+              return `Could not find project "${project}".`;
+            }
+
+            return `<strong>Add Commands:</strong>
+• Add skill: "Add TypeScript at 85%"
+• Add bullet: "Add bullet to Bank of America: Led migration achieving 40% efficiency gain"
+• Add tag: "Add tag React to NoteApp"
+<div style="margin-top:0.5rem;color:var(--text-muted)"><em>Tip: Bullets are auto-validated for action verbs, metrics, and impact.</em></div>`;
+
+          case 'DELETE':
+            // Handle skill removal: "remove Java" or "delete Python skill"
+            const removeSkillMatch = msg.match(/(?:remove|delete)\s+(\w+(?:\s+\w+)?)\s*(?:skill)?/i);
+            if (removeSkillMatch && cmd.section === 'SKILLS') {
+              const skillName = removeSkillMatch[1].trim();
+              const removed = this.ContentManager.removeSkill(skillName);
+              if (removed) {
+                return `✓ Removed <strong>${removed}</strong> skill.${demoNote}`;
+              }
+              return `Could not find skill "${skillName}". Available: ${this.ContentManager.listSkills().join(', ')}`;
+            }
+
+            // Handle remove project tag: "remove tag React from NoteApp"
+            const removeTagMatch = msg.match(/(?:remove|delete)\s+tag\s+(\w+)\s+from\s+(\w+)/i);
+            if (removeTagMatch) {
+              const tag = removeTagMatch[1].trim();
+              const project = removeTagMatch[2].trim();
+              if (this.ContentManager.removeProjectTag(project, tag)) {
+                return `✓ Removed tag <strong>${tag}</strong> from <strong>${project}</strong>.${demoNote}`;
+              }
+              return `Could not find tag "${tag}" on project "${project}".`;
+            }
+
+            // Fall through to HIDE
+          case 'HIDE':
+            // Handle section hiding: "hide projects" or "hide skills section"
+            const hideMatch = msg.match(/hide\s+(?:the\s+)?(\w+)(?:\s+section)?/i);
+            if (hideMatch) {
+              const sectionName = hideMatch[1].toLowerCase();
+              const sectionMap = {
+                'skills': 'skills', 'projects': 'projects', 'experience': 'experience',
+                'certifications': 'certifications', 'about': 'about'
+              };
+              const sectionId = sectionMap[sectionName];
+              if (sectionId && this.LayoutEngine.hideSection(sectionId)) {
+                return `✓ Hidden <strong>${sectionName}</strong> section.${demoNote}`;
+              }
+              return `Could not hide "${sectionName}". Available sections: ${Object.keys(sectionMap).join(', ')}`;
+            }
+            return `<strong>Delete/Hide Commands:</strong>
+• Remove skill: "Remove Java skill"
+• Remove tag: "Remove tag React from NoteApp"
+• Hide section: "Hide projects section"`;
+
+          case 'SHOW':
+            // Handle section showing: "show projects" or "show skills section"
+            const showMatch = msg.match(/show\s+(?:the\s+)?(\w+)(?:\s+section)?/i);
+            if (showMatch) {
+              const sectionName = showMatch[1].toLowerCase();
+              const sectionMap = {
+                'skills': 'skills', 'projects': 'projects', 'experience': 'experience',
+                'certifications': 'certifications', 'about': 'about'
+              };
+              const sectionId = sectionMap[sectionName];
+              if (sectionId && this.LayoutEngine.showSection(sectionId)) {
+                return `✓ Showing <strong>${sectionName}</strong> section.${demoNote}`;
+              }
+              return `Could not show "${sectionName}". Available sections: ${Object.keys(sectionMap).join(', ')}`;
+            }
+            return 'To show a section, try: "Show projects section"';
+
+          case 'LAYOUT':
+            if (msg.includes('compact') || msg.includes('single page')) {
+              this.LayoutEngine.applyCompact();
+              return '✓ Applied <strong>compact layout</strong>. Content is now more condensed.';
+            } else if (msg.includes('expand') || msg.includes('full')) {
+              this.LayoutEngine.applyFull();
+              return '✓ Applied <strong>full layout</strong>. Content is now in original form.';
+            }
+            return 'Layout options: "make it compact" or "expand layout"';
+
+          case 'RESET':
+            this.DemoMode.reset();
+            return 'Resetting resume to original state...';
+
+          case 'LIST':
+            // Handle list commands: "list skills", "list roles"
+            if (msg.includes('skill')) {
+              return `<strong>Current Skills:</strong><br>${this.ContentManager.listSkills().map(s => `• ${s}`).join('<br>')}`;
+            }
+            if (msg.includes('role') || msg.includes('experience')) {
+              return `<strong>Experience Roles:</strong><br>${this.ContentManager.listExperienceRoles().map(r => `• ${r}`).join('<br>')}`;
+            }
+            return `<strong>List Commands:</strong>
+• "List skills" - Show all skills
+• "List roles" - Show all experience entries`;
+
+          case 'VALIDATE':
+            // Validate bullet text: "validate: Led team migration project"
+            const validateMatch = msg.match(/(?:validate|improve|rewrite|suggest)[:\s]+(.+)/i);
+            if (validateMatch) {
+              const textToValidate = message.match(/(?:validate|improve|rewrite|suggest)[:\s]+(.+)/i)[1].trim();
+              const validation = this.ContentValidator.validateBullet(textToValidate);
+
+              let response = `<strong>Content Quality Analysis</strong>`;
+              response += `<br>${this.ContentValidator.formatFeedback(validation)}`;
+
+              if (validation.improved && validation.score < 70) {
+                response += `<br><div style="margin-top:0.5rem;padding:0.75rem;background:var(--accent-dim);border-radius:8px;border-left:3px solid var(--accent)">
+                  <strong>To add the improved version:</strong><br>
+                  <code style="font-size:0.8rem">Add bullet to [role]: ${validation.improved.replace(/\[add:.+?\]/g, '[YOUR METRIC]')}</code>
+                </div>`;
+              }
+
+              return response;
+            }
+
+            return `<strong>Validate Commands:</strong>
+• "Validate: Your bullet text here" - Check quality score
+• "Improve: Worked on system migration" - Get improved version
+• "Rewrite: responsible for team" - Auto-restructure text
+
+<div style="margin-top:0.5rem"><strong>Scoring criteria (100 pts):</strong>
+• Action verb start (30 pts)
+• Quantifiable metrics (40 pts)
+• Impact statement (20 pts)
+• Appropriate length (10 pts)</div>`;
+
+          case 'HELP':
+            return `<strong>Resume Editing Commands:</strong>
+
+<u>Skills</u>
+• Update Python to 90%
+• Rename Java to Java 17
+• Change Python level to Expert
+• Add TypeScript at 85%
+• Remove Java skill
+• List skills
+
+<u>Profile</u>
+• Change my name to John Doe
+• Update my title to Principal Architect
+• Set location to New York
+
+<u>Experience</u>
+• Add bullet to Bank of America: Led system migration
+• Update bullet 1 in Bank of America to: Led migration achieving 50% efficiency
+• List roles
+
+<u>Content Quality</u>
+• Validate: Your bullet text here
+• Improve: responsible for team management
+
+<u>Projects</u>
+• Add tag React to NoteApp
+• Remove tag Flask from project
+
+<u>Layout</u>
+• Make it compact / Expand layout
+• Hide projects section / Show skills
+• Switch to light mode / Toggle theme
+• Reset resume
+
+<u>Review</u>
+• Review my resume
+• Score my resume for Principal Architect`;
+
+          default:
+            // Not a recognized command
+            return null;
+        }
+      }
+    };
+
+    // ===== INTEGRATE WITH EXISTING CHAT =====
+    const originalGetResponse = getResponse;
+    getResponse = function(question) {
+      // First, check if it's a resume automation command
+      if (ResumeAutomation.CommandParser.isResumeCommand(question)) {
+        const response = ResumeAutomation.processCommand(question);
+        if (response) {
+          return response;
+        }
+      }
+
+      // Fall back to original response handler
+      return originalGetResponse(question);
+    };
   </script>
 
   <!-- Image Lightbox Modal -->
