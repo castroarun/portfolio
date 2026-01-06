@@ -8318,6 +8318,14 @@
 
         container.appendChild(weekDiv);
       }
+
+      // Scroll to the right to show most recent activity
+      const heatmapContainer = container.closest('.heatmap-container');
+      if (heatmapContainer) {
+        setTimeout(() => {
+          heatmapContainer.scrollLeft = heatmapContainer.scrollWidth;
+        }, 100);
+      }
     }
 
     // ============ Generate Contribution Heatmap from Events (Fallback) ============
@@ -8366,6 +8374,14 @@
 
         container.appendChild(weekDiv);
       }
+
+      // Scroll to the right to show most recent activity
+      const heatmapContainer = container.closest('.heatmap-container');
+      if (heatmapContainer) {
+        setTimeout(() => {
+          heatmapContainer.scrollLeft = heatmapContainer.scrollWidth;
+        }, 100);
+      }
     }
 
     // ============ Generate Contribution Heatmap (Static Fallback) ============
@@ -8394,6 +8410,14 @@
         }
 
         container.appendChild(weekDiv);
+      }
+
+      // Scroll to the right to show most recent activity
+      const heatmapContainer = container.closest('.heatmap-container');
+      if (heatmapContainer) {
+        setTimeout(() => {
+          heatmapContainer.scrollLeft = heatmapContainer.scrollWidth;
+        }, 100);
       }
     }
 
