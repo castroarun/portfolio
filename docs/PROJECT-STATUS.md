@@ -183,10 +183,44 @@ Based on research from:
 
 ---
 
+## Checkpoints
+
+| Date | Commit | Description |
+|------|--------|-------------|
+| 2026-01-11 | `998673a` | Portfolio updates - projects, contact, about section |
+| 2026-01-11 | `d3c8911` | CV & Resume sync with 6 projects |
+| 2026-01-11 | TBD | Shared projects.json implementation |
+
+---
+
+## Shared Projects Data System
+
+**Location:** `data/projects.json`
+
+The portfolio now uses a shared JSON data source for project information:
+- CV dynamically loads projects from `projects.json`
+- Resume maintains its complex flip-card structure (manual updates needed)
+- Portfolio can optionally use the same data source
+
+**Files:**
+- `data/projects.json` - Single source of truth for all projects
+- `data/projects-loader.js` - JavaScript loader for dynamic rendering
+
+**Current Projects:**
+1. REPPIT (Launching on Google Play)
+2. NoteApp (Live)
+3. PRIMMO (Architected & build-ready)
+4. This Portfolio (Live)
+5. Calci (In Development)
+6. Cinder & The Little Red Dot (Spotify)
+
+---
+
 ## Next Actions
 
 - [x] Resume Content Automation System with local AI agent (Completed 2026-01-06)
 - [x] Train AI Chat Assistant with Recruiter Question Bank (Added 2026-01-11 - needs review)
+- [x] **Implement Shared Projects Data** - Created `data/projects.json` for CV sync (2026-01-11)
 - [ ] **Review & Correct AI Assistant Responses** - Go through each of the 33 new responses and verify/correct with actual answers (Personal preferences, motivations, work style, etc.)
 - [ ] Add screenshots for remaining projects (Spotify Songs, Space Race ML, Backtest Pro)
 - [ ] Finalize resume/index.html as production version

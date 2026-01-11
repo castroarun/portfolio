@@ -1,0 +1,126 @@
+{
+  "projects": [
+    {
+      "id": "reppit",
+      "name": "REPPIT",
+      "status": "launching",
+      "statusText": "Launching on Google Play",
+      "statusColor": "#22c55e",
+      "tech": ["Flutter", "Dart", "SQLite"],
+      "description": "Mobile strength training app that tracks workouts, rest periods, and progress for all fitness levels.",
+      "category": "featured",
+      "featured": true,
+      "image": "assets/projects/reppit.png",
+      "links": {
+        "preview": "#",
+        "github": "#"
+      }
+    },
+    {
+      "id": "noteapp",
+      "name": "NoteApp",
+      "status": "live",
+      "statusText": "",
+      "statusColor": "",
+      "tech": ["React Native", "Supabase"],
+      "description": "Privacy-first note-taking app with offline sync, voice-to-text, and 200+ test cases.",
+      "category": "featured",
+      "featured": true,
+      "image": "assets/projects/noteapp.png",
+      "links": {
+        "preview": "#",
+        "github": "#"
+      }
+    },
+    {
+      "id": "primmo",
+      "name": "PRIMMO",
+      "status": "architected",
+      "statusText": "Architected & build-ready",
+      "statusColor": "#f59e0b",
+      "tech": ["Next.js", "Voice AI", "WhatsApp API"],
+      "description": "Agentic AI strength coach via WhatsApp and voice calls using REPPIT workout data.",
+      "category": "featured",
+      "featured": true,
+      "image": "assets/projects/primmo.png",
+      "links": {
+        "preview": "#",
+        "github": "#"
+      }
+    },
+    {
+      "id": "portfolio",
+      "name": "This Portfolio",
+      "status": "live",
+      "statusText": "",
+      "statusColor": "",
+      "tech": ["HTML", "CSS", "JavaScript", "Chart.js"],
+      "description": "Interactive digital resume with AI assistant, skills radar, and 9-step workflow showcase.",
+      "category": "personal",
+      "featured": false,
+      "image": "assets/projects/portfolio.png",
+      "links": {
+        "preview": "https://castronix.github.io/portfolio/",
+        "github": "https://github.com/castronix/castronix-portfolio"
+      }
+    },
+    {
+      "id": "calci",
+      "name": "Calci",
+      "status": "in-development",
+      "statusText": "In Development",
+      "statusColor": "#f59e0b",
+      "tech": ["Flutter", "Dart", "Material Design"],
+      "description": "Calculator with memory offering a simple, clean workspace. Studying various calculator interactions.",
+      "category": "personal",
+      "featured": false,
+      "image": "assets/projects/calci.png",
+      "links": {
+        "preview": "#",
+        "github": "#"
+      }
+    },
+    {
+      "id": "cinder",
+      "name": "Cinder",
+      "status": "spotify",
+      "statusText": "Spotify",
+      "statusColor": "#22c55e",
+      "tech": ["Udio", "Music Production", "AI/ML"],
+      "description": "AI-assisted original music project launching shortly on Spotify & Apple Music.",
+      "category": "music",
+      "featured": false,
+      "image": "assets/projects/cinder.png",
+      "links": {
+        "preview": "#",
+        "spotify": "#"
+      }
+    },
+    {
+      "id": "littlereddot",
+      "name": "The Little Red Dot",
+      "status": "spotify",
+      "statusText": "Spotify",
+      "statusColor": "#22c55e",
+      "tech": ["Udio", "Music Production", "AI/ML"],
+      "description": "AI-assisted original music project launching shortly on Spotify & Apple Music.",
+      "category": "music",
+      "featured": false,
+      "image": "assets/projects/littlereddot.png",
+      "links": {
+        "preview": "#",
+        "spotify": "#"
+      }
+    }
+  ],
+  "categories": {
+    "featured": "Featured Projects",
+    "personal": "Personal Projects",
+    "music": "Music Projects",
+    "conception": "Under Conception"
+  },
+  "metadata": {
+    "lastUpdated": "2026-01-11",
+    "version": "1.0.0"
+  }
+}
