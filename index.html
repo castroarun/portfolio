@@ -5,6 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Castronix | Digital Products & Engineering</title>
   <meta name="description" content="Premium digital products built with clarity, performance, and obsessive attention to detail.">
+
+  <!-- Open Graph / LinkedIn -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://castronix.dev">
+  <meta property="og:title" content="Castronix | Digital Products & Engineering">
+  <meta property="og:description" content="Premium digital products built with clarity, performance, and obsessive attention to detail.">
+  <meta property="og:image" content="https://castronix.dev/assets/og-image.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://castronix.dev">
+  <meta name="twitter:title" content="Castronix | Digital Products & Engineering">
+  <meta name="twitter:description" content="Premium digital products built with clarity, performance, and obsessive attention to detail.">
+  <meta name="twitter:image" content="https://castronix.dev/assets/og-image.png">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://castronix.dev">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -137,6 +158,27 @@
       transform: translate(-50%, -50%);
       z-index: 1;
       transition: opacity 0.3s ease;
+    }
+
+    /* ============ Skip Link (Accessibility) ============ */
+    .skip-link {
+      position: absolute;
+      top: -50px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--accent);
+      color: var(--bg-base);
+      padding: var(--space-3) var(--space-6);
+      border-radius: 0 0 8px 8px;
+      font-weight: 600;
+      z-index: 10000;
+      transition: top var(--duration-fast) ease;
+    }
+
+    .skip-link:focus {
+      top: 0;
+      outline: 2px dashed var(--accent);
+      outline-offset: 2px;
     }
 
     /* ============ Background Elements (V6) ============ */
@@ -459,6 +501,15 @@
       background: var(--accent-subtle);
     }
 
+    .nav-cta-primary {
+      background: var(--accent);
+      color: var(--bg-base);
+    }
+
+    .nav-cta-primary:hover {
+      background: var(--accent-hover);
+    }
+
     /* Mobile Menu Button */
     .nav-hamburger {
       display: flex;
@@ -519,6 +570,49 @@
 
     .mobile-menu.active {
       transform: translateX(0);
+    }
+
+    .mobile-menu-close {
+      position: absolute;
+      top: var(--space-6);
+      right: var(--space-6);
+      width: 40px;
+      height: 40px;
+      background: transparent;
+      border: 1px solid var(--border-medium);
+      border-radius: 4px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      font-size: 24px;
+      transition: all var(--duration-fast) ease;
+    }
+
+    .mobile-menu-close:hover {
+      background: var(--accent-subtle);
+      border-color: var(--accent);
+    }
+
+    .mobile-menu-socials {
+      display: flex;
+      gap: var(--space-6);
+      margin-top: var(--space-8);
+    }
+
+    .mobile-menu-socials a {
+      color: var(--text-secondary);
+      transition: color var(--duration-fast) ease;
+    }
+
+    .mobile-menu-socials a:hover {
+      color: var(--accent);
+    }
+
+    .mobile-menu-socials svg {
+      width: 24px;
+      height: 24px;
     }
 
     .mobile-menu-backdrop {
@@ -882,6 +976,20 @@
       box-shadow: 0 10px 30px -15px rgba(2, 12, 27, 0.7);
     }
 
+    .project-launch-hint {
+      margin-top: var(--space-2);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: #22c55e;
+    }
+
+    .project-status-hint {
+      margin-top: var(--space-2);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: #f59e0b;
+    }
+
     .project-tech-list {
       display: flex;
       flex-wrap: wrap;
@@ -1062,6 +1170,191 @@
       color: var(--text-tertiary);
     }
 
+    /* ============ Other Notable Projects ============ */
+    .other-projects-heading {
+      font-size: var(--text-xl);
+      font-weight: 600;
+      color: var(--text-heading);
+      text-align: center;
+      margin: var(--space-16) 0 var(--space-8);
+    }
+
+    .other-projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: var(--space-5);
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .other-project-card {
+      background: var(--bg-surface);
+      border-radius: 6px;
+      padding: var(--space-6);
+      display: flex;
+      flex-direction: column;
+      transition: transform var(--duration-base) ease;
+    }
+
+    .other-project-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .other-project-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--space-5);
+    }
+
+    .other-project-header .folder-icon {
+      width: 36px;
+      height: 36px;
+      color: var(--accent);
+    }
+
+    .other-project-links {
+      display: flex;
+      gap: var(--space-3);
+    }
+
+    .other-project-links a {
+      color: var(--text-secondary);
+      transition: color var(--duration-base) ease;
+    }
+
+    .other-project-links a:hover {
+      color: var(--accent);
+    }
+
+    .other-project-links svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .other-project-badge {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      padding: 2px 8px;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .other-project-badge.music {
+      background: rgba(139, 92, 246, 0.15);
+      color: #a78bfa;
+    }
+
+    .other-project-title {
+      font-size: var(--text-lg);
+      font-weight: 600;
+      color: var(--text-heading);
+      margin-bottom: var(--space-2);
+      transition: color var(--duration-base) ease;
+    }
+
+    .other-project-card:hover .other-project-title {
+      color: var(--accent);
+    }
+
+    .other-project-launch-hint {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: #22c55e;
+      margin-bottom: var(--space-3);
+    }
+
+    .other-project-desc {
+      font-size: var(--text-sm);
+      color: var(--text-secondary);
+      line-height: 1.6;
+      flex-grow: 1;
+    }
+
+    .other-project-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+      margin-top: var(--space-5);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-tertiary);
+      list-style: none;
+      padding: 0;
+    }
+
+    /* ============ Under Conception ============ */
+    .conception-heading {
+      font-size: var(--text-lg);
+      font-weight: 600;
+      color: var(--text-heading);
+      text-align: center;
+      margin: var(--space-16) 0 var(--space-2);
+    }
+
+    .conception-subtitle {
+      font-size: var(--text-sm);
+      color: var(--text-tertiary);
+      text-align: center;
+      margin-bottom: var(--space-8);
+    }
+
+    .conception-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: var(--space-4);
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .conception-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: var(--space-3) var(--space-5);
+      transition: border-color var(--duration-base) ease;
+    }
+
+    .conception-item:hover {
+      border-color: var(--accent);
+    }
+
+    .conception-icon {
+      font-size: 18px;
+    }
+
+    .conception-name {
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      font-weight: 500;
+      color: var(--text-heading);
+    }
+
+    .conception-desc {
+      font-size: var(--text-xs);
+      color: var(--text-tertiary);
+      display: none;
+    }
+
+    @media (min-width: 768px) {
+      .conception-item {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: var(--space-5);
+        min-width: 200px;
+      }
+
+      .conception-desc {
+        display: block;
+        margin-top: var(--space-2);
+      }
+    }
+
     /* ============ Principles Section (V7 Style) ============ */
     .principles {
       padding: 100px 0;
@@ -1227,7 +1520,7 @@
     }
 
     .contact-overline::before {
-      content: "05. ";
+      content: "06. ";
     }
 
     .contact-title {
@@ -1258,6 +1551,52 @@
     .contact-cta:hover {
       background: var(--accent-subtle);
     }
+
+    .contact-email-box {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-3);
+      padding: var(--space-4) var(--space-5);
+      background: rgba(34, 211, 238, 0.05);
+      border: 1px solid var(--accent);
+      border-radius: 6px;
+    }
+
+    .contact-email {
+      font-family: var(--font-mono);
+      font-size: var(--text-base);
+      color: var(--accent);
+      letter-spacing: 0.02em;
+    }
+
+    .copy-email-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-2) var(--space-3);
+      background: transparent;
+      border: 1px solid var(--slate-600);
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--slate-400);
+      cursor: pointer;
+      transition: all var(--duration-base) ease;
+    }
+
+    .copy-email-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .copy-email-btn.copied {
+      border-color: #22c55e;
+      color: #22c55e;
+    }
+
+    .copy-email-btn.copied .copy-icon { display: none; }
+    .copy-email-btn.copied .check-icon { display: block; }
+    .copy-email-btn.copied .copy-text::after { content: 'ied'; }
 
     /* ============ Footer ============ */
     .footer {
@@ -1525,7 +1864,6 @@
     /* ============ Design Principles Section - Flip Cards (V7 Style) ============ */
     .principles-section {
       padding: var(--space-24) 0;
-      background: linear-gradient(to bottom, var(--bg-surface), transparent);
     }
 
     .flip-grid {
@@ -1550,6 +1888,21 @@
 
     .flip-card:hover .flip-card-inner {
       transform: rotateY(180deg);
+    }
+
+    /* Touch device support - toggle on tap */
+    .flip-card.flipped .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    /* On touch devices, disable hover and use only click */
+    @media (hover: none) {
+      .flip-card:hover .flip-card-inner {
+        transform: rotateY(0deg);
+      }
+      .flip-card.flipped .flip-card-inner {
+        transform: rotateY(180deg);
+      }
     }
 
     .flip-card-front,
@@ -1744,6 +2097,9 @@
   </style>
 </head>
 <body>
+  <!-- Skip to main content link for accessibility -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
   <!-- Background Elements (V6) -->
   <div class="bg-grid"></div>
   <div class="bg-gradient-orb orb-1"></div>
@@ -1758,19 +2114,19 @@
   <!-- Fixed Left Side - Social Links -->
   <div class="side-element side-left">
     <div class="social-links">
-      <a href="https://github.com/castronix" class="social-link" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
+      <a href="https://github.com/castroarun" class="social-link" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
         </svg>
       </a>
-      <a href="https://linkedin.com/in/castronix" class="social-link" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+      <a href="https://www.linkedin.com/in/aruncastromin" class="social-link" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
           <rect x="2" y="9" width="4" height="12"></rect>
           <circle cx="4" cy="4" r="2"></circle>
         </svg>
       </a>
-      <a href="https://twitter.com/castronix" class="social-link" aria-label="Twitter" target="_blank" rel="noopener noreferrer">
+      <a href="https://x.com/MetricsTrader" class="social-link" aria-label="Twitter" target="_blank" rel="noopener noreferrer">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
         </svg>
@@ -1781,7 +2137,7 @@
   <!-- Fixed Right Side - Email -->
   <div class="side-element side-right">
     <div class="email-link">
-      <a href="mailto:hello@castronix.dev">hello@castronix.dev</a>
+      <a href="mailto:arun.castromin@gmail.com">arun.castromin@gmail.com</a>
     </div>
   </div>
 
@@ -1798,8 +2154,8 @@
       <a href="#design-principles" class="nav-link"><span class="nav-link-number">04.</span>Principles</a>
       <a href="#practices" class="nav-link"><span class="nav-link-number">05.</span>Practices</a>
       <a href="#contact" class="nav-link"><span class="nav-link-number">06.</span>Contact</a>
-      <a href="/portfolio/resume/" class="nav-cta" target="_blank">Digital Resume</a>
-      <a href="/portfolio/cv/" class="nav-cta" style="background: transparent; border: 1px solid var(--accent); color: var(--accent);" target="_blank">Full CV</a>
+      <a href="/resume/" class="nav-cta nav-cta-primary" target="_blank">Digital Resume</a>
+      <a href="/cv/" class="nav-cta" target="_blank">Full CV</a>
     </div>
     <button class="nav-hamburger" id="navHamburger" aria-label="Toggle menu">
       <span class="hamburger-line"></span>
@@ -1813,6 +2169,7 @@
 
   <!-- Mobile Menu -->
   <aside class="mobile-menu" id="mobileMenu">
+    <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close menu">×</button>
     <a href="#about" class="mobile-menu-link">
       <span class="mobile-menu-number">01.</span>
       About
@@ -1837,12 +2194,25 @@
       <span class="mobile-menu-number">06.</span>
       Contact
     </a>
-    <a href="/portfolio/resume/" class="nav-cta" style="margin-top: var(--space-6);" target="_blank">Digital Resume</a>
-    <a href="/portfolio/cv/" class="nav-cta" style="margin-top: var(--space-2); background: transparent; border: 1px solid var(--accent); color: var(--accent);" target="_blank">Full CV</a>
+    <a href="/resume/" class="nav-cta nav-cta-primary" style="margin-top: var(--space-6);" target="_blank">Digital Resume</a>
+    <a href="/cv/" class="nav-cta" style="margin-top: var(--space-2);" target="_blank">Full CV</a>
+
+    <!-- Social Links for Mobile -->
+    <div class="mobile-menu-socials">
+      <a href="https://github.com/castroarun" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+        <svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+      </a>
+      <a href="https://www.linkedin.com/in/aruncastromin" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+        <svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      </a>
+      <a href="mailto:arun.castromin@gmail.com" aria-label="Email">
+        <svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+      </a>
+    </div>
   </aside>
 
   <!-- Main Content -->
-  <div class="main-content">
+  <div class="main-content" id="main-content">
     <div class="container">
       <!-- Hero Section (V6 Style) -->
       <section class="hero">
@@ -1857,8 +2227,7 @@
               <span class="hero-title-accent">that matter.</span>
             </h1>
             <p class="hero-subtitle">
-              Crafting purposeful digital products with obsessive attention to detail.
-              From concept to production, every line of code serves a purpose.
+              Crafting digital tools with obsessive attention to detail — where personal curiosity meets real-world usefulness. If it solves a real problem, I'll ship it.
             </p>
             <div class="hero-cta-group">
               <a href="#work" class="btn btn-primary">
@@ -1876,15 +2245,15 @@
                 <span class="hero-card-dot dot-yellow"></span>
                 <span class="hero-card-dot dot-green"></span>
               </div>
-              <pre class="hero-card-code"><span class="code-comment">// Building with purpose</span>
+              <pre class="hero-card-code"><span class="code-comment">// Building with fun & purpose</span>
 <span class="code-keyword">const</span> castronix = {
-  focus: <span class="code-string">"Digital Products"</span>,
-  approach: <span class="code-string">"Type-safe & tested"</span>,
-  workflow: <span class="code-accent">9</span>,  <span class="code-comment">// steps to ship</span>
-  anyTypes: <span class="code-accent">0</span>,   <span class="code-comment">// always</span>
+  principle: <span class="code-string">"Simple yet beautiful"</span>,
+  design: <span class="code-string">"Clean & intentional"</span>,
+  focus: <span class="code-string">"Tools that matter"</span>,
+  architecture: <span class="code-string">"TOGAF-aligned"</span>,
 };
 
-<span class="code-keyword">export default</span> castronix;</pre>
+<span class="code-keyword">export default</span> castronix; <span class="code-comment">// ship it</span></pre>
             </div>
           </div>
         </div>
@@ -1896,16 +2265,19 @@
         <div style="display: grid; grid-template-columns: 3fr 2fr; gap: var(--space-12); align-items: flex-start;">
           <div>
             <p style="color: var(--text-secondary); line-height: 1.7; margin-bottom: var(--space-4);">
-              Hello! My name is Castro and I enjoy creating things that live on the internet.
-              My interest in development started back in 2018 when I decided to try building
-              custom solutions to everyday problems.
+              Hey, I'm Arun — or <span style="color: var(--accent);">Castronix</span> in the digital world — an Enterprise & Solutions Architect with an intense passion for coding.
+              I believe being "coder-first" makes a better architect: you visualize the entire path
+              from concept to delivery with conviction, finding paths of least resistance to get
+              things shipped.
             </p>
             <p style="color: var(--text-secondary); line-height: 1.7; margin-bottom: var(--space-4);">
-              Fast-forward to today, I've had the privilege of working on
-              <a href="#" style="color: var(--accent);">enterprise applications</a>,
-              <a href="#" style="color: var(--accent);">mobile apps</a>, and
-              <a href="#" style="color: var(--accent);">AI-powered tools</a>. My main focus
-              these days is building accessible, inclusive products and digital experiences.
+              I've always wanted to create things that live on the internet. With AI-assisted learning
+              accelerating what's possible, I've reopened my hands-on coding journey — exploring
+              full stacks, experimenting with architectures, and building tools that actually matter.
+            </p>
+            <p style="color: var(--text-secondary); line-height: 1.7; margin-bottom: var(--space-4);">
+              When I'm not shipping code, you'll find me tracking market metrics or optimizing
+              my portfolio — yes, both kinds.
             </p>
             <p style="color: var(--text-secondary); line-height: 1.7; margin-bottom: var(--space-6);">
               Here are a few technologies I've been working with recently:
@@ -1933,9 +2305,7 @@
           </div>
           <div style="position: relative;">
             <div style="position: relative; border-radius: 4px; overflow: hidden;">
-              <div style="width: 100%; aspect-ratio: 1; background: var(--bg-surface); display: flex; align-items: center; justify-content: center;">
-                <span style="font-family: var(--font-mono); font-size: var(--text-4xl); color: var(--accent); opacity: 0.3;">C</span>
-              </div>
+              <img src="assets/portfolio.png" alt="Castro - Software Developer" style="width: 100%; aspect-ratio: 1; object-fit: cover;" />
             </div>
             <div style="position: absolute; top: 20px; left: 20px; width: 100%; height: 100%; border: 2px solid var(--accent); border-radius: 4px; z-index: -1;"></div>
           </div>
@@ -1952,18 +2322,19 @@
             <div class="project-image">
               <a href="#">
                 <div class="project-image-wrapper">
-                  <div class="project-placeholder">REPPIT</div>
+                  <img src="assets/projects/reppit.png" alt="REPPIT - Strength training app" loading="lazy">
                 </div>
               </a>
             </div>
             <div class="project-content">
               <p class="project-overline">Featured Project</p>
               <h3 class="project-title"><a href="#">REPPIT</a></h3>
+              <p class="project-launch-hint">(Launching soon on Google Play Store)</p>
               <div class="project-description">
                 <p>
-                  A mobile strength training app that tracks your workouts, rest periods,
+                  A mobile strength training app that tracks and prompts your workouts, rest periods,
                   and progress. Features timer modes, workout history, and detailed analytics
-                  for serious lifters.
+                  for all - beginners to serious lifters.
                 </p>
               </div>
               <ul class="project-tech-list">
@@ -1994,7 +2365,7 @@
             <div class="project-image">
               <a href="#">
                 <div class="project-image-wrapper">
-                  <div class="project-placeholder">NoteApp</div>
+                  <img src="assets/projects/noteapp.png" alt="NoteApp - Privacy-first notes" loading="lazy">
                 </div>
               </a>
             </div>
@@ -2036,18 +2407,19 @@
             <div class="project-image">
               <a href="#">
                 <div class="project-image-wrapper">
-                  <div class="project-placeholder">PRIMMO</div>
+                  <img src="assets/projects/primmo.png" alt="PRIMMO - AI Strength Coach" loading="lazy">
                 </div>
               </a>
             </div>
             <div class="project-content">
               <p class="project-overline">Featured Project</p>
               <h3 class="project-title"><a href="#">PRIMMO</a></h3>
+              <p class="project-status-hint">(Architected & build-ready)</p>
               <div class="project-description">
                 <p>
                   An agentic AI strength coach that communicates via WhatsApp and voice calls.
                   Leverages workout data from REPPIT to provide personalized training guidance,
-                  form corrections, and motivation. Currently in development.
+                  form corrections, and motivation.
                 </p>
               </div>
               <ul class="project-tech-list">
@@ -2072,6 +2444,183 @@
             </div>
           </article>
         </div>
+
+        <!-- Other Notable Projects -->
+        <h3 class="other-projects-heading fade-up">Other Notable Projects</h3>
+        <div class="project-list other-projects-list">
+
+          <!-- Project 4: This Portfolio -->
+          <article class="featured-project fade-up">
+            <div class="project-image">
+              <a href="#">
+                <div class="project-image-wrapper">
+                  <img src="assets/projects/portfolio.png" alt="This Portfolio - Interactive digital resume" loading="lazy">
+                </div>
+              </a>
+            </div>
+            <div class="project-content">
+              <p class="project-overline">Personal Project</p>
+              <h3 class="project-title"><a href="#">This Portfolio</a></h3>
+              <div class="project-description">
+                <p>
+                  Interactive digital resume with AI chat assistant, skills radar, project showcase cards,
+                  and 9-step workflow visualization. Crafted to showcase technical depth and design sensibility.
+                </p>
+              </div>
+              <ul class="project-tech-list">
+                <li>HTML</li>
+                <li>CSS</li>
+                <li>JavaScript</li>
+                <li>Chart.js</li>
+              </ul>
+              <div class="project-links">
+                <a href="https://github.com/ArunCastro/portfolio" target="_blank" class="project-link-icon" aria-label="GitHub">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                  </svg>
+                </a>
+                <a href="#" class="project-link-icon" aria-label="External Link">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                    <polyline points="15 3 21 3 21 9"></polyline>
+                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 5: Calci -->
+          <article class="featured-project fade-up">
+            <div class="project-image">
+              <a href="#">
+                <div class="project-image-wrapper">
+                  <img src="assets/projects/calci.png" alt="Calci - Calculator App" loading="lazy">
+                </div>
+              </a>
+            </div>
+            <div class="project-content">
+              <p class="project-overline">Personal Project</p>
+              <h3 class="project-title"><a href="#">Calci</a></h3>
+              <p class="project-status-hint">(Under study & development)</p>
+              <div class="project-description">
+                <p>
+                  A calculator with memory that offers a simple, clean workspace.
+                  Studying various calculator metrics and interactions to code them out right.
+                </p>
+              </div>
+              <ul class="project-tech-list">
+                <li>Flutter</li>
+                <li>Dart</li>
+                <li>Material Design</li>
+              </ul>
+              <div class="project-links">
+                <a href="#" class="project-link-icon" aria-label="GitHub">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 6: Cinder -->
+          <article class="featured-project fade-up">
+            <div class="project-image">
+              <a href="#">
+                <div class="project-image-wrapper">
+                  <img src="assets/projects/cinder.png" alt="Cinder - AI-assisted music" loading="lazy">
+                </div>
+              </a>
+            </div>
+            <div class="project-content">
+              <p class="project-overline">Creative Project</p>
+              <h3 class="project-title"><a href="#">Cinder</a></h3>
+              <p class="project-launch-hint">(Launching shortly on Spotify & Apple Music)</p>
+              <div class="project-description">
+                <p>
+                  AI-assisted original music production. A creative exploration blending
+                  technology with artistic expression. Themes of warmth, nostalgia, and human connection.
+                </p>
+              </div>
+              <ul class="project-tech-list">
+                <li>Udio</li>
+                <li>Music Production</li>
+                <li>AI/ML</li>
+              </ul>
+              <div class="project-links">
+                <a href="#" class="project-link-icon" aria-label="Spotify">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M8 15s1.5-2 4-2 4 2 4 2"></path>
+                    <path d="M7 11s2-2 5-2 5 2 5 2"></path>
+                    <path d="M6 7s2.5-2 6-2 6 2 6 2"></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 7: The Little Red Dot -->
+          <article class="featured-project fade-up">
+            <div class="project-image">
+              <a href="#">
+                <div class="project-image-wrapper">
+                  <img src="assets/projects/littlereddot.png" alt="The Little Red Dot - Singapore music" loading="lazy">
+                </div>
+              </a>
+            </div>
+            <div class="project-content">
+              <p class="project-overline">Creative Project</p>
+              <h3 class="project-title"><a href="#">The Little Red Dot</a></h3>
+              <p class="project-launch-hint">(Launching shortly on Spotify & Apple Music)</p>
+              <div class="project-description">
+                <p>
+                  AI-assisted original music celebrating Singapore. Themes of identity, culture,
+                  and the island's unique spirit. A tribute to the little red dot on the map.
+                </p>
+              </div>
+              <ul class="project-tech-list">
+                <li>Udio</li>
+                <li>Music Production</li>
+                <li>AI/ML</li>
+              </ul>
+              <div class="project-links">
+                <a href="#" class="project-link-icon" aria-label="Spotify">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M8 15s1.5-2 4-2 4 2 4 2"></path>
+                    <path d="M7 11s2-2 5-2 5 2 5 2"></path>
+                    <path d="M6 7s2.5-2 6-2 6 2 6 2"></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- Under Conception -->
+        <h3 class="conception-heading fade-up">Under Conception</h3>
+        <p class="conception-subtitle fade-up">Ideas brewing in the background, waiting for the right moment to build.</p>
+        <div class="conception-grid fade-up">
+          <div class="conception-item">
+            <span class="conception-icon">💡</span>
+            <span class="conception-name">Portfolio Optimizer</span>
+            <span class="conception-desc">Investment dashboard with fundamentals view</span>
+          </div>
+          <div class="conception-item">
+            <span class="conception-icon">📊</span>
+            <span class="conception-name">Backtest Pro</span>
+            <span class="conception-desc">Options strategy backtesting platform</span>
+          </div>
+          <div class="conception-item">
+            <span class="conception-icon">🚀</span>
+            <span class="conception-name">Space Race ML</span>
+            <span class="conception-desc">Rocket landing prediction model</span>
+          </div>
+        </div>
+
       </section>
 
       <!-- Process Section (V6 Style) -->
@@ -2425,244 +2974,34 @@
         </div>
       </section>
 
-      <!-- Engineering Principles Section - Flip Cards (V7 Style) -->
-      <section id="principles" class="principles-section">
-        <div class="container">
-          <h2 class="numbered-heading">Engineering Principles</h2>
-
-          <p class="process-intro fade-up">
-            Hover over each card to reveal how we apply these principles.
-          </p>
-
-          <div class="flip-grid">
-            <!-- DRY Flip Card -->
-            <div class="flip-card">
-              <div class="flip-card-inner">
-                <div class="flip-card-front">
-                  <span class="flip-principle">DRY</span>
-                  <span class="flip-name">Don't Repeat Yourself</span>
-                  <span class="flip-desc">Every piece of knowledge has a single, authoritative representation.</span>
-                  <span class="flip-hint">Hover to reveal</span>
-                </div>
-                <div class="flip-card-back">
-                  <div class="flip-contrast">
-                    <div class="flip-contrast-row bad">
-                      <div class="flip-contrast-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M18 6L6 18M6 6l12 12"/></svg>
-                      </div>
-                      <div>
-                        <div class="flip-contrast-label">Instead of</div>
-                        <div class="flip-contrast-text">Copy-paste validation logic to all 12 forms</div>
-                      </div>
-                    </div>
-                    <div class="flip-contrast-row good">
-                      <div class="flip-contrast-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
-                      </div>
-                      <div>
-                        <div class="flip-contrast-label">We do</div>
-                        <div class="flip-contrast-text">One useValidation hook, 12 forms, 0 duplicates</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- KISS Flip Card -->
-            <div class="flip-card">
-              <div class="flip-card-inner">
-                <div class="flip-card-front">
-                  <span class="flip-principle">KISS</span>
-                  <span class="flip-name">Keep It Simple</span>
-                  <span class="flip-desc">Simplicity is prerequisite for reliability.</span>
-                  <span class="flip-hint">Hover to reveal</span>
-                </div>
-                <div class="flip-card-back">
-                  <div class="flip-contrast">
-                    <div class="flip-contrast-row bad">
-                      <div class="flip-contrast-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M18 6L6 18M6 6l12 12"/></svg>
-                      </div>
-                      <div>
-                        <div class="flip-contrast-label">Instead of</div>
-                        <div class="flip-contrast-text">Build a state machine with 47 transitions</div>
-                      </div>
-                    </div>
-                    <div class="flip-contrast-row good">
-                      <div class="flip-contrast-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
-                      </div>
-                      <div>
-                        <div class="flip-contrast-label">We do</div>
-                        <div class="flip-contrast-text">Simple array of sets with timestamps. Done.</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- YAGNI Flip Card -->
-            <div class="flip-card">
-              <div class="flip-card-inner">
-                <div class="flip-card-front">
-                  <span class="flip-principle">YAGNI</span>
-                  <span class="flip-name">You Aren't Gonna Need It</span>
-                  <span class="flip-desc">Build what's needed now, not what might be.</span>
-                  <span class="flip-hint">Hover to reveal</span>
-                </div>
-                <div class="flip-card-back">
-                  <div class="flip-contrast">
-                    <div class="flip-contrast-row bad">
-                      <div class="flip-contrast-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M18 6L6 18M6 6l12 12"/></svg>
-                      </div>
-                      <div>
-                        <div class="flip-contrast-label">Instead of</div>
-                        <div class="flip-contrast-text">Add multi-tenancy "in case we need it later"</div>
-                      </div>
-                    </div>
-                    <div class="flip-contrast-row good">
-                      <div class="flip-contrast-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
-                      </div>
-                      <div>
-                        <div class="flip-contrast-label">We do</div>
-                        <div class="flip-contrast-text">Ship single-tenant MVP. Iterate when needed.</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- TDD Flip Card -->
-            <div class="flip-card">
-              <div class="flip-card-inner">
-                <div class="flip-card-front">
-                  <span class="flip-principle">TDD</span>
-                  <span class="flip-name">Test-Driven Development</span>
-                  <span class="flip-desc">Write tests first. Code follows specification.</span>
-                  <span class="flip-hint">Hover to reveal</span>
-                </div>
-                <div class="flip-card-back">
-                  <div class="flip-contrast">
-                    <div class="flip-contrast-row bad">
-                      <div class="flip-contrast-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M18 6L6 18M6 6l12 12"/></svg>
-                      </div>
-                      <div>
-                        <div class="flip-contrast-label">Instead of</div>
-                        <div class="flip-contrast-text">Write tests after shipping, "when we have time"</div>
-                      </div>
-                    </div>
-                    <div class="flip-contrast-row good">
-                      <div class="flip-contrast-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
-                      </div>
-                      <div>
-                        <div class="flip-contrast-label">We do</div>
-                        <div class="flip-contrast-text">Test first. Red, green, refactor. Always.</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- CI/CD Flip Card -->
-            <div class="flip-card">
-              <div class="flip-card-inner">
-                <div class="flip-card-front">
-                  <span class="flip-principle">CI/CD</span>
-                  <span class="flip-name">Continuous Integration</span>
-                  <span class="flip-desc">Automate builds, tests, and deployments.</span>
-                  <span class="flip-hint">Hover to reveal</span>
-                </div>
-                <div class="flip-card-back">
-                  <div class="flip-contrast">
-                    <div class="flip-contrast-row bad">
-                      <div class="flip-contrast-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M18 6L6 18M6 6l12 12"/></svg>
-                      </div>
-                      <div>
-                        <div class="flip-contrast-label">Instead of</div>
-                        <div class="flip-contrast-text">Manual deploy every Friday at 5pm</div>
-                      </div>
-                    </div>
-                    <div class="flip-contrast-row good">
-                      <div class="flip-contrast-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
-                      </div>
-                      <div>
-                        <div class="flip-contrast-label">We do</div>
-                        <div class="flip-contrast-text">Push to main, tests run, auto-deploy in 4 min</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- SOLID Flip Card -->
-            <div class="flip-card">
-              <div class="flip-card-inner">
-                <div class="flip-card-front">
-                  <span class="flip-principle">SOLID</span>
-                  <span class="flip-name">Single Responsibility</span>
-                  <span class="flip-desc">A class should have only one reason to change.</span>
-                  <span class="flip-hint">Hover to reveal</span>
-                </div>
-                <div class="flip-card-back">
-                  <div class="flip-contrast">
-                    <div class="flip-contrast-row bad">
-                      <div class="flip-contrast-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M18 6L6 18M6 6l12 12"/></svg>
-                      </div>
-                      <div>
-                        <div class="flip-contrast-label">Instead of</div>
-                        <div class="flip-contrast-text">UserService handles auth, email, and logging</div>
-                      </div>
-                    </div>
-                    <div class="flip-contrast-row good">
-                      <div class="flip-contrast-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
-                      </div>
-                      <div>
-                        <div class="flip-contrast-label">We do</div>
-                        <div class="flip-contrast-text">UserService, AuthService, EmailService - each one job</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <a href="v7-principles.html" class="principles-link" style="display: block; text-align: center; margin-top: var(--space-12);">
-            Explore all approaches <span>→</span>
-          </a>
-        </div>
-      </section>
-
       <!-- Contact Section -->
       <section id="contact" class="contact">
         <p class="contact-overline">What's Next?</p>
         <h2 class="contact-title">Get In Touch</h2>
         <p class="contact-description">
-          I'm currently looking for new opportunities and my inbox is always open.
-          Whether you have a question, want to collaborate, or just want to say hi,
-          I'll try my best to get back to you!
+          Whether you want to connect with an architect who codes, want to collaborate on something
+          meaningful, or explore what's possible with AI — my inbox is open. I'm always up for
+          conversations about architecture, AI-assisted development, or interesting problems to solve.
         </p>
-        <a href="mailto:hello@castronix.dev" class="contact-cta">Say Hello</a>
+        <div class="contact-email-box">
+          <span class="contact-email">arun.castromin@gmail.com</span>
+          <button class="copy-email-btn" onclick="copyEmail()" title="Copy email">
+            <svg class="copy-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+            <svg class="check-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span class="copy-text">Copy</span>
+          </button>
+        </div>
       </section>
 
       <!-- Footer -->
       <footer class="footer">
         <p class="footer-credit">
-          Built with Next.js + Tailwind + Obsession<br>
-          Design inspired by <a href="https://brittanychiang.com" target="_blank" rel="noopener noreferrer">Brittany Chiang</a>
+          Built with HTML + CSS + Obsession
         </p>
       </footer>
     </div>
@@ -2676,25 +3015,42 @@
       }, 500);
     });
 
-    // ============ Cursor Glow Effect (V6) ============
-    const cursorGlow = document.getElementById('cursorGlow');
-    let mouseX = 0, mouseY = 0;
-    let currentX = 0, currentY = 0;
-
-    document.addEventListener('mousemove', (e) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-    });
-
-    function animateCursor() {
-      // Smooth interpolation
-      currentX += (mouseX - currentX) * 0.1;
-      currentY += (mouseY - currentY) * 0.1;
-      cursorGlow.style.left = currentX + 'px';
-      cursorGlow.style.top = currentY + 'px';
-      requestAnimationFrame(animateCursor);
+    // Copy Email Function
+    function copyEmail() {
+      const email = 'arun.castromin@gmail.com';
+      navigator.clipboard.writeText(email).then(() => {
+        const btn = document.querySelector('.copy-email-btn');
+        btn.classList.add('copied');
+        setTimeout(() => btn.classList.remove('copied'), 2000);
+      });
     }
-    animateCursor();
+
+    // ============ Cursor Glow Effect (V6) ============
+    // Only enable on devices with a mouse (not touch devices)
+    if (window.matchMedia('(pointer: fine)').matches) {
+      const cursorGlow = document.getElementById('cursorGlow');
+      let mouseX = 0, mouseY = 0;
+      let currentX = 0, currentY = 0;
+
+      document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+      });
+
+      function animateCursor() {
+        // Smooth interpolation
+        currentX += (mouseX - currentX) * 0.1;
+        currentY += (mouseY - currentY) * 0.1;
+        cursorGlow.style.left = currentX + 'px';
+        cursorGlow.style.top = currentY + 'px';
+        requestAnimationFrame(animateCursor);
+      }
+      animateCursor();
+    } else {
+      // Hide cursor glow on touch devices
+      const cursorGlow = document.getElementById('cursorGlow');
+      if (cursorGlow) cursorGlow.style.display = 'none';
+    }
 
     // Nav scroll effect
     const nav = document.getElementById('nav');
@@ -2718,6 +3074,32 @@
     hamburger.addEventListener('click', toggleMenu);
     backdrop.addEventListener('click', toggleMenu);
     mobileLinks.forEach(link => link.addEventListener('click', toggleMenu));
+
+    // Close button for mobile menu
+    const mobileMenuClose = document.getElementById('mobileMenuClose');
+    mobileMenuClose.addEventListener('click', toggleMenu);
+
+    // Flip cards - tap/click toggle for touch devices and keyboard accessibility
+    const flipCards = document.querySelectorAll('.flip-card');
+    flipCards.forEach(card => {
+      // Add accessibility attributes
+      card.setAttribute('role', 'button');
+      card.setAttribute('tabindex', '0');
+      card.setAttribute('aria-label', 'Tap to flip card');
+
+      // Click/tap toggle
+      card.addEventListener('click', () => {
+        card.classList.toggle('flipped');
+      });
+
+      // Keyboard support (Enter and Space)
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          card.classList.toggle('flipped');
+        }
+      });
+    });
 
     // Fade-up animation on scroll
     const fadeElements = document.querySelectorAll('.fade-up');
