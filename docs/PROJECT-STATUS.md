@@ -3,7 +3,7 @@
 > **Project:** Castronix Portfolio Website
 > **Purpose:** Showcase projects, workflow, and engineering practices
 
-**Last Updated:** 2026-01-06
+**Last Updated:** 2026-01-11
 
 ---
 
@@ -186,6 +186,8 @@ Based on research from:
 ## Next Actions
 
 - [x] Resume Content Automation System with local AI agent (Completed 2026-01-06)
+- [x] Train AI Chat Assistant with Recruiter Question Bank (Added 2026-01-11 - needs review)
+- [ ] **Review & Correct AI Assistant Responses** - Go through each of the 33 new responses and verify/correct with actual answers (Personal preferences, motivations, work style, etc.)
 - [ ] Add screenshots for remaining projects (Spotify Songs, Space Race ML, Backtest Pro)
 - [ ] Finalize resume/index.html as production version
 - [ ] Set up custom domain (castronix.dev) on GitHub Pages

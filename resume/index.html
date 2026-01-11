@@ -468,31 +468,31 @@
       opacity: 0;
     }
 
-    /* ============ GitHub Stats Section ============ */
+    /* ============ GitHub Stats Section - Compact ============ */
     .github-section {
       background: var(--bg-card);
       border: 1px solid var(--border-subtle);
       border-radius: 16px;
-      padding: 2rem;
-      margin-bottom: 2rem;
+      padding: 1.25rem;
+      margin-bottom: 1rem;
     }
 
-    .github-header {
-      display: flex;
+    .github-compact-row {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 1.5rem;
       align-items: center;
-      justify-content: space-between;
-      margin-bottom: 1.5rem;
     }
 
     .github-profile {
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: 0.75rem;
     }
 
     .github-avatar {
-      width: 48px;
-      height: 48px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
       background: var(--accent-dim);
       display: flex;
@@ -501,101 +501,72 @@
     }
 
     .github-avatar svg {
-      width: 24px;
-      height: 24px;
+      width: 20px;
+      height: 20px;
       color: var(--accent);
     }
 
     .github-username {
       font-weight: 600;
+      font-size: 0.9rem;
       color: var(--text-primary);
     }
 
     .github-handle {
-      font-size: 0.875rem;
+      font-size: 0.75rem;
       color: var(--text-muted);
     }
 
-    .github-link {
-      padding: 0.5rem 1rem;
-      background: var(--bg-hover);
-      border: 1px solid var(--border-medium);
-      border-radius: 8px;
-      color: var(--text-secondary);
-      font-size: 0.875rem;
+    .github-link-small {
+      font-size: 0.7rem;
+      color: var(--accent);
       display: flex;
       align-items: center;
-      gap: 0.5rem;
-      transition: all 0.2s;
+      gap: 0.25rem;
+      margin-top: 0.25rem;
     }
 
-    .github-link:hover {
-      border-color: var(--accent);
-      color: var(--accent);
+    /* Compact Stats */
+    .stats-compact {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
     }
 
-    /* Stats Cards */
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 1rem;
-      margin-bottom: 2rem;
-    }
-
-    .stat-card {
-      background: var(--bg-elevated);
-      border: 1px solid var(--border-subtle);
-      border-radius: 12px;
-      padding: 1.25rem;
+    .stat-mini {
       text-align: center;
-      transition: all 0.2s;
     }
 
-    .stat-card:hover {
-      border-color: var(--accent);
-      transform: translateY(-2px);
-    }
-
-    .stat-value {
-      font-size: 2rem;
+    .stat-mini-value {
+      font-size: 1.25rem;
       font-weight: 700;
       color: var(--accent);
-      margin-bottom: 0.25rem;
+      line-height: 1;
     }
 
-    .stat-label {
-      font-size: 0.75rem;
+    .stat-mini-label {
+      font-size: 0.6rem;
       color: var(--text-muted);
       text-transform: uppercase;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.03em;
+      margin-top: 0.15rem;
     }
 
-    /* Contribution Heatmap */
-    .heatmap-container {
-      background: var(--bg-elevated);
-      border-radius: 12px;
-      padding: 1.5rem;
-      overflow-x: auto;
-    }
-
-    .heatmap-title {
-      font-size: 0.875rem;
-      color: var(--text-muted);
-      margin-bottom: 1rem;
+    /* Mini Heatmap */
+    .heatmap-mini {
       display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      flex-wrap: wrap;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.35rem;
     }
 
-    .heatmap-total {
-      margin-left: auto;
-      font-size: 0.75rem;
-      color: var(--accent);
-      font-weight: 500;
+    .heatmap-mini-title {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
     }
 
-    .heatmap {
+    .heatmap-mini-grid {
       display: flex;
       gap: 3px;
     }
@@ -607,8 +578,8 @@
     }
 
     .heatmap-day {
-      width: 12px;
-      height: 12px;
+      width: 11px;
+      height: 11px;
       border-radius: 2px;
       background: var(--bg-hover);
       transition: all 0.2s;
@@ -623,51 +594,18 @@
     .heatmap-day.level-3 { background: rgba(34, 211, 238, 0.6); }
     .heatmap-day.level-4 { background: var(--accent); }
 
-    .heatmap-legend {
+    .heatmap-mini-legend {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
-      margin-top: 1rem;
-      font-size: 0.75rem;
+      gap: 0.35rem;
+      font-size: 0.65rem;
       color: var(--text-muted);
     }
 
     .heatmap-legend-item {
-      width: 12px;
-      height: 12px;
+      width: 10px;
+      height: 10px;
       border-radius: 2px;
-    }
-
-    /* Languages */
-    .languages-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1rem;
-      margin-top: 1.5rem;
-    }
-
-    .language-item {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-
-    .language-dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-    }
-
-    .language-name {
-      font-size: 0.875rem;
-      color: var(--text-primary);
-      flex: 1;
-    }
-
-    .language-percent {
-      font-size: 0.875rem;
-      color: var(--text-muted);
-      font-family: 'JetBrains Mono', monospace;
     }
 
     /* ============ GitHub Repositories Grid ============ */
@@ -3628,13 +3566,9 @@
       width: 56px;
       height: 56px;
       border-radius: 50%;
-      background: var(--gradient-1);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--bg-base);
+      overflow: hidden;
+      border: 2px solid var(--accent-1);
+      box-shadow: 0 0 20px rgba(34, 211, 238, 0.2);
     }
 
     .intro-title-text h3 {
@@ -4912,38 +4846,32 @@
         min-width: fit-content;
       }
 
-      /* GitHub section */
+      /* GitHub section - compact mobile */
       .github-section {
-        padding: 1.25rem;
-      }
-
-      .github-header {
-        flex-direction: column;
-        gap: 1rem;
-        align-items: flex-start;
-      }
-
-      .github-link {
-        width: 100%;
-        justify-content: center;
-      }
-
-      .heatmap-container {
         padding: 1rem;
       }
 
-      .heatmap-title {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.25rem;
-      }
-
-      .heatmap-total {
-        margin-left: 0;
-      }
-
-      .languages-grid {
+      .github-compact-row {
         grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .github-profile {
+        justify-content: center;
+      }
+
+      .stats-compact {
+        justify-content: space-around;
+        gap: 1rem;
+      }
+
+      .heatmap-mini {
+        align-items: center;
+      }
+
+      .heatmap-mini-grid {
+        overflow-x: auto;
+        max-width: 100%;
       }
 
       /* GitHub repos */
@@ -4981,7 +4909,6 @@
       .intro-avatar {
         width: 44px;
         height: 44px;
-        font-size: 1.2rem;
       }
 
       .intro-title-text h3 {
@@ -5565,10 +5492,10 @@
       <div class="intro-section expanded" id="intro-section">
         <div class="intro-header" onclick="toggleIntro()">
           <div class="intro-title-row">
-            <div class="intro-avatar">AC</div>
+            <div class="intro-avatar"><img src="../assets/portfolio.png" alt="Arun" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%; filter: saturate(0.85) contrast(1.05);"></div>
             <div class="intro-title-text">
-              <h3 id="intro-greeting">Hi, click to read my story</h3>
-              <p id="intro-hint">or collapse to skip ahead</p>
+              <h3 id="intro-greeting">Hey there! Here's my story</h3>
+              <p id="intro-hint">click to collapse</p>
             </div>
           </div>
           <div class="intro-toggle">
@@ -5583,11 +5510,10 @@
             <!-- Typing Animation Summary -->
             <div class="typing-container">
               <p class="typing-text" id="typing-text">
-                <strong>Sr. Solution Architect</strong> with <strong>17+ years</strong> delivering technology-enabled solutions in
+                <strong>Sr. Solution Architect</strong> & <strong>TOGAF Certified Enterprise Architect</strong> with <strong>17+ years</strong> delivering technology-enabled solutions in
                 <strong>core banking, payments, and digital transformation</strong>. I've implemented Finacle core banking
                 across <strong>India, Middle East, Africa, and APAC</strong> for Tier-1 banks including
-                <strong>Bank of America, Emirates NBD, and Standard Bank</strong>. Currently driving NFR and RTP
-                implementations for global commercial banking at BoA Singapore.<span class="typing-cursor"></span>
+                <strong>Bank of America, Emirates NBD, and Standard Bank</strong>. Currently a key contributor to Application Platform Engineering, delivering RTP solutions and support for global commercial banking in Singapore. Also pursuing structured, <strong>AI-assisted learning</strong> through personal projects in full-stack development.<span class="typing-cursor"></span>
               </p>
             </div>
 
@@ -5624,7 +5550,7 @@
                 </div>
                 <div class="strength-text">
                   <h4>Demonstrated Leadership</h4>
-                  <p>Mentored teams of up to 18 for Tier-1 clients with 15000+ man-days of deliverables</p>
+                  <p>Mentored and driven teams for Tier-1 clients with 15000+ man-days of deliverables</p>
                 </div>
               </div>
               <div class="strength-card">
@@ -5900,8 +5826,9 @@
                   <div class="timeline-employer">Infosys Ltd.</div>
                   <div class="timeline-summary">Driving RTP implementations and NFR delivery for APAC. 5x volumes-ready, 60% job time reduction.</div>
                   <div class="timeline-gallery">
-                    <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=120&h=120&fit=crop" alt="Jakarta office" class="timeline-gallery-img">
-                    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=120&h=120&fit=crop" alt="Team collaboration" class="timeline-gallery-img">
+                    <img src="../assets/Bank of america/20190816_222217.jpg" alt="Bank of America Team" class="timeline-gallery-img">
+                    <img src="../assets/Bank of america/20230519_203004.jpg" alt="Singapore Office" class="timeline-gallery-img">
+                    <img src="../assets/Bank of america/20230910_165709.jpg" alt="Team Event" class="timeline-gallery-img">
                   </div>
                 </div>
               </div>
@@ -5914,9 +5841,17 @@
                   </div>
                   <div class="life-event-title">AI-Assisted Learning Journey</div>
                   <div class="life-event-summary">New co-pilot unlocked. Building apps with Claude, learning at 10x speed.</div>
+                  <div style="display: flex; gap: 0.75rem; margin-top: 0.5rem; font-size: 0.75rem;">
+                    <a href="../" style="color: var(--accent-1); text-decoration: none; display: flex; align-items: center; gap: 0.25rem;">
+                      <span>→</span> Portfolio
+                    </a>
+                    <a href="#section-build" style="color: var(--accent-1); text-decoration: none; display: flex; align-items: center; gap: 0.25rem;">
+                      <span>→</span> Build Journey
+                    </a>
+                  </div>
                   <div class="life-event-gallery">
-                    <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=100&h=100&fit=crop" alt="AI" class="life-event-gallery-img">
-                    <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=100&h=100&fit=crop" alt="Tech" class="life-event-gallery-img">
+                    <img src="../assets/projects/cinder.png" alt="Cinder App" class="life-event-gallery-img">
+                    <img src="../assets/projects/calci.png" alt="Calci App" class="life-event-gallery-img">
                   </div>
                 </div>
                 <div class="life-event">
@@ -5927,8 +5862,8 @@
                   <div class="life-event-title">Professional Fitness Journey</div>
                   <div class="life-event-summary">From sedentary to shredded. Now coaching others to escape the dad-bod zone.</div>
                   <div class="life-event-gallery">
-                    <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=100&h=100&fit=crop" alt="Strength training" class="life-event-gallery-img">
-                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=100&h=100&fit=crop" alt="Fitness" class="life-event-gallery-img">
+                    <img src="../assets/Fitness journey/portfolio.png" alt="Fitness Journey" class="life-event-gallery-img">
+                    <img src="../assets/Fitness journey/me 2.png" alt="Fitness Progress" class="life-event-gallery-img">
                   </div>
                 </div>
                 <div class="life-event">
@@ -5939,8 +5874,8 @@
                   <div class="life-event-title">Princess Thiya Arrived</div>
                   <div class="life-event-summary">New project manager arrived - zero experience, maximum authority.</div>
                   <div class="life-event-gallery">
-                    <img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?w=100&h=100&fit=crop" alt="Family" class="life-event-gallery-img">
-                    <img src="https://images.unsplash.com/photo-1476703993599-0035a21b17a9?w=100&h=100&fit=crop" alt="Baby" class="life-event-gallery-img">
+                    <img src="../assets/princess thiya 1.jpg" alt="Princess Thiya" class="life-event-gallery-img">
+                    <img src="../assets/princess thiya 2.jpg" alt="Princess Thiya" class="life-event-gallery-img">
                   </div>
                 </div>
               </div>
@@ -5959,8 +5894,8 @@
                   <div class="timeline-employer">Latitude Fintech</div>
                   <div class="timeline-summary">All-India LOS go-live. Two-thirds reduction in client onboarding time.</div>
                   <div class="timeline-gallery">
-                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=120&h=120&fit=crop" alt="Team meeting" class="timeline-gallery-img">
-                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=120&h=120&fit=crop" alt="Office work" class="timeline-gallery-img">
+                    <img src="../assets/cholmandalam Finance/20191208_154505.jpg" alt="Cholamandalam Team" class="timeline-gallery-img">
+                    <img src="../assets/cholmandalam Finance/IMG_20210725_131057.jpg" alt="Cholamandalam Office" class="timeline-gallery-img">
                   </div>
                 </div>
               </div>
@@ -5973,6 +5908,64 @@
                   </div>
                   <div class="life-event-title">Transition Period</div>
                   <div class="life-event-summary">Career focus during brief consulting stint.</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Timeline Row: 2016-2019 Sabbatical -->
+            <div class="timeline-row">
+              <!-- Career Track (Left) -->
+              <div class="career-track">
+                <div class="timeline-item" style="border-left-color: var(--accent-2);">
+                  <div class="timeline-date-role">
+                    <span class="timeline-date">2016 - 2019</span>
+                    <span class="timeline-role">Entrepreneurial Sabbatical</span>
+                  </div>
+                  <div class="timeline-company">Creative & Business Ventures</div>
+                  <div class="timeline-employer">Independent</div>
+                  <div class="timeline-summary">1st Place at South Indian Film Festival. Wedding photography. Business explorations.</div>
+                  <div class="timeline-gallery">
+                    <img src="../assets/Creative & Business Ventures/10320586_755273381237390_1209375142514353034_n.jpg" alt="Filmmaking" class="timeline-gallery-img">
+                    <img src="../assets/Creative & Business Ventures/12657431_10208622544270357_1467322089424340240_o.jpg" alt="Photography" class="timeline-gallery-img">
+                    <img src="../assets/Creative & Business Ventures/886230_10208606074578625_723712456619134183_o.jpg" alt="Creative Work" class="timeline-gallery-img">
+                  </div>
+                </div>
+              </div>
+              <!-- Personal Track (Right) -->
+              <div class="personal-track">
+                <div class="life-event">
+                  <div class="life-event-header">
+                    <span class="life-event-year">2016-19</span>
+                    <span class="life-event-badge">Creative</span>
+                  </div>
+                  <div class="life-event-title">Exploring Passions</div>
+                  <div class="life-event-summary">Took a leap to pursue filmmaking, photography, and entrepreneurial ventures.</div>
+                  <div class="life-event-gallery">
+                    <img src="../assets/Creative & Business Ventures/10320586_755273381237390_1209375142514353034_n.jpg" alt="Filmmaking" class="life-event-gallery-img">
+                    <img src="../assets/Creative & Business Ventures/12657431_10208622544270357_1467322089424340240_o.jpg" alt="Photography" class="life-event-gallery-img">
+                    <img src="../assets/Creative & Business Ventures/886230_10208606074578625_723712456619134183_o.jpg" alt="Creative Work" class="life-event-gallery-img">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Timeline Row: 2016 - Best Short Film Award -->
+            <div class="timeline-row">
+              <!-- Career Track (Left) - Empty for this period -->
+              <div class="career-track"></div>
+              <!-- Personal Track (Right) -->
+              <div class="personal-track">
+                <div class="life-event">
+                  <div class="life-event-header">
+                    <span class="life-event-year">2016</span>
+                    <span class="life-event-badge">Achievement</span>
+                  </div>
+                  <div class="life-event-title">Best Short Film Award</div>
+                  <div class="life-event-summary">Traded code for cameras. Script to screen - Winner of South India Film fest, against 20+ shortlisted teams.</div>
+                  <div class="life-event-gallery">
+                    <img src="../assets/Short film award/10320586_755273381237390_1209375142514353034_n.jpg" alt="Short Film Award" class="life-event-gallery-img">
+                    <img src="../assets/Short film award/11146267_755284554569606_5446543567028146643_n.jpg" alt="Film Production" class="life-event-gallery-img">
+                  </div>
                 </div>
               </div>
             </div>
@@ -5990,8 +5983,8 @@
                   <div class="timeline-employer">EdgeVerve Systems</div>
                   <div class="timeline-summary">3000+ man-days, 100% on-time. CMMI Level 4. Client's most preferred PM.</div>
                   <div class="timeline-gallery">
-                    <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=120&h=120&fit=crop" alt="Africa project" class="timeline-gallery-img">
-                    <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=120&h=120&fit=crop" alt="Team leadership" class="timeline-gallery-img">
+                    <img src="../assets/Standard bank/20200207_081115.jpg" alt="Standard Bank Project" class="timeline-gallery-img">
+                    <img src="../assets/Standard bank/20200303_082913.jpg" alt="Africa Team" class="timeline-gallery-img">
                   </div>
                 </div>
               </div>
@@ -5999,38 +5992,15 @@
               <div class="personal-track">
                 <div class="life-event">
                   <div class="life-event-header">
-                    <span class="life-event-year">2015</span>
-                    <span class="life-event-badge">Personal</span>
-                  </div>
-                  <div class="life-event-title">Best Short Film Award</div>
-                  <div class="life-event-summary">Creative DNA confirmed. Script to screen - won against 20+ shortlisted teams.</div>
-                  <div class="life-event-gallery">
-                    <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?w=100&h=100&fit=crop" alt="Film" class="life-event-gallery-img">
-                    <img src="https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=100&h=100&fit=crop" alt="Cinema" class="life-event-gallery-img">
-                  </div>
-                </div>
-                <div class="life-event">
-                  <div class="life-event-header">
                     <span class="life-event-year">2014</span>
                     <span class="life-event-badge">Personal</span>
                   </div>
-                  <div class="life-event-title">Marriage</div>
+                  <div class="life-event-title">Tied the Knot</div>
                   <div class="life-event-summary">Plot twist: Found the co-star of my life story. The sequel's been amazing.</div>
                   <div class="life-event-gallery">
-                    <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=100&h=100&fit=crop" alt="Wedding" class="life-event-gallery-img">
-                    <img src="https://images.unsplash.com/photo-1529634806980-85c3dd6d34ac?w=100&h=100&fit=crop" alt="Couple" class="life-event-gallery-img">
-                  </div>
-                </div>
-                <div class="life-event">
-                  <div class="life-event-header">
-                    <span class="life-event-year">2012</span>
-                    <span class="life-event-badge">Personal</span>
-                  </div>
-                  <div class="life-event-title">Creative Arts Focus</div>
-                  <div class="life-event-summary">Traded code for cameras. Capturing 'I dos' between deployments.</div>
-                  <div class="life-event-gallery">
-                    <img src="https://images.unsplash.com/photo-1502982720700-bfff97f2ecac?w=100&h=100&fit=crop" alt="Photography" class="life-event-gallery-img">
-                    <img src="https://images.unsplash.com/photo-1452802447250-470a88ac82bc?w=100&h=100&fit=crop" alt="Camera" class="life-event-gallery-img">
+                    <img src="../assets/Marriage/HT8A9003_C.jpg" alt="Wedding" class="life-event-gallery-img">
+                    <img src="../assets/Marriage/IMG_5263.JPG" alt="Wedding Ceremony" class="life-event-gallery-img">
+                    <img src="../assets/Marriage/IMG_5466.JPG" alt="Wedding Celebration" class="life-event-gallery-img">
                   </div>
                 </div>
               </div>
@@ -6049,8 +6019,9 @@
                   <div class="timeline-employer">Infosys Ltd.</div>
                   <div class="timeline-summary">6000+ man-days, 100% on-time. Award-winning modules. Release automation.</div>
                   <div class="timeline-gallery">
-                    <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=120&h=120&fit=crop" alt="Dubai skyline" class="timeline-gallery-img">
-                    <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=120&h=120&fit=crop" alt="Tech work" class="timeline-gallery-img">
+                    <img src="../assets/Emirates NBD/DSC_0013.JPG" alt="Emirates NBD Dubai" class="timeline-gallery-img">
+                    <img src="../assets/Emirates NBD/DSC_0018.JPG" alt="Dubai Team" class="timeline-gallery-img">
+                    <img src="../assets/Emirates NBD/DSC01034.JPG" alt="Emirates NBD Project" class="timeline-gallery-img">
                   </div>
                 </div>
               </div>
@@ -6080,8 +6051,8 @@
                   <div class="timeline-employer">Infosys Ltd.</div>
                   <div class="timeline-summary">Bank Sohar, SBI Overseas, Bank of Alexandria, Bank of India - Core banking.</div>
                   <div class="timeline-gallery">
-                    <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=120&h=120&fit=crop" alt="Coding" class="timeline-gallery-img">
-                    <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=120&h=120&fit=crop" alt="Early career" class="timeline-gallery-img">
+                    <img src="../assets/multiple banks/DSC00814.JPG" alt="Early Career" class="timeline-gallery-img">
+                    <img src="../assets/multiple banks/DSC07687.JPG" alt="Bank Projects" class="timeline-gallery-img">
                   </div>
                 </div>
               </div>
@@ -6226,7 +6197,9 @@
       </div>
 
       <div class="github-section">
-        <div class="github-header">
+        <!-- Compact Single Row: Profile + Stats + Mini Heatmap -->
+        <div class="github-compact-row">
+          <!-- Profile -->
           <div class="github-profile">
             <div class="github-avatar">
               <svg viewBox="0 0 24 24" fill="currentColor">
@@ -6236,85 +6209,46 @@
             <div>
               <div class="github-username">castroarun</div>
               <div class="github-handle">@castroarun</div>
+              <a href="https://github.com/castroarun" class="github-link-small" target="_blank">
+                View Profile →
+              </a>
             </div>
           </div>
-          <a href="https://github.com/castroarun" class="github-link" target="_blank">
-            View Profile
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
-              <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
-              <polyline points="15 3 21 3 21 9"/>
-              <line x1="10" y1="14" x2="21" y2="3"/>
-            </svg>
-          </a>
-        </div>
 
-        <!-- Stats Cards -->
-        <div class="stats-grid">
-          <div class="stat-card">
-            <div class="stat-value" id="commits-count" data-target="0">0</div>
-            <div class="stat-label">Contributions (2025-26)</div>
+          <!-- Compact Stats -->
+          <div class="stats-compact">
+            <div class="stat-mini">
+              <div class="stat-mini-value" id="commits-count" data-target="0">0</div>
+              <div class="stat-mini-label">Commits</div>
+            </div>
+            <div class="stat-mini">
+              <div class="stat-mini-value" id="repos-count" data-target="0">0</div>
+              <div class="stat-mini-label">Repos</div>
+            </div>
+            <div class="stat-mini">
+              <div class="stat-mini-value" id="prs-count" data-target="0">0</div>
+              <div class="stat-mini-label">PRs</div>
+            </div>
+            <div class="stat-mini">
+              <div class="stat-mini-value" id="stars-count" data-target="0">0</div>
+              <div class="stat-mini-label">Stars</div>
+            </div>
           </div>
-          <div class="stat-card">
-            <div class="stat-value" id="repos-count" data-target="0">0</div>
-            <div class="stat-label">Repositories</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-value" id="prs-count" data-target="0">0</div>
-            <div class="stat-label">Pull Requests</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-value" id="stars-count" data-target="0">0</div>
-            <div class="stat-label">Stars Earned</div>
-          </div>
-        </div>
 
-        <!-- Contribution Heatmap -->
-        <div class="heatmap-container">
-          <div class="heatmap-title">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
-              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-              <line x1="16" y1="2" x2="16" y2="6"/>
-              <line x1="8" y1="2" x2="8" y2="6"/>
-              <line x1="3" y1="10" x2="21" y2="10"/>
-            </svg>
-            <span>Contribution Activity (Last 52 weeks)</span>
-            <span class="heatmap-total" id="heatmap-total"></span>
-          </div>
-          <div class="heatmap" id="contribution-heatmap">
-            <!-- Generated by JavaScript with live GitHub data -->
-          </div>
-          <div class="heatmap-legend">
-            Less
-            <div class="heatmap-legend-item" style="background: var(--bg-hover)"></div>
-            <div class="heatmap-legend-item level-1" style="background: rgba(34, 211, 238, 0.2)"></div>
-            <div class="heatmap-legend-item level-2" style="background: rgba(34, 211, 238, 0.4)"></div>
-            <div class="heatmap-legend-item level-3" style="background: rgba(34, 211, 238, 0.6)"></div>
-            <div class="heatmap-legend-item level-4" style="background: var(--accent)"></div>
-            More
-          </div>
-        </div>
-
-        <!-- Languages -->
-        <div class="languages-grid">
-          <div class="language-item">
-            <div class="language-dot" style="background: #3178C6"></div>
-            <span class="language-name">TypeScript</span>
-            <span class="language-percent">42%</span>
-          </div>
-          <div class="language-item">
-            <div class="language-dot" style="background: #F7DF1E"></div>
-            <span class="language-name">JavaScript</span>
-            <span class="language-percent">28%</span>
-          </div>
-          <div class="language-item">
-            <div class="language-dot" style="background: #3776AB"></div>
-            <span class="language-name">Python</span>
-            <span class="language-percent">18%</span>
-          </div>
-          <div class="language-item">
-            <div class="language-dot" style="background: #E34F26"></div>
-            <span class="language-name">HTML/CSS</span>
-            <span class="language-percent">12%</span>
+          <!-- Mini Heatmap -->
+          <div class="heatmap-mini">
+            <div class="heatmap-mini-title">Last 16 weeks <span id="heatmap-total"></span></div>
+            <div class="heatmap-mini-grid" id="contribution-heatmap">
+              <!-- Generated by JavaScript - limited to 16 weeks -->
+            </div>
+            <div class="heatmap-mini-legend">
+              Less
+              <div class="heatmap-legend-item" style="background: var(--bg-hover)"></div>
+              <div class="heatmap-legend-item" style="background: rgba(34, 211, 238, 0.3)"></div>
+              <div class="heatmap-legend-item" style="background: rgba(34, 211, 238, 0.6)"></div>
+              <div class="heatmap-legend-item" style="background: var(--accent)"></div>
+              More
+            </div>
           </div>
         </div>
 
@@ -6342,7 +6276,7 @@
     </section>
 
     <!-- ============ SECTION 5: Projects Showcase ============ -->
-    <section class="section animate-fade-up delay-5">
+    <section class="section animate-fade-up delay-5" id="section-build">
       <div class="section-header">
         <span class="section-number">05.</span>
         <h2 class="section-title">The Build Journey</h2>
@@ -8021,11 +7955,14 @@
     function toggleIntro() {
       const section = document.getElementById('intro-section');
       section.classList.toggle('expanded');
-      const titleText = section.querySelector('.intro-title-text p');
+      const greeting = document.getElementById('intro-greeting');
+      const hint = document.getElementById('intro-hint');
       if (section.classList.contains('expanded')) {
-        titleText.textContent = 'Click to collapse';
+        greeting.textContent = "Hey there! Here's my story";
+        hint.textContent = 'click to collapse';
       } else {
-        titleText.textContent = 'Click to expand my story';
+        greeting.textContent = 'Click to read my story';
+        hint.textContent = 'click to expand';
       }
     }
 
@@ -8314,10 +8251,11 @@
 
       container.innerHTML = ''; // Clear loading
 
-      const weeks = 52;
+      const weeks = 16; // Compact view: 16 weeks instead of 52
       const daysPerWeek = 7;
       const today = new Date();
       let totalContributions = 0;
+      let recentContributions = 0;
 
       // Create contribution map from API data
       const contributionMap = {};
@@ -8330,10 +8268,18 @@
         });
       }
 
-      // Update total display
+      // Calculate recent contributions (last 16 weeks)
+      for (let i = 0; i < weeks * 7; i++) {
+        const d = new Date(today);
+        d.setDate(today.getDate() - i);
+        const dateKey = d.toISOString().split('T')[0];
+        recentContributions += contributionMap[dateKey] || 0;
+      }
+
+      // Update total display (show recent count)
       const totalEl = document.getElementById('heatmap-total');
       if (totalEl) {
-        totalEl.textContent = totalContributions > 0 ? `${totalContributions} contributions in the last year` : '';
+        totalEl.textContent = recentContributions > 0 ? `(${recentContributions})` : '';
       }
 
       // Update commits count with actual data
@@ -8481,10 +8427,27 @@
       const container = document.getElementById('github-repos-grid');
       if (!container || !repos) return;
 
-      // Filter and sort repos (exclude forks, sort by stars then recent)
+      // Filter and sort repos (exclude forks and specific repos, prioritize pinned)
+      const excludedRepos = ['any_calculator', 'buildfolio']; // Repos to hide
+      const pinnedRepos = ['PRIMMO', 'covered_calls', 'caclulate_anything']; // Repos to show first
+
+      // Custom descriptions (override API descriptions)
+      const customDescriptions = {
+        'covered_calls': 'Portfolio Optimizer - Options trading dashboard'
+      };
+
       const filteredRepos = repos
-        .filter(repo => !repo.fork && repo.name !== GITHUB_USERNAME)
-        .sort((a, b) => b.stargazers_count - a.stargazers_count || new Date(b.pushed_at) - new Date(a.pushed_at))
+        .filter(repo => !repo.fork && repo.name !== GITHUB_USERNAME && !excludedRepos.includes(repo.name))
+        .sort((a, b) => {
+          // Pinned repos come first
+          const aPin = pinnedRepos.indexOf(a.name);
+          const bPin = pinnedRepos.indexOf(b.name);
+          if (aPin !== -1 && bPin === -1) return -1;
+          if (bPin !== -1 && aPin === -1) return 1;
+          if (aPin !== -1 && bPin !== -1) return aPin - bPin;
+          // Then sort by stars, then recent activity
+          return b.stargazers_count - a.stargazers_count || new Date(b.pushed_at) - new Date(a.pushed_at);
+        })
         .slice(0, 6);
 
       container.innerHTML = filteredRepos.map(repo => `
@@ -8495,7 +8458,7 @@
             </svg>
             <span class="repo-name">${repo.name}</span>
           </div>
-          <p class="repo-description">${repo.description || 'No description'}</p>
+          <p class="repo-description">${customDescriptions[repo.name] || repo.description || 'No description'}</p>
           <div class="repo-meta">
             ${repo.language ? `<span class="repo-language"><span class="language-dot" style="background: ${getLanguageColor(repo.language)}"></span>${repo.language}</span>` : ''}
             ${repo.stargazers_count > 0 ? `<span class="repo-stars"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>${repo.stargazers_count}</span>` : ''}
@@ -8967,10 +8930,406 @@ This creativity informs his approach to problem-solving - thinking outside the b
 
 <strong>Result:</strong> Transformed mundane operations into automated, reliable process - freeing team to focus on higher-value work.`,
 
+      // ===== ABOUT / INTRO =====
+      'about': `<strong>About Arun</strong>
+
+I'm an <strong>Enterprise & Solutions Architect</strong> with an intense passion for coding. I believe being "coder-first" makes a better architect - nothing beats the clarity that comes from actually building what you design.
+
+<strong>17+ years</strong> delivering core banking, payments, and digital transformation solutions across <strong>India, Middle East, Africa, and APAC</strong> for Tier-1 banks.
+
+Currently a key contributor to Application Platform Engineering at Bank of America Singapore, delivering RTP solutions. Also pursuing structured, <strong>AI-assisted learning</strong> through personal projects in full-stack development.
+
+<em>"Architecture without hands-on coding is like designing a car you've never driven."</em>`,
+
+      // ===== VISA & RELOCATION =====
+      'visa': `<strong>Visa & Work Authorization:</strong>
+
+Arun is currently based in <strong>Singapore</strong> on a valid work visa.
+
+<strong>Relocation:</strong> Open to discussing opportunities in other locations, depending on the role and circumstances.
+
+For specific visa or sponsorship questions, please reach out directly:
+<strong>Email:</strong> arun.castromin@gmail.com`,
+
+      // ===== WORK STYLE & APPROACH =====
+      'workflow': `<strong>9-Step Development Workflow:</strong>
+
+Arun follows a structured approach to building software:
+
+1. <strong>Define</strong> - Clear problem statement
+2. <strong>Research</strong> - Understand domain & constraints
+3. <strong>Design</strong> - Architecture & data models
+4. <strong>Plan</strong> - Break into tasks & milestones
+5. <strong>Build</strong> - Code with type safety (no <code>any</code> types!)
+6. <strong>Test</strong> - Unit, integration, E2E
+7. <strong>Review</strong> - Code quality & peer review
+8. <strong>Deploy</strong> - CI/CD to production
+9. <strong>Iterate</strong> - Feedback & improvement
+
+<em>"Process isn't bureaucracy - it's how you ship quality consistently."</em>`,
+
+      'testing': `<strong>Testing Philosophy:</strong>
+
+Arun believes in comprehensive testing:
+
+• <strong>Unit Tests:</strong> Core logic coverage
+• <strong>Integration Tests:</strong> API & database interactions
+• <strong>E2E Tests:</strong> Critical user flows
+• <strong>NoteApp:</strong> 200+ automated test cases
+
+<em>"Tests are documentation that runs. They tell you what the code should do."</em>
+
+Approach: Test what matters, not everything. Focus on business logic and edge cases.`,
+
+      'code quality': `<strong>Code Quality Philosophy:</strong>
+
+• <strong>No <code>any</code> types</strong> - Full TypeScript coverage
+• <strong>Meaningful names</strong> - Code should read like prose
+• <strong>Small functions</strong> - Single responsibility
+• <strong>Early returns</strong> - Reduce nesting
+• <strong>Documentation</strong> - Only when logic isn't self-evident
+
+<em>"Clean code is not an expense - it's an investment that pays dividends on every future change."</em>`,
+
+      // ===== CAREER GOALS =====
+      'goals': `<strong>Career Direction:</strong>
+
+Arun is focused on roles that combine:
+
+• <strong>Architecture</strong> - Designing scalable, maintainable systems
+• <strong>Hands-on coding</strong> - Staying close to implementation
+• <strong>Leadership</strong> - Mentoring teams and driving technical excellence
+
+<strong>Interest areas:</strong> FinTech, Payments, AI/ML integration, Enterprise Architecture
+
+<em>"The best architects are those who still write code - they understand the real challenges."</em>`,
+
+      // ===== AI & LEARNING =====
+      'ai learning': `<strong>AI-Assisted Learning Journey:</strong>
+
+Arun is pursuing structured, AI-assisted learning through personal projects:
+
+• Building full-stack applications with <strong>Claude</strong> as a coding partner
+• Learning at <strong>10x speed</strong> through interactive pair programming
+• Projects: <strong>REPPIT</strong> (fitness), <strong>NoteApp</strong> (productivity), <strong>PRIMMO</strong> (AI coach)
+
+<em>"AI doesn't replace learning - it accelerates it. You still need to understand what you're building."</em>
+
+This modern approach combines 17+ years of architecture experience with cutting-edge AI tools.`,
+
+      // ===== CLOUD & DEVOPS =====
+      'cloud': `<strong>Cloud & DevOps Experience:</strong>
+
+• <strong>Platforms:</strong> Experience with enterprise cloud deployments
+• <strong>CI/CD:</strong> Jenkins, automated deployment pipelines
+• <strong>Infrastructure:</strong> Container orchestration, microservices
+• <strong>Monitoring:</strong> Splunk dashboards for system monitoring
+
+Currently working with enterprise-grade infrastructure at Bank of America for real-time payment systems.`,
+
+      // ===== SABBATICAL & CREATIVE =====
+      'sabbatical': `<strong>Entrepreneurial Sabbatical (2016-2019):</strong>
+
+Arun took a creative break to explore passions beyond technology:
+
+• <strong>🏆 Best Short Film Award</strong> - Winner at South India Film Festival
+• <strong>Wedding Photography</strong> - Capturing special moments
+• <strong>Business Ventures</strong> - Entrepreneurial explorations
+
+<em>"Sometimes you need to step away to gain perspective. The creative detour enriched how I approach problems today."</em>
+
+This period demonstrates versatility and the courage to pursue diverse interests.`,
+
+      // ===== TECH STACK & LANGUAGES =====
+      'tech stack': `<strong>Primary Tech Stack:</strong>
+
+<strong>Languages:</strong> TypeScript, JavaScript, Python, Java, PL/SQL
+<strong>Frontend:</strong> React, Next.js 14+ (App Router), Tailwind CSS
+<strong>Mobile:</strong> Flutter (cross-platform iOS/Android)
+<strong>Backend:</strong> Node.js, FastAPI, Spring Boot
+<strong>Database:</strong> PostgreSQL (Supabase), Oracle, SQL Server
+<strong>Tools:</strong> Git, VS Code, Claude Code, Docker
+
+I follow a "TypeScript-first" approach with strict type safety - no <code>any</code> types allowed.`,
+
+      // ===== AGILE & SCRUM =====
+      'agile': `<strong>Agile/Scrum Experience:</strong>
+
+• <strong>15+ years</strong> working in Agile environments
+• CSPO (Certified Scrum Product Owner) certified
+• Experience as both team member and product owner
+• Daily standups, sprint planning, retrospectives
+• Jira for project tracking and sprint management
+
+I integrate my personal 9-step workflow within Agile sprints for structured delivery.`,
+
+      // ===== DATABASES =====
+      'database': `<strong>Database Experience:</strong>
+
+<strong>Relational:</strong>
+• Oracle Database - 15+ years (PL/SQL, optimization, complex queries)
+• PostgreSQL - Current preference via Supabase
+• SQL Server - Enterprise deployments
+
+<strong>Skills:</strong> Query optimization, stored procedures, data modeling, migration scripts, performance tuning
+
+I've worked extensively with CASA, payments, and core banking data models.`,
+
+      // ===== MOBILE DEVELOPMENT =====
+      'mobile': `<strong>Mobile Development:</strong>
+
+<strong>Framework:</strong> Flutter (Dart) for cross-platform development
+<strong>Target:</strong> iOS and Android from single codebase
+
+<strong>Projects:</strong>
+• <strong>REPPIT</strong> - Fitness tracker app (live on app stores)
+• <strong>PRIMMO</strong> - AI strength coach (in development)
+
+I chose Flutter for rapid development and native performance across platforms.`,
+
+      // ===== AI/ML EXPERIENCE =====
+      'ai ml': `<strong>AI/ML Experience:</strong>
+
+<strong>Current Focus:</strong>
+• AI-assisted development using Claude, GitHub Copilot
+• Building AI-powered applications (PRIMMO fitness coach)
+• Prompt engineering for development workflows
+
+<strong>Learning:</strong>
+• Exploring LLM integration patterns
+• RAG (Retrieval Augmented Generation) concepts
+• AI agent development
+
+I'm particularly interested in practical AI applications that solve real problems.`,
+
+      // ===== PRODUCTION APPS =====
+      'production': `<strong>Live/Production Applications:</strong>
+
+<strong>Personal Projects:</strong>
+• <strong>REPPIT</strong> - Fitness tracking app (App Store & Play Store)
+• <strong>NoteApp</strong> - Note-taking application with real users
+• This portfolio site - serving recruiters like you!
+
+<strong>Enterprise:</strong>
+• Core banking implementations at 4+ banks
+• RTP (Real-Time Payments) platform at Bank of America
+• CASA transformation at Emirates NBD
+
+I've shipped code that serves thousands of users daily.`,
+
+      // ===== TECHNICAL CHALLENGES =====
+      'challenge': `<strong>Most Complex Technical Challenge:</strong>
+
+<strong>Automated Test Case Generation (EdgeVerve)</strong>
+
+• Built IPDL (Infosys Process Description Language) parser
+• Auto-generated 100,000+ test scenarios from process definitions
+• Reduced testing effort by 70%
+• Directly contributed to CMMI Level 5 achievement
+
+<em>This required deep understanding of banking processes, language parsing, and test automation frameworks.</em>`,
+
+      // ===== OPEN SOURCE =====
+      'open source': `<strong>Open Source Contributions:</strong>
+
+My GitHub (<strong>github.com/ArunCastro</strong>) showcases:
+• Personal projects (PRIMMO, REPPIT, NoteApp)
+• Learning experiments and code samples
+• This portfolio's codebase
+
+Currently focused on building production-quality personal projects rather than contributing to external repos. Open to collaborating on interesting projects!`,
+
+      // ===== METRICS & IMPACT =====
+      'metrics': `<strong>Metrics & Impact:</strong>
+
+<strong>Standard Bank (2013-2015):</strong>
+• Zero critical defects across 3 major releases
+• Contributed to CMMI Level 5 certification
+• 100,000+ automated test cases generated
+
+<strong>Current Projects:</strong>
+• REPPIT: Active users on both app stores
+• NoteApp: Maintained for 2+ years
+• Portfolio: You're looking at it!
+
+I believe in measurable outcomes over vanity metrics.`,
+
+      // ===== DEADLINES =====
+      'deadline': `<strong>Handling Tight Deadlines:</strong>
+
+• <strong>Prioritize ruthlessly</strong> - Focus on must-haves, defer nice-to-haves
+• <strong>Break down work</strong> - Small, deliverable chunks
+• <strong>Communicate early</strong> - Flag risks before they become blockers
+• <strong>Automate repetitively</strong> - Scripts for common tasks
+• <strong>Stay calm</strong> - Pressure doesn't improve code quality
+
+Enterprise banking taught me to deliver under strict regulatory timelines.`,
+
+      // ===== WORK ENVIRONMENT =====
+      'environment': `<strong>Ideal Work Environment:</strong>
+
+• <strong>Autonomy</strong> - Trust to make technical decisions
+• <strong>Clear goals</strong> - Well-defined outcomes, flexible approach
+• <strong>Learning culture</strong> - Time to explore new technologies
+• <strong>Quality focus</strong> - Value maintainable code over quick fixes
+• <strong>Collaborative</strong> - Healthy code reviews, knowledge sharing
+
+I thrive in environments that balance structure with creative freedom.`,
+
+      // ===== COLLABORATION =====
+      'collaboration': `<strong>Working Style:</strong>
+
+I'm comfortable <strong>both independently and collaboratively</strong>:
+
+<strong>Independent:</strong> Deep work on complex problems, architecture design, focused coding sessions
+
+<strong>Collaborative:</strong> Code reviews, pair programming, mentoring juniors, architecture discussions
+
+<em>The best work happens when you can switch between modes based on what the task needs.</em>`,
+
+      // ===== DISAGREEMENTS =====
+      'disagreement': `<strong>Handling Disagreements:</strong>
+
+• <strong>Listen first</strong> - Understand the other perspective fully
+• <strong>Focus on outcomes</strong> - What's best for the project?
+• <strong>Use data</strong> - Let evidence guide decisions
+• <strong>Prototype if needed</strong> - Sometimes code speaks louder than words
+• <strong>Disagree and commit</strong> - Once decided, support the team direction
+
+I believe healthy debate improves solutions. Ego has no place in good engineering.`,
+
+      // ===== MOTIVATION =====
+      'motivation': `<strong>What Motivates Me:</strong>
+
+• <strong>Building things</strong> - The joy of creating something useful
+• <strong>Solving puzzles</strong> - Complex technical challenges
+• <strong>Learning</strong> - New technologies, patterns, approaches
+• <strong>Impact</strong> - Seeing my code help real users
+• <strong>Craftsmanship</strong> - Writing clean, maintainable code
+
+<em>"I code because I genuinely enjoy it - not just as a job, but as a craft."</em>`,
+
+      // ===== INDUSTRIES =====
+      'industry': `<strong>Industries of Interest:</strong>
+
+<strong>Primary:</strong> FinTech, Banking & Financial Services
+• 17+ years domain expertise
+• Deep understanding of payments, core banking, regulations
+
+<strong>Also Interested In:</strong>
+• Health/Fitness Tech (building PRIMMO)
+• Developer Tools
+• AI/ML Applications
+
+Open to any industry with interesting technical challenges!`,
+
+      // ===== COMPANY SIZE =====
+      'startup': `<strong>Startups vs Established Companies:</strong>
+
+<strong>Open to both!</strong>
+
+<strong>Startups appeal:</strong> Speed, ownership, wearing multiple hats, direct impact
+
+<strong>Enterprise appeal:</strong> Scale, complex systems, mentorship opportunities, stability
+
+Currently at Infosys (enterprise), but building startup-style side projects. I enjoy the best of both worlds.`,
+
+      // ===== CONTRACT WORK =====
+      'contract': `<strong>Contract/Freelance Work:</strong>
+
+• Open to <strong>contract opportunities</strong> for the right projects
+• Interested in <strong>consulting</strong> on core banking implementations
+• Available for <strong>freelance</strong> development work (mobile apps, web apps)
+
+My structured 9-step workflow ensures clear deliverables even in contract arrangements.`,
+
+      // ===== LEADERSHIP =====
+      'leadership': `<strong>Technical Lead Experience:</strong>
+
+• Led teams of <strong>5-8 developers</strong> on core banking projects
+• <strong>Architecture ownership</strong> - Design decisions and technical direction
+• <strong>Mentoring</strong> - Helping junior developers grow
+• <strong>Code reviews</strong> - Maintaining quality standards
+
+I enjoy the <strong>IC (Individual Contributor) track</strong> with technical leadership - architecting solutions while staying hands-on with code.`,
+
+      // ===== DESIGN PRINCIPLES =====
+      'design principles': `<strong>Design Principles I Follow:</strong>
+
+• <strong>KISS</strong> - Keep It Simple, Stupid
+• <strong>DRY</strong> - Don't Repeat Yourself
+• <strong>SOLID</strong> - Object-oriented design principles
+• <strong>Mobile-First</strong> - Design for smallest screen, scale up
+• <strong>Type Safety</strong> - Catch errors at compile time
+
+I prioritize <strong>readable, maintainable code</strong> over clever solutions.`,
+
+      // ===== TECH STACK CHOICE =====
+      'why tech stack': `<strong>Why This Tech Stack:</strong>
+
+<strong>TypeScript:</strong> Type safety catches bugs early, better IDE support
+<strong>Next.js:</strong> React with SSR, great DX, Vercel deployment
+<strong>Tailwind:</strong> Utility-first CSS, rapid styling, consistent design
+<strong>Flutter:</strong> Single codebase for iOS/Android, native performance
+<strong>Supabase:</strong> PostgreSQL with auth, realtime, and great DX
+
+I chose tools that maximize <strong>productivity</strong> and <strong>code quality</strong>.`,
+
+      // ===== RESUME =====
+      'resume': `<strong>Resume Download:</strong>
+
+You can download Arun's resume directly from this portfolio!
+
+<button onclick="window.open('resume/Arun_Castro_Resume.pdf', '_blank')" style="margin-top: 0.75rem; padding: 0.5rem 1rem; background: var(--accent); color: var(--bg-base); border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 0.85rem;">📄 Download Resume (PDF)</button>
+
+Or view the interactive Digital Resume section above.`,
+
+      // ===== GITHUB =====
+      'github': `<strong>GitHub Profile:</strong>
+
+<strong>Username:</strong> ArunCastro
+<strong>URL:</strong> github.com/ArunCastro
+
+<strong>Featured Repos:</strong>
+• <strong>PRIMMO</strong> - AI fitness coach (in development)
+• <strong>covered_calls</strong> - Options trading dashboard
+• <strong>castronix-portfolio</strong> - This portfolio site
+
+<button onclick="window.open('https://github.com/ArunCastro', '_blank')" style="margin-top: 0.75rem; padding: 0.5rem 1rem; background: var(--accent); color: var(--bg-base); border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 0.85rem;">🐙 View GitHub Profile</button>`,
+
+      // ===== CALL AVAILABILITY =====
+      'call': `<strong>Availability for a Call:</strong>
+
+I'm happy to schedule a conversation!
+
+<strong>Timezone:</strong> Singapore (SGT, UTC+8)
+<strong>Preferred:</strong> Video calls (Zoom/Google Meet)
+<strong>Best times:</strong> Evenings SGT / Mornings US
+
+<button onclick="openContactModal()" style="margin-top: 0.75rem; padding: 0.5rem 1rem; background: var(--accent); color: var(--bg-base); border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 0.85rem;">📅 Request a Call</button>`,
+
+      // ===== TIMEZONE =====
+      'timezone': `<strong>Timezone & Working Hours:</strong>
+
+<strong>Location:</strong> Singapore
+<strong>Timezone:</strong> SGT (UTC+8)
+<strong>Working hours:</strong> Flexible, can accommodate calls with US/EU timezones
+
+I have experience working with globally distributed teams across multiple timezones.`,
+
+      // ===== EMPLOYMENT STATUS =====
+      'employment status': `<strong>Current Employment Status:</strong>
+
+<strong>Status:</strong> Employed full-time
+<strong>Role:</strong> Sr. Technology Architect at Infosys, Singapore
+<strong>Duration:</strong> 2019 - Present
+
+Open to exploring new opportunities that align with my career goals.`,
+
       // ===== UNKNOWN (no match found) =====
       'unknown': `I don't have specific information about that topic in my knowledge base.
 
-<strong>Try asking about:</strong> Core banking, projects (NoteApp, REPPIT, PRIMMO), certifications, or skills.
+<strong>Try asking about:</strong> Core banking, projects (NoteApp, REPPIT, PRIMMO), certifications, skills, 9-step workflow, or career goals.
 
 <strong>Or leave Arun a message directly:</strong>
 <button onclick="openContactModal()" style="margin-top: 0.75rem; padding: 0.5rem 1rem; background: var(--accent); color: var(--bg-base); border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 0.85rem;">💬 Leave a Message</button>`
@@ -9046,6 +9405,142 @@ This creativity informs his approach to problem-solving - thinking outside the b
         return chatResponses['contact'];
       } else if (q.includes('hello') || q.includes('hi') || q.includes('hey') || q.includes('help')) {
         return chatResponses['suggestions'];
+      }
+      // About & Introduction
+      else if (q.includes('about') || q.includes('yourself') || q.includes('who are you') || q.includes('introduce') || q.includes('tell me about')) {
+        return chatResponses['about'];
+      }
+      // Visa & Relocation
+      else if (q.includes('visa') || q.includes('relocation') || q.includes('relocate') || q.includes('sponsor') || q.includes('work permit') || q.includes('authorization') || q.includes('move to')) {
+        return chatResponses['visa'];
+      }
+      // Workflow & Process
+      else if (q.includes('workflow') || q.includes('process') || q.includes('9 step') || q.includes('nine step') || q.includes('approach') || q.includes('methodology') || q.includes('how do you work')) {
+        return chatResponses['workflow'];
+      }
+      // Testing Philosophy
+      else if (q.includes('testing') || q.includes('test') || q.includes('qa') || q.includes('unit test') || q.includes('integration test') || q.includes('tdd')) {
+        return chatResponses['testing'];
+      }
+      // Code Quality
+      else if (q.includes('code quality') || q.includes('clean code') || q.includes('code review') || q.includes('coding standard') || q.includes('best practice') || q.includes('maintainab')) {
+        return chatResponses['code quality'];
+      }
+      // Career Goals
+      else if (q.includes('goal') || q.includes('aspiration') || q.includes('future') || q.includes('direction') || q.includes('5 year') || q.includes('five year') || q.includes('where do you see')) {
+        return chatResponses['goals'];
+      }
+      // AI-Assisted Learning
+      else if (q.includes('ai learning') || q.includes('ai tool') || q.includes('claude') || q.includes('chatgpt') || q.includes('copilot') || q.includes('ai assist') || q.includes('learn with ai')) {
+        return chatResponses['ai learning'];
+      }
+      // Cloud & DevOps
+      else if (q.includes('cloud') || q.includes('devops') || q.includes('aws') || q.includes('azure') || q.includes('docker') || q.includes('kubernetes') || q.includes('ci/cd') || q.includes('jenkins') || q.includes('infrastructure')) {
+        return chatResponses['cloud'];
+      }
+      // Sabbatical & Career Break
+      else if (q.includes('sabbatical') || q.includes('career break') || q.includes('gap') || q.includes('2016') || q.includes('2017') || q.includes('2018') || q.includes('2019') || q.includes('entrepreneur') || q.includes('business venture')) {
+        return chatResponses['sabbatical'];
+      }
+      // Tech Stack & Languages
+      else if (q.includes('tech stack') || q.includes('stack') || q.includes('language') || q.includes('proficient') || q.includes('primary')) {
+        return chatResponses['tech stack'];
+      }
+      // Agile & Scrum
+      else if (q.includes('agile') || q.includes('scrum') || q.includes('sprint') || q.includes('standup')) {
+        return chatResponses['agile'];
+      }
+      // Databases
+      else if (q.includes('database') || q.includes('sql') || q.includes('nosql') || q.includes('oracle') || q.includes('postgres') || q.includes('mysql')) {
+        return chatResponses['database'];
+      }
+      // Mobile Development
+      else if (q.includes('mobile') || q.includes('flutter') || q.includes('ios') || q.includes('android') || q.includes('app store') || q.includes('play store')) {
+        return chatResponses['mobile'];
+      }
+      // AI/ML Experience
+      else if (q.includes('ai/ml') || q.includes('machine learning') || q.includes('ml experience') || q.includes('artificial intelligence')) {
+        return chatResponses['ai ml'];
+      }
+      // Production Apps
+      else if (q.includes('production') || q.includes('live app') || q.includes('shipped') || q.includes('deployed') || q.includes('real user')) {
+        return chatResponses['production'];
+      }
+      // Technical Challenges
+      else if (q.includes('complex') || q.includes('difficult') || q.includes('hardest') || q.includes('biggest challenge') || q.includes('technical challenge')) {
+        return chatResponses['challenge'];
+      }
+      // Open Source
+      else if (q.includes('open source') || q.includes('contribution') || q.includes('oss') || q.includes('open-source')) {
+        return chatResponses['open source'];
+      }
+      // Metrics & Impact
+      else if (q.includes('metric') || q.includes('impact') || q.includes('result') || q.includes('outcome') || q.includes('measure')) {
+        return chatResponses['metrics'];
+      }
+      // Deadlines
+      else if (q.includes('deadline') || q.includes('pressure') || q.includes('tight') || q.includes('urgent') || q.includes('time constraint')) {
+        return chatResponses['deadline'];
+      }
+      // Work Environment
+      else if (q.includes('environment') || q.includes('ideal') || q.includes('culture') || q.includes('work style') || q.includes('prefer')) {
+        return chatResponses['environment'];
+      }
+      // Collaboration
+      else if (q.includes('collaborat') || q.includes('independent') || q.includes('alone') || q.includes('pair') || q.includes('work with')) {
+        return chatResponses['collaboration'];
+      }
+      // Disagreements
+      else if (q.includes('disagree') || q.includes('conflict') || q.includes('argument') || q.includes('debate') || q.includes('difference of opinion')) {
+        return chatResponses['disagreement'];
+      }
+      // Motivation
+      else if (q.includes('motivat') || q.includes('drive') || q.includes('passion') || q.includes('why do you') || q.includes('what makes you')) {
+        return chatResponses['motivation'];
+      }
+      // Industries
+      else if (q.includes('industr') || q.includes('sector') || q.includes('domain') || q.includes('fintech') || q.includes('banking')) {
+        return chatResponses['industry'];
+      }
+      // Startup vs Enterprise
+      else if (q.includes('startup') || q.includes('established') || q.includes('company size') || q.includes('big company') || q.includes('small company')) {
+        return chatResponses['startup'];
+      }
+      // Contract Work
+      else if (q.includes('contract') || q.includes('freelance') || q.includes('consulting') || q.includes('permanent') || q.includes('full-time vs')) {
+        return chatResponses['contract'];
+      }
+      // Leadership
+      else if (q.includes('lead') || q.includes('manage') || q.includes('mentor') || q.includes('ic track') || q.includes('individual contributor') || q.includes('management track')) {
+        return chatResponses['leadership'];
+      }
+      // Design Principles
+      else if (q.includes('design principle') || q.includes('solid') || q.includes('kiss') || q.includes('dry') || q.includes('pattern')) {
+        return chatResponses['design principles'];
+      }
+      // Tech Stack Choice
+      else if (q.includes('why') && (q.includes('tech') || q.includes('typescript') || q.includes('next') || q.includes('flutter') || q.includes('chose'))) {
+        return chatResponses['why tech stack'];
+      }
+      // Resume
+      else if (q.includes('resume') || q.includes('cv') || q.includes('download')) {
+        return chatResponses['resume'];
+      }
+      // GitHub
+      else if (q.includes('github') || q.includes('repo') || q.includes('code') || q.includes('source')) {
+        return chatResponses['github'];
+      }
+      // Call Availability
+      else if (q.includes('call') || q.includes('meet') || q.includes('schedule') || q.includes('chat') || q.includes('discuss') || q.includes('interview')) {
+        return chatResponses['call'];
+      }
+      // Timezone
+      else if (q.includes('timezone') || q.includes('time zone') || q.includes('hours') || q.includes('sgt') || q.includes('utc')) {
+        return chatResponses['timezone'];
+      }
+      // Employment Status
+      else if (q.includes('employment') || q.includes('status') || q.includes('currently working') || q.includes('employed') || q.includes('job status')) {
+        return chatResponses['employment status'];
       }
       // Unknown - no match found
       else {
