@@ -221,8 +221,10 @@ The portfolio now uses a shared JSON data source for project information:
 - [x] Resume Content Automation System with local AI agent (Completed 2026-01-06)
 - [x] Train AI Chat Assistant with Recruiter Question Bank (Added 2026-01-11 - needs review)
 - [x] **Implement Shared Projects Data** - Created `data/projects.json` for CV sync (2026-01-11)
-- [ ] **Review & Correct AI Assistant Responses** - Go through each of the 33 new responses and verify/correct with actual answers (Personal preferences, motivations, work style, etc.)
+- [x] **Review & Correct AI Assistant Responses** - Reviewed all 34 responses with user corrections (2026-01-12)
 - [ ] Add screenshots for remaining projects (Spotify Songs, Space Race ML, Backtest Pro)
+- [ ] **Under conception projects** - Add images or one-liner mottos explaining what each aims to achieve/solve
+- [ ] **PRIMMO architecture** - Convert to dark theme for portfolio consistency
 - [ ] Finalize resume/index.html as production version
 - [ ] Set up custom domain (castronix.dev) on GitHub Pages
 - [ ] Add favicon and meta tags for SEO/social sharing
