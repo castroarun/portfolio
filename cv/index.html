@@ -493,6 +493,49 @@
       vertical-align: middle;
     }
 
+    /* ============ Responsive ============ */
+    @media (max-width: 768px) {
+      .resume {
+        padding: 1.5rem;
+        margin: 1rem;
+      }
+
+      .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.6rem;
+      }
+
+      .project-card {
+        padding: 0.6rem;
+      }
+
+      .project-name {
+        font-size: 0.8rem;
+      }
+
+      .project-tech {
+        font-size: 0.7rem;
+      }
+
+      .project-desc {
+        font-size: 0.7rem;
+        line-height: 1.3;
+      }
+
+      .project-status {
+        font-size: 0.6rem;
+      }
+
+      .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem;
+      }
+
+      .cert-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
     /* ============ Action Buttons ============ */
     .action-buttons {
       position: fixed;
