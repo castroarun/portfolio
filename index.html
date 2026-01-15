@@ -466,6 +466,31 @@
       z-index: -1;
     }
 
+    .about-resume-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: var(--space-6);
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      color: var(--accent);
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .about-resume-link:hover {
+      color: var(--accent-light);
+      text-shadow: 0 0 10px rgba(34, 211, 238, 0.5);
+    }
+
+    .about-resume-link .link-arrow {
+      transition: transform 0.3s ease;
+    }
+
+    .about-resume-link:hover .link-arrow {
+      transform: translateX(5px);
+    }
+
     @media (max-width: 768px) {
       .about-grid {
         display: flex;
@@ -2572,6 +2597,7 @@
               <li>Supabase / PostgreSQL</li>
               <li>Python / AI/ML</li>
             </ul>
+            <a href="resume/" class="about-resume-link">Check out my digital resume <span class="link-arrow">→</span></a>
           </div>
           <div class="about-image">
             <div class="about-image-wrapper">
