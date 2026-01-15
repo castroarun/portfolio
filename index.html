@@ -163,24 +163,35 @@
     /* ============ Skip Link (Accessibility) ============ */
     .skip-link {
       position: absolute;
-      top: -100px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--accent);
-      color: var(--bg-base);
-      padding: var(--space-3) var(--space-6);
-      border-radius: 0 0 8px 8px;
-      font-weight: 600;
-      z-index: 10000;
-      transition: top var(--duration-fast) ease;
-      opacity: 0;
-      pointer-events: none;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      clip-path: inset(100%);
+      white-space: nowrap;
+      border: 0;
     }
 
     .skip-link:focus {
-      top: 0;
-      opacity: 1;
-      pointer-events: auto;
+      position: fixed;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: auto;
+      height: auto;
+      padding: var(--space-3) var(--space-6);
+      margin: 0;
+      overflow: visible;
+      clip: auto;
+      clip-path: none;
+      white-space: normal;
+      background: var(--accent);
+      color: var(--bg-base);
+      border-radius: 8px;
+      font-weight: 600;
+      z-index: 10000;
       outline: 2px dashed var(--accent);
       outline-offset: 2px;
     }
@@ -839,6 +850,14 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+    }
+
+    @media (max-width: 768px) {
+      .hero-title {
+        background: linear-gradient(to bottom, #ffffff 0%, #d4d4d4 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+      }
     }
 
     .hero-title-accent {
