@@ -234,6 +234,12 @@ The portfolio now uses a shared JSON data source for project information:
 - [ ] Set up custom domain (castronix.dev) on GitHub Pages
 - [ ] Add favicon and meta tags for SEO/social sharing
 
+### Portfolio Quality Fixes (from /portfolio-check 2026-01-15)
+- [ ] **Fix invalid status** - Change `cinder` and `littlereddot` status from "spotify" to "live"
+- [ ] **Fix placeholder links** - Add real URLs for `reppit`, `primmo`, `calci` preview links
+- [ ] **Remove legacy file** - Delete `docs/projects.json` (replaced by `data/projects.json`)
+- [ ] **Remove orphan image** - Delete `assets/projects/portfolio-optimizer.png`
+
 ---
 
 ## Future Ideas (Backlog)
