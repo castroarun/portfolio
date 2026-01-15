@@ -3,116 +3,180 @@
     {
       "id": "reppit",
       "name": "REPPIT",
-      "status": "launching",
-      "statusText": "Launching on Google Play",
+      "tagline": "Fitness strength tracking app",
+      "status": "built",
+      "statusText": "Built",
       "statusColor": "#22c55e",
+      "badgeClass": "built",
       "tech": ["Flutter", "Dart", "SQLite"],
       "description": "Mobile strength training app that tracks workouts, rest periods, and progress for all fitness levels.",
+      "descriptionHtml": "Track workouts with <strong>real-time timer</strong>, progressive overload tracking, and exercise history analytics.",
+      "shortDesc": "Fitness strength tracking with real-time timer and progressive overload analytics.",
       "category": "featured",
       "featured": true,
+      "icon": "fitness",
+      "iconColor": "#22c55e",
       "image": "assets/projects/reppit.png",
+      "progress": { "completed": 8, "total": 9, "inProgress": 8 },
       "links": {
         "preview": "#",
-        "github": "#"
-      }
+        "github": "https://github.com/ArunCastro/reppit"
+      },
+      "display": { "showInResume": true, "trackRow": 1 }
     },
     {
       "id": "noteapp",
       "name": "NoteApp",
+      "tagline": "Rich text note-taking app",
       "status": "live",
-      "statusText": "",
-      "statusColor": "",
-      "tech": ["React Native", "Supabase"],
+      "statusText": "Live",
+      "statusColor": "#22c55e",
+      "badgeClass": "built",
+      "tech": ["Next.js", "TypeScript", "TipTap"],
       "description": "Privacy-first note-taking app with offline sync, voice-to-text, and 200+ test cases.",
+      "descriptionHtml": "Rich text editing with <strong>templates</strong>, auto-save, and dark/light theme toggle.",
+      "shortDesc": "Rich text note-taking with templates and auto-save functionality.",
       "category": "featured",
       "featured": true,
+      "icon": "notes",
+      "iconColor": "#3b82f6",
       "image": "assets/projects/noteapp.png",
+      "progress": { "completed": 9, "total": 9, "inProgress": null },
       "links": {
-        "preview": "#",
-        "github": "#"
-      }
+        "preview": "https://noteapp-castronix.vercel.app",
+        "github": "https://github.com/ArunCastro/noteApp"
+      },
+      "display": { "showInResume": true, "trackRow": 1 }
     },
     {
       "id": "primmo",
       "name": "PRIMMO",
-      "status": "architected",
-      "statusText": "Architected & build-ready",
+      "tagline": "AI-powered personal strength coach",
+      "status": "building",
+      "statusText": "Building",
       "statusColor": "#f59e0b",
-      "tech": ["Next.js", "Voice AI", "WhatsApp API"],
+      "badgeClass": "building",
+      "tech": ["Next.js", "Voice AI", "Supabase"],
       "description": "Agentic AI strength coach via WhatsApp and voice calls using REPPIT workout data.",
+      "descriptionHtml": "Communicates via <strong>WhatsApp and Voice calls</strong>. Uses workout data from REPPIT for personalized training.",
+      "shortDesc": "AI-powered personal strength coach with WhatsApp & Voice AI integration.",
       "category": "featured",
       "featured": true,
+      "icon": "voice",
+      "iconColor": "#f59e0b",
       "image": "assets/projects/primmo.png",
+      "progress": { "completed": 3, "total": 9, "inProgress": 4 },
       "links": {
         "preview": "#",
-        "github": "#"
-      }
+        "github": "https://github.com/ArunCastro/PRIMMO"
+      },
+      "display": { "showInResume": true, "trackRow": 1 }
     },
     {
       "id": "portfolio",
       "name": "This Portfolio",
+      "tagline": "Interactive digital resume",
       "status": "live",
-      "statusText": "",
-      "statusColor": "",
-      "tech": ["HTML", "CSS", "JavaScript", "Chart.js"],
+      "statusText": "Live",
+      "statusColor": "#22c55e",
+      "badgeClass": "built",
+      "tech": ["HTML/CSS", "JavaScript", "Chart.js"],
       "description": "Interactive digital resume with AI assistant, skills radar, and 9-step workflow showcase.",
+      "descriptionHtml": "<strong>AI chat assistant</strong>, skills radar, timeline view with 9-step workflow showcase.",
+      "shortDesc": "Interactive digital resume with AI chat and skills visualization.",
       "category": "personal",
       "featured": false,
+      "icon": "clock",
+      "iconColor": "#64748b",
       "image": "assets/projects/portfolio.png",
+      "progress": { "completed": 8, "total": 9, "inProgress": 9 },
       "links": {
-        "preview": "https://castronix.github.io/portfolio/",
-        "github": "https://github.com/castronix/castronix-portfolio"
-      }
+        "preview": "https://castroarun.github.io/portfolio/",
+        "github": "https://github.com/castroarun/portfolio"
+      },
+      "display": { "showInResume": true, "trackRow": 2 }
     },
     {
       "id": "calci",
       "name": "Calci",
-      "status": "in-development",
+      "tagline": "Calculate anything, anywhere",
+      "status": "building",
       "statusText": "In Development",
       "statusColor": "#f59e0b",
+      "badgeClass": "building",
       "tech": ["Flutter", "Dart", "Material Design"],
       "description": "Calculator with memory offering a simple, clean workspace. Studying various calculator interactions.",
+      "descriptionHtml": "Versatile calculator with <strong>smart presets</strong> for everyday decisions.",
+      "shortDesc": "Smart calculator with presets for EMI, tips, splits, and everyday calculations.",
       "category": "personal",
       "featured": false,
+      "icon": "calculator",
+      "iconColor": "#3b82f6",
       "image": "assets/projects/calci.png",
+      "progress": { "completed": 4, "total": 9, "inProgress": 5 },
       "links": {
         "preview": "#",
         "github": "#"
-      }
+      },
+      "display": { "showInResume": true, "trackRow": 3 }
     },
     {
       "id": "cinder",
       "name": "Cinder",
+      "tagline": "AI-assisted original music",
       "status": "spotify",
       "statusText": "Spotify",
-      "statusColor": "#22c55e",
+      "statusColor": "#1DB954",
+      "badgeClass": "live",
       "tech": ["Udio", "Music Production", "AI/ML"],
       "description": "AI-assisted original music project launching shortly on Spotify & Apple Music.",
+      "descriptionHtml": "<strong>AI-assisted original music project</strong> launching shortly on Spotify & Apple Music.",
+      "shortDesc": "AI-assisted original music project launching on Spotify & Apple Music.",
       "category": "music",
       "featured": false,
+      "icon": "music",
+      "iconColor": "#1DB954",
       "image": "assets/projects/cinder.png",
+      "progress": { "completed": 7, "total": 9, "inProgress": 8 },
       "links": {
-        "preview": "#",
-        "spotify": "#"
-      }
+        "spotify": "https://open.spotify.com/user/castronix"
+      },
+      "display": { "showInResume": true, "trackRow": 2 }
     },
     {
       "id": "littlereddot",
       "name": "The Little Red Dot",
+      "tagline": "AI-assisted original music",
       "status": "spotify",
       "statusText": "Spotify",
-      "statusColor": "#22c55e",
+      "statusColor": "#1DB954",
+      "badgeClass": "live",
       "tech": ["Udio", "Music Production", "AI/ML"],
       "description": "AI-assisted original music project launching shortly on Spotify & Apple Music.",
+      "descriptionHtml": "<strong>AI-assisted original music project</strong> launching shortly on Spotify & Apple Music.",
+      "shortDesc": "AI-assisted original music project launching on Spotify & Apple Music.",
       "category": "music",
       "featured": false,
+      "icon": "music",
+      "iconColor": "#1DB954",
       "image": "assets/projects/littlereddot.png",
+      "progress": { "completed": 7, "total": 9, "inProgress": 8 },
       "links": {
-        "preview": "#",
-        "spotify": "#"
-      }
+        "spotify": "https://open.spotify.com/user/castronix"
+      },
+      "display": { "showInResume": true, "trackRow": 2 }
     }
   ],
+  "icons": {
+    "fitness": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><circle cx=\"12\" cy=\"5\" r=\"3\"/><path d=\"M12 22V8M5 12H2a10 10 0 0 0 20 0h-3\"/></svg>",
+    "notes": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z\"/><polyline points=\"14 2 14 8 20 8\"/></svg>",
+    "voice": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z\"/><path d=\"M19 10v2a7 7 0 0 1-14 0v-2\"/><line x1=\"12\" x2=\"12\" y1=\"19\" y2=\"22\"/></svg>",
+    "clock": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><circle cx=\"12\" cy=\"12\" r=\"10\"/><path d=\"M12 6v6l4 2\"/></svg>",
+    "calculator": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><rect x=\"4\" y=\"2\" width=\"16\" height=\"20\" rx=\"2\"/><line x1=\"8\" y1=\"6\" x2=\"16\" y2=\"6\"/><line x1=\"8\" y1=\"10\" x2=\"10\" y2=\"10\"/><line x1=\"14\" y1=\"10\" x2=\"16\" y2=\"10\"/><line x1=\"8\" y1=\"14\" x2=\"10\" y2=\"14\"/><line x1=\"14\" y1=\"14\" x2=\"16\" y2=\"14\"/><line x1=\"8\" y1=\"18\" x2=\"10\" y2=\"18\"/><line x1=\"14\" y1=\"18\" x2=\"16\" y2=\"18\"/></svg>",
+    "music": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><circle cx=\"12\" cy=\"12\" r=\"10\"/><path d=\"M8 15s1.5-2 4-2 4 2 4 2\"/><path d=\"M7 11s2-2 5-2 5 2 5 2\"/></svg>",
+    "github": "<svg viewBox=\"0 0 24 24\" fill=\"currentColor\"><path d=\"M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z\"/></svg>",
+    "spotify": "<svg viewBox=\"0 0 24 24\" fill=\"#1DB954\"><circle cx=\"12\" cy=\"12\" r=\"10\"/><path fill=\"#000\" d=\"M8 15s1.5-2 4-2 4 2 4 2M7 11s2-2 5-2 5 2 5 2M6 7s2.5-2 6-2 6 2 6 2\"/></svg>"
+  },
   "categories": {
     "featured": "Featured Projects",
     "personal": "Personal Projects",
@@ -120,7 +184,7 @@
     "conception": "Under Conception"
   },
   "metadata": {
-    "lastUpdated": "2026-01-11",
-    "version": "1.0.0"
+    "lastUpdated": "2026-01-15",
+    "version": "2.0.0"
   }
 }

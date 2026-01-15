@@ -11536,6 +11536,275 @@ ${report.improvements.map(i => `• ${i}`).join('\n')}
         });
       });
     });
+
+    // ============ Dynamic Projects Loader ============
+    // Loads projects from projects.json and renders flip-cards and track-timeline dynamically
+    // This ensures future projects added to projects.json automatically appear in Digital Resume
+
+    const ProjectLoader = {
+      icons: null,
+
+      async init() {
+        try {
+          const response = await fetch('../data/projects.json');
+          if (!response.ok) throw new Error('Failed to load projects.json');
+          const data = await response.json();
+          this.icons = data.icons;
+
+          // Filter projects that should show in resume
+          const projects = data.projects.filter(p => p.display?.showInResume !== false);
+
+          // Render flip cards
+          this.renderFlipCards(projects);
+
+          // Render track timeline
+          this.renderTrackTimeline(projects);
+
+          // Re-attach lightbox listeners to new images
+          this.attachLightboxListeners();
+
+          // Update filter counts
+          if (typeof initializeLegendCounts === 'function') {
+            initializeLegendCounts();
+          }
+
+          console.log(`[ProjectLoader] Loaded ${projects.length} projects from projects.json`);
+        } catch (error) {
+          console.warn('[ProjectLoader] Using static content:', error.message);
+        }
+      },
+
+      getIcon(iconName) {
+        return this.icons?.[iconName] || this.icons?.clock || '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>';
+      },
+
+      getStatusBadge(project) {
+        const statusMap = {
+          'built': { class: 'built', text: project.statusText || 'Built' },
+          'live': { class: 'built', text: project.statusText || 'Live' },
+          'building': { class: 'building', text: project.statusText || 'Building' },
+          'planning': { class: 'planning', text: project.statusText || 'Planning' },
+          'spotify': { class: 'live', text: 'Spotify', style: 'background: rgba(30, 215, 96, 0.15); color: #22c55e;' }
+        };
+        return statusMap[project.status] || statusMap['building'];
+      },
+
+      generateProgressDots(progress) {
+        let dots = '';
+        for (let i = 1; i <= progress.total; i++) {
+          if (i <= progress.completed) {
+            dots += '<span class="stage-dot completed" title="Step ' + i + '"></span>';
+          } else if (i === progress.inProgress) {
+            dots += '<span class="stage-dot in-progress" title="Step ' + i + '"></span>';
+          } else {
+            dots += '<span class="stage-dot" title="Step ' + i + '"></span>';
+          }
+        }
+        return dots;
+      },
+
+      generateTrackDots(progress) {
+        let dots = '';
+        for (let i = 1; i <= progress.total; i++) {
+          if (i <= progress.completed) {
+            dots += '<span class="track-workflow-dot completed"></span>';
+          } else if (i === progress.inProgress) {
+            dots += '<span class="track-workflow-dot in-progress"></span>';
+          } else {
+            dots += '<span class="track-workflow-dot"></span>';
+          }
+        }
+        return dots;
+      },
+
+      generateFlipCard(project) {
+        const badge = this.getStatusBadge(project);
+        const progressPercent = (project.progress.completed / project.progress.total * 100).toFixed(1);
+        const linkButton = project.links?.spotify
+          ? `<a href="${project.links.spotify}" target="_blank" class="card-link-btn" onclick="event.stopPropagation()">
+              ${this.getIcon('spotify')} Spotify
+            </a>`
+          : project.links?.github && project.links.github !== '#'
+          ? `<a href="${project.links.github}" target="_blank" class="card-link-btn" onclick="event.stopPropagation()">
+              ${this.getIcon('github')} GitHub
+            </a>`
+          : '';
+
+        return `
+        <div class="flip-card" onclick="this.classList.toggle('flipped')" data-project-id="${project.id}">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <div class="card-header">
+                <div class="card-icon" style="color: ${project.iconColor};">
+                  ${this.getIcon(project.icon)}
+                </div>
+                <div class="card-title-wrapper">
+                  <h3 class="card-title">${project.name} <span class="card-badge ${badge.class}"${badge.style ? ' style="' + badge.style + '"' : ''}>${badge.text}</span></h3>
+                  <p class="card-tagline">${project.tagline}</p>
+                </div>
+              </div>
+              <p class="card-description">${project.descriptionHtml}</p>
+              <div class="card-tech">
+                ${project.tech.map(t => `<span class="tech-chip">${t}</span>`).join('')}
+              </div>
+              <div class="flip-hint">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+                Click to flip
+              </div>
+            </div>
+            <div class="flip-card-back">
+              <div class="deliverable-container">
+                <div class="deliverable-screenshot">
+                  <img src="../${project.image}" alt="${project.name}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                </div>
+                <div class="back-header" style="border-bottom: none; padding-bottom: 0; margin-bottom: 0.5rem;">
+                  <h4 class="back-title" style="font-size: 0.9rem;">
+                    ${this.getIcon(project.icon).replace('viewBox', 'style="width: 16px; height: 16px;" viewBox')}
+                    ${project.name}
+                  </h4>
+                  <span class="card-badge ${badge.class}" style="font-size: 0.6rem;${badge.style ? ' ' + badge.style : ''}">${badge.text}</span>
+                </div>
+                <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 1rem;">${project.shortDesc}</p>
+                <div class="workflow-progress">
+                  <div class="workflow-progress-header">
+                    <span class="workflow-progress-label">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                      9-Step Workflow
+                    </span>
+                    <span class="workflow-progress-count">${project.progress.completed}/${project.progress.total} Complete</span>
+                  </div>
+                  <div class="progress-bar-track">
+                    <div class="progress-bar-fill ${badge.class}" style="width: ${progressPercent}%;"></div>
+                  </div>
+                  <div class="workflow-stages">
+                    ${this.generateProgressDots(project.progress)}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>`;
+      },
+
+      generateTrackNode(project) {
+        const badge = this.getStatusBadge(project);
+        const linkButton = project.links?.spotify
+          ? `<a href="${project.links.spotify}" target="_blank" class="track-link-front" onclick="event.stopPropagation()">
+              ${this.getIcon('spotify')} Spotify
+            </a>`
+          : project.links?.github && project.links.github !== '#'
+          ? `<a href="${project.links.github}" target="_blank" class="track-link-front" onclick="event.stopPropagation()">
+              ${this.getIcon('github')} GitHub
+            </a>`
+          : '';
+
+        return `
+          <div class="track-node" data-status="${project.status === 'spotify' ? 'live' : project.status}" data-project-id="${project.id}">
+            <div class="track-card" onclick="this.classList.toggle('flipped')">
+              <div class="track-card-inner">
+                <div class="track-card-front">
+                  <div class="track-card-header">
+                    <div class="track-icon" style="color: ${project.iconColor};">
+                      ${this.getIcon(project.icon)}
+                    </div>
+                    <div class="track-title">${project.name} <span class="track-badge ${badge.class}"${badge.style ? ' style="' + badge.style + '"' : ''}>${badge.text}</span></div>
+                  </div>
+                  <p class="track-tagline">${project.tagline}</p>
+                  <p class="track-description">${project.descriptionHtml}</p>
+                  <div class="track-tech">
+                    ${project.tech.map(t => `<span class="track-tech-chip">${t}</span>`).join('')}
+                  </div>
+                  ${linkButton}
+                </div>
+                <div class="track-card-back">
+                  <div class="track-back-screenshot">
+                    <img src="../${project.image}" alt="${project.name}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">
+                  </div>
+                  <div class="track-back-title">${project.name}</div>
+                  <p class="track-back-desc">${project.shortDesc}</p>
+                  <div class="track-workflow">
+                    <div class="track-workflow-header">
+                      <span>9-Step Workflow</span>
+                      <span>${project.progress.completed}/${project.progress.total}</span>
+                    </div>
+                    <div class="track-workflow-dots">
+                      ${this.generateTrackDots(project.progress)}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>`;
+      },
+
+      renderFlipCards(projects) {
+        const container = document.querySelector('.projects-grid');
+        if (!container) return;
+
+        // Clear existing cards
+        container.innerHTML = '';
+
+        // Generate and insert new cards
+        projects.forEach(project => {
+          container.innerHTML += this.generateFlipCard(project);
+        });
+      },
+
+      renderTrackTimeline(projects) {
+        const container = document.getElementById('track-timeline');
+        if (!container) return;
+
+        // Group projects by track row
+        const rows = { 1: [], 2: [], 3: [] };
+        projects.forEach(project => {
+          const row = project.display?.trackRow || 3;
+          if (rows[row]) rows[row].push(project);
+        });
+
+        // Generate row HTML
+        let timelineHtml = '';
+
+        // Row 1: Featured Projects
+        if (rows[1].length > 0) {
+          timelineHtml += '<div class="track-row">';
+          rows[1].forEach(p => timelineHtml += this.generateTrackNode(p));
+          timelineHtml += '</div>';
+        }
+
+        // Row 2: Personal & Music Projects
+        if (rows[2].length > 0) {
+          timelineHtml += '<div class="track-row">';
+          rows[2].forEach(p => timelineHtml += this.generateTrackNode(p));
+          timelineHtml += '</div>';
+        }
+
+        // Row 3: Other Projects
+        if (rows[3].length > 0) {
+          timelineHtml += '<div class="track-row">';
+          rows[3].forEach(p => timelineHtml += this.generateTrackNode(p));
+          timelineHtml += '</div>';
+        }
+
+        container.innerHTML = timelineHtml;
+      },
+
+      attachLightboxListeners() {
+        const projectImages = document.querySelectorAll('.track-back-screenshot img, .deliverable-screenshot img');
+        projectImages.forEach(img => {
+          img.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (typeof openLightbox === 'function') {
+              openLightbox(img.src);
+            }
+          });
+        });
+      }
+    };
+
+    // Initialize project loader when DOM is ready
+    document.addEventListener('DOMContentLoaded', () => {
+      ProjectLoader.init();
+    });
   </script>
 
   <!-- Go to Top Button -->
