@@ -884,6 +884,7 @@
       grid-row: 1 / -1;
       position: relative;
       z-index: 1;
+      overflow: visible;
     }
 
     .project-image-wrapper {
@@ -891,6 +892,13 @@
       border-radius: 4px;
       overflow: hidden;
       background: var(--accent);
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+    }
+
+    .project-image-wrapper:hover {
+      transform: scale(1.05);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(34, 211, 238, 0.15);
+      z-index: 10;
     }
 
     .project-image-wrapper::before {
@@ -1048,6 +1056,7 @@
       .project-image {
         width: 100%;
         margin-bottom: var(--space-4);
+        overflow: visible;
       }
 
       .project-content {
