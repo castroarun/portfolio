@@ -3,7 +3,7 @@
 > **Project:** Castronix Portfolio Website
 > **Purpose:** Showcase projects, workflow, and engineering practices
 
-**Last Updated:** 2026-01-11
+**Last Updated:** 2026-01-15
 
 ---
 
@@ -187,6 +187,9 @@ Based on research from:
 
 | Date | Commit | Description |
 |------|--------|-------------|
+| 2026-01-15 | `650a1c7` | Resume assistant enhanced with CV/portfolio links |
+| 2026-01-15 | `1c3d46a` | Mobile hero title brightness fix, skip-link hidden |
+| 2026-01-15 | `cbd4592` | Project image pop-out effect, About section mobile fix |
 | 2026-01-11 | `998673a` | Portfolio updates - projects, contact, about section |
 | 2026-01-11 | `d3c8911` | CV & Resume sync with 6 projects |
 | 2026-01-11 | `6d31201` | Shared projects.json implementation |
@@ -224,7 +227,7 @@ The portfolio now uses a shared JSON data source for project information:
 - [x] **Review & Correct AI Assistant Responses** - Reviewed all 34 responses with user corrections (2026-01-12)
 - [ ] Add screenshots for remaining projects (Spotify Songs, Space Race ML, Backtest Pro)
 - [ ] **Under conception projects** - Add images or one-liner mottos explaining what each aims to achieve/solve
-- [ ] **PRIMMO architecture** - Convert to dark theme for portfolio consistency
+- [x] **PRIMMO architecture** - Convert to dark theme for portfolio consistency (2026-01-15)
 - [ ] **AI Assistant** - Add response for "What's your biggest career challenge?"
 - [ ] **Flat CV** - Change default theme to white background
 - [ ] Finalize resume/index.html as production version
