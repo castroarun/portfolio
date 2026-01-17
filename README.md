@@ -25,6 +25,24 @@
   <a href="#project-structure">Structure</a>
 </p>
 
+<!-- LAUNCHPAD:START -->
+```json
+{
+  "stage": "live",
+  "progress": 100,
+  "complexity": "F",
+  "lastUpdated": "2026-01-17",
+  "targetDate": null,
+  "nextAction": "Add new projects as they ship",
+  "blocker": null,
+  "demoUrl": "https://castroarun.github.io/portfolio/",
+  "techStack": ["HTML5", "CSS3", "JavaScript", "Chart.js"],
+  "shipped": true,
+  "linkedinPosted": true
+}
+```
+<!-- LAUNCHPAD:END -->
+
 ---
 
 ## Features
