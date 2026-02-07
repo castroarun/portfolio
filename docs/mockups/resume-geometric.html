@@ -8,15 +8,15 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-  <!-- Chart.js for Skills Radar (deferred - not needed for initial render) -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+  <!-- Chart.js for Skills Radar -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-  <!-- Prism.js for Code Highlighting (deferred - only used in chat) -->
+  <!-- Prism.js for Code Highlighting -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
 
   <style>
     /* ============ CSS Variables ============ */
@@ -195,51 +195,15 @@
       animation: shape-float 15s ease-in-out infinite;
     }
 
-    /* Diamond / rhombus shape (center of page) */
+    /* Floating ring 1 */
     .geo-ring-1 {
-      width: 50px;
-      height: 28px;
-      border: 1px solid var(--accent);
-      border-radius: 0;
-      background: none;
-      top: 38%;
-      right: 12%;
-      left: auto;
-      margin-left: 0;
+      width: 200px;
+      height: 200px;
+      border: 2px solid var(--accent);
+      border-radius: 50%;
+      top: 15%;
+      right: 20%;
       animation-delay: 0s;
-      opacity: 0.08;
-      animation: hexagon-float 15s ease-in-out infinite;
-      filter: drop-shadow(0 0 1px var(--accent));
-    }
-    .geo-ring-1::before,
-    .geo-ring-1::after {
-      content: '';
-      position: absolute;
-      width: 0;
-      border-left: 26px solid transparent;
-      border-right: 26px solid transparent;
-      left: -1px;
-    }
-    .geo-ring-1::before {
-      bottom: 100%;
-      border-bottom: 15px solid var(--accent);
-      opacity: 0.3;
-    }
-    .geo-ring-1::after {
-      top: 100%;
-      border-top: 15px solid var(--accent);
-      opacity: 0.3;
-    }
-
-    @keyframes hexagon-float {
-      0%, 100% {
-        transform: translateY(0);
-        opacity: 0.08;
-      }
-      50% {
-        transform: translateY(-20px);
-        opacity: 0.12;
-      }
     }
 
     /* Floating ring 2 */
@@ -287,136 +251,6 @@
       right: 12%;
       animation: shape-rotate 25s linear infinite reverse;
       animation-delay: -8s;
-    }
-
-    /* Triangle outline */
-    .geo-triangle {
-      width: 0;
-      height: 0;
-      border-left: 50px solid transparent;
-      border-right: 50px solid transparent;
-      border-bottom: 86px solid transparent;
-      border-bottom-color: transparent;
-      position: absolute;
-      top: 18%;
-      right: 10%;
-      opacity: 0.08;
-      animation: triangle-swirl 28s ease-in-out infinite;
-      animation-delay: -3s;
-      filter: drop-shadow(0 0 1px var(--accent));
-    }
-    .geo-triangle::after {
-      content: '';
-      position: absolute;
-      top: 3px;
-      left: -47px;
-      width: 0;
-      height: 0;
-      border-left: 47px solid transparent;
-      border-right: 47px solid transparent;
-      border-bottom: 80px solid var(--bg-base);
-    }
-    .geo-triangle::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -50px;
-      width: 0;
-      height: 0;
-      border-left: 50px solid transparent;
-      border-right: 50px solid transparent;
-      border-bottom: 86px solid var(--accent);
-      opacity: 0.3;
-    }
-
-    /* Small triangle */
-    .geo-triangle-2 {
-      width: 0;
-      height: 0;
-      border-left: 30px solid transparent;
-      border-right: 30px solid transparent;
-      border-bottom: 52px solid transparent;
-      position: absolute;
-      bottom: 20%;
-      left: 25%;
-      opacity: 0.06;
-      animation: shape-rotate 35s linear infinite;
-      animation-delay: -12s;
-    }
-    .geo-triangle-2::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -30px;
-      width: 0;
-      height: 0;
-      border-left: 30px solid transparent;
-      border-right: 30px solid transparent;
-      border-bottom: 52px solid rgba(139, 92, 246, 0.4);
-    }
-
-    /* Hexagon outline */
-    .geo-hexagon {
-      width: 70px;
-      height: 40px;
-      border: 1px solid var(--accent);
-      position: absolute;
-      top: 12%;
-      left: 12%;
-      opacity: 0.07;
-      animation: shape-float 22s ease-in-out infinite;
-      animation-delay: -7s;
-    }
-    .geo-hexagon::before,
-    .geo-hexagon::after {
-      content: '';
-      position: absolute;
-      width: 0;
-      border-left: 35px solid transparent;
-      border-right: 35px solid transparent;
-      left: -1px;
-    }
-    .geo-hexagon::before {
-      bottom: 100%;
-      border-bottom: 20px solid transparent;
-      border-bottom-color: inherit;
-      border-bottom: 20px solid var(--accent);
-      opacity: 0.3;
-    }
-    .geo-hexagon::after {
-      top: 100%;
-      border-top: 20px solid var(--accent);
-      opacity: 0.3;
-    }
-
-    /* Cross / plus shape */
-    .geo-cross {
-      position: absolute;
-      top: 60%;
-      right: 35%;
-      width: 30px;
-      height: 30px;
-      opacity: 0.08;
-      animation: shape-rotate 28s linear infinite;
-      animation-delay: -6s;
-    }
-    .geo-cross::before,
-    .geo-cross::after {
-      content: '';
-      position: absolute;
-      background: var(--accent);
-    }
-    .geo-cross::before {
-      left: 50%;
-      transform: translateX(-50%);
-      width: 2px;
-      height: 100%;
-    }
-    .geo-cross::after {
-      top: 50%;
-      transform: translateY(-50%);
-      width: 100%;
-      height: 2px;
     }
 
     /* Floating dots cluster */
@@ -474,30 +308,6 @@
       50% {
         transform: translateY(-20px);
         opacity: 0.12;
-      }
-    }
-
-    /* Triangle swirl: bounce + slow rotation */
-    @keyframes triangle-swirl {
-      0% {
-        transform: translateY(0) rotate(0deg);
-        opacity: 0.08;
-      }
-      25% {
-        transform: translateY(-15px) rotate(90deg);
-        opacity: 0.10;
-      }
-      50% {
-        transform: translateY(-20px) rotate(180deg);
-        opacity: 0.12;
-      }
-      75% {
-        transform: translateY(-10px) rotate(270deg);
-        opacity: 0.10;
-      }
-      100% {
-        transform: translateY(0) rotate(360deg);
-        opacity: 0.08;
       }
     }
 
@@ -706,7 +516,7 @@
       margin: 0 auto;
       padding: 2rem;
       position: relative;
-      z-index: 2;
+      z-index: 1;
     }
 
     /* ============ Header ============ */
@@ -2543,23 +2353,6 @@
       font-style: normal;
     }
 
-    .flip-all-btn {
-      font-size: 0.7rem;
-      color: var(--accent);
-      background: transparent;
-      border: 1px solid var(--accent-dim);
-      border-radius: 4px;
-      padding: 0.2rem 0.6rem;
-      cursor: pointer;
-      opacity: 0.7;
-      transition: all 0.3s ease;
-      font-family: inherit;
-    }
-    .flip-all-btn:hover {
-      opacity: 1;
-      background: var(--accent-dim);
-    }
-
     /* Project Status Legend */
     .project-legend {
       display: flex;
@@ -4001,7 +3794,7 @@
       height: 56px;
       border-radius: 50%;
       overflow: hidden;
-      border: 2px solid var(--accent);
+      border: 2px solid var(--accent-1);
       box-shadow: 0 0 20px rgba(34, 211, 238, 0.2);
     }
 
@@ -4080,20 +3873,13 @@
       height: 1.2em;
       background: var(--accent);
       margin-left: 2px;
-      animation: cursor-swirl 3s ease-in-out infinite;
+      animation: blink 1s infinite;
       vertical-align: text-bottom;
-      transform-origin: center center;
     }
 
-    @keyframes cursor-swirl {
-      0%, 15% { opacity: 1; transform: rotate(0deg); }
-      25% { opacity: 1; transform: rotate(360deg); }
-      35%, 50% { opacity: 1; transform: rotate(360deg); }
-      60% { opacity: 0; transform: rotate(360deg); }
-      70% { opacity: 0; transform: rotate(360deg); }
-      80% { opacity: 1; transform: rotate(360deg); }
-      90% { opacity: 0; transform: rotate(360deg); }
-      100% { opacity: 1; transform: rotate(0deg); }
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
     }
 
     /* Key Stats Grid */
@@ -4670,8 +4456,8 @@
       transform: translateY(-50%);
       display: flex;
       gap: 0.5rem;
-      opacity: 0.5;
-      filter: grayscale(60%);
+      opacity: 0.08;
+      filter: grayscale(100%);
       transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
       z-index: 10;
     }
@@ -4930,8 +4716,8 @@
       display: flex;
       gap: 0.5rem;
       margin-top: 0.5rem;
-      opacity: 0.5;
-      filter: grayscale(60%);
+      opacity: 0.15;
+      filter: grayscale(100%);
       transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
@@ -5854,10 +5640,12 @@
 
   <!-- Top Navigation -->
   <nav class="top-nav">
-    <!-- Portfolio link hidden until portfolio launch -->
-    <div class="nav-portfolio" style="visibility: hidden;">
+    <a href="../" class="nav-portfolio">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M15 18l-6-6 6-6"/>
+      </svg>
       Portfolio
-    </div>
+    </a>
     <div class="nav-badge">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="clock-lifeline">
         <circle cx="12" cy="12" r="10"/>
@@ -5901,16 +5689,6 @@
     <!-- Rotating squares -->
     <div class="geo-shape geo-square"></div>
     <div class="geo-shape geo-square-2"></div>
-
-    <!-- Triangles -->
-    <div class="geo-triangle"></div>
-    <div class="geo-triangle-2"></div>
-
-    <!-- Hexagon -->
-    <div class="geo-hexagon"></div>
-
-    <!-- Cross / plus -->
-    <div class="geo-cross"></div>
 
     <!-- Floating dot clusters -->
     <div class="geo-dot geo-dot-1"></div>
@@ -5992,7 +5770,7 @@
                 <strong>Sr. Solution Architect</strong> & <strong>TOGAF Certified Enterprise Architect</strong> with <strong>17+ years</strong> delivering technology-enabled solutions in
                 <strong>core banking, payments, and digital transformation</strong>. I've implemented Finacle core banking
                 across <strong>India, Middle East, Africa, and APAC</strong> for Tier-1 banks including
-                <strong>Bank of America, Emirates NBD, and Standard Bank</strong>. Currently a key contributor to Application Platform Engineering, delivering RTP solutions and support for global commercial banking in Singapore. With an architect's mindset, I design and build <strong>end-to-end solutions</strong> — and practise that approach through <strong>AI-assisted personal projects</strong> in full-stack development, applying architecture thinking from concept to deployment.<span class="typing-cursor"></span>
+                <strong>Bank of America, Emirates NBD, and Standard Bank</strong>. Currently a key contributor to Application Platform Engineering, delivering RTP solutions and support for global commercial banking in Singapore. Also pursuing structured, <strong>AI-assisted learning</strong> through personal projects in full-stack development.<span class="typing-cursor"></span>
               </p>
             </div>
 
@@ -6029,7 +5807,7 @@
                 </div>
                 <div class="strength-text">
                   <h4>Demonstrated Leadership</h4>
-                  <p>Mentored and driven cross-functional teams for Tier-1 banking clients with 100% on-time delivery across 15,000+ man-days of deliverables</p>
+                  <p>Mentored and driven teams for Tier-1 clients with 15000+ man-days of deliverables</p>
                 </div>
               </div>
               <div class="strength-card">
@@ -6041,7 +5819,7 @@
                 </div>
                 <div class="strength-text">
                   <h4>Business Analyst Acumen</h4>
-                  <p>Bridged business and technology — translating complex requirements including regulatory into actionable solutions, driving client onboarding workflows and compliance frameworks</p>
+                  <p>Conceptualized & established multiple business processes and regulatory frameworks</p>
                 </div>
               </div>
               <div class="strength-card">
@@ -6053,8 +5831,8 @@
                   </svg>
                 </div>
                 <div class="strength-text">
-                  <h4>Solutions Architect</h4>
-                  <p>Designed and implemented scalable, high-performance banking solutions — from real-time payment systems to regulatory reporting frameworks across global markets</p>
+                  <h4>Technology Architect</h4>
+                  <p>Designed scalable, reusable & performance-savvy complex banking modules</p>
                 </div>
               </div>
               <div class="strength-card">
@@ -6072,7 +5850,7 @@
                 </div>
                 <div class="strength-text">
                   <h4>Innovation Mindset</h4>
-                  <p>Pioneered unconventional solutions — from self-learning Java to deliver a critical banking module in 2 months, to integrating AI workflows for operational efficiency</p>
+                  <p>Out-of-the-box thinking with AI-assisted development workflows</p>
                 </div>
               </div>
             </div>
@@ -6160,7 +5938,7 @@
                 <li>Strategized Business processes for <strong>Client Onboarding</strong>, enabling new businesses and integrating Regulatory norms within Bank-in-a-box technology</li>
                 <li>Designed and achieved a <strong>5x Business-volumes-ready</strong> reporting system certified by the Client</li>
                 <li>Led Design changes resulting in <strong>60% reduction</strong> in daily job execution times</li>
-                <li>Designed <strong>monitoring dashboards</strong> for visualization and remediation of system events with quickest TAT</li>
+                <li>Designed <strong>Splunk dashboards</strong> for visualization and remediation of system events with quickest TAT</li>
                 <li>Mentored cross-functional teams in decision making, business thinking, and problem solving</li>
               </ul>
             </div>
@@ -6321,13 +6099,16 @@
                   <div class="life-event-title">AI-Assisted Learning Journey</div>
                   <div class="life-event-summary">New co-pilot unlocked. Building apps with Claude, learning at 10x speed.</div>
                   <div style="display: flex; gap: 0.75rem; margin-top: 0.5rem; font-size: 0.75rem;">
-                    <a href="#section-build" style="color: var(--accent); text-decoration: none; display: flex; align-items: center; gap: 0.25rem;">
+                    <a href="../" style="color: var(--accent-1); text-decoration: none; display: flex; align-items: center; gap: 0.25rem;">
+                      <span>→</span> Portfolio
+                    </a>
+                    <a href="#section-build" style="color: var(--accent-1); text-decoration: none; display: flex; align-items: center; gap: 0.25rem;">
                       <span>→</span> Build Journey
                     </a>
                   </div>
                   <div class="life-event-gallery">
-                    <img src="../assets/projects/cinder.png" alt="Cinder App" class="life-event-gallery-img" loading="lazy">
-                    <img src="../assets/projects/calci.png" alt="Calci App" class="life-event-gallery-img" loading="lazy">
+                    <img src="../assets/projects/cinder.png" alt="Cinder App" class="life-event-gallery-img">
+                    <img src="../assets/projects/calci.png" alt="Calci App" class="life-event-gallery-img">
                   </div>
                 </div>
                 <div class="life-event">
@@ -6338,8 +6119,8 @@
                   <div class="life-event-title">Professional Fitness Journey</div>
                   <div class="life-event-summary">From sedentary to shredded. Now coaching others to escape the dad-bod zone.</div>
                   <div class="life-event-gallery">
-                    <img src="../assets/Fitness journey/portfolio.png" alt="Fitness Journey" class="life-event-gallery-img" loading="lazy">
-                    <img src="../assets/Fitness journey/me 2.png" alt="Fitness Progress" class="life-event-gallery-img" loading="lazy">
+                    <img src="../assets/Fitness journey/portfolio.png" alt="Fitness Journey" class="life-event-gallery-img">
+                    <img src="../assets/Fitness journey/me 2.png" alt="Fitness Progress" class="life-event-gallery-img">
                   </div>
                 </div>
                 <div class="life-event">
@@ -6350,8 +6131,8 @@
                   <div class="life-event-title">Princess Thiya Arrived</div>
                   <div class="life-event-summary">New project manager arrived - zero experience, maximum authority.</div>
                   <div class="life-event-gallery">
-                    <img src="../assets/princess thiya 1.jpg" alt="Princess Thiya" class="life-event-gallery-img" loading="lazy">
-                    <img src="../assets/princess thiya 2.jpg" alt="Princess Thiya" class="life-event-gallery-img" loading="lazy">
+                    <img src="../assets/princess thiya 1.jpg" alt="Princess Thiya" class="life-event-gallery-img">
+                    <img src="../assets/princess thiya 2.jpg" alt="Princess Thiya" class="life-event-gallery-img">
                   </div>
                 </div>
               </div>
@@ -6417,9 +6198,9 @@
                   <div class="life-event-title">Exploring Passions</div>
                   <div class="life-event-summary">Took a leap to pursue filmmaking, photography, and entrepreneurial ventures.</div>
                   <div class="life-event-gallery">
-                    <img src="../assets/Creative & Business Ventures/10320586_755273381237390_1209375142514353034_n.jpg" alt="Filmmaking" class="life-event-gallery-img" loading="lazy">
-                    <img src="../assets/Creative & Business Ventures/12657431_10208622544270357_1467322089424340240_o.jpg" alt="Photography" class="life-event-gallery-img" loading="lazy">
-                    <img src="../assets/Creative & Business Ventures/886230_10208606074578625_723712456619134183_o.jpg" alt="Creative Work" class="life-event-gallery-img" loading="lazy">
+                    <img src="../assets/Creative & Business Ventures/10320586_755273381237390_1209375142514353034_n.jpg" alt="Filmmaking" class="life-event-gallery-img">
+                    <img src="../assets/Creative & Business Ventures/12657431_10208622544270357_1467322089424340240_o.jpg" alt="Photography" class="life-event-gallery-img">
+                    <img src="../assets/Creative & Business Ventures/886230_10208606074578625_723712456619134183_o.jpg" alt="Creative Work" class="life-event-gallery-img">
                   </div>
                 </div>
               </div>
@@ -6439,8 +6220,8 @@
                   <div class="life-event-title">Best Short Film Award</div>
                   <div class="life-event-summary">Traded code for cameras. Script to screen - Winner of South India Film fest, against 20+ shortlisted teams.</div>
                   <div class="life-event-gallery">
-                    <img src="../assets/Short film award/10320586_755273381237390_1209375142514353034_n.jpg" alt="Short Film Award" class="life-event-gallery-img" loading="lazy">
-                    <img src="../assets/Short film award/11146267_755284554569606_5446543567028146643_n.jpg" alt="Film Production" class="life-event-gallery-img" loading="lazy">
+                    <img src="../assets/Short film award/10320586_755273381237390_1209375142514353034_n.jpg" alt="Short Film Award" class="life-event-gallery-img">
+                    <img src="../assets/Short film award/11146267_755284554569606_5446543567028146643_n.jpg" alt="Film Production" class="life-event-gallery-img">
                   </div>
                 </div>
               </div>
@@ -6474,9 +6255,9 @@
                   <div class="life-event-title">Tied the Knot</div>
                   <div class="life-event-summary">Plot twist: Found the co-star of my life story. The sequel's been amazing.</div>
                   <div class="life-event-gallery">
-                    <img src="../assets/Marriage/HT8A9003_C.jpg" alt="Wedding" class="life-event-gallery-img" loading="lazy">
-                    <img src="../assets/Marriage/IMG_5263.JPG" alt="Wedding Ceremony" class="life-event-gallery-img" loading="lazy">
-                    <img src="../assets/Marriage/IMG_5466.JPG" alt="Wedding Celebration" class="life-event-gallery-img" loading="lazy">
+                    <img src="../assets/Marriage/HT8A9003_C.jpg" alt="Wedding" class="life-event-gallery-img">
+                    <img src="../assets/Marriage/IMG_5263.JPG" alt="Wedding Ceremony" class="life-event-gallery-img">
+                    <img src="../assets/Marriage/IMG_5466.JPG" alt="Wedding Celebration" class="life-event-gallery-img">
                   </div>
                 </div>
               </div>
@@ -6542,8 +6323,8 @@
                   <div class="life-event-title">Walking with Christ</div>
                   <div class="life-event-summary">Found the source of truth. The commit that changed everything.</div>
                   <div class="life-event-gallery">
-                    <img src="https://images.unsplash.com/photo-1507692049790-de58290a4334?w=100&h=100&fit=crop" alt="Faith" class="life-event-gallery-img" loading="lazy">
-                    <img src="https://images.unsplash.com/photo-1504052434569-70ad5836ab65?w=100&h=100&fit=crop" alt="Journey" class="life-event-gallery-img" loading="lazy">
+                    <img src="https://images.unsplash.com/photo-1507692049790-de58290a4334?w=100&h=100&fit=crop" alt="Faith" class="life-event-gallery-img">
+                    <img src="https://images.unsplash.com/photo-1504052434569-70ad5836ab65?w=100&h=100&fit=crop" alt="Journey" class="life-event-gallery-img">
                   </div>
                 </div>
               </div>
@@ -6613,20 +6394,20 @@
             <div class="skill-item" data-category="development">
               <div class="skill-header">
                 <span class="skill-name">Python</span>
-                <span class="skill-level">Expert</span>
+                <span class="skill-level">Advanced</span>
               </div>
               <div class="skill-bar">
-                <div class="skill-progress" style="width: 88%"></div>
+                <div class="skill-progress" style="width: 80%"></div>
               </div>
             </div>
 
             <div class="skill-item" data-category="development">
               <div class="skill-header">
                 <span class="skill-name">Java</span>
-                <span class="skill-level">Advanced</span>
+                <span class="skill-level">Expert</span>
               </div>
               <div class="skill-bar">
-                <div class="skill-progress" style="width: 78%"></div>
+                <div class="skill-progress" style="width: 88%"></div>
               </div>
             </div>
 
@@ -6642,7 +6423,7 @@
 
             <div class="skill-item" data-category="data">
               <div class="skill-header">
-                <span class="skill-name">Data Analytics (Tableau)</span>
+                <span class="skill-name">Data Analytics (Tableau, Splunk)</span>
                 <span class="skill-level">Advanced</span>
               </div>
               <div class="skill-bar">
@@ -6783,7 +6564,6 @@
           </div>
         </div>
         <span class="flip-instruction-inline">Click any card to flip</span>
-        <button class="flip-all-btn" onclick="flipAllCards()" title="Flip all cards">↻ Flip All</button>
       </div>
 
       <!-- Simple Cards Grid -->
@@ -6957,7 +6737,7 @@
             <div class="flip-card-back">
               <div class="deliverable-container">
                 <div class="deliverable-screenshot">
-                  <img src="../assets/projects/primmo.png" alt="PRIMMO Architecture" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                  <img src="../assets/projects/primmo.png" alt="PRIMMO Architecture" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
                 </div>
                 <div class="back-header" style="border-bottom: none; padding-bottom: 0; margin-bottom: 0.5rem;">
                   <h4 class="back-title" style="font-size: 0.9rem;">
@@ -7024,7 +6804,7 @@
             <div class="flip-card-back">
               <div class="deliverable-container">
                 <div class="deliverable-screenshot">
-                  <img src="../assets/projects/reppit.png" alt="REPPIT App Screenshots" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                  <img src="../assets/projects/reppit.png" alt="REPPIT App Screenshots" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
                 </div>
                 <div class="back-header" style="border-bottom: none; padding-bottom: 0; margin-bottom: 0.5rem;">
                   <h4 class="back-title" style="font-size: 0.9rem;">
@@ -7092,7 +6872,7 @@
             <div class="flip-card-back">
               <div class="deliverable-container">
                 <div class="deliverable-screenshot">
-                  <img src="../assets/projects/noteapp.png" alt="NoteApp Screenshot" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                  <img src="../assets/projects/noteapp.png" alt="NoteApp Screenshot" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
                 </div>
                 <div class="back-header" style="border-bottom: none; padding-bottom: 0; margin-bottom: 0.5rem;">
                   <h4 class="back-title" style="font-size: 0.9rem;">NoteApp</h4>
@@ -7156,7 +6936,7 @@
             <div class="flip-card-back">
               <div class="deliverable-container">
                 <div class="deliverable-screenshot">
-                  <img src="../assets/projects/cinder.png" alt="Cinder" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                  <img src="../assets/projects/cinder.png" alt="Cinder" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
                 </div>
                 <div class="back-header" style="border-bottom: none; padding-bottom: 0; margin-bottom: 0.5rem;">
                   <h4 class="back-title" style="font-size: 0.9rem;">Cinder</h4>
@@ -7220,7 +7000,7 @@
             <div class="flip-card-back">
               <div class="deliverable-container">
                 <div class="deliverable-screenshot">
-                  <img src="../assets/projects/littlereddot.png" alt="The Little Red Dot" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                  <img src="../assets/projects/littlereddot.png" alt="The Little Red Dot" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
                 </div>
                 <div class="back-header" style="border-bottom: none; padding-bottom: 0; margin-bottom: 0.5rem;">
                   <h4 class="back-title" style="font-size: 0.9rem;">The Little Red Dot</h4>
@@ -7283,7 +7063,7 @@
             <div class="flip-card-back">
               <div class="deliverable-container">
                 <div class="deliverable-screenshot">
-                  <img src="../assets/projects/portfolio.png" alt="This Portfolio" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                  <img src="../assets/projects/portfolio.png" alt="This Portfolio" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
                 </div>
                 <div class="back-header" style="border-bottom: none; padding-bottom: 0; margin-bottom: 0.5rem;">
                   <h4 class="back-title" style="font-size: 0.9rem;">This Portfolio</h4>
@@ -7351,7 +7131,7 @@
             <div class="flip-card-back">
               <div class="deliverable-container">
                 <div class="deliverable-screenshot">
-                  <img src="../assets/projects/calci.png" alt="Calci Screenshot" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                  <img src="../assets/projects/calci.png" alt="Calci Screenshot" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
                 </div>
                 <div class="back-header" style="border-bottom: none; padding-bottom: 0; margin-bottom: 0.5rem;">
                   <h4 class="back-title" style="font-size: 0.9rem;">Calci</h4>
@@ -7477,7 +7257,7 @@
                 </div>
                 <div class="track-card-back">
                   <div class="track-back-screenshot">
-                    <img src="../assets/projects/primmo.png" alt="PRIMMO" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">
+                    <img src="../assets/projects/primmo.png" alt="PRIMMO" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">
                   </div>
                   <div class="track-back-title">PRIMMO</div>
                   <p class="track-back-desc">AI-powered strength coach communicating via WhatsApp and Voice.</p>
@@ -7530,7 +7310,7 @@
                 </div>
                 <div class="track-card-back">
                   <div class="track-back-screenshot">
-                    <img src="../assets/projects/reppit.png" alt="REPPIT" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">
+                    <img src="../assets/projects/reppit.png" alt="REPPIT" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">
                   </div>
                   <div class="track-back-title">REPPIT</div>
                   <p class="track-back-desc">Fitness app with real-time timer and progressive overload tracking.</p>
@@ -7584,7 +7364,7 @@
                 </div>
                 <div class="track-card-back">
                   <div class="track-back-screenshot">
-                    <img src="../assets/projects/noteapp.png" alt="NoteApp" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">
+                    <img src="../assets/projects/noteapp.png" alt="NoteApp" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">
                   </div>
                   <div class="track-back-title">NoteApp</div>
                   <p class="track-back-desc">Privacy-first note-taking with offline support and cloud sync.</p>
@@ -7642,7 +7422,7 @@
                 </div>
                 <div class="track-card-back">
                   <div class="track-back-screenshot">
-                    <img src="../assets/projects/cinder.png" alt="Cinder" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                    <img src="../assets/projects/cinder.png" alt="Cinder" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
                   </div>
                   <div class="track-back-title">Cinder</div>
                   <p class="track-back-desc">AI-assisted original music project launching on Spotify & Apple Music.</p>
@@ -7697,7 +7477,7 @@
                 </div>
                 <div class="track-card-back">
                   <div class="track-back-screenshot">
-                    <img src="../assets/projects/littlereddot.png" alt="The Little Red Dot" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                    <img src="../assets/projects/littlereddot.png" alt="The Little Red Dot" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
                   </div>
                   <div class="track-back-title">The Little Red Dot</div>
                   <p class="track-back-desc">AI-assisted original music project launching on Spotify & Apple Music.</p>
@@ -7750,7 +7530,7 @@
                   </a>
                 </div>
                 <div class="track-card-back">
-                  <div class="track-back-screenshot"><img src="../assets/projects/portfolio.png" alt="This Portfolio" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;"></div>
+                  <div class="track-back-screenshot"><img src="../assets/projects/portfolio.png" alt="This Portfolio" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;"></div>
                   <div class="track-back-title">This Portfolio</div>
                   <p class="track-back-desc">Interactive digital resume with AI chat and skills visualization.</p>
                   <div class="track-workflow">
@@ -7794,7 +7574,7 @@
                   <div class="track-tech"><span class="track-tech-chip">Flutter</span><span class="track-tech-chip">Dart</span><span class="track-tech-chip">Material Design</span></div>
                 </div>
                 <div class="track-card-back">
-                  <div class="track-back-screenshot"><img src="../assets/projects/calci.png" alt="Calci" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;"></div>
+                  <div class="track-back-screenshot"><img src="../assets/projects/calci.png" alt="Calci" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;"></div>
                   <div class="track-back-title">Calci</div>
                   <p class="track-back-desc">Smart calculator with presets for EMI, tips, splits, and everyday calculations.</p>
                   <div class="track-workflow"><div class="track-workflow-header"><span>9-Step Workflow</span><span>4/9</span></div><div class="track-workflow-dots"><span class="track-workflow-dot completed"></span><span class="track-workflow-dot completed"></span><span class="track-workflow-dot completed"></span><span class="track-workflow-dot completed"></span><span class="track-workflow-dot in-progress"></span><span class="track-workflow-dot"></span><span class="track-workflow-dot"></span><span class="track-workflow-dot"></span><span class="track-workflow-dot"></span></div></div>
@@ -8077,8 +7857,6 @@
           </svg>
           Traditional Resume
         </a>
-        <!-- Portfolio link hidden until portfolio launch -->
-        <!--
         <a href="../" class="footer-link">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
@@ -8086,7 +7864,6 @@
           </svg>
           View Full Portfolio
         </a>
-        -->
       </div>
       <!-- Creative Back to Top -->
       <a href="#" class="back-to-top-creative" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">
@@ -8433,35 +8210,6 @@
       }
     }
 
-    // ============ Unanswered Question Logging ============
-    async function logUnansweredQuestion(question) {
-      if (SUPABASE_URL === 'https://your-project.supabase.co') return;
-
-      try {
-        const payload = {
-          question: question,
-          user_name: chatUser.name || 'Anonymous',
-          user_email: chatUser.email || null,
-          user_role: chatUser.role || null,
-          session_id: chatUser.sessionId,
-          status: 'pending',
-          created_at: new Date().toISOString()
-        };
-
-        await fetch(`${SUPABASE_URL}/rest/v1/unanswered_questions`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'apikey': SUPABASE_ANON_KEY,
-            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
-          },
-          body: JSON.stringify(payload)
-        });
-      } catch (error) {
-        console.error('Error logging unanswered question:', error);
-      }
-    }
-
     // ============ Intro Section Toggle ============
     function toggleIntro() {
       const section = document.getElementById('intro-section');
@@ -8543,23 +8291,6 @@
     }
 
     // ============ Project Status Filter (with Fluid Rearrangement) ============
-    function flipAllCards() {
-      const flipCards = document.querySelectorAll('.flip-card');
-      const trackCards = document.querySelectorAll('.track-card');
-      const allCards = [...flipCards, ...trackCards];
-      // If any card is NOT flipped, flip all. Otherwise, unflip all.
-      const anyUnflipped = allCards.some(card => !card.classList.contains('flipped'));
-      allCards.forEach((card, i) => {
-        setTimeout(() => {
-          if (anyUnflipped) {
-            card.classList.add('flipped');
-          } else {
-            card.classList.remove('flipped');
-          }
-        }, i * 60);
-      });
-    }
-
     function filterProjects(status) {
       // Update legend active state
       document.querySelectorAll('.legend-item').forEach(item => {
@@ -9286,15 +9017,14 @@ It demonstrates Arun's expertise in mobile development, offline-first patterns, 
 It demonstrates Arun's expertise in AI integration, voice interfaces, and full-stack development.`,
 
       // ===== SKILLS =====
-      'python': `Arun has <strong>expert-level Python</strong> skills:
+      'python': `Arun has <strong>advanced Python</strong> skills:
 
-<strong>Experience:</strong> Data pipelines, automation, analytics, AI/ML workflows
+<strong>Experience:</strong> Data pipelines, automation, analytics
 <strong>Achievement:</strong> 80% reduction in daily job execution times at Bank of America
-<strong>Active Use:</strong> Building AI-assisted apps, data processing pipelines, and automation scripts
 
 <strong>Related skills:</strong> Data Science (IBM certified), Databricks Lakehouse, analytics platforms`,
 
-      'java': `Arun has <strong>strong Java</strong> experience, with a remarkable origin story:
+      'java': `Arun has <strong>expert-level Java</strong> experience, with a remarkable origin story:
 
 <strong>The Denomination Module Story:</strong>
 • <strong>Challenge:</strong> Build a multi-screen, multi-currency cash denomination utility
@@ -9554,7 +9284,7 @@ This modern approach combines 17+ years of architecture experience with cutting-
 • <strong>Microservices:</strong> Banking applications built on container-based microservice architecture
 • <strong>Cloud-Native Patterns:</strong> Containers, service mesh, Kafka (event-driven architecture)
 • <strong>Deployment Patterns:</strong> Blue-green and canary deployments
-• <strong>Monitoring:</strong> Custom dashboards for system monitoring
+• <strong>Monitoring:</strong> Splunk dashboards for system monitoring
 
 Currently working with enterprise-grade infrastructure at Bank of America for real-time payment systems.`,
 
@@ -10107,69 +9837,11 @@ Open to exploring new opportunities that align with my career goals.`,
 
       messageDiv.innerHTML = `
         <div class="message-avatar">${icon}</div>
-        <div class="message-bubble"></div>
+        <div class="message-bubble">${content}</div>
       `;
 
       messages.appendChild(messageDiv);
-      const bubble = messageDiv.querySelector('.message-bubble');
-
-      if (isUser) {
-        bubble.innerHTML = content;
-        messages.scrollTop = messages.scrollHeight;
-      } else {
-        typeMessage(bubble, content, messages);
-      }
-    }
-
-    function typeMessage(bubble, html, scrollContainer) {
-      const segments = [];
-      let i = 0;
-      while (i < html.length) {
-        if (html[i] === '<') {
-          const end = html.indexOf('>', i);
-          if (end !== -1) {
-            segments.push({ type: 'tag', value: html.substring(i, end + 1) });
-            i = end + 1;
-          } else {
-            segments.push({ type: 'char', value: html[i] });
-            i++;
-          }
-        } else if (html[i] === '&') {
-          const end = html.indexOf(';', i);
-          if (end !== -1 && end - i < 10) {
-            segments.push({ type: 'char', value: html.substring(i, end + 1) });
-            i = end + 1;
-          } else {
-            segments.push({ type: 'char', value: html[i] });
-            i++;
-          }
-        } else {
-          segments.push({ type: 'char', value: html[i] });
-          i++;
-        }
-      }
-
-      let current = 0;
-      let rendered = '';
-      const speed = 8;
-      const charsPerTick = 3;
-
-      function tick() {
-        let added = 0;
-        while (current < segments.length && added < charsPerTick) {
-          const seg = segments[current];
-          rendered += seg.value;
-          current++;
-          if (seg.type === 'char') added++;
-        }
-        bubble.innerHTML = rendered;
-        scrollContainer.scrollTop = scrollContainer.scrollHeight;
-
-        if (current < segments.length) {
-          setTimeout(tick, speed);
-        }
-      }
-      tick();
+      messages.scrollTop = messages.scrollHeight;
     }
 
     function showLoadingIndicator() {
@@ -10226,16 +9898,8 @@ Open to exploring new opportunities that align with my career goals.`,
         const response = getResponse(question);
         addMessage(response);
 
-        // Check if this was an unanswered question
-        const isUnanswered = response === chatResponses['unknown'];
-
         // Log Q&A to Supabase
-        logChatSession(isUnanswered ? 'unanswered' : 'message', question, response);
-
-        // Log unanswered questions separately for follow-up
-        if (isUnanswered) {
-          logUnansweredQuestion(question);
-        }
+        logChatSession('message', question, response);
       }, delay);
     }
 
@@ -10507,9 +10171,9 @@ Open to exploring new opportunities that align with my career goals.`,
 
     // ============ Initialize Everything ============
     document.addEventListener('DOMContentLoaded', () => {
-      // Load GitHub data immediately
+      // Load all GitHub data (user, repos, contributions)
       initGitHubData();
-      try { initRadarChart(); } catch(e) { console.warn('Chart.js not available:', e); }
+      initRadarChart();
       initSkillFilters();
 
       // Load project screenshots from READMEs
@@ -10575,7 +10239,7 @@ Open to exploring new opportunities that align with my career goals.`,
               'Strategized Business processes for Client Onboarding, enabling new businesses and integrating Regulatory norms within Bank-in-a-box technology',
               'Designed and achieved a 5x Business-volumes-ready reporting system certified by the Client',
               'Led Design changes resulting in 60% reduction in daily job execution times',
-              'Designed monitoring dashboards for visualization and remediation of system events with quickest TAT',
+              'Designed Splunk dashboards for visualization and remediation of system events with quickest TAT',
               'Mentored cross-functional teams in decision making, business thinking, and problem solving'
             ]
           },
@@ -10651,10 +10315,10 @@ Open to exploring new opportunities that align with my career goals.`,
           { name: 'Solution Architecture', category: 'architecture', level: 'Expert | 17+ years', progress: 95 },
           { name: 'Core Banking (Finacle)', category: 'architecture', level: 'Expert', progress: 90 },
           { name: 'Data Science', category: 'data', level: 'IBM Certified', progress: 78 },
-          { name: 'Python', category: 'development', level: 'Expert', progress: 88 },
-          { name: 'Java', category: 'development', level: 'Advanced', progress: 78 },
+          { name: 'Python', category: 'development', level: 'Advanced', progress: 80 },
+          { name: 'Java', category: 'development', level: 'Expert', progress: 88 },
           { name: 'PL/SQL', category: 'development', level: 'Expert', progress: 90 },
-          { name: 'Data Analytics (Tableau)', category: 'data', level: 'Advanced', progress: 75 },
+          { name: 'Data Analytics (Tableau, Splunk)', category: 'data', level: 'Advanced', progress: 75 },
           { name: 'Agentic AI Implementation', category: 'data', level: 'Active Practitioner', progress: 70 }
         ],
         projects: [
@@ -10718,15 +10382,9 @@ Open to exploring new opportunities that align with my career goals.`,
             reason: null
           };
 
-          // Word-boundary matching
-          const wordMatch = (text, keyword) => {
-            const regex = new RegExp('\\b' + keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b');
-            return regex.test(text);
-          };
-
           // Detect intent
           for (const [intent, keywords] of Object.entries(this.intents)) {
-            if (keywords.some(kw => wordMatch(msg, kw))) {
+            if (keywords.some(kw => msg.includes(kw))) {
               result.intent = intent;
               break;
             }
@@ -10734,7 +10392,7 @@ Open to exploring new opportunities that align with my career goals.`,
 
           // Detect section
           for (const [section, keywords] of Object.entries(this.sections)) {
-            if (keywords.some(kw => wordMatch(msg, kw))) {
+            if (keywords.some(kw => msg.includes(kw))) {
               result.section = section;
               break;
             }
@@ -10763,24 +10421,15 @@ Open to exploring new opportunities that align with my career goals.`,
 
         isResumeCommand(message) {
           const msg = message.toLowerCase();
-
-          // Word-boundary matching to avoid substring false positives
-          const wordMatch = (text, keyword) => {
-            const regex = new RegExp('\\b' + keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b');
-            return regex.test(text);
-          };
-
-          // Resume-related = section keywords + explicit resume nouns (NOT intent verbs)
-          const resumeNouns = [
-            ...Object.values(this.sections).flat(),
-            'resume', 'cv', 'skill', 'skills', 'experience', 'bullet',
-            'dark mode', 'light mode', 'theme', 'compact', 'layout'
+          const allKeywords = [
+            ...Object.values(this.intents).flat(),
+            'resume', 'cv', 'skill', 'experience', 'project'
           ];
-          const isResumeRelated = resumeNouns.some(kw => wordMatch(msg, kw));
 
-          // Must also have a clear action intent
+          // Check if it's a resume-related command
+          const isResumeRelated = allKeywords.some(kw => msg.includes(kw));
           const hasActionIntent = Object.values(this.intents).some(keywords =>
-            keywords.some(kw => wordMatch(msg, kw))
+            keywords.some(kw => msg.includes(kw))
           );
 
           return isResumeRelated && hasActionIntent;
@@ -12263,7 +11912,7 @@ ${report.improvements.map(i => `• ${i}`).join('\n')}
             <div class="flip-card-back">
               <div class="deliverable-container">
                 <div class="deliverable-screenshot">
-                  <img src="../${project.image}" alt="${project.name}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                  <img src="../${project.image}" alt="${project.name}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
                 </div>
                 <div class="back-header" style="border-bottom: none; padding-bottom: 0; margin-bottom: 0.5rem;">
                   <h4 class="back-title" style="font-size: 0.9rem;">
@@ -12326,7 +11975,7 @@ ${report.improvements.map(i => `• ${i}`).join('\n')}
                 </div>
                 <div class="track-card-back">
                   <div class="track-back-screenshot">
-                    <img src="../${project.image}" alt="${project.name}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">
+                    <img src="../${project.image}" alt="${project.name}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">
                   </div>
                   <div class="track-back-title">${project.name}</div>
                   <p class="track-back-desc">${project.shortDesc}</p>
