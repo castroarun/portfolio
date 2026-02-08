@@ -31,7 +31,7 @@
   "stage": "live",
   "progress": 100,
   "complexity": "F",
-  "lastUpdated": "2026-01-17",
+  "lastUpdated": "2026-02-08",
   "targetDate": null,
   "nextAction": "Add new projects as they ship",
   "blocker": null,

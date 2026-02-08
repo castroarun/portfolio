@@ -1,0 +1,13 @@
+{
+  "id": "portfolio",
+  "name": "Digital Resume",
+  "tagline": "Interactive portfolio & resume",
+  "status": "live",
+  "tech": ["HTML/CSS", "JavaScript", "Chart.js"],
+  "description": "Interactive digital resume with AI assistant, skills radar, and 9-step workflow showcase.",
+  "progress": { "completed": 9, "total": 9, "inProgress": null },
+  "links": {
+    "preview": "https://castroarun.github.io/portfolio/",
+    "github": "https://github.com/castroarun/portfolio"
+  }
+}

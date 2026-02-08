@@ -33,7 +33,7 @@
       "statusText": "Live",
       "statusHint": "(Live)",
       "statusColor": "#22c55e",
-      "badgeClass": "built",
+      "badgeClass": "live",
       "tech": ["Next.js", "TypeScript", "TipTap"],
       "description": "Privacy-first note-taking app with offline sync, voice-to-text, and 200+ test cases.",
       "descriptionHtml": "Rich text editing with <strong>templates</strong>, auto-save, and dark/light theme toggle.",
@@ -83,7 +83,7 @@
       "statusText": "Live",
       "statusHint": "(Live)",
       "statusColor": "#22c55e",
-      "badgeClass": "built",
+      "badgeClass": "live",
       "tech": ["HTML/CSS", "JavaScript", "Chart.js"],
       "description": "Interactive digital resume with AI assistant, skills radar, and 9-step workflow showcase.",
       "descriptionHtml": "<strong>AI chat assistant</strong>, skills radar, timeline view with 9-step workflow showcase.",
@@ -93,7 +93,7 @@
       "icon": "clock",
       "iconColor": "#22d3ee",
       "image": "assets/projects/portfolio.png",
-      "progress": { "completed": 8, "total": 9, "inProgress": 9 },
+      "progress": { "completed": 9, "total": 9, "inProgress": null },
       "links": {
         "preview": "https://castroarun.github.io/portfolio/",
         "github": "https://github.com/castroarun/portfolio"
@@ -108,7 +108,7 @@
       "statusText": "Live",
       "statusHint": "(Live)",
       "statusColor": "#22c55e",
-      "badgeClass": "built",
+      "badgeClass": "live",
       "tech": ["Flutter", "Dart", "Material Design"],
       "description": "19 interlinked financial calculators in one app — EMI, tip splits, compound interest, currency conversion, and more. Plan mode lets you chain calculations together.",
       "descriptionHtml": "<strong>19 interlinked calculators</strong> with Plan mode — chain EMI, splits, compound interest, and currency conversions together.",
@@ -283,7 +283,7 @@
     "conception": "Under Conception"
   },
   "metadata": {
-    "lastUpdated": "2026-01-15",
+    "lastUpdated": "2026-02-08",
     "version": "2.0.0"
   }
 }

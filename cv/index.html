@@ -87,23 +87,24 @@
       }
 
       @page {
-        margin: 1.5cm 1cm 1.2cm 1.5cm;
+        margin: 1.2cm 1cm 1cm 1.2cm;
       }
 
       @page :first {
-        margin-top: 1cm;
+        margin-top: 0.8cm;
       }
 
       html {
-        font-size: 12px;
+        font-size: 11.5px;
       }
 
       .name {
-        font-size: 2rem; /* Keep name same size */
+        font-size: 2rem;
       }
 
       body {
         background: white;
+        line-height: 1.5;
       }
 
       .back-link,
@@ -118,44 +119,78 @@
       }
 
       .header {
-        margin-bottom: 1rem;
-        padding-bottom: 0.8rem;
+        margin-bottom: 0.8rem;
+        padding-bottom: 0.6rem;
       }
 
       .section {
-        margin-bottom: 1rem;
+        margin-bottom: 0.8rem;
         page-break-inside: avoid;
+        break-inside: avoid;
       }
 
       .section-title {
-        margin-bottom: 0.6rem;
-        padding-bottom: 0.3rem;
+        margin-bottom: 0.5rem;
+        padding-bottom: 0.2rem;
       }
 
       .experience-item {
-        margin-bottom: 1rem;
-        padding-bottom: 0.8rem;
+        margin-bottom: 0.8rem;
+        padding-bottom: 0.6rem;
         page-break-inside: avoid;
+        break-inside: avoid;
       }
 
-      .traits-grid {
-        gap: 0.5rem;
+      /* Prevent orphaned lines and widows */
+      p, li {
+        orphans: 3;
+        widows: 3;
       }
 
-      .skills-grid {
-        gap: 0.6rem;
+      /* Prevent section titles from being separated from content */
+      .section-title {
+        page-break-after: avoid;
+        break-after: avoid;
       }
 
-      .cert-grid {
-        gap: 0.4rem;
-      }
-
+      /* Keep education and projects together - no page break */
       .projects-grid {
-        gap: 0.6rem;
+        page-break-inside: avoid;
+        break-inside: avoid;
       }
 
       .project-card {
-        padding: 0.6rem;
+        page-break-inside: avoid;
+        break-inside: avoid;
+      }
+
+      .traits-grid {
+        gap: 0.4rem;
+      }
+
+      .skills-grid {
+        gap: 0.5rem;
+      }
+
+      .cert-grid {
+        gap: 0.3rem;
+      }
+
+      .projects-grid {
+        gap: 0.5rem;
+      }
+
+      .project-card {
+        padding: 0.5rem;
+      }
+
+      .summary-text {
+        line-height: 1.5;
+      }
+
+      .experience-bullets li {
+        margin-bottom: 0.2rem;
+        line-height: 1.4;
       }
 
       .no-print {
@@ -164,7 +199,10 @@
 
       .page-break {
         page-break-before: always;
-        padding-top: 0.5cm;
+        break-before: page;
+        padding-top: 0.3cm;
+        page-break-inside: auto;
+        break-inside: auto;
       }
     }
 
@@ -617,7 +655,7 @@
         Back to Portfolio
       </a>
       <h1 class="name">Arun Castromin Lawrance</h1>
-      <p class="title">Senior Technology Architect | Solutions Architect | Enterprise Architecture</p>
+      <p class="title">Solutions Architect | Enterprise Architect | Product Owner | Technology Consulting</p>
       <div class="contact">
         <span class="contact-item">
           <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -650,12 +688,12 @@
     <section class="section">
       <h2 class="section-title">Professional Summary</h2>
       <p class="summary-text">
-        <strong>Sr. Solution Architect</strong> with 17+ years delivering technology-enabled solutions in
+        <strong>Sr. Solution Architect</strong> & <strong>TOGAF Certified Enterprise Architect</strong> with <strong>17+ years</strong> delivering technology-enabled solutions in
         <strong>core banking, payments, and digital transformation</strong>. Extensive experience implementing
-        <strong>Finacle core banking solutions</strong> across India, Middle East, and APAC regions.
-        Expert in driving NFR implementation end-to-end for global commercial banks. Proven track record in
-        stakeholder management, leading cross-functional teams, and achieving <strong>100% on-time deliverables</strong>
-        with industry standards and quality.
+        <strong>Finacle core banking solutions</strong> across India, Middle East, Africa, and APAC regions for Tier-1 banks including
+        Bank of America, Emirates NBD, and Standard Bank. Currently a key contributor to Application Platform Engineering,
+        delivering RTP solutions for global commercial banking in Singapore. With an architect's mindset, designing and building
+        <strong>end-to-end solutions</strong> — applying architecture thinking from concept to deployment.
       </p>
     </section>
 
@@ -663,10 +701,10 @@
     <section class="section">
       <h2 class="section-title">Key Strengths</h2>
       <div class="traits-grid">
-        <div class="trait-item"><strong>Demonstrated Leadership</strong> - Mentored and led teams of up to 18 for top Tier clients with 15000+ man-days of successful deliverables</div>
-        <div class="trait-item"><strong>Business Analyst Acumen</strong> - Conceptualized & established multiple Business Processes</div>
-        <div class="trait-item"><strong>Technology Architect</strong> - Designed & Implemented Scalable, Reusable & Performance-Savvy Business Complex modules</div>
-        <div class="trait-item"><strong>Innovation Mindset</strong> - Out-of-the-box thinking with inclination to add creativity to work regimen</div>
+        <div class="trait-item"><strong>Demonstrated Leadership</strong> - Mentored and driven cross-functional teams for Tier-1 banking clients with 100% on-time delivery across 15,000+ man-days of deliverables</div>
+        <div class="trait-item"><strong>Business Analyst Acumen</strong> - Bridged business and technology — translating complex requirements including regulatory into actionable solutions, driving client onboarding workflows and compliance frameworks</div>
+        <div class="trait-item"><strong>Solutions Architect</strong> - Designed and implemented scalable, high-performance banking solutions — from real-time payment systems to regulatory reporting frameworks across global markets</div>
+        <div class="trait-item"><strong>Innovation Mindset</strong> - Pioneered unconventional solutions — from self-learning Java to deliver a critical banking module in 2 months, to integrating AI workflows for operational efficiency</div>
       </div>
     </section>
 
@@ -684,7 +722,7 @@
         </div>
         <div>
           <p class="skill-category">Programming & Tools</p>
-          <p class="skill-list">Python, Java, PL/SQL, JavaScript, JSP, Unix/C | Tableau, MicroStrategy, Splunk, IBM Cognos, JIRA, PMP</p>
+          <p class="skill-list">Python, Java, PL/SQL, JavaScript, JSP, Unix/C | Tableau, MicroStrategy, IBM Cognos, JIRA, PMP</p>
         </div>
         <div>
           <p class="skill-category">Methodology</p>
@@ -726,7 +764,7 @@
           <li>Led numerous Business meetings with stakeholders across Operations, Stream Leads, PMO, Compliance and Service providers, solutioning multiple Reporting-to-Business conflicts ensuring BAU</li>
           <li>Designed and achieved a 5x Business-volumes-ready reporting system certified by the Client through multiple performance improvement initiatives</li>
           <li>Led Design changes and Performance enhancements resulting in 60% reduction in daily job execution times</li>
-          <li>Designed Splunk User interfaces for visualization and remediation of potential system detrimental events, offering quickest TAT for identification and resolution</li>
+          <li>Designed monitoring dashboards for visualization and remediation of potential system detrimental events, offering quickest TAT for identification and resolution</li>
           <li>Mentored and developed strong team culture in decision making, Business thinking, Knowledge sharing and Problem Solving across Business Analysts, Technology teams and Testers</li>
         </ul>
       </div>
@@ -761,7 +799,7 @@
           <li>Acknowledged as Client's most preferred Project Manager for techno-functional capabilities and management stronghold</li>
           <li>Earned internal prestigious Team Award for management, consistency, timeliness & code quality</li>
         </ul>
-        <p class="experience-roles"><strong>Roles:</strong> Project Manager, Business Analyst, QA Lead, Technology Architect, Senior Developer</p>
+        <p class="experience-roles"><strong>Roles:</strong> Project Manager, Product Owner, Business Analyst, QA Lead, Technology Architect, Senior Developer</p>
       </div>
 
       <!-- Emirates NBD -->
