@@ -12019,11 +12019,10 @@ Open to exploring new opportunities that align with my career goals.`,
               'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
             },
             body: JSON.stringify({
-              sender_name: name,
-              sender_email: email,
+              name: name,
+              email: email,
               message: message,
-              source: chatUser.name ? 'ai_chat' : 'contact_form',
-              created_at: new Date().toISOString()
+              subject: chatUser.name ? 'ai_chat' : 'contact_form'
             })
           });
 
