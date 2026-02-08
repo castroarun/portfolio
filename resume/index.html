@@ -920,10 +920,11 @@
     }
 
     .github-compact-row {
-      display: grid;
-      grid-template-columns: auto 1fr auto;
+      display: flex;
+      flex-wrap: wrap;
       gap: 1.5rem;
       align-items: center;
+      justify-content: space-between;
     }
 
     .github-profile {
@@ -1288,7 +1289,7 @@
     }
 
     .flip-card {
-      height: 380px;
+      height: 320px;
       perspective: 1000px;
       cursor: pointer;
     }
@@ -1314,7 +1315,7 @@
       border-radius: 16px;
       background: var(--bg-card);
       border: 1px solid var(--border-subtle);
-      padding: 1.5rem;
+      padding: 1.25rem;
       overflow: hidden;
     }
 
@@ -6537,7 +6538,7 @@
       .arch-node { min-width: 55px; font-size: 0.58rem; padding: 0.3rem 0.5rem; }
     }
 
-    /* ============ From the Feed (LinkedIn Posts) ============ */
+    /* ============ From the Feed (LinkedIn Posts - Accordion) ============ */
     .li-badge {
       width: 28px;
       height: 28px;
@@ -6552,362 +6553,219 @@
 
     .li-badge svg { width: 16px; height: 16px; color: var(--linkedin); }
 
-    .content-tabs {
-      display: flex;
-      gap: 0.25rem;
-      max-width: 900px;
-      margin: 0 auto 1.5rem auto;
-      background: var(--bg-card);
-      border-radius: 8px;
-      padding: 0.25rem;
-      width: fit-content;
-    }
-
-    .content-tab {
-      padding: 0.4rem 0.8rem;
-      border: none;
-      background: transparent;
-      color: var(--text-muted);
-      font-size: 0.72rem;
-      font-weight: 500;
-      cursor: pointer;
-      border-radius: 6px;
-      transition: all 0.2s;
-      font-family: inherit;
-      display: flex;
-      align-items: center;
-      gap: 0.35rem;
-    }
-
-    .content-tab:hover { color: var(--text-primary); background: var(--bg-elevated); }
-    .content-tab.active { background: var(--accent-dim); color: var(--accent); }
-
-    .tab-count {
-      font-size: 0.58rem;
-      font-weight: 700;
-      background: var(--bg-base);
-      padding: 0.1rem 0.35rem;
-      border-radius: 3px;
-      font-family: 'JetBrains Mono', monospace;
-    }
-
-    .content-tab.active .tab-count { background: rgba(34, 211, 238, 0.15); }
-
-    .posts-layout {
+    .feed-list {
       max-width: 900px;
       margin: 0 auto;
       display: flex;
       flex-direction: column;
-      gap: 0.75rem;
     }
 
-    .posts-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.75rem;
+    .feed-item {
+      border-bottom: 1px solid var(--border-subtle);
+      transition: all 0.3s ease;
+      border-radius: 0;
+      border-left: 2px solid transparent;
     }
 
-    .posts-row.tri { grid-template-columns: 1fr 1fr 1fr; }
+    .feed-item:first-child:not(.expanded) {
+      border-top: 1px solid var(--border-subtle);
+    }
 
-    /* FEATURED Card */
-    .card-featured {
+    .feed-item.expanded {
       background: var(--bg-card);
-      border: 1px solid rgba(10, 102, 194, 0.15);
-      border-radius: 16px;
-      padding: 2rem 2.25rem;
+      border-left: 2px solid var(--accent);
+      border-radius: 8px;
+      margin: 0.35rem 0;
+      border-top: 1px solid var(--border-medium);
+      border-bottom: 1px solid var(--border-medium);
+      border-right: 1px solid var(--border-medium);
+    }
+
+    .feed-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .feed-row:hover {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .feed-item.expanded .feed-row {
+      padding-bottom: 0.5rem;
+      border-radius: 8px 8px 0 0;
+    }
+
+    .feed-item.expanded .feed-row:hover {
+      background: transparent;
+    }
+
+    /* Type pill */
+    .type-pill {
+      flex-shrink: 0;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.58rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      min-width: 52px;
+      text-align: center;
+    }
+
+    .type-pill--article  { background: var(--linkedin-dim); color: var(--linkedin); }
+    .type-pill--launch   { background: var(--green-dim);  color: var(--green); }
+    .type-pill--insight  { background: var(--purple-dim); color: var(--purple); }
+    .type-pill--post     { background: var(--amber-dim);  color: var(--amber); }
+
+    .feed-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .feed-title {
+      font-size: 0.85rem;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      line-height: 1.4;
+    }
+
+    .feed-item.expanded .feed-title {
+      color: var(--accent);
+      white-space: normal;
+      font-size: 0.9rem;
+    }
+
+    .feed-item.expanded .feed-read-link {
+      display: none;
+    }
+
+    .feed-read-link {
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.65rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .feed-read-link:hover {
+      color: var(--linkedin);
+      background: var(--linkedin-dim);
+    }
+
+    .feed-read-link svg { width: 12px; height: 12px; }
+
+    .feed-chevron {
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      color: var(--text-muted);
+      transition: transform 0.3s ease, color 0.2s;
+    }
+
+    .feed-item.expanded .feed-chevron {
+      transform: rotate(90deg);
+      color: var(--accent);
+    }
+
+    /* Expanded Detail Panel */
+    .feed-detail {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+      opacity: 0;
+    }
+
+    .feed-item.expanded .feed-detail {
+      max-height: 500px;
+      opacity: 1;
+    }
+
+    .feed-detail-inner {
+      padding: 0 1rem 1rem 1rem;
+      border-top: 1px solid var(--border-subtle);
+      margin: 0 0.5rem;
+    }
+
+    .detail-card {
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      padding: 0;
       position: relative;
       overflow: hidden;
-      text-decoration: none;
-      color: inherit;
-      display: block;
-      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    .card-featured::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--linkedin), var(--accent), transparent);
-    }
-
-    .card-featured::after {
-      content: '';
-      position: absolute;
-      top: -60px; right: -60px;
-      width: 200px; height: 200px;
-      background: radial-gradient(circle, rgba(10, 102, 194, 0.06) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    .card-featured:hover {
-      border-color: rgba(10, 102, 194, 0.3);
-      transform: translateY(-3px);
-      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(10, 102, 194, 0.08);
-    }
-
-    .card-featured .post-meta { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem; }
-
-    .card-featured .post-title {
-      font-size: 1.25rem;
-      font-weight: 800;
-      color: var(--text-primary);
-      margin-bottom: 0.6rem;
-      line-height: 1.3;
-      letter-spacing: -0.02em;
-    }
-
-    .card-featured:hover .post-title { color: var(--accent); }
-
-    .card-featured .post-arch-note {
+    .detail-desc {
       font-size: 0.85rem;
       color: var(--text-secondary);
-      line-height: 1.6;
-      margin-bottom: 0.75rem;
-      padding-left: 0.85rem;
-      border-left: 2px solid var(--linkedin);
+      line-height: 1.65;
+      margin-top: 0.85rem;
+      margin-bottom: 0.85rem;
     }
 
-    /* ARTICLE Card */
-    .card-article {
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-left: 3px solid var(--linkedin);
-      border-radius: 4px 12px 12px 4px;
-      padding: 1.25rem 1.5rem;
-      text-decoration: none;
-      color: inherit;
-      display: block;
-      transition: all 0.3s ease;
-      position: relative;
-    }
-
-    .card-article:hover {
-      border-color: rgba(10, 102, 194, 0.2);
-      border-left-color: var(--linkedin);
-      background: var(--bg-hover);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-    }
-
-    .card-article .post-title {
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--text-primary);
-      margin-bottom: 0.3rem;
-      line-height: 1.35;
-    }
-
-    .card-article:hover .post-title { color: var(--accent); }
-
-    .card-article .post-arch-note {
-      font-size: 0.78rem;
-      color: var(--text-secondary);
-      line-height: 1.55;
-      margin-bottom: 0.5rem;
-    }
-
-    /* POST Card */
-    .card-post {
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: 12px;
-      padding: 1.15rem 1.25rem;
-      text-decoration: none;
-      color: inherit;
-      display: flex;
-      flex-direction: column;
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .card-post::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--accent), transparent);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .card-post:hover::before { opacity: 1; }
-
-    .card-post:hover {
-      border-color: rgba(34, 211, 238, 0.15);
-      background: var(--bg-hover);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.25);
-    }
-
-    .card-post .post-title { font-size: 0.92rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.3rem; line-height: 1.35; }
-    .card-post:hover .post-title { color: var(--accent); }
-    .card-post .post-arch-note { font-size: 0.72rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 0.5rem; flex: 1; }
-
-    /* INSIGHT Card */
-    .card-insight {
-      background: var(--bg-card);
-      border: 1px solid rgba(167, 139, 250, 0.12);
-      border-radius: 12px;
-      padding: 1.5rem 1.75rem 1.5rem 2.5rem;
-      text-decoration: none;
-      color: inherit;
-      display: block;
-      transition: all 0.3s ease;
-      position: relative;
-    }
-
-    .card-insight::before {
-      content: '\201C';
-      position: absolute;
-      top: 0.5rem; left: 0.75rem;
-      font-size: 3.5rem;
-      font-weight: 800;
-      color: var(--purple);
-      opacity: 0.15;
-      font-family: Georgia, serif;
-      line-height: 1;
-    }
-
-    .card-insight:hover {
-      border-color: rgba(167, 139, 250, 0.25);
-      background: var(--bg-hover);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-    }
-
-    .card-insight .post-title { font-size: 1.05rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.35rem; line-height: 1.35; font-style: italic; }
-    .card-insight:hover .post-title { color: var(--purple); }
-    .card-insight .post-arch-note { font-size: 0.78rem; color: var(--text-secondary); line-height: 1.55; margin-bottom: 0.5rem; padding-left: 0.75rem; border-left: 2px solid rgba(167, 139, 250, 0.3); }
-
-    /* LAUNCH Card */
-    .card-launch {
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: 12px;
-      padding: 1.15rem 1.25rem;
-      text-decoration: none;
-      color: inherit;
-      display: flex;
-      flex-direction: column;
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .card-launch::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--green), transparent);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .card-launch:hover::before { opacity: 1; }
-
-    .card-launch:hover {
-      border-color: rgba(34, 197, 94, 0.15);
-      background: var(--bg-hover);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.25);
-    }
-
-    .card-launch .post-title { font-size: 0.92rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.3rem; line-height: 1.35; }
-    .card-launch:hover .post-title { color: var(--green); }
-    .card-launch .post-arch-note { font-size: 0.72rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 0.5rem; flex: 1; }
-
-    /* Shared post elements */
-    .post-meta { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem; flex-wrap: wrap; }
-
-    .post-type {
-      font-size: 0.55rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      padding: 0.15rem 0.5rem;
-      border-radius: 3px;
-    }
-
-    .post-type.article { color: var(--linkedin); background: var(--linkedin-dim); border: 1px solid rgba(10, 102, 194, 0.2); }
-    .post-type.launch { color: var(--green); background: var(--green-dim); border: 1px solid rgba(34, 197, 94, 0.2); }
-    .post-type.insight { color: var(--purple); background: var(--purple-dim); border: 1px solid rgba(167, 139, 250, 0.2); }
-    .post-type.post { color: var(--accent); background: var(--accent-dim); border: 1px solid rgba(34, 211, 238, 0.15); }
-
-    .pinned-badge {
-      font-size: 0.55rem;
-      font-weight: 700;
-      color: var(--linkedin);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
+    .detail-footer {
       display: flex;
       align-items: center;
-      gap: 0.25rem;
+      justify-content: space-between;
+      gap: 1rem;
     }
 
-    .pinned-badge svg { width: 10px; height: 10px; }
+    .detail-tags {
+      display: flex;
+      gap: 0.35rem;
+      flex-wrap: wrap;
+    }
 
-    .post-tags { display: flex; gap: 0.3rem; flex-wrap: wrap; }
-
-    .post-tag {
-      font-size: 0.55rem;
+    .detail-tag {
+      font-size: 0.6rem;
       color: var(--text-muted);
-      background: var(--bg-base);
+      background: rgba(255, 255, 255, 0.04);
       border: 1px solid var(--border-subtle);
-      padding: 0.1rem 0.4rem;
+      padding: 0.12rem 0.45rem;
       border-radius: 3px;
     }
 
-    /* Card watermarks */
-    .card-watermark {
+    .detail-read {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--accent);
+      text-decoration: none;
+      transition: gap 0.2s ease;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .detail-read:hover { gap: 0.6rem; }
+    .detail-read svg { width: 16px; height: 16px; }
+
+    .detail-watermark {
       position: absolute;
-      bottom: 0.75rem; right: 0.75rem;
-      width: 72px; height: 72px;
-      opacity: 0.045;
+      bottom: 0.5rem;
+      right: 0.75rem;
+      width: 80px;
+      height: 80px;
+      opacity: 0.04;
       pointer-events: none;
-      transition: opacity 0.4s ease;
       color: var(--text-primary);
     }
 
-    .card-watermark svg { width: 100%; height: 100%; }
-
-    .card-featured .card-watermark { width: 110px; height: 110px; bottom: 1.25rem; right: 1.5rem; opacity: 0.04; }
-    .card-launch .card-watermark { color: var(--green); opacity: 0.06; }
-    .card-article .card-watermark { color: var(--linkedin); opacity: 0.06; }
-    .card-insight .card-watermark { color: var(--purple); opacity: 0.06; }
-    .card-post .card-watermark { color: var(--accent); opacity: 0.06; }
-    .card-featured .card-watermark { color: var(--linkedin); opacity: 0.05; }
-
-    .card-featured:hover .card-watermark,
-    .card-article:hover .card-watermark,
-    .card-post:hover .card-watermark,
-    .card-insight:hover .card-watermark,
-    .card-launch:hover .card-watermark { opacity: 0.1; }
-
-    .li-arrow {
-      position: absolute;
-      bottom: 1rem; right: 1.25rem;
-      width: 24px; height: 24px;
-      border-radius: 6px;
-      background: var(--linkedin-dim);
-      border: 1px solid rgba(10, 102, 194, 0.12);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      transform: translateX(-4px);
-      transition: all 0.3s ease;
-    }
-
-    .li-arrow svg { width: 12px; height: 12px; color: var(--linkedin); }
-
-    .card-featured:hover .li-arrow,
-    .card-article:hover .li-arrow,
-    .card-post:hover .li-arrow,
-    .card-insight:hover .li-arrow,
-    .card-launch:hover .li-arrow { opacity: 1; transform: translateX(0); }
+    .detail-watermark svg { width: 100%; height: 100%; }
 
     .posts-cta {
       max-width: 900px;
@@ -6936,9 +6794,8 @@
     .cta-button svg { width: 16px; height: 16px; }
 
     @media (max-width: 640px) {
-      .posts-row, .posts-row.tri { grid-template-columns: 1fr; }
-      .card-featured { padding: 1.5rem; }
-      .card-featured .post-title { font-size: 1.1rem; }
+      .feed-title { white-space: normal; }
+      .feed-read-link span { display: none; }
     }
   </style>
 </head>
@@ -7428,7 +7285,7 @@
                   </div>
                   <div class="life-event-gallery">
                     <img src="../assets/projects/cinder.png" alt="Cinder App" class="life-event-gallery-img" loading="lazy">
-                    <img src="../assets/projects/calci.png" alt="Calci App" class="life-event-gallery-img" loading="lazy">
+                    <img src="../assets/projects/anycalc.png" alt="AnyCalc App" class="life-event-gallery-img" loading="lazy">
                   </div>
                 </div>
                 <div class="life-event">
@@ -7675,10 +7532,80 @@
       </div>
     </section>
 
-    <!-- ============ SECTION 3: Skills Visualization ============ -->
+    <!-- ============ SECTION 3: Certifications & Credentials ============ -->
     <section class="section animate-fade-up delay-3">
       <div class="section-header">
         <span class="section-number">03.</span>
+        <h2 class="section-title">Certifications & Credentials</h2>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="certifications-grid">
+        <!-- TOGAF -->
+        <div class="certification-card">
+          <div class="certification-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+              <polyline points="2 17 12 22 22 17"/>
+              <polyline points="2 12 12 17 22 12"/>
+            </svg>
+          </div>
+          <div class="certification-content">
+            <div class="certification-name">TOGAF 9 Certified</div>
+            <div class="certification-issuer">The Open Group · Enterprise Architecture</div>
+          </div>
+        </div>
+
+        <!-- CSPO -->
+        <div class="certification-card">
+          <div class="certification-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 20V10"/>
+              <path d="M18 20V4"/>
+              <path d="M6 20v-4"/>
+            </svg>
+          </div>
+          <div class="certification-content">
+            <div class="certification-name">Certified Scrum Product Owner (CSPO)</div>
+            <div class="certification-issuer">Scrum Alliance · Agile Methodology</div>
+          </div>
+        </div>
+
+        <!-- IBM Data Science -->
+        <div class="certification-card">
+          <div class="certification-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+              <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+              <line x1="12" y1="22.08" x2="12" y2="12"/>
+            </svg>
+          </div>
+          <div class="certification-content">
+            <div class="certification-name">IBM Data Science Professional</div>
+            <div class="certification-issuer">IBM · Python, ML, Data Analytics</div>
+          </div>
+        </div>
+
+        <!-- ISO 31000 -->
+        <div class="certification-card">
+          <div class="certification-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
+          <div class="certification-content">
+            <div class="certification-name">ISO 31000 Risk Manager</div>
+            <div class="certification-issuer">PECB · Risk Management Framework</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ SECTION 4: Skills & Expertise ============ -->
+    <section class="section animate-fade-up delay-3">
+      <div class="section-header">
+        <span class="section-number">04.</span>
         <h2 class="section-title">Skills & Expertise</h2>
         <div class="section-line"></div>
       </div>
@@ -7784,10 +7711,10 @@
       </div>
     </section>
 
-    <!-- ============ SECTION 3b: Domain Expertise Map ============ -->
+    <!-- ============ SECTION 5: Domain Expertise Map ============ -->
     <section class="section animate-fade-up delay-3">
       <div class="section-header">
-        <span class="section-number">03b.</span>
+        <span class="section-number">05.</span>
         <h2 class="section-title">Domain Expertise</h2>
         <div class="section-line"></div>
       </div>
@@ -7913,32 +7840,22 @@
         </div>
       </div>
 
-      <!-- Compliance sub-section -->
-      <div class="compliance-section">
-        <div class="compliance-header">Regulatory Frameworks</div>
-        <div class="compliance-grid">
-          <div class="compliance-tag"><div class="compliance-dot practiced"></div><span class="compliance-name">PCI-DSS</span><span class="compliance-desc">&mdash; Payment security</span></div>
-          <div class="compliance-tag"><div class="compliance-dot practiced"></div><span class="compliance-name">SOX</span><span class="compliance-desc">&mdash; Financial controls</span></div>
-          <div class="compliance-tag"><div class="compliance-dot practiced"></div><span class="compliance-name">ISO 20022</span><span class="compliance-desc">&mdash; Payment messaging</span></div>
-          <div class="compliance-tag"><div class="compliance-dot practiced"></div><span class="compliance-name">CMMI</span><span class="compliance-desc">&mdash; Process maturity</span></div>
-          <div class="compliance-tag"><div class="compliance-dot aware"></div><span class="compliance-name">GDPR</span><span class="compliance-desc">&mdash; Data protection</span></div>
-          <div class="compliance-tag"><div class="compliance-dot aware"></div><span class="compliance-name">BSA/AML</span><span class="compliance-desc">&mdash; Anti-money laundering</span></div>
-          <div class="compliance-tag"><div class="compliance-dot aware"></div><span class="compliance-name">KYC</span><span class="compliance-desc">&mdash; Customer identity</span></div>
-          <div class="compliance-tag"><div class="compliance-dot aware"></div><span class="compliance-name">PSD2</span><span class="compliance-desc">&mdash; Open banking</span></div>
-        </div>
-      </div>
     </section>
 
-    <!-- ============ SECTION 4: GitHub Stats ============ -->
-    <section class="section animate-fade-up delay-4">
+    <!-- GitHub Stats section merged into Innovation Lab below -->
+
+    <!-- ============ SECTION 6: Innovation Lab ============ -->
+    <section class="section animate-fade-up delay-5" id="section-build">
       <div class="section-header">
-        <span class="section-number">04.</span>
-        <h2 class="section-title">GitHub Activity</h2>
+        <span class="section-number">06.</span>
+        <h2 class="section-title">Innovation Lab</h2>
         <div class="section-line"></div>
       </div>
 
-      <div class="github-section">
-        <!-- Compact Single Row: Profile + Stats + Mini Heatmap -->
+      <p style="font-size: 0.85rem; color: var(--text-muted); max-width: 850px; margin: -0.5rem auto 1rem auto;">Where enterprise architecture meets personal curiosity — I bring the same design rigour from banking systems (scalable patterns, clean separation, testable modules) to personal products, exploring new tech stacks with AI-assisted development and a disciplined 9-step delivery workflow.</p>
+
+      <!-- GitHub Activity (merged from standalone section) -->
+      <div class="github-section" style="margin-bottom: 1.5rem;">
         <div class="github-compact-row">
           <!-- Profile -->
           <div class="github-profile">
@@ -7992,36 +7909,6 @@
             </div>
           </div>
         </div>
-
-        <!-- GitHub Repositories (Dynamically Loaded) -->
-        <div class="github-repos-section">
-          <div class="github-repos-header">
-            <h3 class="github-repos-title">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
-              </svg>
-              Public Repositories
-            </h3>
-          </div>
-          <div class="github-repos-grid" id="github-repos-grid">
-            <!-- Loaded dynamically from GitHub API -->
-            <div class="github-repos-loading">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M21 12a9 9 0 1 1-6.219-8.56"/>
-              </svg>
-              Loading repositories...
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ SECTION 5: Projects Showcase ============ -->
-    <section class="section animate-fade-up delay-5" id="section-build">
-      <div class="section-header">
-        <span class="section-number">05.</span>
-        <h2 class="section-title">The Build Journey</h2>
-        <div class="section-line"></div>
       </div>
 
       <!-- Project Status Legend + Flip Instruction -->
@@ -8051,146 +7938,8 @@
         <button class="flip-all-btn" onclick="flipAllCards()" title="Flip all cards">↻ Flip All</button>
       </div>
 
-      <!-- Simple Cards Grid -->
-      <div class="simple-cards-grid" id="simple-cards-grid">
-        <!-- PRIMMO Simple Card -->
-        <div class="simple-card" data-status="building">
-          <div class="card-header">
-            <div class="card-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
-                <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
-                <line x1="12" x2="12" y1="19" y2="22"/>
-              </svg>
-            </div>
-            <div class="card-title-wrapper">
-              <h3 class="card-title">PRIMMO <span class="card-badge building">Building</span></h3>
-              <p class="card-tagline">AI-powered personal strength coach</p>
-            </div>
-          </div>
-          <div class="card-screenshot" id="primmo-screenshot">
-            <!-- Screenshot loaded from repo README -->
-            <div class="card-screenshot-placeholder">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
-                <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
-              </svg>
-              <span>Screenshot coming soon</span>
-            </div>
-          </div>
-          <p class="card-description">Communicates via <strong>WhatsApp and Voice calls</strong>. Uses workout data from REPPIT for personalized training guidance.</p>
-          <div class="card-tech">
-            <span class="tech-chip">Next.js</span>
-            <span class="tech-chip">Voice AI</span>
-            <span class="tech-chip">Supabase</span>
-          </div>
-          <div class="card-footer">
-            <div class="workflow-progress" style="flex: 1;">
-              <div class="progress-bar-track" style="height: 4px;">
-                <div class="progress-bar-fill building" style="width: 38.8%;"></div>
-              </div>
-              <span style="font-size: 0.7rem; color: var(--text-muted);">3/9 Complete</span>
-            </div>
-            <div class="card-links">
-              <a href="https://github.com/castroarun/primmo" target="_blank" class="card-link">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                GitHub
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- REPPIT Simple Card -->
-        <div class="simple-card" data-status="live">
-          <div class="card-header">
-            <div class="card-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="5" r="3"/><path d="M12 22V8M5 12H2a10 10 0 0 0 20 0h-3"/>
-              </svg>
-            </div>
-            <div class="card-title-wrapper">
-              <h3 class="card-title">REPPIT <span class="card-badge built">Live</span></h3>
-              <p class="card-tagline">Fitness strength tracking app</p>
-            </div>
-          </div>
-          <div class="card-screenshot" id="reppit-screenshot">
-            <div class="card-screenshot-placeholder">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="5" r="3"/><path d="M12 22V8M5 12H2a10 10 0 0 0 20 0h-3"/>
-              </svg>
-              <span>Screenshot coming soon</span>
-            </div>
-          </div>
-          <p class="card-description">Track workouts with <strong>real-time timer</strong>, progressive overload tracking, and exercise history analytics.</p>
-          <div class="card-tech">
-            <span class="tech-chip">React Native</span>
-            <span class="tech-chip">TypeScript</span>
-            <span class="tech-chip">Expo</span>
-          </div>
-          <div class="card-footer">
-            <div class="workflow-progress" style="flex: 1;">
-              <div class="progress-bar-track" style="height: 4px;">
-                <div class="progress-bar-fill complete" style="width: 100%;"></div>
-              </div>
-              <span style="font-size: 0.7rem; color: var(--text-muted);">9/9 Complete</span>
-            </div>
-            <div class="card-links">
-              <a href="https://github.com/castroarun/reppit" target="_blank" class="card-link">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                GitHub
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- NoteApp Simple Card -->
-        <div class="simple-card" data-status="live">
-          <div class="card-header">
-            <div class="card-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
-                <polyline points="14 2 14 8 20 8"/>
-              </svg>
-            </div>
-            <div class="card-title-wrapper">
-              <h3 class="card-title">NoteApp <span class="card-badge built">Live</span></h3>
-              <p class="card-tagline">Privacy-first note-taking app</p>
-            </div>
-          </div>
-          <div class="card-screenshot" id="noteapp-screenshot">
-            <div class="card-screenshot-placeholder">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
-                <polyline points="14 2 14 8 20 8"/>
-              </svg>
-              <span>Screenshot coming soon</span>
-            </div>
-          </div>
-          <p class="card-description"><strong>Offline-first</strong> with cloud sync, voice-to-text input, and 200+ automated test cases.</p>
-          <div class="card-tech">
-            <span class="tech-chip">React Native</span>
-            <span class="tech-chip">TypeScript</span>
-            <span class="tech-chip">Supabase</span>
-          </div>
-          <div class="card-footer">
-            <div class="workflow-progress" style="flex: 1;">
-              <div class="progress-bar-track" style="height: 4px;">
-                <div class="progress-bar-fill complete" style="width: 100%;"></div>
-              </div>
-              <span style="font-size: 0.7rem; color: var(--text-muted);">9/9 Complete</span>
-            </div>
-            <div class="card-links">
-              <a href="https://github.com/castroarun/noteapp" target="_blank" class="card-link">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                GitHub
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Flip Cards Grid (Hidden by default) -->
-      <div class="projects-grid hidden">
+      <!-- Flip Cards Grid (dynamically loaded from projects.json) -->
+      <div class="projects-grid">
         <!-- PRIMMO Card -->
         <div class="flip-card" onclick="this.classList.toggle('flipped')">
           <div class="flip-card-inner">
@@ -8580,29 +8329,29 @@
           </div>
         </div>
 
-        <!-- Calci Card -->
-        <div class="flip-card" data-status="building" onclick="this.classList.toggle('flipped')">
+        <!-- AnyCalc Card -->
+        <div class="flip-card" data-status="live" onclick="this.classList.toggle('flipped')">
           <div class="flip-card-inner">
             <div class="flip-card-front">
               <div class="card-header">
-                <div class="card-icon" style="background: rgba(245, 158, 11, 0.15);">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2">
+                <div class="card-icon" style="background: rgba(59, 130, 246, 0.15);">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2">
                     <rect x="4" y="2" width="16" height="20" rx="2"/>
                     <line x1="8" y1="6" x2="16" y2="6"/>
                     <line x1="8" y1="10" x2="10" y2="10"/>
-                    <line x1="12" y1="10" x2="14" y2="10"/>
+                    <line x1="14" y1="10" x2="16" y2="10"/>
                     <line x1="8" y1="14" x2="10" y2="14"/>
-                    <line x1="12" y1="14" x2="14" y2="14"/>
+                    <line x1="14" y1="14" x2="16" y2="14"/>
                     <line x1="8" y1="18" x2="10" y2="18"/>
-                    <line x1="12" y1="18" x2="16" y2="18"/>
+                    <line x1="14" y1="18" x2="16" y2="18"/>
                   </svg>
                 </div>
                 <div class="card-title-wrapper">
-                  <h3 class="card-title">Calci <span class="card-badge building">In Development</span></h3>
-                  <p class="card-tagline">Simple, clean calculator</p>
+                  <h3 class="card-title">AnyCalc <span class="card-badge built">Live</span></h3>
+                  <p class="card-tagline">Calculate anything, anywhere</p>
                 </div>
               </div>
-              <p class="card-description">Calculator with memory offering a <strong>simple, clean workspace</strong>. Studying various calculator interactions.</p>
+              <p class="card-description">Smart calculator with <strong>presets for EMI, tips, splits</strong>, and everyday calculations.</p>
               <div class="card-tech">
                 <span class="tech-chip">Flutter</span>
                 <span class="tech-chip">Dart</span>
@@ -8616,31 +8365,31 @@
             <div class="flip-card-back">
               <div class="deliverable-container">
                 <div class="deliverable-screenshot">
-                  <img src="../assets/projects/calci.png" alt="Calci Screenshot" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                  <img src="../assets/projects/anycalc.png" alt="AnyCalc Screenshot" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
                 </div>
                 <div class="back-header" style="border-bottom: none; padding-bottom: 0; margin-bottom: 0.5rem;">
-                  <h4 class="back-title" style="font-size: 0.9rem;">Calci</h4>
-                  <span class="card-badge building" style="font-size: 0.6rem;">In Development</span>
+                  <h4 class="back-title" style="font-size: 0.9rem;">AnyCalc</h4>
+                  <span class="card-badge built" style="font-size: 0.6rem;">Live</span>
                 </div>
-                <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 1rem;">Calculator with memory offering a simple, clean workspace.</p>
+                <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 1rem;">Smart calculator with presets for EMI, tips, splits, and everyday calculations.</p>
                 <div class="workflow-progress">
                   <div class="workflow-progress-header">
                     <span class="workflow-progress-label">9-Step Workflow</span>
-                    <span class="workflow-progress-count">3/9 Complete</span>
+                    <span class="workflow-progress-count">9/9 Complete</span>
                   </div>
                   <div class="progress-bar-track">
-                    <div class="progress-bar-fill building" style="width: 33%;"></div>
+                    <div class="progress-bar-fill built" style="width: 100%;"></div>
                   </div>
                   <div class="workflow-stages">
                     <span class="stage-dot completed"></span>
                     <span class="stage-dot completed"></span>
                     <span class="stage-dot completed"></span>
-                    <span class="stage-dot in-progress"></span>
-                    <span class="stage-dot"></span>
-                    <span class="stage-dot"></span>
-                    <span class="stage-dot"></span>
-                    <span class="stage-dot"></span>
-                    <span class="stage-dot"></span>
+                    <span class="stage-dot completed"></span>
+                    <span class="stage-dot completed"></span>
+                    <span class="stage-dot completed"></span>
+                    <span class="stage-dot completed"></span>
+                    <span class="stage-dot completed"></span>
+                    <span class="stage-dot completed"></span>
                   </div>
                 </div>
               </div>
@@ -8648,29 +8397,27 @@
           </div>
         </div>
 
-        <!-- Backtest Pro Card -->
+        <!-- Portfolio Optimization Card -->
         <div class="flip-card" onclick="this.classList.toggle('flipped')">
           <div class="flip-card-inner">
             <div class="flip-card-front">
               <div class="card-header">
-                <div class="card-icon" style="background: rgba(251, 191, 36, 0.15);">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="#FBBF24" stroke-width="2">
-                    <circle cx="12" cy="12" r="10"/>
-                    <path d="M12 6v6l4 2"/>
-                    <path d="M2 12h2"/>
-                    <path d="M20 12h2"/>
+                <div class="card-icon" style="background: rgba(168, 85, 247, 0.15);">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="2">
+                    <path d="M3 3v18h18"/>
+                    <path d="M7 16l4-8 4 4 4-6"/>
                   </svg>
                 </div>
                 <div class="card-title-wrapper">
-                  <h3 class="card-title">Backtest Pro <span class="card-badge building">Building</span></h3>
-                  <p class="card-tagline">Covered call strategy automation</p>
+                  <h3 class="card-title">Portfolio Optimization <span class="card-badge ideating">Concept</span></h3>
+                  <p class="card-tagline">Automated portfolio management</p>
                 </div>
               </div>
-              <p class="card-description"><strong>Covered calls</strong> (sell options on held stock for premium) to smooth portfolio returns. Extensive backtesting & automation.</p>
+              <p class="card-description">Automate <strong>portfolio construction and maintenance</strong> to outperform market indexes. Covered calls, rebalancing, and risk analytics.</p>
               <div class="card-tech">
                 <span class="tech-chip">Python</span>
                 <span class="tech-chip">Pandas</span>
-                <span class="tech-chip">Options API</span>
+                <span class="tech-chip">Kite API</span>
               </div>
               <div class="flip-hint">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
@@ -8680,10 +8427,10 @@
             <div class="flip-card-back">
               <div class="deliverable-container">
                 <div class="back-header" style="border-bottom: none; padding-bottom: 0; margin-bottom: 0.5rem;">
-                  <h4 class="back-title" style="font-size: 0.9rem;">Backtest Pro</h4>
-                  <span class="card-badge building" style="font-size: 0.6rem;">Building</span>
+                  <h4 class="back-title" style="font-size: 0.9rem;">Portfolio Optimization</h4>
+                  <span class="card-badge ideating" style="font-size: 0.6rem;">Concept</span>
                 </div>
-                <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 1rem;">Extensive backtesting and automation for covered call strategies.</p>
+                <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 1rem;">Automated portfolio construction and maintenance to outperform market indexes.</p>
                 <div class="workflow-progress">
                   <div class="workflow-progress-header">
                     <span class="workflow-progress-label">9-Step Workflow</span>
@@ -8709,395 +8456,16 @@
           </div>
         </div>
       </div>
-
-      <!-- Track Timeline View (Default) -->
-      <div class="track-timeline active" id="track-timeline">
-        <div class="track-row">
-          <!-- PRIMMO Node -->
-          <div class="track-node building" data-status="building">
-            <div class="track-card" onclick="this.classList.toggle('flipped')">
-              <div class="track-card-inner">
-                <div class="track-card-front">
-                  <div class="track-card-header">
-                    <div class="track-icon">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
-                        <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
-                        <line x1="12" x2="12" y1="19" y2="22"/>
-                      </svg>
-                    </div>
-                    <div class="track-title">PRIMMO <span class="track-badge building">Building</span></div>
-                  </div>
-                  <p class="track-tagline">AI-powered personal strength coach</p>
-                  <p class="track-description">Communicates via <strong>WhatsApp and Voice calls</strong>. Uses workout data from REPPIT for personalized training.</p>
-                  <div class="track-tech">
-                    <span class="track-tech-chip">Next.js</span>
-                    <span class="track-tech-chip">Voice AI</span>
-                    <span class="track-tech-chip">Supabase</span>
-                  </div>
-                  <a href="https://github.com/castroarun/primmo" target="_blank" class="track-link-front" onclick="event.stopPropagation()">
-                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                    GitHub
-                  </a>
-                </div>
-                <div class="track-card-back">
-                  <div class="track-back-screenshot">
-                    <img src="../assets/projects/primmo.png" alt="PRIMMO" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">
-                  </div>
-                  <div class="track-back-title">PRIMMO</div>
-                  <p class="track-back-desc">AI-powered strength coach communicating via WhatsApp and Voice.</p>
-                  <div class="track-workflow">
-                    <div class="track-workflow-header">
-                      <span>9-Step Workflow</span>
-                      <span>3/9</span>
-                    </div>
-                    <div class="track-workflow-dots">
-                      <span class="track-workflow-dot completed"></span>
-                      <span class="track-workflow-dot completed"></span>
-                      <span class="track-workflow-dot completed"></span>
-                      <span class="track-workflow-dot in-progress"></span>
-                      <span class="track-workflow-dot"></span>
-                      <span class="track-workflow-dot"></span>
-                      <span class="track-workflow-dot"></span>
-                      <span class="track-workflow-dot"></span>
-                      <span class="track-workflow-dot"></span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- REPPIT Node -->
-          <div class="track-node" data-status="live">
-            <div class="track-card" onclick="this.classList.toggle('flipped')">
-              <div class="track-card-inner">
-                <div class="track-card-front">
-                  <div class="track-card-header">
-                    <div class="track-icon">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="5" r="3"/><path d="M12 22V8M5 12H2a10 10 0 0 0 20 0h-3"/>
-                      </svg>
-                    </div>
-                    <div class="track-title">REPPIT <span class="track-badge built">Live</span></div>
-                  </div>
-                  <p class="track-tagline">Fitness strength tracking app</p>
-                  <p class="track-description">Track workouts with <strong>real-time timer</strong>, progressive overload tracking, and exercise history analytics.</p>
-                  <div class="track-tech">
-                    <span class="track-tech-chip">React Native</span>
-                    <span class="track-tech-chip">TypeScript</span>
-                    <span class="track-tech-chip">Expo</span>
-                  </div>
-                  <a href="https://github.com/castroarun/reppit" target="_blank" class="track-link-front" onclick="event.stopPropagation()">
-                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                    GitHub
-                  </a>
-                </div>
-                <div class="track-card-back">
-                  <div class="track-back-screenshot">
-                    <img src="../assets/projects/reppit.png" alt="REPPIT" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">
-                  </div>
-                  <div class="track-back-title">REPPIT</div>
-                  <p class="track-back-desc">Fitness app with real-time timer and progressive overload tracking.</p>
-                  <div class="track-workflow">
-                    <div class="track-workflow-header">
-                      <span>9-Step Workflow</span>
-                      <span>9/9</span>
-                    </div>
-                    <div class="track-workflow-dots">
-                      <span class="track-workflow-dot completed"></span>
-                      <span class="track-workflow-dot completed"></span>
-                      <span class="track-workflow-dot completed"></span>
-                      <span class="track-workflow-dot completed"></span>
-                      <span class="track-workflow-dot completed"></span>
-                      <span class="track-workflow-dot completed"></span>
-                      <span class="track-workflow-dot completed"></span>
-                      <span class="track-workflow-dot completed"></span>
-                      <span class="track-workflow-dot completed"></span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- NoteApp Node -->
-          <div class="track-node" data-status="live">
-            <div class="track-card" onclick="this.classList.toggle('flipped')">
-              <div class="track-card-inner">
-                <div class="track-card-front">
-                  <div class="track-card-header">
-                    <div class="track-icon">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
-                        <polyline points="14 2 14 8 20 8"/>
-                      </svg>
-                    </div>
-                    <div class="track-title">NoteApp <span class="track-badge built">Live</span></div>
-                  </div>
-                  <p class="track-tagline">Privacy-first note-taking app</p>
-                  <p class="track-description"><strong>Offline-first</strong> with cloud sync, voice-to-text input, and 200+ automated test cases.</p>
-                  <div class="track-tech">
-                    <span class="track-tech-chip">React Native</span>
-                    <span class="track-tech-chip">TypeScript</span>
-                    <span class="track-tech-chip">Supabase</span>
-                  </div>
-                  <a href="https://github.com/castroarun/noteapp" target="_blank" class="track-link-front" onclick="event.stopPropagation()">
-                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                    GitHub
-                  </a>
-                </div>
-                <div class="track-card-back">
-                  <div class="track-back-screenshot">
-                    <img src="../assets/projects/noteapp.png" alt="NoteApp" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">
-                  </div>
-                  <div class="track-back-title">NoteApp</div>
-                  <p class="track-back-desc">Privacy-first note-taking with offline support and cloud sync.</p>
-                  <div class="track-workflow">
-                    <div class="track-workflow-header">
-                      <span>9-Step Workflow</span>
-                      <span>9/9</span>
-                    </div>
-                    <div class="track-workflow-dots">
-                      <span class="track-workflow-dot completed"></span>
-                      <span class="track-workflow-dot completed"></span>
-                      <span class="track-workflow-dot completed"></span>
-                      <span class="track-workflow-dot completed"></span>
-                      <span class="track-workflow-dot completed"></span>
-                      <span class="track-workflow-dot completed"></span>
-                      <span class="track-workflow-dot completed"></span>
-                      <span class="track-workflow-dot completed"></span>
-                      <span class="track-workflow-dot completed"></span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Second Row -->
-        <div class="track-row">
-          <!-- Cinder Node -->
-          <div class="track-node" data-status="live">
-            <div class="track-card" onclick="this.classList.toggle('flipped')">
-              <div class="track-card-inner">
-                <div class="track-card-front">
-                  <div class="track-card-header">
-                    <div class="track-icon" style="color: #1DB954;">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="10"/>
-                        <path d="M8 15s1.5-2 4-2 4 2 4 2"/>
-                        <path d="M7 11s2-2 5-2 5 2 5 2"/>
-                      </svg>
-                    </div>
-                    <div class="track-title">Cinder <span class="track-badge live" style="background: rgba(30, 215, 96, 0.15); color: #22c55e;">Spotify</span></div>
-                  </div>
-                  <p class="track-tagline">AI-assisted original music</p>
-                  <p class="track-description"><strong>AI-assisted original music project</strong> launching shortly on Spotify & Apple Music.</p>
-                  <div class="track-tech">
-                    <span class="track-tech-chip">Udio</span>
-                    <span class="track-tech-chip">Music Production</span>
-                    <span class="track-tech-chip">AI/ML</span>
-                  </div>
-                  <a href="https://open.spotify.com/user/castronix" target="_blank" class="track-link-front" onclick="event.stopPropagation()">
-                    <svg viewBox="0 0 24 24" fill="#1DB954"><circle cx="12" cy="12" r="10"/><path fill="#000" d="M8 15s1.5-2 4-2 4 2 4 2M7 11s2-2 5-2 5 2 5 2M6 7s2.5-2 6-2 6 2 6 2"/></svg>
-                    Spotify
-                  </a>
-                </div>
-                <div class="track-card-back">
-                  <div class="track-back-screenshot">
-                    <img src="../assets/projects/cinder.png" alt="Cinder" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
-                  </div>
-                  <div class="track-back-title">Cinder</div>
-                  <p class="track-back-desc">AI-assisted original music project launching on Spotify & Apple Music.</p>
-                  <div class="track-workflow">
-                    <div class="track-workflow-header">
-                      <span>9-Step Workflow</span>
-                      <span>7/9</span>
-                    </div>
-                    <div class="track-workflow-dots">
-                      <span class="track-workflow-dot completed"></span>
-                      <span class="track-workflow-dot completed"></span>
-                      <span class="track-workflow-dot completed"></span>
-                      <span class="track-workflow-dot completed"></span>
-                      <span class="track-workflow-dot completed"></span>
-                      <span class="track-workflow-dot completed"></span>
-                      <span class="track-workflow-dot completed"></span>
-                      <span class="track-workflow-dot in-progress"></span>
-                      <span class="track-workflow-dot"></span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- The Little Red Dot Node -->
-          <div class="track-node" data-status="live">
-            <div class="track-card" onclick="this.classList.toggle('flipped')">
-              <div class="track-card-inner">
-                <div class="track-card-front">
-                  <div class="track-card-header">
-                    <div class="track-icon" style="color: #1DB954;">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="10"/>
-                        <path d="M8 15s1.5-2 4-2 4 2 4 2"/>
-                        <path d="M7 11s2-2 5-2 5 2 5 2"/>
-                      </svg>
-                    </div>
-                    <div class="track-title">The Little Red Dot <span class="track-badge live" style="background: rgba(30, 215, 96, 0.15); color: #22c55e;">Spotify</span></div>
-                  </div>
-                  <p class="track-tagline">AI-assisted original music</p>
-                  <p class="track-description"><strong>AI-assisted original music project</strong> launching shortly on Spotify & Apple Music.</p>
-                  <div class="track-tech">
-                    <span class="track-tech-chip">Udio</span>
-                    <span class="track-tech-chip">Music Production</span>
-                    <span class="track-tech-chip">AI/ML</span>
-                  </div>
-                  <a href="https://open.spotify.com/user/castronix" target="_blank" class="track-link-front" onclick="event.stopPropagation()">
-                    <svg viewBox="0 0 24 24" fill="#1DB954"><circle cx="12" cy="12" r="10"/><path fill="#000" d="M8 15s1.5-2 4-2 4 2 4 2M7 11s2-2 5-2 5 2 5 2M6 7s2.5-2 6-2 6 2 6 2"/></svg>
-                    Spotify
-                  </a>
-                </div>
-                <div class="track-card-back">
-                  <div class="track-back-screenshot">
-                    <img src="../assets/projects/littlereddot.png" alt="The Little Red Dot" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
-                  </div>
-                  <div class="track-back-title">The Little Red Dot</div>
-                  <p class="track-back-desc">AI-assisted original music project launching on Spotify & Apple Music.</p>
-                  <div class="track-workflow">
-                    <div class="track-workflow-header">
-                      <span>9-Step Workflow</span>
-                      <span>7/9</span>
-                    </div>
-                    <div class="track-workflow-dots">
-                      <span class="track-workflow-dot completed"></span>
-                      <span class="track-workflow-dot completed"></span>
-                      <span class="track-workflow-dot completed"></span>
-                      <span class="track-workflow-dot completed"></span>
-                      <span class="track-workflow-dot completed"></span>
-                      <span class="track-workflow-dot completed"></span>
-                      <span class="track-workflow-dot completed"></span>
-                      <span class="track-workflow-dot in-progress"></span>
-                      <span class="track-workflow-dot"></span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- This Portfolio Node -->
-          <div class="track-node" data-status="live">
-            <div class="track-card" onclick="this.classList.toggle('flipped')">
-              <div class="track-card-inner">
-                <div class="track-card-front">
-                  <div class="track-card-header">
-                    <div class="track-icon">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="10"/>
-                        <path d="M12 6v6l4 2"/>
-                      </svg>
-                    </div>
-                    <div class="track-title">This Portfolio <span class="track-badge built">Live</span></div>
-                  </div>
-                  <p class="track-tagline">Interactive digital resume</p>
-                  <p class="track-description"><strong>AI chat assistant</strong>, skills radar, timeline view with 9-step workflow showcase.</p>
-                  <div class="track-tech">
-                    <span class="track-tech-chip">HTML/CSS</span>
-                    <span class="track-tech-chip">JavaScript</span>
-                    <span class="track-tech-chip">Chart.js</span>
-                  </div>
-                  <a href="https://github.com/castroarun/portfolio" target="_blank" class="track-link-front" onclick="event.stopPropagation()">
-                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                    GitHub
-                  </a>
-                </div>
-                <div class="track-card-back">
-                  <div class="track-back-screenshot"><img src="../assets/projects/portfolio.png" alt="This Portfolio" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;"></div>
-                  <div class="track-back-title">This Portfolio</div>
-                  <p class="track-back-desc">Interactive digital resume with AI chat and skills visualization.</p>
-                  <div class="track-workflow">
-                    <div class="track-workflow-header">
-                      <span>9-Step Workflow</span>
-                      <span>8/9</span>
-                    </div>
-                    <div class="track-workflow-dots">
-                      <span class="track-workflow-dot completed"></span>
-                      <span class="track-workflow-dot completed"></span>
-                      <span class="track-workflow-dot completed"></span>
-                      <span class="track-workflow-dot completed"></span>
-                      <span class="track-workflow-dot completed"></span>
-                      <span class="track-workflow-dot completed"></span>
-                      <span class="track-workflow-dot completed"></span>
-                      <span class="track-workflow-dot completed"></span>
-                      <span class="track-workflow-dot in-progress"></span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Third Row -->
-        <div class="track-row">
-          <!-- Calci Node -->
-          <div class="track-node" data-status="building">
-            <div class="track-card" onclick="this.classList.toggle('flipped')">
-              <div class="track-card-inner">
-                <div class="track-card-front">
-                  <div class="track-card-header">
-                    <div class="track-icon" style="color: #3b82f6;">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="10" y2="10"/><line x1="14" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="10" y2="14"/><line x1="14" y1="14" x2="16" y2="14"/><line x1="8" y1="18" x2="10" y2="18"/><line x1="14" y1="18" x2="16" y2="18"/></svg>
-                    </div>
-                    <div class="track-title">Calci <span class="track-badge building">In Development</span></div>
-                  </div>
-                  <p class="track-tagline">Calculate anything, anywhere</p>
-                  <p class="track-description">Versatile calculator with <strong>smart presets</strong> for everyday decisions.</p>
-                  <div class="track-tech"><span class="track-tech-chip">Flutter</span><span class="track-tech-chip">Dart</span><span class="track-tech-chip">Material Design</span></div>
-                </div>
-                <div class="track-card-back">
-                  <div class="track-back-screenshot"><img src="../assets/projects/calci.png" alt="Calci" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;"></div>
-                  <div class="track-back-title">Calci</div>
-                  <p class="track-back-desc">Smart calculator with presets for EMI, tips, splits, and everyday calculations.</p>
-                  <div class="track-workflow"><div class="track-workflow-header"><span>9-Step Workflow</span><span>4/9</span></div><div class="track-workflow-dots"><span class="track-workflow-dot completed"></span><span class="track-workflow-dot completed"></span><span class="track-workflow-dot completed"></span><span class="track-workflow-dot completed"></span><span class="track-workflow-dot in-progress"></span><span class="track-workflow-dot"></span><span class="track-workflow-dot"></span><span class="track-workflow-dot"></span><span class="track-workflow-dot"></span></div></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Backtest Pro Node -->
-          <div class="track-node building" data-status="building">
-            <div class="track-card" onclick="this.classList.toggle('flipped')">
-              <div class="track-card-inner">
-                <div class="track-card-front">
-                  <div class="track-card-header">
-                    <div class="track-icon" style="color: #FBBF24;">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-                    </div>
-                    <div class="track-title">Backtest Pro <span class="track-badge building">Building</span></div>
-                  </div>
-                  <p class="track-tagline">Covered call strategy automation</p>
-                  <p class="track-description"><strong>Covered calls</strong> (sell options for premium) to smooth returns. Backtesting & automation.</p>
-                  <div class="track-tech"><span class="track-tech-chip">Python</span><span class="track-tech-chip">Pandas</span><span class="track-tech-chip">Options API</span></div>
-                </div>
-                <div class="track-card-back">
-                  <div class="track-back-title">Backtest Pro</div>
-                  <p class="track-back-desc">Extensive backtesting and automation for covered call strategies.</p>
-                  <div class="track-workflow"><div class="track-workflow-header"><span>9-Step Workflow</span><span>1/9</span></div><div class="track-workflow-dots"><span class="track-workflow-dot completed"></span><span class="track-workflow-dot in-progress"></span><span class="track-workflow-dot"></span><span class="track-workflow-dot"></span><span class="track-workflow-dot"></span><span class="track-workflow-dot"></span><span class="track-workflow-dot"></span><span class="track-workflow-dot"></span><span class="track-workflow-dot"></span></div></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </section>
 
-    <!-- ============ SECTION 5b: Architecture in Action ============ -->
+    <!-- track-timeline removed during UX consolidation -->
+    <!-- REMOVED: ~380 lines of track-timeline HTML (PRIMMO through Portfolio Optimization nodes) -->
+    <!-- Projects now shown only as flip cards above + Architecture in Action deep-dives below -->
+
+    <!-- ============ SECTION 7: Architecture in Action ============ -->
     <section class="section animate-fade-up delay-5">
       <div class="section-header">
-        <span class="section-number">05b.</span>
+        <span class="section-number">07.</span>
         <h2 class="section-title">Architecture in Action</h2>
         <div class="section-line"></div>
       </div>
@@ -9305,10 +8673,10 @@
             </div>
             <div class="aia-header-content">
               <div class="aia-top-row">
-                <span class="aia-name">Covered Calls</span>
+                <span class="aia-name">Portfolio Optimization</span>
                 <span class="aia-status building">Building</span>
               </div>
-              <p class="aia-tagline">Options trading backtester with strategy pattern, real-time WebSocket streaming, and full cost modeling.</p>
+              <p class="aia-tagline">Automated portfolio management with strategy pattern, real-time WebSocket streaming, and full cost modeling.</p>
               <div class="aia-patterns">
                 <span class="aia-badge">Strategy Pattern (GoF)</span>
                 <span class="aia-badge">Real-Time Streaming</span>
@@ -9535,268 +8903,385 @@
       </div>
     </section>
 
-    <!-- ============ SECTION 6: Certifications ============ -->
+    <!-- ============ SECTION 8: From the Feed (LinkedIn) ============ -->
     <section class="section animate-fade-up delay-5">
       <div class="section-header">
-        <span class="section-number">06.</span>
-        <h2 class="section-title">Certifications & Credentials</h2>
-        <div class="section-line"></div>
-      </div>
-
-      <div class="certifications-grid">
-        <!-- TOGAF -->
-        <div class="certification-card">
-          <div class="certification-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <polygon points="12 2 2 7 12 12 22 7 12 2"/>
-              <polyline points="2 17 12 22 22 17"/>
-              <polyline points="2 12 12 17 22 12"/>
-            </svg>
-          </div>
-          <div class="certification-content">
-            <div class="certification-name">TOGAF 9 Certified</div>
-            <div class="certification-issuer">The Open Group · Enterprise Architecture</div>
-          </div>
-        </div>
-
-        <!-- CSPO -->
-        <div class="certification-card">
-          <div class="certification-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M12 20V10"/>
-              <path d="M18 20V4"/>
-              <path d="M6 20v-4"/>
-            </svg>
-          </div>
-          <div class="certification-content">
-            <div class="certification-name">Certified Scrum Product Owner (CSPO)</div>
-            <div class="certification-issuer">Scrum Alliance · Agile Methodology</div>
-          </div>
-        </div>
-
-        <!-- IBM Data Science -->
-        <div class="certification-card">
-          <div class="certification-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
-              <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
-              <line x1="12" y1="22.08" x2="12" y2="12"/>
-            </svg>
-          </div>
-          <div class="certification-content">
-            <div class="certification-name">IBM Data Science Professional</div>
-            <div class="certification-issuer">IBM · Python, ML, Data Analytics</div>
-          </div>
-        </div>
-
-        <!-- ISO 31000 -->
-        <div class="certification-card">
-          <div class="certification-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-            </svg>
-          </div>
-          <div class="certification-content">
-            <div class="certification-name">ISO 31000 Risk Manager</div>
-            <div class="certification-issuer">PECB · Risk Management Framework</div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ============ SECTION 6b: From the Feed (LinkedIn) ============ -->
-    <section class="section animate-fade-up delay-5">
-      <div class="section-header">
-        <span class="section-number">06b.</span>
+        <span class="section-number">08.</span>
         <h2 class="section-title" style="display:flex;align-items:center;gap:0.6rem;">From the Feed <span class="li-badge"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></span></h2>
         <div class="section-line"></div>
       </div>
 
       <p style="font-size: 0.85rem; color: var(--text-muted); max-width: 900px; margin: -1rem auto 1.5rem auto;">Project launches, deep-dives, and architectural takes I share on LinkedIn.</p>
 
-      <!-- Content type filter -->
-      <div class="content-tabs" id="linkedin-tabs">
-        <button class="content-tab active" onclick="filterLinkedInPosts('all')">All <span class="tab-count">12</span></button>
-        <button class="content-tab" onclick="filterLinkedInPosts('launch')">Launches <span class="tab-count">6</span></button>
-        <button class="content-tab" onclick="filterLinkedInPosts('article')">Articles <span class="tab-count">5</span></button>
-        <button class="content-tab" onclick="filterLinkedInPosts('insight')">Insights <span class="tab-count">1</span></button>
-      </div>
+      <div class="feed-list" id="linkedin-posts">
 
-      <div class="posts-layout" id="linkedin-posts">
-
-        <!-- FEATURED — Klarity -->
-        <a href="https://www.linkedin.com/posts/aruncastromin_i-built-%F0%9D%97%9E%F0%9D%97%B9%F0%9D%97%AE%F0%9D%97%BF%F0%9D%97%B6%F0%9D%98%81%F0%9D%98%86-a-lightweight-personal-activity-7421562812600279041-QrnW" target="_blank" class="card-featured" data-type="article">
-          <div class="post-meta">
-            <span class="post-type article">Article</span>
-            <span class="pinned-badge">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 12V4h1V2H7v2h1v8l-2 2v2h5.2v6h1.6v-6H18v-2l-2-2z"/></svg>
-              Pinned
-            </span>
-          </div>
-          <div class="post-title">I built Klarity &mdash; a lightweight, personal task board for developers using AI coding assistants</div>
-          <div class="post-arch-note">8MB offline-first desktop app with a 15-stage pipeline, ETag-based distributed sync, and multi-agent AI orchestration &mdash; enterprise workflow patterns (STP, optimistic concurrency) applied at personal scale.</div>
-          <div class="post-tags">
-            <span class="post-tag">#OfflineFirst</span>
-            <span class="post-tag">#PipelinePattern</span>
-            <span class="post-tag">#AI</span>
-            <span class="post-tag">#DevTools</span>
-          </div>
-          <div class="card-watermark"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 3h12l4 6-10 13L2 9l4-6z"/><path d="M2 9h20M7.5 3L12 9l4.5-6M12 9l-10 13M12 9l10 13" fill="none" stroke="currentColor" stroke-width="0.8" opacity="0.3"/></svg></div>
-          <div class="li-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg></div>
-        </a>
-
-        <!-- Row: Launch + Article -->
-        <div class="posts-row">
-          <a href="https://www.linkedin.com/posts/aruncastromin_launching-%F0%9D%97%A2%F0%9D%97%BF%F0%9D%97%AF%F0%9D%97%B6%F0%9D%98%81-the-phone-companion-activity-7423708193626800128-sBOA" target="_blank" class="card-launch" data-type="launch">
-            <div class="post-meta"><span class="post-type launch">Launch</span></div>
-            <div class="post-title">Launching Orbit &mdash; the phone companion for Klarity</div>
-            <div class="post-arch-note">Zero-server architecture using GitHub as backend with SHA-based conflict resolution. Sub-2-minute cross-platform sync at $0 infrastructure.</div>
-            <div class="post-tags">
-              <span class="post-tag">#ReactNative</span>
-              <span class="post-tag">#Tauri</span>
-              <span class="post-tag">#DistributedSync</span>
+        <!-- 1. Klarity — starts expanded -->
+        <div class="feed-item expanded">
+          <div class="feed-row" onclick="toggleFeedItem(this)">
+            <span class="type-pill type-pill--article">Article</span>
+            <div class="feed-content">
+              <span class="feed-title">I built Klarity &mdash; a lightweight personal task board for AI-assisted developers</span>
             </div>
-            <div class="card-watermark"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="2.5"/><ellipse cx="12" cy="12" rx="11" ry="4.2" fill="none" stroke="currentColor" stroke-width="1.3"/><ellipse cx="12" cy="12" rx="11" ry="4.2" fill="none" stroke="currentColor" stroke-width="1.3" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="11" ry="4.2" fill="none" stroke="currentColor" stroke-width="1.3" transform="rotate(120 12 12)"/><circle cx="21" cy="8" r="1.3"/></svg></div>
-            <div class="li-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg></div>
-          </a>
-
-          <a href="https://www.linkedin.com/posts/aruncastromin_syntheticdata-dataprivacy-activity-7097464505370112001-3y_G" target="_blank" class="card-article" style="border-radius: 12px; border-left: 3px solid var(--linkedin);" data-type="article">
-            <div class="post-meta"><span class="post-type article">Article</span></div>
-            <div class="post-title">The Data Problem and its 'Fake' Fix &mdash; Synthetic Data for Privacy</div>
-            <div class="post-arch-note">Synthetic data generation as an architectural solution to GDPR/PII constraints in banking test environments.</div>
-            <div class="post-tags">
-              <span class="post-tag">#SyntheticData</span>
-              <span class="post-tag">#DataPrivacy</span>
-              <span class="post-tag">#GDPR</span>
+            <a href="https://www.linkedin.com/posts/aruncastromin_i-built-%F0%9D%97%9E%F0%9D%97%B9%F0%9D%97%AE%F0%9D%97%BF%F0%9D%97%B6%F0%9D%98%81%F0%9D%98%86-a-lightweight-personal-activity-7421562812600279041-QrnW" target="_blank" class="feed-read-link" onclick="event.stopPropagation()">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              <span>Read on LinkedIn</span>
+            </a>
+            <svg class="feed-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4l6 6-6 6"/></svg>
+          </div>
+          <div class="feed-detail">
+            <div class="feed-detail-inner">
+              <div class="detail-card">
+                <p class="detail-desc">A lightweight desktop task board purpose-built for developers who use AI coding assistants. Weighing just 8MB, Klarity runs entirely offline with a 15-stage pipeline that tracks every task from idea to deployment. ETag-based distributed sync keeps your board consistent across machines without a server, while multi-agent orchestration lets different AI assistants collaborate on the same project.</p>
+                <div class="detail-footer">
+                  <div class="detail-tags">
+                    <span class="detail-tag">#OfflineFirst</span>
+                    <span class="detail-tag">#PipelinePattern</span>
+                    <span class="detail-tag">#AI</span>
+                    <span class="detail-tag">#DevTools</span>
+                  </div>
+                  <a href="https://www.linkedin.com/posts/aruncastromin_i-built-%F0%9D%97%9E%F0%9D%97%B9%F0%9D%97%AE%F0%9D%97%BF%F0%9D%97%B6%F0%9D%98%81%F0%9D%98%86-a-lightweight-personal-activity-7421562812600279041-QrnW" target="_blank" class="detail-read">Read on LinkedIn <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4l6 6-6 6"/></svg></a>
+                </div>
+                <div class="detail-watermark"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 3h12l4 6-10 13L2 9l4-6z"/><path d="M2 9h20M7.5 3L12 9l4.5-6M12 9l-10 13M12 9l10 13" fill="none" stroke="currentColor" stroke-width="0.8" opacity="0.3"/></svg></div>
+              </div>
             </div>
-            <div class="card-watermark"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 5a2 2 0 012 2v2h1a1 1 0 011 1v4a1 1 0 01-1 1H9a1 1 0 01-1-1v-4a1 1 0 011-1h1V8a2 2 0 012-2z"/></svg></div>
-            <div class="li-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg></div>
-          </a>
+          </div>
         </div>
 
-        <!-- INSIGHT — AI can write code fast -->
-        <a href="https://www.linkedin.com/posts/aruncastromin_ai-can-write-code-fast-not-necessarily-right-activity-7409622081455230976-Hgn9" target="_blank" class="card-insight" data-type="insight">
-          <div class="post-meta"><span class="post-type insight">Insight</span></div>
-          <div class="post-title">AI can write code fast &mdash; not necessarily right</div>
-          <div class="post-arch-note">TOGAF-inspired phased workflow with specialized agents (@designer, @architect, @qa) and human gates &mdash; applying enterprise architecture governance to AI-assisted development.</div>
-          <div class="post-tags">
-            <span class="post-tag">#TOGAF</span>
-            <span class="post-tag">#AIAssisted</span>
-            <span class="post-tag">#ArchitectureGovernance</span>
+        <!-- 2. Orbit -->
+        <div class="feed-item">
+          <div class="feed-row" onclick="toggleFeedItem(this)">
+            <span class="type-pill type-pill--launch">Launch</span>
+            <div class="feed-content">
+              <span class="feed-title">Launching Orbit &mdash; the phone companion for Klarity</span>
+            </div>
+            <a href="https://www.linkedin.com/posts/aruncastromin_launching-%F0%9D%97%A2%F0%9D%97%BF%F0%9D%97%AF%F0%9D%97%B6%F0%9D%98%81-the-phone-companion-activity-7423708193626800128-sBOA" target="_blank" class="feed-read-link" onclick="event.stopPropagation()">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              <span>Read on LinkedIn</span>
+            </a>
+            <svg class="feed-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4l6 6-6 6"/></svg>
           </div>
-          <div class="card-watermark"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a7 7 0 00-4.6 12.3A4.98 4.98 0 006 18v1a1 1 0 001 1h10a1 1 0 001-1v-1c0-1.4-.6-2.7-1.4-3.7A7 7 0 0012 2zm-1 15h2v1h-2v-1zm0-2h2v1h-2v-1z"/><path d="M9 21h6v1a1 1 0 01-1 1h-4a1 1 0 01-1-1v-1z"/></svg></div>
-          <div class="li-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg></div>
-        </a>
-
-        <!-- Row: Launch + Launch -->
-        <div class="posts-row">
-          <a href="https://www.linkedin.com/posts/aruncastromin_meet-%F0%9D%97%94%F0%9D%97%BB%F0%9D%98%86%F0%9D%97%96%F0%9D%97%AE%F0%9D%97%B9%F0%9D%97%B0-the-calculator-you-activity-7418310501895688192-qDsV" target="_blank" class="card-launch" data-type="launch">
-            <div class="post-meta"><span class="post-type launch">Launch</span></div>
-            <div class="post-title">Meet AnyCalc &mdash; the calculator you actually want to use</div>
-            <div class="post-arch-note">Stateless computation engine with 19 interlinked financial calculators &mdash; rule engine pattern with deterministic I/O and cross-calculator data flow.</div>
-            <div class="post-tags">
-              <span class="post-tag">#Next.js</span>
-              <span class="post-tag">#TypeScript</span>
-              <span class="post-tag">#FinancialCalculators</span>
+          <div class="feed-detail">
+            <div class="feed-detail-inner">
+              <div class="detail-card">
+                <p class="detail-desc">Orbit is the mobile companion for Klarity &mdash; letting you review, update, and triage tasks from your phone while the desktop app handles the heavy lifting. Built with a zero-server architecture that uses GitHub as the backend, it achieves sub-2-minute cross-platform sync with SHA-based conflict resolution and zero infrastructure cost.</p>
+                <div class="detail-footer">
+                  <div class="detail-tags">
+                    <span class="detail-tag">#ReactNative</span>
+                    <span class="detail-tag">#Tauri</span>
+                    <span class="detail-tag">#DistributedSync</span>
+                  </div>
+                  <a href="https://www.linkedin.com/posts/aruncastromin_launching-%F0%9D%97%A2%F0%9D%97%BF%F0%9D%97%AF%F0%9D%97%B6%F0%9D%98%81-the-phone-companion-activity-7423708193626800128-sBOA" target="_blank" class="detail-read">Read on LinkedIn <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4l6 6-6 6"/></svg></a>
+                </div>
+                <div class="detail-watermark"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="2.5"/><ellipse cx="12" cy="12" rx="11" ry="4.2" fill="none" stroke="currentColor" stroke-width="1.3"/><ellipse cx="12" cy="12" rx="11" ry="4.2" fill="none" stroke="currentColor" stroke-width="1.3" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="11" ry="4.2" fill="none" stroke="currentColor" stroke-width="1.3" transform="rotate(120 12 12)"/><circle cx="21" cy="8" r="1.3"/></svg></div>
+              </div>
             </div>
-            <div class="card-watermark"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="7" cy="7" r="3.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17" cy="17" r="3.5" fill="none" stroke="currentColor" stroke-width="2"/><line x1="19" y1="3" x2="5" y2="21" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></div>
-            <div class="li-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg></div>
-          </a>
-
-          <a href="https://www.linkedin.com/posts/aruncastromin_%F0%9D%97%A6%F0%9D%97%B5%F0%9D%97%B6%F0%9D%97%BD%F0%9D%97%BD%F0%9D%97%B2%F0%9D%97%B1-%F0%9D%97%BA%F0%9D%98%86-%F0%9D%97%B3%F0%9D%97%B6%F0%9D%97%BF%F0%9D%98%80%F0%9D%98%81-%F0%9D%97%94%F0%9D%97%9C-%F0%9D%97%B2%F0%9D%97%BF%F0%9D%97%AE-activity-7400755620842250241-d4dU" target="_blank" class="card-launch" data-type="launch">
-            <div class="post-meta"><span class="post-type launch">Launch</span></div>
-            <div class="post-title">Shipped my first AI-era side project &mdash; a note-taking app in 32 hours</div>
-            <div class="post-arch-note">Row-level security, soft delete, and debounced auto-save &mdash; banking data architecture patterns in a personal productivity tool.</div>
-            <div class="post-tags">
-              <span class="post-tag">#Next.js</span>
-              <span class="post-tag">#Supabase</span>
-              <span class="post-tag">#RLS</span>
-            </div>
-            <div class="card-watermark"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z"/><path d="M14 2v6h6" opacity="0.3"/><line x1="8" y1="13" x2="16" y2="13" stroke="currentColor" stroke-width="1" opacity="0.3"/><line x1="8" y1="17" x2="13" y2="17" stroke="currentColor" stroke-width="1" opacity="0.3"/></svg></div>
-            <div class="li-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg></div>
-          </a>
+          </div>
         </div>
 
-        <!-- Article — Why Claude -->
-        <a href="https://www.linkedin.com/posts/aruncastromin_why-should-you-claude-today-activity-7399104960090726400-zQk2" target="_blank" class="card-article" data-type="article">
-          <div class="post-meta"><span class="post-type article">Article</span></div>
-          <div class="post-title">Why should you 'Claude' today!</div>
-          <div class="post-arch-note">AI pair programming through the lens of developer productivity &mdash; comparing Claude's agentic workflow to traditional SDLC phases and where human architectural oversight remains non-negotiable.</div>
-          <div class="post-tags">
-            <span class="post-tag">#ClaudeAI</span>
-            <span class="post-tag">#AIAssisted</span>
-            <span class="post-tag">#DeveloperProductivity</span>
+        <!-- 3. Synthetic Data -->
+        <div class="feed-item">
+          <div class="feed-row" onclick="toggleFeedItem(this)">
+            <span class="type-pill type-pill--article">Article</span>
+            <div class="feed-content">
+              <span class="feed-title">The Data Problem and its 'Fake' Fix &mdash; Synthetic Data for Privacy</span>
+            </div>
+            <a href="https://www.linkedin.com/posts/aruncastromin_syntheticdata-dataprivacy-activity-7097464505370112001-3y_G" target="_blank" class="feed-read-link" onclick="event.stopPropagation()">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              <span>Read on LinkedIn</span>
+            </a>
+            <svg class="feed-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4l6 6-6 6"/></svg>
           </div>
-          <div class="card-watermark"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 2H4a2 2 0 00-2 2v12a2 2 0 002 2h4l4 4 4-4h4a2 2 0 002-2V4a2 2 0 00-2-2z"/><circle cx="8" cy="10" r="1.2" opacity="0.3"/><circle cx="12" cy="10" r="1.2" opacity="0.3"/><circle cx="16" cy="10" r="1.2" opacity="0.3"/></svg></div>
-          <div class="li-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg></div>
-        </a>
-
-        <!-- Row: Launch + Post -->
-        <div class="posts-row">
-          <a href="https://www.linkedin.com/posts/aruncastromin_i-just-dropped-an-8-song-album-on-spotify-activity-7425540006670426112-UORV" target="_blank" class="card-launch" data-type="launch">
-            <div class="post-meta"><span class="post-type launch">Launch</span></div>
-            <div class="post-title">I just dropped an 8-song album on Spotify &mdash; and I've never sung a note</div>
-            <div class="post-arch-note">Iterative pipeline orchestration &mdash; 50+ iterations per song. Multi-channel distribution across Spotify, Apple Music, Amazon.</div>
-            <div class="post-tags">
-              <span class="post-tag">#AI</span>
-              <span class="post-tag">#Creative</span>
-              <span class="post-tag">#Spotify</span>
+          <div class="feed-detail">
+            <div class="feed-detail-inner">
+              <div class="detail-card">
+                <p class="detail-desc">Exploring how synthetic data generation solves one of the hardest problems in enterprise testing &mdash; getting realistic test data without exposing real customer information. The article dives into techniques for generating statistically faithful datasets that satisfy GDPR and PII constraints, turning a compliance headache into an engineering advantage.</p>
+                <div class="detail-footer">
+                  <div class="detail-tags">
+                    <span class="detail-tag">#SyntheticData</span>
+                    <span class="detail-tag">#DataPrivacy</span>
+                    <span class="detail-tag">#GDPR</span>
+                  </div>
+                  <a href="https://www.linkedin.com/posts/aruncastromin_syntheticdata-dataprivacy-activity-7097464505370112001-3y_G" target="_blank" class="detail-read">Read on LinkedIn <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4l6 6-6 6"/></svg></a>
+                </div>
+                <div class="detail-watermark"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 5a2 2 0 012 2v2h1a1 1 0 011 1v4a1 1 0 01-1 1H9a1 1 0 01-1-1v-4a1 1 0 011-1h1V8a2 2 0 012-2z"/></svg></div>
+              </div>
             </div>
-            <div class="card-watermark"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3v10.55A4 4 0 1014 17V7h4V3h-6z"/></svg></div>
-            <div class="li-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg></div>
-          </a>
-
-          <a href="https://www.linkedin.com/posts/aruncastromin_pythonprogramming-pyexcel-activity-7100788688757932032-2PZI" target="_blank" class="card-post" data-type="post">
-            <div class="post-meta"><span class="post-type post">Post</span></div>
-            <div class="post-title">PyExcel &mdash; Revolutionizing spreadsheets with Python</div>
-            <div class="post-arch-note">Collapsing the ETL pipeline &mdash; ML capabilities brought directly to spreadsheet-native users, shifting the analyst-engineer boundary.</div>
-            <div class="post-tags">
-              <span class="post-tag">#Python</span>
-              <span class="post-tag">#DataAnalysis</span>
-            </div>
-            <div class="card-watermark"><svg viewBox="0 0 24 24" fill="currentColor"><rect x="1" y="16" width="4" height="6" rx="1"/><rect x="7" y="11" width="4" height="11" rx="1"/><rect x="13" y="6" width="4" height="16" rx="1"/><rect x="19" y="2" width="4" height="20" rx="1"/></svg></div>
-            <div class="li-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg></div>
-          </a>
+          </div>
         </div>
 
-        <!-- Row: 3 compact — Articles + Story -->
-        <div class="posts-row tri">
-          <a href="https://www.linkedin.com/posts/aruncastromin_the-qualities-of-a-productive-leader-a-comprehensive-activity-7096735806995759105-ADvx" target="_blank" class="card-article" style="border-radius: 12px; border-left: 3px solid var(--linkedin);" data-type="article">
-            <div class="post-meta"><span class="post-type article">Article</span></div>
-            <div class="post-title">The Qualities of a Productive Leader</div>
-            <div class="post-arch-note">Six leadership qualities mapped to delivery excellence and distributed team reliability.</div>
-            <div class="post-tags">
-              <span class="post-tag">#Leadership</span>
-              <span class="post-tag">#Delivery</span>
+        <!-- 4. AI Insight -->
+        <div class="feed-item">
+          <div class="feed-row" onclick="toggleFeedItem(this)">
+            <span class="type-pill type-pill--insight">Insight</span>
+            <div class="feed-content">
+              <span class="feed-title">AI can write code fast &mdash; not necessarily right</span>
             </div>
-            <div class="card-watermark"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
-            <div class="li-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg></div>
-          </a>
+            <a href="https://www.linkedin.com/posts/aruncastromin_ai-can-write-code-fast-not-necessarily-right-activity-7409622081455230976-Hgn9" target="_blank" class="feed-read-link" onclick="event.stopPropagation()">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              <span>Read on LinkedIn</span>
+            </a>
+            <svg class="feed-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4l6 6-6 6"/></svg>
+          </div>
+          <div class="feed-detail">
+            <div class="feed-detail-inner">
+              <div class="detail-card">
+                <p class="detail-desc">AI can generate code at incredible speed, but speed without structure leads to technical debt just as fast. This post shares a phased workflow with specialized agents (@designer, @architect, @qa) and deliberate human gates at each stage &mdash; because the real skill isn't writing code faster, it's knowing when to slow down and verify.</p>
+                <div class="detail-footer">
+                  <div class="detail-tags">
+                    <span class="detail-tag">#TOGAF</span>
+                    <span class="detail-tag">#AIAssisted</span>
+                    <span class="detail-tag">#ArchitectureGovernance</span>
+                  </div>
+                  <a href="https://www.linkedin.com/posts/aruncastromin_ai-can-write-code-fast-not-necessarily-right-activity-7409622081455230976-Hgn9" target="_blank" class="detail-read">Read on LinkedIn <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4l6 6-6 6"/></svg></a>
+                </div>
+                <div class="detail-watermark"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a7 7 0 00-4.6 12.3A4.98 4.98 0 006 18v1a1 1 0 001 1h10a1 1 0 001-1v-1c0-1.4-.6-2.7-1.4-3.7A7 7 0 0012 2zm-1 15h2v1h-2v-1zm0-2h2v1h-2v-1z"/><path d="M9 21h6v1a1 1 0 01-1 1h-4a1 1 0 01-1-1v-1z"/></svg></div>
+              </div>
+            </div>
+          </div>
+        </div>
 
-          <a href="https://www.linkedin.com/posts/aruncastromin_businesswriting-smartgoals-personalgoals-activity-7088875418568568832-hzFc" target="_blank" class="card-article" style="border-radius: 12px; border-left: 3px solid var(--linkedin);" data-type="article">
-            <div class="post-meta"><span class="post-type article">Article</span></div>
-            <div class="post-title">SMART &mdash; A Simple Hack for All</div>
-            <div class="post-arch-note">Structured decomposition for goals &mdash; the same rigor used in ADRs and acceptance criteria.</div>
-            <div class="post-tags">
-              <span class="post-tag">#SMARTGoals</span>
-              <span class="post-tag">#BusinessWriting</span>
+        <!-- 5. AnyCalc -->
+        <div class="feed-item">
+          <div class="feed-row" onclick="toggleFeedItem(this)">
+            <span class="type-pill type-pill--launch">Launch</span>
+            <div class="feed-content">
+              <span class="feed-title">Meet AnyCalc &mdash; the calculator you actually want to use</span>
             </div>
-            <div class="card-watermark"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.3"/><circle cx="12" cy="12" r="2.5"/></svg></div>
-            <div class="li-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg></div>
-          </a>
+            <a href="https://www.linkedin.com/posts/aruncastromin_meet-%F0%9D%97%94%F0%9D%97%BB%F0%9D%98%86%F0%9D%97%96%F0%9D%97%AE%F0%9D%97%B9%F0%9D%97%B0-the-calculator-you-activity-7418310501895688192-qDsV" target="_blank" class="feed-read-link" onclick="event.stopPropagation()">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              <span>Read on LinkedIn</span>
+            </a>
+            <svg class="feed-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4l6 6-6 6"/></svg>
+          </div>
+          <div class="feed-detail">
+            <div class="feed-detail-inner">
+              <div class="detail-card">
+                <p class="detail-desc">AnyCalc packs 19 interlinked financial calculators into a single clean interface &mdash; from EMI and tip splits to compound interest and currency conversion. Every calculator feeds into others, so a mortgage estimate can flow into a stamp duty calculation without re-entering numbers. Built to be the one calculator app that actually replaces all the others.</p>
+                <div class="detail-footer">
+                  <div class="detail-tags">
+                    <span class="detail-tag">#Flutter</span>
+                    <span class="detail-tag">#Dart</span>
+                    <span class="detail-tag">#FinancialCalculators</span>
+                  </div>
+                  <a href="https://www.linkedin.com/posts/aruncastromin_meet-%F0%9D%97%94%F0%9D%97%BB%F0%9D%98%86%F0%9D%97%96%F0%9D%97%AE%F0%9D%97%B9%F0%9D%97%B0-the-calculator-you-activity-7418310501895688192-qDsV" target="_blank" class="detail-read">Read on LinkedIn <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4l6 6-6 6"/></svg></a>
+                </div>
+                <div class="detail-watermark"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="7" cy="7" r="3.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17" cy="17" r="3.5" fill="none" stroke="currentColor" stroke-width="2"/><line x1="19" y1="3" x2="5" y2="21" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></div>
+              </div>
+            </div>
+          </div>
+        </div>
 
-          <a href="https://www.linkedin.com/posts/aruncastromin_%F0%9D%90%93%F0%9D%90%A1%F0%9D%90%9E-%F0%9D%90%92%F0%9D%90%9A%F0%9D%90%A6%F0%9D%90%AE%F0%9D%90%AB%F0%9D%90%9A%F0%9D%90%A2-%F0%9D%90%B0%F0%9D%90%A2%F0%9D%90%AD%F0%9D%90%A1-%F0%9D%90%AD%F0%9D%90%A1%F0%9D%90%9E-%F0%9D%90%96%F0%9D%90%A8%F0%9D%90%A8%F0%9D%90%9D%F0%9D%90%9E%F0%9D%90%A7-activity-7086663387052453889-OfZt" target="_blank" class="card-post" style="border-left: 3px solid var(--amber); border-radius: 4px 12px 12px 4px;" data-type="post">
-            <div class="post-meta"><span class="post-type post">Post</span></div>
-            <div class="post-title">The Samurai with the Wooden Sword</div>
-            <div class="post-arch-note">Strategy over tooling &mdash; the right design beats the fanciest technology stack.</div>
-            <div class="post-tags">
-              <span class="post-tag">#Strategy</span>
-              <span class="post-tag">#Mindset</span>
+        <!-- 6. NoteApp -->
+        <div class="feed-item">
+          <div class="feed-row" onclick="toggleFeedItem(this)">
+            <span class="type-pill type-pill--launch">Launch</span>
+            <div class="feed-content">
+              <span class="feed-title">Shipped my first AI-era side project &mdash; a note-taking app in 32 hours</span>
             </div>
-            <div class="card-watermark"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.92 5.51l-1.41 1.41 2.83 2.83-2.12 2.12 1.41 1.41 2.12-2.12 6.37 6.37a2 2 0 002.83 0 2 2 0 000-2.83L12.58 8.33l2.12-2.12-1.41-1.41-2.12 2.12L8.34 4.09 6.92 5.51z"/><path d="M4 21l2-2 1.5 1.5L4 21z" opacity="0.6"/></svg></div>
-            <div class="li-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg></div>
-          </a>
+            <a href="https://www.linkedin.com/posts/aruncastromin_%F0%9D%97%A6%F0%9D%97%B5%F0%9D%97%B6%F0%9D%97%BD%F0%9D%97%BD%F0%9D%97%B2%F0%9D%97%B1-%F0%9D%97%BA%F0%9D%98%86-%F0%9D%97%B3%F0%9D%97%B6%F0%9D%97%BF%F0%9D%98%80%F0%9D%98%81-%F0%9D%97%94%F0%9D%97%9C-%F0%9D%97%B2%F0%9D%97%BF%F0%9D%97%AE-activity-7400755620842250241-d4dU" target="_blank" class="feed-read-link" onclick="event.stopPropagation()">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              <span>Read on LinkedIn</span>
+            </a>
+            <svg class="feed-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4l6 6-6 6"/></svg>
+          </div>
+          <div class="feed-detail">
+            <div class="feed-detail-inner">
+              <div class="detail-card">
+                <p class="detail-desc">Shipped a fully functional note-taking app in 32 tracked hours &mdash; from blank canvas to production deployment. Features rich text editing with templates, auto-save that never loses a keystroke, and a dark/light theme toggle. The post walks through the experience of building a real product end-to-end with an AI coding assistant for the first time.</p>
+                <div class="detail-footer">
+                  <div class="detail-tags">
+                    <span class="detail-tag">#Next.js</span>
+                    <span class="detail-tag">#Supabase</span>
+                    <span class="detail-tag">#ShippedIt</span>
+                  </div>
+                  <a href="https://www.linkedin.com/posts/aruncastromin_%F0%9D%97%A6%F0%9D%97%B5%F0%9D%97%B6%F0%9D%97%BD%F0%9D%97%BD%F0%9D%97%B2%F0%9D%97%B1-%F0%9D%97%BA%F0%9D%98%86-%F0%9D%97%B3%F0%9D%97%B6%F0%9D%97%BF%F0%9D%98%80%F0%9D%98%81-%F0%9D%97%94%F0%9D%97%9C-%F0%9D%97%B2%F0%9D%97%BF%F0%9D%97%AE-activity-7400755620842250241-d4dU" target="_blank" class="detail-read">Read on LinkedIn <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4l6 6-6 6"/></svg></a>
+                </div>
+                <div class="detail-watermark"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z"/><path d="M14 2v6h6" opacity="0.3"/><line x1="8" y1="13" x2="16" y2="13" stroke="currentColor" stroke-width="1" opacity="0.3"/><line x1="8" y1="17" x2="13" y2="17" stroke="currentColor" stroke-width="1" opacity="0.3"/></svg></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 7. Why Claude -->
+        <div class="feed-item">
+          <div class="feed-row" onclick="toggleFeedItem(this)">
+            <span class="type-pill type-pill--article">Article</span>
+            <div class="feed-content">
+              <span class="feed-title">Why should you 'Claude' today!</span>
+            </div>
+            <a href="https://www.linkedin.com/posts/aruncastromin_why-should-you-claude-today-activity-7399104960090726400-zQk2" target="_blank" class="feed-read-link" onclick="event.stopPropagation()">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              <span>Read on LinkedIn</span>
+            </a>
+            <svg class="feed-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4l6 6-6 6"/></svg>
+          </div>
+          <div class="feed-detail">
+            <div class="feed-detail-inner">
+              <div class="detail-card">
+                <p class="detail-desc">A candid look at why Claude has become my go-to development partner. This article walks through real examples &mdash; from rapid prototyping to production debugging &mdash; showing how AI pair programming changes the way you think about building software. It's less about the tool and more about the mindset shift that unlocks a completely different development velocity.</p>
+                <div class="detail-footer">
+                  <div class="detail-tags">
+                    <span class="detail-tag">#ClaudeAI</span>
+                    <span class="detail-tag">#AIAssisted</span>
+                    <span class="detail-tag">#DeveloperProductivity</span>
+                  </div>
+                  <a href="https://www.linkedin.com/posts/aruncastromin_why-should-you-claude-today-activity-7399104960090726400-zQk2" target="_blank" class="detail-read">Read on LinkedIn <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4l6 6-6 6"/></svg></a>
+                </div>
+                <div class="detail-watermark"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 2H4a2 2 0 00-2 2v12a2 2 0 002 2h4l4 4 4-4h4a2 2 0 002-2V4a2 2 0 00-2-2z"/><circle cx="8" cy="10" r="1.2" opacity="0.3"/><circle cx="12" cy="10" r="1.2" opacity="0.3"/><circle cx="16" cy="10" r="1.2" opacity="0.3"/></svg></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 8. Spotify Album -->
+        <div class="feed-item">
+          <div class="feed-row" onclick="toggleFeedItem(this)">
+            <span class="type-pill type-pill--launch">Launch</span>
+            <div class="feed-content">
+              <span class="feed-title">I just dropped an 8-song album on Spotify &mdash; and I've never sung a note</span>
+            </div>
+            <a href="https://www.linkedin.com/posts/aruncastromin_i-just-dropped-an-8-song-album-on-spotify-activity-7425540006670426112-UORV" target="_blank" class="feed-read-link" onclick="event.stopPropagation()">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              <span>Read on LinkedIn</span>
+            </a>
+            <svg class="feed-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4l6 6-6 6"/></svg>
+          </div>
+          <div class="feed-detail">
+            <div class="feed-detail-inner">
+              <div class="detail-card">
+                <p class="detail-desc">An 8-song album on Spotify, Apple Music, and Amazon &mdash; created by someone who has never sung a note. Each track went through 50+ iterations of prompting, refining, and curating to get the sound right. The post explores what happens when you treat music creation as a creative engineering problem and push the boundaries of what's possible with generative AI.</p>
+                <div class="detail-footer">
+                  <div class="detail-tags">
+                    <span class="detail-tag">#AI</span>
+                    <span class="detail-tag">#Creative</span>
+                    <span class="detail-tag">#Spotify</span>
+                  </div>
+                  <a href="https://www.linkedin.com/posts/aruncastromin_i-just-dropped-an-8-song-album-on-spotify-activity-7425540006670426112-UORV" target="_blank" class="detail-read">Read on LinkedIn <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4l6 6-6 6"/></svg></a>
+                </div>
+                <div class="detail-watermark"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3v10.55A4 4 0 1014 17V7h4V3h-6z"/></svg></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 9. PyExcel -->
+        <div class="feed-item">
+          <div class="feed-row" onclick="toggleFeedItem(this)">
+            <span class="type-pill type-pill--post">Post</span>
+            <div class="feed-content">
+              <span class="feed-title">PyExcel &mdash; Revolutionizing spreadsheets with Python</span>
+            </div>
+            <a href="https://www.linkedin.com/posts/aruncastromin_pythonprogramming-pyexcel-activity-7100788688757932032-2PZI" target="_blank" class="feed-read-link" onclick="event.stopPropagation()">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              <span>Read on LinkedIn</span>
+            </a>
+            <svg class="feed-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4l6 6-6 6"/></svg>
+          </div>
+          <div class="feed-detail">
+            <div class="feed-detail-inner">
+              <div class="detail-card">
+                <p class="detail-desc">PyExcel brings the power of Python directly into spreadsheets &mdash; letting analysts run ML models, automate transformations, and build dashboards without leaving the tool they already know. The post explores how this shifts the boundary between analysts and engineers, giving non-programmers access to capabilities that previously required a dedicated data team.</p>
+                <div class="detail-footer">
+                  <div class="detail-tags">
+                    <span class="detail-tag">#Python</span>
+                    <span class="detail-tag">#DataAnalysis</span>
+                  </div>
+                  <a href="https://www.linkedin.com/posts/aruncastromin_pythonprogramming-pyexcel-activity-7100788688757932032-2PZI" target="_blank" class="detail-read">Read on LinkedIn <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4l6 6-6 6"/></svg></a>
+                </div>
+                <div class="detail-watermark"><svg viewBox="0 0 24 24" fill="currentColor"><rect x="1" y="16" width="4" height="6" rx="1"/><rect x="7" y="11" width="4" height="11" rx="1"/><rect x="13" y="6" width="4" height="16" rx="1"/><rect x="19" y="2" width="4" height="20" rx="1"/></svg></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 10. Productive Leader -->
+        <div class="feed-item">
+          <div class="feed-row" onclick="toggleFeedItem(this)">
+            <span class="type-pill type-pill--article">Article</span>
+            <div class="feed-content">
+              <span class="feed-title">The Qualities of a Productive Leader</span>
+            </div>
+            <a href="https://www.linkedin.com/posts/aruncastromin_the-qualities-of-a-productive-leader-a-comprehensive-activity-7096735806995759105-ADvx" target="_blank" class="feed-read-link" onclick="event.stopPropagation()">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              <span>Read on LinkedIn</span>
+            </a>
+            <svg class="feed-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4l6 6-6 6"/></svg>
+          </div>
+          <div class="feed-detail">
+            <div class="feed-detail-inner">
+              <div class="detail-card">
+                <p class="detail-desc">A comprehensive breakdown of six qualities that distinguish productive leaders from merely busy ones. From setting clear direction to creating psychological safety, the article draws on real experiences leading cross-functional teams and distills them into actionable principles that any team lead or manager can apply immediately.</p>
+                <div class="detail-footer">
+                  <div class="detail-tags">
+                    <span class="detail-tag">#Leadership</span>
+                    <span class="detail-tag">#Delivery</span>
+                  </div>
+                  <a href="https://www.linkedin.com/posts/aruncastromin_the-qualities-of-a-productive-leader-a-comprehensive-activity-7096735806995759105-ADvx" target="_blank" class="detail-read">Read on LinkedIn <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4l6 6-6 6"/></svg></a>
+                </div>
+                <div class="detail-watermark"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 11. SMART Goals -->
+        <div class="feed-item">
+          <div class="feed-row" onclick="toggleFeedItem(this)">
+            <span class="type-pill type-pill--article">Article</span>
+            <div class="feed-content">
+              <span class="feed-title">SMART &mdash; A Simple Hack for All</span>
+            </div>
+            <a href="https://www.linkedin.com/posts/aruncastromin_businesswriting-smartgoals-personalgoals-activity-7088875418568568832-hzFc" target="_blank" class="feed-read-link" onclick="event.stopPropagation()">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              <span>Read on LinkedIn</span>
+            </a>
+            <svg class="feed-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4l6 6-6 6"/></svg>
+          </div>
+          <div class="feed-detail">
+            <div class="feed-detail-inner">
+              <div class="detail-card">
+                <p class="detail-desc">SMART (Specific, Measurable, Achievable, Relevant, Time-bound) is one of those frameworks everyone has heard of but few actually apply well. This article shows how to use it beyond the textbook &mdash; from writing better OKRs to structuring personal goals that you'll actually follow through on, with practical examples from both professional and personal contexts.</p>
+                <div class="detail-footer">
+                  <div class="detail-tags">
+                    <span class="detail-tag">#SMARTGoals</span>
+                    <span class="detail-tag">#BusinessWriting</span>
+                  </div>
+                  <a href="https://www.linkedin.com/posts/aruncastromin_businesswriting-smartgoals-personalgoals-activity-7088875418568568832-hzFc" target="_blank" class="detail-read">Read on LinkedIn <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4l6 6-6 6"/></svg></a>
+                </div>
+                <div class="detail-watermark"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.3"/><circle cx="12" cy="12" r="2.5"/></svg></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 12. Samurai -->
+        <div class="feed-item">
+          <div class="feed-row" onclick="toggleFeedItem(this)">
+            <span class="type-pill type-pill--post">Post</span>
+            <div class="feed-content">
+              <span class="feed-title">The Samurai with the Wooden Sword</span>
+            </div>
+            <a href="https://www.linkedin.com/posts/aruncastromin_%F0%9D%90%93%F0%9D%90%A1%F0%9D%90%9E-%F0%9D%90%92%F0%9D%90%9A%F0%9D%90%A6%F0%9D%90%AE%F0%9D%90%AB%F0%9D%90%9A%F0%9D%90%A2-%F0%9D%90%B0%F0%9D%90%A2%F0%9D%90%AD%F0%9D%90%A1-%F0%9D%90%AD%F0%9D%90%A1%F0%9D%90%9E-%F0%9D%90%96%F0%9D%90%A8%F0%9D%90%A8%F0%9D%90%9D%F0%9D%90%9E%F0%9D%90%A7-activity-7086663387052453889-OfZt" target="_blank" class="feed-read-link" onclick="event.stopPropagation()">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              <span>Read on LinkedIn</span>
+            </a>
+            <svg class="feed-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4l6 6-6 6"/></svg>
+          </div>
+          <div class="feed-detail">
+            <div class="feed-detail-inner">
+              <div class="detail-card">
+                <p class="detail-desc">The story of Miyamoto Musashi &mdash; the legendary samurai who defeated opponents using a wooden sword. A reflection on why mastery of fundamentals and strategic thinking will always outweigh having the shiniest tools. The best solutions come from deep understanding of the problem, not from reaching for the most advanced framework.</p>
+                <div class="detail-footer">
+                  <div class="detail-tags">
+                    <span class="detail-tag">#Strategy</span>
+                    <span class="detail-tag">#Mindset</span>
+                  </div>
+                  <a href="https://www.linkedin.com/posts/aruncastromin_%F0%9D%90%93%F0%9D%90%A1%F0%9D%90%9E-%F0%9D%90%92%F0%9D%90%9A%F0%9D%90%A6%F0%9D%90%AE%F0%9D%90%AB%F0%9D%90%9A%F0%9D%90%A2-%F0%9D%90%B0%F0%9D%90%A2%F0%9D%90%AD%F0%9D%90%A1-%F0%9D%90%AD%F0%9D%90%A1%F0%9D%90%9E-%F0%9D%90%96%F0%9D%90%A8%F0%9D%90%A8%F0%9D%90%9D%F0%9D%90%9E%F0%9D%90%A7-activity-7086663387052453889-OfZt" target="_blank" class="detail-read">Read on LinkedIn <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4l6 6-6 6"/></svg></a>
+                </div>
+                <div class="detail-watermark"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.92 5.51l-1.41 1.41 2.83 2.83-2.12 2.12 1.41 1.41 2.12-2.12 6.37 6.37a2 2 0 002.83 0 2 2 0 000-2.83L12.58 8.33l2.12-2.12-1.41-1.41-2.12 2.12L8.34 4.09 6.92 5.51z"/><path d="M4 21l2-2 1.5 1.5L4 21z" opacity="0.6"/></svg></div>
+              </div>
+            </div>
+          </div>
         </div>
 
       </div>
@@ -9810,10 +9295,10 @@
       </div>
     </section>
 
-    <!-- ============ SECTION 7: AI Chat Assistant ============ -->
+    <!-- ============ SECTION 9: AI Chat Assistant ============ -->
     <section id="chat-section" class="section animate-fade-up delay-6">
       <div class="section-header">
-        <span class="section-number">07.</span>
+        <span class="section-number">09.</span>
         <h2 class="section-title">Ask Me Anything</h2>
         <div class="section-line"></div>
       </div>
@@ -10141,32 +9626,16 @@
   </div>
 
   <script>
-    // ============ LinkedIn Posts Filter ============
-    function filterLinkedInPosts(type) {
-      const tabs = document.querySelectorAll('#linkedin-tabs .content-tab');
-      tabs.forEach(t => t.classList.remove('active'));
-      event.currentTarget.classList.add('active');
-
-      const posts = document.querySelectorAll('#linkedin-posts > *, #linkedin-posts .posts-row > *');
-      const rows = document.querySelectorAll('#linkedin-posts > .posts-row');
-
-      if (type === 'all') {
-        posts.forEach(p => p.style.display = '');
-        rows.forEach(r => r.style.display = '');
-        return;
+    // ============ LinkedIn Feed Accordion ============
+    function toggleFeedItem(rowEl) {
+      const item = rowEl.closest('.feed-item');
+      const wasExpanded = item.classList.contains('expanded');
+      document.querySelectorAll('.feed-item.expanded').forEach(el => {
+        el.classList.remove('expanded');
+      });
+      if (!wasExpanded) {
+        item.classList.add('expanded');
       }
-
-      // Show/hide individual cards
-      document.querySelectorAll('#linkedin-posts [data-type]').forEach(card => {
-        const match = card.dataset.type === type || (type === 'post' && card.dataset.type === 'post');
-        card.style.display = match ? '' : 'none';
-      });
-
-      // Hide rows where all children are hidden
-      rows.forEach(row => {
-        const visible = row.querySelectorAll('[data-type]:not([style*="display: none"])');
-        row.style.display = visible.length === 0 ? 'none' : '';
-      });
     }
 
     // ============ Timeline Mode Toggle ============
@@ -10514,41 +9983,11 @@
       }
     }
 
-    // ============ Projects View Toggle ============
-    function switchProjectsView(view) {
-      const simpleGrid = document.getElementById('simple-cards-grid');
-      const flipGrid = document.querySelector('.projects-grid');
-      const trackTimeline = document.getElementById('track-timeline');
-      const simpleBtn = document.getElementById('projects-simple-btn');
-      const flipBtn = document.getElementById('projects-flip-btn');
-      const timelineBtn = document.getElementById('projects-timeline-btn');
-
-      // Reset all views
-      simpleGrid.classList.remove('active');
-      flipGrid.classList.add('hidden');
-      trackTimeline.classList.remove('active');
-      simpleBtn.classList.remove('active');
-      flipBtn.classList.remove('active');
-      timelineBtn.classList.remove('active');
-
-      // Activate selected view
-      if (view === 'simple') {
-        simpleGrid.classList.add('active');
-        simpleBtn.classList.add('active');
-      } else if (view === 'timeline') {
-        trackTimeline.classList.add('active');
-        timelineBtn.classList.add('active');
-      } else if (view === 'flip') {
-        flipGrid.classList.remove('hidden');
-        flipBtn.classList.add('active');
-      }
-    }
+    // Projects View Toggle removed (only flip cards remain after UX consolidation)
 
     // ============ Project Status Filter (with Fluid Rearrangement) ============
     function flipAllCards() {
-      const flipCards = document.querySelectorAll('.flip-card');
-      const trackCards = document.querySelectorAll('.track-card');
-      const allCards = [...flipCards, ...trackCards];
+      const allCards = [...document.querySelectorAll('.flip-card')];
       // If any card is NOT flipped, flip all. Otherwise, unflip all.
       const anyUnflipped = allCards.some(card => !card.classList.contains('flipped'));
       allCards.forEach((card, i) => {
@@ -10571,47 +10010,24 @@
         }
       });
 
-      // Filter simple cards with animation
-      document.querySelectorAll('.simple-card').forEach(card => {
-        if (status === 'all' || card.dataset.status === status) {
-          card.classList.remove('filtered-out');
-        } else {
-          card.classList.add('filtered-out');
-        }
-      });
-
-      // Filter track nodes with fluid animation
-      const trackRows = document.querySelectorAll('.track-row');
-      trackRows.forEach(row => {
-        const nodes = row.querySelectorAll('.track-node');
-        let visibleCount = 0;
-
-        nodes.forEach(node => {
-          const nodeStatus = node.dataset.status;
-          if (status === 'all' || nodeStatus === status) {
-            node.classList.remove('filtered-out');
-            visibleCount++;
-          } else {
-            node.classList.add('filtered-out');
+      // Filter flip cards with animation
+      document.querySelectorAll('.projects-grid .flip-card').forEach(card => {
+        // Determine card status from data-status or badge class
+        let cardStatus = card.dataset.status;
+        if (!cardStatus) {
+          const badge = card.querySelector('.card-badge');
+          if (badge) {
+            if (badge.classList.contains('built') || badge.classList.contains('live')) cardStatus = 'live';
+            else if (badge.classList.contains('building')) cardStatus = 'building';
+            else if (badge.classList.contains('planning')) cardStatus = 'planning';
           }
-        });
-
-        // Hide entire row if no visible nodes (with animation)
-        if (visibleCount === 0) {
-          row.classList.add('hidden-row');
-        } else {
-          row.classList.remove('hidden-row');
         }
-      });
 
-      // Filter flip cards
-      document.querySelectorAll('.projects-grid .flip-card-container').forEach(card => {
-        if (status === 'all' || card.dataset.status === status) {
+        if (status === 'all' || cardStatus === status) {
           card.classList.remove('filtered-out');
           card.style.display = '';
         } else {
           card.classList.add('filtered-out');
-          // Delay hiding to allow animation
           setTimeout(() => {
             if (card.classList.contains('filtered-out')) {
               card.style.display = 'none';
@@ -10619,16 +10035,24 @@
           }, 400);
         }
       });
-
     }
 
     // Initialize main legend (disable items with 0 count)
     function initializeLegendCounts() {
       const statusCounts = { all: 0, live: 0, building: 0, planning: 0, ideating: 0 };
 
-      // Count all project statuses from track nodes
-      document.querySelectorAll('.track-node').forEach(node => {
-        const status = node.dataset.status;
+      // Count project statuses from flip cards
+      document.querySelectorAll('.projects-grid .flip-card').forEach(card => {
+        // Check data-status on card or infer from badge class
+        let status = card.dataset.status;
+        if (!status) {
+          const badge = card.querySelector('.card-badge');
+          if (badge) {
+            if (badge.classList.contains('built') || badge.classList.contains('live')) status = 'live';
+            else if (badge.classList.contains('building')) status = 'building';
+            else if (badge.classList.contains('planning')) status = 'planning';
+          }
+        }
         if (status && statusCounts.hasOwnProperty(status)) {
           statusCounts[status]++;
           statusCounts.all++;
@@ -10959,11 +10383,11 @@
 
       // Filter and sort repos (exclude forks and specific repos, prioritize pinned)
       const excludedRepos = ['any_calculator', 'buildfolio']; // Repos to hide
-      const pinnedRepos = ['PRIMMO', 'covered_calls', 'caclulate_anything']; // Repos to show first
+      const pinnedRepos = ['PRIMMO', 'covered_calls', 'anycalc']; // Repos to show first
 
       // Custom descriptions (override API descriptions)
       const customDescriptions = {
-        'covered_calls': 'Backtest Pro - Options trading dashboard'
+        'covered_calls': 'Portfolio Optimization - Automated portfolio management'
       };
 
       const filteredRepos = repos
@@ -11641,7 +11065,7 @@ Basically, I'm interested in practical AI applications that solve real problems.
 <strong>Personal Projects:</strong>
 • <strong>REPPIT</strong> - Fitness tracking app (App Store & Play Store)
 • <strong>NoteApp</strong> - Note-taking application with real users
-• <strong>Calci</strong> - Calculator app (in development)
+• <strong>AnyCalc</strong> - Smart calculator with presets (live)
 • This portfolio site - serving recruiters like you!
 • A couple of other interesting opportunities addressing people's needs identified for future development
 
@@ -11838,7 +11262,7 @@ Arun's portfolio showcases his side projects and engineering philosophy.
 
 <strong>Featured Repos:</strong>
 • <strong>PRIMMO</strong> - AI fitness coach (in development)
-• <strong>covered_calls</strong> - Options trading dashboard
+• <strong>covered_calls</strong> - Portfolio Optimization - Automated portfolio management
 • <strong>castronix-portfolio</strong> - This portfolio site
 
 <button onclick="window.open('https://github.com/ArunCastro', '_blank')" style="margin-top: 0.75rem; padding: 0.5rem 1rem; background: var(--accent); color: var(--bg-base); border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 0.85rem;">🐙 View GitHub Profile</button>`,
@@ -12625,7 +12049,7 @@ Open to exploring new opportunities that align with my career goals.`,
           experience: { visible: true, order: 2, id: 'exp-tabs-view' },
           skills: { visible: true, order: 3, id: 'skills-container' },
           github: { visible: true, order: 4, id: 'github-section' },
-          projects: { visible: true, order: 5, id: 'simple-cards-grid' },
+          projects: { visible: true, order: 5, id: 'section-build' },
           certifications: { visible: true, order: 6, id: 'certifications-grid' }
         },
         experience: [
@@ -14215,7 +13639,7 @@ ${report.improvements.map(i => `• ${i}`).join('\n')}
     });
 
     // ============ Dynamic Projects Loader ============
-    // Loads projects from projects.json and renders flip-cards and track-timeline dynamically
+    // Loads projects from projects.json and renders flip-cards dynamically
     // This ensures future projects added to projects.json automatically appear in Digital Resume
 
     const ProjectLoader = {
@@ -14233,9 +13657,6 @@ ${report.improvements.map(i => `• ${i}`).join('\n')}
 
           // Render flip cards
           this.renderFlipCards(projects);
-
-          // Render track timeline
-          this.renderTrackTimeline(projects);
 
           // Re-attach lightbox listeners to new images
           this.attachLightboxListeners();

@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mockup — LinkedIn Interactive Accordion</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg-base: #0A0A0F;
+      --bg-elevated: #111118;
+      --bg-card: #16161D;
+      --bg-hover: #1E1E26;
+      --text-primary: #F4F4F5;
+      --text-secondary: #A1A1AA;
+      --text-muted: #71717A;
+      --accent: #22D3EE;
+      --accent-dim: rgba(34, 211, 238, 0.1);
+      --border-subtle: rgba(255, 255, 255, 0.06);
+      --border-medium: rgba(255, 255, 255, 0.1);
+      --linkedin: #0A66C2;
+      --linkedin-dim: rgba(10, 102, 194, 0.15);
+      --purple: #A78BFA;
+      --purple-dim: rgba(167, 139, 250, 0.1);
+      --green: #22C55E;
+      --green-dim: rgba(34, 197, 94, 0.1);
+      --amber: #F59E0B;
+      --amber-dim: rgba(245, 158, 11, 0.1);
+    }
+
+    html { font-size: 16px; }
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg-base);
+      color: var(--text-primary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      padding: 2rem;
+    }
+
+    .mockup-label {
+      position: fixed;
+      top: 1rem;
+      left: 1rem;
+      background: var(--accent);
+      color: var(--bg-base);
+      padding: 0.4rem 0.8rem;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      z-index: 100;
+    }
+
+    .section {
+      max-width: 800px;
+      margin: 3rem auto;
+    }
+
+    /* ---- Header ---- */
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .section-number {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--accent);
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.15em;
+    }
+
+    .section-title {
+      font-size: 1.75rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .linkedin-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--linkedin-dim);
+      color: var(--linkedin);
+      padding: 0.3rem 0.7rem;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      margin-left: auto;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .linkedin-badge:hover { background: rgba(10, 102, 194, 0.25); }
+    .linkedin-badge svg { width: 14px; height: 14px; fill: currentColor; }
+
+    .section-subtitle {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: -1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ---- Feed List ---- */
+    .feed-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ---- Feed Item (collapsed row) ---- */
+    .feed-item {
+      border-bottom: 1px solid var(--border-subtle);
+      transition: all 0.3s ease;
+      border-radius: 0;
+      border-left: 2px solid transparent;
+    }
+
+    .feed-item:first-child:not(.expanded) {
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .feed-item.expanded {
+      background: var(--bg-card);
+      border-left: 2px solid var(--accent);
+      border-radius: 8px;
+      margin: 0.35rem 0;
+      border-top: 1px solid var(--border-medium);
+      border-bottom: 1px solid var(--border-medium);
+      border-right: 1px solid var(--border-medium);
+    }
+
+    .feed-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .feed-row:hover {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .feed-item.expanded .feed-row {
+      padding-bottom: 0.5rem;
+      border-radius: 8px 8px 0 0;
+    }
+
+    .feed-item.expanded .feed-row:hover {
+      background: transparent;
+    }
+
+    /* Type pill */
+    .type-pill {
+      flex-shrink: 0;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.58rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      min-width: 52px;
+      text-align: center;
+    }
+
+    .type-pill--article  { background: var(--linkedin-dim); color: var(--linkedin); }
+    .type-pill--launch   { background: var(--green-dim);  color: var(--green); }
+    .type-pill--insight  { background: var(--purple-dim); color: var(--purple); }
+    .type-pill--post     { background: var(--amber-dim);  color: var(--amber); }
+
+    /* Feed content */
+    .feed-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .feed-title {
+      font-size: 0.85rem;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      line-height: 1.4;
+    }
+
+    .feed-item.expanded .feed-title {
+      color: var(--accent);
+      white-space: normal;
+      font-size: 0.9rem;
+    }
+
+    .feed-item.expanded .feed-read-link {
+      display: none;
+    }
+
+    /* Read on LinkedIn link (always visible) */
+    .feed-read-link {
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.65rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .feed-read-link:hover {
+      color: var(--linkedin);
+      background: var(--linkedin-dim);
+    }
+
+    .feed-read-link svg {
+      width: 12px;
+      height: 12px;
+    }
+
+    /* Expand chevron */
+    .feed-chevron {
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      color: var(--text-muted);
+      transition: transform 0.3s ease, color 0.2s;
+    }
+
+    .feed-item.expanded .feed-chevron {
+      transform: rotate(90deg);
+      color: var(--accent);
+    }
+
+    /* ---- Expanded Detail Panel ---- */
+    .feed-detail {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+      opacity: 0;
+    }
+
+    .feed-item.expanded .feed-detail {
+      max-height: 500px;
+      opacity: 1;
+    }
+
+    .feed-detail-inner {
+      padding: 0 1rem 1rem 1rem;
+      border-top: 1px solid var(--border-subtle);
+      margin: 0 0.5rem;
+    }
+
+    .detail-card {
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      padding: 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .detail-desc {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      margin-top: 0.85rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .detail-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .detail-tags {
+      display: flex;
+      gap: 0.35rem;
+      flex-wrap: wrap;
+    }
+
+    .detail-tag {
+      font-size: 0.6rem;
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+      padding: 0.12rem 0.45rem;
+      border-radius: 3px;
+    }
+
+    .detail-read {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--accent);
+      text-decoration: none;
+      transition: gap 0.2s ease;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .detail-read:hover {
+      gap: 0.6rem;
+    }
+
+    .detail-read svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    /* Watermark icons in expanded detail */
+    .detail-watermark {
+      position: absolute;
+      bottom: 0.5rem;
+      right: 0.75rem;
+      width: 80px;
+      height: 80px;
+      opacity: 0.04;
+      pointer-events: none;
+      color: var(--text-primary);
+    }
+
+    .detail-watermark svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* ---- CTA ---- */
+    .posts-cta {
+      margin-top: 1.5rem;
+      text-align: center;
+    }
+
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.6rem 1.25rem;
+      background: var(--linkedin-dim);
+      border: 1px solid rgba(10, 102, 194, 0.2);
+      border-radius: 8px;
+      color: var(--linkedin);
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .cta-button:hover {
+      background: rgba(10, 102, 194, 0.2);
+      border-color: var(--linkedin);
+    }
+
+    .cta-button svg { width: 16px; height: 16px; fill: currentColor; }
+
+    /* ---- Responsive ---- */
+    @media (max-width: 640px) {
+      body { padding: 1rem; }
+      .section-header { flex-wrap: wrap; gap: 0.5rem; }
+      .linkedin-badge { margin-left: 0; }
+      .feed-title { white-space: normal; }
+      .feed-read-link span { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="mockup-label">Interactive: Featured + List Accordion</div>
+
+  <section class="section">
+
+    <!-- Header -->
+    <div class="section-header">
+      <div>
+        <div class="section-number">08.</div>
+        <h2 class="section-title">From the Feed</h2>
+      </div>
+      <a href="https://www.linkedin.com/in/aruncastromin/" target="_blank" class="linkedin-badge">
+        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        LinkedIn
+      </a>
+    </div>
+    <p class="section-subtitle">Project launches, deep-dives, and architectural takes I share on LinkedIn.</p>
+
+    <!-- Feed List (Accordion) -->
+    <div class="feed-list">
+
+      <!-- 1. Klarity — starts expanded -->
+      <div class="feed-item expanded" data-url="https://www.linkedin.com/posts/aruncastromin_i-built-%F0%9D%97%9E%F0%9D%97%B9%F0%9D%97%AE%F0%9D%97%BF%F0%9D%97%B6%F0%9D%98%81%F0%9D%98%86-a-lightweight-personal-activity-7421562812600279041-QrnW">
+        <div class="feed-row" onclick="toggleFeedItem(this)">
+          <span class="type-pill type-pill--article">Article</span>
+          <div class="feed-content">
+            <span class="feed-title">I built Klarity &mdash; a lightweight personal task board for AI-assisted developers</span>
+          </div>
+          <a href="https://www.linkedin.com/posts/aruncastromin_i-built-%F0%9D%97%9E%F0%9D%97%B9%F0%9D%97%AE%F0%9D%97%BF%F0%9D%97%B6%F0%9D%98%81%F0%9D%98%86-a-lightweight-personal-activity-7421562812600279041-QrnW" target="_blank" class="feed-read-link" onclick="event.stopPropagation()">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            <span>Read on LinkedIn</span>
+          </a>
+          <svg class="feed-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4l6 6-6 6"/></svg>
+        </div>
+        <div class="feed-detail">
+          <div class="feed-detail-inner">
+            <div class="detail-card">
+              <p class="detail-desc">A lightweight desktop task board purpose-built for developers who use AI coding assistants. Weighing just 8MB, Klarity runs entirely offline with a 15-stage pipeline that tracks every task from idea to deployment. ETag-based distributed sync keeps your board consistent across machines without a server, while multi-agent orchestration lets different AI assistants collaborate on the same project.</p>
+              <div class="detail-footer">
+                <div class="detail-tags">
+                  <span class="detail-tag">#OfflineFirst</span>
+                  <span class="detail-tag">#PipelinePattern</span>
+                  <span class="detail-tag">#AI</span>
+                  <span class="detail-tag">#DevTools</span>
+                </div>
+                <a href="https://www.linkedin.com/posts/aruncastromin_i-built-%F0%9D%97%9E%F0%9D%97%B9%F0%9D%97%AE%F0%9D%97%BF%F0%9D%97%B6%F0%9D%98%81%F0%9D%98%86-a-lightweight-personal-activity-7421562812600279041-QrnW" target="_blank" class="detail-read">Read on LinkedIn <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4l6 6-6 6"/></svg></a>
+              </div>
+              <div class="detail-watermark"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 3h12l4 6-10 13L2 9l4-6z"/><path d="M2 9h20M7.5 3L12 9l4.5-6M12 9l-10 13M12 9l10 13" fill="none" stroke="currentColor" stroke-width="0.8" opacity="0.3"/></svg></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Orbit -->
+      <div class="feed-item" data-url="https://www.linkedin.com/posts/aruncastromin_launching-%F0%9D%97%A2%F0%9D%97%BF%F0%9D%97%AF%F0%9D%97%B6%F0%9D%98%81-the-phone-companion-activity-7423708193626800128-sBOA">
+        <div class="feed-row" onclick="toggleFeedItem(this)">
+          <span class="type-pill type-pill--launch">Launch</span>
+          <div class="feed-content">
+            <span class="feed-title">Launching Orbit &mdash; the phone companion for Klarity</span>
+          </div>
+          <a href="https://www.linkedin.com/posts/aruncastromin_launching-%F0%9D%97%A2%F0%9D%97%BF%F0%9D%97%AF%F0%9D%97%B6%F0%9D%98%81-the-phone-companion-activity-7423708193626800128-sBOA" target="_blank" class="feed-read-link" onclick="event.stopPropagation()">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            <span>Read on LinkedIn</span>
+          </a>
+          <svg class="feed-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4l6 6-6 6"/></svg>
+        </div>
+        <div class="feed-detail">
+          <div class="feed-detail-inner">
+            <div class="detail-card">
+              <p class="detail-desc">Orbit is the mobile companion for Klarity &mdash; letting you review, update, and triage tasks from your phone while the desktop app handles the heavy lifting. Built with a zero-server architecture that uses GitHub as the backend, it achieves sub-2-minute cross-platform sync with SHA-based conflict resolution and zero infrastructure cost.</p>
+              <div class="detail-footer">
+                <div class="detail-tags">
+                  <span class="detail-tag">#ReactNative</span>
+                  <span class="detail-tag">#Tauri</span>
+                  <span class="detail-tag">#DistributedSync</span>
+                </div>
+                <a href="https://www.linkedin.com/posts/aruncastromin_launching-%F0%9D%97%A2%F0%9D%97%BF%F0%9D%97%AF%F0%9D%97%B6%F0%9D%98%81-the-phone-companion-activity-7423708193626800128-sBOA" target="_blank" class="detail-read">Read on LinkedIn <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4l6 6-6 6"/></svg></a>
+              </div>
+              <div class="detail-watermark"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="2.5"/><ellipse cx="12" cy="12" rx="11" ry="4.2" fill="none" stroke="currentColor" stroke-width="1.3"/><ellipse cx="12" cy="12" rx="11" ry="4.2" fill="none" stroke="currentColor" stroke-width="1.3" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="11" ry="4.2" fill="none" stroke="currentColor" stroke-width="1.3" transform="rotate(120 12 12)"/><circle cx="21" cy="8" r="1.3"/></svg></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Synthetic Data -->
+      <div class="feed-item" data-url="https://www.linkedin.com/posts/aruncastromin_syntheticdata-dataprivacy-activity-7097464505370112001-3y_G">
+        <div class="feed-row" onclick="toggleFeedItem(this)">
+          <span class="type-pill type-pill--article">Article</span>
+          <div class="feed-content">
+            <span class="feed-title">The Data Problem and its 'Fake' Fix &mdash; Synthetic Data for Privacy</span>
+          </div>
+          <a href="https://www.linkedin.com/posts/aruncastromin_syntheticdata-dataprivacy-activity-7097464505370112001-3y_G" target="_blank" class="feed-read-link" onclick="event.stopPropagation()">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            <span>Read on LinkedIn</span>
+          </a>
+          <svg class="feed-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4l6 6-6 6"/></svg>
+        </div>
+        <div class="feed-detail">
+          <div class="feed-detail-inner">
+            <div class="detail-card">
+              <p class="detail-desc">Exploring how synthetic data generation solves one of the hardest problems in enterprise testing &mdash; getting realistic test data without exposing real customer information. The article dives into techniques for generating statistically faithful datasets that satisfy GDPR and PII constraints, turning a compliance headache into an engineering advantage.</p>
+              <div class="detail-footer">
+                <div class="detail-tags">
+                  <span class="detail-tag">#SyntheticData</span>
+                  <span class="detail-tag">#DataPrivacy</span>
+                  <span class="detail-tag">#GDPR</span>
+                </div>
+                <a href="https://www.linkedin.com/posts/aruncastromin_syntheticdata-dataprivacy-activity-7097464505370112001-3y_G" target="_blank" class="detail-read">Read on LinkedIn <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4l6 6-6 6"/></svg></a>
+              </div>
+              <div class="detail-watermark"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 5a2 2 0 012 2v2h1a1 1 0 011 1v4a1 1 0 01-1 1H9a1 1 0 01-1-1v-4a1 1 0 011-1h1V8a2 2 0 012-2z"/></svg></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. AI Insight -->
+      <div class="feed-item" data-url="https://www.linkedin.com/posts/aruncastromin_ai-can-write-code-fast-not-necessarily-right-activity-7409622081455230976-Hgn9">
+        <div class="feed-row" onclick="toggleFeedItem(this)">
+          <span class="type-pill type-pill--insight">Insight</span>
+          <div class="feed-content">
+            <span class="feed-title">AI can write code fast &mdash; not necessarily right</span>
+          </div>
+          <a href="https://www.linkedin.com/posts/aruncastromin_ai-can-write-code-fast-not-necessarily-right-activity-7409622081455230976-Hgn9" target="_blank" class="feed-read-link" onclick="event.stopPropagation()">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            <span>Read on LinkedIn</span>
+          </a>
+          <svg class="feed-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4l6 6-6 6"/></svg>
+        </div>
+        <div class="feed-detail">
+          <div class="feed-detail-inner">
+            <div class="detail-card">
+              <p class="detail-desc">AI can generate code at incredible speed, but speed without structure leads to technical debt just as fast. This post shares a phased workflow with specialized agents (@designer, @architect, @qa) and deliberate human gates at each stage &mdash; because the real skill isn't writing code faster, it's knowing when to slow down and verify.</p>
+              <div class="detail-footer">
+                <div class="detail-tags">
+                  <span class="detail-tag">#TOGAF</span>
+                  <span class="detail-tag">#AIAssisted</span>
+                  <span class="detail-tag">#ArchitectureGovernance</span>
+                </div>
+                <a href="https://www.linkedin.com/posts/aruncastromin_ai-can-write-code-fast-not-necessarily-right-activity-7409622081455230976-Hgn9" target="_blank" class="detail-read">Read on LinkedIn <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4l6 6-6 6"/></svg></a>
+              </div>
+              <div class="detail-watermark"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a7 7 0 00-4.6 12.3A4.98 4.98 0 006 18v1a1 1 0 001 1h10a1 1 0 001-1v-1c0-1.4-.6-2.7-1.4-3.7A7 7 0 0012 2zm-1 15h2v1h-2v-1zm0-2h2v1h-2v-1z"/><path d="M9 21h6v1a1 1 0 01-1 1h-4a1 1 0 01-1-1v-1z"/></svg></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. AnyCalc -->
+      <div class="feed-item" data-url="https://www.linkedin.com/posts/aruncastromin_meet-%F0%9D%97%94%F0%9D%97%BB%F0%9D%98%86%F0%9D%97%96%F0%9D%97%AE%F0%9D%97%B9%F0%9D%97%B0-the-calculator-you-activity-7418310501895688192-qDsV">
+        <div class="feed-row" onclick="toggleFeedItem(this)">
+          <span class="type-pill type-pill--launch">Launch</span>
+          <div class="feed-content">
+            <span class="feed-title">Meet AnyCalc &mdash; the calculator you actually want to use</span>
+          </div>
+          <a href="https://www.linkedin.com/posts/aruncastromin_meet-%F0%9D%97%94%F0%9D%97%BB%F0%9D%98%86%F0%9D%97%96%F0%9D%97%AE%F0%9D%97%B9%F0%9D%97%B0-the-calculator-you-activity-7418310501895688192-qDsV" target="_blank" class="feed-read-link" onclick="event.stopPropagation()">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            <span>Read on LinkedIn</span>
+          </a>
+          <svg class="feed-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4l6 6-6 6"/></svg>
+        </div>
+        <div class="feed-detail">
+          <div class="feed-detail-inner">
+            <div class="detail-card">
+              <p class="detail-desc">AnyCalc packs 19 interlinked financial calculators into a single clean interface &mdash; from EMI and tip splits to compound interest and currency conversion. Every calculator feeds into others, so a mortgage estimate can flow into a stamp duty calculation without re-entering numbers. Built to be the one calculator app that actually replaces all the others.</p>
+              <div class="detail-footer">
+                <div class="detail-tags">
+                  <span class="detail-tag">#Flutter</span>
+                  <span class="detail-tag">#Dart</span>
+                  <span class="detail-tag">#FinancialCalculators</span>
+                </div>
+                <a href="https://www.linkedin.com/posts/aruncastromin_meet-%F0%9D%97%94%F0%9D%97%BB%F0%9D%98%86%F0%9D%97%96%F0%9D%97%AE%F0%9D%97%B9%F0%9D%97%B0-the-calculator-you-activity-7418310501895688192-qDsV" target="_blank" class="detail-read">Read on LinkedIn <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4l6 6-6 6"/></svg></a>
+              </div>
+              <div class="detail-watermark"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="7" cy="7" r="3.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17" cy="17" r="3.5" fill="none" stroke="currentColor" stroke-width="2"/><line x1="19" y1="3" x2="5" y2="21" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6. NoteApp -->
+      <div class="feed-item" data-url="https://www.linkedin.com/posts/aruncastromin_%F0%9D%97%A6%F0%9D%97%B5%F0%9D%97%B6%F0%9D%97%BD%F0%9D%97%BD%F0%9D%97%B2%F0%9D%97%B1-%F0%9D%97%BA%F0%9D%98%86-%F0%9D%97%B3%F0%9D%97%B6%F0%9D%97%BF%F0%9D%98%80%F0%9D%98%81-%F0%9D%97%94%F0%9D%97%9C-%F0%9D%97%B2%F0%9D%97%BF%F0%9D%97%AE-activity-7400755620842250241-d4dU">
+        <div class="feed-row" onclick="toggleFeedItem(this)">
+          <span class="type-pill type-pill--launch">Launch</span>
+          <div class="feed-content">
+            <span class="feed-title">Shipped my first AI-era side project &mdash; a note-taking app in 32 hours</span>
+          </div>
+          <a href="https://www.linkedin.com/posts/aruncastromin_%F0%9D%97%A6%F0%9D%97%B5%F0%9D%97%B6%F0%9D%97%BD%F0%9D%97%BD%F0%9D%97%B2%F0%9D%97%B1-%F0%9D%97%BA%F0%9D%98%86-%F0%9D%97%B3%F0%9D%97%B6%F0%9D%97%BF%F0%9D%98%80%F0%9D%98%81-%F0%9D%97%94%F0%9D%97%9C-%F0%9D%97%B2%F0%9D%97%BF%F0%9D%97%AE-activity-7400755620842250241-d4dU" target="_blank" class="feed-read-link" onclick="event.stopPropagation()">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            <span>Read on LinkedIn</span>
+          </a>
+          <svg class="feed-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4l6 6-6 6"/></svg>
+        </div>
+        <div class="feed-detail">
+          <div class="feed-detail-inner">
+            <div class="detail-card">
+              <p class="detail-desc">Shipped a fully functional note-taking app in 32 tracked hours &mdash; from blank canvas to production deployment. Features rich text editing with templates, auto-save that never loses a keystroke, and a dark/light theme toggle. The post walks through the experience of building a real product end-to-end with an AI coding assistant for the first time.</p>
+              <div class="detail-footer">
+                <div class="detail-tags">
+                  <span class="detail-tag">#Next.js</span>
+                  <span class="detail-tag">#Supabase</span>
+                  <span class="detail-tag">#ShippedIt</span>
+                </div>
+                <a href="https://www.linkedin.com/posts/aruncastromin_%F0%9D%97%A6%F0%9D%97%B5%F0%9D%97%B6%F0%9D%97%BD%F0%9D%97%BD%F0%9D%97%B2%F0%9D%97%B1-%F0%9D%97%BA%F0%9D%98%86-%F0%9D%97%B3%F0%9D%97%B6%F0%9D%97%BF%F0%9D%98%80%F0%9D%98%81-%F0%9D%97%94%F0%9D%97%9C-%F0%9D%97%B2%F0%9D%97%BF%F0%9D%97%AE-activity-7400755620842250241-d4dU" target="_blank" class="detail-read">Read on LinkedIn <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4l6 6-6 6"/></svg></a>
+              </div>
+              <div class="detail-watermark"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z"/><path d="M14 2v6h6" opacity="0.3"/><line x1="8" y1="13" x2="16" y2="13" stroke="currentColor" stroke-width="1" opacity="0.3"/><line x1="8" y1="17" x2="13" y2="17" stroke="currentColor" stroke-width="1" opacity="0.3"/></svg></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7. Why Claude -->
+      <div class="feed-item" data-url="https://www.linkedin.com/posts/aruncastromin_why-should-you-claude-today-activity-7399104960090726400-zQk2">
+        <div class="feed-row" onclick="toggleFeedItem(this)">
+          <span class="type-pill type-pill--article">Article</span>
+          <div class="feed-content">
+            <span class="feed-title">Why should you 'Claude' today!</span>
+          </div>
+          <a href="https://www.linkedin.com/posts/aruncastromin_why-should-you-claude-today-activity-7399104960090726400-zQk2" target="_blank" class="feed-read-link" onclick="event.stopPropagation()">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            <span>Read on LinkedIn</span>
+          </a>
+          <svg class="feed-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4l6 6-6 6"/></svg>
+        </div>
+        <div class="feed-detail">
+          <div class="feed-detail-inner">
+            <div class="detail-card">
+              <p class="detail-desc">A candid look at why Claude has become my go-to development partner. This article walks through real examples &mdash; from rapid prototyping to production debugging &mdash; showing how AI pair programming changes the way you think about building software. It's less about the tool and more about the mindset shift that unlocks a completely different development velocity.</p>
+              <div class="detail-footer">
+                <div class="detail-tags">
+                  <span class="detail-tag">#ClaudeAI</span>
+                  <span class="detail-tag">#AIAssisted</span>
+                  <span class="detail-tag">#DeveloperProductivity</span>
+                </div>
+                <a href="https://www.linkedin.com/posts/aruncastromin_why-should-you-claude-today-activity-7399104960090726400-zQk2" target="_blank" class="detail-read">Read on LinkedIn <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4l6 6-6 6"/></svg></a>
+              </div>
+              <div class="detail-watermark"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 2H4a2 2 0 00-2 2v12a2 2 0 002 2h4l4 4 4-4h4a2 2 0 002-2V4a2 2 0 00-2-2z"/><circle cx="8" cy="10" r="1.2" opacity="0.3"/><circle cx="12" cy="10" r="1.2" opacity="0.3"/><circle cx="16" cy="10" r="1.2" opacity="0.3"/></svg></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 8. Spotify Album -->
+      <div class="feed-item" data-url="https://www.linkedin.com/posts/aruncastromin_i-just-dropped-an-8-song-album-on-spotify-activity-7425540006670426112-UORV">
+        <div class="feed-row" onclick="toggleFeedItem(this)">
+          <span class="type-pill type-pill--launch">Launch</span>
+          <div class="feed-content">
+            <span class="feed-title">I just dropped an 8-song album on Spotify &mdash; and I've never sung a note</span>
+          </div>
+          <a href="https://www.linkedin.com/posts/aruncastromin_i-just-dropped-an-8-song-album-on-spotify-activity-7425540006670426112-UORV" target="_blank" class="feed-read-link" onclick="event.stopPropagation()">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            <span>Read on LinkedIn</span>
+          </a>
+          <svg class="feed-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4l6 6-6 6"/></svg>
+        </div>
+        <div class="feed-detail">
+          <div class="feed-detail-inner">
+            <div class="detail-card">
+              <p class="detail-desc">An 8-song album on Spotify, Apple Music, and Amazon &mdash; created by someone who has never sung a note. Each track went through 50+ iterations of prompting, refining, and curating to get the sound right. The post explores what happens when you treat music creation as a creative engineering problem and push the boundaries of what's possible with generative AI.</p>
+              <div class="detail-footer">
+                <div class="detail-tags">
+                  <span class="detail-tag">#AI</span>
+                  <span class="detail-tag">#Creative</span>
+                  <span class="detail-tag">#Spotify</span>
+                </div>
+                <a href="https://www.linkedin.com/posts/aruncastromin_i-just-dropped-an-8-song-album-on-spotify-activity-7425540006670426112-UORV" target="_blank" class="detail-read">Read on LinkedIn <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4l6 6-6 6"/></svg></a>
+              </div>
+              <div class="detail-watermark"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3v10.55A4 4 0 1014 17V7h4V3h-6z"/></svg></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 9. PyExcel -->
+      <div class="feed-item" data-url="https://www.linkedin.com/posts/aruncastromin_pythonprogramming-pyexcel-activity-7100788688757932032-2PZI">
+        <div class="feed-row" onclick="toggleFeedItem(this)">
+          <span class="type-pill type-pill--post">Post</span>
+          <div class="feed-content">
+            <span class="feed-title">PyExcel &mdash; Revolutionizing spreadsheets with Python</span>
+          </div>
+          <a href="https://www.linkedin.com/posts/aruncastromin_pythonprogramming-pyexcel-activity-7100788688757932032-2PZI" target="_blank" class="feed-read-link" onclick="event.stopPropagation()">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            <span>Read on LinkedIn</span>
+          </a>
+          <svg class="feed-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4l6 6-6 6"/></svg>
+        </div>
+        <div class="feed-detail">
+          <div class="feed-detail-inner">
+            <div class="detail-card">
+              <p class="detail-desc">PyExcel brings the power of Python directly into spreadsheets &mdash; letting analysts run ML models, automate transformations, and build dashboards without leaving the tool they already know. The post explores how this shifts the boundary between analysts and engineers, giving non-programmers access to capabilities that previously required a dedicated data team.</p>
+              <div class="detail-footer">
+                <div class="detail-tags">
+                  <span class="detail-tag">#Python</span>
+                  <span class="detail-tag">#DataAnalysis</span>
+                </div>
+                <a href="https://www.linkedin.com/posts/aruncastromin_pythonprogramming-pyexcel-activity-7100788688757932032-2PZI" target="_blank" class="detail-read">Read on LinkedIn <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4l6 6-6 6"/></svg></a>
+              </div>
+              <div class="detail-watermark"><svg viewBox="0 0 24 24" fill="currentColor"><rect x="1" y="16" width="4" height="6" rx="1"/><rect x="7" y="11" width="4" height="11" rx="1"/><rect x="13" y="6" width="4" height="16" rx="1"/><rect x="19" y="2" width="4" height="20" rx="1"/></svg></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 10. Productive Leader -->
+      <div class="feed-item" data-url="https://www.linkedin.com/posts/aruncastromin_the-qualities-of-a-productive-leader-a-comprehensive-activity-7096735806995759105-ADvx">
+        <div class="feed-row" onclick="toggleFeedItem(this)">
+          <span class="type-pill type-pill--article">Article</span>
+          <div class="feed-content">
+            <span class="feed-title">The Qualities of a Productive Leader</span>
+          </div>
+          <a href="https://www.linkedin.com/posts/aruncastromin_the-qualities-of-a-productive-leader-a-comprehensive-activity-7096735806995759105-ADvx" target="_blank" class="feed-read-link" onclick="event.stopPropagation()">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            <span>Read on LinkedIn</span>
+          </a>
+          <svg class="feed-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4l6 6-6 6"/></svg>
+        </div>
+        <div class="feed-detail">
+          <div class="feed-detail-inner">
+            <div class="detail-card">
+              <p class="detail-desc">A comprehensive breakdown of six qualities that distinguish productive leaders from merely busy ones. From setting clear direction to creating psychological safety, the article draws on real experiences leading cross-functional teams and distills them into actionable principles that any team lead or manager can apply immediately.</p>
+              <div class="detail-footer">
+                <div class="detail-tags">
+                  <span class="detail-tag">#Leadership</span>
+                  <span class="detail-tag">#Delivery</span>
+                </div>
+                <a href="https://www.linkedin.com/posts/aruncastromin_the-qualities-of-a-productive-leader-a-comprehensive-activity-7096735806995759105-ADvx" target="_blank" class="detail-read">Read on LinkedIn <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4l6 6-6 6"/></svg></a>
+              </div>
+              <div class="detail-watermark"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 11. SMART Goals -->
+      <div class="feed-item" data-url="https://www.linkedin.com/posts/aruncastromin_businesswriting-smartgoals-personalgoals-activity-7088875418568568832-hzFc">
+        <div class="feed-row" onclick="toggleFeedItem(this)">
+          <span class="type-pill type-pill--article">Article</span>
+          <div class="feed-content">
+            <span class="feed-title">SMART &mdash; A Simple Hack for All</span>
+          </div>
+          <a href="https://www.linkedin.com/posts/aruncastromin_businesswriting-smartgoals-personalgoals-activity-7088875418568568832-hzFc" target="_blank" class="feed-read-link" onclick="event.stopPropagation()">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            <span>Read on LinkedIn</span>
+          </a>
+          <svg class="feed-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4l6 6-6 6"/></svg>
+        </div>
+        <div class="feed-detail">
+          <div class="feed-detail-inner">
+            <div class="detail-card">
+              <p class="detail-desc">SMART (Specific, Measurable, Achievable, Relevant, Time-bound) is one of those frameworks everyone has heard of but few actually apply well. This article shows how to use it beyond the textbook &mdash; from writing better OKRs to structuring personal goals that you'll actually follow through on, with practical examples from both professional and personal contexts.</p>
+              <div class="detail-footer">
+                <div class="detail-tags">
+                  <span class="detail-tag">#SMARTGoals</span>
+                  <span class="detail-tag">#BusinessWriting</span>
+                </div>
+                <a href="https://www.linkedin.com/posts/aruncastromin_businesswriting-smartgoals-personalgoals-activity-7088875418568568832-hzFc" target="_blank" class="detail-read">Read on LinkedIn <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4l6 6-6 6"/></svg></a>
+              </div>
+              <div class="detail-watermark"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.3"/><circle cx="12" cy="12" r="2.5"/></svg></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 12. Samurai -->
+      <div class="feed-item" data-url="https://www.linkedin.com/posts/aruncastromin_%F0%9D%90%93%F0%9D%90%A1%F0%9D%90%9E-%F0%9D%90%92%F0%9D%90%9A%F0%9D%90%A6%F0%9D%90%AE%F0%9D%90%AB%F0%9D%90%9A%F0%9D%90%A2-%F0%9D%90%B0%F0%9D%90%A2%F0%9D%90%AD%F0%9D%90%A1-%F0%9D%90%AD%F0%9D%90%A1%F0%9D%90%9E-%F0%9D%90%96%F0%9D%90%A8%F0%9D%90%A8%F0%9D%90%9D%F0%9D%90%9E%F0%9D%90%A7-activity-7086663387052453889-OfZt">
+        <div class="feed-row" onclick="toggleFeedItem(this)">
+          <span class="type-pill type-pill--post">Post</span>
+          <div class="feed-content">
+            <span class="feed-title">The Samurai with the Wooden Sword</span>
+          </div>
+          <a href="https://www.linkedin.com/posts/aruncastromin_%F0%9D%90%93%F0%9D%90%A1%F0%9D%90%9E-%F0%9D%90%92%F0%9D%90%9A%F0%9D%90%A6%F0%9D%90%AE%F0%9D%90%AB%F0%9D%90%9A%F0%9D%90%A2-%F0%9D%90%B0%F0%9D%90%A2%F0%9D%90%AD%F0%9D%90%A1-%F0%9D%90%AD%F0%9D%90%A1%F0%9D%90%9E-%F0%9D%90%96%F0%9D%90%A8%F0%9D%90%A8%F0%9D%90%9D%F0%9D%90%9E%F0%9D%90%A7-activity-7086663387052453889-OfZt" target="_blank" class="feed-read-link" onclick="event.stopPropagation()">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            <span>Read on LinkedIn</span>
+          </a>
+          <svg class="feed-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4l6 6-6 6"/></svg>
+        </div>
+        <div class="feed-detail">
+          <div class="feed-detail-inner">
+            <div class="detail-card">
+              <p class="detail-desc">The story of Miyamoto Musashi &mdash; the legendary samurai who defeated opponents using a wooden sword. A reflection on why mastery of fundamentals and strategic thinking will always outweigh having the shiniest tools. The best solutions come from deep understanding of the problem, not from reaching for the most advanced framework.</p>
+              <div class="detail-footer">
+                <div class="detail-tags">
+                  <span class="detail-tag">#Strategy</span>
+                  <span class="detail-tag">#Mindset</span>
+                </div>
+                <a href="https://www.linkedin.com/posts/aruncastromin_%F0%9D%90%93%F0%9D%90%A1%F0%9D%90%9E-%F0%9D%90%92%F0%9D%90%9A%F0%9D%90%A6%F0%9D%90%AE%F0%9D%90%AB%F0%9D%90%9A%F0%9D%90%A2-%F0%9D%90%B0%F0%9D%90%A2%F0%9D%90%AD%F0%9D%90%A1-%F0%9D%90%AD%F0%9D%90%A1%F0%9D%90%9E-%F0%9D%90%96%F0%9D%90%A8%F0%9D%90%A8%F0%9D%90%9D%F0%9D%90%9E%F0%9D%90%A7-activity-7086663387052453889-OfZt" target="_blank" class="detail-read">Read on LinkedIn <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4l6 6-6 6"/></svg></a>
+              </div>
+              <div class="detail-watermark"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.92 5.51l-1.41 1.41 2.83 2.83-2.12 2.12 1.41 1.41 2.12-2.12 6.37 6.37a2 2 0 002.83 0 2 2 0 000-2.83L12.58 8.33l2.12-2.12-1.41-1.41-2.12 2.12L8.34 4.09 6.92 5.51z"/><path d="M4 21l2-2 1.5 1.5L4 21z" opacity="0.6"/></svg></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CTA -->
+    <div class="posts-cta">
+      <a href="https://www.linkedin.com/in/aruncastromin/" class="cta-button" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        Follow on LinkedIn
+      </a>
+    </div>
+
+  </section>
+
+  <script>
+    function toggleFeedItem(rowEl) {
+      const item = rowEl.closest('.feed-item');
+      const wasExpanded = item.classList.contains('expanded');
+
+      // Close all expanded items
+      document.querySelectorAll('.feed-item.expanded').forEach(el => {
+        el.classList.remove('expanded');
+      });
+
+      // Toggle the clicked item (if it was closed, open it)
+      if (!wasExpanded) {
+        item.classList.add('expanded');
+      }
+    }
+  </script>
+
+</body>
+</html>
