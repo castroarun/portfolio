@@ -6,7 +6,7 @@
   <img src="https://img.shields.io/badge/GitHub%20Pages-222222?style=for-the-badge&logo=githubpages&logoColor=white" />
 </p>
 
-<h1 align="center">Castronix Portfolio</h1>
+<h1 align="center">Digital Resume</h1>
 
 <h3 align="center">
   A three-part portfolio suite. <em>Portfolio. Digital Resume. Traditional CV.</em>
@@ -58,14 +58,16 @@
 - **Live GitHub stats** — Contribution heatmap, repository cards
 - **Interactive skills** — Filterable progress bars, radar chart
 - **Professional timeline** — Career journey with milestone photos
-- **Browser-based training** — Add new AI responses via keyword commands
+- **Domain expertise** — Banking domain cards with depth indicators
+- **Innovation Lab** — Project cards loaded from `data/projects.json`
+- **LinkedIn Feed** — Interactive accordion with expandable posts
 - **Email notifications** — Unanswered questions trigger alerts via Supabase
 
-### Flat CV (`/cv/index.html`)
+### Traditional CV (`/cv/index.html`)
 - **ATS-friendly format** — Traditional layout for job applications
-- **Print-optimized** — A4 page breaks, proper margins
-- **Content automation** — Natural language commands for edits
-- **Self-validation** — Scores content against best practices
+- **Print-optimized** — A4 page breaks, tightened margins for clean page flow
+- **Dark/Light theme** — Toggle between themes, auto-switches to light for print
+- **Dynamic projects** — Side projects loaded from shared `data/projects.json`
 
 ---
 
@@ -117,23 +119,24 @@
 
 ```
 castronix-portfolio/
-├── index.html              # Portfolio landing page
+├── .project.json             # Project metadata (auto-sync)
+├── index.html                # Portfolio landing page
 ├── resume/
-│   └── index.html          # Digital resume with AI chat
+│   └── index.html            # Digital resume with AI chat
 ├── cv/
-│   └── index.html          # Traditional flat CV
+│   └── index.html            # Traditional CV (print-optimized)
 ├── assets/
-│   ├── images/             # Project screenshots
-│   └── workflow-diagram.png
+│   ├── images/               # Site images
+│   └── projects/             # Project screenshots (auto-copied by sync)
 ├── data/
-│   ├── projects.json       # Shared project data
-│   └── projects-loader.js  # Dynamic loader
+│   ├── projects.json         # Single source of truth for all projects
+│   └── projects-loader.js    # Dynamic loader for resume & CV
 ├── docs/
-│   ├── PROJECT-STATUS.md   # 9-step workflow tracking
-│   ├── PORTFOLIO-FEATURES.md
-│   └── Design/             # PRD and architecture docs
+│   ├── PROJECT-STATUS.md     # 9-step workflow tracking
+│   ├── Design/               # PRD and architecture docs
+│   └── mockups/              # Section mockups (LinkedIn feed, etc.)
 └── scripts/
-    └── sync-projects.js    # Project sync utility
+    └── sync-projects.js      # Syncs .project.json from all repos
 ```
 
 ---
@@ -152,12 +155,15 @@ castronix-portfolio/
 
 - [x] Portfolio page with Brittany Chiang design
 - [x] Digital resume with AI chat assistant
-- [x] Flat CV with content automation
+- [x] Traditional CV with print optimization
 - [x] Shared projects.json data system
 - [x] GitHub stats integration
 - [x] 9-step workflow section
+- [x] Dark/light theme toggle (CV)
+- [x] Domain expertise cards
+- [x] LinkedIn feed accordion
+- [x] Centralized project sync (`scripts/sync-projects.js`)
 - [ ] Custom domain (castronix.dev)
-- [ ] Dark/light theme toggle
 - [ ] Project filtering by tech stack
 
 ---
@@ -182,11 +188,16 @@ http://localhost:3000
 
 ## Related Projects
 
-| Project | Description | Status |
-|---------|-------------|--------|
-| [REPPIT](https://github.com/ArunCastro/reppit) | Fitness tracking app (Flutter) | Launching |
-| [NoteApp](https://github.com/ArunCastro/noteApp) | Rich text note-taking (Next.js) | Live |
-| PRIMMO | AI fitness coach | In Progress |
+| Project | Description | Tech | Status |
+|---------|-------------|------|--------|
+| [REPPIT](https://github.com/ArunCastro/reppit) | Fitness strength tracking | Flutter, Dart | Live |
+| [NoteApp](https://github.com/ArunCastro/noteApp) | Rich text note-taking | Next.js, TypeScript | Live |
+| [Klarity](https://github.com/ArunCastro/klarity) | Developer task board with 15-stage pipeline | Next.js, Zustand, Supabase | Live |
+| [Orbit](https://github.com/ArunCastro/orbit) | Phone companion for Klarity | React Native, GitHub API | Live |
+| [AnyCalc](https://github.com/ArunCastro/anycalc) | 19 interlinked financial calculators | Flutter, Dart | Live |
+| [PRIMMO](https://github.com/ArunCastro/PRIMMO) | AI-powered personal strength coach | Next.js, Voice AI, Supabase | Crafting |
+| Cinder | AI-assisted original music | Udio, Music Production | Live |
+| The Little Red Dot | AI-assisted original music | Udio, Music Production | Live |
 
 ---
 
