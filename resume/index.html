@@ -1423,6 +1423,11 @@
       color: #a855f7;
     }
 
+    .card-badge.live {
+      background: rgba(34, 197, 94, 0.15);
+      color: var(--success);
+    }
+
     .card-tagline {
       font-size: 0.85rem;
       color: var(--text-secondary);
@@ -8779,6 +8784,64 @@
           <div class="aia-expand"><span>Architecture breakdown</span><span class="aia-expand-arrow">&#9660;</span></div>
         </div>
 
+        <!-- Orbit -->
+        <div class="aia-card p-cyan" onclick="this.classList.toggle('expanded')">
+          <div class="aia-header">
+            <div class="aia-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><ellipse cx="12" cy="12" rx="10" ry="4.2"/><ellipse cx="12" cy="12" rx="10" ry="4.2" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4.2" transform="rotate(120 12 12)"/></svg>
+            </div>
+            <div class="aia-header-content">
+              <div class="aia-top-row">
+                <span class="aia-name">Orbit</span>
+                <span class="aia-status building">Building</span>
+              </div>
+              <p class="aia-tagline">Zero-server mobile companion using GitHub as backend with SHA-based conflict resolution and cross-platform sync.</p>
+              <div class="aia-patterns">
+                <span class="aia-badge">Zero-Server Architecture</span>
+                <span class="aia-badge">Conflict Resolution</span>
+              </div>
+              <div class="aia-tech">
+                <span class="aia-tech-tag">React Native</span>
+                <span class="aia-tech-tag">Tauri</span>
+                <span class="aia-tech-tag">GitHub API</span>
+              </div>
+            </div>
+          </div>
+          <div class="aia-detail">
+            <div class="aia-detail-inner">
+              <div class="arch-flow">
+                <div class="arch-node">Phone<br>Client</div>
+                <span class="arch-arrow">&rarr;</span>
+                <div class="arch-node highlight">GitHub<br>Backend</div>
+                <span class="arch-arrow">&rarr;</span>
+                <div class="arch-node">SHA-Based<br>Conflict Resolver</div>
+                <span class="arch-arrow">&rarr;</span>
+                <div class="arch-node">Desktop<br>(Klarity)</div>
+              </div>
+              <div class="arch-connection">
+                <div class="arch-connection-label">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+                  Architecture Insight
+                </div>
+                <div class="arch-connection-text">
+                  <strong>Zero-server architecture</strong> using GitHub as a distributed datastore mirrors how banking settlement systems use existing infrastructure (SWIFT, MEPS+) rather than standing up dedicated servers. <strong>SHA-based conflict resolution</strong> implements the same content-addressable approach used in Git itself &mdash; identical to how banks detect duplicate transactions in multi-channel environments where mobile and branch can modify the same account simultaneously.
+                </div>
+              </div>
+              <div class="adr-callout">
+                <div class="adr-label">Architecture Decision</div>
+                <div class="adr-text"><strong>Decision:</strong> GitHub as backend over dedicated server infrastructure. <strong>Rationale:</strong> Zero infrastructure cost and built-in versioning. SHA-based conflict detection ensures data integrity across devices &mdash; the same hash-based reconciliation banks use for cross-channel transaction deduplication.</div>
+              </div>
+              <div class="aia-links">
+                <a href="https://github.com/ArunCastro/orbit" class="aia-link" target="_blank">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                  GitHub
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="aia-expand"><span>Architecture breakdown</span><span class="aia-expand-arrow">&#9660;</span></div>
+        </div>
+
         <!-- AnyCalc -->
         <div class="aia-card p-teal" onclick="this.classList.toggle('expanded')">
           <div class="aia-header">
@@ -8790,7 +8853,7 @@
                 <span class="aia-name">AnyCalc</span>
                 <span class="aia-status live">Live</span>
               </div>
-              <p class="aia-tagline">Pure calculation engine with stateless computation and formula parsing &mdash; a rule engine in miniature.</p>
+              <p class="aia-tagline">19 interlinked financial calculators with Plan mode &mdash; chain EMI, splits, and conversions. A rule engine in miniature.</p>
               <div class="aia-patterns">
                 <span class="aia-badge">Rule Engine</span>
                 <span class="aia-badge">Stateless Computation</span>
@@ -8837,7 +8900,7 @@
           <div class="aia-expand"><span>Architecture breakdown</span><span class="aia-expand-arrow">&#9660;</span></div>
         </div>
 
-        <!-- This Portfolio -->
+        <!-- Digital Resume -->
         <div class="aia-card p-cyan" onclick="this.classList.toggle('expanded')">
           <div class="aia-header">
             <div class="aia-icon">
@@ -8845,7 +8908,7 @@
             </div>
             <div class="aia-header-content">
               <div class="aia-top-row">
-                <span class="aia-name">This Portfolio</span>
+                <span class="aia-name">Digital Resume</span>
                 <span class="aia-status live">Live</span>
               </div>
               <p class="aia-tagline">Single source of truth architecture &mdash; one JSON drives portfolio, resume, and Launchpad dashboard.</p>
@@ -13679,7 +13742,7 @@ ${report.improvements.map(i => `• ${i}`).join('\n')}
       getStatusBadge(project) {
         const statusMap = {
           'built': { class: 'built', text: project.statusText || 'Built' },
-          'live': { class: 'built', text: project.statusText || 'Live' },
+          'live': { class: 'live', text: project.statusText || 'Live' },
           'building': { class: 'building', text: project.statusText || 'Building' },
           'planning': { class: 'planning', text: project.statusText || 'Planning' },
           'spotify': { class: 'live', text: 'Spotify', style: 'background: rgba(30, 215, 96, 0.15); color: #22c55e;' }
