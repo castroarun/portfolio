@@ -1674,6 +1674,11 @@
       background: linear-gradient(90deg, var(--success) 0%, var(--warning) 100%);
     }
 
+    .progress-bar-fill.built,
+    .progress-bar-fill.live {
+      background: var(--success);
+    }
+
     .workflow-stages {
       display: flex;
       justify-content: space-between;
@@ -5924,7 +5929,7 @@
       display: flex;
       align-items: center;
       gap: 1.5rem;
-      max-width: 850px;
+      max-width: 1100px;
       margin: 0 auto 1.5rem auto;
       padding: 0.75rem 1.25rem;
       background: var(--bg-card);
@@ -5934,9 +5939,9 @@
     }
 
     .legend-label {
-      font-size: 0.65rem;
-      font-weight: 600;
-      color: var(--text-muted);
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--text-secondary);
       text-transform: uppercase;
       letter-spacing: 0.08em;
     }
@@ -5945,26 +5950,27 @@
       display: flex;
       align-items: center;
       gap: 0.4rem;
-      font-size: 0.7rem;
-      color: var(--text-secondary);
+      font-size: 0.75rem;
+      color: var(--text-primary);
+      font-weight: 500;
     }
 
     .legend-bar {
-      width: 20px;
-      height: 6px;
-      border-radius: 3px;
+      width: 24px;
+      height: 8px;
+      border-radius: 4px;
     }
 
     .legend-bar.led { background: linear-gradient(90deg, var(--accent), var(--d-nfr)); }
     .legend-bar.delivered { background: linear-gradient(90deg, var(--d-loan), var(--d-migration)); }
-    .legend-bar.contributed { background: linear-gradient(90deg, var(--d-digital), var(--d-risk)); opacity: 0.7; }
-    .legend-bar.awareness { background: var(--bg-hover); border: 1px solid var(--border-medium); }
+    .legend-bar.contributed { background: linear-gradient(90deg, var(--d-digital), var(--d-risk)); }
+    .legend-bar.awareness { background: rgba(255, 255, 255, 0.12); border: 1px solid var(--border-medium); }
 
     .domain-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 0.75rem;
-      max-width: 850px;
+      max-width: 1100px;
       margin: 0 auto;
     }
 
@@ -7737,12 +7743,12 @@
       <div class="domain-grid">
 
         <!-- Core Banking -->
-        <div class="domain-card d-core wide">
+        <div class="domain-card d-core">
           <div class="domain-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M3 10h18M5 6l7-3 7 3M4 10v11M20 10v11M8 14v3M12 14v3M16 14v3"/></svg>
           </div>
           <div class="domain-name">Core Banking</div>
-          <div class="domain-depth">Led Architecture</div>
+          <div class="domain-depth">Delivered</div>
           <div class="domain-desc">Finacle implementations across 3 continents. Account management, transaction processing, GL, and customer information systems. Multi-country regulatory adaptations.</div>
           <div class="domain-xp">12+ years &bull; 4 major implementations</div>
           <div class="xp-bar"><div class="xp-fill" style="width: 95%"></div></div>
@@ -7755,7 +7761,7 @@
           </div>
           <div class="domain-name">Real-Time Payments</div>
           <div class="domain-depth">Led Architecture</div>
-          <div class="domain-desc">RTP/instant payment systems, ISO 20022 messaging, cross-border settlement, CQRS event-driven processing.</div>
+          <div class="domain-desc">RTP/instant payment systems, ISO 20022 messaging, cross-border settlement, event-driven processing.</div>
           <div class="domain-xp">5+ years &bull; APAC region</div>
           <div class="xp-bar"><div class="xp-fill" style="width: 90%"></div></div>
         </div>
@@ -8025,7 +8031,7 @@
                   </svg>
                 </div>
                 <div class="card-title-wrapper">
-                  <h3 class="card-title">REPPIT <span class="card-badge built">Shipped</span></h3>
+                  <h3 class="card-title">REPPIT <span class="card-badge live">Live</span></h3>
                   <p class="card-tagline">Fitness strength tracking app</p>
                 </div>
               </div>
@@ -8050,7 +8056,7 @@
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><circle cx="12" cy="5" r="3"/><path d="M12 22V8M5 12H2a10 10 0 0 0 20 0h-3"/></svg>
                     REPPIT
                   </h4>
-                  <span class="card-badge built" style="font-size: 0.6rem;">Shipped</span>
+                  <span class="card-badge live" style="font-size: 0.6rem;">Live</span>
                 </div>
                 <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 1rem;">Fitness strength tracking with real-time timer and progressive overload analytics.</p>
                 <div class="workflow-progress">
@@ -8062,7 +8068,7 @@
                     <span class="workflow-progress-count">8/9 Complete</span>
                   </div>
                   <div class="progress-bar-track">
-                    <div class="progress-bar-fill built" style="width: 88%;"></div>
+                    <div class="progress-bar-fill live" style="width: 88%;"></div>
                   </div>
                   <div class="workflow-stages">
                     <span class="stage-dot completed" title="DEV-CLOCK"></span>
@@ -8184,22 +8190,11 @@
                 <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 1rem;">AI-assisted original music project launching on Spotify & Apple Music.</p>
                 <div class="workflow-progress">
                   <div class="workflow-progress-header">
-                    <span class="workflow-progress-label">9-Step Workflow</span>
-                    <span class="workflow-progress-count">7/9 Complete</span>
+                    <span class="workflow-progress-label">Concept to Live</span>
+                    <span class="workflow-progress-count">Complete</span>
                   </div>
                   <div class="progress-bar-track">
-                    <div class="progress-bar-fill complete" style="width: 77%;"></div>
-                  </div>
-                  <div class="workflow-stages">
-                    <span class="stage-dot completed"></span>
-                    <span class="stage-dot completed"></span>
-                    <span class="stage-dot completed"></span>
-                    <span class="stage-dot completed"></span>
-                    <span class="stage-dot completed"></span>
-                    <span class="stage-dot completed"></span>
-                    <span class="stage-dot completed"></span>
-                    <span class="stage-dot in-progress"></span>
-                    <span class="stage-dot"></span>
+                    <div class="progress-bar-fill complete" style="width: 100%;"></div>
                   </div>
                 </div>
               </div>
@@ -8248,22 +8243,11 @@
                 <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 1rem;">AI-assisted original music project launching on Spotify & Apple Music.</p>
                 <div class="workflow-progress">
                   <div class="workflow-progress-header">
-                    <span class="workflow-progress-label">9-Step Workflow</span>
-                    <span class="workflow-progress-count">7/9 Complete</span>
+                    <span class="workflow-progress-label">Concept to Live</span>
+                    <span class="workflow-progress-count">Complete</span>
                   </div>
                   <div class="progress-bar-track">
-                    <div class="progress-bar-fill complete" style="width: 77%;"></div>
-                  </div>
-                  <div class="workflow-stages">
-                    <span class="stage-dot completed"></span>
-                    <span class="stage-dot completed"></span>
-                    <span class="stage-dot completed"></span>
-                    <span class="stage-dot completed"></span>
-                    <span class="stage-dot completed"></span>
-                    <span class="stage-dot completed"></span>
-                    <span class="stage-dot completed"></span>
-                    <span class="stage-dot in-progress"></span>
-                    <span class="stage-dot"></span>
+                    <div class="progress-bar-fill complete" style="width: 100%;"></div>
                   </div>
                 </div>
               </div>
@@ -8280,7 +8264,7 @@
                   <svg viewBox="0 0 24 24" fill="none" stroke="#818cf8" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
                 </div>
                 <div class="card-title-wrapper">
-                  <h3 class="card-title">Klarity <span class="card-badge building">Building</span></h3>
+                  <h3 class="card-title">Klarity <span class="card-badge live">Live</span></h3>
                   <p class="card-tagline">Developer task board with 15-stage pipeline</p>
                 </div>
               </div>
@@ -8303,27 +8287,30 @@
                 </div>
                 <div class="back-header" style="border-bottom: none; padding-bottom: 0; margin-bottom: 0.5rem;">
                   <h4 class="back-title" style="font-size: 0.9rem;">Klarity</h4>
-                  <span class="card-badge building" style="font-size: 0.6rem;">Building</span>
+                  <span class="card-badge live" style="font-size: 0.6rem;">Live</span>
                 </div>
                 <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 1rem;">Developer task board with 15-stage pipeline and distributed sync.</p>
                 <div class="workflow-progress">
                   <div class="workflow-progress-header">
-                    <span class="workflow-progress-label">9-Step Workflow</span>
-                    <span class="workflow-progress-count">3/9 Complete</span>
+                    <span class="workflow-progress-label">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                      9-Step Workflow
+                    </span>
+                    <span class="workflow-progress-count">8/9 Complete</span>
                   </div>
                   <div class="progress-bar-track">
-                    <div class="progress-bar-fill building" style="width: 33%;"></div>
+                    <div class="progress-bar-fill live" style="width: 88%;"></div>
                   </div>
                   <div class="workflow-stages">
                     <span class="stage-dot completed"></span>
                     <span class="stage-dot completed"></span>
                     <span class="stage-dot completed"></span>
+                    <span class="stage-dot completed"></span>
+                    <span class="stage-dot completed"></span>
+                    <span class="stage-dot completed"></span>
+                    <span class="stage-dot completed"></span>
+                    <span class="stage-dot completed"></span>
                     <span class="stage-dot in-progress"></span>
-                    <span class="stage-dot"></span>
-                    <span class="stage-dot"></span>
-                    <span class="stage-dot"></span>
-                    <span class="stage-dot"></span>
-                    <span class="stage-dot"></span>
                   </div>
                 </div>
               </div>
@@ -8340,7 +8327,7 @@
                   <svg viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><circle cx="12" cy="12" r="3"/><ellipse cx="12" cy="12" rx="10" ry="4.2"/><ellipse cx="12" cy="12" rx="10" ry="4.2" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4.2" transform="rotate(120 12 12)"/></svg>
                 </div>
                 <div class="card-title-wrapper">
-                  <h3 class="card-title">Orbit <span class="card-badge building">Building</span></h3>
+                  <h3 class="card-title">Orbit <span class="card-badge live">Live</span></h3>
                   <p class="card-tagline">Phone companion for Klarity</p>
                 </div>
               </div>
@@ -8362,27 +8349,30 @@
                 </div>
                 <div class="back-header" style="border-bottom: none; padding-bottom: 0; margin-bottom: 0.5rem;">
                   <h4 class="back-title" style="font-size: 0.9rem;">Orbit</h4>
-                  <span class="card-badge building" style="font-size: 0.6rem;">Building</span>
+                  <span class="card-badge live" style="font-size: 0.6rem;">Live</span>
                 </div>
                 <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 1rem;">Phone companion for Klarity with cross-platform sync.</p>
                 <div class="workflow-progress">
                   <div class="workflow-progress-header">
-                    <span class="workflow-progress-label">9-Step Workflow</span>
-                    <span class="workflow-progress-count">2/9 Complete</span>
+                    <span class="workflow-progress-label">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                      9-Step Workflow
+                    </span>
+                    <span class="workflow-progress-count">8/9 Complete</span>
                   </div>
                   <div class="progress-bar-track">
-                    <div class="progress-bar-fill building" style="width: 22%;"></div>
+                    <div class="progress-bar-fill live" style="width: 88%;"></div>
                   </div>
                   <div class="workflow-stages">
                     <span class="stage-dot completed"></span>
                     <span class="stage-dot completed"></span>
+                    <span class="stage-dot completed"></span>
+                    <span class="stage-dot completed"></span>
+                    <span class="stage-dot completed"></span>
+                    <span class="stage-dot completed"></span>
+                    <span class="stage-dot completed"></span>
+                    <span class="stage-dot completed"></span>
                     <span class="stage-dot in-progress"></span>
-                    <span class="stage-dot"></span>
-                    <span class="stage-dot"></span>
-                    <span class="stage-dot"></span>
-                    <span class="stage-dot"></span>
-                    <span class="stage-dot"></span>
-                    <span class="stage-dot"></span>
                   </div>
                 </div>
               </div>
@@ -8471,7 +8461,7 @@
                   </svg>
                 </div>
                 <div class="card-title-wrapper">
-                  <h3 class="card-title">AnyCalc <span class="card-badge built">Live</span></h3>
+                  <h3 class="card-title">AnyCalc <span class="card-badge live">Live</span></h3>
                   <p class="card-tagline">Calculate anything, anywhere</p>
                 </div>
               </div>
@@ -8493,7 +8483,7 @@
                 </div>
                 <div class="back-header" style="border-bottom: none; padding-bottom: 0; margin-bottom: 0.5rem;">
                   <h4 class="back-title" style="font-size: 0.9rem;">AnyCalc</h4>
-                  <span class="card-badge built" style="font-size: 0.6rem;">Live</span>
+                  <span class="card-badge live" style="font-size: 0.6rem;">Live</span>
                 </div>
                 <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 1rem;">19 interlinked financial calculators with Plan mode for chained calculations.</p>
                 <div class="workflow-progress">
@@ -8502,7 +8492,7 @@
                     <span class="workflow-progress-count">9/9 Complete</span>
                   </div>
                   <div class="progress-bar-track">
-                    <div class="progress-bar-fill built" style="width: 100%;"></div>
+                    <div class="progress-bar-fill complete" style="width: 100%;"></div>
                   </div>
                   <div class="workflow-stages">
                     <span class="stage-dot completed"></span>
@@ -13948,17 +13938,15 @@ ${report.improvements.map(i => `• ${i}`).join('\n')}
                 <div class="workflow-progress">
                   <div class="workflow-progress-header">
                     <span class="workflow-progress-label">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-                      9-Step Workflow
+                      ${project.workflowLabel ? '' : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>'}
+                      ${project.workflowLabel || '9-Step Workflow'}
                     </span>
-                    <span class="workflow-progress-count">${project.progress.completed}/${project.progress.total} Complete</span>
+                    <span class="workflow-progress-count">${project.workflowLabel ? 'Complete' : project.progress.completed + '/' + project.progress.total + ' Complete'}</span>
                   </div>
                   <div class="progress-bar-track">
-                    <div class="progress-bar-fill ${badge.class}" style="width: ${progressPercent}%;"></div>
+                    <div class="progress-bar-fill ${project.workflowLabel ? 'complete' : badge.class}" style="width: ${progressPercent}%;"></div>
                   </div>
-                  <div class="workflow-stages">
-                    ${this.generateProgressDots(project.progress)}
-                  </div>
+                  ${project.workflowLabel ? '' : '<div class="workflow-stages">' + this.generateProgressDots(project.progress) + '</div>'}
                 </div>
               </div>
             </div>
