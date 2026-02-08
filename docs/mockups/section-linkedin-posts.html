@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Section Mockup — From the Feed</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg-base: #0A0A0F;
+      --bg-elevated: #111118;
+      --bg-card: #16161D;
+      --bg-hover: #1E1E26;
+      --text-primary: #F4F4F5;
+      --text-secondary: #A1A1AA;
+      --text-muted: #71717A;
+      --accent: #22D3EE;
+      --accent-dim: rgba(34, 211, 238, 0.1);
+      --border-subtle: rgba(255, 255, 255, 0.06);
+      --border-medium: rgba(255, 255, 255, 0.1);
+      --linkedin: #0A66C2;
+      --linkedin-dim: rgba(10, 102, 194, 0.1);
+      --purple: #A78BFA;
+      --purple-dim: rgba(167, 139, 250, 0.1);
+      --green: #22C55E;
+      --green-dim: rgba(34, 197, 94, 0.1);
+      --amber: #F59E0B;
+      --amber-dim: rgba(245, 158, 11, 0.1);
+    }
+
+    html { font-size: 16px; }
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg-base);
+      color: var(--text-primary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      padding: 2rem;
+    }
+
+    .mockup-label {
+      position: fixed;
+      top: 1rem;
+      left: 1rem;
+      background: var(--accent);
+      color: var(--bg-base);
+      padding: 0.4rem 0.8rem;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      z-index: 100;
+    }
+
+    .section-header {
+      max-width: 900px;
+      margin: 2rem auto 2.5rem auto;
+    }
+
+    .section-number {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--accent);
+      font-family: 'JetBrains Mono', monospace;
+      margin-bottom: 0.3rem;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      letter-spacing: -0.03em;
+      margin-bottom: 0.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .section-title .li-badge {
+      width: 28px;
+      height: 28px;
+      background: var(--linkedin-dim);
+      border: 1px solid rgba(10, 102, 194, 0.15);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .section-title .li-badge svg {
+      width: 16px;
+      height: 16px;
+      color: var(--linkedin);
+    }
+
+    .section-subtitle {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* ============ Content Type Tabs ============ */
+    .content-tabs {
+      display: flex;
+      gap: 0.25rem;
+      max-width: 900px;
+      margin: 0 auto 1.5rem auto;
+      background: var(--bg-card);
+      border-radius: 8px;
+      padding: 0.25rem;
+      width: fit-content;
+    }
+
+    .content-tab {
+      padding: 0.4rem 0.8rem;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 0.72rem;
+      font-weight: 500;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: all 0.2s;
+      font-family: inherit;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .content-tab:hover {
+      color: var(--text-primary);
+      background: var(--bg-elevated);
+    }
+
+    .content-tab.active {
+      background: var(--accent-dim);
+      color: var(--accent);
+    }
+
+    .tab-count {
+      font-size: 0.58rem;
+      font-weight: 700;
+      background: var(--bg-base);
+      padding: 0.1rem 0.35rem;
+      border-radius: 3px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .content-tab.active .tab-count {
+      background: rgba(34, 211, 238, 0.15);
+    }
+
+    /* ============ Mixed Layout Grid ============ */
+    .posts-layout {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    /* Row of 2 or 3 compact cards */
+    .posts-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+
+    .posts-row.tri {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    /* ============ FEATURED Card (hero-style) ============ */
+    .card-featured {
+      background: var(--bg-card);
+      border: 1px solid rgba(10, 102, 194, 0.15);
+      border-radius: 16px;
+      padding: 2rem 2.25rem;
+      position: relative;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .card-featured::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--linkedin), var(--accent), transparent);
+    }
+
+    .card-featured::after {
+      content: '';
+      position: absolute;
+      top: -60px;
+      right: -60px;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(10, 102, 194, 0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .card-featured:hover {
+      border-color: rgba(10, 102, 194, 0.3);
+      transform: translateY(-3px);
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(10, 102, 194, 0.08);
+    }
+
+    .card-featured .post-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .card-featured .post-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 0.6rem;
+      line-height: 1.3;
+      letter-spacing: -0.02em;
+    }
+
+    .card-featured:hover .post-title { color: var(--accent); }
+
+    .card-featured .post-arch-note {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 0.75rem;
+      padding-left: 0.85rem;
+      border-left: 2px solid var(--linkedin);
+    }
+
+    /* ============ ARTICLE Card (full-width, left accent) ============ */
+    .card-article {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-left: 3px solid var(--linkedin);
+      border-radius: 4px 12px 12px 4px;
+      padding: 1.25rem 1.5rem;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .card-article:hover {
+      border-color: rgba(10, 102, 194, 0.2);
+      border-left-color: var(--linkedin);
+      background: var(--bg-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-article .post-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 0.3rem;
+      line-height: 1.35;
+    }
+
+    .card-article:hover .post-title { color: var(--accent); }
+
+    .card-article .post-arch-note {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      line-height: 1.55;
+      margin-bottom: 0.5rem;
+    }
+
+    /* ============ POST Card (compact, for 2-col grid) ============ */
+    .card-post {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 1.15rem 1.25rem;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-post::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .card-post:hover::before { opacity: 1; }
+
+    .card-post:hover {
+      border-color: rgba(34, 211, 238, 0.15);
+      background: var(--bg-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.25);
+    }
+
+    .card-post .post-title {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 0.3rem;
+      line-height: 1.35;
+    }
+
+    .card-post:hover .post-title { color: var(--accent); }
+
+    .card-post .post-arch-note {
+      font-size: 0.72rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      margin-bottom: 0.5rem;
+      flex: 1;
+    }
+
+    /* ============ INSIGHT Card (full-width, quote style) ============ */
+    .card-insight {
+      background: var(--bg-card);
+      border: 1px solid rgba(167, 139, 250, 0.12);
+      border-radius: 12px;
+      padding: 1.5rem 1.75rem 1.5rem 2.5rem;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .card-insight::before {
+      content: '\201C';
+      position: absolute;
+      top: 0.5rem;
+      left: 0.75rem;
+      font-size: 3.5rem;
+      font-weight: 800;
+      color: var(--purple);
+      opacity: 0.15;
+      font-family: Georgia, serif;
+      line-height: 1;
+    }
+
+    .card-insight:hover {
+      border-color: rgba(167, 139, 250, 0.25);
+      background: var(--bg-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-insight .post-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 0.35rem;
+      line-height: 1.35;
+      font-style: italic;
+    }
+
+    .card-insight:hover .post-title { color: var(--purple); }
+
+    .card-insight .post-arch-note {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      line-height: 1.55;
+      margin-bottom: 0.5rem;
+      padding-left: 0.75rem;
+      border-left: 2px solid rgba(167, 139, 250, 0.3);
+    }
+
+    /* ============ LAUNCH Card (green accent, for shipped projects) ============ */
+    .card-launch {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 1.15rem 1.25rem;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-launch::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--green), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .card-launch:hover::before { opacity: 1; }
+
+    .card-launch:hover {
+      border-color: rgba(34, 197, 94, 0.15);
+      background: var(--bg-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.25);
+    }
+
+    .card-launch .post-title {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 0.3rem;
+      line-height: 1.35;
+    }
+
+    .card-launch:hover .post-title { color: var(--green); }
+
+    .card-launch .post-arch-note {
+      font-size: 0.72rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      margin-bottom: 0.5rem;
+      flex: 1;
+    }
+
+    /* ============ Shared Elements ============ */
+    .post-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .post-type {
+      font-size: 0.55rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+    }
+
+    .post-type.article { color: var(--linkedin); background: var(--linkedin-dim); border: 1px solid rgba(10, 102, 194, 0.2); }
+    .post-type.launch { color: var(--green); background: var(--green-dim); border: 1px solid rgba(34, 197, 94, 0.2); }
+    .post-type.insight { color: var(--purple); background: var(--purple-dim); border: 1px solid rgba(167, 139, 250, 0.2); }
+    .post-type.post { color: var(--accent); background: var(--accent-dim); border: 1px solid rgba(34, 211, 238, 0.15); }
+
+    .pinned-badge {
+      font-size: 0.55rem;
+      font-weight: 700;
+      color: var(--linkedin);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .pinned-badge svg { width: 10px; height: 10px; }
+
+    .post-tags {
+      display: flex;
+      gap: 0.3rem;
+      flex-wrap: wrap;
+    }
+
+    .post-tag {
+      font-size: 0.55rem;
+      color: var(--text-muted);
+      background: var(--bg-base);
+      border: 1px solid var(--border-subtle);
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+    }
+
+    /* ============ Iconic Watermark Backgrounds ============ */
+    .card-watermark {
+      position: absolute;
+      bottom: 0.75rem;
+      right: 0.75rem;
+      width: 72px;
+      height: 72px;
+      opacity: 0.045;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+      color: var(--text-primary);
+    }
+
+    .card-watermark svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Featured card gets a bigger watermark */
+    .card-featured .card-watermark {
+      width: 110px;
+      height: 110px;
+      bottom: 1.25rem;
+      right: 1.5rem;
+      opacity: 0.04;
+    }
+
+    /* Tint watermarks per card type */
+    .card-launch .card-watermark { color: var(--green); opacity: 0.06; }
+    .card-article .card-watermark { color: var(--linkedin); opacity: 0.06; }
+    .card-insight .card-watermark { color: var(--purple); opacity: 0.06; }
+    .card-post .card-watermark { color: var(--accent); opacity: 0.06; }
+    .card-featured .card-watermark { color: var(--linkedin); opacity: 0.05; }
+
+    /* Subtle reveal on hover */
+    .card-featured:hover .card-watermark,
+    .card-article:hover .card-watermark,
+    .card-post:hover .card-watermark,
+    .card-insight:hover .card-watermark,
+    .card-launch:hover .card-watermark {
+      opacity: 0.1;
+    }
+
+    /* LinkedIn arrow indicator on hover */
+    .li-arrow {
+      position: absolute;
+      bottom: 1rem;
+      right: 1.25rem;
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      background: var(--linkedin-dim);
+      border: 1px solid rgba(10, 102, 194, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transform: translateX(-4px);
+      transition: all 0.3s ease;
+    }
+
+    .li-arrow svg { width: 12px; height: 12px; color: var(--linkedin); }
+
+    .card-featured:hover .li-arrow,
+    .card-article:hover .li-arrow,
+    .card-post:hover .li-arrow,
+    .card-insight:hover .li-arrow,
+    .card-launch:hover .li-arrow {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* ============ CTA ============ */
+    .posts-cta {
+      max-width: 900px;
+      margin: 1.5rem auto 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.6rem 1.25rem;
+      background: var(--linkedin-dim);
+      border: 1px solid rgba(10, 102, 194, 0.2);
+      border-radius: 8px;
+      color: var(--linkedin);
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .cta-button:hover {
+      background: rgba(10, 102, 194, 0.15);
+      border-color: var(--linkedin);
+    }
+
+    .cta-button svg { width: 16px; height: 16px; }
+
+    @media (max-width: 640px) {
+      .posts-row, .posts-row.tri { grid-template-columns: 1fr; }
+      .card-featured { padding: 1.5rem; }
+      .card-featured .post-title { font-size: 1.1rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="mockup-label">Section — From the Feed</div>
+
+  <div class="section-header">
+    <div class="section-number">09.</div>
+    <h2 class="section-title">From the Feed <span class="li-badge"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></span></h2>
+    <p class="section-subtitle">Project launches, deep-dives, and architectural takes I share on LinkedIn.</p>
+  </div>
+
+  <!-- Content type filter -->
+  <div class="content-tabs">
+    <button class="content-tab active">All <span class="tab-count">12</span></button>
+    <button class="content-tab">Launches <span class="tab-count">6</span></button>
+    <button class="content-tab">Articles <span class="tab-count">5</span></button>
+    <button class="content-tab">Insights <span class="tab-count">1</span></button>
+  </div>
+
+  <div class="posts-layout">
+
+    <!-- ══════════ FEATURED — Klarity (Article + Launch hybrid) ══════════ -->
+    <a href="https://www.linkedin.com/posts/aruncastromin_i-built-%F0%9D%97%9E%F0%9D%97%B9%F0%9D%97%AE%F0%9D%97%BF%F0%9D%97%B6%F0%9D%98%81%F0%9D%98%86-a-lightweight-personal-activity-7421562812600279041-QrnW" target="_blank" class="card-featured">
+      <div class="post-meta">
+        <span class="post-type article">Article</span>
+        <span class="pinned-badge">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 12V4h1V2H7v2h1v8l-2 2v2h5.2v6h1.6v-6H18v-2l-2-2z"/></svg>
+          Pinned
+        </span>
+      </div>
+      <div class="post-title">I built Klarity — a lightweight, personal task board for developers using AI coding assistants</div>
+      <div class="post-arch-note">8MB offline-first desktop app with a 15-stage pipeline, ETag-based distributed sync, and multi-agent AI orchestration — enterprise workflow patterns (STP, optimistic concurrency) applied at personal scale.</div>
+      <div class="post-tags">
+        <span class="post-tag">#OfflineFirst</span>
+        <span class="post-tag">#PipelinePattern</span>
+        <span class="post-tag">#AI</span>
+        <span class="post-tag">#DevTools</span>
+      </div>
+      <!-- Klarity: Diamond / clarity gem -->
+      <div class="card-watermark"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 3h12l4 6-10 13L2 9l4-6z"/><path d="M2 9h20M7.5 3L12 9l4.5-6M12 9l-10 13M12 9l10 13" fill="none" stroke="currentColor" stroke-width="0.8" opacity="0.3"/></svg></div>
+      <div class="li-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg></div>
+    </a>
+
+    <!-- ══════════ Row: Launch + Article (mixed) ══════════ -->
+    <div class="posts-row">
+
+      <!-- Orbit — Launch -->
+      <a href="https://www.linkedin.com/posts/aruncastromin_launching-%F0%9D%97%A2%F0%9D%97%BF%F0%9D%97%AF%F0%9D%97%B6%F0%9D%98%81-the-phone-companion-activity-7423708193626800128-sBOA" target="_blank" class="card-launch">
+        <div class="post-meta"><span class="post-type launch">Launch</span></div>
+        <div class="post-title">Launching Orbit — the phone companion for Klarity</div>
+        <div class="post-arch-note">Zero-server architecture using GitHub as backend with SHA-based conflict resolution. Sub-2-minute cross-platform sync at $0 infrastructure.</div>
+        <div class="post-tags">
+          <span class="post-tag">#ReactNative</span>
+          <span class="post-tag">#Tauri</span>
+          <span class="post-tag">#DistributedSync</span>
+        </div>
+        <!-- Orbit: Orbital rings with satellite -->
+        <div class="card-watermark"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="2.5"/><ellipse cx="12" cy="12" rx="11" ry="4.2" fill="none" stroke="currentColor" stroke-width="1.3"/><ellipse cx="12" cy="12" rx="11" ry="4.2" fill="none" stroke="currentColor" stroke-width="1.3" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="11" ry="4.2" fill="none" stroke="currentColor" stroke-width="1.3" transform="rotate(120 12 12)"/><circle cx="21" cy="8" r="1.3"/></svg></div>
+        <div class="li-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg></div>
+      </a>
+
+      <!-- Synthetic Data — Article -->
+      <a href="https://www.linkedin.com/posts/aruncastromin_syntheticdata-dataprivacy-activity-7097464505370112001-3y_G" target="_blank" class="card-article" style="border-radius: 12px; border-left: 3px solid var(--linkedin);">
+        <div class="post-meta"><span class="post-type article">Article</span></div>
+        <div class="post-title">The Data Problem and its 'Fake' Fix — Synthetic Data for Privacy</div>
+        <div class="post-arch-note">Synthetic data generation as an architectural solution to GDPR/PII constraints in banking test environments.</div>
+        <div class="post-tags">
+          <span class="post-tag">#SyntheticData</span>
+          <span class="post-tag">#DataPrivacy</span>
+          <span class="post-tag">#GDPR</span>
+        </div>
+        <!-- Synthetic Data: Shield / privacy lock -->
+        <div class="card-watermark"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 5a2 2 0 012 2v2h1a1 1 0 011 1v4a1 1 0 01-1 1H9a1 1 0 01-1-1v-4a1 1 0 011-1h1V8a2 2 0 012-2z"/></svg></div>
+        <div class="li-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg></div>
+      </a>
+    </div>
+
+    <!-- ══════════ INSIGHT — AI can write code fast (quote style) ══════════ -->
+    <a href="https://www.linkedin.com/posts/aruncastromin_ai-can-write-code-fast-not-necessarily-right-activity-7409622081455230976-Hgn9" target="_blank" class="card-insight">
+      <div class="post-meta"><span class="post-type insight">Insight</span></div>
+      <div class="post-title">AI can write code fast — not necessarily right</div>
+      <div class="post-arch-note">TOGAF-inspired phased workflow with specialized agents (@designer, @architect, @qa) and human gates — applying enterprise architecture governance to AI-assisted development.</div>
+      <div class="post-tags">
+        <span class="post-tag">#TOGAF</span>
+        <span class="post-tag">#AIAssisted</span>
+        <span class="post-tag">#ArchitectureGovernance</span>
+      </div>
+      <!-- AI Insight: Brain / neural network -->
+      <div class="card-watermark"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a7 7 0 00-4.6 12.3A4.98 4.98 0 006 18v1a1 1 0 001 1h10a1 1 0 001-1v-1c0-1.4-.6-2.7-1.4-3.7A7 7 0 0012 2zm-1 15h2v1h-2v-1zm0-2h2v1h-2v-1z"/><path d="M9 21h6v1a1 1 0 01-1 1h-4a1 1 0 01-1-1v-1z"/></svg></div>
+      <div class="li-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg></div>
+    </a>
+
+    <!-- ══════════ Row: Launch + Launch ══════════ -->
+    <div class="posts-row">
+
+      <!-- AnyCalc — Launch -->
+      <a href="https://www.linkedin.com/posts/aruncastromin_meet-%F0%9D%97%94%F0%9D%97%BB%F0%9D%98%86%F0%9D%97%96%F0%9D%97%AE%F0%9D%97%B9%F0%9D%97%B0-the-calculator-you-activity-7418310501895688192-qDsV" target="_blank" class="card-launch">
+        <div class="post-meta"><span class="post-type launch">Launch</span></div>
+        <div class="post-title">Meet AnyCalc — the calculator you actually want to use</div>
+        <div class="post-arch-note">Stateless computation engine with 19 interlinked financial calculators — rule engine pattern with deterministic I/O and cross-calculator data flow.</div>
+        <div class="post-tags">
+          <span class="post-tag">#Next.js</span>
+          <span class="post-tag">#TypeScript</span>
+          <span class="post-tag">#FinancialCalculators</span>
+        </div>
+        <!-- AnyCalc: Percentage / financial symbol -->
+        <div class="card-watermark"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="7" cy="7" r="3.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17" cy="17" r="3.5" fill="none" stroke="currentColor" stroke-width="2"/><line x1="19" y1="3" x2="5" y2="21" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></div>
+        <div class="li-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg></div>
+      </a>
+
+      <!-- NoteApp — Launch -->
+      <a href="https://www.linkedin.com/posts/aruncastromin_%F0%9D%97%A6%F0%9D%97%B5%F0%9D%97%B6%F0%9D%97%BD%F0%9D%97%BD%F0%9D%97%B2%F0%9D%97%B1-%F0%9D%97%BA%F0%9D%98%86-%F0%9D%97%B3%F0%9D%97%B6%F0%9D%97%BF%F0%9D%98%80%F0%9D%98%81-%F0%9D%97%94%F0%9D%97%9C-%F0%9D%97%B2%F0%9D%97%BF%F0%9D%97%AE-activity-7400755620842250241-d4dU" target="_blank" class="card-launch">
+        <div class="post-meta"><span class="post-type launch">Launch</span></div>
+        <div class="post-title">Shipped my first AI-era side project — a note-taking app in 32 hours</div>
+        <div class="post-arch-note">Row-level security, soft delete, and debounced auto-save — banking data architecture patterns in a personal productivity tool.</div>
+        <div class="post-tags">
+          <span class="post-tag">#Next.js</span>
+          <span class="post-tag">#Supabase</span>
+          <span class="post-tag">#RLS</span>
+        </div>
+        <!-- NoteApp: Notepad / document -->
+        <div class="card-watermark"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z"/><path d="M14 2v6h6" opacity="0.3"/><line x1="8" y1="13" x2="16" y2="13" stroke="currentColor" stroke-width="1" opacity="0.3"/><line x1="8" y1="17" x2="13" y2="17" stroke="currentColor" stroke-width="1" opacity="0.3"/></svg></div>
+        <div class="li-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg></div>
+      </a>
+    </div>
+
+    <!-- ══════════ Article — Why Claude (full-width accent) ══════════ -->
+    <a href="https://www.linkedin.com/posts/aruncastromin_why-should-you-claude-today-activity-7399104960090726400-zQk2" target="_blank" class="card-article">
+      <div class="post-meta"><span class="post-type article">Article</span></div>
+      <div class="post-title">Why should you 'Claude' today!</div>
+      <div class="post-arch-note">AI pair programming through the lens of developer productivity — comparing Claude's agentic workflow to traditional SDLC phases and where human architectural oversight remains non-negotiable.</div>
+      <div class="post-tags">
+        <span class="post-tag">#ClaudeAI</span>
+        <span class="post-tag">#AIAssisted</span>
+        <span class="post-tag">#DeveloperProductivity</span>
+      </div>
+      <!-- Why Claude: AI robot / chat bubble -->
+      <div class="card-watermark"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 2H4a2 2 0 00-2 2v12a2 2 0 002 2h4l4 4 4-4h4a2 2 0 002-2V4a2 2 0 00-2-2z"/><circle cx="8" cy="10" r="1.2" opacity="0.3"/><circle cx="12" cy="10" r="1.2" opacity="0.3"/><circle cx="16" cy="10" r="1.2" opacity="0.3"/></svg></div>
+      <div class="li-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg></div>
+    </a>
+
+    <!-- ══════════ Row: Launch + Post (mixed) ══════════ -->
+    <div class="posts-row">
+
+      <!-- Spotify Album — Launch -->
+      <a href="https://www.linkedin.com/posts/aruncastromin_i-just-dropped-an-8-song-album-on-spotify-activity-7425540006670426112-UORV" target="_blank" class="card-launch">
+        <div class="post-meta"><span class="post-type launch">Launch</span></div>
+        <div class="post-title">I just dropped an 8-song album on Spotify — and I've never sung a note</div>
+        <div class="post-arch-note">Iterative pipeline orchestration — 50+ iterations per song. Multi-channel distribution across Spotify, Apple Music, Amazon.</div>
+        <div class="post-tags">
+          <span class="post-tag">#AI</span>
+          <span class="post-tag">#Creative</span>
+          <span class="post-tag">#Spotify</span>
+        </div>
+        <!-- Spotify: Music note -->
+        <div class="card-watermark"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3v10.55A4 4 0 1014 17V7h4V3h-6z"/></svg></div>
+        <div class="li-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg></div>
+      </a>
+
+      <!-- PyExcel — Post -->
+      <a href="https://www.linkedin.com/posts/aruncastromin_pythonprogramming-pyexcel-activity-7100788688757932032-2PZI" target="_blank" class="card-post">
+        <div class="post-meta"><span class="post-type post">Post</span></div>
+        <div class="post-title">PyExcel — Revolutionizing spreadsheets with Python</div>
+        <div class="post-arch-note">Collapsing the ETL pipeline — ML capabilities brought directly to spreadsheet-native users, shifting the analyst-engineer boundary.</div>
+        <div class="post-tags">
+          <span class="post-tag">#Python</span>
+          <span class="post-tag">#DataAnalysis</span>
+        </div>
+        <!-- PyExcel: Rising bar chart -->
+        <div class="card-watermark"><svg viewBox="0 0 24 24" fill="currentColor"><rect x="1" y="16" width="4" height="6" rx="1"/><rect x="7" y="11" width="4" height="11" rx="1"/><rect x="13" y="6" width="4" height="16" rx="1"/><rect x="19" y="2" width="4" height="20" rx="1"/></svg></div>
+        <div class="li-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg></div>
+      </a>
+    </div>
+
+    <!-- ══════════ Row: 3 compact — Articles + Story ══════════ -->
+    <div class="posts-row tri">
+
+      <!-- Productive Leader -->
+      <a href="https://www.linkedin.com/posts/aruncastromin_the-qualities-of-a-productive-leader-a-comprehensive-activity-7096735806995759105-ADvx" target="_blank" class="card-article" style="border-radius: 12px; border-left: 3px solid var(--linkedin);">
+        <div class="post-meta"><span class="post-type article">Article</span></div>
+        <div class="post-title">The Qualities of a Productive Leader</div>
+        <div class="post-arch-note">Six leadership qualities mapped to delivery excellence and distributed team reliability.</div>
+        <div class="post-tags">
+          <span class="post-tag">#Leadership</span>
+          <span class="post-tag">#Delivery</span>
+        </div>
+        <!-- Leader: Crown / star -->
+        <div class="card-watermark"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+        <div class="li-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg></div>
+      </a>
+
+      <!-- SMART Goals -->
+      <a href="https://www.linkedin.com/posts/aruncastromin_businesswriting-smartgoals-personalgoals-activity-7088875418568568832-hzFc" target="_blank" class="card-article" style="border-radius: 12px; border-left: 3px solid var(--linkedin);">
+        <div class="post-meta"><span class="post-type article">Article</span></div>
+        <div class="post-title">SMART — A Simple Hack for All</div>
+        <div class="post-arch-note">Structured decomposition for goals — the same rigor used in ADRs and acceptance criteria.</div>
+        <div class="post-tags">
+          <span class="post-tag">#SMARTGoals</span>
+          <span class="post-tag">#BusinessWriting</span>
+        </div>
+        <!-- SMART: Target / bullseye -->
+        <div class="card-watermark"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.3"/><circle cx="12" cy="12" r="2.5"/></svg></div>
+        <div class="li-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg></div>
+      </a>
+
+      <!-- Samurai -->
+      <a href="https://www.linkedin.com/posts/aruncastromin_%F0%9D%90%93%F0%9D%90%A1%F0%9D%90%9E-%F0%9D%90%92%F0%9D%90%9A%F0%9D%90%A6%F0%9D%90%AE%F0%9D%90%AB%F0%9D%90%9A%F0%9D%90%A2-%F0%9D%90%B0%F0%9D%90%A2%F0%9D%90%AD%F0%9D%90%A1-%F0%9D%90%AD%F0%9D%90%A1%F0%9D%90%9E-%F0%9D%90%96%F0%9D%90%A8%F0%9D%90%A8%F0%9D%90%9D%F0%9D%90%9E%F0%9D%90%A7-activity-7086663387052453889-OfZt" target="_blank" class="card-post" style="border-left: 3px solid var(--amber); border-radius: 4px 12px 12px 4px;">
+        <div class="post-meta"><span class="post-type post">Post</span></div>
+        <div class="post-title">The Samurai with the Wooden Sword</div>
+        <div class="post-arch-note">Strategy over tooling — the right design beats the fanciest technology stack.</div>
+        <div class="post-tags">
+          <span class="post-tag">#Strategy</span>
+          <span class="post-tag">#Mindset</span>
+        </div>
+        <!-- Samurai: Sword / katana -->
+        <div class="card-watermark"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.92 5.51l-1.41 1.41 2.83 2.83-2.12 2.12 1.41 1.41 2.12-2.12 6.37 6.37a2 2 0 002.83 0 2 2 0 000-2.83L12.58 8.33l2.12-2.12-1.41-1.41-2.12 2.12L8.34 4.09 6.92 5.51z"/><path d="M4 21l2-2 1.5 1.5L4 21z" opacity="0.6"/></svg></div>
+        <div class="li-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg></div>
+      </a>
+    </div>
+
+  </div>
+
+  <!-- CTA -->
+  <div class="posts-cta">
+    <a href="https://www.linkedin.com/in/aruncastromin/" class="cta-button" target="_blank">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      Follow on LinkedIn
+    </a>
+  </div>
+</body>
+</html>

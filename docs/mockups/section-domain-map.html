@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Section Mockup — Domain Expertise Map</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg-base: #0A0A0F;
+      --bg-elevated: #111118;
+      --bg-card: #16161D;
+      --bg-hover: #1E1E26;
+      --text-primary: #F4F4F5;
+      --text-secondary: #A1A1AA;
+      --text-muted: #71717A;
+      --accent: #22D3EE;
+      --accent-dim: rgba(34, 211, 238, 0.1);
+      --border-subtle: rgba(255, 255, 255, 0.06);
+      --border-medium: rgba(255, 255, 255, 0.1);
+      --success: #22C55E;
+
+      /* Domain-specific colors */
+      --d-core: #22D3EE;       /* Cyan — Core Banking */
+      --d-rtp: #0EA5E9;        /* Blue — Payments */
+      --d-loan: #A78BFA;       /* Purple — Lending */
+      --d-digital: #F472B6;    /* Pink — Digital */
+      --d-nfr: #22C55E;        /* Green — Performance */
+      --d-migration: #F59E0B;  /* Amber — Migration */
+      --d-risk: #EF4444;       /* Red — Risk */
+      --d-trade: #6366F1;      /* Indigo — Trade */
+      --d-open: #14B8A6;       /* Teal — Open Banking */
+    }
+
+    html { font-size: 16px; }
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg-base);
+      color: var(--text-primary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      padding: 2rem;
+    }
+
+    .mockup-label {
+      position: fixed;
+      top: 1rem;
+      left: 1rem;
+      background: var(--accent);
+      color: var(--bg-base);
+      padding: 0.4rem 0.8rem;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      z-index: 100;
+    }
+
+    /* ============ Section Header ============ */
+    .section-header {
+      max-width: 850px;
+      margin: 2rem auto 2.5rem auto;
+    }
+
+    .section-number {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--accent);
+      font-family: 'JetBrains Mono', monospace;
+      margin-bottom: 0.3rem;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      letter-spacing: -0.03em;
+      margin-bottom: 0.4rem;
+    }
+
+    .section-subtitle {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* ============ Legend ============ */
+    .depth-legend {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      max-width: 850px;
+      margin: 0 auto 1.5rem auto;
+      padding: 0.75rem 1.25rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      flex-wrap: wrap;
+    }
+
+    .legend-label {
+      font-size: 0.65rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.7rem;
+      color: var(--text-secondary);
+    }
+
+    .legend-bar {
+      width: 20px;
+      height: 6px;
+      border-radius: 3px;
+    }
+
+    .legend-bar.led { background: linear-gradient(90deg, var(--accent), var(--d-nfr)); }
+    .legend-bar.delivered { background: linear-gradient(90deg, var(--d-loan), var(--d-migration)); }
+    .legend-bar.contributed { background: linear-gradient(90deg, var(--d-digital), var(--d-risk)); opacity: 0.7; }
+    .legend-bar.awareness { background: var(--bg-hover); border: 1px solid var(--border-medium); }
+
+    /* ============ Domain Grid ============ */
+    .domain-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+      max-width: 850px;
+      margin: 0 auto;
+    }
+
+    .domain-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 1.25rem;
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .domain-card:hover {
+      transform: translateY(-4px);
+      box-shadow:
+        0 12px 40px rgba(0, 0, 0, 0.3),
+        0 0 0 1px rgba(255, 255, 255, 0.04),
+        inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    }
+
+    /* Accent top bar — hidden by default, revealed on hover */
+    .domain-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .domain-card:hover::before {
+      opacity: 1;
+    }
+
+    /* Per-domain colors for top bar, icon, depth label, xp fill, and hover glow */
+    .domain-card.d-core::before { background: linear-gradient(90deg, var(--d-core), transparent); }
+    .domain-card.d-core:hover { border-color: rgba(34, 211, 238, 0.2); }
+    .domain-card.d-core .domain-icon { background: rgba(34, 211, 238, 0.1); }
+    .domain-card.d-core .domain-icon svg { color: var(--d-core); }
+    .domain-card.d-core .domain-depth { color: var(--d-core); }
+    .domain-card.d-core .xp-fill { background: var(--d-core); }
+
+    .domain-card.d-rtp::before { background: linear-gradient(90deg, var(--d-rtp), transparent); }
+    .domain-card.d-rtp:hover { border-color: rgba(14, 165, 233, 0.2); }
+    .domain-card.d-rtp .domain-icon { background: rgba(14, 165, 233, 0.1); }
+    .domain-card.d-rtp .domain-icon svg { color: var(--d-rtp); }
+    .domain-card.d-rtp .domain-depth { color: var(--d-rtp); }
+    .domain-card.d-rtp .xp-fill { background: var(--d-rtp); }
+
+    .domain-card.d-loan::before { background: linear-gradient(90deg, var(--d-loan), transparent); }
+    .domain-card.d-loan:hover { border-color: rgba(167, 139, 250, 0.2); }
+    .domain-card.d-loan .domain-icon { background: rgba(167, 139, 250, 0.1); }
+    .domain-card.d-loan .domain-icon svg { color: var(--d-loan); }
+    .domain-card.d-loan .domain-depth { color: var(--d-loan); }
+    .domain-card.d-loan .xp-fill { background: var(--d-loan); }
+
+    .domain-card.d-digital::before { background: linear-gradient(90deg, var(--d-digital), transparent); }
+    .domain-card.d-digital:hover { border-color: rgba(244, 114, 182, 0.2); }
+    .domain-card.d-digital .domain-icon { background: rgba(244, 114, 182, 0.1); }
+    .domain-card.d-digital .domain-icon svg { color: var(--d-digital); }
+    .domain-card.d-digital .domain-depth { color: var(--d-digital); }
+    .domain-card.d-digital .xp-fill { background: var(--d-digital); }
+
+    .domain-card.d-nfr::before { background: linear-gradient(90deg, var(--d-nfr), transparent); }
+    .domain-card.d-nfr:hover { border-color: rgba(34, 197, 94, 0.2); }
+    .domain-card.d-nfr .domain-icon { background: rgba(34, 197, 94, 0.1); }
+    .domain-card.d-nfr .domain-icon svg { color: var(--d-nfr); }
+    .domain-card.d-nfr .domain-depth { color: var(--d-nfr); }
+    .domain-card.d-nfr .xp-fill { background: var(--d-nfr); }
+
+    .domain-card.d-migration::before { background: linear-gradient(90deg, var(--d-migration), transparent); }
+    .domain-card.d-migration:hover { border-color: rgba(245, 158, 11, 0.2); }
+    .domain-card.d-migration .domain-icon { background: rgba(245, 158, 11, 0.1); }
+    .domain-card.d-migration .domain-icon svg { color: var(--d-migration); }
+    .domain-card.d-migration .domain-depth { color: var(--d-migration); }
+    .domain-card.d-migration .xp-fill { background: var(--d-migration); }
+
+    .domain-card.d-risk::before { background: linear-gradient(90deg, var(--d-risk), transparent); }
+    .domain-card.d-risk:hover { border-color: rgba(239, 68, 68, 0.2); }
+    .domain-card.d-risk .domain-icon { background: rgba(239, 68, 68, 0.1); }
+    .domain-card.d-risk .domain-icon svg { color: var(--d-risk); }
+    .domain-card.d-risk .domain-depth { color: var(--d-risk); }
+    .domain-card.d-risk .xp-fill { background: var(--d-risk); }
+
+    .domain-card.d-trade::before { background: linear-gradient(90deg, var(--d-trade), transparent); }
+    .domain-card.d-trade:hover { border-color: rgba(99, 102, 241, 0.2); }
+    .domain-card.d-trade .domain-icon { background: rgba(99, 102, 241, 0.1); }
+    .domain-card.d-trade .domain-icon svg { color: var(--d-trade); }
+    .domain-card.d-trade .domain-depth { color: var(--d-trade); }
+    .domain-card.d-trade .xp-fill { background: var(--d-trade); }
+
+    .domain-card.d-open::before { background: linear-gradient(90deg, var(--d-open), transparent); }
+    .domain-card.d-open:hover { border-color: rgba(20, 184, 166, 0.2); }
+    .domain-card.d-open .domain-icon { background: rgba(20, 184, 166, 0.1); }
+    .domain-card.d-open .domain-icon svg { color: var(--d-open); }
+    .domain-card.d-open .domain-depth { color: var(--d-open); }
+    .domain-card.d-open .xp-fill { background: var(--d-open); }
+
+    .domain-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0.75rem;
+      transition: all 0.3s ease;
+    }
+
+    .domain-card:hover .domain-icon {
+      transform: scale(1.08);
+    }
+
+    .domain-icon svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .domain-name {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 0.2rem;
+    }
+
+    .domain-depth {
+      font-size: 0.6rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.5rem;
+    }
+
+    .domain-desc {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      margin-bottom: 0.6rem;
+    }
+
+    .domain-xp {
+      font-size: 0.62rem;
+      color: var(--text-muted);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Experience bar */
+    .xp-bar {
+      height: 4px;
+      background: var(--bg-base);
+      border-radius: 2px;
+      margin-top: 0.5rem;
+      overflow: hidden;
+    }
+
+    .xp-fill {
+      height: 100%;
+      border-radius: 2px;
+      background: var(--accent);
+      transition: width 0.6s ease;
+    }
+
+    /* Wide card spanning 2 columns */
+    .domain-card.wide {
+      grid-column: span 2;
+    }
+
+    /* ============ Compliance sub-section ============ */
+    .compliance-section {
+      max-width: 850px;
+      margin: 2rem auto 0 auto;
+    }
+
+    .compliance-header {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.75rem;
+      padding-left: 0.25rem;
+    }
+
+    .compliance-grid {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .compliance-tag {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 6px;
+      padding: 0.5rem 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.2s;
+    }
+
+    .compliance-tag:hover {
+      border-color: rgba(34, 211, 238, 0.15);
+      background: var(--bg-hover);
+    }
+
+    .compliance-name {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .compliance-desc {
+      font-size: 0.62rem;
+      color: var(--text-muted);
+    }
+
+    .compliance-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .compliance-dot.practiced { background: var(--success); box-shadow: 0 0 6px rgba(34, 197, 94, 0.4); }
+    .compliance-dot.aware { background: var(--text-muted); opacity: 0.5; }
+
+    @media (max-width: 768px) {
+      .domain-grid { grid-template-columns: 1fr; }
+      .domain-card.wide { grid-column: span 1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="mockup-label">Section — Domain Expertise Map</div>
+
+  <div class="section-header">
+    <div class="section-number">04.</div>
+    <h2 class="section-title">Domain Expertise</h2>
+    <p class="section-subtitle">Banking and financial services sub-domains I've architected for, with depth of involvement.</p>
+  </div>
+
+  <div class="depth-legend">
+    <span class="legend-label">Depth:</span>
+    <div class="legend-item"><div class="legend-bar led"></div> Led Architecture</div>
+    <div class="legend-item"><div class="legend-bar delivered"></div> Delivered</div>
+    <div class="legend-item"><div class="legend-bar contributed"></div> Contributed</div>
+    <div class="legend-item"><div class="legend-bar awareness"></div> Awareness</div>
+  </div>
+
+  <div class="domain-grid">
+
+    <!-- Core Banking -->
+    <div class="domain-card d-core wide">
+      <div class="domain-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M3 10h18M5 6l7-3 7 3M4 10v11M20 10v11M8 14v3M12 14v3M16 14v3"/></svg>
+      </div>
+      <div class="domain-name">Core Banking</div>
+      <div class="domain-depth">Led Architecture</div>
+      <div class="domain-desc">Finacle implementations across 3 continents. Account management, transaction processing, GL, and customer information systems. Multi-country regulatory adaptations.</div>
+      <div class="domain-xp">12+ years • 4 major implementations</div>
+      <div class="xp-bar"><div class="xp-fill" style="width: 95%"></div></div>
+    </div>
+
+    <!-- Real-Time Payments -->
+    <div class="domain-card d-rtp">
+      <div class="domain-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      </div>
+      <div class="domain-name">Real-Time Payments</div>
+      <div class="domain-depth">Led Architecture</div>
+      <div class="domain-desc">RTP/instant payment systems, ISO 20022 messaging, cross-border settlement, CQRS event-driven processing.</div>
+      <div class="domain-xp">5+ years • APAC region</div>
+      <div class="xp-bar"><div class="xp-fill" style="width: 90%"></div></div>
+    </div>
+
+    <!-- Loan Origination -->
+    <div class="domain-card d-loan">
+      <div class="domain-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/></svg>
+      </div>
+      <div class="domain-name">Loan Origination</div>
+      <div class="domain-depth">Delivered</div>
+      <div class="domain-desc">End-to-end LOS with automated credit scoring, KYC verification, multi-stage approval workflows. All-India rollout.</div>
+      <div class="domain-xp">NBFC nationwide deployment</div>
+      <div class="xp-bar"><div class="xp-fill" style="width: 70%"></div></div>
+    </div>
+
+    <!-- Digital Channels -->
+    <div class="domain-card d-digital">
+      <div class="domain-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
+      </div>
+      <div class="domain-name">Digital Channels</div>
+      <div class="domain-depth">Contributed</div>
+      <div class="domain-desc">Internet banking, mobile banking integration layers, API gateway design, omni-channel architecture.</div>
+      <div class="domain-xp">Integration architecture</div>
+      <div class="xp-bar"><div class="xp-fill" style="width: 55%"></div></div>
+    </div>
+
+    <!-- NFR / Performance -->
+    <div class="domain-card d-nfr">
+      <div class="domain-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+      </div>
+      <div class="domain-name">NFR & Performance</div>
+      <div class="domain-depth">Led Architecture</div>
+      <div class="domain-desc">Non-functional requirements delivery: load testing at 5x, latency optimization, resilience patterns, capacity planning.</div>
+      <div class="domain-xp">Current focus area</div>
+      <div class="xp-bar"><div class="xp-fill" style="width: 88%"></div></div>
+    </div>
+
+    <!-- Data Migration -->
+    <div class="domain-card d-migration">
+      <div class="domain-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 14h6m0 0l-3-3m3 3l-3 3M20 10h-6m0 0l3-3m-3 3l3 3"/></svg>
+      </div>
+      <div class="domain-name">Data Migration</div>
+      <div class="domain-depth">Delivered</div>
+      <div class="domain-desc">Legacy-to-modern platform migrations with parallel-run validation, zero-data-loss guarantees, and reconciliation frameworks.</div>
+      <div class="domain-xp">Multi-country migrations</div>
+      <div class="xp-bar"><div class="xp-fill" style="width: 72%"></div></div>
+    </div>
+
+    <!-- Risk & Compliance -->
+    <div class="domain-card d-risk">
+      <div class="domain-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <div class="domain-name">Risk & Compliance</div>
+      <div class="domain-depth">Contributed</div>
+      <div class="domain-desc">Regulatory reporting architecture, audit logging, data encryption design, PCI-DSS compliance patterns.</div>
+      <div class="domain-xp">Across all implementations</div>
+      <div class="xp-bar"><div class="xp-fill" style="width: 50%"></div></div>
+    </div>
+
+    <!-- Trade Finance / Treasury (Awareness) -->
+    <div class="domain-card d-trade">
+      <div class="domain-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+      </div>
+      <div class="domain-name">Trade Finance</div>
+      <div class="domain-depth">Awareness</div>
+      <div class="domain-desc">Letters of credit, trade document processing, cross-border trade workflows. Exposure through core banking integrations.</div>
+      <div class="domain-xp">Indirect exposure</div>
+      <div class="xp-bar"><div class="xp-fill" style="width: 25%"></div></div>
+    </div>
+
+    <!-- Open Banking / APIs -->
+    <div class="domain-card d-open">
+      <div class="domain-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </div>
+      <div class="domain-name">Open Banking & APIs</div>
+      <div class="domain-depth">Awareness</div>
+      <div class="domain-desc">PSD2, API gateway patterns, third-party integrations, consent management architecture.</div>
+      <div class="domain-xp">Growing interest</div>
+      <div class="xp-bar"><div class="xp-fill" style="width: 30%"></div></div>
+    </div>
+  </div>
+
+  <!-- Compliance sub-section -->
+  <div class="compliance-section">
+    <div class="compliance-header">Regulatory Frameworks</div>
+    <div class="compliance-grid">
+      <div class="compliance-tag"><div class="compliance-dot practiced"></div><span class="compliance-name">PCI-DSS</span><span class="compliance-desc">— Payment security</span></div>
+      <div class="compliance-tag"><div class="compliance-dot practiced"></div><span class="compliance-name">SOX</span><span class="compliance-desc">— Financial controls</span></div>
+      <div class="compliance-tag"><div class="compliance-dot practiced"></div><span class="compliance-name">ISO 20022</span><span class="compliance-desc">— Payment messaging</span></div>
+      <div class="compliance-tag"><div class="compliance-dot practiced"></div><span class="compliance-name">CMMI</span><span class="compliance-desc">— Process maturity</span></div>
+      <div class="compliance-tag"><div class="compliance-dot aware"></div><span class="compliance-name">GDPR</span><span class="compliance-desc">— Data protection</span></div>
+      <div class="compliance-tag"><div class="compliance-dot aware"></div><span class="compliance-name">BSA/AML</span><span class="compliance-desc">— Anti-money laundering</span></div>
+      <div class="compliance-tag"><div class="compliance-dot aware"></div><span class="compliance-name">KYC</span><span class="compliance-desc">— Customer identity</span></div>
+      <div class="compliance-tag"><div class="compliance-dot aware"></div><span class="compliance-name">PSD2</span><span class="compliance-desc">— Open banking</span></div>
+    </div>
+  </div>
+</body>
+</html>

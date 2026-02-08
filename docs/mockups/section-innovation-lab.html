@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Section Mockup — Innovation Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg-base: #0A0A0F;
+      --bg-elevated: #111118;
+      --bg-card: #16161D;
+      --bg-hover: #1E1E26;
+      --text-primary: #F4F4F5;
+      --text-secondary: #A1A1AA;
+      --text-muted: #71717A;
+      --accent: #22D3EE;
+      --accent-dim: rgba(34, 211, 238, 0.1);
+      --border-subtle: rgba(255, 255, 255, 0.06);
+      --border-medium: rgba(255, 255, 255, 0.1);
+      --success: #22C55E;
+      --warning: #F59E0B;
+      --purple: #A78BFA;
+      --pink: #F472B6;
+      --blue: #0EA5E9;
+      --indigo: #6366F1;
+      --teal: #14B8A6;
+    }
+
+    html { font-size: 16px; }
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg-base);
+      color: var(--text-primary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      padding: 2rem;
+    }
+
+    .mockup-label {
+      position: fixed;
+      top: 1rem;
+      left: 1rem;
+      background: var(--accent);
+      color: var(--bg-base);
+      padding: 0.4rem 0.8rem;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      z-index: 100;
+    }
+
+    /* ============ Section Header ============ */
+    .section-header {
+      max-width: 900px;
+      margin: 2rem auto 1rem auto;
+    }
+
+    .section-number {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--accent);
+      font-family: 'JetBrains Mono', monospace;
+      margin-bottom: 0.3rem;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      letter-spacing: -0.03em;
+      margin-bottom: 0.4rem;
+    }
+
+    .section-subtitle {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      max-width: 650px;
+    }
+
+    /* ============ Intro callout ============ */
+    .lab-intro {
+      max-width: 900px;
+      margin: 1.25rem auto 2rem auto;
+      padding: 1rem 1.25rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 10px 10px 0;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .lab-intro strong {
+      color: var(--text-primary);
+    }
+
+    /* ============ Project Cards ============ */
+    .projects {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .project-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      position: relative;
+    }
+
+    .project-card:hover {
+      border-color: rgba(255, 255, 255, 0.08);
+      transform: translateY(-2px);
+      box-shadow:
+        0 12px 40px rgba(0, 0, 0, 0.3),
+        0 0 0 1px rgba(255, 255, 255, 0.03),
+        inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    }
+
+    /* Top accent bar — per project color */
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .project-card:hover::before { opacity: 1; }
+
+    .project-card.p-green::before { background: linear-gradient(90deg, var(--success), transparent); }
+    .project-card.p-green:hover { border-color: rgba(34, 197, 94, 0.15); }
+    .project-card.p-purple::before { background: linear-gradient(90deg, var(--purple), transparent); }
+    .project-card.p-purple:hover { border-color: rgba(167, 139, 250, 0.15); }
+    .project-card.p-blue::before { background: linear-gradient(90deg, var(--blue), transparent); }
+    .project-card.p-blue:hover { border-color: rgba(14, 165, 233, 0.15); }
+    .project-card.p-amber::before { background: linear-gradient(90deg, var(--warning), transparent); }
+    .project-card.p-amber:hover { border-color: rgba(245, 158, 11, 0.15); }
+    .project-card.p-cyan::before { background: linear-gradient(90deg, var(--accent), transparent); }
+    .project-card.p-cyan:hover { border-color: rgba(34, 211, 238, 0.15); }
+    .project-card.p-indigo::before { background: linear-gradient(90deg, var(--indigo), transparent); }
+    .project-card.p-indigo:hover { border-color: rgba(99, 102, 241, 0.15); }
+    .project-card.p-teal::before { background: linear-gradient(90deg, var(--teal), transparent); }
+    .project-card.p-teal:hover { border-color: rgba(20, 184, 166, 0.15); }
+
+    /* Card header — always visible */
+    .pc-header {
+      padding: 1.5rem 1.75rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1.25rem;
+    }
+
+    .pc-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: transform 0.3s ease;
+    }
+
+    .project-card:hover .pc-icon { transform: scale(1.06); }
+
+    .pc-icon svg { width: 24px; height: 24px; }
+
+    /* Per-project icon colors */
+    .p-green .pc-icon { background: rgba(34, 197, 94, 0.1); }
+    .p-green .pc-icon svg { color: var(--success); }
+    .p-purple .pc-icon { background: rgba(167, 139, 250, 0.1); }
+    .p-purple .pc-icon svg { color: var(--purple); }
+    .p-blue .pc-icon { background: rgba(14, 165, 233, 0.1); }
+    .p-blue .pc-icon svg { color: var(--blue); }
+    .p-amber .pc-icon { background: rgba(245, 158, 11, 0.1); }
+    .p-amber .pc-icon svg { color: var(--warning); }
+    .p-cyan .pc-icon { background: var(--accent-dim); }
+    .p-cyan .pc-icon svg { color: var(--accent); }
+    .p-indigo .pc-icon { background: rgba(99, 102, 241, 0.1); }
+    .p-indigo .pc-icon svg { color: var(--indigo); }
+    .p-teal .pc-icon { background: rgba(20, 184, 166, 0.1); }
+    .p-teal .pc-icon svg { color: var(--teal); }
+
+    .pc-header-content { flex: 1; min-width: 0; }
+
+    .pc-top-row {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 0.3rem;
+      flex-wrap: wrap;
+    }
+
+    .pc-name {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .pc-status {
+      font-size: 0.55rem;
+      font-weight: 700;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .pc-status.shipped { background: rgba(34, 197, 94, 0.1); color: var(--success); border: 1px solid rgba(34, 197, 94, 0.2); }
+    .pc-status.live { background: rgba(34, 197, 94, 0.1); color: var(--success); border: 1px solid rgba(34, 197, 94, 0.2); }
+    .pc-status.building { background: rgba(245, 158, 11, 0.1); color: var(--warning); border: 1px solid rgba(245, 158, 11, 0.2); }
+
+    .pc-tagline {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      margin-bottom: 0.5rem;
+    }
+
+    /* Pattern badge row */
+    .pc-patterns {
+      display: flex;
+      gap: 0.35rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.4rem;
+    }
+
+    .pattern-badge {
+      font-size: 0.6rem;
+      font-weight: 600;
+      padding: 0.18rem 0.5rem;
+      border-radius: 4px;
+      border: 1px solid;
+    }
+
+    .p-green .pattern-badge { color: var(--success); border-color: rgba(34, 197, 94, 0.25); background: rgba(34, 197, 94, 0.06); }
+    .p-purple .pattern-badge { color: var(--purple); border-color: rgba(167, 139, 250, 0.25); background: rgba(167, 139, 250, 0.06); }
+    .p-blue .pattern-badge { color: var(--blue); border-color: rgba(14, 165, 233, 0.25); background: rgba(14, 165, 233, 0.06); }
+    .p-amber .pattern-badge { color: var(--warning); border-color: rgba(245, 158, 11, 0.25); background: rgba(245, 158, 11, 0.06); }
+    .p-cyan .pattern-badge { color: var(--accent); border-color: rgba(34, 211, 238, 0.25); background: rgba(34, 211, 238, 0.06); }
+    .p-indigo .pattern-badge { color: var(--indigo); border-color: rgba(99, 102, 241, 0.25); background: rgba(99, 102, 241, 0.06); }
+    .p-teal .pattern-badge { color: var(--teal); border-color: rgba(20, 184, 166, 0.25); background: rgba(20, 184, 166, 0.06); }
+
+    /* Tech tags */
+    .pc-tech {
+      display: flex;
+      gap: 0.3rem;
+      flex-wrap: wrap;
+    }
+
+    .tech-tag {
+      font-size: 0.58rem;
+      color: var(--text-muted);
+      background: var(--bg-base);
+      border: 1px solid var(--border-subtle);
+      padding: 0.12rem 0.4rem;
+      border-radius: 3px;
+    }
+
+    /* Expand hint */
+    .pc-expand {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 1.75rem 1rem 1.75rem;
+      gap: 0.3rem;
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      transition: color 0.2s;
+    }
+
+    .project-card:hover .pc-expand { color: var(--text-secondary); }
+
+    .pc-expand-arrow {
+      transition: transform 0.3s ease;
+      font-size: 0.5rem;
+    }
+
+    .project-card.expanded .pc-expand-arrow { transform: rotate(180deg); }
+
+    /* Expandable detail section */
+    .pc-detail {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .project-card.expanded .pc-detail {
+      max-height: 600px;
+    }
+
+    .pc-detail-inner {
+      padding: 0 1.75rem 1.75rem 1.75rem;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    /* Architecture connection callout */
+    .arch-connection {
+      margin: 1.25rem 0;
+      padding: 1rem 1.25rem;
+      background: var(--bg-elevated);
+      border-radius: 10px;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .arch-connection-label {
+      font-size: 0.6rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--text-muted);
+    }
+
+    .arch-connection-label svg {
+      width: 12px;
+      height: 12px;
+    }
+
+    .p-green .arch-connection-label { color: var(--success); }
+    .p-purple .arch-connection-label { color: var(--purple); }
+    .p-blue .arch-connection-label { color: var(--blue); }
+    .p-amber .arch-connection-label { color: var(--warning); }
+    .p-cyan .arch-connection-label { color: var(--accent); }
+    .p-indigo .arch-connection-label { color: var(--indigo); }
+    .p-teal .arch-connection-label { color: var(--teal); }
+
+    .arch-connection-text {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      line-height: 1.55;
+    }
+
+    .arch-connection-text strong {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    /* Architecture flow diagram */
+    .arch-flow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+      margin: 1rem 0;
+    }
+
+    .arch-node {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-medium);
+      border-radius: 8px;
+      padding: 0.4rem 0.7rem;
+      font-size: 0.65rem;
+      color: var(--text-secondary);
+      text-align: center;
+      min-width: 70px;
+    }
+
+    .arch-node.highlight { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); }
+    .p-green .arch-node.highlight { border-color: var(--success); color: var(--success); background: rgba(34, 197, 94, 0.08); }
+    .p-purple .arch-node.highlight { border-color: var(--purple); color: var(--purple); background: rgba(167, 139, 250, 0.08); }
+    .p-blue .arch-node.highlight { border-color: var(--blue); color: var(--blue); background: rgba(14, 165, 233, 0.08); }
+    .p-amber .arch-node.highlight { border-color: var(--warning); color: var(--warning); background: rgba(245, 158, 11, 0.08); }
+    .p-indigo .arch-node.highlight { border-color: var(--indigo); color: var(--indigo); background: rgba(99, 102, 241, 0.08); }
+    .p-teal .arch-node.highlight { border-color: var(--teal); color: var(--teal); background: rgba(20, 184, 166, 0.08); }
+
+    .arch-arrow { color: var(--text-muted); font-size: 0.6rem; opacity: 0.4; }
+
+    /* Links row */
+    .pc-links {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .pc-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.68rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      background: var(--bg-base);
+      border: 1px solid var(--border-subtle);
+      padding: 0.3rem 0.65rem;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .pc-link:hover {
+      color: var(--text-primary);
+      border-color: var(--border-medium);
+    }
+
+    .pc-link svg { width: 12px; height: 12px; }
+
+    @media (max-width: 640px) {
+      .pc-header { padding: 1.25rem; }
+      .pc-detail-inner { padding: 0 1.25rem 1.25rem; }
+      .arch-flow { gap: 0.25rem; }
+      .arch-node { min-width: 55px; font-size: 0.58rem; padding: 0.3rem 0.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="mockup-label">Section — Innovation Lab</div>
+
+  <div class="section-header">
+    <div class="section-number">07.</div>
+    <h2 class="section-title">Innovation Lab</h2>
+    <p class="section-subtitle">Personal projects where I apply enterprise architecture patterns to real products — shipped end-to-end.</p>
+  </div>
+
+  <div class="lab-intro">
+    <strong>Why this matters:</strong> Enterprise architects design systems. These projects are testimonials that I <strong>design, architect, build, ship, and maintain</strong> products I own from zero to production.
+  </div>
+
+  <div class="projects">
+
+    <!-- REPPIT -->
+    <div class="project-card p-green" onclick="this.classList.toggle('expanded')">
+      <div class="pc-header">
+        <div class="pc-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+        </div>
+        <div class="pc-header-content">
+          <div class="pc-top-row">
+            <span class="pc-name">REPPIT</span>
+            <span class="pc-status shipped">Shipped</span>
+          </div>
+          <p class="pc-tagline">Fitness strength tracking app with offline-first architecture and progression state machines.</p>
+          <div class="pc-patterns">
+            <span class="pattern-badge">State Machine</span>
+            <span class="pattern-badge">Local-First</span>
+            <span class="pattern-badge">Data Isolation</span>
+          </div>
+          <div class="pc-tech">
+            <span class="tech-tag">Flutter</span>
+            <span class="tech-tag">Dart</span>
+            <span class="tech-tag">SQLite</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pc-detail">
+        <div class="pc-detail-inner">
+          <div class="arch-flow">
+            <div class="arch-node">User Input</div>
+            <span class="arch-arrow">→</span>
+            <div class="arch-node highlight">State Machine<br>(Beginner→Elite)</div>
+            <span class="arch-arrow">→</span>
+            <div class="arch-node">SQLite<br>(Local-First)</div>
+            <span class="arch-arrow">→</span>
+            <div class="arch-node">Multi-Profile<br>Isolation</div>
+          </div>
+
+          <div class="arch-connection">
+            <div class="arch-connection-label">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+              Architectural Relevance
+            </div>
+            <div class="arch-connection-text">
+              <strong>State machine pattern</strong> drives progression through deterministic levels (Beginner → Intermediate → Advanced → Elite) — the same pattern that governs credit tier transitions and KYC status workflows in banking systems. <strong>Local-first SQLite</strong> ensures the app works without connectivity, mirroring how branch banking systems must operate during network outages. <strong>Multi-profile data isolation</strong> enforces strict partitioning between users — the mobile equivalent of row-level security.
+            </div>
+          </div>
+
+          <div class="pc-links">
+            <a href="https://github.com/ArunCastro/reppit" class="pc-link">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="pc-expand"><span>Architecture breakdown</span><span class="pc-expand-arrow">▼</span></div>
+    </div>
+
+    <!-- PRIMMO -->
+    <div class="project-card p-purple" onclick="this.classList.toggle('expanded')">
+      <div class="pc-header">
+        <div class="pc-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        </div>
+        <div class="pc-header-content">
+          <div class="pc-top-row">
+            <span class="pc-name">PRIMMO</span>
+            <span class="pc-status building">Building</span>
+          </div>
+          <p class="pc-tagline">AI-powered personal strength coach with tiered routing, event-driven orchestration, and vector search.</p>
+          <div class="pc-patterns">
+            <span class="pattern-badge">Tiered Routing</span>
+            <span class="pattern-badge">Event-Driven</span>
+            <span class="pattern-badge">RAG / Vector Search</span>
+            <span class="pattern-badge">RLS</span>
+          </div>
+          <div class="pc-tech">
+            <span class="tech-tag">Next.js</span>
+            <span class="tech-tag">TypeScript</span>
+            <span class="tech-tag">Supabase</span>
+            <span class="tech-tag">OpenAI</span>
+            <span class="tech-tag">pgvector</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pc-detail">
+        <div class="pc-detail-inner">
+          <div class="arch-flow">
+            <div class="arch-node">User Query</div>
+            <span class="arch-arrow">→</span>
+            <div class="arch-node highlight">4-Tier AI<br>Router</div>
+            <span class="arch-arrow">→</span>
+            <div class="arch-node">Vector<br>Search</div>
+            <span class="arch-arrow">→</span>
+            <div class="arch-node">Event<br>Orchestrator</div>
+            <span class="arch-arrow">→</span>
+            <div class="arch-node">RLS-Protected<br>Storage</div>
+          </div>
+
+          <div class="arch-connection">
+            <div class="arch-connection-label">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+              Architectural Relevance
+            </div>
+            <div class="arch-connection-text">
+              <strong>4-tier AI routing</strong> (cache → rules → lightweight model → full model) mirrors how payment systems route transactions through cost-optimized processing tiers. <strong>Event-driven orchestration</strong> decouples AI inference from data persistence — the same pattern behind CQRS in payment rails. <strong>Vector search (RAG)</strong> enables semantic retrieval over exercise data, demonstrating enterprise AI patterns. <strong>Row-level security</strong> enforces per-user data isolation at the database level — identical to how banking systems protect customer data.
+            </div>
+          </div>
+
+          <div class="pc-links">
+            <a href="https://github.com/ArunCastro/primmo" class="pc-link">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="pc-expand"><span>Architecture breakdown</span><span class="pc-expand-arrow">▼</span></div>
+    </div>
+
+    <!-- NoteApp -->
+    <div class="project-card p-blue" onclick="this.classList.toggle('expanded')">
+      <div class="pc-header">
+        <div class="pc-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        </div>
+        <div class="pc-header-content">
+          <div class="pc-top-row">
+            <span class="pc-name">NoteApp</span>
+            <span class="pc-status live">Live</span>
+          </div>
+          <p class="pc-tagline">Notes app with multi-tenant row-level security, soft delete, and optimistic auto-save.</p>
+          <div class="pc-patterns">
+            <span class="pattern-badge">Row-Level Security</span>
+            <span class="pattern-badge">Soft Delete</span>
+            <span class="pattern-badge">Optimistic Persistence</span>
+          </div>
+          <div class="pc-tech">
+            <span class="tech-tag">Next.js</span>
+            <span class="tech-tag">TypeScript</span>
+            <span class="tech-tag">Supabase</span>
+            <span class="tech-tag">Tailwind</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pc-detail">
+        <div class="pc-detail-inner">
+          <div class="arch-flow">
+            <div class="arch-node">User Action</div>
+            <span class="arch-arrow">→</span>
+            <div class="arch-node">Debounced<br>Auto-Save</div>
+            <span class="arch-arrow">→</span>
+            <div class="arch-node highlight">RLS Policy<br>Enforcement</div>
+            <span class="arch-arrow">→</span>
+            <div class="arch-node">Soft Delete<br>(Recoverable)</div>
+          </div>
+
+          <div class="arch-connection">
+            <div class="arch-connection-label">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+              Architectural Relevance
+            </div>
+            <div class="arch-connection-text">
+              <strong>Row-level security</strong> at the database level ensures users only access their own data — the same Supabase RLS policies used in banking for customer data isolation. <strong>Soft delete</strong> preserves data for audit and recovery, matching regulatory requirements where financial records must never be permanently destroyed. <strong>Debounced auto-save</strong> demonstrates optimistic persistence — writes are batched and retried, similar to how transaction systems handle intermittent connectivity.
+            </div>
+          </div>
+
+          <div class="pc-links">
+            <a href="https://github.com/ArunCastro/noteapp" class="pc-link">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="pc-expand"><span>Architecture breakdown</span><span class="pc-expand-arrow">▼</span></div>
+    </div>
+
+    <!-- Covered Calls / Backtest Pro -->
+    <div class="project-card p-amber" onclick="this.classList.toggle('expanded')">
+      <div class="pc-header">
+        <div class="pc-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <div class="pc-header-content">
+          <div class="pc-top-row">
+            <span class="pc-name">Covered Calls</span>
+            <span class="pc-status building">Building</span>
+          </div>
+          <p class="pc-tagline">Options trading backtester with strategy pattern, real-time WebSocket streaming, and full cost modeling.</p>
+          <div class="pc-patterns">
+            <span class="pattern-badge">Strategy Pattern (GoF)</span>
+            <span class="pattern-badge">Real-Time Streaming</span>
+            <span class="pattern-badge">Domain Modeling</span>
+          </div>
+          <div class="pc-tech">
+            <span class="tech-tag">Next.js</span>
+            <span class="tech-tag">TypeScript</span>
+            <span class="tech-tag">WebSocket</span>
+            <span class="tech-tag">Kite API</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pc-detail">
+        <div class="pc-detail-inner">
+          <div class="arch-flow">
+            <div class="arch-node">Market Data<br>(WebSocket)</div>
+            <span class="arch-arrow">→</span>
+            <div class="arch-node highlight">Strategy<br>Engine</div>
+            <span class="arch-arrow">→</span>
+            <div class="arch-node">Cost Model<br>(Brokerage+Tax)</div>
+            <span class="arch-arrow">→</span>
+            <div class="arch-node">Risk<br>Analytics</div>
+          </div>
+
+          <div class="arch-connection">
+            <div class="arch-connection-label">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+              Architectural Relevance
+            </div>
+            <div class="arch-connection-text">
+              <strong>Strategy pattern</strong> (Gang of Four) — pluggable trading algorithms behind a single interface, identical to how banking product engines swap calculation strategies without conditional branching. <strong>Real-time WebSocket streaming</strong> from Kite Connect demonstrates the same data pipeline patterns used in market data feeds and trading platforms. <strong>Full cost modeling</strong> (brokerage, STT, GST, stamp duty) mirrors how banking fee engines compute transaction costs across product types.
+            </div>
+          </div>
+
+          <div class="pc-links">
+            <a href="https://github.com/ArunCastro/covered-calls" class="pc-link">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="pc-expand"><span>Architecture breakdown</span><span class="pc-expand-arrow">▼</span></div>
+    </div>
+
+    <!-- Taskboard / Klarity -->
+    <div class="project-card p-indigo" onclick="this.classList.toggle('expanded')">
+      <div class="pc-header">
+        <div class="pc-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        </div>
+        <div class="pc-header-content">
+          <div class="pc-top-row">
+            <span class="pc-name">Klarity</span>
+            <span class="pc-status building">Building</span>
+          </div>
+          <p class="pc-tagline">Task management with 15-stage pipeline, ETag-based distributed sync, and multi-agent orchestration.</p>
+          <div class="pc-patterns">
+            <span class="pattern-badge">Pipeline Pattern</span>
+            <span class="pattern-badge">Distributed Sync</span>
+            <span class="pattern-badge">Multi-Agent</span>
+          </div>
+          <div class="pc-tech">
+            <span class="tech-tag">Next.js</span>
+            <span class="tech-tag">TypeScript</span>
+            <span class="tech-tag">Zustand</span>
+            <span class="tech-tag">Supabase</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pc-detail">
+        <div class="pc-detail-inner">
+          <div class="arch-flow">
+            <div class="arch-node">Task Input</div>
+            <span class="arch-arrow">→</span>
+            <div class="arch-node highlight">15-Stage<br>Pipeline</div>
+            <span class="arch-arrow">→</span>
+            <div class="arch-node">ETag<br>Sync</div>
+            <span class="arch-arrow">→</span>
+            <div class="arch-node">Multi-Agent<br>Orchestration</div>
+          </div>
+
+          <div class="arch-connection">
+            <div class="arch-connection-label">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+              Architectural Relevance
+            </div>
+            <div class="arch-connection-text">
+              <strong>15-stage pipeline</strong> with configurable gates mirrors loan origination workflows and straight-through processing (STP) pipelines in banking. <strong>ETag-based sync</strong> implements optimistic concurrency control — the same distributed reconciliation pattern used when multiple systems update shared financial records. <strong>Multi-agent orchestration</strong> via Zustand demonstrates how banking systems coordinate between microservices without tight coupling.
+            </div>
+          </div>
+
+          <div class="pc-links">
+            <a href="#" class="pc-link">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="pc-expand"><span>Architecture breakdown</span><span class="pc-expand-arrow">▼</span></div>
+    </div>
+
+    <!-- AnyCalc -->
+    <div class="project-card p-teal" onclick="this.classList.toggle('expanded')">
+      <div class="pc-header">
+        <div class="pc-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="10" y2="10"/><line x1="14" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="10" y2="14"/><line x1="14" y1="14" x2="16" y2="14"/><line x1="8" y1="18" x2="16" y2="18"/></svg>
+        </div>
+        <div class="pc-header-content">
+          <div class="pc-top-row">
+            <span class="pc-name">AnyCalc</span>
+            <span class="pc-status live">Live</span>
+          </div>
+          <p class="pc-tagline">Pure calculation engine with stateless computation and formula parsing — a rule engine in miniature.</p>
+          <div class="pc-patterns">
+            <span class="pattern-badge">Rule Engine</span>
+            <span class="pattern-badge">Stateless Computation</span>
+          </div>
+          <div class="pc-tech">
+            <span class="tech-tag">HTML</span>
+            <span class="tech-tag">CSS</span>
+            <span class="tech-tag">JavaScript</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pc-detail">
+        <div class="pc-detail-inner">
+          <div class="arch-flow">
+            <div class="arch-node">Input<br>Expression</div>
+            <span class="arch-arrow">→</span>
+            <div class="arch-node highlight">Formula<br>Parser</div>
+            <span class="arch-arrow">→</span>
+            <div class="arch-node">Stateless<br>Compute</div>
+            <span class="arch-arrow">→</span>
+            <div class="arch-node">Deterministic<br>Output</div>
+          </div>
+
+          <div class="arch-connection">
+            <div class="arch-connection-label">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+              Architectural Relevance
+            </div>
+            <div class="arch-connection-text">
+              <strong>Rule engine pattern</strong> — stateless, deterministic computation pipelines identical to how banking product pricing engines compute interest rates, fees, and EMIs. Same input always produces the same output, with no side effects. This is the foundation of every financial calculation engine in banking, from loan EMI calculators to forex rate converters.
+            </div>
+          </div>
+
+          <div class="pc-links">
+            <a href="https://github.com/ArunCastro/calci" class="pc-link">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="pc-expand"><span>Architecture breakdown</span><span class="pc-expand-arrow">▼</span></div>
+    </div>
+
+    <!-- Portfolio -->
+    <div class="project-card p-cyan" onclick="this.classList.toggle('expanded')">
+      <div class="pc-header">
+        <div class="pc-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        </div>
+        <div class="pc-header-content">
+          <div class="pc-top-row">
+            <span class="pc-name">This Portfolio</span>
+            <span class="pc-status live">Live</span>
+          </div>
+          <p class="pc-tagline">Single source of truth architecture — one JSON drives portfolio, resume, and Launchpad dashboard.</p>
+          <div class="pc-patterns">
+            <span class="pattern-badge">Golden Source</span>
+            <span class="pattern-badge">Multi-Format Rendering</span>
+          </div>
+          <div class="pc-tech">
+            <span class="tech-tag">HTML</span>
+            <span class="tech-tag">CSS</span>
+            <span class="tech-tag">JavaScript</span>
+            <span class="tech-tag">JSON</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pc-detail">
+        <div class="pc-detail-inner">
+          <div class="arch-flow">
+            <div class="arch-node highlight">projects.json<br>(Golden Source)</div>
+            <span class="arch-arrow">→</span>
+            <div class="arch-node">Portfolio<br>Site</div>
+            <span class="arch-arrow">↗</span>
+          </div>
+          <div class="arch-flow" style="margin-top: -0.5rem;">
+            <div class="arch-node" style="visibility: hidden; width: 70px;">x</div>
+            <span class="arch-arrow" style="visibility: hidden;">→</span>
+            <div class="arch-node">Digital<br>Resume</div>
+            <span class="arch-arrow">→ from source</span>
+          </div>
+
+          <div class="arch-connection">
+            <div class="arch-connection-label">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+              Architectural Relevance
+            </div>
+            <div class="arch-connection-text">
+              <strong>Golden source pattern</strong> — one `projects.json` file drives three different outputs (portfolio cards, resume flip-cards, Launchpad status). This is the same pattern banks use for regulatory reporting: a single authoritative data source generates Basel III reports, MAS submissions, and internal dashboards without data duplication or drift.
+            </div>
+          </div>
+
+          <div class="pc-links">
+            <a href="https://github.com/ArunCastro/castronix-portfolio" class="pc-link">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="pc-expand"><span>Architecture breakdown</span><span class="pc-expand-arrow">▼</span></div>
+    </div>
+
+  </div>
+</body>
+</html>

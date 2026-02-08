@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Section Mockup — Technology Radar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg-base: #0A0A0F;
+      --bg-elevated: #111118;
+      --bg-card: #16161D;
+      --bg-hover: #1E1E26;
+      --text-primary: #F4F4F5;
+      --text-secondary: #A1A1AA;
+      --text-muted: #71717A;
+      --accent: #22D3EE;
+      --accent-dim: rgba(34, 211, 238, 0.1);
+      --border-subtle: rgba(255, 255, 255, 0.06);
+      --border-medium: rgba(255, 255, 255, 0.1);
+      --q1: #22D3EE;  /* Techniques - cyan */
+      --q2: #A78BFA;  /* Platforms - purple */
+      --q3: #F59E0B;  /* Tools - amber */
+      --q4: #22C55E;  /* Languages - green */
+    }
+
+    html { font-size: 16px; }
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg-base);
+      color: var(--text-primary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      padding: 2rem;
+    }
+
+    .mockup-label {
+      position: fixed;
+      top: 1rem;
+      left: 1rem;
+      background: var(--accent);
+      color: var(--bg-base);
+      padding: 0.4rem 0.8rem;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      z-index: 100;
+    }
+
+    .section-header {
+      max-width: 900px;
+      margin: 2rem auto 1.5rem auto;
+    }
+
+    .section-number {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--accent);
+      font-family: 'JetBrains Mono', monospace;
+      margin-bottom: 0.3rem;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      letter-spacing: -0.03em;
+      margin-bottom: 0.4rem;
+    }
+
+    .section-subtitle {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* ============ Ring Legend ============ */
+    .ring-legend {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      max-width: 900px;
+      margin: 0 auto 2rem auto;
+      padding: 0.75rem 1.25rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      flex-wrap: wrap;
+    }
+
+    .ring-legend-label {
+      font-size: 0.65rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .ring-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.7rem;
+      color: var(--text-secondary);
+    }
+
+    .ring-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .ring-dot.adopt { background: var(--accent); box-shadow: 0 0 6px var(--accent); }
+    .ring-dot.trial { background: rgba(34, 211, 238, 0.5); }
+    .ring-dot.assess { background: rgba(34, 211, 238, 0.25); }
+    .ring-dot.hold { background: var(--bg-hover); border: 1px solid var(--border-medium); }
+
+    /* ============ Radar Grid — 4 quadrants ============ */
+    .radar-container {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .quadrant {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 1.25rem 1.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .quadrant:hover {
+      border-color: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .quadrant-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .quadrant-icon {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .quadrant-name {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .q-techniques .quadrant-icon { background: var(--q1); }
+    .q-techniques .quadrant-name { color: var(--q1); }
+    .q-platforms .quadrant-icon { background: var(--q2); }
+    .q-platforms .quadrant-name { color: var(--q2); }
+    .q-tools .quadrant-icon { background: var(--q3); }
+    .q-tools .quadrant-name { color: var(--q3); }
+    .q-languages .quadrant-icon { background: var(--q4); }
+    .q-languages .quadrant-name { color: var(--q4); }
+
+    /* Ring sections within quadrant */
+    .ring-section {
+      margin-bottom: 0.75rem;
+    }
+
+    .ring-section:last-child {
+      margin-bottom: 0;
+    }
+
+    .ring-name {
+      font-size: 0.6rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.35rem;
+    }
+
+    .ring-items {
+      display: flex;
+      gap: 0.3rem;
+      flex-wrap: wrap;
+    }
+
+    .radar-blip {
+      font-size: 0.68rem;
+      color: var(--text-secondary);
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      padding: 0.2rem 0.55rem;
+      border-radius: 4px;
+      transition: all 0.2s;
+      cursor: default;
+      position: relative;
+    }
+
+    .radar-blip:hover {
+      border-color: var(--border-medium);
+      color: var(--text-primary);
+      background: var(--bg-hover);
+    }
+
+    /* Blip ring indicator */
+    .radar-blip::before {
+      content: '';
+      display: inline-block;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      margin-right: 0.3rem;
+      vertical-align: middle;
+    }
+
+    .radar-blip.adopt::before { background: var(--accent); box-shadow: 0 0 4px var(--accent); }
+    .radar-blip.trial::before { background: rgba(34, 211, 238, 0.5); }
+    .radar-blip.assess::before { background: rgba(34, 211, 238, 0.25); }
+    .radar-blip.hold::before { background: var(--text-muted); opacity: 0.4; }
+
+    /* New indicator */
+    .radar-blip .new-badge {
+      font-size: 0.45rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-left: 0.2rem;
+    }
+
+    /* ============ Tooltip on hover ============ */
+    .radar-blip[data-note]:hover::after {
+      content: attr(data-note);
+      position: absolute;
+      bottom: calc(100% + 6px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-medium);
+      color: var(--text-secondary);
+      font-size: 0.62rem;
+      padding: 0.3rem 0.5rem;
+      border-radius: 4px;
+      white-space: nowrap;
+      z-index: 10;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    @media (max-width: 640px) {
+      .radar-container { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="mockup-label">Section — Technology Radar</div>
+
+  <div class="section-header">
+    <div class="section-number">05.</div>
+    <h2 class="section-title">Technology Radar</h2>
+    <p class="section-subtitle">My opinionated view on technologies — what I'd adopt today, what I'm evaluating, and what I'd move away from. Inspired by ThoughtWorks.</p>
+  </div>
+
+  <div class="ring-legend">
+    <span class="ring-legend-label">Rings:</span>
+    <div class="ring-item"><div class="ring-dot adopt"></div> Adopt — use in production</div>
+    <div class="ring-item"><div class="ring-dot trial"></div> Trial — worth pursuing</div>
+    <div class="ring-item"><div class="ring-dot assess"></div> Assess — exploring</div>
+    <div class="ring-item"><div class="ring-dot hold"></div> Hold — caution / phase out</div>
+  </div>
+
+  <div class="radar-container">
+
+    <!-- Q1: Techniques -->
+    <div class="quadrant q-techniques">
+      <div class="quadrant-header">
+        <div class="quadrant-icon"></div>
+        <div class="quadrant-name">Techniques</div>
+      </div>
+
+      <div class="ring-section">
+        <div class="ring-name">Adopt</div>
+        <div class="ring-items">
+          <span class="radar-blip adopt" data-note="Core to RTP platform design">Event-Driven Architecture</span>
+          <span class="radar-blip adopt" data-note="Separate read/write for scale">CQRS</span>
+          <span class="radar-blip adopt" data-note="Domain-first system boundaries">Domain-Driven Design</span>
+          <span class="radar-blip adopt">CI/CD Pipelines</span>
+          <span class="radar-blip adopt">API-First Design</span>
+        </div>
+      </div>
+
+      <div class="ring-section">
+        <div class="ring-name">Trial</div>
+        <div class="ring-items">
+          <span class="radar-blip trial">Event Sourcing</span>
+          <span class="radar-blip trial" data-note="Using in PRIMMO project">AI-Augmented Dev <span class="new-badge">new</span></span>
+          <span class="radar-blip trial">Feature Flags</span>
+        </div>
+      </div>
+
+      <div class="ring-section">
+        <div class="ring-name">Assess</div>
+        <div class="ring-items">
+          <span class="radar-blip assess">Cell-Based Architecture <span class="new-badge">new</span></span>
+          <span class="radar-blip assess">Platform Engineering</span>
+        </div>
+      </div>
+
+      <div class="ring-section">
+        <div class="ring-name">Hold</div>
+        <div class="ring-items">
+          <span class="radar-blip hold">Monolithic Deployments</span>
+          <span class="radar-blip hold">Waterfall PM</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q2: Platforms -->
+    <div class="quadrant q-platforms">
+      <div class="quadrant-header">
+        <div class="quadrant-icon"></div>
+        <div class="quadrant-name">Platforms</div>
+      </div>
+
+      <div class="ring-section">
+        <div class="ring-name">Adopt</div>
+        <div class="ring-items">
+          <span class="radar-blip adopt">AWS</span>
+          <span class="radar-blip adopt" data-note="Current project stack">Kafka</span>
+          <span class="radar-blip adopt">Oracle DB</span>
+          <span class="radar-blip adopt" data-note="Side projects backend">Supabase <span class="new-badge">new</span></span>
+        </div>
+      </div>
+
+      <div class="ring-section">
+        <div class="ring-name">Trial</div>
+        <div class="ring-items">
+          <span class="radar-blip trial" data-note="Exploring for side projects">Vercel / Next.js <span class="new-badge">new</span></span>
+          <span class="radar-blip trial">Azure</span>
+          <span class="radar-blip trial">Redis</span>
+        </div>
+      </div>
+
+      <div class="ring-section">
+        <div class="ring-name">Assess</div>
+        <div class="ring-items">
+          <span class="radar-blip assess">GCP</span>
+          <span class="radar-blip assess">Kubernetes</span>
+          <span class="radar-blip assess">Temporal (workflow)</span>
+        </div>
+      </div>
+
+      <div class="ring-section">
+        <div class="ring-name">Hold</div>
+        <div class="ring-items">
+          <span class="radar-blip hold">On-prem only</span>
+          <span class="radar-blip hold">WebSphere</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q3: Tools -->
+    <div class="quadrant q-tools">
+      <div class="quadrant-header">
+        <div class="quadrant-icon"></div>
+        <div class="quadrant-name">Tools</div>
+      </div>
+
+      <div class="ring-section">
+        <div class="ring-name">Adopt</div>
+        <div class="ring-items">
+          <span class="radar-blip adopt">Git / GitHub</span>
+          <span class="radar-blip adopt">Jira</span>
+          <span class="radar-blip adopt">VS Code</span>
+          <span class="radar-blip adopt" data-note="AI-powered dev workflow">Claude Code <span class="new-badge">new</span></span>
+        </div>
+      </div>
+
+      <div class="ring-section">
+        <div class="ring-name">Trial</div>
+        <div class="ring-items">
+          <span class="radar-blip trial" data-note="Data visualization">Tableau</span>
+          <span class="radar-blip trial">Figma</span>
+          <span class="radar-blip trial">Postman</span>
+        </div>
+      </div>
+
+      <div class="ring-section">
+        <div class="ring-name">Assess</div>
+        <div class="ring-items">
+          <span class="radar-blip assess">Terraform <span class="new-badge">new</span></span>
+          <span class="radar-blip assess">Grafana</span>
+        </div>
+      </div>
+
+      <div class="ring-section">
+        <div class="ring-name">Hold</div>
+        <div class="ring-items">
+          <span class="radar-blip hold">Eclipse IDE</span>
+          <span class="radar-blip hold">SVN</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q4: Languages & Frameworks -->
+    <div class="quadrant q-languages">
+      <div class="quadrant-header">
+        <div class="quadrant-icon"></div>
+        <div class="quadrant-name">Languages & Frameworks</div>
+      </div>
+
+      <div class="ring-section">
+        <div class="ring-name">Adopt</div>
+        <div class="ring-items">
+          <span class="radar-blip adopt">Java / Spring Boot</span>
+          <span class="radar-blip adopt">Python</span>
+          <span class="radar-blip adopt">PL/SQL</span>
+          <span class="radar-blip adopt" data-note="Portfolio + side projects">TypeScript <span class="new-badge">new</span></span>
+        </div>
+      </div>
+
+      <div class="ring-section">
+        <div class="ring-name">Trial</div>
+        <div class="ring-items">
+          <span class="radar-blip trial" data-note="REPPIT built with this">Flutter / Dart</span>
+          <span class="radar-blip trial" data-note="Next.js side projects">React / Next.js <span class="new-badge">new</span></span>
+          <span class="radar-blip trial">Tailwind CSS</span>
+        </div>
+      </div>
+
+      <div class="ring-section">
+        <div class="ring-name">Assess</div>
+        <div class="ring-items">
+          <span class="radar-blip assess">Rust <span class="new-badge">new</span></span>
+          <span class="radar-blip assess">Go</span>
+        </div>
+      </div>
+
+      <div class="ring-section">
+        <div class="ring-name">Hold</div>
+        <div class="ring-items">
+          <span class="radar-blip hold">jQuery</span>
+          <span class="radar-blip hold">JSP / Servlets</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
