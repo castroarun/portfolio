@@ -137,7 +137,7 @@ class ProjectsLoader {
 const projectsLoader = new ProjectsLoader();
 
 // Auto-initialize when DOM is ready
-document.addEventListener('DOMContentLoaded', async () => {
+async function initProjects() {
   await projectsLoader.load();
 
   // Auto-render if containers exist
@@ -150,4 +150,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (document.getElementById('portfolio-featured-grid')) {
     projectsLoader.renderPortfolioFeatured('portfolio-featured-grid');
   }
-});
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initProjects);
+} else {
+  initProjects();
+}
