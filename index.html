@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Castronix | Portfolio & Products</title>
+  <title>Portfolio & Products | Castronix</title>
   <meta name="description" content="Premium digital products built with clarity, performance, and obsessive attention to detail.">
 
   <!-- Open Graph / LinkedIn -->
@@ -4011,7 +4011,7 @@
               </div>
             </div>
             <div class="project-content">
-              <p class="project-overline">Mobile App</p>
+              <p class="project-overline">Web App</p>
               <h3 class="project-title"><a href="#">AnyCalc</a> <span class="project-launch-hint">(Live)</span></h3>
               <div class="project-description">
                 <p>19 interlinked financial calculators in one app — EMI, tip splits, compound interest, currency conversion, and more. Plan mode lets you chain calculations together for smarter decision-making.</p>
@@ -4038,7 +4038,7 @@
               </div>
             </div>
             <div class="project-content">
-              <p class="project-overline">Web App</p>
+              <p class="project-overline">Desktop App</p>
               <h3 class="project-title"><a href="#">Klarity</a> <span class="project-launch-hint">(Live)</span></h3>
               <div class="project-description">
                 <p>Lightweight desktop task board with a 15-stage pipeline, ETag-based distributed sync, and multi-agent orchestration for AI-assisted developers. Built to bring clarity to complex workflows.</p>
@@ -4819,6 +4819,17 @@
   </div>
 
   <script>
+    // Screenshot mode: ?screenshot=1 removes dimming/grayscale for clean screenshots
+    if (new URLSearchParams(window.location.search).has('screenshot')) {
+      const style = document.createElement('style');
+      style.textContent = `
+        .project-image-wrapper::before { opacity: 0 !important; }
+        .project-image-wrapper img { filter: none !important; }
+        .preview-panel { opacity: 0 !important; }
+      `;
+      document.head.appendChild(style);
+    }
+
     // Page Loader
     window.addEventListener('load', () => {
       setTimeout(() => {
