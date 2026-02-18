@@ -6816,10 +6816,9 @@
 
   <!-- Top Navigation -->
   <nav class="top-nav">
-    <!-- Portfolio link hidden until portfolio launch -->
-    <div class="nav-portfolio" style="visibility: hidden;">
+    <a href="../" class="nav-portfolio">
       Portfolio
-    </div>
+    </a>
     <div class="nav-badge">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="clock-lifeline">
         <circle cx="12" cy="12" r="10"/>
@@ -7071,8 +7070,8 @@
               Timeline
             </button>
           </div>
-          <!-- Life Toggle Switch (only visible in timeline view) -->
-          <label class="life-toggle" id="life-toggle">
+          <!-- Life Toggle Switch (hidden for now) -->
+          <label class="life-toggle" id="life-toggle" style="display: none !important;">
             <input type="checkbox" id="life-toggle-input" onchange="toggleLifeEvents(this.checked)">
             <span class="toggle-switch"></span>
             <span class="toggle-label">+ Life</span>
@@ -7927,22 +7926,22 @@
         <div class="project-legend" id="project-legend">
           <div class="legend-item active" data-filter="all" onclick="filterProjects('all')">
             <span>All</span>
-            <span class="legend-count">(8)</span>
-          </div>
-          <div class="legend-item" data-filter="building" onclick="filterProjects('building')">
-            <span class="legend-dot building"></span>
-            <span>Building</span>
-            <span class="legend-count">(3)</span>
+            <span class="legend-count">(12)</span>
           </div>
           <div class="legend-item" data-filter="live" onclick="filterProjects('live')">
             <span class="legend-dot live"></span>
             <span>Live</span>
-            <span class="legend-count">(4)</span>
+            <span class="legend-count">(8)</span>
           </div>
-          <div class="legend-item" data-filter="planning" onclick="filterProjects('planning')">
-            <span class="legend-dot planning"></span>
-            <span>Planning</span>
-            <span class="legend-count">(1)</span>
+          <div class="legend-item" data-filter="building" onclick="filterProjects('building')">
+            <span class="legend-dot building"></span>
+            <span>Crafting</span>
+            <span class="legend-count">(2)</span>
+          </div>
+          <div class="legend-item" data-filter="ideating" onclick="filterProjects('ideating')">
+            <span class="legend-dot ideating"></span>
+            <span>Concept</span>
+            <span class="legend-count">(2)</span>
           </div>
         </div>
         <span class="flip-instruction-inline">Click any card to flip</span>
@@ -8037,9 +8036,10 @@
               </div>
               <p class="card-description">Track workouts with <strong>real-time timer</strong>, progressive overload tracking, and exercise history analytics.</p>
               <div class="card-tech">
-                <span class="tech-chip">React Native</span>
+                <span class="tech-chip">Next.js</span>
                 <span class="tech-chip">TypeScript</span>
-                <span class="tech-chip">Expo</span>
+                <span class="tech-chip">Supabase</span>
+                <span class="tech-chip">Capacitor</span>
               </div>
               <div class="flip-hint">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
@@ -8099,15 +8099,15 @@
                   </svg>
                 </div>
                 <div class="card-title-wrapper">
-                  <h3 class="card-title">NoteApp <span class="card-badge built">Built</span></h3>
+                  <h3 class="card-title">NoteApp <span class="card-badge live">Live</span></h3>
                   <p class="card-tagline">Privacy-first note-taking app</p>
                 </div>
               </div>
               <p class="card-description"><strong>Offline-first</strong> with cloud sync, voice-to-text input, and 200+ automated test cases.</p>
               <div class="card-tech">
-                <span class="tech-chip">React Native</span>
+                <span class="tech-chip">Next.js</span>
                 <span class="tech-chip">TypeScript</span>
-                <span class="tech-chip">Supabase</span>
+                <span class="tech-chip">TipTap</span>
               </div>
               <div class="flip-hint">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
@@ -8121,7 +8121,7 @@
                 </div>
                 <div class="back-header" style="border-bottom: none; padding-bottom: 0; margin-bottom: 0.5rem;">
                   <h4 class="back-title" style="font-size: 0.9rem;">NoteApp</h4>
-                  <span class="card-badge built" style="font-size: 0.6rem;">Built</span>
+                  <span class="card-badge live" style="font-size: 0.6rem;">Live</span>
                 </div>
                 <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 1rem;">Offline-first note-taking with cloud sync, voice input, and 200+ test cases.</p>
                 <div class="workflow-progress">
@@ -8167,9 +8167,8 @@
                   <p class="card-tagline">AI-assisted original music</p>
                 </div>
               </div>
-              <p class="card-description"><strong>AI-assisted original music project</strong> launching shortly on Spotify & Apple Music.</p>
+              <p class="card-description"><strong>AI-assisted original music project</strong> live on Spotify & Apple Music.</p>
               <div class="card-tech">
-                <span class="tech-chip">Udio</span>
                 <span class="tech-chip">Music Production</span>
                 <span class="tech-chip">AI/ML</span>
               </div>
@@ -8187,7 +8186,7 @@
                   <h4 class="back-title" style="font-size: 0.9rem;">Cinder</h4>
                   <span class="card-badge live" style="font-size: 0.6rem; background: rgba(30, 215, 96, 0.15); color: #22c55e;">Spotify</span>
                 </div>
-                <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 1rem;">AI-assisted original music project launching on Spotify & Apple Music.</p>
+                <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 1rem;">AI-assisted original music project live on Spotify & Apple Music.</p>
                 <div class="workflow-progress">
                   <div class="workflow-progress-header">
                     <span class="workflow-progress-label">Concept to Live</span>
@@ -8220,9 +8219,8 @@
                   <p class="card-tagline">AI-assisted original music</p>
                 </div>
               </div>
-              <p class="card-description"><strong>AI-assisted original music project</strong> launching shortly on Spotify & Apple Music.</p>
+              <p class="card-description"><strong>AI-assisted original music project</strong> live on Spotify & Apple Music.</p>
               <div class="card-tech">
-                <span class="tech-chip">Udio</span>
                 <span class="tech-chip">Music Production</span>
                 <span class="tech-chip">AI/ML</span>
               </div>
@@ -8240,7 +8238,7 @@
                   <h4 class="back-title" style="font-size: 0.9rem;">The Little Red Dot</h4>
                   <span class="card-badge live" style="font-size: 0.6rem; background: rgba(30, 215, 96, 0.15); color: #22c55e;">Spotify</span>
                 </div>
-                <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 1rem;">AI-assisted original music project launching on Spotify & Apple Music.</p>
+                <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 1rem;">AI-assisted original music project live on Spotify & Apple Music.</p>
                 <div class="workflow-progress">
                   <div class="workflow-progress-header">
                     <span class="workflow-progress-label">Concept to Live</span>
@@ -8270,10 +8268,11 @@
               </div>
               <p class="card-description">Task board with <strong>15-stage pipeline</strong>, ETag-based distributed sync, and multi-agent orchestration.</p>
               <div class="card-tech">
-                <span class="tech-chip">Next.js</span>
+                <span class="tech-chip">Vite</span>
+                <span class="tech-chip">React</span>
                 <span class="tech-chip">TypeScript</span>
                 <span class="tech-chip">Zustand</span>
-                <span class="tech-chip">Supabase</span>
+                <span class="tech-chip">Tauri</span>
               </div>
               <div class="flip-hint">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
@@ -8421,10 +8420,10 @@
                 <div class="workflow-progress">
                   <div class="workflow-progress-header">
                     <span class="workflow-progress-label">9-Step Workflow</span>
-                    <span class="workflow-progress-count">8/9 Complete</span>
+                    <span class="workflow-progress-count">9/9 Complete</span>
                   </div>
                   <div class="progress-bar-track">
-                    <div class="progress-bar-fill complete" style="width: 88%;"></div>
+                    <div class="progress-bar-fill complete" style="width: 100%;"></div>
                   </div>
                   <div class="workflow-stages">
                     <span class="stage-dot completed"></span>
@@ -8435,7 +8434,7 @@
                     <span class="stage-dot completed"></span>
                     <span class="stage-dot completed"></span>
                     <span class="stage-dot completed"></span>
-                    <span class="stage-dot in-progress"></span>
+                    <span class="stage-dot completed"></span>
                   </div>
                 </div>
               </div>
@@ -8467,9 +8466,10 @@
               </div>
               <p class="card-description"><strong>19 interlinked calculators</strong> with Plan mode — chain EMI, splits, compound interest, and currency conversions together.</p>
               <div class="card-tech">
-                <span class="tech-chip">Flutter</span>
-                <span class="tech-chip">Dart</span>
-                <span class="tech-chip">Material Design</span>
+                <span class="tech-chip">Next.js</span>
+                <span class="tech-chip">TypeScript</span>
+                <span class="tech-chip">Supabase</span>
+                <span class="tech-chip">Zustand</span>
               </div>
               <div class="flip-hint">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
@@ -8523,7 +8523,7 @@
                   </svg>
                 </div>
                 <div class="card-title-wrapper">
-                  <h3 class="card-title">Portfolio Optimization <span class="card-badge ideating">Concept</span></h3>
+                  <h3 class="card-title">Portfolio Optimization <span class="card-badge building">Crafting</span></h3>
                   <p class="card-tagline">Automated portfolio management</p>
                 </div>
               </div>
@@ -8542,7 +8542,7 @@
               <div class="deliverable-container">
                 <div class="back-header" style="border-bottom: none; padding-bottom: 0; margin-bottom: 0.5rem;">
                   <h4 class="back-title" style="font-size: 0.9rem;">Portfolio Optimization</h4>
-                  <span class="card-badge ideating" style="font-size: 0.6rem;">Concept</span>
+                  <span class="card-badge building" style="font-size: 0.6rem;">Crafting</span>
                 </div>
                 <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 1rem;">Automated portfolio construction and maintenance to outperform market indexes.</p>
                 <div class="workflow-progress">
@@ -8569,6 +8569,126 @@
             </div>
           </div>
         </div>
+
+        <!-- Health Reports Tracker Card -->
+        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <div class="card-header">
+                <div class="card-icon" style="background: rgba(239, 68, 68, 0.15);">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2">
+                    <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                  </svg>
+                </div>
+                <div class="card-title-wrapper">
+                  <h3 class="card-title">Health Reports Tracker <span class="card-badge ideating">Concept</span></h3>
+                  <p class="card-tagline">Medical reports organized over time</p>
+                </div>
+              </div>
+              <p class="card-description"><strong>OCR-powered lab report scanning</strong> with historical trend graphs, smart alerts, and doctor-ready summaries for Indian lab formats.</p>
+              <div class="card-tech">
+                <span class="tech-chip">Next.js</span>
+                <span class="tech-chip">TypeScript</span>
+                <span class="tech-chip">Claude AI</span>
+                <span class="tech-chip">Supabase</span>
+              </div>
+              <div class="flip-hint">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+                Click to flip
+              </div>
+            </div>
+            <div class="flip-card-back">
+              <div class="deliverable-container">
+                <div class="back-header" style="border-bottom: none; padding-bottom: 0; margin-bottom: 0.5rem;">
+                  <h4 class="back-title" style="font-size: 0.9rem;">Health Reports Tracker</h4>
+                  <span class="card-badge ideating" style="font-size: 0.6rem;">Concept</span>
+                </div>
+                <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 1rem;">Scan lab reports with OCR, track health parameters across years, and share doctor-ready summaries.</p>
+                <div class="workflow-progress">
+                  <div class="workflow-progress-header">
+                    <span class="workflow-progress-label">9-Step Workflow</span>
+                    <span class="workflow-progress-count">0/9 Complete</span>
+                  </div>
+                  <div class="progress-bar-track">
+                    <div class="progress-bar-fill building" style="width: 0%;"></div>
+                  </div>
+                  <div class="workflow-stages">
+                    <span class="stage-dot in-progress"></span>
+                    <span class="stage-dot"></span>
+                    <span class="stage-dot"></span>
+                    <span class="stage-dot"></span>
+                    <span class="stage-dot"></span>
+                    <span class="stage-dot"></span>
+                    <span class="stage-dot"></span>
+                    <span class="stage-dot"></span>
+                    <span class="stage-dot"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Payment House Card -->
+        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <div class="card-header">
+                <div class="card-icon" style="background: rgba(99, 102, 241, 0.15);">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2">
+                    <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
+                    <line x1="1" y1="10" x2="23" y2="10"/>
+                  </svg>
+                </div>
+                <div class="card-title-wrapper">
+                  <h3 class="card-title">Payment House <span class="card-badge ideating">Concept</span></h3>
+                  <p class="card-tagline">Enterprise payment processing</p>
+                </div>
+              </div>
+              <p class="card-description"><strong>Kafka-driven microservices</strong> for core banking payments across 4 regions with event sourcing, compliance screening, and clearing house adapters.</p>
+              <div class="card-tech">
+                <span class="tech-chip">Java 21</span>
+                <span class="tech-chip">Spring Boot</span>
+                <span class="tech-chip">Kafka</span>
+                <span class="tech-chip">PostgreSQL</span>
+              </div>
+              <div class="flip-hint">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+                Click to flip
+              </div>
+            </div>
+            <div class="flip-card-back">
+              <div class="deliverable-container">
+                <div class="back-header" style="border-bottom: none; padding-bottom: 0; margin-bottom: 0.5rem;">
+                  <h4 class="back-title" style="font-size: 0.9rem;">Payment House</h4>
+                  <span class="card-badge ideating" style="font-size: 0.6rem;">Concept</span>
+                </div>
+                <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 1rem;">Kafka-driven, event-sourced microservices for core banking payments across Singapore, Hong Kong, UK, and India.</p>
+                <div class="workflow-progress">
+                  <div class="workflow-progress-header">
+                    <span class="workflow-progress-label">9-Step Workflow</span>
+                    <span class="workflow-progress-count">1/9 Complete</span>
+                  </div>
+                  <div class="progress-bar-track">
+                    <div class="progress-bar-fill building" style="width: 11%;"></div>
+                  </div>
+                  <div class="workflow-stages">
+                    <span class="stage-dot completed"></span>
+                    <span class="stage-dot in-progress"></span>
+                    <span class="stage-dot"></span>
+                    <span class="stage-dot"></span>
+                    <span class="stage-dot"></span>
+                    <span class="stage-dot"></span>
+                    <span class="stage-dot"></span>
+                    <span class="stage-dot"></span>
+                    <span class="stage-dot"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -8577,7 +8697,7 @@
     <!-- Projects now shown only as flip cards above + Architecture in Action deep-dives below -->
 
     <!-- ============ SECTION 7: Architecture in Action ============ -->
-    <section class="section animate-fade-up delay-5">
+    <section id="architecture" class="section animate-fade-up delay-5">
       <div class="section-header">
         <span class="section-number">07.</span>
         <h2 class="section-title">Architecture in Action</h2>
@@ -8610,9 +8730,10 @@
                 <span class="aia-badge">Data Isolation</span>
               </div>
               <div class="aia-tech">
-                <span class="aia-tech-tag">Flutter</span>
-                <span class="aia-tech-tag">Dart</span>
-                <span class="aia-tech-tag">SQLite</span>
+                <span class="aia-tech-tag">Next.js</span>
+                <span class="aia-tech-tag">TypeScript</span>
+                <span class="aia-tech-tag">Supabase</span>
+                <span class="aia-tech-tag">Capacitor</span>
               </div>
             </div>
           </div>
@@ -8623,7 +8744,7 @@
                 <span class="arch-arrow">&rarr;</span>
                 <div class="arch-node highlight">State Machine<br>(Beginner&rarr;Elite)</div>
                 <span class="arch-arrow">&rarr;</span>
-                <div class="arch-node">SQLite<br>(Local-First)</div>
+                <div class="arch-node">Supabase<br>(Cloud + Local)</div>
                 <span class="arch-arrow">&rarr;</span>
                 <div class="arch-node">Multi-Profile<br>Isolation</div>
               </div>
@@ -8633,15 +8754,15 @@
                   Architecture Insight
                 </div>
                 <div class="arch-connection-text">
-                  <strong>State machine pattern</strong> drives progression through deterministic levels (Beginner &rarr; Intermediate &rarr; Advanced &rarr; Elite) &mdash; the same pattern that governs credit tier transitions and KYC status workflows in banking systems. <strong>Local-first SQLite</strong> ensures the app works without connectivity, mirroring how branch banking systems must operate during network outages. <strong>Multi-profile data isolation</strong> enforces strict partitioning between users &mdash; the mobile equivalent of row-level security.
+                  <strong>State machine pattern</strong> drives progression through deterministic levels (Beginner &rarr; Intermediate &rarr; Advanced &rarr; Elite) &mdash; the same pattern that governs credit tier transitions and KYC status workflows in banking systems. <strong>Supabase with local caching</strong> ensures the app works with minimal connectivity, mirroring how branch banking systems must operate during network outages. <strong>Multi-profile data isolation</strong> enforces strict partitioning between users &mdash; the mobile equivalent of row-level security.
                 </div>
               </div>
               <div class="adr-callout">
                 <div class="adr-label">Architecture Decision</div>
-                <div class="adr-text"><strong>Decision:</strong> SQLite over cloud-first storage. <strong>Rationale:</strong> Workout data must be available mid-set regardless of connectivity. Local-first with optional sync mirrors how ATMs process transactions offline and reconcile later &mdash; availability over consistency for the user-facing path.</div>
+                <div class="adr-text"><strong>Decision:</strong> Supabase with local caching via Capacitor. <strong>Rationale:</strong> Workout data must be available mid-set regardless of connectivity. Cloud-first with local fallback mirrors how modern banking apps cache critical data &mdash; availability over consistency for the user-facing path.</div>
               </div>
               <div class="aia-links">
-                <a href="https://github.com/ArunCastro/reppit" class="aia-link" target="_blank">
+                <a href="https://github.com/castroarun/REPPIT" class="aia-link" target="_blank">
                   <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
                   GitHub
                 </a>
@@ -8705,7 +8826,7 @@
                 <div class="adr-text"><strong>Decision:</strong> 4-tier routing over single-model approach. <strong>Rationale:</strong> 80% of user queries are repetitive ("log my bench press"). Routing these through cache/rules instead of GPT-4 reduces cost by ~90% &mdash; the same cost-optimization logic behind tiered transaction processing in payment gateways.</div>
               </div>
               <div class="aia-links">
-                <a href="https://github.com/ArunCastro/PRIMMO" class="aia-link" target="_blank">
+                <a href="https://github.com/castroarun/PRIMMO" class="aia-link" target="_blank">
                   <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
                   GitHub
                 </a>
@@ -8765,7 +8886,7 @@
                 <div class="adr-text"><strong>Decision:</strong> Soft delete with <code>deleted_at</code> timestamp over hard delete. <strong>Rationale:</strong> Regulatory audit patterns require data recovery capability. Banking systems never permanently destroy records &mdash; they mark them inactive. Same principle applied here for user notes.</div>
               </div>
               <div class="aia-links">
-                <a href="https://github.com/ArunCastro/noteApp" class="aia-link" target="_blank">
+                <a href="https://github.com/castroarun/noteApp" class="aia-link" target="_blank">
                   <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
                   GitHub
                 </a>
@@ -8829,7 +8950,7 @@
                 <div class="adr-text"><strong>Decision:</strong> Strategy pattern over if/else branching for trading algorithms. <strong>Rationale:</strong> New strategies (iron condor, butterfly) must be pluggable without modifying the engine &mdash; identical to how banking product engines add new loan products without changing the core pricing system.</div>
               </div>
               <div class="aia-links">
-                <a href="https://github.com/ArunCastro/covered-calls" class="aia-link" target="_blank">
+                <a href="https://github.com/castroarun/covered_calls" class="aia-link" target="_blank">
                   <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
                   GitHub
                 </a>
@@ -8857,10 +8978,11 @@
                 <span class="aia-badge">Multi-Agent</span>
               </div>
               <div class="aia-tech">
-                <span class="aia-tech-tag">Next.js</span>
+                <span class="aia-tech-tag">Vite</span>
+                <span class="aia-tech-tag">React</span>
                 <span class="aia-tech-tag">TypeScript</span>
                 <span class="aia-tech-tag">Zustand</span>
-                <span class="aia-tech-tag">Supabase</span>
+                <span class="aia-tech-tag">Tauri</span>
               </div>
             </div>
           </div>
@@ -8902,7 +9024,7 @@
             <div class="aia-header-content">
               <div class="aia-top-row">
                 <span class="aia-name">Orbit</span>
-                <span class="aia-status building">Building</span>
+                <span class="aia-status shipped">Live</span>
               </div>
               <p class="aia-tagline">Zero-server mobile companion using GitHub as backend with SHA-based conflict resolution and cross-platform sync.</p>
               <div class="aia-patterns">
@@ -8941,7 +9063,7 @@
                 <div class="adr-text"><strong>Decision:</strong> GitHub as backend over dedicated server infrastructure. <strong>Rationale:</strong> Zero infrastructure cost and built-in versioning. SHA-based conflict detection ensures data integrity across devices &mdash; the same hash-based reconciliation banks use for cross-channel transaction deduplication.</div>
               </div>
               <div class="aia-links">
-                <a href="https://github.com/ArunCastro/orbit" class="aia-link" target="_blank">
+                <a href="https://github.com/castroarun/taskBoard" class="aia-link" target="_blank">
                   <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
                   GitHub
                 </a>
@@ -8968,9 +9090,10 @@
                 <span class="aia-badge">Stateless Computation</span>
               </div>
               <div class="aia-tech">
-                <span class="aia-tech-tag">Flutter</span>
-                <span class="aia-tech-tag">Dart</span>
-                <span class="aia-tech-tag">Material Design</span>
+                <span class="aia-tech-tag">Next.js</span>
+                <span class="aia-tech-tag">TypeScript</span>
+                <span class="aia-tech-tag">Supabase</span>
+                <span class="aia-tech-tag">Zustand</span>
               </div>
             </div>
           </div>
@@ -8999,7 +9122,7 @@
                 <div class="adr-text"><strong>Decision:</strong> Pure functions with zero shared state. <strong>Rationale:</strong> Financial calculations must be deterministic and auditable. Every EMI, tip split, and conversion in AnyCalc is a pure function &mdash; same inputs, same outputs, always. This is non-negotiable in banking computation engines.</div>
               </div>
               <div class="aia-links">
-                <a href="https://github.com/ArunCastro/anycalc" class="aia-link" target="_blank">
+                <a href="https://github.com/castroarun/caclulate_anything" class="aia-link" target="_blank">
                   <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
                   GitHub
                 </a>
@@ -9231,8 +9354,8 @@
                 <p class="detail-desc">AnyCalc packs 19 interlinked financial calculators into a single clean interface &mdash; from EMI and tip splits to compound interest and currency conversion. Every calculator feeds into others, so a mortgage estimate can flow into a stamp duty calculation without re-entering numbers. Built to be the one calculator app that actually replaces all the others.</p>
                 <div class="detail-footer">
                   <div class="detail-tags">
-                    <span class="detail-tag">#Flutter</span>
-                    <span class="detail-tag">#Dart</span>
+                    <span class="detail-tag">#NextJS</span>
+                    <span class="detail-tag">#TypeScript</span>
                     <span class="detail-tag">#FinancialCalculators</span>
                   </div>
                   <a href="https://www.linkedin.com/posts/aruncastromin_meet-%F0%9D%97%94%F0%9D%97%BB%F0%9D%98%86%F0%9D%97%96%F0%9D%97%AE%F0%9D%97%B9%F0%9D%97%B0-the-calculator-you-activity-7418310501895688192-qDsV" target="_blank" class="detail-read">Read on LinkedIn <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4l6 6-6 6"/></svg></a>
@@ -9645,8 +9768,6 @@
           </svg>
           Traditional Resume
         </a>
-        <!-- Portfolio link hidden until portfolio launch -->
-        <!--
         <a href="../" class="footer-link">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
@@ -9654,7 +9775,6 @@
           </svg>
           View Full Portfolio
         </a>
-        -->
       </div>
       <!-- Creative Back to Top -->
       <a href="#" class="back-to-top-creative" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">
@@ -9667,7 +9787,7 @@
         </span>
         <span class="back-to-top-line"></span>
       </a>
-      <p class="footer-text">Built with purpose. Last updated January 2026.</p>
+      <p class="footer-text">Built with purpose. Last updated February 2026.</p>
       <div class="footer-digital">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
           <circle cx="12" cy="12" r="10"/>
@@ -10833,33 +10953,34 @@ He has worked across multiple regions:
 Led through example - took on QA Lead role additionally when needed.`,
 
       // ===== PROJECTS =====
-      'react': `Arun has built several React-based projects:
+      'react': `Arun has built several projects across React and Next.js:
 
-<strong>NoteApp</strong> - React Native note-taking app with offline sync, voice-to-text, and 200+ test cases
-
-<strong>REPPIT</strong> - React Native fitness tracker with workout timer and progressive overload tracking
-
+<strong>Klarity</strong> - Vite/React/TypeScript developer task board with 15-stage pipeline and distributed sync
+<strong>NoteApp</strong> - Next.js/TypeScript rich text note-taking app with TipTap editor and 200+ test cases
 <strong>PRIMMO</strong> - Next.js AI-powered personal trainer using voice AI for curated guidance
+<strong>REPPIT</strong> - Next.js/TypeScript fitness tracker with Capacitor for mobile deployment
+<strong>AnyCalc</strong> - Next.js/TypeScript calculator app with 19 interlinked financial calculators
+<strong>Orbit</strong> - React Native mobile companion for Klarity with zero-server architecture
 
 All projects follow his 9-step development workflow and are AI-assisted in development.`,
 
-      'noteapp': `<strong>NoteApp</strong> is a privacy-first note-taking application built with:
+      'noteapp': `<strong>NoteApp</strong> is a rich text note-taking application built with:
 
-<strong>Tech Stack:</strong> React Native, TypeScript, Supabase
+<strong>Tech Stack:</strong> Next.js, TypeScript, TipTap
 
 <strong>Key Features:</strong>
-- Offline-first architecture with cloud sync
-- Voice-to-text input
+- Rich text editing with templates and auto-save
+- Dark/light theme toggle
 - 200+ automated test cases
-- E2E encryption for privacy
+- Deployed live at noteapp-castronix.vercel.app
 
-It demonstrates Arun's expertise in mobile development, offline-first patterns, and comprehensive testing.`,
+It demonstrates Arun's expertise in full-stack web development, rich text editing, and comprehensive testing.`,
 
       'reppit': `<strong>REPPIT</strong> is a fitness strength tracking app - built by someone who actually trains:
 
 <strong>Why Built:</strong> Arun has been strength training for 1.5 years and coaches 3-4 people. He wanted to share practitioner-level knowledge through technology.
 
-<strong>Tech Stack:</strong> React Native, TypeScript
+<strong>Tech Stack:</strong> Next.js, TypeScript, Supabase, Capacitor
 
 <strong>Key Features:</strong>
 • Workout timer with rest intervals
@@ -11140,7 +11261,7 @@ Arun is pursuing structured, AI-assisted learning through personal projects:
 
 • Building full-stack applications with <strong>Claude</strong> as a coding partner
 • Learning at <strong>10x speed</strong> through interactive pair programming
-• Projects: <strong>REPPIT</strong> (Flutter), <strong>NoteApp</strong> (Next.js), <strong>PRIMMO</strong> (AI fitness coach), and a few more under conception
+• Projects: <strong>REPPIT</strong> (Next.js + Capacitor), <strong>NoteApp</strong> (Next.js), <strong>PRIMMO</strong> (AI fitness coach), and a few more under conception
 
 <em>"AI doesn't replace learning - it accelerates it. You still need to understand what you're building."</em>
 
@@ -11177,7 +11298,7 @@ I took a creative break to explore passions beyond technology:
 
 <strong>Learning with AI Assistance:</strong>
 • <strong>Frontend:</strong> React, Next.js 14+ (App Router), Tailwind CSS, TypeScript
-• <strong>Mobile:</strong> Flutter (cross-platform iOS/Android)
+• <strong>Mobile:</strong> Capacitor (web-to-native), React Native
 • <strong>Backend:</strong> Node.js, FastAPI
 • <strong>Database:</strong> PostgreSQL (Supabase), Oracle, SQL Server
 • <strong>Tools:</strong> Git, VS Code, Claude Code
@@ -11190,7 +11311,7 @@ I'm on a continuous learning curve, leveraging AI-assisted development to rapidl
 • <strong>4 years</strong> working in fully Agile environments
 • CSPO (Certified Scrum Product Owner) certified
 • Daily standups, sprint planning, retrospectives
-• Jira for project tracking and sprint management`,
+• Jira for enterprise project tracking; Klarity (self-built 15-stage task board) for personal projects`,
 
       // ===== DATABASES =====
       'database': `<strong>Database Experience:</strong>
@@ -11207,14 +11328,16 @@ I've worked extensively with CASA, payments, and core banking data models.`,
       // ===== MOBILE DEVELOPMENT =====
       'mobile': `<strong>Mobile Development:</strong>
 
-<strong>Framework:</strong> Flutter (Dart) for cross-platform development
-<strong>Target:</strong> iOS and Android from single codebase
+<strong>Next.js + Capacitor:</strong> Web-to-mobile deployment
+• <strong>REPPIT</strong> - Fitness tracker app (live, deploying to Play Store via Capacitor)
 
-<strong>Projects:</strong>
-• <strong>REPPIT</strong> - Fitness tracker app (live on app stores)
-• <strong>PRIMMO</strong> - AI strength coach (in development)
+<strong>React Native:</strong>
+• <strong>Orbit</strong> - Phone companion for Klarity with zero-server architecture (live)
 
-I chose Flutter for rapid development and native performance across platforms.`,
+<strong>In Development:</strong>
+• <strong>PRIMMO</strong> - AI strength coach (Next.js + Voice AI)
+
+I use Capacitor to wrap Next.js apps for native mobile deployment and React Native for projects needing tight native ecosystem integration.`,
 
       // ===== AI/ML EXPERIENCE =====
       'ai ml': `<strong>AI/ML Experience:</strong>
@@ -11234,12 +11357,14 @@ Basically, I'm interested in practical AI applications that solve real problems.
       // ===== PRODUCTION APPS =====
       'production': `<strong>Live/Production Applications:</strong>
 
-<strong>Personal Projects:</strong>
-• <strong>REPPIT</strong> - Fitness tracking app (App Store & Play Store)
-• <strong>NoteApp</strong> - Note-taking application with real users
-• <strong>AnyCalc</strong> - Smart calculator with presets (live)
-• This portfolio site - serving recruiters like you!
-• A couple of other interesting opportunities addressing people's needs identified for future development
+<strong>Personal Projects (8 shipped):</strong>
+• <strong>REPPIT</strong> - Fitness tracking app (Next.js + Capacitor, Play Store)
+• <strong>NoteApp</strong> - Rich text note-taking app (Next.js, live on Vercel)
+• <strong>Klarity</strong> - Developer task board with 15-stage pipeline (Vite/React + Tauri)
+• <strong>Orbit</strong> - Phone companion for Klarity (React Native)
+• <strong>AnyCalc</strong> - 19 interlinked financial calculators (Next.js)
+• <strong>Cinder</strong> & <strong>The Little Red Dot</strong> - AI-assisted music (live on Spotify & Apple Music)
+• This portfolio & digital resume - serving recruiters like you!
 
 <strong>Enterprise:</strong>
 • Core banking implementations at 4+ banks
@@ -11263,10 +11388,10 @@ I've shipped code that serves thousands of users daily.`,
       // ===== OPEN SOURCE =====
       'open source': `<strong>Open Source Contributions:</strong>
 
-My GitHub (<strong>github.com/ArunCastro</strong>) showcases:
-• Personal projects (PRIMMO, REPPIT, NoteApp)
-• Learning experiments and code samples
-• This portfolio's codebase
+My GitHub (<strong>github.com/castroarun</strong>) showcases:
+• 8 shipped projects: REPPIT, NoteApp, Klarity, Orbit, AnyCalc, Cinder, The Little Red Dot, Digital Resume
+• Projects in development: PRIMMO, Portfolio Optimization
+• Concept repos: Health Reports Tracker, Payment House
 
 Currently focused on building production-quality personal projects rather than contributing to external repos. Open to collaborating on interesting projects!`,
 
@@ -11398,7 +11523,8 @@ I prioritize <strong>readable, maintainable code</strong> over clever solutions.
 <strong>TypeScript:</strong> Type safety catches bugs early, better IDE support
 <strong>Next.js:</strong> React with SSR, great DX, Vercel deployment
 <strong>Tailwind:</strong> Utility-first CSS, rapid styling, consistent design
-<strong>Flutter:</strong> Single codebase for iOS/Android, native performance
+<strong>Capacitor:</strong> Wrap web apps into native mobile with a single codebase
+<strong>Tauri:</strong> Lightweight desktop apps from web tech (powers Klarity)
 <strong>Supabase:</strong> PostgreSQL with auth, realtime, and great DX
 
 I chose tools that maximize <strong>productivity</strong> and <strong>code quality</strong>.`,
@@ -11429,15 +11555,15 @@ Arun's portfolio showcases his side projects and engineering philosophy.
       // ===== GITHUB =====
       'github': `<strong>GitHub Profile:</strong>
 
-<strong>Username:</strong> ArunCastro
-<strong>URL:</strong> github.com/ArunCastro
+<strong>Username:</strong> castroarun
+<strong>URL:</strong> github.com/castroarun
 
 <strong>Featured Repos:</strong>
 • <strong>PRIMMO</strong> - AI fitness coach (in development)
 • <strong>covered_calls</strong> - Portfolio Optimization - Automated portfolio management
 • <strong>castronix-portfolio</strong> - This portfolio site
 
-<button onclick="window.open('https://github.com/ArunCastro', '_blank')" style="margin-top: 0.75rem; padding: 0.5rem 1rem; background: var(--accent); color: var(--bg-base); border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 0.85rem;">🐙 View GitHub Profile</button>`,
+<button onclick="window.open('https://github.com/castroarun', '_blank')" style="margin-top: 0.75rem; padding: 0.5rem 1rem; background: var(--accent); color: var(--bg-base); border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 0.85rem;">🐙 View GitHub Profile</button>`,
 
       // ===== CALL AVAILABILITY =====
       'call': `<strong>Availability for a Call:</strong>
@@ -11597,7 +11723,7 @@ Open to exploring new opportunities that align with my career goals.`,
         return chatResponses['database'];
       }
       // Mobile Development
-      else if (q.includes('mobile') || q.includes('flutter') || q.includes('ios') || q.includes('android') || q.includes('app store') || q.includes('play store')) {
+      else if (q.includes('mobile') || q.includes('flutter') || q.includes('capacitor') || q.includes('ios') || q.includes('android') || q.includes('app store') || q.includes('play store')) {
         return chatResponses['mobile'];
       }
       // AI/ML Experience
@@ -11661,7 +11787,7 @@ Open to exploring new opportunities that align with my career goals.`,
         return chatResponses['design principles'];
       }
       // Tech Stack Choice
-      else if (q.includes('why') && (q.includes('tech') || q.includes('typescript') || q.includes('next') || q.includes('flutter') || q.includes('chose'))) {
+      else if (q.includes('why') && (q.includes('tech') || q.includes('typescript') || q.includes('next') || q.includes('tauri') || q.includes('vite') || q.includes('chose'))) {
         return chatResponses['why tech stack'];
       }
       // Resume & CV
@@ -12322,10 +12448,18 @@ Open to exploring new opportunities that align with my career goals.`,
           { name: 'Agentic AI Implementation', category: 'data', level: 'Active Practitioner', progress: 70 }
         ],
         projects: [
-          { name: 'PRIMMO', status: 'building', tagline: 'AI-powered personal strength coach', tech: ['Next.js', 'Voice AI', 'Supabase'] },
-          { name: 'REPPIT', status: 'live', tagline: 'Fitness strength tracking app', tech: ['React Native', 'TypeScript', 'Expo'] },
-          { name: 'NoteApp', status: 'live', tagline: 'Privacy-first note-taking app', tech: ['Next.js', 'Supabase', 'PWA'] },
-          { name: 'Portfolio', status: 'live', tagline: 'Interactive digital portfolio', tech: ['HTML/CSS/JS', 'Chart.js', 'GitHub API'] }
+          { name: 'REPPIT', status: 'live', tagline: 'Fitness strength tracking app', tech: ['Next.js', 'TypeScript', 'Supabase', 'Capacitor'] },
+          { name: 'NoteApp', status: 'live', tagline: 'Rich text note-taking app', tech: ['Next.js', 'TypeScript', 'TipTap'] },
+          { name: 'Klarity', status: 'live', tagline: 'Developer task board with 15-stage pipeline', tech: ['Vite', 'React', 'TypeScript', 'Zustand', 'Tauri'] },
+          { name: 'Orbit', status: 'live', tagline: 'Phone companion for Klarity', tech: ['React Native', 'Tauri', 'GitHub API'] },
+          { name: 'AnyCalc', status: 'live', tagline: '19 interlinked financial calculators', tech: ['Next.js', 'TypeScript', 'Supabase', 'Zustand'] },
+          { name: 'Digital Resume', status: 'live', tagline: 'Interactive portfolio & resume', tech: ['HTML/CSS', 'JavaScript', 'Chart.js'] },
+          { name: 'Cinder', status: 'live', tagline: 'AI-assisted original music', tech: ['Music Production', 'AI/ML'] },
+          { name: 'The Little Red Dot', status: 'live', tagline: 'AI-assisted original music', tech: ['Music Production', 'AI/ML'] },
+          { name: 'PRIMMO', status: 'crafting', tagline: 'AI-powered personal strength coach', tech: ['Next.js', 'Voice AI', 'Supabase'] },
+          { name: 'Portfolio Optimization', status: 'crafting', tagline: 'Automated portfolio management', tech: ['Python', 'Pandas', 'Kite API'] },
+          { name: 'Health Reports Tracker', status: 'concept', tagline: 'Medical reports organized over time', tech: ['Next.js', 'TypeScript', 'Claude AI', 'Supabase'] },
+          { name: 'Payment House', status: 'concept', tagline: 'Enterprise payment processing', tech: ['Java 21', 'Spring Boot', 'Apache Kafka', 'PostgreSQL'] }
         ],
         settings: {
           theme: 'dark',
