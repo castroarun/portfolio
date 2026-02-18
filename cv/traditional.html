@@ -150,6 +150,7 @@
 
       .project-card {
         padding: 0.6rem;
+        break-inside: avoid;
       }
 
       .no-print {
@@ -743,25 +744,11 @@
       </div>
     </section>
 
-    <!-- Side Projects -->
+    <!-- Side Projects (Dynamically loaded from shared projects.json) -->
     <section class="section">
       <h2 class="section-title">Side Projects <span class="ai-badge">AI-Assisted Development</span></h2>
-      <div class="projects-grid">
-        <div class="project-card">
-          <p class="project-name">NoteApp</p>
-          <p class="project-tech">React Native, Supabase</p>
-          <p class="project-desc">Privacy-first note-taking app with offline sync, voice-to-text, and 200+ test cases.</p>
-        </div>
-        <div class="project-card">
-          <p class="project-name">REPPIT</p>
-          <p class="project-tech">React Native, TypeScript</p>
-          <p class="project-desc">Fitness strength tracking with workout timer and progressive overload tracking.</p>
-        </div>
-        <div class="project-card">
-          <p class="project-name">PRIMMO</p>
-          <p class="project-tech">Next.js, Supabase, Voice AI</p>
-          <p class="project-desc">AI-powered personal trainer using REPPIT workout insights to provide curated voice-based guidance.</p>
-        </div>
+      <div class="projects-grid" id="cv-projects-grid">
+        <!-- Projects loaded dynamically from ../data/projects.json -->
       </div>
     </section>
 
@@ -820,5 +807,8 @@
       }
     })();
   </script>
+
+  <!-- Shared Projects Loader -->
+  <script src="../data/projects-loader.js"></script>
 </body>
 </html>

@@ -39,7 +39,36 @@ CREATE POLICY "Allow authenticated read"
   USING (true);
 ```
 
-## 2. Existing Tables
+## 2. Create the `trained_qa` Table (Training Mode)
+
+This table stores Q&A pairs added via the secret training mode (`castro train`).
+
+```sql
+CREATE TABLE trained_qa (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  question TEXT NOT NULL,
+  keywords TEXT[] NOT NULL,
+  answer TEXT NOT NULL,
+  active BOOLEAN DEFAULT true,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+ALTER TABLE trained_qa ENABLE ROW LEVEL SECURITY;
+
+-- Allow anonymous reads (so all visitors get trained responses)
+CREATE POLICY "Allow anonymous read"
+  ON trained_qa FOR SELECT USING (true);
+
+-- Allow anonymous inserts (for training mode)
+CREATE POLICY "Allow anonymous insert"
+  ON trained_qa FOR INSERT WITH CHECK (true);
+
+-- Allow anonymous updates (for deactivating pairs)
+CREATE POLICY "Allow anonymous update"
+  ON trained_qa FOR UPDATE USING (true);
+```
+
+## 3. Existing Tables
 
 The resume also uses these tables (already set up if chat logging works):
 

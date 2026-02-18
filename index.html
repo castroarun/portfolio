@@ -1407,11 +1407,19 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: flex-end;
-      gap: var(--space-4);
+      gap: var(--space-2);
+      list-style: none;
+      padding: 0;
       margin-top: var(--space-6);
       font-family: var(--font-mono);
       font-size: var(--text-xs);
       color: var(--text-secondary);
+    }
+
+    .project-tech-list li + li::before {
+      content: "·";
+      margin-right: var(--space-2);
+      color: var(--text-tertiary);
     }
 
     .project-links {
@@ -1715,57 +1723,114 @@
     }
 
     .conception-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: var(--space-4);
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: var(--space-6);
       max-width: 900px;
       margin: 0 auto;
     }
 
     .conception-item {
       display: flex;
-      align-items: center;
-      gap: var(--space-3);
+      flex-direction: column;
+      gap: var(--space-4);
       background: var(--bg-card);
       border: 1px solid var(--border-subtle);
-      border-radius: 8px;
-      padding: var(--space-3) var(--space-5);
-      transition: border-color var(--duration-base) ease;
+      border-radius: 12px;
+      padding: var(--space-6);
+      transition: all var(--duration-base) ease;
     }
 
     .conception-item:hover {
       border-color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .conception-header {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
     }
 
     .conception-icon {
-      font-size: 18px;
+      font-size: 24px;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(168, 85, 247, 0.1);
+      border-radius: 10px;
+      flex-shrink: 0;
+    }
+
+    .conception-title-group {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
     }
 
     .conception-name {
       font-family: var(--font-mono);
-      font-size: var(--text-sm);
-      font-weight: 500;
+      font-size: var(--text-base);
+      font-weight: 600;
       color: var(--text-heading);
     }
 
-    .conception-desc {
-      font-size: var(--text-xs);
-      color: var(--text-tertiary);
-      display: none;
+    .conception-badge {
+      font-size: 0.65rem;
+      font-weight: 600;
+      color: #a855f7;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
     }
 
-    @media (min-width: 768px) {
-      .conception-item {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: var(--space-5);
-        min-width: 200px;
-      }
+    .conception-desc {
+      font-size: var(--text-sm);
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
 
-      .conception-desc {
-        display: block;
-        margin-top: var(--space-2);
+    .conception-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .conception-tech-chip {
+      padding: 3px 10px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-medium);
+      border-radius: 6px;
+      font-size: 0.7rem;
+      font-family: var(--font-mono);
+      color: var(--text-secondary);
+    }
+
+    .conception-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: var(--text-xs);
+      color: var(--text-tertiary);
+      text-decoration: none;
+      transition: color 0.2s;
+      margin-top: auto;
+    }
+
+    .conception-link:hover {
+      color: var(--accent);
+    }
+
+    .conception-link svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    @media (max-width: 768px) {
+      .conception-grid {
+        grid-template-columns: 1fr;
       }
     }
 
@@ -1964,6 +2029,321 @@
 
     .contact-cta:hover {
       background: var(--accent-subtle);
+    }
+
+    .contact-message-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-3);
+      padding: var(--space-4) var(--space-6);
+      background: var(--accent);
+      color: var(--bg-base);
+      border: none;
+      border-radius: 6px;
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      margin-bottom: var(--space-4);
+    }
+
+    .contact-message-btn:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(34, 211, 238, 0.3);
+    }
+
+    /* Contact Modal */
+    .contact-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(4px);
+      z-index: 1001;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .contact-modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .contact-modal {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 400px;
+      max-width: calc(100vw - 2rem);
+      max-height: calc(100vh - 4rem);
+      overflow-y: auto;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-medium);
+      border-radius: 12px;
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
+      z-index: 1002;
+      transform: translateY(100px) scale(0.9);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .contact-modal.active {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .contact-modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 1.5rem;
+      background: var(--accent-subtle);
+      border-bottom: 1px solid var(--border-subtle, rgba(255,255,255,0.06));
+      border-radius: 12px 12px 0 0;
+    }
+
+    .contact-modal-title {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .contact-modal-title svg {
+      width: 20px;
+      height: 20px;
+      color: var(--accent);
+    }
+
+    .contact-modal-title h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin: 0;
+      color: var(--text-primary);
+    }
+
+    .contact-modal-close {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: transparent;
+      border: 1px solid var(--border-medium);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      color: var(--text-secondary);
+    }
+
+    .contact-modal-close:hover {
+      background: var(--error);
+      border-color: var(--error);
+      color: white;
+    }
+
+    .contact-modal-body {
+      padding: 1.5rem;
+    }
+
+    .contact-form-group {
+      margin-bottom: 1rem;
+    }
+
+    .contact-form-label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 0.4rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .contact-form-input {
+      width: 100%;
+      padding: 0.75rem;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-medium);
+      border-radius: 8px;
+      color: var(--text-primary);
+      font-size: 0.9rem;
+      font-family: inherit;
+      transition: border-color 0.2s;
+      box-sizing: border-box;
+    }
+
+    .contact-form-input:focus {
+      outline: none;
+      border-color: var(--accent);
+      background: var(--accent-subtle);
+    }
+
+    .contact-form-textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .domain-chips {
+      display: flex;
+      gap: 0.4rem;
+      margin-top: 0.4rem;
+      flex-wrap: wrap;
+    }
+
+    .domain-chip {
+      padding: 0.3rem 0.6rem;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-medium);
+      border-radius: 6px;
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .domain-chip:hover {
+      border-color: var(--accent);
+      color: var(--text-primary);
+    }
+
+    .quick-messages {
+      margin-bottom: 1rem;
+    }
+
+    .quick-messages-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 0.4rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .quick-message-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .quick-message-chip {
+      padding: 0.5rem 0.75rem;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-medium);
+      border-radius: 8px;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .quick-message-chip:hover {
+      border-color: var(--accent);
+      color: var(--text-primary);
+    }
+
+    .contact-form-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: 1.25rem;
+    }
+
+    .contact-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: none;
+    }
+
+    .contact-btn-primary {
+      background: var(--accent);
+      color: var(--bg-base);
+    }
+
+    .contact-btn-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 20px rgba(34, 211, 238, 0.3);
+    }
+
+    .contact-btn-primary:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .contact-btn-secondary {
+      background: transparent;
+      border: 1px solid var(--border-medium);
+      color: var(--text-secondary);
+    }
+
+    .contact-btn-secondary:hover {
+      border-color: var(--accent);
+      color: var(--text-primary);
+    }
+
+    .contact-btn-small {
+      padding: 0.5rem 1rem;
+      font-size: 0.8rem;
+    }
+
+    .contact-success {
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .contact-success-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: var(--success);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+    }
+
+    .contact-success-icon svg {
+      width: 30px;
+      height: 30px;
+      color: white;
+    }
+
+    .contact-success h4 {
+      font-size: 1.2rem;
+      margin: 0 0 0.5rem;
+      color: var(--text-primary);
+    }
+
+    .contact-success p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin: 0;
+    }
+
+    @media (max-width: 768px) {
+      .contact-modal {
+        bottom: 0;
+        right: 0;
+        left: 0;
+        width: 100%;
+        max-width: 100%;
+        max-height: 90vh;
+        border-radius: 12px 12px 0 0;
+      }
     }
 
     .contact-email-box {
@@ -2314,8 +2694,6 @@
     .workflow-diagram-container {
       position: relative;
       border-radius: 12px;
-      border: 1px solid var(--border-subtle);
-      background: var(--bg-card);
       z-index: 1;
     }
 
@@ -2697,6 +3075,671 @@
       color: var(--text-tertiary);
       margin-top: var(--space-2);
     }
+
+    /* ============ Project Modal Overlay (Carousel) ============ */
+    .project-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+      overflow: hidden;
+    }
+
+    .project-modal-backdrop.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Navigation arrows */
+    .project-modal-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10002;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: 50%;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.25s ease;
+      opacity: 0;
+    }
+
+    .project-modal-backdrop.active .project-modal-nav {
+      opacity: 1;
+    }
+
+    .project-modal-nav:hover {
+      background: var(--accent-subtle);
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .project-modal-nav svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .project-modal-nav-prev {
+      left: 16px;
+    }
+
+    .project-modal-nav-next {
+      right: 16px;
+    }
+
+    /* Preview panels (dimmed side projects) */
+    .project-modal-preview {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%) scale(0.75);
+      width: 55%;
+      max-width: 580px;
+      height: 60vh;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-medium);
+      border-radius: 16px;
+      opacity: 0.25;
+      pointer-events: none;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9998;
+    }
+
+    .project-modal-backdrop.active .project-modal-preview {
+      opacity: 0.25;
+    }
+
+    .project-modal-preview-left {
+      left: -18%;
+    }
+
+    .project-modal-preview-right {
+      right: -18%;
+    }
+
+    .project-modal-preview .preview-name {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text-tertiary);
+      text-align: center;
+      padding: var(--space-6);
+    }
+
+    /* Clickable preview panels */
+    .project-modal-preview.clickable {
+      cursor: pointer;
+      pointer-events: auto;
+    }
+
+    .project-modal-preview.clickable:hover {
+      opacity: 0.4;
+    }
+
+    /* Center modal */
+    .project-modal {
+      position: relative;
+      width: 90%;
+      max-width: 780px;
+      max-height: 88vh;
+      overflow-y: auto;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-medium);
+      border-radius: 16px;
+      padding: var(--space-10);
+      transform: translateY(30px) scale(0.97);
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 10001;
+      flex-shrink: 0;
+    }
+
+    .project-modal-backdrop.active .project-modal {
+      transform: translateY(0) scale(1);
+    }
+
+    /* Slide animation classes */
+    .project-modal.slide-out-left {
+      animation: slideOutLeft 0.3s ease forwards;
+    }
+    .project-modal.slide-out-right {
+      animation: slideOutRight 0.3s ease forwards;
+    }
+    .project-modal.slide-in-left {
+      animation: slideInLeft 0.3s ease forwards;
+    }
+    .project-modal.slide-in-right {
+      animation: slideInRight 0.3s ease forwards;
+    }
+
+    @keyframes slideOutLeft {
+      to { transform: translateX(-60px) scale(0.92); opacity: 0; }
+    }
+    @keyframes slideOutRight {
+      to { transform: translateX(60px) scale(0.92); opacity: 0; }
+    }
+    @keyframes slideInLeft {
+      from { transform: translateX(60px) scale(0.92); opacity: 0; }
+      to { transform: translateX(0) scale(1); opacity: 1; }
+    }
+    @keyframes slideInRight {
+      from { transform: translateX(-60px) scale(0.92); opacity: 0; }
+      to { transform: translateX(0) scale(1); opacity: 1; }
+    }
+
+    .project-modal::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .project-modal::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .project-modal::-webkit-scrollbar-thumb {
+      background: var(--border-medium);
+      border-radius: 3px;
+    }
+
+    .project-modal-close {
+      position: sticky;
+      top: 0;
+      float: right;
+      z-index: 2;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      margin-bottom: var(--space-2);
+    }
+
+    .project-modal-close:hover {
+      background: var(--bg-hover);
+      color: var(--text-primary);
+      border-color: var(--border-accent);
+    }
+
+    .project-modal-close svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .project-modal-header {
+      margin-bottom: var(--space-6);
+    }
+
+    .project-modal-overline {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      font-weight: 500;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: var(--space-2);
+    }
+
+    .project-modal-title {
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.2;
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      flex-wrap: wrap;
+    }
+
+    .project-modal-badge {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      padding: 2px 10px;
+      border-radius: 20px;
+      font-weight: 500;
+    }
+
+    .project-modal-badge.live {
+      background: var(--success-subtle);
+      color: var(--success);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+    }
+
+    .project-modal-badge.crafting {
+      background: rgba(245, 158, 11, 0.1);
+      color: #f59e0b;
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+
+    .project-modal-tagline {
+      font-size: var(--text-base);
+      color: var(--text-secondary);
+      margin-top: var(--space-2);
+    }
+
+    .project-modal-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+      margin-top: var(--space-4);
+    }
+
+    .project-modal-tag {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--accent);
+      background: var(--accent-subtle);
+      padding: 3px 10px;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    a.project-modal-tag:hover {
+      background: var(--accent);
+      color: var(--bg-base);
+    }
+
+    .project-modal-image {
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid var(--border-subtle);
+      margin-bottom: var(--space-8);
+      overflow: hidden;
+    }
+
+    .project-modal-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .project-modal-section {
+      margin-bottom: var(--space-8);
+    }
+
+    .project-modal-section-title {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: var(--space-4);
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+    }
+
+    .project-modal-section-title svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .project-modal-desc {
+      font-size: var(--text-base);
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .project-modal-arch-flow {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      padding: var(--space-5);
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      margin-bottom: var(--space-6);
+      overflow-x: auto;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .project-modal-arch-node {
+      padding: var(--space-3) var(--space-4);
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-primary);
+      text-align: center;
+      white-space: nowrap;
+      min-width: 90px;
+    }
+
+    .project-modal-arch-node.highlight {
+      border-color: var(--accent);
+      background: var(--accent-subtle);
+      color: var(--accent);
+    }
+
+    .project-modal-arch-arrow {
+      color: var(--text-tertiary);
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .project-modal-insight {
+      padding: var(--space-5);
+      background: var(--bg-elevated);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+      margin-bottom: var(--space-5);
+    }
+
+    .project-modal-insight-label {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: var(--space-3);
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+    }
+
+    .project-modal-insight-label svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .project-modal-insight-text {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+
+    .project-modal-insight-text strong {
+      color: var(--text-primary);
+    }
+
+    .project-modal-adr {
+      padding: var(--space-5);
+      background: rgba(245, 158, 11, 0.05);
+      border-left: 3px solid #f59e0b;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: var(--space-5);
+    }
+
+    .project-modal-adr-label {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: #f59e0b;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: var(--space-3);
+    }
+
+    .project-modal-adr-text {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+
+    .project-modal-adr-text strong {
+      color: var(--text-primary);
+    }
+
+    .project-modal-patterns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+      margin-bottom: var(--space-6);
+    }
+
+    .project-modal-pattern {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      padding: 4px 12px;
+      border-radius: 20px;
+      background: var(--accent-subtle);
+      color: var(--accent);
+      border: 1px solid var(--border-accent);
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    a.project-modal-pattern:hover {
+      background: var(--accent);
+      color: var(--bg-base);
+      border-color: var(--accent);
+    }
+
+    .project-modal-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+      margin-top: var(--space-4);
+    }
+
+    .project-modal-link {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-3) var(--space-5);
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .project-modal-link:hover {
+      border-color: var(--border-accent);
+      color: var(--accent);
+      background: var(--accent-subtle);
+      transform: translateY(-1px);
+    }
+
+    .project-modal-link svg {
+      width: 16px;
+      height: 16px;
+    }
+
+
+    .project-modal-features {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+    }
+
+    .project-modal-features li {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      padding-left: 1.4em;
+      position: relative;
+    }
+
+    .project-modal-features li::before {
+      content: '\25B8';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 0.9em;
+    }
+
+    .project-modal-no-arch {
+      font-size: 0.85rem;
+      color: var(--text-tertiary);
+      font-style: italic;
+      padding: var(--space-6);
+      text-align: center;
+      background: var(--bg-elevated);
+      border-radius: 10px;
+      border: 1px dashed var(--border-subtle);
+    }
+
+    /* Track Listing (music projects) */
+    .project-modal-tracklist {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .project-modal-track {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+      padding: var(--space-3) var(--space-4);
+      background: var(--bg-elevated);
+      border-radius: 6px;
+      transition: background 0.2s ease;
+    }
+
+    .project-modal-track:hover {
+      background: var(--bg-hover);
+    }
+
+    .track-number {
+      font-size: 0.75rem;
+      color: var(--text-tertiary);
+      font-family: 'JetBrains Mono', monospace;
+      min-width: 1.5em;
+    }
+
+    .track-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .track-title {
+      font-size: 0.85rem;
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    .track-theme {
+      font-size: 0.75rem;
+      color: var(--text-tertiary);
+      font-style: italic;
+    }
+
+    /* Lyrics Preview (music projects) */
+    .project-modal-lyrics-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-4);
+    }
+
+    .project-modal-lyric-card {
+      padding: var(--space-5);
+      background: var(--bg-elevated);
+      border-radius: 10px;
+      border-left: 3px solid #1DB954;
+      position: relative;
+    }
+
+    .project-modal-lyric-card::before {
+      content: '\201C';
+      position: absolute;
+      top: 8px;
+      right: 16px;
+      font-size: 2.5rem;
+      color: rgba(30, 215, 96, 0.15);
+      font-family: Georgia, serif;
+      line-height: 1;
+    }
+
+    .lyric-card-track {
+      font-size: 0.7rem;
+      color: #1DB954;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 600;
+      margin-bottom: var(--space-3);
+    }
+
+    .lyric-card-lines {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      font-style: italic;
+    }
+
+    body.modal-open {
+      overflow: hidden;
+    }
+
+    @media (max-width: 640px) {
+      .project-modal {
+        width: 96%;
+        max-height: 92vh;
+        padding: var(--space-6);
+        border-radius: 12px;
+      }
+
+      .project-modal-arch-flow {
+        gap: var(--space-2);
+        padding: var(--space-3);
+      }
+
+      .project-modal-arch-node {
+        font-size: 0.65rem;
+        padding: var(--space-2) var(--space-3);
+        min-width: 70px;
+      }
+
+      .project-modal-title {
+        font-size: 1.3rem;
+      }
+
+      /* Hide preview panels on mobile */
+      .project-modal-preview {
+        display: none;
+      }
+
+      .project-modal-nav {
+        width: 36px;
+        height: 36px;
+      }
+
+      .project-modal-nav-prev {
+        left: 6px;
+      }
+
+      .project-modal-nav-next {
+        right: 6px;
+      }
+
+      .project-modal-nav svg {
+        width: 16px;
+        height: 16px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -2813,7 +3856,7 @@
       <a href="#process" class="nav-link"><span class="nav-link-number">03.</span>Workflow</a>
       <a href="#design-principles" class="nav-link"><span class="nav-link-number">04.</span>Craft</a>
       <a href="#contact" class="nav-link"><span class="nav-link-number">05.</span>Contact</a>
-      <a href="resume/" class="nav-cta nav-cta-primary" target="_blank">Resume</a>
+      <a href="resume/" class="nav-cta nav-cta-primary" target="_blank">Digital Resume</a>
       <a href="cv/" class="nav-cta" target="_blank">CV</a>
     </div>
     <button class="nav-hamburger" id="navHamburger" aria-label="Toggle menu">
@@ -2849,7 +3892,7 @@
       <span class="mobile-menu-number">05.</span>
       Contact
     </a>
-    <a href="resume/" class="nav-cta nav-cta-primary" style="margin-top: var(--space-6);" target="_blank">Resume</a>
+    <a href="resume/" class="nav-cta nav-cta-primary" style="margin-top: var(--space-6);" target="_blank">Digital Resume</a>
     <a href="cv/" class="nav-cta" style="margin-top: var(--space-2);" target="_blank">CV</a>
 
     <!-- Social Links for Mobile -->
@@ -2921,7 +3964,7 @@
             <p>
               Hey, I'm Arun — or <span class="about-highlight">Castronix</span> in the digital world — an Enterprise & Solutions Architect with an intense passion for coding.
               I believe being "coder-first" makes a better architect: you visualize the entire path
-              from concept to delivery with conviction, finding paths of least resistance to see things through.
+              from concept to delivery, mapping efficient, well-structured paths to see things through.
             </p>
             <p>
               I've always wanted to create things that live on the internet. With AI-assisted learning
@@ -2937,7 +3980,7 @@
             <ul class="about-skills">
               <li>TypeScript</li>
               <li>React / Next.js</li>
-              <li>Flutter</li>
+              <li>Tauri / Capacitor</li>
               <li>Node.js</li>
               <li>Supabase / PostgreSQL</li>
               <li>Python / AI/ML</li>
@@ -2956,106 +3999,239 @@
       <!-- Featured Work Section -->
       <section id="work" class="featured-projects">
         <h2 class="numbered-heading">Some Things I've Built</h2>
+        <p class="conception-subtitle fade-up">Personal projects built with purpose and AI assistance — from idea to live, shipped products.</p>
 
         <div class="project-list" id="featured-projects-list">
-          <!-- Project 1: REPPIT -->
-          <article class="featured-project fade-up">
-            <div class="project-image">
-              <div class="project-image-wrapper">
-                  <img src="assets/projects/reppit.png" alt="REPPIT - Strength training app" loading="lazy">
-                </div>
-            </div>
-            <div class="project-content">
-              <p class="project-overline">Featured Project</p>
-              <h3 class="project-title"><a href="#">REPPIT</a></h3>
-              <p class="project-launch-hint">(Launching soon on Google Play Store)</p>
-              <div class="project-description">
-                <p>
-                  A mobile strength training app that tracks and prompts your workouts, rest periods,
-                  and progress. Features timer modes, workout history, and detailed analytics
-                  for all - beginners to serious lifters.
-                </p>
-              </div>
-              <ul class="project-tech-list">
-                <li>Flutter</li>
-                <li>Dart</li>
-                <li>SQLite</li>
-                <li>Riverpod</li>
-              </ul>
-              <div class="project-links">
-                <a href="#" class="project-link-icon" aria-label="GitHub">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-                  </svg>
-                </a>
-                <a href="#" class="project-link-icon" aria-label="External Link">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                    <polyline points="15 3 21 3 21 9"></polyline>
-                    <line x1="10" y1="14" x2="21" y2="3"></line>
-                  </svg>
-                </a>
-              </div>
-            </div>
-          </article>
 
-          <!-- Project 2: NoteApp -->
-          <article class="featured-project fade-up">
+          <!-- 1. AnyCalc -->
+          <article class="featured-project fade-up" data-project-id="anycalc">
             <div class="project-image">
               <div class="project-image-wrapper">
-                  <img src="assets/projects/noteapp.png" alt="NoteApp - Privacy-first notes" loading="lazy">
-                </div>
+                <img src="assets/projects/anycalc.png" alt="AnyCalc - Calculate anything, anywhere" loading="lazy">
+              </div>
             </div>
             <div class="project-content">
-              <p class="project-overline">Featured Project</p>
-              <h3 class="project-title"><a href="#">NoteApp</a></h3>
+              <p class="project-overline">Mobile App</p>
+              <h3 class="project-title"><a href="#">AnyCalc</a> <span class="project-launch-hint">(Live)</span></h3>
               <div class="project-description">
-                <p>
-                  A notes app with real-time sync across devices. Features markdown support,
-                  folder organization, and AI-powered search to find any note instantly.
-                  Built for speed and simplicity.
-                </p>
+                <p>19 interlinked financial calculators in one app — EMI, tip splits, compound interest, currency conversion, and more. Plan mode lets you chain calculations together for smarter decision-making.</p>
               </div>
               <ul class="project-tech-list">
                 <li>Next.js</li>
                 <li>TypeScript</li>
                 <li>Supabase</li>
-                <li>Tailwind</li>
+                <li>Zustand</li>
               </ul>
               <div class="project-links">
-                <a href="#" class="project-link-icon" aria-label="GitHub">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-                  </svg>
-                </a>
-                <a href="#" class="project-link-icon" aria-label="External Link">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                    <polyline points="15 3 21 3 21 9"></polyline>
-                    <line x1="10" y1="14" x2="21" y2="3"></line>
-                  </svg>
+                <a href="https://github.com/castroarun/caclulate_anything" class="project-link-icon" aria-label="GitHub" target="_blank">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
                 </a>
               </div>
             </div>
           </article>
 
-          <!-- Project 3: PRIMMO -->
-          <article class="featured-project fade-up">
+          <!-- 2. Klarity -->
+          <article class="featured-project fade-up" data-project-id="klarity">
             <div class="project-image">
               <div class="project-image-wrapper">
-                  <img src="assets/projects/primmo.png" alt="PRIMMO - AI Strength Coach" loading="lazy">
-                </div>
+                <img src="assets/projects/klarity.png" alt="Klarity - Developer task board" loading="lazy">
+              </div>
             </div>
             <div class="project-content">
-              <p class="project-overline">Featured Project</p>
-              <h3 class="project-title"><a href="#">PRIMMO</a></h3>
-              <p class="project-status-hint">(Architected & build-ready)</p>
+              <p class="project-overline">Web App</p>
+              <h3 class="project-title"><a href="#">Klarity</a> <span class="project-launch-hint">(Live)</span></h3>
               <div class="project-description">
-                <p>
-                  An agentic AI strength coach that communicates via WhatsApp and voice calls.
-                  Leverages workout data from REPPIT to provide personalized training guidance,
-                  form corrections, and motivation.
-                </p>
+                <p>Lightweight desktop task board with a 15-stage pipeline, ETag-based distributed sync, and multi-agent orchestration for AI-assisted developers. Built to bring clarity to complex workflows.</p>
+              </div>
+              <ul class="project-tech-list">
+                <li>Vite</li>
+                <li>React</li>
+                <li>TypeScript</li>
+                <li>Zustand</li>
+                <li>Tauri</li>
+              </ul>
+              <div class="project-links">
+                <a href="https://github.com/castroarun/taskBoard" class="project-link-icon" aria-label="GitHub" target="_blank">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 3. Orbit -->
+          <article class="featured-project fade-up" data-project-id="orbit">
+            <div class="project-image">
+              <div class="project-image-wrapper">
+                <img src="assets/projects/orbit.png" alt="Orbit - Phone companion for Klarity" loading="lazy">
+              </div>
+            </div>
+            <div class="project-content">
+              <p class="project-overline">Mobile App</p>
+              <h3 class="project-title"><a href="#">Orbit</a> <span class="project-launch-hint">(Live)</span></h3>
+              <div class="project-description">
+                <p>Mobile companion for Klarity — review, update, and triage tasks from your phone with zero-server architecture using GitHub as backend and SHA-based conflict resolution.</p>
+              </div>
+              <ul class="project-tech-list">
+                <li>React Native</li>
+                <li>Tauri</li>
+                <li>GitHub API</li>
+              </ul>
+              <div class="project-links">
+                <a href="https://github.com/castroarun/taskBoard" class="project-link-icon" aria-label="GitHub" target="_blank">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 4. Digital Resume -->
+          <article class="featured-project fade-up" data-project-id="portfolio">
+            <div class="project-image">
+              <div class="project-image-wrapper">
+                <img src="assets/projects/portfolio.png" alt="Digital Resume - Interactive portfolio" loading="lazy">
+              </div>
+            </div>
+            <div class="project-content">
+              <p class="project-overline">Web App</p>
+              <h3 class="project-title"><a href="#">Digital Resume</a> <span class="project-launch-hint">(Live)</span></h3>
+              <div class="project-description">
+                <p>Interactive digital resume with AI chat assistant, skills radar, project showcase cards, and 9-step workflow visualization. Crafted to showcase technical depth and design sensibility.</p>
+              </div>
+              <ul class="project-tech-list">
+                <li>HTML</li>
+                <li>CSS</li>
+                <li>JavaScript</li>
+                <li>Chart.js</li>
+              </ul>
+              <div class="project-links">
+                <a href="https://github.com/castroarun/portfolio" class="project-link-icon" aria-label="GitHub" target="_blank">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                </a>
+                <a href="https://castroarun.github.io/portfolio/" class="project-link-icon" aria-label="External Link" target="_blank">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 5. Cinder -->
+          <article class="featured-project fade-up" data-project-id="cinder">
+            <div class="project-image">
+              <div class="project-image-wrapper">
+                <img src="assets/projects/cinder.png" alt="Cinder - AI-assisted original music" loading="lazy">
+              </div>
+            </div>
+            <div class="project-content">
+              <p class="project-overline">Music</p>
+              <h3 class="project-title"><a href="#">Cinder</a> <span class="project-launch-hint">(On Spotify & Apple Music)</span></h3>
+              <div class="project-description">
+                <p>AI-assisted original music production. A creative exploration blending technology with artistic expression. Themes of warmth, nostalgia, and human connection.</p>
+              </div>
+              <ul class="project-tech-list">
+                <li>Music Production</li>
+                <li>AI/ML</li>
+              </ul>
+              <div class="project-links">
+                <a href="https://open.spotify.com/user/castronix" class="project-link-icon" aria-label="Spotify" target="_blank">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M8 15s1.5-2 4-2 4 2 4 2"></path><path d="M7 11s2-2 5-2 5 2 5 2"></path><path d="M6 7s2.5-2 6-2 6 2 6 2"></path></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 6. The Little Red Dot -->
+          <article class="featured-project fade-up" data-project-id="littlereddot">
+            <div class="project-image">
+              <div class="project-image-wrapper">
+                <img src="assets/projects/littlereddot.png" alt="The Little Red Dot - AI-assisted original music" loading="lazy">
+              </div>
+            </div>
+            <div class="project-content">
+              <p class="project-overline">Music</p>
+              <h3 class="project-title"><a href="#">The Little Red Dot</a> <span class="project-launch-hint">(On Spotify & Apple Music)</span></h3>
+              <div class="project-description">
+                <p>AI-assisted original music celebrating Singapore. Themes of identity, culture, and the island's unique spirit. A tribute to the little red dot on the map.</p>
+              </div>
+              <ul class="project-tech-list">
+                <li>Music Production</li>
+                <li>AI/ML</li>
+              </ul>
+              <div class="project-links">
+                <a href="https://open.spotify.com/user/castronix" class="project-link-icon" aria-label="Spotify" target="_blank">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M8 15s1.5-2 4-2 4 2 4 2"></path><path d="M7 11s2-2 5-2 5 2 5 2"></path><path d="M6 7s2.5-2 6-2 6 2 6 2"></path></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 7. REPPIT -->
+          <article class="featured-project fade-up" data-project-id="reppit">
+            <div class="project-image">
+              <div class="project-image-wrapper">
+                <img src="assets/projects/reppit.png" alt="REPPIT - Fitness strength tracking app" loading="lazy">
+              </div>
+            </div>
+            <div class="project-content">
+              <p class="project-overline">Mobile App</p>
+              <h3 class="project-title"><a href="#">REPPIT</a> <span class="project-launch-hint">(Launching soon on Google Play Store)</span></h3>
+              <div class="project-description">
+                <p>A mobile strength training app that tracks and prompts your workouts, rest periods, and progress. Features timer modes, workout history, and detailed analytics for all — beginners to serious lifters.</p>
+              </div>
+              <ul class="project-tech-list">
+                <li>Next.js</li>
+                <li>TypeScript</li>
+                <li>Supabase</li>
+                <li>Capacitor</li>
+              </ul>
+              <div class="project-links">
+                <a href="https://github.com/castroarun/REPPIT" class="project-link-icon" aria-label="GitHub" target="_blank">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 8. NoteApp -->
+          <article class="featured-project fade-up" data-project-id="noteapp">
+            <div class="project-image">
+              <div class="project-image-wrapper">
+                <img src="assets/projects/noteapp.png" alt="NoteApp - Rich text note-taking app" loading="lazy">
+              </div>
+            </div>
+            <div class="project-content">
+              <p class="project-overline">Web App</p>
+              <h3 class="project-title"><a href="#">NoteApp</a> <span class="project-launch-hint">(Live)</span></h3>
+              <div class="project-description">
+                <p>A notes app with real-time sync across devices. Features markdown support, folder organization, and AI-powered search to find any note instantly. Built for speed and simplicity.</p>
+              </div>
+              <ul class="project-tech-list">
+                <li>Next.js</li>
+                <li>TypeScript</li>
+                <li>TipTap</li>
+              </ul>
+              <div class="project-links">
+                <a href="https://github.com/castroarun/noteApp" class="project-link-icon" aria-label="GitHub" target="_blank">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                </a>
+                <a href="https://noteapp-castronix.vercel.app" class="project-link-icon" aria-label="External Link" target="_blank">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 9. PRIMMO -->
+          <article class="featured-project fade-up" data-project-id="primmo">
+            <div class="project-image">
+              <div class="project-image-wrapper">
+                <img src="assets/projects/primmo.png" alt="PRIMMO - AI Strength Coach" loading="lazy">
+              </div>
+            </div>
+            <div class="project-content">
+              <p class="project-overline">AI / Voice</p>
+              <h3 class="project-title"><a href="#">PRIMMO</a> <span class="project-status-hint">(Architected & build-ready)</span></h3>
+              <div class="project-description">
+                <p>An agentic AI strength coach that communicates via WhatsApp and voice calls. Leverages workout data from REPPIT to provide personalized training guidance, form corrections, and motivation.</p>
               </div>
               <ul class="project-tech-list">
                 <li>Next.js</li>
@@ -3064,16 +4240,34 @@
                 <li>Voice AI</li>
               </ul>
               <div class="project-links">
-                <a href="#" class="project-link-icon" aria-label="GitHub">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-                  </svg>
+                <a href="https://github.com/castroarun/PRIMMO" class="project-link-icon" aria-label="GitHub" target="_blank">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
                 </a>
-                <a href="#" class="project-link-icon" aria-label="Coming Soon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <polyline points="12 6 12 12 16 14"></polyline>
-                  </svg>
+              </div>
+            </div>
+          </article>
+
+          <!-- 10. Portfolio Optimization -->
+          <article class="featured-project fade-up" data-project-id="portfolio-optimization">
+            <div class="project-image">
+              <div class="project-image-wrapper">
+                <img src="assets/projects/portfolio-optimizer.png" alt="Portfolio Optimization - Automated portfolio management" loading="lazy">
+              </div>
+            </div>
+            <div class="project-content">
+              <p class="project-overline">Automation</p>
+              <h3 class="project-title"><a href="#">Portfolio Optimization</a> <span class="project-status-hint">(In development)</span></h3>
+              <div class="project-description">
+                <p>Automated portfolio construction and maintenance — covered calls, rebalancing, and risk analytics to outperform market indexes.</p>
+              </div>
+              <ul class="project-tech-list">
+                <li>Python</li>
+                <li>Pandas</li>
+                <li>Kite API</li>
+              </ul>
+              <div class="project-links">
+                <a href="https://github.com/castroarun/covered_calls" class="project-link-icon" aria-label="GitHub" target="_blank">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
                 </a>
               </div>
             </div>
@@ -3084,21 +4278,46 @@
         <h3 class="conception-heading fade-up">Under Conception</h3>
         <p class="conception-subtitle fade-up">Ideas brewing in the background, waiting for the right moment to build.</p>
         <div class="conception-grid fade-up" id="conception-projects-grid">
-          <!-- Fallback content - replaced by dynamic loader -->
+          <!-- Fallback content - replaced by dynamic loader when served via HTTP -->
           <div class="conception-item">
-            <span class="conception-icon">💡</span>
-            <span class="conception-name">Portfolio Optimizer</span>
-            <span class="conception-desc">Investment dashboard with fundamentals view</span>
+            <div class="conception-header">
+              <span class="conception-icon">🏥</span>
+              <div class="conception-title-group">
+                <span class="conception-name">Health Reports Tracker</span>
+                <span class="conception-badge">Concept</span>
+              </div>
+            </div>
+            <span class="conception-desc">Scan lab reports with OCR, track health parameters across years, visualize trends, and share doctor-ready summaries. Built for Indian lab formats like Thyrocare, Dr Lal PathLabs, and SRL Diagnostics.</span>
+            <div class="conception-tech">
+              <span class="conception-tech-chip">Next.js</span>
+              <span class="conception-tech-chip">TypeScript</span>
+              <span class="conception-tech-chip">Claude AI</span>
+              <span class="conception-tech-chip">Supabase</span>
+            </div>
+            <a href="https://github.com/castroarun/Health-Reports-Tracker" class="conception-link" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+              View on GitHub
+            </a>
           </div>
           <div class="conception-item">
-            <span class="conception-icon">📊</span>
-            <span class="conception-name">Backtest Pro</span>
-            <span class="conception-desc">Options strategy backtesting platform</span>
-          </div>
-          <div class="conception-item">
-            <span class="conception-icon">🚀</span>
-            <span class="conception-name">Space Race ML</span>
-            <span class="conception-desc">Rocket landing prediction model</span>
+            <div class="conception-header">
+              <span class="conception-icon">💳</span>
+              <div class="conception-title-group">
+                <span class="conception-name">Payment House</span>
+                <span class="conception-badge">Concept</span>
+              </div>
+            </div>
+            <span class="conception-desc">Kafka-driven, event-sourced microservices architecture for core banking payments across Singapore, Hong Kong, UK, and India. Six-tier pipeline with clearing house adapters for MEPS+, FAST, CHATS, FPS, and SWIFT gpi.</span>
+            <div class="conception-tech">
+              <span class="conception-tech-chip">Java 21</span>
+              <span class="conception-tech-chip">Spring Boot</span>
+              <span class="conception-tech-chip">Apache Kafka</span>
+              <span class="conception-tech-chip">PostgreSQL</span>
+            </div>
+            <a href="https://github.com/castroarun/project-house" class="conception-link" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+              View on GitHub
+            </a>
           </div>
         </div>
 
@@ -3434,8 +4653,8 @@
             </div>
             <div class="practice-card">
               <div class="practice-icon">&#8635;</div>
-              <h3 class="practice-title">Jira Integration</h3>
-              <p class="practice-desc">Every task tracked. Clear workflow from To Do through Testing to Done.</p>
+              <h3 class="practice-title">Klarity Pipeline</h3>
+              <p class="practice-desc">Built my own 15-stage task board. Every feature flows from idea through build, test, and ship.</p>
             </div>
             <div class="practice-card">
               <div class="practice-icon">&#9633;</div>
@@ -3456,7 +4675,7 @@
         <div class="container">
           <div class="stats-grid fade-up">
             <div class="stat-item">
-              <div class="stat-value"><span class="counter" data-target="3">0</span>+</div>
+              <div class="stat-value"><span class="counter" data-target="8">0</span></div>
               <div class="stat-label">Projects Shipped</div>
             </div>
             <div class="stat-item">
@@ -3484,6 +4703,12 @@
           meaningful, or explore what's possible with AI — my inbox is open. I'm always up for
           conversations about architecture, AI-assisted development, or interesting problems to solve.
         </p>
+        <button class="contact-message-btn" onclick="openContactModal()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+          </svg>
+          Leave me a message
+        </button>
         <div class="contact-email-box">
           <span class="contact-email">arun.castromin@gmail.com</span>
           <button class="copy-email-btn" onclick="copyEmail()" title="Copy email">
@@ -3498,6 +4723,85 @@
           </button>
         </div>
       </section>
+
+      <!-- Contact Modal -->
+      <div class="contact-modal-overlay" id="contact-overlay" onclick="closeContactModal()"></div>
+      <div class="contact-modal" id="contact-modal">
+        <div class="contact-modal-header">
+          <div class="contact-modal-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+            </svg>
+            <h3>Leave me a message</h3>
+          </div>
+          <button class="contact-modal-close" onclick="closeContactModal()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+
+        <div class="contact-modal-body" id="contact-form-container">
+          <div class="contact-form-group">
+            <label class="contact-form-label">Your Name</label>
+            <input type="text" class="contact-form-input" id="contact-name" placeholder="John Doe">
+          </div>
+
+          <div class="contact-form-group">
+            <label class="contact-form-label">Email</label>
+            <input type="email" class="contact-form-input" id="contact-email" placeholder="your.email@example.com">
+            <div class="domain-chips">
+              <span class="domain-chip" onclick="appendDomain('@gmail.com')">@gmail.com</span>
+              <span class="domain-chip" onclick="appendDomain('@yahoo.com')">@yahoo.com</span>
+              <span class="domain-chip" onclick="appendDomain('@outlook.com')">@outlook.com</span>
+              <span class="domain-chip" onclick="appendDomain('@sg')">@sg</span>
+            </div>
+          </div>
+
+          <div class="quick-messages">
+            <div class="quick-messages-label">Quick messages:</div>
+            <div class="quick-message-chips">
+              <span class="quick-message-chip" onclick="setQuickMessage('Please get back to me regarding a position.')">Get back to me</span>
+              <span class="quick-message-chip" onclick="setQuickMessage('Please send your resume to my email.')">Send resume</span>
+              <span class="quick-message-chip" onclick="setQuickMessage('Would love to discuss a potential opportunity.')">Discuss opportunity</span>
+              <span class="quick-message-chip" onclick="setQuickMessage('Interested in your profile for our team.')">Interested in profile</span>
+            </div>
+          </div>
+
+          <div class="contact-form-group">
+            <label class="contact-form-label">Message</label>
+            <textarea class="contact-form-input contact-form-textarea" id="contact-message" placeholder="Hi Arun, I'm reaching out to..."></textarea>
+          </div>
+
+          <div class="contact-form-actions">
+            <button class="contact-btn contact-btn-primary" onclick="sendContactMessage(this)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+              </svg>
+              Send Message
+            </button>
+            <button class="contact-btn contact-btn-secondary contact-btn-small" onclick="copyModalEmail(this)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              Copy email instead
+            </button>
+          </div>
+        </div>
+
+        <div class="contact-success" id="contact-success" style="display: none;">
+          <div class="contact-success-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          </div>
+          <h4>Message Sent!</h4>
+          <p>Thanks for reaching out. I'll get back to you soon.</p>
+        </div>
+      </div>
 
       <!-- Footer -->
       <footer class="footer">
@@ -3531,6 +4835,103 @@
         setTimeout(() => btn.classList.remove('copied'), 2000);
       });
     }
+
+    // ============ Contact Modal ============
+    const SUPABASE_URL = 'https://trkirkyebgahfjhgqihd.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRya2lya3llYmdhaGZqaGdxaWhkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMyODM2NzUsImV4cCI6MjA3ODg1OTY3NX0.HM-qoVT5t1CVX0hV_1RVeqv-Y_CSFxJxsFV4JHcUgF8';
+
+    function openContactModal() {
+      document.getElementById('contact-overlay').classList.add('active');
+      document.getElementById('contact-modal').classList.add('active');
+      document.getElementById('contact-form-container').style.display = 'block';
+      document.getElementById('contact-success').style.display = 'none';
+    }
+
+    function closeContactModal() {
+      document.getElementById('contact-overlay').classList.remove('active');
+      document.getElementById('contact-modal').classList.remove('active');
+    }
+
+    function appendDomain(domain) {
+      const emailInput = document.getElementById('contact-email');
+      const currentValue = emailInput.value;
+      const atIndex = currentValue.indexOf('@');
+      const username = atIndex > -1 ? currentValue.substring(0, atIndex) : currentValue;
+      emailInput.value = username + domain;
+      emailInput.focus();
+    }
+
+    function setQuickMessage(message) {
+      document.getElementById('contact-message').value = message;
+    }
+
+    async function sendContactMessage(btn) {
+      const name = document.getElementById('contact-name').value.trim();
+      const email = document.getElementById('contact-email').value.trim();
+      const message = document.getElementById('contact-message').value.trim();
+
+      if (!name || !email || !message) {
+        alert('Please fill in all fields');
+        return;
+      }
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        alert('Please enter a valid email address');
+        return;
+      }
+
+      const originalHTML = btn.innerHTML;
+      btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18" style="animation:spin 1s linear infinite"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg> Sending...';
+      btn.disabled = true;
+
+      try {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/contact_messages`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+          },
+          body: JSON.stringify({
+            name: name,
+            email: email,
+            message: message,
+            subject: 'contact_form'
+          })
+        });
+
+        if (!res.ok) throw new Error('Failed to send message');
+
+        document.getElementById('contact-form-container').style.display = 'none';
+        document.getElementById('contact-success').style.display = 'block';
+      } catch (error) {
+        console.error('Error sending message:', error);
+        alert('Failed to send message. Please try the direct contact options below.');
+        btn.innerHTML = originalHTML;
+        btn.disabled = false;
+      }
+    }
+
+    function copyModalEmail(btn) {
+      navigator.clipboard.writeText('arun.castromin@gmail.com').then(() => {
+        const originalHTML = btn.innerHTML;
+        btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><polyline points="20 6 9 17 4 12"></polyline></svg> Copied!';
+        btn.style.background = 'var(--success)';
+        btn.style.borderColor = 'var(--success)';
+        btn.style.color = 'white';
+        setTimeout(() => {
+          btn.innerHTML = originalHTML;
+          btn.style.background = '';
+          btn.style.borderColor = '';
+          btn.style.color = '';
+        }, 2000);
+      });
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeContactModal();
+    });
 
     // ============ Cursor Glow Effect (V6) ============
     // Only enable on devices with a mouse (not touch devices)
@@ -3692,6 +5093,40 @@
       newFadeElements.forEach(el => observer.observe(el));
     };
   </script>
+
+  <!-- Project Modal Overlay (Carousel) -->
+  <div class="project-modal-backdrop" id="projectModalBackdrop">
+    <!-- Left arrow -->
+    <button class="project-modal-nav project-modal-nav-prev" id="projectModalPrev" aria-label="Previous project">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+
+    <!-- Left preview panel (dimmed) -->
+    <div class="project-modal-preview project-modal-preview-left" id="projectModalPreviewLeft">
+      <div class="preview-name" id="previewLeftName"></div>
+    </div>
+
+    <!-- Center (active) modal -->
+    <div class="project-modal" id="projectModal">
+      <button class="project-modal-close" id="projectModalClose" aria-label="Close modal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <div id="projectModalContent"></div>
+    </div>
+
+    <!-- Right preview panel (dimmed) -->
+    <div class="project-modal-preview project-modal-preview-right" id="projectModalPreviewRight">
+      <div class="preview-name" id="previewRightName"></div>
+    </div>
+
+    <!-- Right arrow -->
+    <button class="project-modal-nav project-modal-nav-next" id="projectModalNext" aria-label="Next project">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+  </div>
 
   <!-- Dynamic Project Loader -->
   <script src="js/project-loader.js"></script>

@@ -15,10 +15,10 @@
       "status": "live",
       "progress": 100,
       "technologies": [
-        "Flutter",
-        "Dart",
-        "SQLite",
-        "Riverpod"
+        "Next.js",
+        "TypeScript",
+        "Supabase",
+        "Capacitor"
       ],
       "localPath": "strength_profile_tracker",
       "githubRepo": "castroarun/reppit",
