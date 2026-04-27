@@ -243,8 +243,33 @@
       "image": "assets/projects/quantifyd.png",
       "progress": { "completed": 7, "total": 9, "inProgress": 8 },
       "links": {
-        "preview": "https://castroarun.github.io/Quantifyd/tactical_capital_system.html",
+        "preview": "https://castroarun.github.io/Quantifyd/premarket_brief_pipeline.html",
         "github": "https://github.com/castroarun/Quantifyd"
+      },
+      "display": { "showInResume": true, "trackRow": 3 }
+    },
+    {
+      "id": "quantifyd-premarket-brief",
+      "name": "Pre-Market Brief Pipeline",
+      "tagline": "VPS + Claude Code routine writing the daily 08:00 IST brief",
+      "status": "live",
+      "statusText": "Live",
+      "statusHint": "(Live)",
+      "statusColor": "#22c55e",
+      "badgeClass": "live",
+      "tech": ["Python", "APScheduler", "yfinance", "Claude Code", "Gmail SMTP"],
+      "description": "A two-stage daily intelligence brief for systematic trading. The VPS pulls live market data, holdings calendar, and overnight news at 08:00 IST. A Claude Code cloud routine reads the JSON, writes sentiment-tagged headlines and the narrative one-liner, then posts back. The VPS dispatches the email. End-to-end loop closes in three minutes; an 08:08 fallback guarantees delivery.",
+      "descriptionHtml": "Two-stage <strong>VPS + Claude Code</strong> pipeline. Cloud routine writes the narrative; VPS handles data + transport. Three-minute loop with an 08:08 fallback so the operator always gets a brief.",
+      "shortDesc": "Daily quant trading brief — VPS data, cloud-AI synthesis, 3-minute loop.",
+      "category": "personal",
+      "featured": false,
+      "icon": "📈",
+      "iconColor": "#22d3ee",
+      "image": "assets/projects/quantifyd.png",
+      "progress": { "completed": 9, "total": 9, "inProgress": null },
+      "links": {
+        "preview": "https://castroarun.github.io/Quantifyd/premarket_brief_pipeline.html",
+        "github": "https://github.com/castroarun/Quantifyd/blob/master/services/premarket_brief.py"
       },
       "display": { "showInResume": true, "trackRow": 3 }
     },

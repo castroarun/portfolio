@@ -1,9 +1,9 @@
 {
   "meta": {
     "description": "Single source of truth for all portfolio projects",
-    "lastUpdated": "2026-01-04",
+    "lastUpdated": "2026-04-27",
     "usage": "Run 'node scripts/sync-projects.js' to update portfolio pages",
-    "lastSync": "2026-01-04T09:16:18.971Z"
+    "lastSync": "2026-04-27T07:40:14.322Z"
   },
   "projects": [
     {
@@ -114,12 +114,16 @@
     },
     {
       "id": "portfolio",
-      "name": "This Portfolio",
-      "tagline": "Interactive Digital Resume",
-      "description": "AI chat assistant, skills radar, flip cards with 9-step workflow showcase.",
+      "name": "Digital Resume",
+      "tagline": "Interactive portfolio & resume",
+      "description": "Interactive digital resume with AI assistant, skills radar, and 9-step workflow showcase.",
       "longDescription": "A modern portfolio featuring an AI chat assistant, interactive skills radar, project flip cards, and a showcase of the 9-step development workflow.",
-      "status": "building",
-      "progress": 39,
+      "status": "live",
+      "progress": {
+        "completed": 9,
+        "total": 9,
+        "inProgress": null
+      },
       "technologies": [
         "HTML",
         "CSS",
@@ -156,12 +160,16 @@
     },
     {
       "id": "backtest-pro",
-      "name": "Backtest Pro",
-      "tagline": "Options Strategy Backtester",
+      "name": "Quantifyd",
+      "tagline": "Systematic quant trading platform for Indian markets",
       "description": "Covered calls strategy backtesting to smooth portfolio returns. Extensive backtesting & automation.",
       "longDescription": "A backtesting platform for covered call options strategies. Analyzes historical data to optimize premium collection while managing downside risk.",
-      "status": "building",
-      "progress": 11,
+      "status": "live",
+      "progress": {
+        "completed": 7,
+        "total": 9,
+        "inProgress": 8
+      },
       "technologies": [
         "Python",
         "Pandas",
