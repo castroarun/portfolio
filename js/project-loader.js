@@ -78,7 +78,7 @@
     klarity: 'Lightweight desktop task board with a 15-stage pipeline, ETag-based distributed sync, and multi-agent orchestration for AI-assisted developers. Built to bring clarity to complex workflows.',
     orbit: 'Mobile companion for Klarity \u2014 review, update, and triage tasks from your phone with zero-server architecture using GitHub as backend and SHA-based conflict resolution.',
     'portfolio-optimization': 'Automated portfolio construction and maintenance \u2014 covered calls, rebalancing, and risk analytics to outperform market indexes.',
-    'quantifyd-premarket-brief': 'Daily quant trading brief \u2014 three stages, ~3-minute loop. <ul style="margin:10px 0 0 0;padding-left:1.2em;line-height:1.8"><li><b>Stage 1 \u00b7 08:00 IST</b> \u2014 VPS builds the JSON (market data, holdings events, news).</li><li><b>Stage 2 \u00b7 08:02 IST</b> \u2014 Claude routine writes sentiment + narrative.</li><li><b>Stage 3 \u00b7 08:03 IST</b> \u2014 VPS dispatches to <b>Gmail</b> + <b>WhatsApp</b>.</li></ul>'
+    'quantifyd-premarket-brief': 'A daily intelligence brief in your inbox before the opening bell \u2014 three stages, ~3-minute loop. <ul style="margin:10px 0 0 0;padding-left:1.2em;line-height:1.8"><li><b>Stage 1 \u00b7 08:00 IST</b> \u2014 VPS builds the JSON (market data, holdings events, news).</li><li><b>Stage 2 \u00b7 08:02 IST</b> \u2014 Claude routine writes sentiment + narrative.</li><li><b>Stage 3 \u00b7 08:03 IST</b> \u2014 VPS dispatches to <b>Gmail</b> + <b>WhatsApp</b>.</li></ul>'
   };
 
   // Tech stack overrides (portfolio may show different tech than JSON)
@@ -153,11 +153,11 @@
   const PROJECT_DETAILS = {
     'quantifyd-premarket-brief': {
       features: [
-        'Two-stage pipeline: VPS (Contabo Linux box) builds raw data at 08:00 IST; Claude Code cloud routine narrates at 08:02; VPS dispatches the email by 08:03 — full loop closes in 3 minutes',
-        'Sandboxed cloud agent stays stateless: no SSH key, no SMTP credentials, no secrets — only reads via /api/premarket/brief/raw and writes synthesis to /synthesized',
-        '08:08 IST self-healing fallback fires from the VPS if the cloud routine never posts back, so the operator always gets a brief',
-        'Free data spine: yfinance (14 tickers), NSE archive CSVs, BSE corporate actions, RSS from Moneycontrol/Mint/Reuters India, plus the local holdings_events.db',
-        'Same JSON contract feeds both halves — the VPS never blocks on the cloud, the cloud is purely a synthesis layer'
+        'Lands in inbox + WhatsApp at 08:03 IST every weekday — three minutes from data fetch to delivery',
+        'Three stages, two halves: VPS builds the raw JSON at 08:00; Claude Code cloud routine narrates at 08:02; VPS dispatches via Gmail SMTP + Twilio WhatsApp at 08:03',
+        'Sandboxed cloud agent stays stateless — no SSH key, no SMTP credentials, no secrets. Only reads /api/premarket/brief/raw and writes synthesis to /synthesized',
+        '08:08 IST self-healing fallback on the VPS guarantees delivery — even if the cloud routine never posts back, the un-synthesized version goes out',
+        'Free data spine: yfinance (14 tickers), NSE archive CSVs, BSE corporate actions, RSS from Moneycontrol/Mint/Reuters India, plus the local holdings_events.db'
       ],
       archFlow: ['Sources\n(yfinance + RSS)', 'VPS Builder\n08:00 IST', 'Claude Cloud\n08:02 IST', 'VPS SMTP\n08:03 IST'],
       archHighlight: 2,
