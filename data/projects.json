@@ -265,7 +265,7 @@
       "featured": false,
       "icon": "📈",
       "iconColor": "#22d3ee",
-      "image": "assets/projects/quantifyd.png",
+      "image": "assets/projects/quantifyd-premarket-brief.png",
       "progress": { "completed": 9, "total": 9, "inProgress": null },
       "links": {
         "preview": "https://castroarun.github.io/Quantifyd/premarket_brief_pipeline.html",

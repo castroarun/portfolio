@@ -47,8 +47,8 @@
 
   // Project ID to overline mapping (tech category)
   const PROJECT_OVERLINES = {
-    anycalc: 'Mobile App',
-    klarity: 'Web App',
+    anycalc: 'Web App',
+    klarity: 'Desktop App',
     orbit: 'Mobile App',
     portfolio: 'Web App',
     cinder: 'Music',
@@ -336,8 +336,10 @@
     return project.status === 'concept' || project.status === 'exploring';
   }
 
-  // Explicit display order for portfolio page (array index = position)
+  // Explicit display order for portfolio page (array index = position).
+  // Newest project goes to position 0 by convention.
   const DISPLAY_ORDER = [
+    'quantifyd-premarket-brief',
     'anycalc', 'klarity', 'orbit', 'portfolio', 'cinder',
     'littlereddot', 'reppit', 'noteapp', 'primmo', 'portfolio-optimization'
   ];
