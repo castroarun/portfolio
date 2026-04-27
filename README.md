@@ -1,3 +1,60 @@
+<div align="center">
+
+# Castronix Portfolio
+
+**Premium digital products portfolio — interactive resume + ATS-optimized CV + 60+ recruiter chat responses**
+
+![HTML5](https://img.shields.io/badge/HTML5-static-E34F26?logo=html5&logoColor=white) ![CSS3](https://img.shields.io/badge/CSS3-modern-1572B6?logo=css3&logoColor=white) ![JavaScript](https://img.shields.io/badge/JavaScript-vanilla-F7DF1E?logo=javascript&logoColor=white) ![Chart.js](https://img.shields.io/badge/Chart.js-viz-FF6384?logo=chartdotjs&logoColor=white) ![GitHub Pages](https://img.shields.io/badge/GitHub_Pages-live-222222?logo=github&logoColor=white)
+
+[**Live demo →**](https://castronix.dev)
+
+</div>
+
+<!-- LAUNCHPAD:START -->
+```json
+{
+  "stage": "live",
+  "progress": 75,
+  "complexity": "F",
+  "lastUpdated": "2026-04-27",
+  "targetDate": null,
+  "nextAction": "LinkedIn Feed integration",
+  "blocker": null,
+  "demoUrl": "https://castronix.dev",
+  "techStack": [
+    "HTML5",
+    "CSS3",
+    "JavaScript",
+    "Chart.js"
+  ],
+  "shipped": true,
+  "linkedinPosted": false
+}
+```
+<!-- LAUNCHPAD:END -->
+
+<details>
+<summary>📚 Table of Contents</summary>
+
+- [Features](#features)
+- [Quick Start](#quick-start)
+- [Tech Stack](#tech-stack)
+- [Project Structure](#project-structure)
+- [Roadmap](#roadmap)
+- [License](#license)
+
+</details>
+
+## Features
+
+- Single-source-of-truth: all projects load from data/projects.json
+- 3-part suite: Portfolio landing, interactive resume, ATS-optimized printable CV
+- AI Chat Assistant with 60+ pre-trained recruiter responses (no LLM required)
+- Project 1-pager modals with architecture deep-dives on card click
+- Zero-framework: pure HTML5/CSS3/vanilla JS
+
+## Quick Start
+
 <p align="center">
   <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" />
   <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" />
@@ -25,23 +82,7 @@
   <a href="#project-structure">Structure</a>
 </p>
 
-<!-- LAUNCHPAD:START -->
-```json
-{
-  "stage": "live",
-  "progress": 100,
-  "complexity": "F",
-  "lastUpdated": "2026-02-08",
-  "targetDate": null,
-  "nextAction": "Add new projects as they ship",
-  "blocker": null,
-  "demoUrl": "https://castroarun.github.io/portfolio/",
-  "techStack": ["HTML5", "CSS3", "JavaScript", "Chart.js"],
-  "shipped": true,
-  "linkedinPosted": true
-}
-```
-<!-- LAUNCHPAD:END -->
+
 
 ---
 
@@ -210,3 +251,31 @@ MIT
 <p align="center">
   <sub>Built by <a href="https://github.com/ArunCastro">Arun Castro</a> • Powered by AI-assisted development</sub>
 </p>
+
+## Tech Stack
+
+| Component | Tech |
+|---|---|
+| HTML5 | — |
+| CSS3 | — |
+| JavaScript | — |
+| Chart.js | — |
+
+## Roadmap
+
+- [x] Brittany Chiang-inspired layout
+- [x] Project deep-dive modals
+- [x] Resume flip-card + ATS CV
+- [ ] LinkedIn Feed integration
+
+## License
+
+Private — part of the Castronix portfolio.
+
+<div align="center">
+
+---
+
+<sub>Part of the <a href="https://castronix.dev">Castronix</a> portfolio · crafted with care · © 2026 Arun Castromin</sub>
+
+</div>
