@@ -150,6 +150,21 @@
   // ============ PROJECT DETAILS for Modal Deep-Dives ============
   // Architecture data sourced from resume/index.html Section 07
   const PROJECT_DETAILS = {
+    'quantifyd-premarket-brief': {
+      features: [
+        'Two-stage pipeline: VPS (Contabo Linux box) builds raw data at 08:00 IST; Claude Code cloud routine narrates at 08:02; VPS dispatches the email by 08:03 — full loop closes in 3 minutes',
+        'Sandboxed cloud agent stays stateless: no SSH key, no SMTP credentials, no secrets — only reads via /api/premarket/brief/raw and writes synthesis to /synthesized',
+        '08:08 IST self-healing fallback fires from the VPS if the cloud routine never posts back, so the operator always gets a brief',
+        'Free data spine: yfinance (14 tickers), NSE archive CSVs, BSE corporate actions, RSS from Moneycontrol/Mint/Reuters India, plus the local holdings_events.db',
+        'Same JSON contract feeds both halves — the VPS never blocks on the cloud, the cloud is purely a synthesis layer'
+      ],
+      archFlow: ['Sources\n(yfinance + RSS)', 'VPS Builder\n08:00 IST', 'Claude Cloud\n08:02 IST', 'VPS SMTP\n08:03 IST'],
+      archHighlight: 2,
+      archInsight: '<strong>Separation of layers</strong> — the VPS handles deterministic work (fetching, persisting, transport via Gmail SMTP) while the cloud routine handles the part that benefits from language understanding (sentiment tags, narrative one-liner). Each side stays in its lane. <strong>Stateless cloud agent</strong> means there are no secrets to leak — the worst-case payload an attacker could harvest is a public-data forecast. <strong>Idempotent fallback</strong> at 08:08 IST guarantees delivery even when the cloud round-trip fails — the same dual-rail design banks use for critical settlement messaging where a backup channel must always exist.',
+      adr: '<strong>Decision:</strong> Webhook-back-to-VPS over having the cloud routine send email directly via Gmail MCP. <strong>Rationale:</strong> Gmail MCP only exposes <code>create_draft</code>, not <code>send_email</code> — letting the cloud handle delivery would mean clicking "Send" on a draft every morning. By keeping SMTP transport on the VPS (where the app password already lives), the loop stays fully autonomous. The 08:08 fallback exists because cloud sandboxes can fail silently; degraded brief beats no brief.',
+      patterns: ['Two-Stage Pipeline', 'Stateless Synthesis Layer', 'Self-Healing Fallback'],
+      links: { github: 'https://github.com/castroarun/Quantifyd', preview: 'https://castroarun.github.io/Quantifyd/premarket_brief_pipeline.html' }
+    },
     reppit: {
       features: [
         'Automatic strength-level detection based on lifts relative to bodyweight',

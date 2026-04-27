@@ -3,7 +3,7 @@
     "description": "Single source of truth for all portfolio projects",
     "lastUpdated": "2026-04-27",
     "usage": "Run 'node scripts/sync-projects.js' to update portfolio pages",
-    "lastSync": "2026-04-27T08:01:16.813Z"
+    "lastSync": "2026-04-27T08:09:01.784Z"
   },
   "projects": [
     {
