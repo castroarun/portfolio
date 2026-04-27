@@ -77,7 +77,8 @@
     littlereddot: '8 songs about love, resilience, and saying goodbye. A musical tribute to Singapore \u2014 from moonlit longing to unbroken flames. This is my heart, set to music.',
     klarity: 'Lightweight desktop task board with a 15-stage pipeline, ETag-based distributed sync, and multi-agent orchestration for AI-assisted developers. Built to bring clarity to complex workflows.',
     orbit: 'Mobile companion for Klarity \u2014 review, update, and triage tasks from your phone with zero-server architecture using GitHub as backend and SHA-based conflict resolution.',
-    'portfolio-optimization': 'Automated portfolio construction and maintenance \u2014 covered calls, rebalancing, and risk analytics to outperform market indexes.'
+    'portfolio-optimization': 'Automated portfolio construction and maintenance \u2014 covered calls, rebalancing, and risk analytics to outperform market indexes.',
+    'quantifyd-premarket-brief': 'A daily 08:00 IST intelligence brief for systematic trading. Two-stage pipeline with self-healing fallback. <ul style="margin:10px 0 0 0;padding-left:1.2em;line-height:1.7"><li><b>Stage 1 \u00b7 VPS builder (08:00 IST)</b> \u2014 Contabo Linux box pulls live data: yfinance, NSE F&amp;O ban CSV, holdings calendar, RSS feeds.</li><li><b>Stage 2 \u00b7 Claude Code routine (08:02 IST)</b> \u2014 sandboxed cloud agent reads the JSON, writes sentiment-tagged headlines + narrative one-liner, posts back.</li><li><b>Delivery (08:03 IST)</b> \u2014 VPS dispatches to <b>Gmail</b> (HTML email) and <b>WhatsApp</b> (Twilio summary). 08:08 fallback if cloud routine ever fails.</li></ul>'
   };
 
   // Tech stack overrides (portfolio may show different tech than JSON)

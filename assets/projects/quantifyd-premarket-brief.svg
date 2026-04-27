@@ -95,23 +95,30 @@
   <text x="944" y="596" text-anchor="middle" font-family="Inter, Helvetica, Arial, sans-serif" font-size="13" fill="#525252">Mock C v5 HTML</text>
   <text x="944" y="616" text-anchor="middle" font-family="JetBrains Mono, Courier, monospace" font-size="13" fill="#525252">/synthesized</text>
 
-  <!-- SMTP -->
-  <rect x="1088" y="510" width="200" height="140" rx="10" fill="#161B22" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
-  <text x="1188" y="544" text-anchor="middle" font-family="JetBrains Mono, Courier, monospace" font-size="14" fill="#22D3EE" font-weight="600" letter-spacing="1">08:03 IST</text>
-  <text x="1188" y="578" text-anchor="middle" font-family="Inter, Helvetica, Arial, sans-serif" font-size="22" font-weight="700" fill="#FAFAFA">SMTP</text>
-  <text x="1188" y="606" text-anchor="middle" font-family="Inter, Helvetica, Arial, sans-serif" font-size="13" fill="#525252">Gmail · TLS</text>
+  <!-- Dispatch -->
+  <rect x="1088" y="510" width="180" height="140" rx="10" fill="#161B22" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+  <text x="1178" y="544" text-anchor="middle" font-family="JetBrains Mono, Courier, monospace" font-size="15" fill="#22D3EE" font-weight="600" letter-spacing="1">08:03 IST</text>
+  <text x="1178" y="582" text-anchor="middle" font-family="Inter, Helvetica, Arial, sans-serif" font-size="24" font-weight="700" fill="#FAFAFA">Dispatch</text>
+  <text x="1178" y="612" text-anchor="middle" font-family="Inter, Helvetica, Arial, sans-serif" font-size="14" fill="#525252">Gmail + WhatsApp</text>
 
-  <!-- Inbox -->
-  <rect x="1316" y="544" width="100" height="72" rx="10" fill="rgba(34,197,94,0.1)" stroke="rgba(34,197,94,0.6)" stroke-width="2"/>
-  <text x="1366" y="578" text-anchor="middle" font-family="Inter, Helvetica, Arial, sans-serif" font-size="18" font-weight="700" fill="#FAFAFA">Inbox</text>
-  <text x="1366" y="600" text-anchor="middle" font-family="JetBrains Mono, Courier, monospace" font-size="11" fill="#22C55E">arun@gmail</text>
+  <!-- Gmail destination -->
+  <rect x="1304" y="478" width="148" height="68" rx="10" fill="rgba(34,197,94,0.1)" stroke="rgba(34,197,94,0.6)" stroke-width="2"/>
+  <text x="1378" y="510" text-anchor="middle" font-family="Inter, Helvetica, Arial, sans-serif" font-size="20" font-weight="700" fill="#FAFAFA">Gmail</text>
+  <text x="1378" y="532" text-anchor="middle" font-family="JetBrains Mono, Courier, monospace" font-size="13" fill="#22C55E">HTML email</text>
+
+  <!-- WhatsApp destination -->
+  <rect x="1304" y="612" width="148" height="68" rx="10" fill="rgba(34,197,94,0.1)" stroke="rgba(34,197,94,0.6)" stroke-width="2"/>
+  <text x="1378" y="644" text-anchor="middle" font-family="Inter, Helvetica, Arial, sans-serif" font-size="20" font-weight="700" fill="#FAFAFA">WhatsApp</text>
+  <text x="1378" y="666" text-anchor="middle" font-family="JetBrains Mono, Courier, monospace" font-size="13" fill="#22C55E">Twilio summary</text>
 
   <!-- Horizontal arrows -->
   <path d="M 312 580 L 350 580" fill="none" stroke="#22D3EE" stroke-width="2" marker-end="url(#ah)"/>
   <path d="M 556 580 L 594 580" fill="none" stroke="#22D3EE" stroke-width="2" marker-end="url(#ah)"/>
   <path d="M 800 580 L 838 580" fill="none" stroke="#22D3EE" stroke-width="2" marker-end="url(#ah)"/>
   <path d="M 1044 580 L 1082 580" fill="none" stroke="#22D3EE" stroke-width="2" marker-end="url(#ah)"/>
-  <path d="M 1288 580 L 1314 580" fill="none" stroke="#22D3EE" stroke-width="2" marker-end="url(#ah)"/>
+  <!-- Dispatch fork: up to Gmail, down to WhatsApp -->
+  <path d="M 1268 552 C 1286 552, 1286 512, 1304 512" fill="none" stroke="#22D3EE" stroke-width="2.5" marker-end="url(#ah)"/>
+  <path d="M 1268 608 C 1286 608, 1286 646, 1304 646" fill="none" stroke="#22D3EE" stroke-width="2.5" marker-end="url(#ah)"/>
 
   <!-- Cloud round-trip arrows -->
   <!-- JSON cache → Cloud -->
