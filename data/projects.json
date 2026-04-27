@@ -269,7 +269,7 @@
       "progress": { "completed": 9, "total": 9, "inProgress": null },
       "links": {
         "preview": "https://castroarun.github.io/Quantifyd/premarket_brief_pipeline.html",
-        "github": "https://github.com/castroarun/Quantifyd/blob/master/services/premarket_brief.py"
+        "github": "https://github.com/castroarun/Quantifyd/blob/master/docs/PREMARKET_BRIEF.md"
       },
       "display": { "showInResume": true, "trackRow": 3 }
     },
