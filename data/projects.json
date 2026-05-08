@@ -1,6 +1,32 @@
 {
   "projects": [
     {
+      "id": "cca-coach",
+      "name": "CCA Coach",
+      "tagline": "Agentic study system for the Claude Certified Architect exam",
+      "status": "crafting",
+      "statusText": "Building",
+      "statusHint": "(Building · Day 1 of 5 shipped)",
+      "statusColor": "#f59e0b",
+      "badgeClass": "building",
+      "tech": ["Python", "MCP", "SQLite", "Caddy", "OAuth 2.0", "Anthropic SDK"],
+      "description": "An agentic study companion for the Claude Certified Architect (CCA) Foundations exam — built with the patterns it teaches. Hosted MCP server on a Contabo VPS, sub-agent orchestration (orchestrator + workers), real evals. Reachable from Claude Desktop, claude.ai, and Claude Code with the same SQLite state across all clients.",
+      "descriptionHtml": "<ul style='margin:0;padding-left:1.1em'><li><strong>Hosted MCP server</strong> on Contabo VPS at <span style='font-family:monospace'>cca.anycalc.in/mcp</span> — Caddy-fronted, systemd-supervised, OAuth 2.0 + PKCE for claude.ai.</li><li><strong>Orchestrator + sub-agent workers</strong> (QuizGenerator, ConceptCoach, CodeReviewer) — every architectural choice maps to a CCA exam domain.</li><li><strong>Cross-client state</strong> via SQLite — weak-spot scores persist across Desktop, claude.ai, and Claude Code.</li></ul>",
+      "shortDesc": "Agentic CCA study tool — MCP server + sub-agents + cross-client SQLite state.",
+      "category": "featured",
+      "featured": true,
+      "icon": "🎓",
+      "iconColor": "#22D3EE",
+      "image": "assets/projects/cca-coach.png",
+      "progress": { "completed": 1, "total": 5, "inProgress": 2 },
+      "links": {
+        "preview": "/portfolio/projects/cca-coach.html",
+        "details": "/portfolio/projects/cca-coach.html",
+        "github": "https://github.com/castroarun"
+      },
+      "display": { "showInResume": true, "trackRow": 1 }
+    },
+    {
       "id": "anycalc",
       "name": "AnyCalc",
       "tagline": "Calculate anything, anywhere",

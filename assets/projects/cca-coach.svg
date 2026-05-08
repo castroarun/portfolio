@@ -1,0 +1,145 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1492 940" width="1492" height="940">
+  <defs>
+    <linearGradient id="bg-grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0A0A0F"/>
+      <stop offset="100%" stop-color="#0F1117"/>
+    </linearGradient>
+    <linearGradient id="title-grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FAFAFA"/>
+      <stop offset="100%" stop-color="#A1A1A1"/>
+    </linearGradient>
+    <linearGradient id="vps-grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(34,211,238,0.06)"/>
+      <stop offset="100%" stop-color="rgba(34,211,238,0.0)"/>
+    </linearGradient>
+    <marker id="arrowhead" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#22D3EE"/>
+    </marker>
+    <marker id="arrowhead-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#A78BFA"/>
+    </marker>
+    <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M 60 0 L 0 0 0 60" fill="none" stroke="rgba(255,255,255,0.018)" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1492" height="940" fill="url(#bg-grad)"/>
+  <rect width="1492" height="940" fill="url(#grid)"/>
+
+  <!-- Title block -->
+  <text x="80" y="105" font-family="JetBrains Mono, monospace" font-size="16" letter-spacing="3" fill="#22D3EE" font-weight="600">CCA COACH · AGENTIC STUDY SYSTEM</text>
+  <text x="80" y="170" font-family="Inter Tight, sans-serif" font-size="62" font-weight="700" letter-spacing="-2" fill="url(#title-grad)">Built with the patterns it teaches.</text>
+  <text x="80" y="218" font-family="Inter Tight, sans-serif" font-size="22" fill="#A1A1A1">Hosted MCP server  ·  Sub-agent orchestration  ·  Cross-client SQLite state.</text>
+
+  <!-- Top: Claude clients -->
+  <g>
+    <rect x="80" y="290" width="240" height="84" rx="10" fill="#161B22" stroke="rgba(255,255,255,0.10)" stroke-width="1"/>
+    <text x="200" y="320" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" letter-spacing="1.5" fill="#525252">CLIENT</text>
+    <text x="200" y="345" text-anchor="middle" font-family="Inter Tight, sans-serif" font-size="17" font-weight="600" fill="#FAFAFA">Claude Desktop</text>
+    <text x="200" y="365" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#A1A1A1">stdio · local</text>
+
+    <rect x="370" y="290" width="240" height="84" rx="10" fill="#161B22" stroke="rgba(255,255,255,0.10)" stroke-width="1"/>
+    <text x="490" y="320" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" letter-spacing="1.5" fill="#525252">CLIENT</text>
+    <text x="490" y="345" text-anchor="middle" font-family="Inter Tight, sans-serif" font-size="17" font-weight="600" fill="#FAFAFA">claude.ai</text>
+    <text x="490" y="365" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#A1A1A1">custom connector · OAuth</text>
+
+    <rect x="660" y="290" width="240" height="84" rx="10" fill="#161B22" stroke="rgba(255,255,255,0.10)" stroke-width="1"/>
+    <text x="780" y="320" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" letter-spacing="1.5" fill="#525252">CLIENT</text>
+    <text x="780" y="345" text-anchor="middle" font-family="Inter Tight, sans-serif" font-size="17" font-weight="600" fill="#FAFAFA">Claude Code</text>
+    <text x="780" y="365" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#A1A1A1">SSE · bearer</text>
+  </g>
+
+  <!-- Arrows: clients -> Caddy -->
+  <path d="M 200 380 L 200 432" fill="none" stroke="#22D3EE" stroke-width="1.6" marker-end="url(#arrowhead)"/>
+  <path d="M 490 380 L 490 432" fill="none" stroke="#22D3EE" stroke-width="1.6" marker-end="url(#arrowhead)"/>
+  <path d="M 780 380 L 780 432" fill="none" stroke="#22D3EE" stroke-width="1.6" marker-end="url(#arrowhead)"/>
+
+  <text x="930" y="340" font-family="JetBrains Mono, monospace" font-size="11" fill="#525252">HTTPS + Bearer / OAuth 2.0 + PKCE</text>
+
+  <!-- VPS container -->
+  <rect x="80" y="450" width="820" height="380" rx="14" fill="rgba(22,27,34,0.5)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+  <rect x="80" y="450" width="820" height="380" rx="14" fill="url(#vps-grad)"/>
+  <text x="106" y="486" font-family="JetBrains Mono, monospace" font-size="14" letter-spacing="2" fill="#525252">CONTABO VPS · cca.anycalc.in</text>
+
+  <!-- Caddy -->
+  <rect x="106" y="510" width="768" height="58" rx="8" fill="#0F1117" stroke="rgba(34,211,238,0.4)" stroke-width="1"/>
+  <text x="490" y="535" text-anchor="middle" font-family="Inter Tight, sans-serif" font-size="16" font-weight="600" fill="#FAFAFA">Caddy · TLS termination · reverse proxy</text>
+  <text x="490" y="555" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#A1A1A1">Auto-renew Let's Encrypt  ·  HTTP/2  ·  access log</text>
+
+  <!-- arrow caddy -> mcp -->
+  <path d="M 490 575 L 490 600" fill="none" stroke="#22D3EE" stroke-width="1.4" marker-end="url(#arrowhead)"/>
+  <text x="510" y="590" font-family="JetBrains Mono, monospace" font-size="10" fill="#525252">127.0.0.1:8765</text>
+
+  <!-- MCP server -->
+  <rect x="106" y="610" width="768" height="56" rx="8" fill="#161B22" stroke="rgba(255,255,255,0.10)" stroke-width="1"/>
+  <text x="490" y="634" text-anchor="middle" font-family="Inter Tight, sans-serif" font-size="16" font-weight="600" fill="#FAFAFA">mcp_server.py · uvicorn · HTTP/SSE adapter</text>
+  <text x="490" y="654" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#A1A1A1">auth middleware  ·  MCP framing  ·  systemd-supervised</text>
+
+  <!-- arrow mcp -> core -->
+  <path d="M 490 670 L 490 692" fill="none" stroke="#22D3EE" stroke-width="1.4" marker-end="url(#arrowhead)"/>
+
+  <!-- Core (3 columns) -->
+  <rect x="106" y="700" width="245" height="76" rx="8" fill="#0F1117" stroke="rgba(255,255,255,0.10)"/>
+  <text x="228" y="725" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="1.5" fill="#525252">CORE</text>
+  <text x="228" y="747" text-anchor="middle" font-family="Inter Tight, sans-serif" font-size="15" font-weight="600" fill="#FAFAFA">topics.py</text>
+  <text x="228" y="765" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#A1A1A1">get_next_topic · weak_spots</text>
+
+  <rect x="367" y="700" width="245" height="76" rx="8" fill="#0F1117" stroke="rgba(255,255,255,0.10)"/>
+  <text x="489" y="725" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="1.5" fill="#525252">CORE</text>
+  <text x="489" y="747" text-anchor="middle" font-family="Inter Tight, sans-serif" font-size="15" font-weight="600" fill="#FAFAFA">scoring.py</text>
+  <text x="489" y="765" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#A1A1A1">recency-weighted misses</text>
+
+  <rect x="628" y="700" width="246" height="76" rx="8" fill="#0F1117" stroke="rgba(255,255,255,0.10)"/>
+  <text x="751" y="725" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="1.5" fill="#525252">CORE</text>
+  <text x="751" y="747" text-anchor="middle" font-family="Inter Tight, sans-serif" font-size="15" font-weight="600" fill="#FAFAFA">sessions.py</text>
+  <text x="751" y="765" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#A1A1A1">log_quiz_attempt · record</text>
+
+  <!-- arrows to DB -->
+  <path d="M 228 778 L 228 808 L 490 808" fill="none" stroke="#22D3EE" stroke-width="1.2" stroke-dasharray="0"/>
+  <path d="M 489 778 L 489 808" fill="none" stroke="#22D3EE" stroke-width="1.2"/>
+  <path d="M 751 778 L 751 808 L 490 808" fill="none" stroke="#22D3EE" stroke-width="1.2"/>
+  <path d="M 490 808 L 490 818" fill="none" stroke="#22D3EE" stroke-width="1.4" marker-end="url(#arrowhead)"/>
+
+  <!-- right: workers + tools -->
+  <g>
+    <rect x="940" y="450" width="470" height="380" rx="14" fill="rgba(167,139,250,0.04)" stroke="rgba(167,139,250,0.30)" stroke-width="1"/>
+    <text x="966" y="486" font-family="JetBrains Mono, monospace" font-size="14" letter-spacing="2" fill="#A78BFA">SUB-AGENT ORCHESTRATION</text>
+
+    <rect x="966" y="510" width="418" height="64" rx="8" fill="#161B22" stroke="rgba(167,139,250,0.30)"/>
+    <text x="1175" y="536" text-anchor="middle" font-family="Inter Tight, sans-serif" font-size="16" font-weight="600" fill="#FAFAFA">Orchestrator</text>
+    <text x="1175" y="556" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#A1A1A1">picks weakest domain · routes session</text>
+
+    <rect x="966" y="590" width="132" height="80" rx="8" fill="#0F1117" stroke="rgba(167,139,250,0.20)"/>
+    <text x="1032" y="616" text-anchor="middle" font-family="Inter Tight, sans-serif" font-size="14" font-weight="600" fill="#FAFAFA">QuizGenerator</text>
+    <text x="1032" y="635" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#A1A1A1">scenario MCQs</text>
+    <text x="1032" y="652" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#A1A1A1">JSON-schema</text>
+
+    <rect x="1109" y="590" width="132" height="80" rx="8" fill="#0F1117" stroke="rgba(167,139,250,0.20)"/>
+    <text x="1175" y="616" text-anchor="middle" font-family="Inter Tight, sans-serif" font-size="14" font-weight="600" fill="#FAFAFA">ConceptCoach</text>
+    <text x="1175" y="635" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#A1A1A1">Socratic mode</text>
+    <text x="1175" y="652" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#A1A1A1">never gives answer</text>
+
+    <rect x="1252" y="590" width="132" height="80" rx="8" fill="#0F1117" stroke="rgba(167,139,250,0.20)"/>
+    <text x="1318" y="616" text-anchor="middle" font-family="Inter Tight, sans-serif" font-size="14" font-weight="600" fill="#FAFAFA">CodeReviewer</text>
+    <text x="1318" y="635" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#A1A1A1">critiques MCP</text>
+    <text x="1318" y="652" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#A1A1A1">+ agent prompts</text>
+
+    <text x="966" y="710" font-family="JetBrains Mono, monospace" font-size="12" letter-spacing="2" fill="#525252">FIVE MCP TOOLS</text>
+    <text x="966" y="734" font-family="JetBrains Mono, monospace" font-size="12" fill="#22D3EE">get_next_topic()</text>
+    <text x="1175" y="734" font-family="JetBrains Mono, monospace" font-size="12" fill="#525252">get_weak_spots()</text>
+    <text x="966" y="754" font-family="JetBrains Mono, monospace" font-size="12" fill="#525252">log_quiz_attempt()</text>
+    <text x="1175" y="754" font-family="JetBrains Mono, monospace" font-size="12" fill="#525252">fetch_scenario()</text>
+    <text x="966" y="774" font-family="JetBrains Mono, monospace" font-size="12" fill="#525252">record_study_session()</text>
+
+    <text x="966" y="808" font-family="JetBrains Mono, monospace" font-size="11" fill="#525252">Day 1 shipped: get_next_topic · OAuth · TLS · SSE</text>
+  </g>
+
+  <!-- DB -->
+  <ellipse cx="490" cy="858" rx="118" ry="22" fill="#0F1117" stroke="rgba(34,211,238,0.45)" stroke-width="1.4"/>
+  <text x="490" y="853" text-anchor="middle" font-family="Inter Tight, sans-serif" font-size="14" font-weight="600" fill="#FAFAFA">SQLite</text>
+  <text x="490" y="870" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#A1A1A1">cca_coach.db · WAL · 5 tables</text>
+
+  <!-- legend / footer -->
+  <text x="80" y="912" font-family="JetBrains Mono, monospace" font-size="11" fill="#525252">cca.anycalc.in/mcp  ·  systemd-supervised  ·  pure-Python core  ·  thin MCP adapter  ·  same DB across all clients</text>
+</svg>

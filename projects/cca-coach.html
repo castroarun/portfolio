@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CCA Coach · Castronix</title>
+<meta name="description" content="Agentic study system for the Claude Certified Architect Foundations exam. Hosted MCP server, sub-agent orchestration, real evals — built with the patterns the exam tests.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="CCA Coach · Built with the patterns it teaches.">
+<meta property="og:description" content="Hosted MCP server on a Contabo VPS. Orchestrator + sub-agents. SQLite state shared across every Claude client.">
+<meta property="og:url" content="https://castroarun.github.io/portfolio/projects/cca-coach.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg-base:#0A0A0F;
+  --bg-surface:#0F1117;
+  --bg-elevated:#161B22;
+  --bg-card:rgba(22,27,34,0.6);
+  --text-primary:#FAFAFA;
+  --text-secondary:#A1A1A1;
+  --text-tertiary:#525252;
+  --accent:#22D3EE;
+  --accent-hover:#06B6D4;
+  --accent-blue:#0EA5E9;
+  --accent-purple:#A78BFA;
+  --accent-subtle:rgba(34,211,238,0.1);
+  --accent-glow:rgba(34,211,238,0.15);
+  --success:#22C55E;
+  --warning:#F59E0B;
+  --error:#EF4444;
+  --border-subtle:rgba(255,255,255,0.05);
+  --border-default:rgba(255,255,255,0.08);
+  --border-strong:rgba(255,255,255,0.12);
+  --grad-primary:linear-gradient(135deg,#22D3EE 0%,#0EA5E9 100%);
+}
+
+body{
+  font-family:'Inter Tight',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  background:var(--bg-base);
+  color:var(--text-primary);
+  line-height:1.55;
+  font-feature-settings:'cv02','cv03','cv04','cv11';
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+
+body::before{
+  content:'';
+  position:fixed;inset:0;
+  background:radial-gradient(800px circle at var(--mouse-x,50%) var(--mouse-y,50%),rgba(34,211,238,0.05),transparent 40%);
+  pointer-events:none;z-index:0;
+}
+body::after{
+  content:'';
+  position:fixed;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,0.012) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.012) 1px,transparent 1px);
+  background-size:60px 60px;pointer-events:none;z-index:0;
+}
+
+.container{max-width:1100px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
+
+/* ===== NAV ===== */
+.nav{
+  position:sticky;top:0;z-index:50;
+  backdrop-filter:saturate(180%) blur(14px);
+  -webkit-backdrop-filter:saturate(180%) blur(14px);
+  background:rgba(10,10,15,0.65);
+  border-bottom:1px solid var(--border-subtle);
+}
+.nav-inner{max-width:1100px;margin:0 auto;padding:14px 24px;display:flex;justify-content:space-between;align-items:center}
+.nav-brand{font-weight:700;font-size:14px;letter-spacing:-0.01em;display:flex;align-items:center;gap:10px}
+.nav-brand .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent-glow)}
+.nav-link{font-size:13px;color:var(--text-secondary);text-decoration:none;transition:color .2s}
+.nav-link:hover{color:var(--accent)}
+
+/* ===== HERO ===== */
+.hero{padding:120px 0 80px}
+.hero-eyebrow{
+  font-family:'JetBrains Mono',monospace;
+  font-size:12px;color:var(--accent);
+  letter-spacing:0.15em;text-transform:uppercase;
+  margin-bottom:24px;display:inline-flex;align-items:center;gap:10px;
+}
+.hero-eyebrow .pulse{
+  width:6px;height:6px;border-radius:50%;background:var(--warning);
+  box-shadow:0 0 8px var(--warning);animation:pulse 2s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(0.8)}}
+.hero h1{
+  font-size:clamp(38px,6vw,68px);
+  font-weight:700;
+  letter-spacing:-0.035em;
+  line-height:1.05;
+  margin-bottom:24px;
+  background:linear-gradient(180deg,#FAFAFA 0%,#A1A1A1 100%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+}
+.hero-lede{
+  font-size:21px;color:var(--text-secondary);
+  max-width:760px;line-height:1.6;margin-bottom:18px;
+}
+.hero p{
+  font-size:17px;color:var(--text-secondary);
+  max-width:760px;line-height:1.65;
+}
+.hero-meta{
+  margin-top:40px;display:flex;flex-wrap:wrap;gap:32px;
+  padding-top:32px;border-top:1px solid var(--border-subtle);
+}
+.hero-meta-item{display:flex;flex-direction:column;gap:4px}
+.hero-meta-label{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;color:var(--text-tertiary);
+  text-transform:uppercase;letter-spacing:0.1em;
+}
+.hero-meta-value{font-size:14px;color:var(--text-primary);font-weight:500}
+.hero-meta-value.warn{color:var(--warning)}
+.hero-meta-value.accent{color:var(--accent)}
+
+/* ===== SECTION ===== */
+.section{padding:80px 0;border-top:1px solid var(--border-subtle)}
+.section-eyebrow{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;color:var(--accent);
+  letter-spacing:0.15em;text-transform:uppercase;
+  margin-bottom:16px;
+}
+.section h2{
+  font-size:clamp(28px,4vw,40px);
+  font-weight:600;
+  letter-spacing:-0.025em;
+  margin-bottom:20px;line-height:1.15;
+}
+.section-lead{
+  font-size:17px;color:var(--text-secondary);
+  max-width:760px;margin-bottom:48px;line-height:1.65;
+}
+
+/* ===== ARCH IMAGE WRAP ===== */
+.arch-figure{
+  margin-top:24px;background:linear-gradient(180deg,rgba(34,211,238,0.02) 0%,transparent 100%);
+  border:1px solid var(--border-subtle);border-radius:12px;
+  padding:24px;overflow:hidden;
+}
+.arch-figure img{display:block;width:100%;height:auto;border-radius:8px}
+.arch-figure-caption{
+  margin-top:16px;
+  font-family:'JetBrains Mono',monospace;font-size:11px;
+  color:var(--text-tertiary);text-align:center;letter-spacing:0.05em;
+}
+
+/* ===== ARCHITECTURE GRID ===== */
+.arch-grid{display:grid;grid-template-columns:1fr;gap:16px;margin-top:24px}
+@media(min-width:760px){.arch-grid{grid-template-columns:1fr 1fr}}
+.arch-card{
+  padding:28px;border-radius:12px;
+  background:var(--bg-card);
+  border:1px solid var(--border-subtle);
+  transition:all .3s;
+}
+.arch-card:hover{border-color:var(--border-strong);background:rgba(22,27,34,0.8)}
+.arch-card-icon{
+  display:inline-flex;width:42px;height:42px;
+  align-items:center;justify-content:center;border-radius:10px;
+  background:var(--accent-subtle);margin-bottom:18px;
+  font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:13px;font-weight:700;
+}
+.arch-card-title{font-size:18px;font-weight:600;margin-bottom:8px;letter-spacing:-0.01em}
+.arch-card-desc{color:var(--text-secondary);font-size:14px;line-height:1.65}
+.arch-card-tags{margin-top:18px;display:flex;flex-wrap:wrap;gap:6px}
+
+/* ===== PHASE GRID ===== */
+.phase-grid{display:grid;grid-template-columns:1fr;gap:16px;margin-top:24px}
+@media(min-width:880px){.phase-grid{grid-template-columns:repeat(3,1fr)}}
+.phase-card{
+  padding:24px;border-radius:12px;
+  background:var(--bg-card);
+  border:1px solid var(--border-subtle);
+  position:relative;
+}
+.phase-num{
+  font-family:'JetBrains Mono',monospace;font-size:11px;
+  color:var(--accent);letter-spacing:0.15em;text-transform:uppercase;
+  margin-bottom:10px;
+}
+.phase-title{font-size:18px;font-weight:600;margin-bottom:10px;letter-spacing:-0.01em}
+.phase-desc{color:var(--text-secondary);font-size:14px;line-height:1.65;margin-bottom:14px}
+.phase-list{list-style:none;padding:0;margin:0}
+.phase-list li{
+  font-family:'JetBrains Mono',monospace;font-size:12px;
+  color:var(--text-secondary);padding:5px 0 5px 16px;position:relative;
+}
+.phase-list li::before{
+  content:'>';position:absolute;left:0;top:5px;
+  color:var(--accent);font-weight:700;
+}
+
+/* ===== EXAM TABLE ===== */
+.exam-table{
+  width:100%;border-collapse:collapse;margin-top:24px;
+  background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:10px;
+  overflow:hidden;
+}
+.exam-table th, .exam-table td{
+  padding:14px 18px;text-align:left;font-size:14px;
+  border-bottom:1px solid var(--border-subtle);
+}
+.exam-table th{
+  font-family:'JetBrains Mono',monospace;font-size:11px;
+  color:var(--text-tertiary);font-weight:500;
+  text-transform:uppercase;letter-spacing:0.1em;
+  background:rgba(0,0,0,0.2);
+}
+.exam-table tr:last-child td{border-bottom:none}
+.exam-table td.weight{
+  font-family:'JetBrains Mono',monospace;color:var(--accent);font-weight:600;
+}
+.exam-table td.codepath{
+  font-family:'JetBrains Mono',monospace;color:var(--text-secondary);font-size:13px;
+}
+
+/* ===== TIMELINE ===== */
+.timeline{position:relative;padding-left:36px;margin-top:24px}
+.timeline::before{
+  content:'';position:absolute;left:11px;top:8px;bottom:8px;
+  width:1px;background:linear-gradient(180deg,var(--success) 0%,var(--accent) 50%,var(--accent-purple) 100%);
+  opacity:0.5;
+}
+.timeline-step{position:relative;padding:18px 0 28px}
+.timeline-step::before{
+  content:'';position:absolute;left:-30px;top:26px;
+  width:14px;height:14px;border-radius:50%;
+  background:var(--bg-base);border:2px solid var(--accent);
+  box-shadow:0 0 0 4px rgba(34,211,238,0.1);
+}
+.timeline-step.done::before{background:var(--success);border-color:var(--success);box-shadow:0 0 0 4px rgba(34,197,94,0.15)}
+.timeline-step.next::before{background:var(--bg-base);border-color:var(--warning);box-shadow:0 0 0 4px rgba(245,158,11,0.12)}
+.timeline-day{
+  font-family:'JetBrains Mono',monospace;font-size:12px;
+  color:var(--accent);font-weight:600;letter-spacing:0.05em;margin-bottom:6px;
+}
+.timeline-step.done .timeline-day{color:var(--success)}
+.timeline-step.next .timeline-day{color:var(--warning)}
+.timeline-title{font-size:18px;font-weight:600;margin-bottom:6px;letter-spacing:-0.01em}
+.timeline-desc{color:var(--text-secondary);max-width:680px;font-size:14px;line-height:1.65}
+
+/* ===== RHYTHM ===== */
+.rhythm-grid{display:grid;grid-template-columns:1fr;gap:24px;margin-top:24px}
+@media(min-width:760px){.rhythm-grid{grid-template-columns:1fr 1fr}}
+.rhythm-card{
+  padding:28px;border-radius:12px;
+  background:var(--bg-card);border:1px solid var(--border-subtle);
+}
+.rhythm-card-title{
+  font-size:16px;font-weight:600;margin-bottom:18px;letter-spacing:-0.01em;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.rhythm-card-time{
+  font-family:'JetBrains Mono',monospace;font-size:11px;
+  color:var(--accent);letter-spacing:0.1em;text-transform:uppercase;
+}
+.rhythm-list{list-style:none;padding:0}
+.rhythm-list li{
+  display:grid;grid-template-columns:60px 1fr;gap:14px;
+  padding:10px 0;border-bottom:1px dashed var(--border-subtle);
+  font-size:14px;color:var(--text-secondary);
+}
+.rhythm-list li:last-child{border-bottom:none}
+.rhythm-list li .mins{
+  font-family:'JetBrains Mono',monospace;
+  color:var(--accent);font-weight:600;
+}
+
+/* ===== CONNECT BOX ===== */
+.code-block{
+  margin-top:24px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:13px;
+  background:#000;border:1px solid var(--border-subtle);
+  border-radius:10px;padding:20px 24px;
+  color:var(--text-secondary);
+  overflow-x:auto;
+  line-height:1.7;
+}
+.code-block .comment{color:var(--text-tertiary)}
+.code-block .keyword{color:var(--accent-purple)}
+.code-block .string{color:var(--success)}
+.code-block .var{color:var(--accent)}
+
+.notice{
+  margin-top:18px;padding:14px 18px;
+  background:rgba(245,158,11,0.07);
+  border:1px solid rgba(245,158,11,0.30);
+  border-radius:8px;
+  font-size:13px;color:var(--warning);
+  display:flex;gap:12px;align-items:flex-start;
+}
+.notice strong{color:var(--text-primary);display:block;margin-bottom:4px}
+.notice span{color:var(--text-secondary)}
+
+/* ===== TECH STACK ===== */
+.tech-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.tech-pill{
+  font-family:'JetBrains Mono',monospace;font-size:12px;
+  padding:8px 14px;border-radius:6px;
+  background:var(--bg-elevated);
+  border:1px solid var(--border-subtle);
+  color:var(--text-secondary);
+  display:inline-flex;align-items:center;gap:8px;
+  text-decoration:none;transition:all .2s;
+}
+.tech-pill:hover{border-color:var(--accent);color:var(--accent)}
+.tech-pill .dot{width:6px;height:6px;border-radius:50%;background:var(--accent)}
+
+/* ===== FOOTER ===== */
+.footer{
+  padding:60px 0 80px;border-top:1px solid var(--border-subtle);
+  color:var(--text-tertiary);font-size:13px;
+}
+.footer a{color:var(--accent);text-decoration:none}
+.footer a:hover{text-decoration:underline}
+
+.mono{font-family:'JetBrains Mono',monospace}
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-brand"><span class="dot"></span> cca-coach</div>
+    <a href="../index.html" class="nav-link">&larr; Back to portfolio</a>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-eyebrow"><span class="pulse"></span> Building &middot; Day 1 of 5 shipped</div>
+    <h1>I built my CCA prep tool as the system the exam tests.</h1>
+    <p class="hero-lede">An agentic study companion for the Claude Certified Architect (CCA) Foundations exam. Hosted MCP server, sub-agent orchestration, real evals. Used daily.</p>
+    <p>The CCA exam tests architectural judgment &mdash; when to fan out to sub-agents, how to design MCP tools that recover gracefully, how to budget context across long-running workflows. You don&rsquo;t get that from flashcards. You get it from shipping the thing.</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <div class="hero-meta-label">Status</div>
+        <div class="hero-meta-value warn">Building &middot; 4 days to MVP</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-label">Target exam</div>
+        <div class="hero-meta-value">2026-06-19</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-label">MCP endpoint</div>
+        <div class="hero-meta-value accent">cca.anycalc.in/mcp</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-label">Stack</div>
+        <div class="hero-meta-value">Python &middot; MCP SDK &middot; SQLite &middot; Caddy</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ARCHITECTURE ============ -->
+<section class="section">
+  <div class="container">
+    <div class="section-eyebrow">01 &middot; Architecture</div>
+    <h2>Two halves, one loop.</h2>
+    <p class="section-lead">A Contabo VPS hosts the MCP server behind Caddy TLS termination. Any Claude client &mdash; Desktop, claude.ai, Claude Code &mdash; connects with a bearer token (or OAuth 2.0 + PKCE for claude.ai). The orchestrator picks the weakest exam domain, dispatches a worker, persists the attempt, updates the score. Same SQLite. Same truth. Every client.</p>
+
+    <div class="arch-figure">
+      <img src="../assets/projects/cca-coach.png" alt="CCA Coach architecture diagram showing Claude clients connecting through Caddy to the MCP server, orchestrator-worker layer, and shared SQLite database">
+      <div class="arch-figure-caption">CLIENTS &rarr; CADDY &rarr; MCP SERVER &rarr; PURE-PYTHON CORE &rarr; SQLITE &middot; SUB-AGENTS ORCHESTRATED IN-PROCESS</div>
+    </div>
+
+    <div class="arch-grid">
+      <div class="arch-card">
+        <div class="arch-card-icon">VPS</div>
+        <div class="arch-card-title">Contabo &middot; one machine</div>
+        <div class="arch-card-desc">Caddy terminates TLS at <span class="mono">cca.anycalc.in/mcp</span> with auto Let&rsquo;s Encrypt. uvicorn binds <span class="mono">127.0.0.1:8765</span>; only Caddy can reach it. systemd supervises with <span class="mono">Restart=on-failure</span>, <span class="mono">NoNewPrivileges</span>, narrow <span class="mono">ReadWritePaths</span>. Bearer token in <span class="mono">/etc/cca-coach.env</span> chmod 600 &mdash; never logged, never in repo.</div>
+      </div>
+      <div class="arch-card">
+        <div class="arch-card-icon">CORE</div>
+        <div class="arch-card-title">Pure Python &middot; thin adapter</div>
+        <div class="arch-card-desc"><span class="mono">cca_coach.core/</span> is unit-testable without HTTP, without an Anthropic key, without a network. <span class="mono">mcp_server.py</span> is a 1-line dispatch into <span class="mono">core/</span> per tool. Replacing SSE with stdio or gRPC doesn&rsquo;t touch logic. Same hexagonal split banks use to insulate ledger systems from channel changes.</div>
+      </div>
+      <div class="arch-card">
+        <div class="arch-card-icon">AUTH</div>
+        <div class="arch-card-title">Bearer + OAuth 2.0 + PKCE</div>
+        <div class="arch-card-desc">Bearer for Desktop and Claude Code. Full OAuth 2.0 + PKCE for claude.ai (it requires it). 32 random bytes from <span class="mono">secrets.token_urlsafe</span>. Rotation is one line in <span class="mono">/etc/cca-coach.env</span> + <span class="mono">systemctl restart</span>. Zero downtime; clients reconnect via SSE.</div>
+      </div>
+      <div class="arch-card">
+        <div class="arch-card-icon">DB</div>
+        <div class="arch-card-title">SQLite &middot; shared truth</div>
+        <div class="arch-card-desc">Single SQLite file with WAL + foreign keys. Five tables: topics, questions, attempts, weak_spots, study_sessions. Same DB across every Claude client &mdash; the weak-spot score from a Desktop quiz informs tomorrow&rsquo;s claude.ai session. Nightly <span class="mono">deploy/backup.sh</span> to <span class="mono">/var/backups/cca</span>.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ COURSE / PHASES ============ -->
+<section class="section">
+  <div class="container">
+    <div class="section-eyebrow">02 &middot; The study cycle</div>
+    <h2>Acquire &rarr; Consolidate &rarr; Reinforce.</h2>
+    <p class="section-lead">A three-phase rhythm. Reading happens outside the tool &mdash; primary sources only. Consolidation happens inside the tool through Socratic dialogue. Reinforcement is automatic: tomorrow&rsquo;s session opens with what was missed yesterday.</p>
+
+    <div class="phase-grid">
+      <div class="phase-card">
+        <div class="phase-num">Phase 01 &middot; Acquire</div>
+        <div class="phase-title">Read the source.</div>
+        <div class="phase-desc">Outside the tool. Tier-1 sources only &mdash; no second-hand summaries.</div>
+        <ul class="phase-list">
+          <li>Anthropic &ldquo;Building effective agents&rdquo;</li>
+          <li>modelcontextprotocol.io spec</li>
+          <li>Anthropic Academy CCA path (Skilljar)</li>
+        </ul>
+      </div>
+      <div class="phase-card">
+        <div class="phase-num">Phase 02 &middot; Consolidate</div>
+        <div class="phase-title">Socratic dialogue.</div>
+        <div class="phase-desc">Inside the tool. The Concept Coach never gives the answer first &mdash; it asks me to design before it explains.</div>
+        <ul class="phase-list">
+          <li>Quiz attempts logged via MCP</li>
+          <li>Scenario MCQs tagged by domain</li>
+          <li>Code review of my own MCP tools</li>
+        </ul>
+      </div>
+      <div class="phase-card">
+        <div class="phase-num">Phase 03 &middot; Reinforce</div>
+        <div class="phase-title">Spaced &amp; weighted.</div>
+        <div class="phase-desc">Recency-weighted miss rate per domain drives session selection. Weak spots compound interest until you fix them.</div>
+        <ul class="phase-list">
+          <li>Cross-session score persistence</li>
+          <li>Cross-client (Desktop &harr; web)</li>
+          <li>Daily session opens at the weakest</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 style="margin-top:64px;font-size:20px;font-weight:600;letter-spacing:-0.015em">Exam domain coverage</h3>
+    <p class="section-lead" style="margin-top:8px;margin-bottom:0">Every architectural choice maps to one of the five exam domains. The codebase <em>is</em> the curriculum.</p>
+
+    <table class="exam-table">
+      <thead>
+        <tr><th>Exam domain</th><th>Weight</th><th>Where it shows up</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Agentic Architecture &amp; Orchestration</td>
+          <td class="weight">27%</td>
+          <td class="codepath">orchestrator.py + workers/ (orchestrator-worker pattern)</td>
+        </tr>
+        <tr>
+          <td>Claude Code Configuration &amp; Workflows</td>
+          <td class="weight">20%</td>
+          <td class="codepath">.claude/ skills + hooks (stretch)</td>
+        </tr>
+        <tr>
+          <td>Prompt Engineering &amp; Structured Output</td>
+          <td class="weight">20%</td>
+          <td class="codepath">Worker prompts + JSON-schema tool outputs</td>
+        </tr>
+        <tr>
+          <td>Tool Design &amp; MCP Integration</td>
+          <td class="weight">18%</td>
+          <td class="codepath">mcp_server.py + oauth.py</td>
+        </tr>
+        <tr>
+          <td>Context Management &amp; Reliability</td>
+          <td class="weight">15%</td>
+          <td class="codepath">tests/evals/ + caching + retry logic</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ PROGRESS TIMELINE ============ -->
+<section class="section">
+  <div class="container">
+    <div class="section-eyebrow">03 &middot; What&rsquo;s built</div>
+    <h2>Day 1 shipped. Four to go.</h2>
+    <p class="section-lead">A 5-day MVP plan. Day 1 closed today &mdash; the architecture is live in production, even if the curriculum isn&rsquo;t seeded yet. Days 2&ndash;5 turn the skeleton into a working study companion.</p>
+
+    <div class="timeline">
+      <div class="timeline-step done">
+        <div class="timeline-day">Day 1 &middot; 2026-05-08 &middot; Shipped</div>
+        <div class="timeline-title">MCP server skeleton + production deploy</div>
+        <div class="timeline-desc">SQLite schema (5 tables), <span class="mono">get_next_topic()</span> tool, HTTP/SSE transport, bearer auth, OAuth 2.0 + PKCE for claude.ai compatibility, Caddy reverse proxy with TLS, systemd unit. End-to-end reachable from all three Claude clients.</div>
+      </div>
+      <div class="timeline-step next">
+        <div class="timeline-day">Day 2 &middot; Up next</div>
+        <div class="timeline-title">Seed exam domains + study plan</div>
+        <div class="timeline-desc">The 5 domains, weights, and sub-topics as Python data. Idempotent <span class="mono">seed.py</span>. <span class="mono">get_weak_spots()</span> MCP tool returning <span class="mono">[{domain, score, last_attempt}]</span>. The orchestrator finally has data to plan against.</div>
+      </div>
+      <div class="timeline-step">
+        <div class="timeline-day">Day 3</div>
+        <div class="timeline-title">QuizGenerator worker + attempt logging</div>
+        <div class="timeline-desc">First worker. Anthropic SDK call returning <span class="mono">{question, options[4], correct_idx, explanation}</span>, every question tagged with domain + sub-topic + difficulty. <span class="mono">log_quiz_attempt()</span> persists, <span class="mono">fetch_scenario()</span> serves prompts. Prompt caching on the system prompt.</div>
+      </div>
+      <div class="timeline-step">
+        <div class="timeline-day">Day 4</div>
+        <div class="timeline-title">Orchestrator + weak-spot scoring</div>
+        <div class="timeline-desc">The 27% domain. Recency-weighted miss rate per domain. <span class="mono">cca-coach study</span> CLI &rarr; orchestrator &rarr; worker &rarr; DB. <span class="mono">record_study_session()</span> closes the loop.</div>
+      </div>
+      <div class="timeline-step">
+        <div class="timeline-day">Day 5</div>
+        <div class="timeline-title">Eval harness + first GitHub push</div>
+        <div class="timeline-desc">Asserts: domain tag present, exactly 4 options with 1 correct, scenario length sane, difficulty distribution healthy. In-memory SQLite fixture. <span class="mono">git init</span>, <span class="mono">gh repo create</span>, push. Definition of done for v0.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RHYTHM ============ -->
+<section class="section">
+  <div class="container">
+    <div class="section-eyebrow">04 &middot; Daily rhythm</div>
+    <h2>45 minutes weekday. 90 minutes weekend.</h2>
+    <p class="section-lead">A study cadence designed to fit between work and life. Source reading happens outside the tool; the Coach handles consolidation and drilling.</p>
+
+    <div class="rhythm-grid">
+      <div class="rhythm-card">
+        <div class="rhythm-card-title">Weekday session <span class="rhythm-card-time">45 min</span></div>
+        <ul class="rhythm-list">
+          <li><span class="mins">10 min</span><span>Read source (Anthropic blog, MCP spec, Skilljar) &mdash; outside the tool, focused</span></li>
+          <li><span class="mins">15 min</span><span>Socratic drill via claude.ai connector &mdash; Concept Coach asks before it explains</span></li>
+          <li><span class="mins">15 min</span><span>Scenario MCQs via QuizGenerator &mdash; <span class="mono">log_quiz_attempt()</span> on every answer</span></li>
+          <li><span class="mins">5 min</span><span>Wrap with <span class="mono">record_study_session()</span> &mdash; minutes, topics, weak-spots updated</span></li>
+        </ul>
+      </div>
+      <div class="rhythm-card">
+        <div class="rhythm-card-title">Weekend session <span class="rhythm-card-time">90 min</span></div>
+        <ul class="rhythm-list">
+          <li><span class="mins">20 min</span><span>Long-form reading &mdash; primary docs and one architecture deep-dive</span></li>
+          <li><span class="mins">30 min</span><span>Code review with the CodeReviewer worker &mdash; paste my own MCP tools, it critiques production-mode</span></li>
+          <li><span class="mins">30 min</span><span>Build a small thing &mdash; a new MCP tool, a hook, a skill &mdash; and ship it to the VPS</span></li>
+          <li><span class="mins">10 min</span><span>Review the week&rsquo;s weak-spots dashboard, plan next week&rsquo;s focus</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONNECT ============ -->
+<section class="section">
+  <div class="container">
+    <div class="section-eyebrow">05 &middot; Connect from your Claude client</div>
+    <h2>One server, three clients.</h2>
+    <p class="section-lead">The MCP server is reachable from any Claude client. Pattern shown below; the actual bearer token is per-instance and never lives in the public portfolio.</p>
+
+    <div class="code-block"><span class="comment"># Claude Desktop &mdash; claude_desktop_config.json</span>
+{
+  <span class="var">"mcpServers"</span>: {
+    <span class="var">"cca-coach"</span>: {
+      <span class="var">"url"</span>: <span class="string">"https://cca.anycalc.in/mcp"</span>,
+      <span class="var">"auth"</span>: { <span class="var">"type"</span>: <span class="string">"bearer"</span>, <span class="var">"token"</span>: <span class="string">"&lt;your-token&gt;"</span> }
+    }
+  }
+}</div>
+
+    <div class="code-block" style="margin-top:16px"><span class="comment"># claude.ai &mdash; Settings &rarr; Connectors &rarr; Add custom connector</span>
+URL:        <span class="string">https://cca.anycalc.in/mcp</span>
+Auth:       <span class="keyword">OAuth 2.0 + PKCE</span> <span class="comment">(handled by the connector)</span>
+<span class="comment"># OAuth callback resolves to the same backing user; one DB across both clients.</span></div>
+
+    <div class="notice">
+      <span><strong>This is a personal study tool.</strong> The server runs as a single-tenant instance. The bearer token is rotated locally and never appears in this page or any committed file.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TECH STACK ============ -->
+<section class="section">
+  <div class="container">
+    <div class="section-eyebrow">06 &middot; Stack</div>
+    <h2>No web framework. No DB server. One VPS.</h2>
+    <p class="section-lead">Deliberate restraint. Every dependency earns its place by mapping to an exam domain or a reliability concern.</p>
+
+    <div class="tech-row">
+      <a href="https://www.python.org" class="tech-pill" target="_blank" rel="noopener"><span class="dot"></span>Python 3.11+</a>
+      <a href="https://modelcontextprotocol.io" class="tech-pill" target="_blank" rel="noopener"><span class="dot"></span>MCP SDK</a>
+      <a href="https://docs.anthropic.com/en/api/client-sdks" class="tech-pill" target="_blank" rel="noopener"><span class="dot"></span>Anthropic SDK</a>
+      <a href="https://www.sqlite.org" class="tech-pill" target="_blank" rel="noopener"><span class="dot"></span>SQLite (WAL)</a>
+      <a href="https://www.starlette.io" class="tech-pill" target="_blank" rel="noopener"><span class="dot"></span>Starlette + uvicorn</a>
+      <a href="https://caddyserver.com" class="tech-pill" target="_blank" rel="noopener"><span class="dot"></span>Caddy</a>
+      <a href="https://systemd.io" class="tech-pill" target="_blank" rel="noopener"><span class="dot"></span>systemd</a>
+      <a href="https://docs.pytest.org" class="tech-pill" target="_blank" rel="noopener"><span class="dot"></span>pytest evals</a>
+      <a href="https://github.com/astral-sh/uv" class="tech-pill" target="_blank" rel="noopener"><span class="dot"></span>uv</a>
+      <a href="https://oauth.net/2/pkce/" class="tech-pill" target="_blank" rel="noopener"><span class="dot"></span>OAuth 2.0 + PKCE</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="container">
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:24px;align-items:baseline">
+      <div>
+        CCA Coach &middot; built and shipped 2026-05-08 (Day 1 of 5)<br>
+        <span style="color:var(--text-tertiary);font-size:12px">A study companion for the Claude Certified Architect Foundations exam.</span>
+      </div>
+      <div class="mono" style="font-size:12px">
+        <a href="../index.html">&larr; portfolio</a>
+        <span style="color:var(--text-tertiary);margin:0 8px">&middot;</span>
+        <a href="https://cca.anycalc.in/health" target="_blank" rel="noopener">health</a>
+        <span style="color:var(--text-tertiary);margin:0 8px">&middot;</span>
+        <a href="https://github.com/castroarun" target="_blank" rel="noopener">github &middot; repo coming Day 5</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.addEventListener('mousemove', e => {
+  document.body.style.setProperty('--mouse-x', e.clientX + 'px');
+  document.body.style.setProperty('--mouse-y', e.clientY + 'px');
+});
+</script>
+
+</body>
+</html>

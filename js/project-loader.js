@@ -47,6 +47,7 @@
 
   // Project ID to overline mapping (tech category)
   const PROJECT_OVERLINES = {
+    'cca-coach': 'Agentic System',
     anycalc: 'Web App',
     klarity: 'Desktop App',
     orbit: 'Mobile App',
@@ -68,6 +69,7 @@
 
   // Full descriptions for portfolio (can be overridden in JSON with "portfolioDescription")
   const FULL_DESCRIPTIONS = {
+    'cca-coach': 'An agentic study companion for the Claude Certified Architect (CCA) Foundations exam — built with the patterns it tests. <ul style="margin:10px 0 0 0;padding-left:1.2em;line-height:1.8"><li><b>Hosted MCP server</b> on a Contabo VPS at <span style="font-family:monospace">cca.anycalc.in/mcp</span> — reachable from Claude Desktop, claude.ai, and Claude Code with one shared SQLite state.</li><li><b>Orchestrator + sub-agent workers</b> (QuizGenerator, ConceptCoach, CodeReviewer) drive each session against the weakest exam domain.</li><li><b>Day 1 of 5</b> shipped today — OAuth 2.0 + PKCE, bearer auth, HTTP/SSE, systemd, Caddy TLS.</li></ul>',
     reppit: 'A mobile strength training app that tracks and prompts your workouts, rest periods, and progress. Features timer modes, workout history, and detailed analytics for all - beginners to serious lifters.',
     noteapp: 'A notes app with real-time sync across devices. Features markdown support, folder organization, and AI-powered search to find any note instantly. Built for speed and simplicity.',
     primmo: 'An agentic AI strength coach that communicates via WhatsApp and voice calls. Leverages workout data from REPPIT to provide personalized training guidance, form corrections, and motivation.',
@@ -83,6 +85,7 @@
 
   // Tech stack overrides (portfolio may show different tech than JSON)
   const TECH_OVERRIDES = {
+    'cca-coach': ['Python', 'MCP', 'SQLite', 'Caddy', 'OAuth 2.0', 'Anthropic SDK'],
     reppit: ['Flutter', 'Dart', 'SQLite', 'Riverpod'],
     noteapp: ['Next.js', 'TypeScript', 'Supabase', 'Tailwind'],
     primmo: ['Next.js', 'TypeScript', 'WhatsApp API', 'Voice AI'],
@@ -119,7 +122,11 @@
     'Kite API': 'https://kite.zerodha.com',
     'Udio': 'https://www.udio.com',
     'Music Production': 'https://www.udio.com',
-    'AI/ML': 'https://en.wikipedia.org/wiki/Artificial_intelligence'
+    'AI/ML': 'https://en.wikipedia.org/wiki/Artificial_intelligence',
+    'MCP': 'https://modelcontextprotocol.io',
+    'Caddy': 'https://caddyserver.com',
+    'OAuth 2.0': 'https://oauth.net/2/',
+    'Anthropic SDK': 'https://docs.anthropic.com/en/api/client-sdks'
   };
 
   // Architecture pattern → reference URLs
@@ -145,12 +152,31 @@
     'Multi-Format Rendering': 'https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller',
     'Strategy Pattern (GoF)': 'https://en.wikipedia.org/wiki/Strategy_pattern',
     'Real-Time Streaming': 'https://en.wikipedia.org/wiki/WebSocket',
-    'Domain Modeling': 'https://en.wikipedia.org/wiki/Domain-driven_design'
+    'Domain Modeling': 'https://en.wikipedia.org/wiki/Domain-driven_design',
+    'Orchestrator-Worker': 'https://www.anthropic.com/research/building-effective-agents',
+    'Hexagonal Architecture': 'https://en.wikipedia.org/wiki/Hexagonal_architecture_(software)',
+    'OAuth 2.0 + PKCE': 'https://oauth.net/2/pkce/',
+    'Eval-Driven Development': 'https://hamel.dev/blog/posts/evals/'
   };
 
   // ============ PROJECT DETAILS for Modal Deep-Dives ============
   // Architecture data sourced from resume/index.html Section 07
   const PROJECT_DETAILS = {
+    'cca-coach': {
+      features: [
+        'Hosted MCP server at <span style="font-family:monospace">https://cca.anycalc.in/mcp</span> — Caddy TLS, systemd-supervised, bearer auth + OAuth 2.0 + PKCE for claude.ai',
+        'Orchestrator picks today\'s session against the weakest exam domain; routes to QuizGenerator, ConceptCoach, or CodeReviewer worker',
+        'Pure-Python core (<span style="font-family:monospace">core/topics.py · scoring.py · sessions.py</span>) — unit-testable without HTTP, without an API key, without a network',
+        'Single SQLite DB shared across Claude Desktop, claude.ai, and Claude Code — weak-spot scores persist across every client',
+        'Five MCP tools: <span style="font-family:monospace">get_next_topic · get_weak_spots · log_quiz_attempt · fetch_scenario · record_study_session</span>'
+      ],
+      archFlow: ['Claude Clients\n(Desktop · Web · Code)', 'Caddy\nTLS + OAuth', 'MCP Server\nuvicorn :8765', 'Pure-Python\nCore', 'SQLite\n(Shared State)'],
+      archHighlight: 3,
+      archInsight: '<strong>Orchestrator-worker pattern</strong> — a thin orchestrator reads weak-spot scores, picks the highest-leverage domain, and dispatches a single-responsibility worker (QuizGenerator, ConceptCoach, or CodeReviewer). The same fan-out pattern banks use for <strong>multi-engine credit decisioning</strong> — a routing layer reads the case, sends it to the specialist (fraud, KYC, limits), and synthesizes the verdict. Bounded context per worker means a failed call never poisons the whole session. <strong>Hexagonal architecture</strong> — the pure-Python core has no HTTP, no SDK calls, no network; the MCP server is a thin adapter over <code>core/</code>. Replacing SSE with stdio or gRPC doesn\'t touch business logic. Same pattern banks use to keep <strong>core ledger systems insulated from channel changes</strong> — internet banking, mobile, branch teller all hit the same domain layer.',
+      adr: '<strong>Decision:</strong> One SQLite shared across all Claude clients vs. per-client state. <strong>Rationale:</strong> Weak-spot scores from a Claude Desktop quiz must inform the next claude.ai session. A single golden source of truth — the same logic banks use for <strong>customer 360 across channels</strong>: balance you saw on mobile must match the ATM and branch screens. Per-client state would create drift; one DB with bearer-auth gating keeps the truth singular.',
+      patterns: ['Orchestrator-Worker', 'Hexagonal Architecture', 'OAuth 2.0 + PKCE', 'Eval-Driven Development'],
+      links: { github: 'https://github.com/castroarun', preview: '/portfolio/projects/cca-coach.html' }
+    },
     'quantifyd-premarket-brief': {
       features: [
         'Lands in inbox + WhatsApp at 08:03 IST every weekday — three minutes from data fetch to delivery',
@@ -355,6 +381,7 @@
   // Explicit display order for portfolio page (array index = position).
   // Newest project goes to position 0 by convention.
   const DISPLAY_ORDER = [
+    'cca-coach',
     'quantifyd-premarket-brief',
     'anycalc', 'klarity', 'orbit', 'portfolio', 'cinder',
     'littlereddot', 'reppit', 'noteapp', 'primmo', 'portfolio-optimization'
@@ -487,6 +514,7 @@
     }
     // Fallback: capitalize the ID
     var names = {
+      'cca-coach': 'CCA Coach',
       anycalc: 'AnyCalc', klarity: 'Klarity', orbit: 'Orbit',
       portfolio: 'Portfolio', cinder: 'Cinder', littlereddot: 'The Little Red Dot',
       reppit: 'REPPIT', noteapp: 'NoteApp', primmo: 'PRIMMO',
