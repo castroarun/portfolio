@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mockup — LinkedIn Minimal Grid</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg-base: #0a0f1a;
+      --bg-card: #111827;
+      --bg-card-hover: #161f2e;
+      --text-primary: #e2e8f0;
+      --text-muted: #94a3b8;
+      --accent: #22d3ee;
+      --accent-dim: rgba(34, 211, 238, 0.1);
+      --linkedin: #0a66c2;
+      --linkedin-dim: rgba(10, 102, 194, 0.15);
+      --border-subtle: rgba(255, 255, 255, 0.06);
+      --border-medium: rgba(255, 255, 255, 0.08);
+    }
+
+    html { font-size: 16px; }
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg-base);
+      color: var(--text-primary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      padding: 2rem;
+    }
+
+    .mockup-label {
+      position: fixed;
+      top: 1rem;
+      left: 1rem;
+      background: var(--accent);
+      color: var(--bg-base);
+      padding: 0.4rem 0.8rem;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      z-index: 100;
+    }
+
+    .section {
+      max-width: 800px;
+      margin: 3rem auto;
+    }
+
+    /* ---- Header ---- */
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .section-number {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .section-title {
+      font-size: 1.75rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .linkedin-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--linkedin-dim);
+      color: var(--linkedin);
+      padding: 0.3rem 0.7rem;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      margin-left: auto;
+    }
+
+    .linkedin-badge svg {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
+    }
+
+    /* ---- Grid ---- */
+    .feed-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+
+    /* ---- Link Card ---- */
+    .link-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-medium);
+      border-radius: 10px;
+      padding: 1rem 1.15rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      text-decoration: none;
+      color: inherit;
+      transition: background 0.2s ease, border-color 0.25s ease;
+      cursor: pointer;
+    }
+
+    .link-card:hover {
+      background: var(--bg-card-hover);
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+
+    .link-card__top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* Type pill */
+    .type-pill {
+      padding: 0.18rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.6rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .type-pill--insight  { background: rgba(34, 211, 238, 0.12); color: #22d3ee; }
+    .type-pill--article  { background: rgba(167, 139, 250, 0.12); color: #a78bfa; }
+    .type-pill--launch   { background: rgba(34, 197, 94, 0.12);  color: #22c55e; }
+    .type-pill--post     { background: rgba(245, 158, 11, 0.12); color: #f59e0b; }
+
+    .link-card__arrow {
+      width: 16px;
+      height: 16px;
+      color: var(--text-muted);
+      transition: color 0.2s, transform 0.2s;
+      flex-shrink: 0;
+    }
+
+    .link-card:hover .link-card__arrow {
+      color: var(--accent);
+      transform: translateX(2px);
+    }
+
+    /* Title */
+    .link-card__title {
+      font-size: 0.85rem;
+      font-weight: 600;
+      line-height: 1.4;
+      letter-spacing: -0.01em;
+    }
+
+    /* Note / tags */
+    .link-card__note {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* ---- CTA ---- */
+    .cta-container {
+      margin-top: 1.75rem;
+      text-align: center;
+    }
+
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--linkedin);
+      color: #fff;
+      padding: 0.65rem 1.5rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .cta-button:hover { opacity: 0.9; }
+
+    .cta-button svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+    }
+
+    /* ---- Responsive ---- */
+    @media (max-width: 540px) {
+      body { padding: 1rem; }
+      .section-header { flex-wrap: wrap; gap: 0.5rem; }
+      .linkedin-badge { margin-left: 0; }
+      .feed-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="mockup-label">Mockup: Minimal Grid</div>
+
+  <section class="section">
+
+    <!-- Header -->
+    <div class="section-header">
+      <div>
+        <div class="section-number">09</div>
+        <h2 class="section-title">From the Feed</h2>
+      </div>
+      <span class="linkedin-badge">
+        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        LinkedIn
+      </span>
+    </div>
+
+    <!-- Minimal 2-Column Grid -->
+    <div class="feed-grid">
+
+      <a href="#" class="link-card">
+        <div class="link-card__top">
+          <span class="type-pill type-pill--insight">Insight</span>
+          <svg class="link-card__arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4l6 6-6 6"/></svg>
+        </div>
+        <div class="link-card__title">Claude Code: How I Ship 10x Faster</div>
+        <div class="link-card__note">#AI #ClaudeCode</div>
+      </a>
+
+      <a href="#" class="link-card">
+        <div class="link-card__top">
+          <span class="type-pill type-pill--article">Article</span>
+          <svg class="link-card__arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4l6 6-6 6"/></svg>
+        </div>
+        <div class="link-card__title">Why should you 'Claude' today!</div>
+        <div class="link-card__note">#ClaudeAI #AIAssisted</div>
+      </a>
+
+      <a href="#" class="link-card">
+        <div class="link-card__top">
+          <span class="type-pill type-pill--article">Article</span>
+          <svg class="link-card__arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4l6 6-6 6"/></svg>
+        </div>
+        <div class="link-card__title">The Data Problem and its 'Fake' Fix &mdash; Synthetic Data for Privacy</div>
+        <div class="link-card__note">#SyntheticData #DataPrivacy</div>
+      </a>
+
+      <a href="#" class="link-card">
+        <div class="link-card__top">
+          <span class="type-pill type-pill--launch">Launch</span>
+          <svg class="link-card__arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4l6 6-6 6"/></svg>
+        </div>
+        <div class="link-card__title">I just dropped an 8-song album on Spotify</div>
+        <div class="link-card__note">#AI #Creative #Spotify</div>
+      </a>
+
+      <a href="#" class="link-card">
+        <div class="link-card__top">
+          <span class="type-pill type-pill--post">Post</span>
+          <svg class="link-card__arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4l6 6-6 6"/></svg>
+        </div>
+        <div class="link-card__title">PyExcel &mdash; Revolutionizing spreadsheets with Python</div>
+        <div class="link-card__note">#Python #DataAnalysis</div>
+      </a>
+
+      <a href="#" class="link-card">
+        <div class="link-card__top">
+          <span class="type-pill type-pill--article">Article</span>
+          <svg class="link-card__arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4l6 6-6 6"/></svg>
+        </div>
+        <div class="link-card__title">The Qualities of a Productive Leader</div>
+        <div class="link-card__note">#Leadership #Delivery</div>
+      </a>
+
+      <a href="#" class="link-card">
+        <div class="link-card__top">
+          <span class="type-pill type-pill--article">Article</span>
+          <svg class="link-card__arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4l6 6-6 6"/></svg>
+        </div>
+        <div class="link-card__title">SMART &mdash; A Simple Hack for All</div>
+        <div class="link-card__note">#SMARTGoals #BusinessWriting</div>
+      </a>
+
+      <a href="#" class="link-card">
+        <div class="link-card__top">
+          <span class="type-pill type-pill--post">Post</span>
+          <svg class="link-card__arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4l6 6-6 6"/></svg>
+        </div>
+        <div class="link-card__title">The Samurai with the Wooden Sword</div>
+        <div class="link-card__note">#Strategy #Mindset</div>
+      </a>
+
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-container">
+      <a href="https://www.linkedin.com/in/aruncastro" target="_blank" class="cta-button">
+        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        Follow on LinkedIn
+      </a>
+    </div>
+
+  </section>
+
+</body>
+</html>

@@ -24,7 +24,24 @@
       "Bash(python:*)",
       "Bash(pip install:*)",
       "Bash(cat:*)",
-      "Bash(npx serve -l 3000)"
+      "Bash(npx serve -l 3000)",
+      "Bash(powershell -Command:*)",
+      "Bash(timeout:*)",
+      "Skill(linkedin)",
+      "Skill(linkedin:*)",
+      "Bash(gh api:*)",
+      "WebFetch(domain:v0.app)",
+      "WebSearch",
+      "Bash(start \"\" \"C:\\\\Users\\\\Castro\\\\Documents\\\\Projects\\\\castronix-portfolio\\\\docs\\\\mockups\\\\v9-fluid-waves.html\")",
+      "WebFetch(domain:aptifolio.com)",
+      "Bash(start \"\" \"http://localhost:3000/v9-fluid-waves.html\")",
+      "Bash(start \"\" \"http://localhost:3000\")",
+      "Bash(npx serve -l 3001 .)",
+      "Bash(start \"\" \"http://localhost:3001\")",
+      "Bash(start \"\" \"http://localhost:3001/docs/mockups/resume-geometric.html\")"
+    ],
+    "additionalDirectories": [
+      "C:\\Users\\Castro\\Pictures\\claude"
     ]
   }
 }
