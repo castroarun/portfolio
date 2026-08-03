@@ -1,6 +1,28 @@
 {
   "projects": [
     {
+      "id": "flintit",
+      "name": "FlintIt",
+      "tagline": "Strike the spark — zero-friction AI idea inbox",
+      "status": "building",
+      "statusText": "Building",
+      "statusHint": "(Building · Step 4 of 9)",
+      "statusColor": "#f59e0b",
+      "badgeClass": "building",
+      "tech": ["Next.js", "TypeScript", "Supabase", "pgvector", "Gemini"],
+      "description": "Open, type, Enter — done. FlintIt captures fleeting ideas instantly, then free AI cleans up typos and voice filler, tags the note against your own vocabulary, and tells you when you've had a similar idea before — with date and category. Store everything in a local folder you own, or sync via cloud.",
+      "descriptionHtml": "Zero-friction idea capture: <strong>type → Enter → done</strong>. Free AI polishes the text, auto-tags against your own vocabulary, and surfaces similar past ideas with date and category.",
+      "shortDesc": "Instant idea capture with AI cleanup, auto-tagging, and similar-idea recall.",
+      "category": "personal",
+      "featured": false,
+      "icon": "notes",
+      "iconColor": "#f59e0b",
+      "image": "assets/projects/flintit.png",
+      "progress": { "completed": 3, "total": 9, "inProgress": 4 },
+      "links": { "preview": "https://flintit-castroaruns-projects.vercel.app", "github": "https://github.com/castroarun/flintit" },
+      "display": { "showInResume": true, "trackRow": 3 }
+    },
+    {
       "id": "cca-coach",
       "name": "CCA Coach",
       "tagline": "Agentic study system for the Claude Certified Architect exam",
