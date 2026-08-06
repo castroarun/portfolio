@@ -1,6 +1,28 @@
 {
   "projects": [
     {
+      "id": "myfit-webapp",
+      "name": "Compound First",
+      "tagline": "A strength coach's operating system — consultation to printed plan",
+      "status": "building",
+      "statusText": "Building",
+      "statusHint": "(Building · Step 4 of 9)",
+      "statusColor": "#f59e0b",
+      "badgeClass": "building",
+      "tech": ["Next.js", "TypeScript", "Tailwind", "Prisma", "SQLite", "Zod"],
+      "description": "A solo strength coach's operating system. Live consultation onboarding builds a red/watch/right assessment in real time as the coach types; a rule-based generator turns the intake into a personalised training + nutrition plan, rendered as a pixel-faithful 12-page print document. Client tracking (sessions, weigh-ins, check-ins) feeds an auto-flagged attention queue, with WhatsApp-native plan delivery and reminders.",
+      "descriptionHtml": "A solo strength coach's <strong>operating system</strong> — from consultation call to printed plan. <ul style='margin:0;padding-left:1.1em'><li><strong>Live assessment engine</strong> — consultation answers classify into red / watch / doing-right flags as they're typed; coach can edit any flag inline, and the curated assessment becomes the client report.</li><li><strong>One plan contract</strong> — a single Zod-validated plan object drives the deterministic generator, the editor, the share page and the Playwright PDF; the renderer is a set of fixed US-Letter page components matched to the print design.</li><li><strong>Next.js App Router + Server Actions, SQLite via Prisma 7</strong> (Postgres-ready), derived metrics computed on read.</li></ul>",
+      "shortDesc": "Consultation → live assessment → personalised plan document → tracking.",
+      "category": "personal",
+      "featured": false,
+      "icon": "fitness",
+      "iconColor": "#D7FF3E",
+      "image": "assets/projects/myfit-webapp.png",
+      "progress": { "completed": 3, "total": 9, "inProgress": 4 },
+      "links": { "preview": "#", "github": "" },
+      "display": { "showInResume": true, "trackRow": 3 }
+    },
+    {
       "id": "flintit",
       "name": "FlintIt",
       "tagline": "Strike the spark — zero-friction AI idea inbox",
@@ -387,7 +409,7 @@
     "conception": "Under Conception"
   },
   "metadata": {
-    "lastUpdated": "2026-02-22",
+    "lastUpdated": "2026-08-06",
     "version": "2.0.0"
   }
 }

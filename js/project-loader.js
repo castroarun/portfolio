@@ -47,6 +47,7 @@
 
   // Project ID to overline mapping (tech category)
   const PROJECT_OVERLINES = {
+    'myfit-webapp': 'Web App',
     'cca-coach': 'Agentic System',
     anycalc: 'Web App',
     klarity: 'Desktop App',
@@ -69,6 +70,7 @@
 
   // Full descriptions for portfolio (can be overridden in JSON with "portfolioDescription")
   const FULL_DESCRIPTIONS = {
+    'myfit-webapp': 'A solo strength coach\'s operating system — from consultation call to printed plan, client tracking, and WhatsApp-native delivery. <ul style="margin:10px 0 0 0;padding-left:1.2em;line-height:1.8"><li><b>Live assessment engine</b> — one pure flag engine shared client/server classifies consultation answers into red / watch / doing-right as the coach types; inline-edited flags become the client report.</li><li><b>One plan contract</b> — a single Zod-validated plan object drives the rule-based generator, the editor, the share page and the Playwright PDF, rendered as fixed US-Letter page components (pixel-faithful 12-page document).</li><li><b>Next.js App Router + Server Actions</b>, SQLite via Prisma 7 (Postgres-ready); derived metrics computed on read.</li></ul>',
     'cca-coach': 'An agentic study companion for the Claude Certified Architect (CCA) Foundations exam — built with the patterns it tests. <ul style="margin:10px 0 0 0;padding-left:1.2em;line-height:1.8"><li><b>Hosted MCP server</b> on a Contabo VPS at <span style="font-family:monospace">cca.anycalc.in/mcp</span> — reachable from Claude Desktop, claude.ai, and Claude Code with one shared SQLite state.</li><li><b>Orchestrator + sub-agent workers</b> (QuizGenerator, ConceptCoach, CodeReviewer) drive each session against the weakest exam domain.</li><li><b>Day 1 of 5</b> shipped today — OAuth 2.0 + PKCE, bearer auth, HTTP/SSE, systemd, Caddy TLS.</li></ul>',
     reppit: 'A mobile strength training app that tracks and prompts your workouts, rest periods, and progress. Features timer modes, workout history, and detailed analytics for all - beginners to serious lifters.',
     noteapp: 'A notes app with real-time sync across devices. Features markdown support, folder organization, and AI-powered search to find any note instantly. Built for speed and simplicity.',
@@ -126,7 +128,9 @@
     'MCP': 'https://modelcontextprotocol.io',
     'Caddy': 'https://caddyserver.com',
     'OAuth 2.0': 'https://oauth.net/2/',
-    'Anthropic SDK': 'https://docs.anthropic.com/en/api/client-sdks'
+    'Anthropic SDK': 'https://docs.anthropic.com/en/api/client-sdks',
+    'Prisma': 'https://www.prisma.io',
+    'Zod': 'https://zod.dev'
   };
 
   // Architecture pattern → reference URLs
@@ -162,6 +166,20 @@
   // ============ PROJECT DETAILS for Modal Deep-Dives ============
   // Architecture data sourced from resume/index.html Section 07
   const PROJECT_DETAILS = {
+    'myfit-webapp': {
+      features: [
+        'Live consultation onboarding — answers classify into red / watch / doing-right flags in real time as the coach types; the coach can edit any flag inline, and the curated list becomes the client assessment report',
+        'Rule-based generator turns the intake into a personalised training + nutrition plan — rendered as a pixel-faithful 12-page print/PDF document',
+        'One Zod-validated plan contract drives the generator, the editor, the share page, and the Playwright PDF — fixed US-Letter page components matched to the print design',
+        'Client tracking — sessions, weigh-ins, check-ins — feeds an auto-flagged attention queue so no client slips through',
+        'WhatsApp-native delivery of plans and reminders — meets clients where they already are'
+      ],
+      archFlow: ['Consultation\nIntake', 'Flag Engine\n(red/watch/right)', 'Plan Object\n(Zod Contract)', 'US-Letter\nRenderer + PDF', 'Tracking +\nAttention Queue'],
+      archHighlight: 2,
+      archInsight: '<strong>Shared rule engine</strong> — one pure flag engine classifies consultation answers on both client and server, and the coach curates the flags before they become the report. The banking parallel: <strong>AML transaction screening</strong> — the same rules run at every channel, raise red flags and watch items, and an analyst reviews and curates them before anything reaches the final report. Machine flags, human judgment, one engine. <strong>Golden-source plan contract</strong> — a single Zod-validated plan object drives the generator, the editor, the share page and the PDF — the same single-source pattern banks use when one product definition feeds statements, channels, and regulatory prints without drift.',
+      adr: '<strong>Decision:</strong> Derived metrics (adherence, e1RM, trends) computed on read, never stored. <strong>Rationale:</strong> Stored aggregates drift from the events that produced them; recomputing from raw sessions and weigh-ins keeps every number auditable back to source — the same reason core banking computes balances from the ledger instead of trusting a stored total.',
+      patterns: ['Rule Engine', 'Golden Source', 'Multi-Format Rendering']
+    },
     'cca-coach': {
       features: [
         'Hosted MCP server at <span style="font-family:monospace">https://cca.anycalc.in/mcp</span> — Caddy TLS, systemd-supervised, bearer auth + OAuth 2.0 + PKCE for claude.ai',
@@ -381,6 +399,7 @@
   // Explicit display order for portfolio page (array index = position).
   // Newest project goes to position 0 by convention.
   const DISPLAY_ORDER = [
+    'myfit-webapp',
     'cca-coach',
     'quantifyd-premarket-brief',
     'anycalc', 'klarity', 'orbit', 'portfolio', 'cinder',
