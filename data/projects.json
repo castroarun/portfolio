@@ -9,7 +9,14 @@
       "statusHint": "(Building · Step 4 of 9)",
       "statusColor": "#f59e0b",
       "badgeClass": "building",
-      "tech": ["Next.js", "TypeScript", "Tailwind", "Prisma", "SQLite", "Zod"],
+      "tech": [
+        "Next.js",
+        "TypeScript",
+        "Tailwind",
+        "Prisma",
+        "SQLite",
+        "Zod"
+      ],
       "description": "A solo strength coach's operating system. Live consultation onboarding builds a red/watch/right assessment in real time as the coach types; a rule-based generator turns the intake into a personalised training + nutrition plan, rendered as a pixel-faithful 12-page print document. Client tracking (sessions, weigh-ins, check-ins) feeds an auto-flagged attention queue, with WhatsApp-native plan delivery and reminders.",
       "descriptionHtml": "A solo strength coach's <strong>operating system</strong> — from consultation call to printed plan. <ul style='margin:0;padding-left:1.1em'><li><strong>Live assessment engine</strong> — consultation answers classify into red / watch / doing-right flags as they're typed; coach can edit any flag inline, and the curated assessment becomes the client report.</li><li><strong>One plan contract</strong> — a single Zod-validated plan object drives the deterministic generator, the editor, the share page and the Playwright PDF; the renderer is a set of fixed US-Letter page components matched to the print design.</li><li><strong>Next.js App Router + Server Actions, SQLite via Prisma 7</strong> (Postgres-ready), derived metrics computed on read.</li></ul>",
       "shortDesc": "Consultation → live assessment → personalised plan document → tracking.",
@@ -18,9 +25,19 @@
       "icon": "fitness",
       "iconColor": "#D7FF3E",
       "image": "assets/projects/myfit-webapp.png",
-      "progress": { "completed": 3, "total": 9, "inProgress": 4 },
-      "links": { "preview": "#", "github": "" },
-      "display": { "showInResume": true, "trackRow": 3 }
+      "progress": {
+        "completed": 3,
+        "total": 9,
+        "inProgress": 4
+      },
+      "links": {
+        "preview": "#",
+        "github": ""
+      },
+      "display": {
+        "showInResume": true,
+        "trackRow": 3
+      }
     },
     {
       "id": "flintit",
@@ -31,7 +48,13 @@
       "statusHint": "(Building · Step 4 of 9)",
       "statusColor": "#f59e0b",
       "badgeClass": "building",
-      "tech": ["Next.js", "TypeScript", "Supabase", "pgvector", "Gemini"],
+      "tech": [
+        "Next.js",
+        "TypeScript",
+        "Supabase",
+        "pgvector",
+        "Gemini"
+      ],
       "description": "Open, type, Enter — done. FlintIt captures fleeting ideas instantly, then free AI cleans up typos and voice filler, tags the note against your own vocabulary, and tells you when you've had a similar idea before — with date and category. Store everything in a local folder you own, or sync via cloud.",
       "descriptionHtml": "Zero-friction idea capture: <strong>type → Enter → done</strong>. Free AI polishes the text, auto-tags against your own vocabulary, and surfaces similar past ideas with date and category.",
       "shortDesc": "Instant idea capture with AI cleanup, auto-tagging, and similar-idea recall.",
@@ -40,9 +63,19 @@
       "icon": "notes",
       "iconColor": "#f59e0b",
       "image": "assets/projects/flintit.png",
-      "progress": { "completed": 3, "total": 9, "inProgress": 4 },
-      "links": { "preview": "https://flintit-castroaruns-projects.vercel.app", "github": "https://github.com/castroarun/flintit" },
-      "display": { "showInResume": true, "trackRow": 3 }
+      "progress": {
+        "completed": 3,
+        "total": 9,
+        "inProgress": 4
+      },
+      "links": {
+        "preview": "https://flintit-castroaruns-projects.vercel.app",
+        "github": "https://github.com/castroarun/flintit"
+      },
+      "display": {
+        "showInResume": true,
+        "trackRow": 3
+      }
     },
     {
       "id": "cca-coach",
@@ -53,7 +86,14 @@
       "statusHint": "(Building · Day 1 of 5 shipped)",
       "statusColor": "#f59e0b",
       "badgeClass": "building",
-      "tech": ["Python", "MCP", "SQLite", "Caddy", "OAuth 2.0", "Anthropic SDK"],
+      "tech": [
+        "Python",
+        "MCP",
+        "SQLite",
+        "Caddy",
+        "OAuth 2.0",
+        "Anthropic SDK"
+      ],
       "description": "An agentic study companion for the Claude Certified Architect (CCA) Foundations exam — built with the patterns it teaches. Hosted MCP server on a Contabo VPS, sub-agent orchestration (orchestrator + workers), real evals. Reachable from Claude Desktop, claude.ai, and Claude Code with the same SQLite state across all clients.",
       "descriptionHtml": "<ul style='margin:0;padding-left:1.1em'><li><strong>Hosted MCP server</strong> on Contabo VPS at <span style='font-family:monospace'>cca.anycalc.in/mcp</span> — Caddy-fronted, systemd-supervised, OAuth 2.0 + PKCE for claude.ai.</li><li><strong>Orchestrator + sub-agent workers</strong> (QuizGenerator, ConceptCoach, CodeReviewer) — every architectural choice maps to a CCA exam domain.</li><li><strong>Cross-client state</strong> via SQLite — weak-spot scores persist across Desktop, claude.ai, and Claude Code.</li></ul>",
       "shortDesc": "Agentic CCA study tool — MCP server + sub-agents + cross-client SQLite state.",
@@ -62,13 +102,20 @@
       "icon": "🎓",
       "iconColor": "#22D3EE",
       "image": "assets/projects/cca-coach.png",
-      "progress": { "completed": 1, "total": 5, "inProgress": 2 },
+      "progress": {
+        "completed": 1,
+        "total": 5,
+        "inProgress": 2
+      },
       "links": {
         "preview": "/portfolio/projects/cca-coach.html",
         "details": "/portfolio/projects/cca-coach.html",
         "github": "https://github.com/castroarun"
       },
-      "display": { "showInResume": true, "trackRow": 1 }
+      "display": {
+        "showInResume": true,
+        "trackRow": 1
+      }
     },
     {
       "id": "anycalc",
@@ -79,7 +126,12 @@
       "statusHint": "(Live)",
       "statusColor": "#22c55e",
       "badgeClass": "live",
-      "tech": ["Next.js", "TypeScript", "Supabase", "Zustand"],
+      "tech": [
+        "Next.js",
+        "TypeScript",
+        "Supabase",
+        "Zustand"
+      ],
       "description": "19 interlinked financial calculators in one app — EMI, tip splits, compound interest, currency conversion, and more. Plan mode lets you chain calculations together.",
       "descriptionHtml": "<strong>19 interlinked calculators</strong> with Plan mode — chain EMI, splits, compound interest, and currency conversions together.",
       "shortDesc": "19 interlinked financial calculators with Plan mode for chained calculations.",
@@ -88,12 +140,19 @@
       "icon": "calculator",
       "iconColor": "#3b82f6",
       "image": "assets/projects/anycalc.png",
-      "progress": { "completed": 9, "total": 9, "inProgress": null },
+      "progress": {
+        "completed": 9,
+        "total": 9,
+        "inProgress": null
+      },
       "links": {
         "preview": "#",
         "github": "https://github.com/castroarun/caclulate_anything"
       },
-      "display": { "showInResume": true, "trackRow": 3 }
+      "display": {
+        "showInResume": true,
+        "trackRow": 3
+      }
     },
     {
       "id": "klarity",
@@ -104,7 +163,13 @@
       "statusHint": "(Live)",
       "statusColor": "#22c55e",
       "badgeClass": "live",
-      "tech": ["Vite", "React", "TypeScript", "Zustand", "Tauri"],
+      "tech": [
+        "Vite",
+        "React",
+        "TypeScript",
+        "Zustand",
+        "Tauri"
+      ],
       "description": "Lightweight desktop task board with 15-stage pipeline, ETag-based distributed sync, and multi-agent orchestration for AI-assisted developers.",
       "descriptionHtml": "Task board with <strong>15-stage pipeline</strong>, ETag-based distributed sync, and multi-agent orchestration.",
       "shortDesc": "Developer task board with 15-stage pipeline and distributed sync.",
@@ -113,11 +178,18 @@
       "icon": "board",
       "iconColor": "#818cf8",
       "image": "assets/projects/klarity.png",
-      "progress": { "completed": 8, "total": 9, "inProgress": 9 },
+      "progress": {
+        "completed": 8,
+        "total": 9,
+        "inProgress": 9
+      },
       "links": {
         "github": "https://github.com/castroarun/taskBoard"
       },
-      "display": { "showInResume": true, "trackRow": 1 }
+      "display": {
+        "showInResume": true,
+        "trackRow": 1
+      }
     },
     {
       "id": "orbit",
@@ -128,7 +200,11 @@
       "statusHint": "(Live)",
       "statusColor": "#22c55e",
       "badgeClass": "live",
-      "tech": ["React Native", "Tauri", "GitHub API"],
+      "tech": [
+        "React Native",
+        "Tauri",
+        "GitHub API"
+      ],
       "description": "Mobile companion for Klarity — review, update, and triage tasks from your phone with zero-server architecture using GitHub as backend.",
       "descriptionHtml": "Mobile companion with <strong>zero-server architecture</strong> using GitHub as backend and SHA-based conflict resolution.",
       "shortDesc": "Phone companion for Klarity with cross-platform sync.",
@@ -137,11 +213,18 @@
       "icon": "orbit",
       "iconColor": "#06b6d4",
       "image": "assets/projects/orbit.png",
-      "progress": { "completed": 8, "total": 9, "inProgress": 9 },
+      "progress": {
+        "completed": 8,
+        "total": 9,
+        "inProgress": 9
+      },
       "links": {
         "github": "https://github.com/castroarun/taskBoard"
       },
-      "display": { "showInResume": true, "trackRow": 2 }
+      "display": {
+        "showInResume": true,
+        "trackRow": 2
+      }
     },
     {
       "id": "portfolio",
@@ -152,7 +235,11 @@
       "statusHint": "(Live)",
       "statusColor": "#22c55e",
       "badgeClass": "live",
-      "tech": ["HTML/CSS", "JavaScript", "Chart.js"],
+      "tech": [
+        "HTML/CSS",
+        "JavaScript",
+        "Chart.js"
+      ],
       "description": "Interactive digital resume with AI assistant, skills radar, and 9-step workflow showcase.",
       "descriptionHtml": "<strong>AI chat assistant</strong>, skills radar, timeline view with 9-step workflow showcase.",
       "shortDesc": "Interactive digital resume with AI chat and skills visualization.",
@@ -161,12 +248,19 @@
       "icon": "clock",
       "iconColor": "#22d3ee",
       "image": "assets/projects/portfolio.png",
-      "progress": { "completed": 9, "total": 9, "inProgress": null },
+      "progress": {
+        "completed": 9,
+        "total": 9,
+        "inProgress": null
+      },
       "links": {
         "preview": "https://castroarun.github.io/portfolio/",
         "github": "https://github.com/castroarun/portfolio"
       },
-      "display": { "showInResume": true, "trackRow": 2 }
+      "display": {
+        "showInResume": true,
+        "trackRow": 2
+      }
     },
     {
       "id": "cinder",
@@ -177,7 +271,10 @@
       "statusHint": "(On Spotify & Apple Music)",
       "statusColor": "#1DB954",
       "badgeClass": "live",
-      "tech": ["Music Production", "AI/ML"],
+      "tech": [
+        "Music Production",
+        "AI/ML"
+      ],
       "description": "AI-assisted original music project live on Spotify & Apple Music.",
       "descriptionHtml": "<strong>AI-assisted original music project</strong> live on Spotify & Apple Music.",
       "shortDesc": "AI-assisted original music project live on Spotify & Apple Music.",
@@ -186,12 +283,19 @@
       "icon": "music",
       "iconColor": "#1DB954",
       "image": "assets/projects/cinder.png",
-      "progress": { "completed": 9, "total": 9, "inProgress": null },
+      "progress": {
+        "completed": 9,
+        "total": 9,
+        "inProgress": null
+      },
       "workflowLabel": "Concept to Live",
       "links": {
         "spotify": "https://open.spotify.com/user/castronix"
       },
-      "display": { "showInResume": true, "trackRow": 2 }
+      "display": {
+        "showInResume": true,
+        "trackRow": 2
+      }
     },
     {
       "id": "littlereddot",
@@ -202,7 +306,10 @@
       "statusHint": "(On Spotify & Apple Music)",
       "statusColor": "#1DB954",
       "badgeClass": "live",
-      "tech": ["Music Production", "AI/ML"],
+      "tech": [
+        "Music Production",
+        "AI/ML"
+      ],
       "description": "AI-assisted original music project live on Spotify & Apple Music.",
       "descriptionHtml": "<strong>AI-assisted original music project</strong> live on Spotify & Apple Music.",
       "shortDesc": "AI-assisted original music project live on Spotify & Apple Music.",
@@ -211,12 +318,19 @@
       "icon": "music",
       "iconColor": "#1DB954",
       "image": "assets/projects/littlereddot.png",
-      "progress": { "completed": 9, "total": 9, "inProgress": null },
+      "progress": {
+        "completed": 9,
+        "total": 9,
+        "inProgress": null
+      },
       "workflowLabel": "Concept to Live",
       "links": {
         "spotify": "https://open.spotify.com/user/castronix"
       },
-      "display": { "showInResume": true, "trackRow": 2 }
+      "display": {
+        "showInResume": true,
+        "trackRow": 2
+      }
     },
     {
       "id": "reppit",
@@ -227,7 +341,12 @@
       "statusHint": "(Launching soon on Google Play Store)",
       "statusColor": "#22c55e",
       "badgeClass": "live",
-      "tech": ["Next.js", "TypeScript", "Supabase", "Capacitor"],
+      "tech": [
+        "Next.js",
+        "TypeScript",
+        "Supabase",
+        "Capacitor"
+      ],
       "description": "Mobile strength training app that tracks workouts, rest periods, and progress for all fitness levels.",
       "descriptionHtml": "Track workouts with <strong>real-time timer</strong>, progressive overload tracking, and exercise history analytics.",
       "shortDesc": "Fitness strength tracking with real-time timer and progressive overload analytics.",
@@ -236,12 +355,19 @@
       "icon": "fitness",
       "iconColor": "#22c55e",
       "image": "assets/projects/reppit.png",
-      "progress": { "completed": 8, "total": 9, "inProgress": 9 },
+      "progress": {
+        "completed": 8,
+        "total": 9,
+        "inProgress": 9
+      },
       "links": {
         "preview": "#",
         "github": "https://github.com/castroarun/REPPIT"
       },
-      "display": { "showInResume": true, "trackRow": 1 }
+      "display": {
+        "showInResume": true,
+        "trackRow": 1
+      }
     },
     {
       "id": "noteapp",
@@ -252,7 +378,11 @@
       "statusHint": "(Live)",
       "statusColor": "#22c55e",
       "badgeClass": "live",
-      "tech": ["Next.js", "TypeScript", "TipTap"],
+      "tech": [
+        "Next.js",
+        "TypeScript",
+        "TipTap"
+      ],
       "description": "Privacy-first note-taking app with offline sync, voice-to-text, and 200+ test cases.",
       "descriptionHtml": "Rich text editing with <strong>templates</strong>, auto-save, and dark/light theme toggle.",
       "shortDesc": "Rich text note-taking with templates and auto-save functionality.",
@@ -261,12 +391,19 @@
       "icon": "notes",
       "iconColor": "#3b82f6",
       "image": "assets/projects/noteapp.png",
-      "progress": { "completed": 9, "total": 9, "inProgress": null },
+      "progress": {
+        "completed": 9,
+        "total": 9,
+        "inProgress": null
+      },
       "links": {
         "preview": "https://noteapp-castronix.vercel.app",
         "github": "https://github.com/castroarun/noteApp"
       },
-      "display": { "showInResume": true, "trackRow": 1 }
+      "display": {
+        "showInResume": true,
+        "trackRow": 1
+      }
     },
     {
       "id": "primmo",
@@ -277,7 +414,11 @@
       "statusHint": "(Architected & build-ready)",
       "statusColor": "#f59e0b",
       "badgeClass": "building",
-      "tech": ["Next.js", "Voice AI", "Supabase"],
+      "tech": [
+        "Next.js",
+        "Voice AI",
+        "Supabase"
+      ],
       "description": "Agentic AI strength coach via WhatsApp and voice calls using REPPIT workout data.",
       "descriptionHtml": "Communicates via <strong>WhatsApp and Voice calls</strong>. Uses workout data from REPPIT for personalized training.",
       "shortDesc": "AI-powered personal strength coach with WhatsApp & Voice AI integration.",
@@ -286,12 +427,19 @@
       "icon": "voice",
       "iconColor": "#f59e0b",
       "image": "assets/projects/primmo.png",
-      "progress": { "completed": 2, "total": 9, "inProgress": 3 },
+      "progress": {
+        "completed": 2,
+        "total": 9,
+        "inProgress": 3
+      },
       "links": {
         "preview": "#",
         "github": "https://github.com/castroarun/PRIMMO"
       },
-      "display": { "showInResume": true, "trackRow": 1 }
+      "display": {
+        "showInResume": true,
+        "trackRow": 1
+      }
     },
     {
       "id": "quantifyd",
@@ -302,7 +450,13 @@
       "statusHint": "(Live)",
       "statusColor": "#22c55e",
       "badgeClass": "live",
-      "tech": ["Python", "Flask", "Pandas", "Chart.js", "Kite API"],
+      "tech": [
+        "Python",
+        "Flask",
+        "Pandas",
+        "Chart.js",
+        "Kite API"
+      ],
       "description": "Three-engine quant trading system — Momentum+Quality portfolio (36% CAGR), KC6 mean reversion live trader (65% win rate), and Tactical Capital Pool with 20-year backtests across Nifty 500.",
       "descriptionHtml": "Three-engine quant system — <strong>MQ portfolio (36% CAGR)</strong>, KC6 live trader (65% win rate), and Tactical Capital Pool with 20-year backtests.",
       "shortDesc": "Systematic quant trading platform with MQ, KC6, and Tactical Capital strategies.",
@@ -311,12 +465,58 @@
       "icon": "📊",
       "iconColor": "#a855f7",
       "image": "assets/projects/quantifyd.png",
-      "progress": { "completed": 7, "total": 9, "inProgress": 8 },
+      "progress": {
+        "completed": 7,
+        "total": 9,
+        "inProgress": 8
+      },
       "links": {
         "preview": "https://castroarun.github.io/Quantifyd/premarket_brief_pipeline.html",
         "github": "https://github.com/castroarun/Quantifyd"
       },
-      "display": { "showInResume": true, "trackRow": 3 }
+      "display": {
+        "showInResume": true,
+        "trackRow": 3
+      }
+    },
+    {
+      "id": "nas-mechanical-trading",
+      "name": "Mechanical Options Trading — NAS",
+      "tagline": "A live, code-run options book that beats gut-feel",
+      "status": "live",
+      "statusText": "Live",
+      "statusHint": "(Live)",
+      "statusColor": "#22c55e",
+      "badgeClass": "built",
+      "tech": [
+        "Python",
+        "Flask",
+        "SQLite",
+        "React",
+        "Kite API",
+        "Backtesting"
+      ],
+      "description": "A first-principles walkthrough of a live, automated index-options book: the thesis (mechanical > discretionary), the 10 GB minute-data backtesting behind it, and the honest results. Presented for a first-time trader.",
+      "descriptionHtml": "A first-principles walkthrough of a <strong>live, automated index-options book</strong> — the thesis (mechanical &gt; discretionary), the 10&nbsp;GB minute-data backtesting behind it, and the honest results. Presented for a first-time trader.",
+      "shortDesc": "Live automated options systems + backtest walkthrough.",
+      "category": "personal",
+      "featured": false,
+      "icon": "📈",
+      "iconColor": "#f59e0b",
+      "image": "assets/projects/nas-mechanical-trading.png",
+      "progress": {
+        "completed": 9,
+        "total": 9,
+        "inProgress": null
+      },
+      "links": {
+        "github": "https://github.com/castroarun/Quantifyd",
+        "preview": "https://castroarun.github.io/presentations/nas-mechanical-trading/deck.html"
+      },
+      "display": {
+        "showInResume": true,
+        "trackRow": 1
+      }
     },
     {
       "id": "quantifyd-premarket-brief",
@@ -327,7 +527,13 @@
       "statusHint": "(Live)",
       "statusColor": "#22c55e",
       "badgeClass": "live",
-      "tech": ["Python", "APScheduler", "yfinance", "Claude Code", "Gmail SMTP"],
+      "tech": [
+        "Python",
+        "APScheduler",
+        "yfinance",
+        "Claude Code",
+        "Gmail SMTP"
+      ],
       "description": "A daily 08:00 IST intelligence brief for systematic trading, built in two stages: (1) the Contabo VPS pulls live market data, holdings events, and overnight RSS into a JSON snapshot; (2) a Claude Code cloud routine narrates it with sentiment-tagged headlines and a one-liner, then posts back to the VPS for Gmail dispatch. End-to-end loop closes in three minutes; an 08:08 IST fallback on the VPS guarantees delivery if the cloud routine ever fails.",
       "descriptionHtml": "<ul style='margin:0;padding-left:1.1em'><li><strong>Stage 1 — VPS builder (08:00 IST)</strong> pulls live data: yfinance, NSE F&amp;O ban CSV, holdings calendar, and RSS feeds.</li><li><strong>Stage 2 — Claude Code routine (08:02 IST)</strong> reads the JSON, writes sentiment-tagged headlines + narrative one-liner, posts back. VPS dispatches the email by 08:03.</li></ul>",
       "shortDesc": "The Morning Note — daily quant brief written by AI, in your inbox before the bell.",
@@ -336,12 +542,19 @@
       "icon": "📈",
       "iconColor": "#22d3ee",
       "image": "assets/projects/quantifyd-premarket-brief.png",
-      "progress": { "completed": 9, "total": 9, "inProgress": null },
+      "progress": {
+        "completed": 9,
+        "total": 9,
+        "inProgress": null
+      },
       "links": {
         "preview": "https://castroarun.github.io/Quantifyd/premarket_brief_pipeline.html",
         "github": "https://github.com/castroarun/Quantifyd/blob/master/docs/PREMARKET_BRIEF.md"
       },
-      "display": { "showInResume": true, "trackRow": 3 }
+      "display": {
+        "showInResume": true,
+        "trackRow": 3
+      }
     },
     {
       "id": "health-reports-tracker",
@@ -351,7 +564,12 @@
       "statusText": "Concept",
       "statusColor": "#a855f7",
       "badgeClass": "ideating",
-      "tech": ["Next.js", "TypeScript", "Supabase", "Claude AI"],
+      "tech": [
+        "Next.js",
+        "TypeScript",
+        "Supabase",
+        "Claude AI"
+      ],
       "description": "Scan lab reports with OCR, track health parameters across years, visualize trends, and share doctor-ready summaries. Built for Indian lab formats.",
       "descriptionHtml": "<strong>OCR-powered lab report scanning</strong> with historical trend graphs, smart alerts, and doctor-ready summaries for Indian lab formats.",
       "shortDesc": "OCR-powered health report tracking with trend visualization and doctor-ready summaries.",
@@ -360,11 +578,18 @@
       "icon": "🏥",
       "iconColor": "#ef4444",
       "image": null,
-      "progress": { "completed": 0, "total": 9, "inProgress": 1 },
+      "progress": {
+        "completed": 0,
+        "total": 9,
+        "inProgress": 1
+      },
       "links": {
         "github": "https://github.com/castroarun/Health-Reports-Tracker"
       },
-      "display": { "showInResume": true, "trackRow": 3 }
+      "display": {
+        "showInResume": true,
+        "trackRow": 3
+      }
     },
     {
       "id": "payment-house",
@@ -374,7 +599,12 @@
       "statusText": "Concept",
       "statusColor": "#a855f7",
       "badgeClass": "ideating",
-      "tech": ["Java 21", "Spring Boot", "Apache Kafka", "PostgreSQL"],
+      "tech": [
+        "Java 21",
+        "Spring Boot",
+        "Apache Kafka",
+        "PostgreSQL"
+      ],
       "description": "Kafka-driven, event-sourced microservices for core banking payments across Singapore, Hong Kong, UK, and India. Six-tier architecture with clearing house adapters.",
       "descriptionHtml": "<strong>Kafka-driven microservices</strong> for core banking payments across 4 regions with event sourcing, compliance screening, and clearing house adapters.",
       "shortDesc": "Enterprise payment processing with Kafka event sourcing across 4 regions.",
@@ -383,11 +613,18 @@
       "icon": "💳",
       "iconColor": "#6366f1",
       "image": null,
-      "progress": { "completed": 1, "total": 9, "inProgress": 2 },
+      "progress": {
+        "completed": 1,
+        "total": 9,
+        "inProgress": 2
+      },
       "links": {
         "github": "https://github.com/castroarun/project-house"
       },
-      "display": { "showInResume": true, "trackRow": 3 }
+      "display": {
+        "showInResume": true,
+        "trackRow": 3
+      }
     }
   ],
   "icons": {
