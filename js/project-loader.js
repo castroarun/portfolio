@@ -58,7 +58,8 @@
     reppit: 'Mobile App',
     noteapp: 'Web App',
     primmo: 'AI / Voice',
-    'portfolio-optimization': 'Automation'
+    'portfolio-optimization': 'Automation',
+    'nas-mechanical-trading': 'Trading Automation'
   };
 
   // Fallback category mapping
