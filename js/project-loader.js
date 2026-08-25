@@ -400,6 +400,8 @@
   // Explicit display order for portfolio page (array index = position).
   // Newest project goes to position 0 by convention.
   const DISPLAY_ORDER = [
+    'nas-mechanical-trading',
+    'quantifyd',
     'myfit-webapp',
     'cca-coach',
     'quantifyd-premarket-brief',
@@ -484,7 +486,7 @@
       <article class="featured-project fade-up" data-project-id="${project.id}">
         <div class="project-image">
           <div class="project-image-wrapper">
-            <img src="${project.image}" alt="${project.name} - ${project.tagline}" loading="lazy">
+            <img src="${project.image}" alt="${project.name} - ${project.tagline}" loading="lazy" onerror="this.style.display='none'">
           </div>
         </div>
         <div class="project-content">

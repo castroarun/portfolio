@@ -235,7 +235,28 @@
       font-size: 1.3rem;
       font-weight: 500;
       color: var(--accent);
+      margin-bottom: 0.25rem;
+    }
+
+    .subtitle {
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--text-secondary);
       margin-bottom: 1rem;
+    }
+
+    .current-badge {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-dim, rgba(34,211,238,0.15));
+      border-radius: 3px;
+      padding: 0.12rem 0.45rem;
+      margin-left: 0.5rem;
+      vertical-align: middle;
     }
 
     .contact {
@@ -656,13 +677,14 @@
         Back to Portfolio
       </a>
       <h1 class="name">Arun Castromin Lawrance</h1>
-      <p class="title">Solutions Architect | Enterprise Architect | Product Owner | Technology Consulting</p>
+      <p class="title">Quant Researcher &amp; Practitioner | AI Consultant</p>
+      <p class="subtitle">20 yrs Core Banking &amp; Payments &middot; TOGAF 9 Certified Enterprise Architect</p>
       <div class="contact">
         <span class="contact-item">
           <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/>
           </svg>
-          +65 91806569
+          +91 99410 22034
         </span>
         <span class="contact-item">
           <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -680,7 +702,7 @@
           <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
           </svg>
-          Singapore
+          Chennai, India
         </span>
       </div>
     </header>
@@ -689,12 +711,19 @@
     <section class="section">
       <h2 class="section-title">Professional Summary</h2>
       <p class="summary-text">
-        <strong>Sr. Solution Architect</strong> & <strong>TOGAF Certified Enterprise Architect</strong> with <strong>17+ years</strong> delivering technology-enabled solutions in
-        <strong>core banking, payments, and digital transformation</strong>. Extensive experience implementing
-        <strong>Finacle core banking solutions</strong> across India, Middle East, Africa, and APAC regions for Tier-1 banks including
-        Bank of America, Emirates NBD, and Standard Bank. Currently a key contributor to Application Platform Engineering,
-        delivering RTP solutions for global commercial banking in Singapore. With an architect's mindset, designing and building
-        <strong>end-to-end solutions</strong> — applying architecture thinking from concept to deployment.
+        <strong>Quant researcher and practitioner</strong> across derivatives (F&O), equities and systematic investing, and an
+        <strong>AI practitioner and consultant</strong> — built on <strong>20 years</strong> as a <strong>Sr. Solution Architect</strong>
+        & <strong>TOGAF Certified Enterprise Architect</strong> in <strong>core banking, payments, and digital transformation</strong>.
+        Implemented <strong>Finacle core banking solutions</strong> across India, Middle East, Africa, and APAC for Tier-1 banks including
+        Bank of America, Emirates NBD, and Standard Bank, most recently delivering RTP solutions for global commercial banking.
+      </p>
+      <p class="summary-text" style="margin-top: 0.6rem;">
+        Since <strong>February 2026</strong>, running an independent practice from Chennai: designing and stress-testing
+        <strong>systematic derivatives and investment strategies</strong> — hypothesis to backtest to walk-forward
+        validation, always <strong>net of costs</strong> — then automating what survives and running it live. In parallel,
+        advising teams on <strong>practical AI adoption</strong>: agentic workflows, LLM integration and automation that
+        survives contact with production. The through-line is unchanged: engineering rigour applied to
+        <strong>money movement, risk and regulation</strong>.
       </p>
     </section>
 
@@ -751,11 +780,28 @@
     <section class="section page-break">
       <h2 class="section-title">Professional Experience</h2>
 
+      <!-- Independent Practice: Quant Research & AI -->
+      <div class="experience-item">
+        <div class="experience-header">
+          <span class="experience-company">Independent Practice — Quant Research & AI<span class="current-badge">Current</span></span>
+          <span class="experience-period">Feb 2026 - Present</span>
+        </div>
+        <p class="experience-role">Quant Researcher & Practitioner | AI Practitioner & Consultant — Chennai, India</p>
+        <p class="experience-context">Self-directed research practice following repatriation from Singapore. Two tracks: systematic research across derivatives and investments, and applied AI consulting.</p>
+        <ul class="experience-bullets">
+          <li><strong>Systematic derivatives research (F&O):</strong> index and equity options strategies — directional, spread and volatility structures — taken from hypothesis through backtest, out-of-sample and walk-forward validation before any capital is committed</li>
+          <li><strong>Investment research:</strong> systematic equity selection and longer-horizon strategies — screening and factor exposure, valuation and quality screens, portfolio construction, asset allocation and rebalancing rules</li>
+          <li><strong>Net-of-cost discipline:</strong> every result reported gross and net, with brokerage, STT, slippage and impact modelled explicitly plus a cost-sensitivity band; a positive signal is not treated as a strategy until it survives portfolio, correlation and drawdown analysis</li>
+          <li><strong>Automation to live:</strong> strategies that clear validation are automated and run live with monitoring, risk limits and position sizing built in — consistency in production is the objective, not a good backtest</li>
+          <li><strong>AI practice and consulting:</strong> building and advising on agentic workflows, LLM integration, retrieval pipelines and automation for small teams; translating AI capability into measurable operational outcomes rather than proofs of concept</li>
+        </ul>
+      </div>
+
       <!-- Bank of America Jakarta -->
       <div class="experience-item">
         <div class="experience-header">
-          <span class="experience-company">Bank of America (Jakarta, Indonesia)</span>
-          <span class="experience-period">2020 - Present</span>
+          <span class="experience-company">Bank of America (Chennai, Jakarta, Singapore)</span>
+          <span class="experience-period">Apr 2019 - Feb 2026</span>
         </div>
         <p class="experience-role">Sr. Technology Architect, Infosys Ltd.</p>
         <ul class="experience-bullets">

@@ -788,7 +788,16 @@
     .title {
       font-size: 1.25rem;
       color: var(--text-secondary);
+      margin-bottom: 0.35rem;
+      transition: all 0.4s ease;
+    }
+
+    .subtitle {
+      font-size: 0.95rem;
+      color: var(--text-muted, var(--text-secondary));
+      opacity: 0.85;
       margin-bottom: 0;
+      letter-spacing: 0.01em;
       transition: all 0.4s ease;
     }
 
@@ -6888,7 +6897,8 @@
     <header class="header animate-fade-up">
       <div class="header-hero">
         <h1 class="name">Arun Castromin Lawrance</h1>
-        <p class="title">Solutions Architect | Enterprise Architect | Product Owner | Technology Consulting</p>
+        <p class="title">Quant Researcher &amp; Practitioner | AI Consultant</p>
+        <p class="subtitle">20 yrs Core Banking &amp; Payments &middot; TOGAF 9 Certified Enterprise Architect</p>
       </div>
       <div class="contact-row">
         <a href="mailto:arun.castromin@gmail.com" class="contact-item">
@@ -6917,7 +6927,7 @@
             <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
             <circle cx="12" cy="10" r="3"/>
           </svg>
-          Singapore
+          Chennai, India
         </span>
       </div>
     </header>
@@ -6951,17 +6961,18 @@
             <!-- Typing Animation Summary -->
             <div class="typing-container">
               <p class="typing-text" id="typing-text">
-                <strong>Sr. Solution Architect</strong> & <strong>TOGAF Certified Enterprise Architect</strong> with <strong>17+ years</strong> delivering technology-enabled solutions in
-                <strong>core banking, payments, and digital transformation</strong>. I've implemented Finacle core banking
+                <strong>Quant researcher and practitioner</strong> across derivatives (F&O), equities and systematic investing, and an <strong>AI practitioner and consultant</strong> — built on <strong>20 years</strong> as a
+                <strong>Sr. Solution Architect</strong> & <strong>TOGAF Certified Enterprise Architect</strong> in
+                <strong>core banking, payments, and digital transformation</strong>. I implemented Finacle core banking
                 across <strong>India, Middle East, Africa, and APAC</strong> for Tier-1 banks including
-                <strong>Bank of America, Emirates NBD, and Standard Bank</strong>. Currently a key contributor to Application Platform Engineering, delivering RTP solutions and support for global commercial banking in Singapore. With an architect's mindset, I design and build <strong>end-to-end solutions</strong> — and practise that approach through <strong>AI-assisted personal projects</strong> in full-stack development, applying architecture thinking from concept to deployment.<span class="typing-cursor"></span>
+                <strong>Bank of America, Emirates NBD, and Standard Bank</strong>, most recently delivering RTP solutions for global commercial banking. In <strong>February 2026</strong> I closed that chapter, left the corporate track and moved back from Singapore to Chennai. Today I research and automate <strong>systematic strategies</strong> — and advise teams on making AI work in production. Same architect's mindset, new problem set.<span class="typing-cursor"></span>
               </p>
             </div>
 
             <!-- Key Stats -->
             <div class="intro-stats">
               <div class="intro-stat">
-                <div class="intro-stat-value">17+</div>
+                <div class="intro-stat-value">20</div>
                 <div class="intro-stat-label">Years Experience</div>
               </div>
               <div class="intro-stat">
@@ -7082,9 +7093,13 @@
         <!-- Tabbed View (hidden by default) -->
         <div id="exp-tabs-view" style="display: none;">
           <div class="exp-tabs">
-            <button class="exp-tab active" onclick="switchExpTab('boa')" data-tab="boa">
+            <button class="exp-tab active" onclick="switchExpTab('quant')" data-tab="quant">
+              Independent Practice
+              <span class="exp-tab-period">Feb 2026 - Present • Quant & AI</span>
+            </button>
+            <button class="exp-tab" onclick="switchExpTab('boa')" data-tab="boa">
               Bank of America
-              <span class="exp-tab-period">2020 - Present • Infosys</span>
+              <span class="exp-tab-period">Apr 2019 - Feb 2026 • Infosys</span>
             </button>
             <button class="exp-tab" onclick="switchExpTab('chola')" data-tab="chola">
               Cholamandalam
@@ -7105,17 +7120,38 @@
           </div>
 
           <div class="exp-panels">
-            <!-- Bank of America Panel -->
-            <div class="exp-panel active" id="panel-boa">
+            <!-- Independent Practice Panel -->
+            <div class="exp-panel active" id="panel-quant">
               <div class="exp-panel-header">
                 <div class="exp-company-info">
-                  <h3>Bank of America (Jakarta, Singapore, India)</h3>
+                  <h3>Independent Practice — Quant Research & AI (Chennai, India)</h3>
+                  <p class="role">Quant Researcher & Practitioner | AI Practitioner & Consultant</p>
+                  <p class="employer">Self-directed</p>
+                </div>
+                <span class="exp-period-badge">Feb 2026 - Present</span>
+              </div>
+              <p class="exp-context">Left the corporate track and repatriated from Singapore in February 2026. Two parallel tracks: systematic research across derivatives and investments, and applied AI consulting.</p>
+              <ul class="exp-bullets">
+                <li><strong>Systematic derivatives research (F&O)</strong> — index and equity options strategies across directional, spread and volatility structures, taken from hypothesis through backtest, out-of-sample and <strong>walk-forward validation</strong> before any capital is committed</li>
+                <li><strong>Investment research</strong> — systematic equity selection and longer-horizon strategies: screening and factor exposure, valuation and quality screens, portfolio construction, asset allocation and rebalancing rules</li>
+                <li><strong>Net-of-cost accounting</strong> — every result reported gross and net, with brokerage, STT, slippage and impact modelled explicitly, plus a cost-sensitivity band; a signal is only called a strategy once it survives portfolio, correlation and drawdown analysis</li>
+                <li><strong>Automation to live</strong> — strategies that clear validation are automated and run live, with monitoring, risk limits and position sizing built in; consistency in production is the objective, not a good backtest</li>
+                <li><strong>Guarded against the usual killers</strong> — look-ahead bias, survivorship, multiple-testing and overfitting, regime dependence and capacity limits, each controlled for and documented</li>
+                <li><strong>AI practice and consulting</strong> — building and advising on <strong>agentic workflows, LLM integration, retrieval pipelines</strong> and automation for small teams; turning AI capability into measurable operational outcomes rather than demos</li>
+              </ul>
+            </div>
+
+            <!-- Bank of America Panel -->
+            <div class="exp-panel" id="panel-boa">
+              <div class="exp-panel-header">
+                <div class="exp-company-info">
+                  <h3>Bank of America (Chennai, Jakarta, Singapore)</h3>
                   <p class="role">Sr. Technology Architect</p>
                   <p class="employer">Infosys Ltd.</p>
                 </div>
-                <span class="exp-period-badge">2020 - Present</span>
+                <span class="exp-period-badge">Apr 2019 - Feb 2026</span>
               </div>
-              <p class="exp-context">Global Commercial Bank - APAC Region. Driving Real-Time Payments (RTP) and NFR delivery across multiple countries.</p>
+              <p class="exp-context">Global Commercial Bank - APAC Region. Began offshore in Chennai (Apr 2019), later onsite across Jakarta and Singapore. Driving Real-Time Payments (RTP) and NFR delivery across multiple countries.</p>
               <ul class="exp-bullets">
                 <li>Integral member and architect of Application Engineering and Support agile team driving <strong>Real-Time Payments (RTP)</strong> implementations and NFR delivery for APAC regions</li>
                 <li>Led the Business mapping stream for <strong>Regulatory Reporting translation</strong>, achieving 100% mappings and timely Business enablement</li>
@@ -7235,7 +7271,7 @@
               <h3 class="exp-timeline-title">Career Journey</h3>
               <div class="exp-timeline-pulse"></div>
             </div>
-            <p class="exp-timeline-tagline">17+ years of enterprise solutioning across 5 countries</p>
+            <p class="exp-timeline-tagline">20 years of enterprise solutioning across 5 countries</p>
           </div>
 
           <div class="timeline-view" id="career-timeline">
@@ -7255,16 +7291,54 @@
               </div>
             </div>
 
-            <!-- Timeline Row: 2020-Present -->
+            <!-- Timeline Row: Feb 2026-Present (Independent Practice) -->
             <div class="timeline-row">
               <!-- Career Track (Left) -->
               <div class="career-track">
                 <div class="timeline-item current">
                   <div class="timeline-date-role">
-                    <span class="timeline-date">2020 — Present</span>
+                    <span class="timeline-date">Feb 2026 — Present</span>
+                    <span class="timeline-role">Quant Researcher & AI Consultant</span>
+                  </div>
+                  <div class="timeline-company">Independent Practice (Chennai, India)</div>
+                  <div class="timeline-employer">Self-directed</div>
+                  <div class="timeline-summary">Systematic research across derivatives and investments — backtested, walk-forward validated, net of costs, then automated to run live. In parallel, AI consulting: agentic workflows and LLM integration for small teams.</div>
+                  <div class="timeline-metrics">
+                    <span class="metric">Net-of-cost discipline</span>
+                    <span class="metric">Automated to live</span>
+                  </div>
+                  <div class="timeline-tech">
+                    <span class="t-tag">Python</span>
+                    <span class="t-tag">pandas</span>
+                    <span class="t-tag">Backtesting</span>
+                    <span class="t-tag">Kite Connect</span>
+                    <span class="t-tag">LLMs</span>
+                  </div>
+                </div>
+              </div>
+              <!-- Personal Track (Right) -->
+              <div class="personal-track">
+                <div class="life-event">
+                  <div class="life-event-header">
+                    <span class="life-event-year">Feb 2026</span>
+                    <span class="life-event-badge">Personal</span>
+                  </div>
+                  <div class="life-event-title">Repatriated from Singapore</div>
+                  <div class="life-event-summary">Closed the corporate chapter after 20 years and moved home to Chennai. Second deliberate step off the corporate track — this time with a research desk.</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Timeline Row: Apr 2019 - Feb 2026 -->
+            <div class="timeline-row">
+              <!-- Career Track (Left) -->
+              <div class="career-track">
+                <div class="timeline-item">
+                  <div class="timeline-date-role">
+                    <span class="timeline-date">Apr 2019 — Feb 2026</span>
                     <span class="timeline-role">Sr. Technology Architect</span>
                   </div>
-                  <div class="timeline-company">Bank of America (Jakarta, Singapore)</div>
+                  <div class="timeline-company">Bank of America (Chennai, Jakarta, Singapore)</div>
                   <div class="timeline-employer">Infosys Ltd.</div>
                   <div class="timeline-summary">Driving RTP implementations and NFR delivery for APAC region. Leading architecture decisions for real-time payment systems serving millions of transactions.</div>
                   <div class="timeline-metrics">
@@ -7641,7 +7715,7 @@
             <div class="skill-item" data-category="architecture">
               <div class="skill-header">
                 <span class="skill-name">Solution Architecture</span>
-                <span class="skill-level">Expert | 17+ years</span>
+                <span class="skill-level">Expert</span>
               </div>
               <div class="skill-bar">
                 <div class="skill-progress" style="width: 95%"></div>
@@ -9721,7 +9795,7 @@
                 </svg>
               </div>
               <div class="message-bubble">
-                Hi! I'm an AI assistant trained on Arun's experience and projects. Ask me anything about his <strong>17+ years in enterprise technology</strong>, <strong>core banking implementations</strong>, or <strong>side projects</strong> like NoteApp, REPPIT, and PRIMMO.
+                Hi! I'm an AI assistant trained on Arun's experience and projects. Ask me anything about his <strong>20 years in enterprise technology</strong>, <strong>core banking implementations</strong>, or <strong>side projects</strong> like NoteApp, REPPIT, and PRIMMO.
               </div>
             </div>
           </div>
@@ -10151,7 +10225,7 @@
       const welcomeMessage = document.querySelector('#chat-messages .message-bubble');
       if (welcomeMessage) {
         const firstName = chatUser.name.split(' ')[0];
-        welcomeMessage.innerHTML = `Hi <strong>${firstName}</strong>! I'm an AI assistant trained on Arun's experience and projects. Ask me anything about his <strong>17+ years in enterprise technology</strong>, <strong>core banking implementations</strong>, or <strong>side projects</strong> like NoteApp, REPPIT, and PRIMMO.`;
+        welcomeMessage.innerHTML = `Hi <strong>${firstName}</strong>! I'm an AI assistant trained on Arun's experience and projects. Ask me anything about his <strong>20 years in enterprise technology</strong>, <strong>core banking implementations</strong>, or <strong>side projects</strong> like NoteApp, REPPIT, and PRIMMO.`;
       }
     }
 
@@ -10892,13 +10966,18 @@
     // ============ AI Chat Functionality ============
     const chatResponses = {
       // ===== EXPERIENCE & BACKGROUND =====
-      'experience': `Arun has <strong>17+ years of experience</strong> in enterprise technology consulting:
+      'experience': `Arun has <strong>20 years in enterprise technology</strong>, and since February 2026 runs an independent research and consulting practice:
 
-<strong>Current:</strong> Sr. Technology Architect at Infosys, Singapore (2019-Present)
-<strong>Previous:</strong> Technology Architect at EdgeVerve, Chennai (2015-2016)
-<strong>Earlier:</strong> Progressive roles at Infosys India (2004-2015)
+<strong>Current (Feb 2026 - Present):</strong> Quant Researcher & Practitioner | AI Practitioner & Consultant — independent, Chennai
+<strong>Apr 2019 - Feb 2026:</strong> Sr. Technology Architect, Infosys — Bank of America (Chennai, Jakarta, Singapore)
+<strong>Feb - Apr 2019:</strong> Project Manager, Latitude Fintech — Cholamandalam
+<strong>2016 - 2019:</strong> Entrepreneurial sabbatical — creative and business ventures
+<strong>2012 - 2016:</strong> Technology Architect & Project Manager, EdgeVerve — Standard Bank (South Africa, Nigeria)
+<strong>2008 - 2012:</strong> Team Lead & Project Manager, Infosys — Emirates NBD (Dubai)
+<strong>2004 - 2008:</strong> Software Developer, Infosys — Bank Sohar, SBI Overseas, Bank of Alexandria, Bank of India
 
-Specialization: Core Banking, Solution Architecture, NFR Management, Digital Transformation`,
+<strong>Then:</strong> Core banking, solution architecture, NFR management, payments
+<strong>Now:</strong> Systematic research across derivatives and investments, strategy automation, applied AI`,
 
       'core banking': `Arun has <strong>15+ years of Finacle core banking expertise</strong> - Infosys's flagship solution deployed in 100+ countries.
 
@@ -10914,9 +10993,29 @@ Specialization: Core Banking, Solution Architecture, NFR Management, Digital Tra
 
 <strong>What makes implementations succeed:</strong> Team structure, quality individuals, and proper Infosys backing.`,
 
-      'current role': `<strong>Current Role:</strong> Sr. Technology Architect at Infosys Ltd., Singapore
+      'current role': `<strong>Current:</strong> Independent practice — Quant Researcher & Practitioner, and AI Practitioner & Consultant. Based in <strong>Chennai, India</strong> since February 2026.
 
-<strong>Client:</strong> Bank of America - Global Commercial Bank
+<strong>Two tracks:</strong>
+
+<strong>1. Quantitative research (derivatives, equities and systematic investing)</strong>
+• Designing and stress-testing index and equity <strong>options strategies</strong> — directional, spread and volatility structures
+• <strong>Investment research</strong> — systematic equity selection, factor and valuation screens, portfolio construction, asset allocation
+• Hypothesis → backtest → out-of-sample → walk-forward validation, before any capital is committed
+• Everything reported <strong>gross and net of costs</strong> (brokerage, STT, slippage, impact) with a cost-sensitivity band
+• What survives gets <strong>automated and run live</strong> — consistency in production is the objective, not a good backtest
+
+<strong>2. Applied AI (practitioner and consultant)</strong>
+• Agentic workflows, LLM integration, retrieval pipelines, automation for small teams
+• Advising on practical AI adoption — what to build, what to buy, what to ignore
+• AI-assisted development as a daily working method, not a novelty
+
+<strong>The through-line:</strong> <em>"20 years of moving money safely under regulation taught me to distrust results that haven't been stress-tested. That instinct is exactly what quant research needs."</em>
+
+<strong>Previously:</strong> Sr. Technology Architect at Infosys serving Bank of America (Apr 2019 - Feb 2026). Ask about <em>"previous role"</em> or <em>"RTP"</em> for that chapter.`,
+
+      'previous role': `<strong>Previous Role (Apr 2019 - Feb 2026):</strong> Sr. Technology Architect at Infosys Ltd., serving Bank of America.
+
+<strong>Client:</strong> Bank of America - Global Commercial Bank (Chennai, Jakarta, Singapore)
 <strong>Team:</strong> Application Engineering & Support Agile Team
 
 <strong>What is RTP?</strong> <em>"All payments must be instantly received, acknowledged, validated, processed and settled. To the customer, this end loop must be instant."</em>
@@ -10928,15 +11027,95 @@ Specialization: Core Banking, Solution Architecture, NFR Management, Digital Tra
 • 60% reduction in job execution times
 • 5x Volume-Ready Reporting (certified by client)
 
-<strong>APAC Challenge:</strong> Each region (Chinese, Japanese, Singaporean, Indonesian banks) has different regulations and clearing houses - must unlearn and approach fresh for each.`,
+<strong>APAC Challenge:</strong> Each region (Chinese, Japanese, Singaporean, Indonesian banks) has different regulations and clearing houses - must unlearn and approach fresh for each.
 
-      'location': `Arun is based in <strong>Singapore</strong>.
+Arun stepped away in <strong>February 2026</strong> to work independently. Ask about <em>"why the career change"</em> for the reasoning.`,
 
-He has worked across multiple regions:
+      'transition': `<strong>Why the change?</strong>
+
+In <strong>February 2026</strong> Arun left the corporate technology track after 20 years and repatriated from Singapore to Chennai.
+
+<strong>The reasoning:</strong>
+• <strong>Pull, not push.</strong> Markets and AI had stopped being side interests and started consuming the good hours of the day
+• <strong>Transferable rigour.</strong> Core banking teaches you that an untested assumption about money is a future incident report — the same instinct separates a real edge from an overfitted backtest
+• <strong>Compounding, not billing.</strong> Research and tooling keep paying after the work is done, in a way a delivery milestone does not
+• <strong>Proximity.</strong> Being home in India, closer to family and to the market he actually researches
+
+<strong>Not his first time off the track.</strong> He took an <strong>entrepreneurial sabbatical in 2016-2019</strong> for creative and business ventures. This is a considered pattern, not an impulse.
+
+<strong>What it is not:</strong> not a career break, and not a pivot away from engineering. It is the same discipline pointed at a different problem.`,
+
+      'quant': `<strong>Quant Research & Practice</strong>
+
+Arun works as a <strong>quant researcher and practitioner</strong> across <strong>derivatives (F&O), equities and systematic investing</strong> in Indian markets.
+
+<strong>What he researches:</strong>
+• Index and equity <strong>options strategies</strong> — directional, spreads, and volatility structures
+• Expiry-cycle behaviour, greeks-aware position management
+• <strong>Investment research</strong> — systematic equity selection, factor and valuation screens, portfolio construction, asset allocation and rebalancing
+
+<strong>How the work is run (the non-negotiables):</strong>
+• <strong>Stage gates</strong> — kill ideas cheaply and early; most hypotheses should die, that is the system working
+• <strong>Net of costs or it did not happen</strong> — brokerage, STT, slippage and impact modelled explicitly, always with a cost-sensitivity band
+• <strong>Signal ≠ strategy</strong> — a positive per-trade result is only a strategy once it survives portfolio construction, correlation, drawdown and capacity analysis
+• <strong>Robustness before any claim</strong> — out-of-sample and walk-forward testing, per-year stability, parameter sensitivity
+• <strong>Guarded against</strong> look-ahead bias, survivorship, overfitting and multiple testing, regime dependence, and capacity limits
+
+<strong>Then automation.</strong> What clears validation gets automated and run live, with monitoring, risk limits and position sizing built in. The goal is a system that runs consistently in production — not a good-looking backtest.
+
+<strong>The stack:</strong> Python (pandas, NumPy), market-data ingestion and cleaning, an event-driven backtesting engine, risk and position-sizing modules, automated tearsheets benchmarked against buy-and-hold, and broker APIs (Kite Connect).
+
+<em>"A backtest that has never tried to kill itself is marketing, not research."</em>`,
+
+      'ai practice': `<strong>AI Practitioner & Consultant</strong>
+
+Arun works hands-on with AI and advises teams adopting it — the emphasis is on <strong>shipped and measurable</strong>, not proofs of concept.
+
+<strong>What he builds:</strong>
+• <strong>Agentic workflows</strong> — multi-step agents that do real work with tools, not chat wrappers
+• <strong>LLM integration</strong> — into existing products and internal operations
+• <strong>Retrieval pipelines (RAG)</strong> — grounding models in a team's own data
+• <strong>Automation</strong> — replacing the mundane, thankless, error-prone parts of operations
+
+<strong>What he advises on:</strong>
+• Where AI actually pays for itself, and where it is theatre
+• Build vs. buy, and how to avoid locking into the wrong layer
+• Getting from prototype to something that survives production, review and cost scrutiny
+• AI-assisted development workflows for small teams
+
+<strong>Credibility check:</strong> this portfolio, the resume automation behind it, and his quant research tooling are all built with AI-assisted workflows. He uses what he consults on, daily.
+
+<em>"Most AI projects do not fail on the model. They fail on the plumbing, the evaluation, and nobody owning the outcome."</em>`,
+
+      'consulting': `<strong>Working with Arun</strong>
+
+He takes on <strong>AI consulting and advisory</strong> engagements alongside his quant research.
+
+<strong>Typical engagements:</strong>
+• <strong>AI adoption advisory</strong> — where to start, what to prioritise, what to skip
+• <strong>Agentic workflow & LLM build-outs</strong> — design through to production
+• <strong>Automation of operations</strong> — the repetitive, high-error-cost processes
+• <strong>Architecture review</strong> — 20 years of enterprise, banking, payments and regulatory systems
+• <strong>Quant research tooling</strong> — backtesting infrastructure and validation discipline
+
+<strong>Good fit:</strong> fintech and BFSI teams, small product teams that need senior architecture judgement without a full-time hire, and anyone whose AI pilot has stalled short of production.
+
+<strong>Working style:</strong> remote-first from Chennai (IST), comfortable across APAC, Middle East and European time zones after two decades of distributed delivery.
+
+<strong>Email:</strong> arun.castromin@gmail.com
+<strong>LinkedIn:</strong> linkedin.com/in/aruncastromin`,
+
+      'location': `Arun is based in <strong>Chennai, India</strong>.
+
+He repatriated from <strong>Singapore in February 2026</strong> after 20 years working across international banking engagements, and now runs his research and consulting practice from Chennai.
+
+<strong>Regions worked across:</strong>
 - <strong>APAC:</strong> Singapore, Jakarta, India
 - <strong>Middle East:</strong> UAE (Emirates NBD), Oman (Bank Sohar)
 - <strong>Africa:</strong> South Africa, Nigeria (Standard Bank)
-- <strong>North Africa:</strong> Egypt (Bank of Alexandria)`,
+- <strong>North Africa:</strong> Egypt (Bank of Alexandria)
+
+<strong>Working style:</strong> remote-first, comfortable across APAC, Middle East and European time zones.`,
 
       'team': `Arun has extensive <strong>leadership experience</strong>:
 
@@ -11033,7 +11212,7 @@ This established his Java competency that grew into architecture expertise.`,
 
       'sql': `Arun has <strong>expert-level SQL/PL-SQL</strong> skills:
 
-<strong>Experience:</strong> 17+ years in banking data systems
+<strong>Experience:</strong> 20 years in banking data systems
 <strong>Domains:</strong> Core banking, reconciliation, regulatory reporting
 <strong>Databases:</strong> Oracle (Finacle), enterprise data warehouses
 
@@ -11081,57 +11260,68 @@ Created complex reconciliation reports and optimized batch processing jobs.`,
 <strong>Creative:</strong> Best Short Film Award (inter-departmental competition)`,
 
       // ===== LOGISTICS =====
-      'availability': `For availability and notice period details, please contact Arun directly:
+      'availability': `Arun works <strong>independently</strong> as of February 2026, so there is <strong>no notice period</strong> — he can start consulting or advisory engagements quickly.
+
+<strong>Currently open to:</strong>
+• AI consulting and advisory engagements (part-time or project-based)
+• Architecture and fintech/BFSI advisory
+• Quant research collaborations
+
+<strong>Currently not seeking:</strong> a full-time corporate role — though the right opportunity in quant research or AI is always worth a conversation.
 
 <strong>Email:</strong> arun.castromin@gmail.com
 <strong>LinkedIn:</strong> linkedin.com/in/aruncastromin
-<strong>Phone:</strong> +65 91806569
+<strong>Phone:</strong> +91 99410 22034`,
 
-He's happy to discuss timing for the right opportunity.`,
+      'salary': `For <strong>consulting engagements</strong>, rates depend on scope, duration and engagement model (advisory retainer, project-based, or fractional).
 
-      'salary': `Salary expectations depend on the specific role, responsibilities, and total compensation package.
+For a <strong>full-time role</strong>, compensation depends on the mandate and the total package.
 
-For a detailed discussion, please reach out directly:
+Either way it is a direct conversation, not a number on a web page:
 <strong>Email:</strong> arun.castromin@gmail.com
 <strong>LinkedIn:</strong> linkedin.com/in/aruncastromin`,
 
-      'remote': `Arun has experience with <strong>distributed teams</strong> across APAC and EMEA.
+      'remote': `Arun is <strong>remote-first</strong>, working from <strong>Chennai, India</strong>.
 
-<strong>Work style:</strong> Flexible - has worked in:
-- On-site client engagements
-- Hybrid arrangements
-- Managing remote cross-functional teams
+<strong>Distributed delivery experience:</strong> two decades across APAC and EMEA — Singapore, Jakarta, Dubai, South Africa, Nigeria and India.
 
-Open to discussing work arrangements based on role requirements.`,
+<strong>Work style:</strong>
+- Remote-first for consulting and research engagements
+- Comfortable across APAC, Middle East and European time zones
+- Has run on-site client engagements, hybrid arrangements, and fully remote cross-functional teams
+
+Open to travel for workshops, onboarding and key milestones.`,
 
       'contact': `<strong>Contact Information:</strong>
 
 <strong>Email:</strong> arun.castromin@gmail.com
-<strong>Phone:</strong> +65 91806569
+<strong>Phone:</strong> +91 99410 22034
 <strong>LinkedIn:</strong> linkedin.com/in/aruncastromin
 <strong>GitHub:</strong> github.com/castroarun
-<strong>Location:</strong> Singapore`,
+<strong>Location:</strong> Chennai, India`,
 
       // ===== SUGGESTIONS (first-time helper) =====
-      'suggestions': `I can help you learn more about Arun's experience! Try asking about:
+      'suggestions': `I can help you learn more about Arun. Try asking about:
 
-<strong>Background:</strong> Years of experience, current role, location, team size
-<strong>Banking:</strong> Core banking, Finacle, payments, NFR
+<strong>What he does now:</strong> Quant research, derivatives and options, investing, AI practice, consulting engagements, why the career change
+<strong>Background:</strong> Years of experience, previous role at Bank of America, location, team size
+<strong>Banking:</strong> Core banking, Finacle, payments, NFR, RTP
 <strong>Projects:</strong> NoteApp, REPPIT, PRIMMO
-<strong>Skills:</strong> Python, Java, React, SQL
+<strong>Skills:</strong> Python, Java, SQL, backtesting, agentic AI
 <strong>Credentials:</strong> Certifications, education, achievements
+<strong>Logistics:</strong> Availability, remote working, contact
 
 What would you like to know?`,
 
       // ===== AGE & PERSONAL INFO =====
       'age': `<strong>About Arun:</strong>
 
-<strong>Age:</strong> 42 years old (DOB: 26 April 1983)
-<strong>Location:</strong> Singapore
+<strong>Age:</strong> 43 years old (DOB: 26 April 1983)
+<strong>Location:</strong> Chennai, India
 <strong>Career Start:</strong> 2004 (after B.E. graduation)
-<strong>Experience:</strong> 17+ years in enterprise technology
+<strong>Experience:</strong> 20 years in enterprise technology
 
-Arun graduated with a B.E. in Electronics & Communication from Sathyabama College in 2004 and has been building his career in core banking and solution architecture ever since.`,
+Arun graduated with a B.E. in Electronics & Communication from Sathyabama College in 2004 and built a career in core banking and solution architecture across four continents. Since <strong>February 2026</strong> he has worked independently as a quant researcher and AI consultant from Chennai.`,
 
       // ===== PERSONAL INTERESTS =====
       'fitness': `<strong>Strength Training - Discipline, Clarity & Coaching</strong>
@@ -11184,22 +11374,21 @@ This creativity informs his approach to problem-solving - thinking outside the b
 
 I'm an <strong>Enterprise & Solutions Architect</strong> and <strong>Certified Scrum Product Owner</strong> with an intense passion for coding. I believe a "coder-first" approach makes a better architect - it allows me to envision the complete path to delivery and leverage my design and architecture skills more effectively.
 
-<strong>17+ years</strong> delivering core banking, payments, and digital transformation solutions across <strong>India, Middle East, Africa, and APAC</strong> for Tier-1 banks.
+<strong>20 years</strong> delivering core banking, payments, and digital transformation solutions across <strong>India, Middle East, Africa, and APAC</strong> for Tier-1 banks.
 
 Currently a key contributor to Application Platform Engineering at Bank of America Singapore, delivering RTP solutions. I follow a structured <strong>9-step workflow</strong> because great software comes from deliberate process - human in the loop is a must for great products.
 
 <em>"Architecture without hands-on coding is like designing a car you've never driven."</em>`,
 
       // ===== VISA & RELOCATION =====
-      'visa': `<strong>Visa & Work Authorization:</strong>
+      'visa': `<strong>Location & Work Authorization:</strong>
 
-Currently based in <strong>Singapore</strong> on a sponsored work permit.
+Arun is an <strong>Indian citizen based in Chennai, India</strong>. He relocated back from Singapore in <strong>February 2026</strong>; the Singapore work permit is no longer relevant.
 
-<strong>Transition:</strong> Making a move to <strong>India</strong> due to personal objectives.
+<strong>Work arrangement:</strong> remote-first, and available for <strong>travel</strong> as needed for workshops, onboarding and key milestones.
 
-<strong>Work Arrangement:</strong> Happy to work <strong>remote</strong> and available for <strong>travel</strong> as needed for work.
+<strong>For overseas engagements:</strong> would require sponsorship, and is open to discussing it for the right mandate.
 
-For specific questions, please reach out directly:
 <strong>Email:</strong> arun.castromin@gmail.com`,
 
       // ===== WORK STYLE & APPROACH =====
@@ -11245,13 +11434,14 @@ Approach: Test what matters, not everything. Focus on business logic and edge ca
       // ===== CAREER GOALS =====
       'goals': `<strong>Career Direction:</strong>
 
-My career focus is on <strong>AI-assisted development</strong>. I believe combining my architecture skills with a passion for AI-assisted development phases enables delivering products with quality and scale.
+Since February 2026 Arun's focus is <strong>quantitative research</strong> and <strong>applied AI</strong> — and the two reinforce each other.
 
-• <strong>AI-Assisted Learning</strong> - Continuously evolving with AI tools and workflows
-• <strong>Product Building</strong> - Creating technology products that solve real problems
-• <strong>Leadership</strong> - Mentoring teams and driving technical excellence
+• <strong>Systematic strategies</strong> — research, validate, automate, and run them live consistently
+• <strong>Applied AI</strong> — agentic workflows and LLM integration that reach production, not just pilots
+• <strong>Consulting</strong> — helping BFSI and small product teams adopt AI where it actually pays
+• <strong>Compounding</strong> — research and tooling that keep paying after the work is done
 
-<strong>Interest areas:</strong> AI/ML integration, Enterprise Architecture, FinTech, Payments
+<strong>Interest areas:</strong> Derivatives and systematic investing, AI/ML integration, FinTech, Payments, Enterprise Architecture
 
 <em>"AI isn't replacing developers - it's amplifying what great developers can achieve."</em>`,
 
@@ -11266,7 +11456,7 @@ Arun is pursuing structured, AI-assisted learning through personal projects:
 
 <em>"AI doesn't replace learning - it accelerates it. You still need to understand what you're building."</em>
 
-This modern approach combines 17+ years of architecture experience with cutting-edge AI tools.`,
+This modern approach combines 20 years of architecture experience with cutting-edge AI tools.`,
 
       // ===== CLOUD & DEVOPS =====
       'cloud': `<strong>Cloud & DevOps Experience:</strong>
@@ -11469,7 +11659,7 @@ I believe healthy debate improves solutions. Ego has no place in good engineerin
       'industry': `<strong>Industries of Interest:</strong>
 
 <strong>Primary:</strong> FinTech, Banking & Financial Services
-• 17+ years domain expertise
+• 20 years domain expertise
 • Deep understanding of payments, core banking, regulations
 
 <strong>Also Interested In:</strong>
@@ -11491,11 +11681,16 @@ Open to any industry with interesting technical challenges!`,
 Currently at Infosys (enterprise), but building startup-style side projects. I enjoy the best of both worlds.`,
 
       // ===== CONTRACT WORK =====
-      'contract': `<strong>Contract/Freelance Work:</strong>
+      'contract': `<strong>Contract / Consulting Work:</strong>
 
-• Open to <strong>contract opportunities</strong> for the right projects
-• Interested in <strong>consulting</strong> on core banking implementations
-• Available for <strong>freelance</strong> development work (mobile apps, web apps)`,
+This is Arun's primary mode of working as of February 2026.
+
+• <strong>AI consulting and advisory</strong> — agentic workflows, LLM integration, automation
+• <strong>Architecture advisory</strong> — 20 years of enterprise, banking, payments and regulatory systems
+• <strong>Quant research collaborations</strong> — backtesting infrastructure and validation discipline
+• Open to <strong>fractional, retainer or project-based</strong> engagements
+
+<strong>Email:</strong> arun.castromin@gmail.com`,
 
       // ===== LEADERSHIP =====
       'leadership': `<strong>Technical Lead Experience:</strong>
@@ -11580,20 +11775,23 @@ I'm happy to schedule a conversation!
       // ===== TIMEZONE =====
       'timezone': `<strong>Timezone & Working Hours:</strong>
 
-<strong>Location:</strong> Singapore
-<strong>Timezone:</strong> SGT (UTC+8)
-<strong>Working hours:</strong> Flexible, can accommodate calls with US/EU timezones
+<strong>Location:</strong> Chennai, India
+<strong>Timezone:</strong> IST (UTC+5:30)
+<strong>Working hours:</strong> Flexible — IST sits conveniently between APAC and European hours, and can accommodate US calls
 
-I have experience working with globally distributed teams across multiple timezones.`,
+Two decades of working with globally distributed teams across APAC, the Middle East, Africa and Europe.`,
 
       // ===== EMPLOYMENT STATUS =====
       'employment status': `<strong>Current Employment Status:</strong>
 
-<strong>Status:</strong> Employed full-time
-<strong>Role:</strong> Sr. Technology Architect at Infosys, Singapore
-<strong>Duration:</strong> 2019 - Present
+<strong>Status:</strong> Self-employed / independent practice
+<strong>Role:</strong> Quant Researcher & Practitioner | AI Practitioner & Consultant
+<strong>Since:</strong> February 2026
+<strong>Base:</strong> Chennai, India
 
-Open to exploring new opportunities that align with my career goals.`,
+<strong>Previously:</strong> Sr. Technology Architect at Infosys (Bank of America), Apr 2019 - Feb 2026.
+
+Open to consulting and advisory engagements, and to the right full-time opportunity in quant research or AI.`,
 
       // ===== UNKNOWN (no match found) =====
       'unknown': `I don't have specific information about that topic in my knowledge base.
@@ -11608,22 +11806,38 @@ Open to exploring new opportunities that align with my career goals.`,
       const q = question.toLowerCase();
 
       // Age & Personal Info
-      if (q.includes('age') || q.includes('old') || q.includes('born') || q.includes('birthday') || q.includes('dob') || q.includes('date of birth')) {
+      if (/\bage\b/.test(q) || /\bold\b/.test(q) || /\bborn\b/.test(q) || q.includes('birthday') || /\bdob\b/.test(q) || q.includes('date of birth')) {
         return chatResponses['age'];
+      }
+      // Career transition (checked before generic 'career'/'experience' matching)
+      else if (q.includes('why quit') || q.includes('quit') || q.includes('career change') || q.includes('career switch') || q.includes('career shift') || q.includes('transition') || q.includes('why leave') || q.includes('why did he leave') || q.includes('career break') || q.includes('repatriat') || q.includes('move back') || q.includes('moved back') || q.includes('left infosys') || q.includes('resign')) {
+        return chatResponses['transition'];
+      }
+      // Quant research & markets
+      else if (q.includes('quant') || q.includes('f&o') || q.includes('fno') || q.includes('option') || q.includes('derivativ') || q.includes('backtest') || q.includes('trading') || q.includes('trade') || q.includes('invest') || q.includes('market') || q.includes('nifty') || q.includes('volatility') || q.includes('hedg') || q.includes('walk-forward')) {
+        return chatResponses['quant'];
+      }
+      // Consulting & engagements
+      else if (q.includes('consult') || q.includes('freelance') || q.includes('advisory') || q.includes('engage') || q.includes('hire') || q.includes('services') || q.includes('rates')) {
+        return chatResponses['consulting'];
+      }
+      // AI practice (word-boundary check so 'available', 'detail', 'trainer' don't match)
+      else if ((/\bai\b/.test(q) || q.includes('llm') || q.includes('agentic') || q.includes('artificial intelligence') || q.includes('genai') || q.includes('machine learning') || q.includes('chatgpt') || q.includes('claude')) && !q.includes('primmo') && !q.includes('trainer')) {
+        return chatResponses['ai practice'];
       }
       // Experience & Background
       else if (q.includes('years') || q.includes('experience') || q.includes('background') || q.includes('career')) {
         return chatResponses['experience'];
-      } else if (q.includes('current role') || q.includes('current job') || q.includes('currently') || q.includes('doing now')) {
+      } else if (q.includes('current role') || q.includes('current job') || q.includes('currently') || q.includes('doing now') || q.includes('do now') || q.includes('what do you do') || q.includes('what does he do')) {
         return chatResponses['current role'];
-      } else if (q.includes('location') || q.includes('based') || q.includes('where') || q.includes('country') || q.includes('singapore')) {
+      } else if (q.includes('location') || q.includes('based') || q.includes('where') || q.includes('country') || q.includes('singapore') || q.includes('chennai') || q.includes('india') || q.includes('relocat')) {
         return chatResponses['location'];
       } else if (q.includes('team') || q.includes('manage') || q.includes('lead') || q.includes('people') || q.includes('size')) {
         return chatResponses['team'];
       }
       // Banking & Current Role
-      else if (q.includes('rtp') || q.includes('real-time') || q.includes('nfr') || q.includes('current role') || q.includes('bank of america') || q.includes('boa')) {
-        return chatResponses['current role'];
+      else if (q.includes('rtp') || q.includes('real-time') || q.includes('nfr') || q.includes('bank of america') || q.includes('boa') || q.includes('previous role') || q.includes('last job') || q.includes('last role') || q.includes('infosys')) {
+        return chatResponses['previous role'];
       } else if (q.includes('core banking') || q.includes('finacle') || q.includes('casa') || q.includes('payments')) {
         return chatResponses['core banking'];
       } else if (q.includes('cmmi') || q.includes('quality') || q.includes('standard bank') || q.includes('defect')) {
@@ -12340,7 +12554,8 @@ Open to exploring new opportunities that align with my career goals.`,
           email: 'arun.castromin@gmail.com',
           linkedin: 'linkedin.com/in/aruncastromin',
           github: 'github.com/castroarun',
-          location: 'Singapore'
+          phone: '+91 99410 22034',
+          location: 'Chennai, India'
         },
         sections: {
           about: { visible: true, order: 1, id: 'section-about' },
@@ -12352,13 +12567,30 @@ Open to exploring new opportunities that align with my career goals.`,
         },
         experience: [
           {
+            id: 'quant',
+            company: 'Independent Practice - Quant Research & AI',
+            location: 'Chennai, India',
+            role: 'Quant Researcher & Practitioner | AI Practitioner & Consultant',
+            employer: 'Self-directed',
+            period: 'Feb 2026 - Present',
+            isCurrent: true,
+            context: 'Left the corporate track and repatriated from Singapore in February 2026. Two parallel tracks: systematic research across derivatives and investments, and applied AI consulting.',
+            bullets: [
+              'Systematic derivatives research (F&O) - index and equity options strategies across directional, spread and volatility structures, taken from hypothesis through backtest, out-of-sample and walk-forward validation before any capital is committed',
+              'Investment research - systematic equity selection and longer-horizon strategies: screening and factor exposure, valuation and quality screens, portfolio construction, asset allocation and rebalancing rules',
+              'Net-of-cost accounting - every result reported gross and net, with brokerage, STT, slippage and impact modelled explicitly, plus a cost-sensitivity band',
+              'Automation to live - strategies that clear validation are automated and run live, with monitoring, risk limits and position sizing built in',
+              'AI practice and consulting - building and advising on agentic workflows, LLM integration, retrieval pipelines and automation for small teams'
+            ]
+          },
+          {
             id: 'boa',
             company: 'Bank of America',
-            location: 'Jakarta, Singapore, India',
+            location: 'Chennai, Jakarta, Singapore',
             role: 'Sr. Technology Architect',
             employer: 'Infosys Ltd.',
-            period: '2020 - Present',
-            isCurrent: true,
+            period: 'Apr 2019 - Feb 2026',
+            isCurrent: false,
             context: 'Global Commercial Bank - APAC Region. Driving Real-Time Payments (RTP) and NFR delivery across multiple countries.',
             bullets: [
               'Integral member and architect of Application Engineering and Support agile team driving Real-Time Payments (RTP) implementations and NFR delivery for APAC regions',
@@ -12439,7 +12671,7 @@ Open to exploring new opportunities that align with my career goals.`,
           }
         ],
         skills: [
-          { name: 'Solution Architecture', category: 'architecture', level: 'Expert | 17+ years', progress: 95 },
+          { name: 'Solution Architecture', category: 'architecture', level: 'Expert', progress: 95 },
           { name: 'Core Banking (Finacle)', category: 'architecture', level: 'Expert', progress: 90 },
           { name: 'Data Science', category: 'data', level: 'IBM Certified', progress: 78 },
           { name: 'Python', category: 'development', level: 'Expert', progress: 88 },
@@ -13332,7 +13564,7 @@ Open to exploring new opportunities that align with my career goals.`,
           ResumeAutomation.state.meta.location = newLocation;
           const locationEls = document.querySelectorAll('.contact-item');
           for (const el of locationEls) {
-            if (el.textContent.includes('Singapore') || el.querySelector('svg path[d*="M12 2"]')) {
+            if (el.textContent.includes('Chennai') || el.textContent.includes('Singapore') || el.querySelector('svg path[d*="M12 2"]')) {
               const textNode = el.childNodes[el.childNodes.length - 1];
               if (textNode.nodeType === Node.TEXT_NODE) {
                 textNode.textContent = ' ' + newLocation;
