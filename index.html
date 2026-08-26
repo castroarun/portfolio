@@ -1381,7 +1381,8 @@
       background: var(--bg-surface);
       padding: var(--space-6);
       border-radius: 4px;
-      font-size: var(--text-base);
+      font-size: var(--text-sm);
+      text-align: left;
       color: var(--text-secondary);
       line-height: 1.7;
       box-shadow: 0 10px 30px -15px rgba(2, 12, 27, 0.7);
@@ -3333,9 +3334,20 @@
     }
 
     .project-modal-tagline {
-      font-size: var(--text-base);
+      font-size: var(--text-sm);
       color: var(--text-secondary);
       margin-top: var(--space-2);
+      text-align: left;
+      line-height: 1.65;
+    }
+
+    /* the bullet list the description carries is a sibling of the <p> - a <ul>
+       closes it - so it needs the same treatment rather than inheriting */
+    .project-modal-header ul {
+      font-size: var(--text-sm);
+      color: var(--text-secondary);
+      text-align: left;
+      line-height: 1.65;
     }
 
     .project-modal-tags {
