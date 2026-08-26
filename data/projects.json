@@ -443,8 +443,8 @@
     },
     {
       "id": "quantifyd",
-      "name": "Quantifyd",
-      "tagline": "Systematic quant trading platform for Indian markets",
+      "name": "Momentum 30",
+      "tagline": "A live, rules-based equity momentum book",
       "status": "live",
       "statusText": "Live",
       "statusHint": "(Live)",
@@ -453,13 +453,14 @@
       "tech": [
         "Python",
         "Flask",
+        "SQLite",
         "Pandas",
-        "Chart.js",
-        "Kite API"
+        "Kite API",
+        "VPS"
       ],
-      "description": "Three-engine quant trading system — Momentum+Quality portfolio (36% CAGR), KC6 mean reversion live trader (65% win rate), and Tactical Capital Pool with 20-year backtests across Nifty 500.",
-      "descriptionHtml": "Three-engine quant system — <strong>MQ portfolio (36% CAGR)</strong>, KC6 live trader (65% win rate), and Tactical Capital Pool with 20-year backtests.",
-      "shortDesc": "Systematic quant trading platform with MQ, KC6, and Tactical Capital strategies.",
+      "description": "Ranks the Nifty 200 by blended momentum, holds the best 8 of the top-30 ranks, and rebalances monthly with a buffer so positions are not churned on noise. Each name trails a 15-day Donchian low; the whole book steps aside to cash when NIFTYBEES loses its 100-day average, and redeploys at the next rebalance. Running live with real money on a cloud VPS through the Zerodha Kite API. Backtested 2011-2026, survivorship-free and net of costs: 27.1% CAGR at a -17.0% drawdown (Calmar 0.91). The wider Nifty-250 variant reaches 31.9% CAGR over 2006-2026, but pays for it with a -31.6% drawdown - which is why the live book selects from the Nifty 200.",
+      "descriptionHtml": "Ranks the <strong>Nifty 200</strong> by blended momentum and holds the <strong>best 8</strong> of the top-30, rebalanced monthly with a buffer. Each name trails a <strong>15-day Donchian low</strong>; the book exits to cash when NIFTYBEES loses its <strong>100-day average</strong>. Live with real money. Backtested 2011-2026 net of costs: <strong>27.1% CAGR</strong> at a <strong>-17.0% drawdown</strong> (Calmar 0.91).",
+      "shortDesc": "Live momentum book — Nifty 200, 8 holdings, trailing stops and a regime gate.",
       "category": "personal",
       "featured": false,
       "icon": "📊",
