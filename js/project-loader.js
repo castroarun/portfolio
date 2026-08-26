@@ -59,7 +59,8 @@
     noteapp: 'Web App',
     primmo: 'AI / Voice',
     'portfolio-optimization': 'Automation',
-    'nas-mechanical-trading': 'Trading Automation'
+    'nas-mechanical-trading': 'Trading Automation',
+    quantifyd: 'Quant Trading'
   };
 
   // Fallback category mapping
@@ -167,6 +168,37 @@
   // ============ PROJECT DETAILS for Modal Deep-Dives ============
   // Architecture data sourced from resume/index.html Section 07
   const PROJECT_DETAILS = {
+    'nas-mechanical-trading': {
+      features: [
+        '<b>Three tiers of stop-out, each with its own authority</b> \u2014 a per-leg stop on the individual option, a system-level stop that retires one strategy for the rest of the day, and a suite-level stop that flattens the entire book. Whichever tier trips first wins; the wider ones keep watching regardless.',
+        '<b>Per-system trailing exits</b> \u2014 each strategy carries its own trail geometry (fixed, breakeven-clamped, or volatility-following), so a fast-decaying leg and a slow one are never governed by the same rule. Trails re-evaluate on every tick batch, never on a timer alone.',
+        '<b>Fills are verified, never assumed</b> \u2014 the executor re-reads the order book after every placement, retries on a broker timeout, and refuses to end a cycle holding a naked short leg. Every incident this system has had began as an order it believed had gone through.',
+        '<b>A 10-second supervision loop</b> over a live WebSocket feed drives every stop, trail and cap. If the feed goes dark or the session token expires, the loop self-heals at the next pre-open rather than trading blind.',
+        '<b>Twice-daily reconciliation</b> diffs broker positions against app state across four mismatch classes \u2014 orphan, size, ghost, and unprotected short \u2014 and pushes the report to email and WhatsApp rather than silently repairing it.',
+        '<b>Deploys are time-gated</b> \u2014 no restart while the market is open, and a deferred-restart guard re-checks the clock at wake time, because a sleep that fires early is not a gate.'
+      ],
+      archFlow: ['Kite Ticker\n(live feed)', 'Strategy Suite\n(9 systems)', 'Risk Engine\nleg \u00b7 system \u00b7 suite', 'Executor\nverify + retry', 'Reconciler\n2\u00d7 daily'],
+      archHighlight: 2,
+      archInsight: '<strong>Layered circuit breakers</strong> \u2014 risk is enforced at three widths at once: the leg, the strategy, and the whole book. No single tier can be tuned into uselessness, because the tier above it is still armed. This is the limit hierarchy a bank runs on \u2014 a transaction limit, an account limit, and an institution-wide kill switch \u2014 where the narrowest control that fires stops the flow and the wider ones never stand down. <strong>The broker is the source of truth</strong>, and app state is treated as a projection of it: every control that matters is re-derived from what the exchange actually holds rather than from what the process remembers, which is why a restart can cost bookkeeping without costing protection.',
+      adr: '<strong>Decision:</strong> Reconciliation alerts a human instead of auto-correcting the mismatch. <strong>Rationale:</strong> A position difference has several possible causes \u2014 a partial fill, a manual trade, a stale row \u2014 and the cheap automatic fix is right for some and catastrophic for the rest; squaring off a leg you misread doubles the exposure you meant to close. So the reconciler classifies, evidences, and escalates over two channels, and leaves the irreversible action to the person who can tell the causes apart. It is the same reason settlement breaks route to an investigations queue rather than to an auto-adjustment.',
+      patterns: ['Layered Circuit Breakers', 'Broker-as-Source-of-Truth', 'Idempotent Execution', 'Reconciliation as Control'],
+      links: { github: 'https://github.com/castroarun/Quantifyd', preview: 'https://castroarun.github.io/presentations/nas-mechanical-trading/deck.html' }
+    },
+    quantifyd: {
+      features: [
+        '<b>15 years of backtest \u2014 2011 to 2026 \u2014 on the Nifty 200</b>, read point-in-time: index membership as it stood on each rebalance date, so the test never gets to know which companies survived. Survivorship is the most flattering bug in Indian equity research, and it is designed out rather than caveated.',
+        '<b>Every figure is net</b> \u2014 0.15% a leg for brokerage and impact, and idle cash credited only at the rate a liquid ETF actually pays. Gross numbers are never quoted on their own.',
+        '<b>One code path for research and production</b> \u2014 the ranking, the regime brake and the sizing that ran the backtest are the same functions that place the live orders. What was tested is what trades.',
+        '<b>Stage-gated research</b> \u2014 an idea must clear out-of-sample, per-year stability, and a parameter surface that is <i>monotonic rather than peaked</i> before it goes near money. Most candidates are killed on purpose, early, while they are still cheap.',
+        '<b>Unattended by design</b> \u2014 cron on a VPS, orders through the Kite API, positions reconciled against the broker twice a day, and every fill written to a journal the research harness later reads back.'
+      ],
+      archFlow: ['Nifty 200\npoint-in-time', 'Ranking Engine\nrisk-adjusted', 'Regime Brake\nrisk-on / risk-off', 'Sizing +\nOrders (Kite)', 'Journal +\nReconciliation'],
+      archHighlight: 2,
+      archInsight: '<strong>What makes it stand out is the drawdown, not the return.</strong> A wider-universe variant of the same engine earns more \u2014 31.9% a year \u2014 and pays for it with a \u221231.6% drawdown, which is the number that ends real portfolios. Holding the discipline to the Nifty 200 and letting the regime brake pull the book to cash trades about five points of annual return for <em>half</em> the drawdown: 27.1% at \u221217.0%. Optimising for return alone would have produced the worse portfolio. <strong>The brake is the whole risk story</strong> \u2014 the one component that cannot be swapped out without the drawdown coming back, which the research harness established by trying to replace it.',
+      adr: '<strong>Decision:</strong> Concentrate in 8 names rather than diversify across 30. <strong>Rationale:</strong> Momentum pays for conviction, and spreading the same capital thinner regresses the book toward the index it is trying to beat. The drawdown control was never coming from diversification anyway \u2014 it comes from the regime brake, which acts on the whole book at once. Position count and crash defence are therefore kept separate concerns: concentration supplies the return, the brake supplies the survival, and neither is asked to do the other job.',
+      patterns: ['Point-in-Time Data', 'Same-Code Backtest & Live', 'Stage-Gated Research', 'Regime Filter'],
+      links: { github: 'https://github.com/castroarun/Quantifyd/blob/main/services/momentum_paper.py', preview: 'https://castroarun.github.io/presentations/trading-automation-v2/deck.html' }
+    },
     'myfit-webapp': {
       features: [
         'Live consultation onboarding — answers classify into red / watch / doing-right flags in real time as the coach types; the coach can edit any flag inline, and the curated list becomes the client assessment report',
@@ -521,6 +553,10 @@
 
   // ============ MODAL LOGIC (Carousel) ============
 
+  // projects.json keyed by id - lets the modal fall back to the golden source
+  // instead of needing an entry in every hardcoded map above.
+  var PROJECTS_BY_ID = {};
+
   // Current modal index in DISPLAY_ORDER
   var currentModalIndex = -1;
   var isNavigating = false;
@@ -553,8 +589,9 @@
     if (!details) return '';
 
     const overline = PROJECT_OVERLINES[projectId] || 'Project';
-    const desc = FULL_DESCRIPTIONS[projectId] || '';
-    const tech = TECH_OVERRIDES[projectId] || [];
+    const source = PROJECTS_BY_ID[projectId] || {};
+    const desc = FULL_DESCRIPTIONS[projectId] || source.portfolioDescription || source.description || '';
+    const tech = TECH_OVERRIDES[projectId] || source.tech || [];
 
     const card = document.querySelector(`[data-project-id="${projectId}"]`);
     const name = getProjectName(projectId);
@@ -653,7 +690,7 @@
     }
 
     // Links
-    const allLinks = details.links || {};
+    const allLinks = details.links || source.links || {};
     const linkEntries = [];
     if (allLinks.github) linkEntries.push(`<a href="${allLinks.github}" class="project-modal-link" target="_blank">${SVG_ICONS.github} GitHub</a>`);
     if (allLinks.preview) linkEntries.push(`<a href="${allLinks.preview}" class="project-modal-link" target="_blank">${SVG_ICONS.external} Live Demo</a>`);
@@ -823,6 +860,7 @@
       }
       const data = await response.json();
       const projects = data.projects || [];
+      projects.forEach(function(p) { PROJECTS_BY_ID[p.id] = p; });
 
       const activeProjects = projects
         .filter(p => !isConceptionProject(p) && p.display?.showInResume)
